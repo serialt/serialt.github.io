@@ -1,0 +1,137 @@
+<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content=makdocs学习笔记><meta name=author content=serialt><link href=https://serialt.github.io/go/basic/helloword/ rel=canonical><link rel="shortcut icon" href=../../../assets/images/favicon.png><meta name=generator content="mkdocs-1.1.2, mkdocs-material-6.2.8"><title>Helloword - Serialt 文档</title><link rel=stylesheet href=../../../assets/stylesheets/main.cb6bc1d0.min.css><link rel=stylesheet href=../../../assets/stylesheets/palette.39b8e14a.min.css><meta name=theme-color content=#009485><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback"><style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style><link rel=stylesheet href=../../../css/extra.css></head> <body dir=ltr data-md-color-scheme data-md-color-primary=teal data-md-color-accent=red> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#go class=md-skip> 跳转至 </a> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header-nav md-grid" aria-label=Header> <a href=https://serialt.github.io title="Serialt 文档" class="md-header-nav__button md-logo" aria-label="Serialt 文档"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg> </a> <label class="md-header-nav__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg> </label> <div class=md-header-nav__title data-md-component=header-title> <div class=md-header-nav__ellipsis> <div class=md-header-nav__topic> <span class=md-ellipsis> Serialt 文档 </span> </div> <div class=md-header-nav__topic> <span class=md-ellipsis> Helloword </span> </div> </div> </div> <label class="md-header-nav__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=搜索 placeholder=搜索 autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query data-md-state=active required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </label> <button type=reset class="md-search__icon md-icon" aria-label=Clear data-md-component=search-reset tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg> </button> </form> <div class=md-search__output> <div class=md-search__scrollwrap data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> 正在初始化搜索引擎 </div> <ol class=md-search-result__list></ol> </div> </div> </div> </div> </div> <div class=md-header-nav__source> <a href=https://github.com/serialt/serialt.github.io/ title="前往 GitHub 仓库" class=md-source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg> </div> <div class=md-source__repository> Serialt </div> </a> </div> </nav> </header> <div class=md-container data-md-component=container> <nav class=md-tabs aria-label=Tabs data-md-component=tabs> <div class="md-tabs__inner md-grid"> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=../../.. class=md-tabs__link> Home </a> </li> <li class=md-tabs__item> <a href=../../../vscode/1.%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/ class=md-tabs__link> VS Code </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label=Navigation data-md-level=0> <label class=md-nav__title for=__drawer> <a href=https://serialt.github.io title="Serialt 文档" class="md-nav__button md-logo" aria-label="Serialt 文档"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg> </a> Serialt 文档 </label> <div class=md-nav__source> <a href=https://github.com/serialt/serialt.github.io/ title="前往 GitHub 仓库" class=md-source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg> </div> <div class=md-source__repository> Serialt </div> </a> </div> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../.. class=md-nav__link> Home </a> </li> <li class=md-nav__item> <a href=../../../vscode/1.%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/ class=md-nav__link> VS Code </a> </li> </ul> </nav> </div> </div> </div> <div class=md-content> <article class="md-content__inner md-typeset"> <a href=https://github.com/serialt/serialt.github.io/edit/master/docs/go/basic/helloword.md title=编辑此页 class="md-content__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg> </a> <h1>Helloword</h1> <h2 id=go>Go语言初步了解<a class=headerlink href=#go title="Permanent link">&para;</a></h2> <h3 id=go_1>Go语言结构<a class=headerlink href=#go_1 title="Permanent link">&para;</a></h3> <p>Go 语言的基础组成有以下几个部分：</p> <ul> <li>包声明</li> <li>引入包</li> <li>函数</li> <li>变量</li> <li>语句 &amp; 表达式</li> <li>注释</li> </ul> <p>示例代码：</p> <div class=highlight><pre><span></span><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+   /* 这是我的第一个简单的程序 */
+   fmt.Println(&quot;Hello, World!&quot;)
+}
+</code></pre></div> <p>输出结果：</p> <div class=highlight><pre><span></span><code>Hello, World!
+</code></pre></div> <p>1、第一行代码 <em>package main</em> 定义了包名。你必须在源文件中非注释的第一行指明这个文件属于哪个包，如：package main。package main表示一个可独立执行的程序，每个 Go 应用程序都包含一个名为 main 的包。</p> <p>2、下一行 <em>import "fmt"</em> 告诉 Go 编译器这个程序需要使用 fmt 包（的函数，或其他元素），fmt 包实现了格式化 IO（输入/输出）的函数。</p> <p>3、下一行 <em>func main()</em> 是程序开始执行的函数。main 函数是每一个可执行程序所必须包含的，一般来说都是在启动后第一个执行的函数（如果有 init() 函数则会先执行该函数）。</p> <p>4、下一行 /<em>...</em>/ 是注释，在程序执行时将被忽略。单行注释是最常见的注释形式，你可以在任何地方使用以 // 开头的单行注释。多行注释也叫块注释，均已以 /* 开头，并以 */ 结尾，且不可以嵌套使用，多行注释一般用于包的文档描述或注释成块的代码片段。</p> <p>5、下一行 <em>fmt.Println(...)</em> 可以将字符串输出到控制台，并在最后自动增加换行字符 \n。 使用 fmt.Print("hello, world\n") 可以得到相同的结果。 Print 和 Println 这两个函数也支持使用变量，如：fmt.Println(arr)。如果没有特别指定，它们会以默认的打印格式将变量 arr 输出到控制台。</p> <p>6、当标识符（包括常量、变量、类型、函数名、结构字段等等）以一个大写字母开头，如：Group1，那么使用这种形式的标识符的对象就可以被外部包的代码所使用（客户端程序需要先导入这个包），这被称为导出（像面向对象语言中的 public）；标识符如果以小写字母开头，则对包外是不可见的，但是他们在整个包的内部是可见并且可用的（像面向对象语言中的 protected ）。</p> <p>注意：</p> <p>需要注意的是 <strong>{</strong> 不能单独放在一行，所以以下代码在运行时会产生错误：</p> <div class=highlight><pre><span></span><code>package main
+
+import &quot;fmt&quot;
+
+func main()  
+{  // 错误，{ 不能在单独的行上
+    fmt.Println(&quot;Hello, World!&quot;)
+}
+</code></pre></div> <p>go语法：</p> <p>注释：</p> <p>以 // 开头的单行注释。多行注释也叫块注释，均已以 /* 开头，并以 */ 结尾。如：</p> <div class=highlight><pre><span></span><code>// 单行注释
+/*
+ Author by 菜鸟教程
+ 我是多行注释
+ */
+</code></pre></div> <p>字符串连接符号:</p> <p>Go 语言的字符串可以通过 <strong>+</strong> 实现</p> <div class=highlight><pre><span></span><code>package main
+import &quot;fmt&quot;
+func main() {
+    fmt.Println(&quot;Google&quot; + &quot;Runoob&quot;)
+}
+</code></pre></div> <div class=highlight><pre><span></span><code># 输出结果
+GoogleRunoob
+</code></pre></div> <hr> <h3 id=_1>关键字<a class=headerlink href=#_1 title="Permanent link">&para;</a></h3> <p>下面列举了 Go 代码中会使用到的 25 个关键字或保留字：</p> <table> <thead> <tr> <th>break</th> <th>default</th> <th>func</th> <th>interface</th> <th>select</th> </tr> </thead> <tbody> <tr> <td>case</td> <td>defer</td> <td>go</td> <td>map</td> <td>struct</td> </tr> <tr> <td>chan</td> <td>else</td> <td>goto</td> <td>package</td> <td>switch</td> </tr> <tr> <td>const</td> <td>fallthrough</td> <td>if</td> <td>range</td> <td>type</td> </tr> <tr> <td>continue</td> <td>for</td> <td>import</td> <td>return</td> <td>var</td> </tr> </tbody> </table> <p>除了以上介绍的这些关键字，Go 语言还有 36 个预定义标识符：</p> <table> <thead> <tr> <th>append</th> <th>bool</th> <th>byte</th> <th>cap</th> <th>close</th> <th>complex</th> <th>complex64</th> <th>complex128</th> <th>uint16</th> </tr> </thead> <tbody> <tr> <td>copy</td> <td>false</td> <td>float32</td> <td>float64</td> <td>imag</td> <td>int</td> <td>int8</td> <td>int16</td> <td>uint32</td> </tr> <tr> <td>int32</td> <td>int64</td> <td>iota</td> <td>len</td> <td>make</td> <td>new</td> <td>nil</td> <td>panic</td> <td>uint64</td> </tr> <tr> <td>print</td> <td>println</td> <td>real</td> <td>recover</td> <td>string</td> <td>true</td> <td>uint</td> <td>uint8</td> <td>uintptr</td> </tr> </tbody> </table> <p>程序一般由关键字、常量、变量、运算符、类型和函数组成。</p> <p>程序中可能会使用到这些分隔符：括号 ()，中括号 [] 和大括号 {}。</p> <p>程序中可能会使用到这些标点符号：.、,、;、: 和 …。</p> <hr> <h3 id=go_2>Go语言数据类型<a class=headerlink href=#go_2 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th align=left>序号</th> <th align=left>类型和描述</th> </tr> </thead> <tbody> <tr> <td align=left>1</td> <td align=left><strong>布尔型</strong> 布尔型的值只可以是常量 true 或者 false。一个简单的例子：var b bool = true。</td> </tr> <tr> <td align=left>2</td> <td align=left><strong>数字类型</strong> 整型 int 和浮点型 float32、float64，Go 语言支持整型和浮点型数字，并且支持复数，其中位的运算采用补码。</td> </tr> <tr> <td align=left>3</td> <td align=left><strong>字符串类型:</strong> 字符串就是一串固定长度的字符连接起来的字符序列。Go 的字符串是由单个字节连接起来的。Go 语言的字符串的字节使用 UTF-8 编码标识 Unicode 文本。</td> </tr> <tr> <td align=left>4</td> <td align=left><strong>派生类型:</strong> 包括：(a) 指针类型（Pointer）(b) 数组类型&copy; 结构化类型(struct)(d) Channel 类型(e) 函数类型(f) 切片类型(g) 接口类型（interface）(h) Map 类型</td> </tr> </tbody> </table> <p>数字类型</p> <p>Go 也有基于架构的类型，例如：int、uint 和 uintptr。</p> <h4 id=_2>整数类型<a class=headerlink href=#_2 title="Permanent link">&para;</a></h4> <table> <thead> <tr> <th align=left>序号</th> <th align=left>类型和描述</th> </tr> </thead> <tbody> <tr> <td align=left>1</td> <td align=left><strong>uint8</strong> 无符号 8 位整型 (0 到 255)</td> </tr> <tr> <td align=left>2</td> <td align=left><strong>uint16</strong> 无符号 16 位整型 (0 到 65535)</td> </tr> <tr> <td align=left>3</td> <td align=left><strong>uint32</strong> 无符号 32 位整型 (0 到 4294967295)</td> </tr> <tr> <td align=left>4</td> <td align=left><strong>uint64</strong> 无符号 64 位整型 (0 到 18446744073709551615)</td> </tr> <tr> <td align=left>5</td> <td align=left><strong>int8</strong> 有符号 8 位整型 (-128 到 127)</td> </tr> <tr> <td align=left>6</td> <td align=left><strong>int16</strong> 有符号 16 位整型 (-32768 到 32767)</td> </tr> <tr> <td align=left>7</td> <td align=left><strong>int32</strong> 有符号 32 位整型 (-2147483648 到 2147483647)</td> </tr> <tr> <td align=left>8</td> <td align=left><strong>int64</strong> 有符号 64 位整型 (-9223372036854775808 到 9223372036854775807)</td> </tr> </tbody> </table> <p>示例1：int8溢出，使用时要注意数的范围</p> <div class=highlight><pre><span></span><code>package main
+
+import &quot;fmt&quot;
+
+func main()  {
+    var num int8 = 128
+
+    fmt.Println(num)
+}
+</code></pre></div> <p>结果</p> <div class=highlight><pre><span></span><code>[root@k8s2 go-code]# go run &quot;/usr/local/go/src/github.com/serialt/go-code/0206/test2/main.go&quot;
+# command-line-arguments
+0206/test2/main.go:6:6: constant 128 overflows int8
+[root@k8s2 go-code]# 
+</code></pre></div> <p>整数使用细节</p> <ul> <li>Golangd的个整数类型分：有符号和无符号，int uint的大小与系统有关，32位系统就是32位，64位系统就是64位。</li> <li>Golang的整数默认声明为int型</li> <li>如何在程序中查看某个变量的字节大小和数据类型</li> <li>Golang程序中整型变量在使用时，遵守保小不保大的原则。即在保证程序正常运行的前提下，尽量使用占用内存小的数据类型。【如：年龄】</li> <li>bit：计算机中最小的存储单位。byte：计算机中基本的存储单元。1 byte = 8 bit</li> </ul> <div class=highlight><pre><span></span><code>package main
+
+import &quot;fmt&quot;
+import &quot;unsafe&quot;
+
+func main()  {
+    var num =100
+
+    //判断变量的类型
+    fmt.Printf(&quot;num的数据类型是 %T&quot;,num)
+
+    var num2 int64 = 10
+
+    fmt.Printf(&quot;\nnum2的数据类型是：%T\n占用的字节数是: %d&quot;,num2  ,unsafe.Sizeof(num2))
+}
+</code></pre></div> <div class=highlight><pre><span></span><code>[root@k8s2 go-code]# go run &quot;/usr/local/go/src/github.com/serialt/go-code/0206/test2/main.go&quot;
+num的数据类型是 int
+num2的数据类型是：int64
+占用的字节数是: 8
+</code></pre></div> <h4 id=_3>浮点型<a class=headerlink href=#_3 title="Permanent link">&para;</a></h4> <table> <thead> <tr> <th align=left>序号</th> <th align=left>类型和描述</th> </tr> </thead> <tbody> <tr> <td align=left>1</td> <td align=left><strong>float32</strong> IEEE-754 32位浮点型数</td> </tr> <tr> <td align=left>2</td> <td align=left><strong>float64</strong> IEEE-754 64位浮点型数</td> </tr> <tr> <td align=left>3</td> <td align=left><strong>complex64</strong> 32 位实数和虚数</td> </tr> <tr> <td align=left>4</td> <td align=left><strong>complex128</strong> 64 位实数和虚数</td> </tr> </tbody> </table> <hr> <div class=highlight><pre><span></span><code>package main
+
+import (
+    &quot;fmt&quot;
+)
+
+func main(){
+    var price float32 = 99.99
+    fmt.Println(price)
+
+}
+</code></pre></div> <p>浮点型使用细节</p> <ul> <li>Golang浮点类型有固定的长度，不受具体OS的影响</li> <li>Golang的浮点类型默认声明为float64</li> <li>通常情况下应该使用float64，因为他比float32更精确。</li> </ul> <h4 id=_4>字符类型：<a class=headerlink href=#_4 title="Permanent link">&para;</a></h4> <p>Golang中没有专门用来保存字符类型，如果要村单个字符（字母），一般用<code>byte</code>来保存。</p> <p>字符串就是一串固定长度的字符连接起来的字符序列，Go的字符串是有单个字节连接起来的。Go发字符串是由字节组成的。</p> <p>使用注意：</p> <ul> <li>字符常量使用单引号('')括起来的单个字符，例如：var c1 byte = 'a' 。</li> <li>Go中允许使用转义字符<code>'\'</code>将其后的字符转变为特俗字符型常量。</li> <li> <p>Go语言的字符使用<code>UTF-8</code>编码</p> </li> <li> <p>在Go中，字符的本质是一个整数，直接输出时，是该字符的对应的UTF-8编码的码值。</p> </li> <li>可以直接给某个变量赋予一个数字，然后按格式化输出时<code>%c</code>，会输出该数字对应的unicode字符</li> <li>字符类型时可以进行运算的，相当于一个整数，因为它都有对应的Unicode码</li> </ul> <p>其他数字类型</p> <p>以下列出了其他更多的数字类型：</p> <table> <thead> <tr> <th align=left>序号</th> <th align=left>类型和描述</th> </tr> </thead> <tbody> <tr> <td align=left>1</td> <td align=left><strong>byte</strong> 类似 uint8</td> </tr> <tr> <td align=left>2</td> <td align=left><strong>rune</strong> 类似 int32</td> </tr> <tr> <td align=left>3</td> <td align=left><strong>uint</strong> 32 或 64 位</td> </tr> <tr> <td align=left>4</td> <td align=left><strong>int</strong> 与 uint 一样大小</td> </tr> <tr> <td align=left>5</td> <td align=left><strong>uintptr</strong> 无符号整型，用于存放一个指针</td> </tr> </tbody> </table> <h4 id=_5>布尔类型<a class=headerlink href=#_5 title="Permanent link">&para;</a></h4> <table> <thead> <tr> <th>序号</th> <th>类型和描述</th> </tr> </thead> <tbody> <tr> <td>1</td> <td>true 真</td> </tr> <tr> <td></td> <td>false 假</td> </tr> </tbody> </table> <p>说明：</p> <ul> <li>bool类型是允许取值true和false。</li> <li>bool类型只占一个字节</li> <li>boolean类型适用与逻辑运算，一般用于程序的流程控制。if判断语句和for循环语句。</li> </ul> <h4 id=_6>字符串类型<a class=headerlink href=#_6 title="Permanent link">&para;</a></h4> <p>使用细节：</p> <ul> <li>Go语言的字符串适用UTF-8识别Unicode文本，这样Golang统一适用UTF-8编码，编码问题不会再困扰程序员。</li> <li>字符串一旦赋值，字符串就不能修改了，再Go中字符串时不可改变的。</li> <li> <p>字符串的表示形式有两种。双引号：会识别转移字符。反引号：以字符串的原生形式输出，包括换行和特殊字符。</p> </li> <li> <p>字符串的拼接方式：使用<code>+</code></p> </li> </ul> <p>基本数据类型的默认值</p> <table> <thead> <tr> <th>数据类型</th> <th>默认值</th> </tr> </thead> <tbody> <tr> <td>整型</td> <td>0</td> </tr> <tr> <td>浮点型</td> <td>0</td> </tr> <tr> <td>字符串</td> <td>""</td> </tr> <tr> <td>布尔类型</td> <td>false</td> </tr> <tr> <td></td> <td></td> </tr> </tbody> </table> <p>基本数据类型转换</p> <p>Go和java和c不同，Go再不同类型的变量之间赋值需要显示转换。也就是说Go数据类型不能自动转换。</p> <div class=highlight><pre><span></span><code>package main
+
+import &quot;fmt&quot;
+
+func main (){
+    var i int32 = 100
+    var n1 float32 = float32(i)
+    var n2 int32 = int32(n2)
+    fmt.Print(&quot;i=%v,n1=%v&quot;,i,n1)
+}
+</code></pre></div> <p>基本数据类型和string间的转换</p> <p>基本数据类型</p> <p>方式1）fmt.Sprintf("%参数"，表达式)</p> <p>a、参数需要和表达式的数据类型相匹配</p> <p>b、fmt.Sprintf()会返回转换后的字符串</p> <p>方式2）使用strconv包的函数</p> <p>使用实例：</p> <div class=highlight><pre><span></span><code>package main
+
+import (
+    &quot;fmt&quot;
+    &quot;strconv&quot;
+)
+
+func main(){
+
+    //基本数据类型转string
+    var num1 int = 99
+    var num2 float64 = 88.88
+    var b bool 
+    var mychar byte = &#39;s&#39;
+    var str string
+
+    //使用第一种方式转换，fmt.Sprintf
+    fmt.Println(&quot;CentOS&quot;)
+    str = fmt.Sprintf(&quot;%d&quot;,num1)
+    fmt.Printf(&quot;str type is %T str=%v \n&quot;,str,str)
+
+    str = fmt.Sprintf(&quot;%f&quot;,num2)
+    fmt.Printf(&quot;str type is %T str=%v \n&quot;,str,str)
+
+    str = fmt.Sprintf(&quot;%t&quot;,b)
+    fmt.Printf(&quot;str type is %T str=%v \n&quot;,str,str)
+
+    str = fmt.Sprintf(&quot;%c&quot;,mychar)
+    fmt.Printf(&quot;str type is %T str=%v \n&quot;,str,str)
+
+
+    //第二种方式：strconv
+    str = strconv.FormatInt(int64(num1),10)
+    fmt.Printf(&quot;str type is %T str=%v \n&quot;,str,str)
+
+    str = strconv.FormatFloat(float64(num1),&#39;f&#39;,10,64)  
+    fmt.Printf(&quot;str type is %T str=%v \n&quot;,str,str)
+
+}
+</code></pre></div> <p>输出结果</p> <div class=highlight><pre><span></span><code>CentOS
+str type is string str=99 
+str type is string str=88.880000 
+str type is string str=false 
+str type is string str=s 
+str type is string str=99 
+str type is string str=99.0000000000 
+</code></pre></div> <hr> <div class=md-source-date> <small> 最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_datetime">2021-02-08 16:23:45</span> </small> </div> </article> </div> </div> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-footer-copyright> <div class=md-footer-copyright__highlight> Copyright &copy; 2020 - 2021 Serialt </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <script src=../../../assets/javascripts/vendor.18f0862e.min.js></script> <script src=../../../assets/javascripts/bundle.994580cf.min.js></script><script id=__lang type=application/json>{"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script> <script>
+        app = initialize({
+          base: "../../..",
+          features: ['tabs', 'instant', 'navigation.tabs', 'navigation.tabs.sticky', 'toc.integrate', 'search.suggest', 'search.highlight'],
+          search: Object.assign({
+            worker: "../../../assets/javascripts/worker/search.9c0e82ba.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script> <script src=../../../js/extra.js></script> </body> </html>

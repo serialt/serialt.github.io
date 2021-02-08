@@ -1,0 +1,435 @@
+<!doctype html><html lang=zh class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content=makdocs学习笔记><meta name=author content=serialt><link href=https://serialt.github.io/go/go_ven/ rel=canonical><link rel="shortcut icon" href=../../assets/images/favicon.png><meta name=generator content="mkdocs-1.1.2, mkdocs-material-6.2.8"><title>Go ven - Serialt 文档</title><link rel=stylesheet href=../../assets/stylesheets/main.cb6bc1d0.min.css><link rel=stylesheet href=../../assets/stylesheets/palette.39b8e14a.min.css><meta name=theme-color content=#009485><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback"><style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style><link rel=stylesheet href=../../css/extra.css></head> <body dir=ltr data-md-color-scheme data-md-color-primary=teal data-md-color-accent=red> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#go class=md-skip> 跳转至 </a> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header-nav md-grid" aria-label=Header> <a href=https://serialt.github.io title="Serialt 文档" class="md-header-nav__button md-logo" aria-label="Serialt 文档"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg> </a> <label class="md-header-nav__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg> </label> <div class=md-header-nav__title data-md-component=header-title> <div class=md-header-nav__ellipsis> <div class=md-header-nav__topic> <span class=md-ellipsis> Serialt 文档 </span> </div> <div class=md-header-nav__topic> <span class=md-ellipsis> Go ven </span> </div> </div> </div> <label class="md-header-nav__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=搜索 placeholder=搜索 autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query data-md-state=active required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </label> <button type=reset class="md-search__icon md-icon" aria-label=Clear data-md-component=search-reset tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg> </button> </form> <div class=md-search__output> <div class=md-search__scrollwrap data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> 正在初始化搜索引擎 </div> <ol class=md-search-result__list></ol> </div> </div> </div> </div> </div> <div class=md-header-nav__source> <a href=https://github.com/serialt/serialt.github.io/ title="前往 GitHub 仓库" class=md-source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg> </div> <div class=md-source__repository> Serialt </div> </a> </div> </nav> </header> <div class=md-container data-md-component=container> <nav class=md-tabs aria-label=Tabs data-md-component=tabs> <div class="md-tabs__inner md-grid"> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=../.. class=md-tabs__link> Home </a> </li> <li class=md-tabs__item> <a href=../../vscode/1.%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/ class=md-tabs__link> VS Code </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label=Navigation data-md-level=0> <label class=md-nav__title for=__drawer> <a href=https://serialt.github.io title="Serialt 文档" class="md-nav__button md-logo" aria-label="Serialt 文档"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg> </a> Serialt 文档 </label> <div class=md-nav__source> <a href=https://github.com/serialt/serialt.github.io/ title="前往 GitHub 仓库" class=md-source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg> </div> <div class=md-source__repository> Serialt </div> </a> </div> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../.. class=md-nav__link> Home </a> </li> <li class=md-nav__item> <a href=../../vscode/1.%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/ class=md-nav__link> VS Code </a> </li> </ul> </nav> </div> </div> </div> <div class=md-content> <article class="md-content__inner md-typeset"> <a href=https://github.com/serialt/serialt.github.io/edit/master/docs/go/go_ven.md title=编辑此页 class="md-content__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg> </a> <h1>Go ven</h1> <h2 id=go>Go<a class=headerlink href=#go title="Permanent link">&para;</a></h2> <p>go开发平台搭建</p> <p>参考链接：</p> <ul> <li> <p>：<a href=https://www.cnblogs.com/aaronthon/p/10587487.html>https://www.cnblogs.com/aaronthon/p/10587487.html</a></p> </li> <li> <p>：<a href=https://www.runoob.com/go/go-environment.html>https://www.runoob.com/go/go-environment.html</a></p> </li> </ul> <p>一、下载地址</p> <p>Go官网下载地址：<a href=https://golang.org/dl/ >https://golang.org/dl/</a></p> <p>Go官方镜像站（推荐）：<a href=https://golang.google.cn/dl/ >https://golang.google.cn/dl/</a></p> <p>Linux下安装</p> <p>我们在版本选择页面选择并下载好<code>go1.11.5.linux-amd64.tar.gz</code>文件：</p> <div class=highlight><pre><span></span><code>wget https://dl.google.com/go/go1.11.5.linux-amd64.tar.gz
+</code></pre></div> <p>将下载好的文件解压到<code>/usr/local</code>目录下：</p> <div class=highlight><pre><span></span><code>mkdir -p /usr/local/go  # 创建目录
+tar -C /usr/lcoal/go zxvf go1.11.5.linux-amd64.tar.gz. # 解压
+</code></pre></div> <p>如果提示没有权限，加上<code>sudo</code>以root用户的身份再运行。执行完就可以在<code>/usr/local/</code>下看到go目录了。</p> <p>配置环境变量： Linux下有两个文件可以配置环境变量，其中<code>/etc/profile</code>是对所有用户生效的；<code>$HOME/.profile</code>是对当前用户生效的，根据自己的情况自行选择一个文件打开，添加如下两行代码，保存退出。</p> <div class=highlight><pre><span></span><code>export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
+</code></pre></div> <p><strong>Go项目结构</strong></p> <p>在进行Go语言开发的时候，我们的代码总是会保存在<code>$GOPATH/src</code>目录下。在工程经过<code>go build</code>、<code>go install</code>或<code>go get</code>等指令后，会将下载的第三方包源代码文件放在<code>$GOPATH/src</code>目录下， 产生的二进制可执行文件放在 <code>$GOPATH/bin</code>目录下，生成的中间缓存文件会被保存在 <code>$GOPATH/pkg</code> 下。</p> <p>如果我们使用版本管理工具（Version Control System，VCS。常用如Git）来管理我们的项目代码时，我们只需要添加<code>$GOPATH/src</code>目录的源代码即可。<code>bin</code> 和 <code>pkg</code> 目录的内容无需版本控制。</p> <p><strong>适合个人开发者</strong></p> <p>我们知道源代码都是存放在<code>GOPATH</code>的<code>src</code>目录下，那我们可以按照下图来组织我们的代码。</p> <p><img alt=img src=../images/1300537-20190325205527275-638377643.png></p> <p><strong>目前流行的项目结构</strong></p> <p>Go语言中也是通过包来组织代码文件，我们可以引用别人的包也可以发布自己的包，但是为了防止不同包的项目名冲突，我们通常使用<code>顶级域名</code>来作为包名的前缀，这样就不担心项目名冲突的问题了。</p> <p>因为不是每个个人开发者都拥有自己的顶级域名，所以目前流行的方式是使用个人的github用户名来区分不同的包。</p> <p><img alt=img src=../images/1300537-20190325205546430-23281384.png></p> <p>举个例子：张三和李四都有一个名叫<code>studygo</code>的项目，那么这两个包的路径就会是：</p> <div class=highlight><pre><span></span><code>import &quot;github.com/zhangsan/studygo&quot;
+</code></pre></div> <p>和</p> <div class=highlight><pre><span></span><code>import &quot;github.com/lisi/studygo&quot;
+</code></pre></div> <p>以后我们从github上下载别人包的时候，如：</p> <div class=highlight><pre><span></span><code>go get github.com/jmoiron/sqlx
+</code></pre></div> <p>那么，这个包会下载到我们本地<code>GOPATH</code>目录下的<code>src/github.com/jmoiron/sqlx</code>。</p> <p><strong>适合企业开发者</strong></p> <p><img alt=img src=../images/1300537-20190325205654857-1473178176.png></p> <p>二、语法</p> <p>1、第一个Go程序</p> <div class=highlight><pre><span></span><code>package main  // 声明 main 包，表明当前是一个可执行程序
+
+import &quot;fmt&quot;  // 导入内置 fmt 包
+
+func main(){  // main函数，是程序执行的入口
+    fmt.Println(&quot;Hello World!&quot;)  // 在终端打印 Hello World!
+}
+</code></pre></div> <p>运行</p> <div class=highlight><pre><span></span><code>
+</code></pre></div> <p>build，当运行go build后，会自动将当前目录下的*.go文件编译</p> <div class=highlight><pre><span></span><code>go build    
+</code></pre></div> <p>在编译过后可以直接执行</p> <p>go install</p> <p><code>go install</code>表示安装的意思，它先编译源代码得到可执行文件，然后将可执行文件移动到<code>GOPATH</code>的bin目录下。因为我们的环境变量中配置了<code>GOPATH</code>下的bin目录，所以我们就可以在任意地方直接执行可执行文件了</p> <p><strong>跨平台编译</strong></p> <p>默认我们<code>go build</code>的可执行文件都是当前操作系统可执行的文件，如果我想在windows下编译一个linux下可执行文件，那需要怎么做呢？</p> <p>只需要指定目标操作系统的平台和处理器架构即可</p> <div class=highlight><pre><span></span><code>SET CGO_ENABLED=0 ``// 禁用CGO
+SET GOOS=linux ``// 目标平台是linux
+SET GOARCH=amd64 ``// 目标处理器架构是amd64
+</code></pre></div> <p>然后再执行<code>go build</code>命令，得到的就是能够在Linux平台运行的可执行文件了</p> <p><strong>Go语言结构</strong></p> <p>Go 语言的基础组成有以下几个部分：</p> <ul> <li>包声明</li> <li>引入包</li> <li>函数</li> <li>变量</li> <li>语句 &amp; 表达式</li> <li>注释</li> </ul> <div class=highlight><pre><span></span><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+   /* 这是我的第一个简单的程序 */
+   fmt.Println(&quot;Hello, World!&quot;)
+}
+</code></pre></div> <ol> <li>第一行代码 <em>package main</em> 定义了包名。你必须在源文件中非注释的第一行指明这个文件属于哪个包，如：package main。package main表示一个可独立执行的程序，每个 Go 应用程序都包含一个名为 main 的包。</li> <li>下一行 <em>import "fmt"</em> 告诉 Go 编译器这个程序需要使用 fmt 包（的函数，或其他元素），fmt 包实现了格式化 IO（输入/输出）的函数。</li> <li>下一行 <em>func main()</em> 是程序开始执行的函数。main 函数是每一个可执行程序所必须包含的，一般来说都是在启动后第一个执行的函数（如果有 init() 函数则会先执行该函数）。</li> <li>下一行 /<em>...</em>/ 是注释，在程序执行时将被忽略。单行注释是最常见的注释形式，你可以在任何地方使用以 // 开头的单行注释。多行注释也叫块注释，均已以 /* 开头，并以 */ 结尾，且不可以嵌套使用，多行注释一般用于包的文档描述或注释成块的代码片段。</li> <li>下一行 <em>fmt.Println(...)</em> 可以将字符串输出到控制台，并在最后自动增加换行字符 \n。 使用 fmt.Print("hello, world\n") 可以得到相同的结果。 Print 和 Println 这两个函数也支持使用变量，如：fmt.Println(arr)。如果没有特别指定，它们会以默认的打印格式将变量 arr 输出到控制台。</li> <li>当标识符（包括常量、变量、类型、函数名、结构字段等等）以一个大写字母开头，如：Group1，那么使用这种形式的标识符的对象就可以被外部包的代码所使用（客户端程序需要先导入这个包），这被称为导出（像面向对象语言中的 public）；标识符如果以小写字母开头，则对包外是不可见的，但是他们在整个包的内部是可见并且可用的（像面向对象语言中的 protected ）。</li> </ol> <p>注意：</p> <p>需要注意的是 <strong>{</strong> 不能单独放在一行，所以以下代码在运行时会产生错误：</p> <div class=highlight><pre><span></span><code>package main
+
+import &quot;fmt&quot;
+
+func main()  
+{  // 错误，{ 不能在单独的行上
+    fmt.Println(&quot;Hello, World!&quot;)
+}
+</code></pre></div> <p>go语法：</p> <p>注释：</p> <p>以 // 开头的单行注释。多行注释也叫块注释，均已以 /* 开头，并以 */ 结尾。如：</p> <div class=highlight><pre><span></span><code>// 单行注释
+/*
+ Author by 菜鸟教程
+ 我是多行注释
+ */
+</code></pre></div> <p>字符串连接符号:</p> <p>Go 语言的字符串可以通过 <strong>+</strong> 实现</p> <div class=highlight><pre><span></span><code>package main
+import &quot;fmt&quot;
+func main() {
+    fmt.Println(&quot;Google&quot; + &quot;Runoob&quot;)
+}
+</code></pre></div> <div class=highlight><pre><span></span><code># 输出结果
+GoogleRunoob
+</code></pre></div> <p>关键字</p> <p>下面列举了 Go 代码中会使用到的 25 个关键字或保留字：</p> <table> <thead> <tr> <th>break</th> <th>default</th> <th>func</th> <th>interface</th> <th>select</th> </tr> </thead> <tbody> <tr> <td>case</td> <td>defer</td> <td>go</td> <td>map</td> <td>struct</td> </tr> <tr> <td>chan</td> <td>else</td> <td>goto</td> <td>package</td> <td>switch</td> </tr> <tr> <td>const</td> <td>fallthrough</td> <td>if</td> <td>range</td> <td>type</td> </tr> <tr> <td>continue</td> <td>for</td> <td>import</td> <td>return</td> <td>var</td> </tr> </tbody> </table> <p>除了以上介绍的这些关键字，Go 语言还有 36 个预定义标识符：</p> <table> <thead> <tr> <th>append</th> <th>bool</th> <th>byte</th> <th>cap</th> <th>close</th> <th>complex</th> <th>complex64</th> <th>complex128</th> <th>uint16</th> </tr> </thead> <tbody> <tr> <td>copy</td> <td>false</td> <td>float32</td> <td>float64</td> <td>imag</td> <td>int</td> <td>int8</td> <td>int16</td> <td>uint32</td> </tr> <tr> <td>int32</td> <td>int64</td> <td>iota</td> <td>len</td> <td>make</td> <td>new</td> <td>nil</td> <td>panic</td> <td>uint64</td> </tr> <tr> <td>print</td> <td>println</td> <td>real</td> <td>recover</td> <td>string</td> <td>true</td> <td>uint</td> <td>uint8</td> <td>uintptr</td> </tr> </tbody> </table> <p>程序一般由关键字、常量、变量、运算符、类型和函数组成。</p> <p>程序中可能会使用到这些分隔符：括号 ()，中括号 [] 和大括号 {}。</p> <p>程序中可能会使用到这些标点符号：.、,、;、: 和 …。</p> <p>Go语言数据类型</p> <table> <thead> <tr> <th align=left>序号</th> <th align=left>类型和描述</th> </tr> </thead> <tbody> <tr> <td align=left>1</td> <td align=left><strong>布尔型</strong> 布尔型的值只可以是常量 true 或者 false。一个简单的例子：var b bool = true。</td> </tr> <tr> <td align=left>2</td> <td align=left><strong>数字类型</strong> 整型 int 和浮点型 float32、float64，Go 语言支持整型和浮点型数字，并且支持复数，其中位的运算采用补码。</td> </tr> <tr> <td align=left>3</td> <td align=left><strong>字符串类型:</strong> 字符串就是一串固定长度的字符连接起来的字符序列。Go 的字符串是由单个字节连接起来的。Go 语言的字符串的字节使用 UTF-8 编码标识 Unicode 文本。</td> </tr> <tr> <td align=left>4</td> <td align=left><strong>派生类型:</strong> 包括：(a) 指针类型（Pointer）(b) 数组类型&copy; 结构化类型(struct)(d) Channel 类型(e) 函数类型(f) 切片类型(g) 接口类型（interface）(h) Map 类型</td> </tr> </tbody> </table> <h2 id=_1>数字类型<a class=headerlink href=#_1 title="Permanent link">&para;</a></h2> <p>Go 也有基于架构的类型，例如：int、uint 和 uintptr。</p> <table> <thead> <tr> <th align=left>序号</th> <th align=left>类型和描述</th> </tr> </thead> <tbody> <tr> <td align=left>1</td> <td align=left><strong>uint8</strong> 无符号 8 位整型 (0 到 255)</td> </tr> <tr> <td align=left>2</td> <td align=left><strong>uint16</strong> 无符号 16 位整型 (0 到 65535)</td> </tr> <tr> <td align=left>3</td> <td align=left><strong>uint32</strong> 无符号 32 位整型 (0 到 4294967295)</td> </tr> <tr> <td align=left>4</td> <td align=left><strong>uint64</strong> 无符号 64 位整型 (0 到 18446744073709551615)</td> </tr> <tr> <td align=left>5</td> <td align=left><strong>int8</strong> 有符号 8 位整型 (-128 到 127)</td> </tr> <tr> <td align=left>6</td> <td align=left><strong>int16</strong> 有符号 16 位整型 (-32768 到 32767)</td> </tr> <tr> <td align=left>7</td> <td align=left><strong>int32</strong> 有符号 32 位整型 (-2147483648 到 2147483647)</td> </tr> <tr> <td align=left>8</td> <td align=left><strong>int64</strong> 有符号 64 位整型 (-9223372036854775808 到 9223372036854775807)</td> </tr> </tbody> </table> <h3 id=_2>浮点型<a class=headerlink href=#_2 title="Permanent link">&para;</a></h3> <table> <thead> <tr> <th align=left>序号</th> <th align=left>类型和描述</th> </tr> </thead> <tbody> <tr> <td align=left>1</td> <td align=left><strong>float32</strong> IEEE-754 32位浮点型数</td> </tr> <tr> <td align=left>2</td> <td align=left><strong>float64</strong> IEEE-754 64位浮点型数</td> </tr> <tr> <td align=left>3</td> <td align=left><strong>complex64</strong> 32 位实数和虚数</td> </tr> <tr> <td align=left>4</td> <td align=left><strong>complex128</strong> 64 位实数和虚数</td> </tr> </tbody> </table> <hr> <h2 id=_3>其他数字类型<a class=headerlink href=#_3 title="Permanent link">&para;</a></h2> <p>以下列出了其他更多的数字类型：</p> <table> <thead> <tr> <th align=left>序号</th> <th align=left>类型和描述</th> </tr> </thead> <tbody> <tr> <td align=left>1</td> <td align=left><strong>byte</strong> 类似 uint8</td> </tr> <tr> <td align=left>2</td> <td align=left><strong>rune</strong> 类似 int32</td> </tr> <tr> <td align=left>3</td> <td align=left><strong>uint</strong> 32 或 64 位</td> </tr> <tr> <td align=left>4</td> <td align=left><strong>int</strong> 与 uint 一样大小</td> </tr> <tr> <td align=left>5</td> <td align=left><strong>uintptr</strong> 无符号整型，用于存放一个指针</td> </tr> </tbody> </table> <p>Go语言变量</p> <p>定义格式</p> <div class=highlight><pre><span></span><code>var identifier type
+</code></pre></div> <p>可以一次声明多个变量</p> <div class=highlight><pre><span></span><code>var identifier1, identifier2 type
+</code></pre></div> <div class=highlight><pre><span></span><code>package main
+import &quot;fmt&quot;
+func main() {
+    var a string = &quot;Runoob&quot;
+    fmt.Println(a)
+
+    var b, c int = 1, 2
+    fmt.Println(b, c)
+}
+</code></pre></div> <h4 id=_4>变量声明<a class=headerlink href=#_4 title="Permanent link">&para;</a></h4> <p><strong>第一种，指定变量类型，如果没有初始化，则变量默认为零值</strong>。</p> <div class=highlight><pre><span></span><code>var v_name v_type
+v_name = value
+</code></pre></div> <div class=highlight><pre><span></span><code>package main
+import &quot;fmt&quot;
+func main() {
+
+    // 声明一个变量并初始化
+    var a = &quot;RUNOOB&quot;
+    fmt.Println(a)
+
+    // 没有初始化就为零值
+    var b int
+    fmt.Println(b)
+
+    // bool 零值为 false
+    var c bool
+    fmt.Println(c)
+}
+</code></pre></div> <div class=highlight><pre><span></span><code>RUNOOB
+0
+fals
+</code></pre></div> <ul> <li> <p>数值类型（包括complex64/128）为 <strong>0</strong></p> </li> <li> <p>布尔类型为 <strong>false</strong></p> </li> <li> <p>字符串为 <strong>""</strong>（空字符串）</p> </li> <li> <p>以下几种类型为 <strong>nil</strong>：</p> </li> </ul> <div class=highlight><pre><span></span><code>var a *int
+var a []int
+var a map[string] int
+var a chan int
+var a func(string) int
+var a error // error 是接口
+</code></pre></div> <div class=highlight><pre><span></span><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+    var i int
+    var f float64
+    var b bool
+    var s string
+    fmt.Printf(&quot;%v %v %v %q\n&quot;, i, f, b, s)
+}
+</code></pre></div> <div class=highlight><pre><span></span><code>0 0 false &quot;&quot;
+</code></pre></div> <p><strong>第二种，根据值自行判定变量类型。</strong></p> <div class=highlight><pre><span></span><code>var v_name = value
+</code></pre></div> <div class=highlight><pre><span></span><code>package main
+import &quot;fmt&quot;
+func main() {
+    var d = true
+    fmt.Println(d)
+}
+</code></pre></div> <div class=highlight><pre><span></span><code>true
+</code></pre></div> <p><strong>第三种，省略 var, 注意 *<em>:=*</em> 左侧如果没有声明新的变量，就产生编译错误，格式</strong></p> <div class=highlight><pre><span></span><code>v_name := value
+</code></pre></div> <div class=highlight><pre><span></span><code>package main
+import &quot;fmt&quot;
+func main() {
+    f := &quot;Runoob&quot; // var f string = &quot;Runoob&quot;
+
+    fmt.Println(f)
+}
+</code></pre></div> <div class=highlight><pre><span></span><code>Runoob
+</code></pre></div> <h3 id=_5>多变量声明<a class=headerlink href=#_5 title="Permanent link">&para;</a></h3> <div class=highlight><pre><span></span><code>//类型相同多个变量, 非全局变量
+var vname1, vname2, vname3 type
+vname1, vname2, vname3 = v1, v2, v3
+
+var vname1, vname2, vname3 = v1, v2, v3 // 和 python 很像,不需要显示声明类型，自动推断
+
+vname1, vname2, vname3 := v1, v2, v3 // 出现在 := 左侧的变量不应该是已经被声明过的，否则会导致编译错误
+
+
+// 这种因式分解关键字的写法一般用于声明全局变量
+var (
+    vname1 v_type1
+    vname2 v_type2
+)
+</code></pre></div> <div class=highlight><pre><span></span><code>package main
+
+var x, y int
+var (  // 这种因式分解关键字的写法一般用于声明全局变量
+    a int
+    b bool
+)
+
+var c, d int = 1, 2
+var e, f = 123, &quot;hello&quot;
+
+//这种不带声明格式的只能在函数体中出现
+//g, h := 123, &quot;hello&quot;
+
+func main(){
+    g, h := 123, &quot;hello&quot;
+    println(x, y, a, b, c, d, e, f, g, h)
+}
+</code></pre></div> <p>以上实例执行结果为：</p> <div class=highlight><pre><span></span><code>0 0 0 false 1 2 123 hello 123 hello
+</code></pre></div> <p>简短形式，使用 := 赋值操作符</p> <p>我们知道可以在变量的初始化时省略变量的类型而由系统自动推断，声明语句写上 var 关键字其实是显得有些多余了，因此我们可以将它们简写为 a := 50 或 b := false。</p> <p>a 和 b 的类型（int 和 bool）将由编译器自动推断。</p> <p>这是使用变量的首选形式，但是它只能被用在函数体内，而不可以用于全局变量的声明与赋值。使用操作符 := 可以高效地创建一个新的变量，称之为初始化声明。</p> <p><strong>注意事项</strong></p> <p>如果在相同的代码块中，我们不可以再次对于相同名称的变量使用初始化声明，例如：a := 20 就是不被允许的，编译器会提示错误 no new variables on left side of :=，但是 a = 20 是可以的，因为这是给相同的变量赋予一个新的值。</p> <p>如果你在定义变量 a 之前使用它，则会得到编译错误 undefined: a。</p> <p>如果你声明了一个局部变量却没有在相同的代码块中使用它，同样会得到编译错误</p> <p><strong>但是全局变量是允许声明但不使用的</strong>。 同一类型的多个变量可以声明在同一行</p> <p>Go语言常量</p> <p>常量是一个简单值的标识符，在程序运行时，不会被修改的量。</p> <p>常量中的数据类型只可以是布尔型、数字型（整数型、浮点型和复数）和字符串型。</p> <p>常量的定义格式</p> <div class=highlight><pre><span></span><code>const identifier [type] = value
+</code></pre></div> <p>你可以省略类型说明符 [type]，因为编译器可以根据变量的值来推断其类型。</p> <ul> <li>显式类型定义： <code>const b string = "abc"</code></li> <li>隐式类型定义： <code>const b = "abc"</code></li> </ul> <p>多个相同类型的声明可以简写为：</p> <div class=highlight><pre><span></span><code>const c_name1, c_name2 = value1, value2
+</code></pre></div> <div class=highlight><pre><span></span><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+   const LENGTH int = 10
+   const WIDTH int = 5  
+   var area int
+   const a, b, c = 1, false, &quot;str&quot; //多重赋值
+
+   area = LENGTH * WIDTH
+   fmt.Printf(&quot;面积为 : %d&quot;, area)
+   println()
+   println(a, b, c)  
+}
+</code></pre></div> <p>Go运算符</p> <div class=highlight><pre><span></span><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+
+   var a int = 21
+   var b int = 10
+   var c int
+
+   c = a + b
+   fmt.Printf(&quot;第一行 - c 的值为 %d\n&quot;, c )
+   c = a - b
+   fmt.Printf(&quot;第二行 - c 的值为 %d\n&quot;, c )
+   c = a * b
+   fmt.Printf(&quot;第三行 - c 的值为 %d\n&quot;, c )
+   c = a / b
+   fmt.Printf(&quot;第四行 - c 的值为 %d\n&quot;, c )
+   c = a % b
+   fmt.Printf(&quot;第五行 - c 的值为 %d\n&quot;, c )
+   a++
+   fmt.Printf(&quot;第六行 - a 的值为 %d\n&quot;, a )
+   a=21   // 为了方便测试，a 这里重新赋值为 21
+   a--
+   fmt.Printf(&quot;第七行 - a 的值为 %d\n&quot;, a )
+}
+</code></pre></div> <h3 id=_6>关系运算符<a class=headerlink href=#_6 title="Permanent link">&para;</a></h3> <p>下表列出了所有Go语言的关系运算符。假定 A 值为 10，B 值为 20。</p> <table> <thead> <tr> <th align=left>运算符</th> <th align=left>描述</th> <th align=left>实例</th> </tr> </thead> <tbody> <tr> <td align=left>==</td> <td align=left>检查两个值是否相等，如果相等返回 True 否则返回 False。</td> <td align=left>(A == B) 为 False</td> </tr> <tr> <td align=left>!=</td> <td align=left>检查两个值是否不相等，如果不相等返回 True 否则返回 False。</td> <td align=left>(A != B) 为 True</td> </tr> <tr> <td align=left>&gt;</td> <td align=left>检查左边值是否大于右边值，如果是返回 True 否则返回 False。</td> <td align=left>(A &gt; B) 为 False</td> </tr> <tr> <td align=left>&lt;</td> <td align=left>检查左边值是否小于右边值，如果是返回 True 否则返回 False。</td> <td align=left>(A &lt; B) 为 True</td> </tr> <tr> <td align=left>&gt;=</td> <td align=left>检查左边值是否大于等于右边值，如果是返回 True 否则返回 False。</td> <td align=left>(A &gt;= B) 为 False</td> </tr> <tr> <td align=left>&lt;=</td> <td align=left>检查左边值是否小于等于右边值，如果是返回 True 否则返回 False。</td> <td align=left>(A &lt;= B) 为 True</td> </tr> </tbody> </table> <div class=highlight><pre><span></span><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+   var a int = 21
+   var b int = 10
+
+   if( a == b ) {
+      fmt.Printf(&quot;第一行 - a 等于 b\n&quot; )
+   } else {
+      fmt.Printf(&quot;第一行 - a 不等于 b\n&quot; )
+   }
+   if ( a &lt; b ) {
+      fmt.Printf(&quot;第二行 - a 小于 b\n&quot; )
+   } else {
+      fmt.Printf(&quot;第二行 - a 不小于 b\n&quot; )
+   }
+
+   if ( a &gt; b ) {
+      fmt.Printf(&quot;第三行 - a 大于 b\n&quot; )
+   } else {
+      fmt.Printf(&quot;第三行 - a 不大于 b\n&quot; )
+   }
+   /* Lets change value of a and b */
+   a = 5
+   b = 20
+   if ( a &lt;= b ) {
+      fmt.Printf(&quot;第四行 - a 小于等于 b\n&quot; )
+   }
+   if ( b &gt;= a ) {
+      fmt.Printf(&quot;第五行 - b 大于等于 a\n&quot; )
+   }
+}
+</code></pre></div> <h3 id=_7>逻辑运算符<a class=headerlink href=#_7 title="Permanent link">&para;</a></h3> <p>下表列出了所有Go语言的逻辑运算符。假定 A 值为 True，B 值为 False。</p> <table> <thead> <tr> <th align=left>运算符</th> <th align=left>描述</th> <th align=left>实例</th> </tr> </thead> <tbody> <tr> <td align=left>&amp;&amp;</td> <td align=left>逻辑 AND 运算符。 如果两边的操作数都是 True，则条件 True，否则为 False。</td> <td align=left>(A &amp;&amp; B) 为 False</td> </tr> <tr> <td align=left>||</td> <td align=left>逻辑 OR 运算符。 如果两边的操作数有一个 True，则条件 True，否则为 False。</td> <td align=left>(A || B) 为 True</td> </tr> <tr> <td align=left>!</td> <td align=left>逻辑 NOT 运算符。 如果条件为 True，则逻辑 NOT 条件 False，否则为 True。</td> <td align=left>!(A &amp;&amp; B) 为 True</td> </tr> </tbody> </table> <div class=highlight><pre><span></span><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+   var a bool = true
+   var b bool = false
+   if ( a &amp;&amp; b ) {
+      fmt.Printf(&quot;第一行 - 条件为 true\n&quot; )
+   }
+   if ( a || b ) {
+      fmt.Printf(&quot;第二行 - 条件为 true\n&quot; )
+   }
+   /* 修改 a 和 b 的值 */
+   a = false
+   b = true
+   if ( a &amp;&amp; b ) {
+      fmt.Printf(&quot;第三行 - 条件为 true\n&quot; )
+   } else {
+      fmt.Printf(&quot;第三行 - 条件为 false\n&quot; )
+   }
+   if ( !(a &amp;&amp; b) ) {
+      fmt.Printf(&quot;第四行 - 条件为 true\n&quot; )
+   }
+}
+</code></pre></div> <h2 id=_8>赋值运算符<a class=headerlink href=#_8 title="Permanent link">&para;</a></h2> <p>下表列出了所有Go语言的赋值运算符。</p> <table> <thead> <tr> <th align=left>运算符</th> <th align=left>描述</th> <th align=left>实例</th> </tr> </thead> <tbody> <tr> <td align=left>=</td> <td align=left>简单的赋值运算符，将一个表达式的值赋给一个左值</td> <td align=left>C = A + B 将 A + B 表达式结果赋值给 C</td> </tr> <tr> <td align=left>+=</td> <td align=left>相加后再赋值</td> <td align=left>C += A 等于 C = C + A</td> </tr> <tr> <td align=left>-=</td> <td align=left>相减后再赋值</td> <td align=left>C -= A 等于 C = C - A</td> </tr> <tr> <td align=left>*=</td> <td align=left>相乘后再赋值</td> <td align=left>C *= A 等于 C = C * A</td> </tr> <tr> <td align=left>/=</td> <td align=left>相除后再赋值</td> <td align=left>C /= A 等于 C = C / A</td> </tr> <tr> <td align=left>%=</td> <td align=left>求余后再赋值</td> <td align=left>C %= A 等于 C = C % A</td> </tr> <tr> <td align=left>&lt;&lt;=</td> <td align=left>左移后赋值</td> <td align=left>C &lt;&lt;= 2 等于 C = C &lt;&lt; 2</td> </tr> <tr> <td align=left>&gt;&gt;=</td> <td align=left>右移后赋值</td> <td align=left>C &gt;&gt;= 2 等于 C = C &gt;&gt; 2</td> </tr> <tr> <td align=left>&amp;=</td> <td align=left>按位与后赋值</td> <td align=left>C &amp;= 2 等于 C = C &amp; 2</td> </tr> <tr> <td align=left>^=</td> <td align=left>按位异或后赋值</td> <td align=left>C ^= 2 等于 C = C ^ 2</td> </tr> <tr> <td align=left>|=</td> <td align=left>按位或后赋值</td> <td align=left>C |= 2 等于 C = C | 2</td> </tr> </tbody> </table> <div class=highlight><pre><span></span><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+   var a int = 21
+   var c int
+
+   c =  a
+   fmt.Printf(&quot;第 1 行 - =  运算符实例，c 值为 = %d\n&quot;, c )
+
+   c +=  a
+   fmt.Printf(&quot;第 2 行 - += 运算符实例，c 值为 = %d\n&quot;, c )
+
+   c -=  a
+   fmt.Printf(&quot;第 3 行 - -= 运算符实例，c 值为 = %d\n&quot;, c )
+
+   c *=  a
+   fmt.Printf(&quot;第 4 行 - *= 运算符实例，c 值为 = %d\n&quot;, c )
+
+   c /=  a
+   fmt.Printf(&quot;第 5 行 - /= 运算符实例，c 值为 = %d\n&quot;, c )
+
+   c  = 200;
+
+   c &lt;&lt;=  2
+   fmt.Printf(&quot;第 6行  - &lt;&lt;= 运算符实例，c 值为 = %d\n&quot;, c )
+
+   c &gt;&gt;=  2
+   fmt.Printf(&quot;第 7 行 - &gt;&gt;= 运算符实例，c 值为 = %d\n&quot;, c )
+
+   c &amp;=  2
+   fmt.Printf(&quot;第 8 行 - &amp;= 运算符实例，c 值为 = %d\n&quot;, c )
+
+   c ^=  2
+   fmt.Printf(&quot;第 9 行 - ^= 运算符实例，c 值为 = %d\n&quot;, c )
+
+   c |=  2
+   fmt.Printf(&quot;第 10 行 - |= 运算符实例，c 值为 = %d\n&quot;, c )
+
+}
+</code></pre></div> <div class=highlight><pre><span></span><code>第 1 行 - =  运算符实例，c 值为 = 21
+第 2 行 - += 运算符实例，c 值为 = 42
+第 3 行 - -= 运算符实例，c 值为 = 21
+第 4 行 - *= 运算符实例，c 值为 = 441
+第 5 行 - /= 运算符实例，c 值为 = 21
+第 6行  - &lt;&lt;= 运算符实例，c 值为 = 800
+第 7 行 - &gt;&gt;= 运算符实例，c 值为 = 200
+第 8 行 - &amp;= 运算符实例，c 值为 = 0
+第 9 行 - ^= 运算符实例，c 值为 = 2
+第 10 行 - |= 运算符实例，c 值为 = 2
+</code></pre></div> <h2 id=_9>其他运算符<a class=headerlink href=#_9 title="Permanent link">&para;</a></h2> <p>下表列出了Go语言的其他运算符。</p> <table> <thead> <tr> <th align=left>运算符</th> <th align=left>描述</th> <th align=left>实例</th> </tr> </thead> <tbody> <tr> <td align=left>&amp;</td> <td align=left>返回变量存储地址</td> <td align=left>&a; 将给出变量的实际地址。</td> </tr> <tr> <td align=left>*</td> <td align=left>指针变量。</td> <td align=left>*a; 是一个指针变量</td> </tr> </tbody> </table> <div class=highlight><pre><span></span><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+   var a int = 4
+   var b int32
+   var c float32
+   var ptr *int
+
+   /* 运算符实例 */
+   fmt.Printf(&quot;第 1 行 - a 变量类型为 = %T\n&quot;, a );
+   fmt.Printf(&quot;第 2 行 - b 变量类型为 = %T\n&quot;, b );
+   fmt.Printf(&quot;第 3 行 - c 变量类型为 = %T\n&quot;, c );
+
+   /*  &amp; 和 * 运算符实例 */
+   ptr = &amp;a     /* &#39;ptr&#39; 包含了 &#39;a&#39; 变量的地址 */
+   fmt.Printf(&quot;a 的值为  %d\n&quot;, a);
+   fmt.Printf(&quot;*ptr 为 %d\n&quot;, *ptr);
+}
+</code></pre></div> <p>Go语言条件语句</p> <div class=highlight><pre><span></span><code>if 布尔表达式 {
+   /* 在布尔表达式为 true 时执行 */
+}
+</code></pre></div> <div class=highlight><pre><span></span><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+   /* 定义局部变量 */
+   var a int = 10
+
+   /* 使用 if 语句判断布尔表达式 */
+   if a &lt; 20 {
+       /* 如果条件为 true 则执行以下语句 */
+       fmt.Printf(&quot;a 小于 20\n&quot; )
+   }
+   fmt.Printf(&quot;a 的值为 : %d\n&quot;, a)
+}
+</code></pre></div> <div class=highlight><pre><span></span><code>if 布尔表达式 {
+   /* 在布尔表达式为 true 时执行 */
+} else {
+  /* 在布尔表达式为 false 时执行 */
+}
+</code></pre></div> <div class=highlight><pre><span></span><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+   /* 局部变量定义 */
+   var a int = 100;
+
+   /* 判断布尔表达式 */
+   if a &lt; 20 {
+       /* 如果条件为 true 则执行以下语句 */
+       fmt.Printf(&quot;a 小于 20\n&quot; );
+   } else {
+       /* 如果条件为 false 则执行以下语句 */
+       fmt.Printf(&quot;a 不小于 20\n&quot; );
+   }
+   fmt.Printf(&quot;a 的值为 : %d\n&quot;, a);
+
+}
+</code></pre></div> <div class=highlight><pre><span></span><code>switch var1 {
+    case val1:
+        ...
+    case val2:
+        ...
+    default:
+        ...
+}
+</code></pre></div> <div class=highlight><pre><span></span><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+   /* 定义局部变量 */
+   var grade string = &quot;B&quot;
+   var marks int = 90
+
+   switch marks {
+      case 90: grade = &quot;A&quot;
+      case 80: grade = &quot;B&quot;
+      case 50,60,70 : grade = &quot;C&quot;
+      default: grade = &quot;D&quot;  
+   }
+
+   switch {
+      case grade == &quot;A&quot; :
+         fmt.Printf(&quot;优秀!\n&quot; )    
+      case grade == &quot;B&quot;, grade == &quot;C&quot; :
+         fmt.Printf(&quot;良好\n&quot; )      
+      case grade == &quot;D&quot; :
+         fmt.Printf(&quot;及格\n&quot; )      
+      case grade == &quot;F&quot;:
+         fmt.Printf(&quot;不及格\n&quot; )
+      default:
+         fmt.Printf(&quot;差\n&quot; );
+   }
+   fmt.Printf(&quot;你的等级是 %s\n&quot;, grade );      
+}
+</code></pre></div> <p>switch 默认情况下 case 最后自带 break 语句，匹配成功后就不会执行其他 case，如果我们需要执行后面的 case，可以使用 <strong>fallthrough</strong> ,使用 fallthrough 会强制执行后面的 case 语句，fallthrough 不会判断下一条 case 的表达式结果是否为 true</p> <div class=highlight><pre><span></span><code>package main
+
+import &quot;fmt&quot;
+
+func main() {
+
+    switch {
+    case false:
+            fmt.Println(&quot;1、case 条件语句为 false&quot;)
+            fallthrough
+    case true:
+            fmt.Println(&quot;2、case 条件语句为 true&quot;)
+            fallthrough
+    case false:
+            fmt.Println(&quot;3、case 条件语句为 false&quot;)
+            fallthrough
+    case true:
+            fmt.Println(&quot;4、case 条件语句为 true&quot;)
+    case false:
+            fmt.Println(&quot;5、case 条件语句为 false&quot;)
+            fallthrough
+    default:
+            fmt.Println(&quot;6、默认 case&quot;)
+    }
+}
+</code></pre></div> <hr> <div class=md-source-date> <small> 最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_datetime">2021-02-08 16:23:45</span> </small> </div> </article> </div> </div> </main> <footer class=md-footer> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-footer-copyright> <div class=md-footer-copyright__highlight> Copyright &copy; 2020 - 2021 Serialt </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <script src=../../assets/javascripts/vendor.18f0862e.min.js></script> <script src=../../assets/javascripts/bundle.994580cf.min.js></script><script id=__lang type=application/json>{"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script> <script>
+        app = initialize({
+          base: "../..",
+          features: ['tabs', 'instant', 'navigation.tabs', 'navigation.tabs.sticky', 'toc.integrate', 'search.suggest', 'search.highlight'],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.9c0e82ba.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script> <script src=../../js/extra.js></script> </body> </html>
