@@ -1,0 +1,101 @@
+# Project information
+site_name: Serialt 文档 
+site_description: makdocs学习笔记
+site_author: serialt
+site_url: https://serialt.github.io
+
+
+# Repository
+repo_name: Serialt
+repo_url: https://github.com/serialt/serialt.github.io
+
+# Copyright
+copyright: 'Copyright &copy; 2020 - 2021 Serialt'
+
+theme:
+  name: material
+  logo: 'image/serialt.JPG'
+  favicon: 'image/serialt.JPG'
+  palette:
+    primary: teal
+    accent: red
+  language: 'zh'
+  features:
+    - tabs
+    - instant
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+  
+  inlude_sitebar: true
+  
+plugins:
+  - search
+  - minify:
+      minify_html: true
+  - git-revision-date-localized:
+      type: iso_datetime
+
+extra:
+  social:
+    link: https://github.com/serialt
+  search:
+    separator: '[\s\-\.]+'
+    language: 'jp'
+    Content-Encoding: gzip
+
+extra_css:
+  - css/extra.css
+
+extra_javascript:
+  - js/extra.js
+
+
+
+markdown_extensions:
+  - admonition
+  - abbr
+  - attr_list
+  - def_list
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:pymdownx.emoji.twemoji
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.highlight:
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: serialt
+      repo: serialt
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      check_paths: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - pymdownx.tabbed
+
+
+
+nav:
+    - Home: README.md
+    - VS Code:  vscode/1.基础配置.md
