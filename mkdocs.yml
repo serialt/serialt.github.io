@@ -14,8 +14,8 @@ copyright: 'Copyright &copy; 2020 - 2021 Serialt'
 
 theme:
   name: material
-  logo: 'image/serialt.JPG'
-  favicon: 'image/serialt.JPG'
+  logo: 'images/serialt.jpg'
+  favicon: 'images/serialt.jpg'
   palette:
     primary: teal
     accent: red
@@ -39,8 +39,6 @@ plugins:
       type: iso_datetime
 
 extra:
-  social:
-    link: https://github.com/serialt
   search:
     separator: '[\s\-\.]+'
     language: 'jp'
@@ -97,5 +95,5 @@ markdown_extensions:
 
 
 nav:
-    - Home: README.md
-    - VS Code:  vscode/1.基础配置.md
+- Home: README.md
+- VS Code:  vscode/1.基础配置.md
