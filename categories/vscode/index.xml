@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>vscode - Category - blog for log</title>
+        <link>https://serialt.github.io/categories/vscode/</link>
+        <description>vscode - Category - blog for log</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 24 Sep 2023 18:09:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/vscode/" rel="self" type="application/rss+xml" /><item>
+    <title>Debug Shell in VSCode</title>
+    <link>https://serialt.github.io/posts/debug-shell-in-vscode/</link>
+    <pubDate>Sun, 24 Sep 2023 18:09:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/debug-shell-in-vscode/</guid>
+    <description><![CDATA[Debug shell 1、安装插件 安装bashdb插件 rogalmic.bash-debug 2、增加一个vscode launch.json配置文件 Select Debug -&gt; Add Configuration to add custom debug configuration 示例： { &#34;configurations&#34;: [ { &#34;type&#34;: &#34;bashdb&#34;, &#34;request&#34;: &#34;launch&#34;, &#34;name&#34;: &#34;Bash-Debug&#34;, &#34;cwd&#34;:]]></description>
+</item>
+</channel>
+</rss>

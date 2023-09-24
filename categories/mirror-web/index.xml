@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>mirror-web - Category - blog for log</title>
+        <link>https://serialt.github.io/categories/mirror-web/</link>
+        <description>mirror-web - Category - blog for log</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 24 Sep 2023 17:01:26 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/mirror-web/" rel="self" type="application/rss+xml" /><item>
+    <title>Tuna Web</title>
+    <link>https://serialt.github.io/posts/tuna-web/</link>
+    <pubDate>Sun, 24 Sep 2023 17:01:26 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/tuna-web/</guid>
+    <description><![CDATA[清华镜像网页搭建镜像站 tuna mirror-web地址：https://github.com/tuna/mirror-web.git tuna mirror]]></description>
+</item>
+</channel>
+</rss>
