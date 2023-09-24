@@ -2,10 +2,12 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://serialt.github.io/</loc><lastmod>2023-09-24T17:01:26&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/</loc><lastmod>2023-09-24T18:09:42&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/debug-shell-in-vscode/</loc><lastmod>2023-09-24T18:09:42&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/</loc><lastmod>2023-09-24T18:09:42&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/shell/</loc><lastmod>2023-09-24T18:09:42&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/</loc><lastmod>2023-09-24T18:09:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/mirrors/</loc><lastmod>2023-09-24T17:01:26&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/posts/</loc><lastmod>2023-09-24T17:01:26&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/</loc><lastmod>2023-09-24T17:01:26&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/tuna-web/</loc><lastmod>2023-09-24T17:01:26&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/helm/</loc><lastmod>2023-09-24T11:05:25&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/helm-migrate-oci/</loc><lastmod>2023-09-24T11:05:25&#43;08:00</lastmod></url><url>
