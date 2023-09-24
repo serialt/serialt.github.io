@@ -3,6 +3,7 @@ title = 'Helm Migrate OCI'
 date = 2023-09-24T11:05:25+08:00
 draft = false
 tags = ["helm"]
+categories = ["Kubernetes"]
 +++
 
 ## helm oci
