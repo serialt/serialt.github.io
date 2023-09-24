@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Helm Migrate OCI - blog for log</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Helm Migrate OCI" />
+<meta property="og:description" content="helm oci 缘由 Helm 3.8 版本开始，支持使用oci进行存储chart。镜像存储常用的Harbor在v1.6版本开始支持Helm Chart仓库功能， char" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/helm-migrate-oci/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-09-24T11:05:25+08:00" />
+<meta property="article:modified_time" content="2023-09-24T11:05:25+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Helm Migrate OCI"/>
+<meta name="twitter:description" content="helm oci 缘由 Helm 3.8 版本开始，支持使用oci进行存储chart。镜像存储常用的Harbor在v1.6版本开始支持Helm Chart仓库功能， char"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/helm-migrate-oci/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Helm Migrate OCI",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/helm-migrate-oci\/"
+        },"genre": "posts","keywords": "helm","wordcount":  410 ,
+        "url": "https:\/\/serialt.github.io\/posts\/helm-migrate-oci\/","datePublished": "2023-09-24T11:05:25+08:00","dateModified": "2023-09-24T11:05:25+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="blog for log">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="blog for log">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Helm Migrate OCI</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-09-24">2023-09-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;410 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#helm-oci">helm oci</a>
+      <ul>
+        <li><a href="#缘由">缘由</a></li>
+        <li><a href="#registry-仓库使用">registry 仓库使用</a></li>
+        <li><a href="#迁移-chart-repo-到-oci-仓库">迁移 chart repo 到 oci 仓库</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="helm-oci">helm oci</h2>
+<h3 id="缘由">缘由</h3>
+<p>Helm 3.8 版本开始，支持使用oci进行存储chart。镜像存储常用的Harbor在v1.6版本开始支持Helm Chart仓库功能，
+chart仓库由chartmuseum以插件的方式提供。随着兼容OCI规范的Helm Chart在社区上被更广泛地接受，Helm Chart能以Artifact的形式在Harbor中存储和管理，不再依赖ChartMuseum，因此Harbor在v2.8.0版本中，移除对ChartMuseum的支持。</p>
+<h3 id="registry-仓库使用">registry 仓库使用</h3>
+<p>基本使用</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">### registry</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 登录</span>
+</span></span><span class="line"><span class="cl">helm registry login -u serialt docker.io
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 注销</span>
+</span></span><span class="line"><span class="cl">helm registry <span class="nb">logout</span>  docker.io
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># pull chart</span>
+</span></span><span class="line"><span class="cl">helm fetch oci://docker.io/serialt/loki-stack --version<span class="o">=</span>2.9.11
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># push chart</span>
+</span></span><span class="line"><span class="cl">helm push loki-stack-2.9.11.tgz oci://docker.io/serialt
+</span></span></code></pre></div><p>oci支持的其他命令</p>
+<ul>
+<li><code>helm pull</code></li>
+<li><code>helm show</code></li>
+<li><code>helm template</code></li>
+<li><code>helm install</code></li>
+<li><code>helm upgrade</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ helm pull oci://localhost:5000/helm-charts/mychart --version 0.1.0
+</span></span><span class="line"><span class="cl">Pulled: localhost:5000/helm-charts/mychart:0.1.0
+</span></span><span class="line"><span class="cl">Digest: sha256:0be7ec9fb7b962b46d81e4bb74fdcdb7089d965d3baca9f85d64948b05b402ff
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ helm show all oci://localhost:5000/helm-charts/mychart --version 0.1.0
+</span></span><span class="line"><span class="cl">apiVersion: v2
+</span></span><span class="line"><span class="cl">appVersion: 1.16.0
+</span></span><span class="line"><span class="cl">description: A Helm chart <span class="k">for</span> Kubernetes
+</span></span><span class="line"><span class="cl">name: mychart
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ helm template myrelease oci://localhost:5000/helm-charts/mychart --version 0.1.0
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl"><span class="c1"># Source: mychart/templates/serviceaccount.yaml</span>
+</span></span><span class="line"><span class="cl">apiVersion: v1
+</span></span><span class="line"><span class="cl">kind: ServiceAccount
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ helm install myrelease oci://localhost:5000/helm-charts/mychart --version 0.1.0
+</span></span><span class="line"><span class="cl">NAME: myrelease
+</span></span><span class="line"><span class="cl">LAST DEPLOYED: Wed Oct <span class="m">27</span> 15:11:40 <span class="m">2021</span>
+</span></span><span class="line"><span class="cl">NAMESPACE: default
+</span></span><span class="line"><span class="cl">STATUS: deployed
+</span></span><span class="line"><span class="cl">REVISION: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">NOTES:
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ helm upgrade myrelease oci://localhost:5000/helm-charts/mychart --version 0.2.0
+</span></span><span class="line"><span class="cl">Release <span class="s2">&#34;myrelease&#34;</span> has been upgraded. Happy Helming!
+</span></span><span class="line"><span class="cl">NAME: myrelease
+</span></span><span class="line"><span class="cl">LAST DEPLOYED: Wed Oct <span class="m">27</span> 15:12:05 <span class="m">2021</span>
+</span></span><span class="line"><span class="cl">NAMESPACE: default
+</span></span><span class="line"><span class="cl">STATUS: deployed
+</span></span><span class="line"><span class="cl">REVISION: <span class="m">2</span>
+</span></span><span class="line"><span class="cl">NOTES:
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></div><h3 id="迁移-chart-repo-到-oci-仓库">迁移 chart repo 到 oci 仓库</h3>
+<p>基于 github action 镜像 helm repo 仓库到 docker hub，以加速 helm repo 到访问。</p>
+<ul>
+<li><a href="https://github.com/serialt/migrate-chart" target="_blank" rel="noopener noreffer ">migrate-chart</a></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-09-24</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/helm-migrate-oci/" data-title="Helm Migrate OCI" data-hashtags="helm"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/helm-migrate-oci/" data-hashtag="helm"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/helm-migrate-oci/" data-title="Helm Migrate OCI"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/helm-migrate-oci/" data-title="Helm Migrate OCI"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/helm-migrate-oci/" data-title="Helm Migrate OCI"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/helm/">helm</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

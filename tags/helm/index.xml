@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>helm - Tag - blog for log</title>
+        <link>https://serialt.github.io/tags/helm/</link>
+        <description>helm - Tag - blog for log</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 24 Sep 2023 11:05:25 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/helm/" rel="self" type="application/rss+xml" /><item>
+    <title>Helm Migrate OCI</title>
+    <link>https://serialt.github.io/posts/helm-migrate-oci/</link>
+    <pubDate>Sun, 24 Sep 2023 11:05:25 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/helm-migrate-oci/</guid>
+    <description><![CDATA[helm oci 缘由 Helm 3.8 版本开始，支持使用oci进行存储chart。镜像存储常用的Harbor在v1.6版本开始支持Helm Chart仓库功能， char]]></description>
+</item>
+</channel>
+</rss>
