@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Tuna Web - blog for log</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Tuna Web" />
+<meta property="og:description" content="清华镜像网页搭建镜像站 tuna mirror-web地址：https://github.com/tuna/mirror-web.git tuna mirror" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/tuna-web/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-09-24T17:01:26+08:00" />
+<meta property="article:modified_time" content="2023-09-24T17:01:26+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Tuna Web"/>
+<meta name="twitter:description" content="清华镜像网页搭建镜像站 tuna mirror-web地址：https://github.com/tuna/mirror-web.git tuna mirror"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/tuna-web/" /><link rel="prev" href="https://serialt.github.io/posts/helm-migrate-oci/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Tuna Web",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/tuna-web\/"
+        },"genre": "posts","keywords": "mirrors","wordcount":  2156 ,
+        "url": "https:\/\/serialt.github.io\/posts\/tuna-web\/","datePublished": "2023-09-24T17:01:26+08:00","dateModified": "2023-09-24T17:01:26+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="blog for log">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="blog for log">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Tuna Web</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-09-24">2023-09-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2156 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#清华镜像网页搭建镜像站">清华镜像网页搭建镜像站</a>
+      <ul>
+        <li><a href="#1下载mirror-web的jekyll编译环境">1、下载mirror-web的jekyll编译环境</a></li>
+        <li><a href="#2下载github仓库">2、下载github仓库</a></li>
+        <li><a href="#3下载额外资源和编译">3、下载额外资源和编译</a></li>
+        <li><a href="#4编译nginx">4、编译nginx</a></li>
+        <li><a href="#5镜像资源暴露">5、镜像资源暴露</a></li>
+        <li><a href="#6docker镜像使用">6、docker镜像使用</a></li>
+        <li><a href="#新镜像站版本发布">新镜像站版本发布</a></li>
+        <li><a href="#编写说明">编写说明</a></li>
+        <li><a href="#help-说明">help 说明</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="清华镜像网页搭建镜像站">清华镜像网页搭建镜像站</h2>
+<p>tuna mirror-web地址：https://github.com/tuna/mirror-web.git</p>
+<p>tuna mirror-web基于jekyll开发，由于ruby环境安装复杂，因此采用docker编译，但在build镜像的时候，出现安装包依赖安装失败，在多次测试后，无法build成镜像。前段时间，在查看mirror-web段issues时，有人询问mirror-web段README.md文档的下一步，官方给了一点提示，有关于基于nginx的第三方模块来实现目录第渲染的提示说明，再次尝试后，经历各种困难和折磨，终于摸索出。</p>
+<h3 id="1下载mirror-web的jekyll编译环境">1、下载mirror-web的jekyll编译环境</h3>
+<p>tuna的编译镜像：tunathu/mirror-web</p>
+<p>在下载tunathu/mirror-web时发生了一个小问题，由于在国内使用的docker镜像加速，下载的镜像是旧版本的，但境外的服务器下载的镜像是最新的，在踩坑后果断推到自己的dockerhub上，新的下载地址：serialt/tuna-mirror-web。</p>
+<h3 id="2下载github仓库">2、下载github仓库</h3>
+<pre tabindex="0"><code>git clone https://github.com/tuna/mirror-web.git /opt/mirror-web
+</code></pre><h3 id="3下载额外资源和编译">3、下载额外资源和编译</h3>
+<pre tabindex="0"><code>cd /opt/mirror-web
+wget https://mirrors.tuna.tsinghua.edu.cn/static/tunasync.json -O static/tunasync.json
+wget https://mirrors.tuna.tsinghua.edu.cn/static/tunet.json -O static/tunet.json
+mkdir -p static/status
+wget https://mirrors.tuna.tsinghua.edu.cn/static/status/isoinfo.json -O static/status/isoinfo.json
+
+docker run -it -v  /opt/mirror-web/:/data serialt/tuna-mirror-web:20211006
+</code></pre><p>编译的后静态文件在_site里</p>
+<h3 id="4编译nginx">4、编译nginx</h3>
+<p>需要安装第三方模块</p>
+<ul>
+<li>modules/ngx_http_js_module.so</li>
+<li>modules/ngx_http_fancyindex_module.so</li>
+</ul>
+<pre tabindex="0"><code>[root@serialt nginx]# ll
+总用量 1068
+drwxr-xr-x  9 sonar sonar     186 10月  5 22:27 nginx-1.20.1
+-rw-r--r--  1 root  root  1061461 5月  25 23:34 nginx-1.20.1.tar.gz
+drwxrwxr-x  3 root  root      217 10月 27 2020 ngx-fancyindex-0.5.1
+-rw-r--r--  1 root  root    25148 10月 27 2020 ngx-fancyindex-0.5.1.tar.xz
+drwxr-xr-x 10 root  root      228 10月  6 15:49 njs
+</code></pre><pre tabindex="0"><code># njs下载
+git clone https://github.com/nginx/njs
+
+# ngx-fancyindex 下载
+wget https://github.com/aperezdc/ngx-fancyindex/releases/download/v0.5.1/ngx-fancyindex-0.5.1.tar.xz
+</code></pre><p>编译：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@serialt nginx<span class="o">]</span><span class="c1"># ls</span>
+</span></span><span class="line"><span class="cl">nginx-1.20.1  nginx-1.20.1.tar.gz  ngx-fancyindex-0.5.1  ngx-fancyindex-0.5.1.tar.xz  njs
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@serialt nginx<span class="o">]</span><span class="c1"># cd nginx-1.20.1/</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@serialt nginx-1.20.1<span class="o">]</span><span class="c1"># ./configure --prefix=/usr/local/nginx --with-pcre --with-http_auth_request_module --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_random_index_module --with-http_secure_link_module --with-http_stub_status_module  --with-mail --with-mail_ssl_module  --with-stream --with-stream_ssl_module --with-stream_realip_module --add-dynamic-module=/root/nginx/ngx-fancyindex-0.5.1 --add-dynamic-module=/root/nginx/njs/nginx</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># add m</span>
+</span></span><span class="line"><span class="cl"> <span class="m">3997</span>  <span class="o">[</span>2022-02-25 00:49:21<span class="o">]</span> <span class="o">[</span>root<span class="o">]</span> <span class="o">[</span>10.5.0.10<span class="o">]</span> ./configure --with-compat --add-dynamic-module<span class="o">=</span>/root/github/tuna-mirror-web/njs-0.6.2/nginx
+</span></span><span class="line"><span class="cl"> <span class="m">3998</span>  <span class="o">[</span>2022-02-25 00:49:31<span class="o">]</span> <span class="o">[</span>root<span class="o">]</span> <span class="o">[</span>10.5.0.10<span class="o">]</span> make modules
+</span></span></code></pre></div><p>nginx配置文件内容</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@serialt mirrors<span class="o">]</span><span class="c1"># cat /usr/local/nginx/conf/nginx.conf</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#user  nobody;</span>
+</span></span><span class="line"><span class="cl">worker_processes  1<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#error_log  logs/error.log;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#error_log  logs/error.log  notice;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#error_log  logs/error.log  info;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#pid        logs/nginx.pid;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">load_module modules/ngx_http_js_module.so<span class="p">;</span>
+</span></span><span class="line"><span class="cl">load_module modules/ngx_http_fancyindex_module.so<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">events <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    worker_connections  1024<span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">http <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    include       mime.types<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    default_type  application/octet-stream<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">#log_format  main  &#39;$remote_addr - $remote_user [$time_local] &#34;$request&#34; &#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#                  &#39;$status $body_bytes_sent &#34;$http_referer&#34; &#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#                  &#39;&#34;$http_user_agent&#34; &#34;$http_x_forwarded_for&#34;&#39;;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">#access_log  logs/access.log  main;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    sendfile        on<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#tcp_nopush     on;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">#keepalive_timeout  0;</span>
+</span></span><span class="line"><span class="cl">    keepalive_timeout  65<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">#gzip  on;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">map <span class="nv">$http_user_agent</span> <span class="nv">$isbrowser</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl"> default 0<span class="p">;</span>
+</span></span><span class="line"><span class="cl"> <span class="s2">&#34;~*validation server&#34;</span> 0<span class="p">;</span>
+</span></span><span class="line"><span class="cl"> <span class="s2">&#34;~*mozilla&#34;</span> 1<span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">        js_path /opt/mirror-web/_site/static/njs<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        js_include /opt/mirror-web/_site/static/njs/all.njs<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#js_path /opt/mirror-web/static/njs;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#js_include /opt/mirror-web/static/njs/all.njs;</span>
+</span></span><span class="line"><span class="cl">    server <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        listen       8007<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        server_name  localhost<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">#charset koi8-r;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">#access_log  logs/host.access.log  main;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#root         /opt/mirror-web/_site;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        fancyindex_header /fancy-index/before<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        fancyindex_footer /fancy-index/after<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        fancyindex_exact_size off<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        fancyindex_time_format <span class="s2">&#34;%d %b %Y %H:%M:%S +0000&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        fancyindex_name_length 256<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        error_page <span class="m">404</span> /404.html<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        location /fancy-index <span class="o">{</span>
+</span></span><span class="line"><span class="cl">         internal<span class="p">;</span>
+</span></span><span class="line"><span class="cl">         root /opt/mirror-web/_site<span class="p">;</span>
+</span></span><span class="line"><span class="cl">         subrequest_output_buffer_size 100k<span class="p">;</span>
+</span></span><span class="line"><span class="cl">         <span class="nv">location</span> <span class="o">=</span> /fancy-index/before <span class="o">{</span>
+</span></span><span class="line"><span class="cl">           js_content fancyIndexBeforeRender<span class="p">;</span>
+</span></span><span class="line"><span class="cl">         <span class="o">}</span>
+</span></span><span class="line"><span class="cl">         <span class="nv">location</span> <span class="o">=</span> /fancy-index/after <span class="o">{</span>
+</span></span><span class="line"><span class="cl">           js_content fancyIndexAfterRender<span class="p">;</span>
+</span></span><span class="line"><span class="cl">         <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        location / <span class="o">{</span>
+</span></span><span class="line"><span class="cl">         root /opt/mirror-web/_site<span class="p">;</span>
+</span></span><span class="line"><span class="cl">         index index.html index.htm<span class="p">;</span>
+</span></span><span class="line"><span class="cl">         <span class="c1">#try_files /_site/$uri $uri/ /_site/$uri;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">         fancyindex on<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#        location / {</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#            root   html;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#            index  index.html index.htm;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#        }</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">#error_page  404              /404.html;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># redirect server error pages to the static page /50x.html</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">        error_page   <span class="m">500</span> <span class="m">502</span> <span class="m">503</span> <span class="m">504</span>  /50x.html<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">location</span> <span class="o">=</span> /50x.html <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            root   html<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@serialt mirrors<span class="o">]</span><span class="c1">#</span>
+</span></span></code></pre></div><h3 id="5镜像资源暴露">5、镜像资源暴露</h3>
+<p>方法1：以软链接形式存放在<code>/opt/mirror-web/_site</code>中</p>
+<pre tabindex="0"><code>[root@serialt _site]# pwd
+/opt/mirror-web/_site
+[root@serialt _site]# ll
+总用量 160
+-rw-r--r--   1 root root 16415 10月  6 15:37 404.html
+drwxr-xr-x   2 root root     6 10月  6 17:14 cc
+drwxr-xr-x   2 root root    19 10月  6 17:14 centos
+drwxr-xr-x   2 root root    94 10月  6 09:25 fancy-index
+-rw-r--r--   1 root root 36650 10月  6 15:37 feed.xml
+drwxr-xr-x 103 root root  4096 10月  6 09:25 help
+-rw-r--r--   1 root root 27679 10月  6 15:37 index.html
+-rw-r--r--   1 root root 20728 10月  6 15:37 legacy_index.html
+-rw-r--r--   1 root root 18092 10月  6 15:37 LICENSE
+drwxr-xr-x  47 root root  4096 10月  6 09:25 news
+-rw-r--r--   1 root root    58 10月  6 15:37 robots.txt
+-rw-r--r--   1 root root 19134 10月  6 15:37 sitemap.xml
+drwxr-xr-x   8 root root   115 10月  6 15:37 static
+drwxr-xr-x   2 root root    24 10月  6 09:25 status
+</code></pre><p>方法二：把<code>/opt/mirror-web/_site</code>里的文件以软链接的方式链接到镜像的跟目录（建议使用）</p>
+<pre tabindex="0"><code>ln -snf /opt/mirror-web/_site/* /opt/imau
+</code></pre><p>目录描述文件：_data/options.yml</p>
+<p>站点资源显示控制：static/tunasync.json</p>
+<p>tunasync.json</p>
+<pre tabindex="0"><code>[
+    {
+        &#34;name&#34;: &#34;ant&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;book&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;centos&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;dev&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;frp&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;git&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;go&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;grafana&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;iso&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;jdk&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;jmeter&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;kubernetes&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;mac&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;monitor&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;node&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;root-ca&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;other&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;printer&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;prometheus&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;pycharm&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;python&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;repo&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;script&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;test&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    },
+    {
+        &#34;name&#34;: &#34;tool&#34;,
+        &#34;is_master&#34;: true,
+        &#34;status&#34;: &#34;success&#34;
+    }
+]
+</code></pre><pre tabindex="0"><code>        &#34;last_update&#34;: &#34;2022-01-11 16:39:37 +0800&#34;,
+        &#34;last_update_ts&#34;: 1641890377,
+        &#34;last_started&#34;: &#34;2022-01-11 16:39:21 +0800&#34;,
+        &#34;last_started_ts&#34;: 1641890361,
+        &#34;last_ended&#34;: &#34;2022-01-11 16:39:37 +0800&#34;,
+        &#34;last_ended_ts&#34;: 1641890377,
+        &#34;next_schedule&#34;: &#34;2022-01-11 22:39:37 +0800&#34;,
+        &#34;next_schedule_ts&#34;: 1641911977,
+        &#34;upstream&#34;: &#34;rsync://msync.centos.org/CentOS/&#34;,
+
+
+  - status: &#39;success&#39;
+    last_update: &#39;-&#39;
+    name: &#34;AUR&#34;
+    url: &#39;https://aur.tuna.tsinghua.edu.cn/&#39;
+    upstream: &#39;https://aur.archlinux.org/&#39;
+    is_master: true
+</code></pre><p>options.yml</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># Content Related</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">mirror_desc</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">git </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">desc</span><span class="p">:</span><span class="w"> </span><span class="l">git 二进制编译版本</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">go</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">desc</span><span class="p">:</span><span class="w"> </span><span class="l">golang 开发环境</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">grafana</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">desc</span><span class="p">:</span><span class="w"> </span><span class="l">grafana 的安装包</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">helm</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">desc</span><span class="p">:</span><span class="w"> </span><span class="l">helm 的二进制发行包</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">ios</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">desc</span><span class="p">:</span><span class="w"> </span><span class="l">镜像文件，如centos, ubuntu, rocky等 </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">jdk</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">desc</span><span class="p">:</span><span class="w"> </span><span class="l">java 开发环境安装包</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">new_mirrors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">hugging-face-models</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">endeavouros</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">ubuntukylin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">putty</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">postmarketOS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">postmarketOS-images</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">obs-studio</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">stellarium</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">unlisted_mirrors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">status</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;success&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">last_update</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;-&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;AUR&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;https://aur.tuna.tsinghua.edu.cn/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">upstream</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;https://aur.archlinux.org/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">is_master</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;osdn&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;manjaro-cd&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/osdn/storage/g/m/ma/manjaro/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;osdn&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;manjaro-arm-cd&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/osdn/storage/g/m/ma/manjaro-arm/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;osdn&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;mxlinux-isos&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/osdn/storage/g/m/mx/mx-linux/ISOs/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;osdn&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;garuda-linux&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/osdn/storage/g/g/ga/garuda-linux/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;osdn&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;linuxlite-cd&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/osdn/storage/g/l/li/linuxlite/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;github-release&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;prometheus&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/github-release/prometheus/prometheus/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;github-release&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;iina&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/github-release/iina/iina/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;github-release&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;VSCodium&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/github-release/VSCodium/vscodium/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;github-release&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;FreeCAD&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/github-release/FreeCAD/FreeCAD/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;github-release&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;git-for-windows&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/github-release/git-for-windows/git/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;github-release&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;llvm-binary&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/github-release/llvm/llvm-project/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;github-release&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;miniforge&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/github-release/conda-forge/miniforge/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;github-release&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;stellarium&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/github-release/Stellarium/stellarium/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;github-release&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;cmder&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/github-release/cmderdev/cmder/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;github-release&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;googlefonts&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/github-release/googlefonts/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;github-release&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;minikube&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/github-release/kubernetes/minikube/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;github-release&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;obs-studio&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/github-release/obsproject/obs-studio/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;github-release&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;orchestrator&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/github-release/openark/orchestrator/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;github-release&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;texstudio&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/github-release/texstudio-org/texstudio/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;github-release&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;rust-analyzer&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/github-release/rust-analyzer/rust-analyzer/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">link_to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;github-release&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;thuthesis&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/github-release/tuna/thuthesis&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">force_redirect_help_mirrors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">AOSP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">lineageOS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">homebrew</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">linux.git</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">linux-next.git</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">linux-stable.git</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">git-repo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">gentoo-portage.git</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">chromiumos</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">weave</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">CocoaPods</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">llvm</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">llvm-project.git</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">openthos-src</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">qemu.git</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">linux-firmware.git</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">gcc.git</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">crates.io-index.git</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">binutils-gdb.git</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">glibc.git</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">flutter-sdk.git</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">julia-general.git</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">force_show_help_mirrors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">hugging-face-models</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">label_map</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">unknown</span><span class="p">:</span><span class="w"> </span><span class="l">label-default</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">syncing</span><span class="p">:</span><span class="w"> </span><span class="l">label-info</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">success</span><span class="p">:</span><span class="w"> </span><span class="l">label-success</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">fail</span><span class="p">:</span><span class="w"> </span><span class="l">label-warning</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">failed</span><span class="p">:</span><span class="w"> </span><span class="l">label-warning</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">paused</span><span class="p">:</span><span class="w"> </span><span class="l">label-warning</span><span class="w">
+</span></span></span></code></pre></div><h3 id="6docker镜像使用">6、docker镜像使用</h3>
+<h4 id="静态文件编译">静态文件编译</h4>
+<p>构建 Jekyll 的 docker 镜像环境复杂，建议直接使用官方或者已经存在的镜像<code>tunathu/mirror-web</code>或者<code>serialt/tuna-mirror-web</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@tc ~<span class="o">]</span><span class="c1"># docker run -it -v /path/to/mirror-web/:/data  serialt/tuna-mirror-web</span>
+</span></span></code></pre></div><p><strong>一些动态数据已经下载，若需要最新的，可以就行以下操作,然后在构建</strong></p>
+<p>下载最新的动态数据文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">wget https://mirrors.tuna.tsinghua.edu.cn/static/tunasync.json -O static/tunasync.json
+</span></span><span class="line"><span class="cl">wget https://mirrors.tuna.tsinghua.edu.cn/static/tunet.json -O static/tunet.json
+</span></span><span class="line"><span class="cl">mkdir -p static/status
+</span></span><span class="line"><span class="cl">wget https://mirrors.tuna.tsinghua.edu.cn/static/status/isoinfo.json -O static/status/isoinfo.json
+</span></span></code></pre></div><h4 id="运行服务">运行服务</h4>
+<ul>
+<li>
+<p>docker镜像网页根目录: /opt/mirror-web</p>
+</li>
+<li>
+<p>镜像站资源根目录: /opt/mirror</p>
+</li>
+</ul>
+<h4 id="启动服务">启动服务</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run -tid  -v /opt/tuna-mirror-web/_site:/opt/mirror-web  -v /opt/mirror:/opt/mirror -p 8099:80 --name<span class="o">=</span>tuna-mirror-nginx serialt/tuna-mirror-web-nginx:7b0c89d
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tuna-mirror-nginx</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tuna-mirror-nginx</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">serialt/tuna-mirror-web-nginx:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">mirror-nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">mirror-nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">tuna-mirror-nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;/etc/localtime:/etc/localtime:ro&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;/opt/mirror-web/_site:/opt/mirror-web&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;/opt/mirror:/opt/mirror&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;80:80&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dns</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">223.5.5.5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">223.6.6.6</span><span class="w">
+</span></span></span></code></pre></div><h3 id="新镜像站版本发布">新镜像站版本发布</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run -it --rm  -v /opt/tuna-mirror-web:/data serialt/tuna-mirror-web
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker restart tuna-mirror-nginx
+</span></span></code></pre></div><h3 id="编写说明">编写说明</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">_data/options.yml: 是显示在镜像站主页对各个目录的说明
+</span></span><span class="line"><span class="cl">static/tunasync.json: 是对当前repo的同步信息的描述，可以自行编辑，也可以从tuna上下载
+</span></span><span class="line"><span class="cl">help: help目录里存有各个repo的帮助信息，在主页上会显示有个&#34;?&#34;
+</span></span><span class="line"><span class="cl">news: 镜像站的新闻信息
+</span></span></code></pre></div><h3 id="help-说明">help 说明</h3>
+<p>permalink 是表示help的首页的路径，必须要有</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">layout: help
+</span></span><span class="line"><span class="cl">category: help
+</span></span><span class="line"><span class="cl">mirrorid: app
+</span></span><span class="line"><span class="cl">permalink: /help/app/
+</span></span><span class="line"><span class="cl">---
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-09-24</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/tuna-web/" data-title="Tuna Web" data-hashtags="mirrors"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/tuna-web/" data-hashtag="mirrors"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/tuna-web/" data-title="Tuna Web"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/tuna-web/" data-title="Tuna Web"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/tuna-web/" data-title="Tuna Web"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/mirrors/">mirrors</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/helm-migrate-oci/" class="prev" rel="prev" title="Helm Migrate OCI"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Helm Migrate OCI</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
