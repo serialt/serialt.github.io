@@ -4,9 +4,17 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 24 Sep 2023 18:09:42 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Tue, 26 Sep 2023 19:16:02 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Okteto</title>
+    <link>https://serialt.github.io/posts/okteto/</link>
+    <pubDate>Tue, 26 Sep 2023 19:16:02 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/okteto/</guid>
+    <description><![CDATA[Dev in kubernetes ​ 传统的开发模式中，是代码存放在本地，使用 IDE 进行编辑和 debug 。但随着容器化火了之后，很多单一服务都进行了拆分，微服务化。在开发阶段，需要本]]></description>
+</item>
+<item>
     <title>Debug Shell in VSCode</title>
     <link>https://serialt.github.io/posts/debug-shell-in-vscode/</link>
     <pubDate>Sun, 24 Sep 2023 18:09:42 &#43;0800</pubDate>

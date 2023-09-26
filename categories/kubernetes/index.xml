@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/categories/kubernetes/</link>
         <description>Kubernetes - Category - blog for log</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 24 Sep 2023 11:05:25 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/kubernetes/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Tue, 26 Sep 2023 19:16:02 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/kubernetes/" rel="self" type="application/rss+xml" /><item>
+    <title>Okteto</title>
+    <link>https://serialt.github.io/posts/okteto/</link>
+    <pubDate>Tue, 26 Sep 2023 19:16:02 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/okteto/</guid>
+    <description><![CDATA[Dev in kubernetes ​ 传统的开发模式中，是代码存放在本地，使用 IDE 进行编辑和 debug 。但随着容器化火了之后，很多单一服务都进行了拆分，微服务化。在开发阶段，需要本]]></description>
+</item>
+<item>
     <title>Helm Migrate OCI</title>
     <link>https://serialt.github.io/posts/helm-migrate-oci/</link>
     <pubDate>Sun, 24 Sep 2023 11:05:25 &#43;0800</pubDate>

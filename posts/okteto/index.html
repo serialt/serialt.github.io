@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Okteto - blog for log</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Okteto" />
+<meta property="og:description" content="Dev in kubernetes ​ 传统的开发模式中，是代码存放在本地，使用 IDE 进行编辑和 debug 。但随着容器化火了之后，很多单一服务都进行了拆分，微服务化。在开发阶段，需要本" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/okteto/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-09-26T19:16:02+08:00" />
+<meta property="article:modified_time" content="2023-09-26T19:16:02+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Okteto"/>
+<meta name="twitter:description" content="Dev in kubernetes ​ 传统的开发模式中，是代码存放在本地，使用 IDE 进行编辑和 debug 。但随着容器化火了之后，很多单一服务都进行了拆分，微服务化。在开发阶段，需要本"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/okteto/" /><link rel="prev" href="https://serialt.github.io/posts/debug-shell-in-vscode/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Okteto",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/okteto\/"
+        },"genre": "posts","keywords": "okteto, kubernetes, vscode, dev","wordcount":  1063 ,
+        "url": "https:\/\/serialt.github.io\/posts\/okteto\/","datePublished": "2023-09-26T19:16:02+08:00","dateModified": "2023-09-26T19:16:02+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="blog for log">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="blog for log">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Okteto</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/kubernetes/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Kubernetes</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-09-26">2023-09-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1063 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装与配置">安装与配置</a>
+      <ul>
+        <li><a href="#下载示例代码">下载示例代码</a></li>
+        <li><a href="#配置port-forward端口">配置port-forward端口</a></li>
+        <li><a href="#启动服务">启动服务</a></li>
+        <li><a href="#远程开发">远程开发</a></li>
+        <li><a href="#远程调试">远程调试</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="dev-in-kubernetes">Dev in kubernetes</h1>
+<p>​		传统的开发模式中，是代码存放在本地，使用 IDE 进行编辑和 debug 。但随着容器化火了之后，很多单一服务都进行了拆分，微服务化。在开发阶段，需要本地同时启动多个服务，这使得本地开发调试变得越来越困难。Okteto 是一个通过在 Kubernetes 中来开发和测试代码的应用程序开发工具。可以通过 Okteto 在 Kubernetes 中一键为我们启动一个开发环境，非常简单方便。Google  推出的 Skaffold 只是把 CICD 集成到本地，使用起来也比较困难。Okteto 的工作原理是在 kubernetes 中启动一个服务，把本地代码同步到 pod 中，然后执行命令让服务运行起来，Okteto 可以进行端口的转发，转发pod里服务的端口到本地，在进行 debug 的时候，pod里启动的端口可以被 kubernetes 内的其他服务所访问，本地转发的端口可以被本地的工具（例如 postman ）访问。</p>
+<ul>
+<li>okteto官网文档：https://www.okteto.com/docs</li>
+<li>Go 配置文档：https://www.okteto.com/docs/samples/golang/</li>
+</ul>
+<p>示例环境：</p>
+<ul>
+<li>vscode 1.82.1(需要安装 Remote - Kubernetes 插件，插件code：okteto.remote-kubernetes)</li>
+<li>k3d</li>
+<li>mac</li>
+</ul>
+<h2 id="安装与配置">安装与配置</h2>
+<p>下载okteto：https://github.com/okteto/okteto/releases</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>crab@Sugar ~<span class="o">]</span>🐳 wget https://ghproxy.com/https://github.com/okteto/okteto/releases/download/2.20.0/okteto-Darwin-arm64
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>crab@Sugar ~<span class="o">]</span>🐳 chmod +x okteto-Darwin-arm64
+</span></span><span class="line"><span class="cl"><span class="o">[</span>crab@Sugar ~<span class="o">]</span>🐳 sudo mv okteto-Darwin-arm64 /usr/local/bin/okteto
+</span></span></code></pre></div><h3 id="下载示例代码">下载示例代码</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>crab@Sugar ~<span class="o">]</span>🐳 git clone https://github.com/okteto/go-getting-started go-okteto
+</span></span><span class="line"><span class="cl"><span class="o">[</span>crab@Sugar ~<span class="o">]</span>🐳 <span class="nb">cd</span> go-okteto
+</span></span></code></pre></div><h3 id="配置port-forward端口">配置port-forward端口</h3>
+<p>需要转发两个，一个是服务的端口，另一个是debug使用的端口</p>
+<p><code>okteto.yaml</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">build</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hello-world</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">serialt/go-hello-world:1.0.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">context</span><span class="p">:</span><span class="w"> </span><span class="l">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">deploy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">kubectl apply -f k8s.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">dev</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hello-world</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">okteto/golang:1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">bash</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">sync</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">.:/usr/src/app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/go</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/root/.cache</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">securityContext</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">capabilities</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">add</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="l">SYS_PTRACE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">forward</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">2345</span><span class="p">:</span><span class="m">2345</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">8080</span><span class="p">:</span><span class="m">8080</span><span class="w">   </span><span class="c"># &lt;---- 增加8080服务端口转发</span><span class="w">
+</span></span></span></code></pre></div><p>设置okteto context，okteto 默认会优先使用<code>KUBECONFIG</code>环境变量的配置文件，如果没有设置，则使用 <code>~/.kube/config</code>文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>crab@Sugar go-okteto<span class="o">]</span>🐳 okteto context
+</span></span><span class="line"><span class="cl"> ✓  Context <span class="s1">&#39;k3d-mycluster&#39;</span> selected
+</span></span><span class="line"><span class="cl"> ✓  Using dev @ k3d-mycluster
+</span></span></code></pre></div><h3 id="启动服务">启动服务</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>crab@Sugar go-okteto<span class="o">]</span>🐳 okteto up 
+</span></span><span class="line"><span class="cl"> i  Using dev @ k3d-mycluster as context
+</span></span><span class="line"><span class="cl"> i  <span class="s1">&#39;go-getting-started&#39;</span> was already deployed. To redeploy run <span class="s1">&#39;okteto deploy&#39;</span> or <span class="s1">&#39;okteto up --deploy&#39;</span>
+</span></span><span class="line"><span class="cl"> i  Images were already built. To rebuild your images run <span class="s1">&#39;okteto build&#39;</span> or <span class="s1">&#39;okteto deploy --build&#39;</span>
+</span></span><span class="line"><span class="cl"> ✓  Images successfully pulled
+</span></span><span class="line"><span class="cl"> ✓  Files synchronized
+</span></span><span class="line"><span class="cl">    Context:   k3d-mycluster
+</span></span><span class="line"><span class="cl">    Namespace: dev
+</span></span><span class="line"><span class="cl">    Name:      hello-world
+</span></span><span class="line"><span class="cl">    Forward:   <span class="m">2345</span> -&gt; <span class="m">2345</span>
+</span></span><span class="line"><span class="cl">               <span class="m">8080</span> -&gt; <span class="m">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Welcome to your development container. Happy coding!
+</span></span><span class="line"><span class="cl">dev:hello-world app&gt; 
+</span></span><span class="line"><span class="cl">dev:hello-world app&gt; ls
+</span></span><span class="line"><span class="cl">Dockerfile  LICENSE  Makefile  README.md  bashrc  go.mod  k8s.yml  main.go  okteto.yml
+</span></span></code></pre></div><h3 id="远程开发">远程开发</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># okteto终端</span>
+</span></span><span class="line"><span class="cl">dev:hello-world app&gt; go run main.go
+</span></span><span class="line"><span class="cl">Starting hello-world server...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 终端测试</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>crab@Sugar ~<span class="o">]</span>🐳 curl 127.0.0.1:8080
+</span></span><span class="line"><span class="cl">Hello world!
+</span></span></code></pre></div><h3 id="远程调试">远程调试</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># okteto终端, 执行dlv命令</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">dev:hello-world app&gt; dlv debug --headless --listen=:2345 --log --api-version=2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">API server listening at</span><span class="p">:</span><span class="w"> </span><span class="p">[::]:</span><span class="m">2345</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="ld">2023-09-26T13:40:51Z</span><span class="w"> </span><span class="l">warning layer=rpc Listening for remote connections (connections are not authenticated nor encrypted)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">2023-09-26T13:40:51Z info layer=debugger launching process with args</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">./__debug_bin3213431902]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="ld">2023-09-26T13:40:51Z</span><span class="w"> </span><span class="l">debug layer=debugger Adding target 575 &#34;/usr/src/app/__debug_bin3213431902&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># main.go 打上debug标记</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">func helloServer(w http.ResponseWriter, r *http.Request) {</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="l">fmt.Fprint(w, &#34;Hello world from Okteto!, k3d is great! &#34;)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="l">fmt.Println(&#34;okteto ccccccc&#34;)</span><span class="w"> </span><span class="c"># 标记此行</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>}<span class="w">
+</span></span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/okteto/images/image-20230926214213456.png"
+        data-srcset="/posts/okteto/images/image-20230926214213456.png, /posts/okteto/images/image-20230926214213456.png 1.5x, /posts/okteto/images/image-20230926214213456.png 2x"
+        data-sizes="auto"
+        alt="/posts/okteto/images/image-20230926214213456.png"
+        title="image-20230926214213456" width="1242" height="240" /></p>
+<p>在vscode debug中点击开始debug</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/okteto/images/image-20230926214350489.png"
+        data-srcset="/posts/okteto/images/image-20230926214350489.png, /posts/okteto/images/image-20230926214350489.png 1.5x, /posts/okteto/images/image-20230926214350489.png 2x"
+        data-sizes="auto"
+        alt="/posts/okteto/images/image-20230926214350489.png"
+        title="image-20230926214350489" width="2026" height="1468" /></p>
+<p>使用命令请求<code> http://127.0.0.1:8080</code>，即可debug到标记点</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>sugar@Sugar go-okteto<span class="o">]</span>🐳 curl http://127.0.0.1:8080
+</span></span><span class="line"><span class="cl">Hello world from Okteto!, k3d is great! 
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/posts/okteto/images/image-20230926214552593.png"
+        data-srcset="/posts/okteto/images/image-20230926214552593.png, /posts/okteto/images/image-20230926214552593.png 1.5x, /posts/okteto/images/image-20230926214552593.png 2x"
+        data-sizes="auto"
+        alt="/posts/okteto/images/image-20230926214552593.png"
+        title="image-20230926214552593" width="2028" height="1476" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-09-26</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/okteto/" data-title="Okteto" data-hashtags="okteto,kubernetes,vscode,dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/okteto/" data-hashtag="okteto"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/okteto/" data-title="Okteto"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/okteto/" data-title="Okteto"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/okteto/" data-title="Okteto"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/okteto/">okteto</a>,&nbsp;<a href="/tags/kubernetes/">kubernetes</a>,&nbsp;<a href="/tags/vscode/">vscode</a>,&nbsp;<a href="/tags/dev/">dev</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/debug-shell-in-vscode/" class="prev" rel="prev" title="Debug Shell in VSCode"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Debug Shell in VSCode</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
