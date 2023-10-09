@@ -4,9 +4,25 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Tue, 26 Sep 2023 19:16:02 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 09 Oct 2023 21:00:42 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Go Http Client</title>
+    <link>https://serialt.github.io/posts/req/</link>
+    <pubDate>Mon, 09 Oct 2023 21:00:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/req/</guid>
+    <description><![CDATA[req Go语言人性化HTTP请求库 特性 轻量级 简单 容易操作JSON和XML 容易调试和日志记录 容易上传和下载文件 容易管理Cookie 容易设置代理 容易]]></description>
+</item>
+<item>
+    <title>Go Http</title>
+    <link>https://serialt.github.io/posts/go-http/</link>
+    <pubDate>Mon, 09 Oct 2023 20:00:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/go-http/</guid>
+    <description><![CDATA[Go 原生http库 Go语言内置的net/http包十分的优秀，提供了HTTP客户端和服务端的实现。 一、net/http介绍 Go语言内置的net]]></description>
+</item>
+<item>
     <title>Okteto</title>
     <link>https://serialt.github.io/posts/okteto/</link>
     <pubDate>Tue, 26 Sep 2023 19:16:02 &#43;0800</pubDate>

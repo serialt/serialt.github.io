@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Go 库文档 - Category - blog for log</title>
+        <link>https://serialt.github.io/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/</link>
+        <description>Go 库文档 - Category - blog for log</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 09 Oct 2023 20:00:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/" rel="self" type="application/rss+xml" /><item>
+    <title>Go Http</title>
+    <link>https://serialt.github.io/posts/go-http/</link>
+    <pubDate>Mon, 09 Oct 2023 20:00:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/go-http/</guid>
+    <description><![CDATA[Go 原生http库 Go语言内置的net/http包十分的优秀，提供了HTTP客户端和服务端的实现。 一、net/http介绍 Go语言内置的net]]></description>
+</item>
+</channel>
+</rss>

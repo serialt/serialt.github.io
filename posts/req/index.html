@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Go Http Client - blog for log</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Go Http Client" />
+<meta property="og:description" content="req Go语言人性化HTTP请求库 特性 轻量级 简单 容易操作JSON和XML 容易调试和日志记录 容易上传和下载文件 容易管理Cookie 容易设置代理 容易" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/req/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-10-09T21:00:42+08:00" />
+<meta property="article:modified_time" content="2023-10-09T21:00:42+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go Http Client"/>
+<meta name="twitter:description" content="req Go语言人性化HTTP请求库 特性 轻量级 简单 容易操作JSON和XML 容易调试和日志记录 容易上传和下载文件 容易管理Cookie 容易设置代理 容易"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/req/" /><link rel="prev" href="https://serialt.github.io/posts/go-http/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Go Http Client",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/req\/"
+        },"genre": "posts","keywords": "Go, http, req","wordcount":  1659 ,
+        "url": "https:\/\/serialt.github.io\/posts\/req\/","datePublished": "2023-10-09T21:00:42+08:00","dateModified": "2023-10-09T21:00:42+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="blog for log">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="blog for log">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Go Http Client</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go-req-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go req 库文档</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-10-09">2023-10-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1659 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#a-namebasic基础用法a"><!-- raw HTML omitted -->基础用法<!-- raw HTML omitted --></a></li>
+    <li><a href="#a-nameset-header设置请求头a"><!-- raw HTML omitted -->设置请求头<!-- raw HTML omitted --></a></li>
+    <li><a href="#a-nameset-param设置请求参数a"><!-- raw HTML omitted -->设置请求参数<!-- raw HTML omitted --></a></li>
+    <li><a href="#a-nameset-body设置请求体a"><!-- raw HTML omitted -->设置请求体<!-- raw HTML omitted --></a></li>
+    <li><a href="#a-namedebug调试a"><!-- raw HTML omitted -->调试<!-- raw HTML omitted --></a></li>
+    <li><a href="#a-nameformat输出格式a"><!-- raw HTML omitted -->输出格式<!-- raw HTML omitted --></a>
+      <ul>
+        <li><a href="#v-或-s"><code>%+v</code> 或 <code>%+s</code></a></li>
+        <li><a href="#v-或-s-1"><code>%v</code> 或 <code>%s</code></a></li>
+        <li><a href="#-v-或--s"><code>%-v</code> 或 <code>%-s</code></a></li>
+        <li><a href="#flag">Flag</a></li>
+        <li><a href="#监控请求耗时">监控请求耗时</a></li>
+      </ul>
+    </li>
+    <li><a href="#a-nametojson-toxmltojson--toxmla"><!-- raw HTML omitted -->ToJSON &amp; ToXML<!-- raw HTML omitted --></a></li>
+    <li><a href="#a-nameresponse获取-httpresponsea"><!-- raw HTML omitted -->获取 *http.Response<!-- raw HTML omitted --></a></li>
+    <li><a href="#a-nameupload上传a"><!-- raw HTML omitted -->上传<!-- raw HTML omitted --></a></li>
+    <li><a href="#a-namedownload下载a"><!-- raw HTML omitted -->下载<!-- raw HTML omitted --></a></li>
+    <li><a href="#a-namecookiecookiea"><!-- raw HTML omitted -->Cookie<!-- raw HTML omitted --></a></li>
+    <li><a href="#a-nameset-timeout设置超时a"><!-- raw HTML omitted -->设置超时<!-- raw HTML omitted --></a></li>
+    <li><a href="#a-nameset-proxy设置代理a"><!-- raw HTML omitted -->设置代理<!-- raw HTML omitted --></a></li>
+    <li><a href="#a-namecustomize-client自定义http客户端a"><!-- raw HTML omitted -->自定义HTTP客户端<!-- raw HTML omitted --></a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="req">req</h1>
+<p><a href="https://godoc.org/github.com/serialt/req" target="_blank" rel="noopener noreffer "><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://godoc.org/github.com/serialt/req?status.svg"
+        data-srcset="https://godoc.org/github.com/serialt/req?status.svg, https://godoc.org/github.com/serialt/req?status.svg 1.5x, https://godoc.org/github.com/serialt/req?status.svg 2x"
+        data-sizes="auto"
+        alt="https://godoc.org/github.com/serialt/req?status.svg"
+        title="GoDoc" /></a></p>
+<p>Go语言人性化HTTP请求库</p>
+<h1 id="特性">特性</h1>
+<ul>
+<li>轻量级</li>
+<li>简单</li>
+<li>容易操作JSON和XML</li>
+<li>容易调试和日志记录</li>
+<li>容易上传和下载文件</li>
+<li>容易管理Cookie</li>
+<li>容易设置代理</li>
+<li>容易设置超时</li>
+<li>容易自定义HTTP客户端</li>
+</ul>
+<h1 id="安装">安装</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">go get github.com/serialt/req
+</span></span></code></pre></div><h1 id="概要">概要</h1>
+<p><code>req</code> 基于标准库 <code>net/http</code> 实现了一个友好的API.</p>
+<p><code>Req</code> 和 <code>Resp</code> 是两个最重要的结构体, 你可以把 <code>Req</code> 看作客户端， 把<code>Resp</code> 看作存放请求及其响应的容器，它们都提供许多简洁方便的API，让你可以很轻松做很多很多事情。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">Req</span><span class="p">)</span> <span class="nf">Post</span><span class="p">(</span><span class="nx">url</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">v</span> <span class="o">...</span><span class="kd">interface</span><span class="p">{})</span> <span class="p">(</span><span class="o">*</span><span class="nx">Resp</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>
+</span></span></code></pre></div><p>大多情况下，发起请求只有url是必选参数，其它都可选，比如请求头、请求参数、文件或请求体等。</p>
+<p>包中含一个默认的 <code>Req</code> 对象, 它所有的公有方法都被<code>req</code>包对应的公有方法包装了，所以大多数情况下，你直接可以把<code>req</code>包看作一个<code>Req</code>对象来使用。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 创建Req对象来发起请求
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">r</span> <span class="o">:=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">New</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">r</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 直接使用req包发起请求
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">req</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+</span></span></code></pre></div><p>你可以使用 <code>req.New()</code> 方法来创建 <code>*Req</code> 作为一个单独的客户端</p>
+<h1 id="例子">例子</h1>
+<p><a href="#Basic" rel="">基础用法</a><br>
+<a href="#Set-Header" rel="">设置请求头</a><br>
+<a href="#Set-Param" rel="">设置请求参数</a><br>
+<a href="#Set-Body" rel="">设置请求体</a><br>
+<a href="#Debug" rel="">调试</a><br>
+<a href="#Format" rel="">输出格式</a><br>
+<a href="#ToJSON-ToXML" rel="">ToJSON &amp; ToXML</a><br>
+<a href="#Response" rel="">获取 *http.Response</a><br>
+<a href="#Upload" rel="">上传</a><br>
+<a href="#Download" rel="">下载</a><br>
+<a href="#Cookie" rel="">Cookie</a><br>
+<a href="#Set-Timeout" rel="">设置超时</a><br>
+<a href="#Set-Proxy" rel="">设置代理</a><br>
+<a href="#Customize-Client" rel="">自定义 http.Client</a></p>
+<h2 id="a-namebasic基础用法a"><!-- raw HTML omitted -->基础用法<!-- raw HTML omitted --></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">header</span> <span class="o">:=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">Header</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;Accept&#34;</span><span class="p">:</span>        <span class="s">&#34;application/json&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;Authorization&#34;</span><span class="p">:</span> <span class="s">&#34;Basic YWRtaW46YWRtaW4=&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">param</span> <span class="o">:=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">Param</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;name&#34;</span><span class="p">:</span> <span class="s">&#34;imroc&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;cmd&#34;</span><span class="p">:</span>  <span class="s">&#34;add&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 只有url必选，其它参数都是可选
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">r</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">Post</span><span class="p">(</span><span class="s">&#34;http://foo.bar/api&#34;</span><span class="p">,</span> <span class="nx">header</span><span class="p">,</span> <span class="nx">param</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">r</span><span class="p">.</span><span class="nf">ToJSON</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">foo</span><span class="p">)</span>       <span class="c1">// 响应体转成对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%+v&#34;</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span> <span class="c1">// 打印详细信息
+</span></span></span></code></pre></div><h2 id="a-nameset-header设置请求头a"><!-- raw HTML omitted -->设置请求头<!-- raw HTML omitted --></h2>
+<p>使用 <code>req.Header</code> (它实际上是一个 <code>map[string]string</code>)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">authHeader</span> <span class="o">:=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">Header</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;Accept&#34;</span><span class="p">:</span>        <span class="s">&#34;application/json&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;Authorization&#34;</span><span class="p">:</span> <span class="s">&#34;Basic YWRtaW46YWRtaW4=&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;https://www.baidu.com&#34;</span><span class="p">,</span> <span class="nx">authHeader</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">Header</span><span class="p">{</span><span class="s">&#34;User-Agent&#34;</span><span class="p">:</span> <span class="s">&#34;V1.1&#34;</span><span class="p">})</span>
+</span></span></code></pre></div><p>使用 <code>http.Header</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">header</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">Header</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">header</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;Accept&#34;</span><span class="p">,</span> <span class="s">&#34;application/json&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;https://www.baidu.com&#34;</span><span class="p">,</span> <span class="nx">header</span><span class="p">)</span>
+</span></span></code></pre></div><p>你可以使用 <code>struct</code> 来设置请求头，用 <code>HeaderFromStruct</code> 这个函数来解析你的 <code>struct</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">HeaderStruct</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">UserAgent</span>     <span class="kt">string</span> <span class="s">`json:&#34;User-Agent&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Authorization</span> <span class="kt">string</span> <span class="s">`json:&#34;Authorization&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">h</span> <span class="o">:=</span> <span class="nx">HeaderStruct</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="s">&#34;V1.0.0&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="s">&#34;roc&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">authHeader</span> <span class="o">:=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">HeaderFromStruct</span><span class="p">(</span><span class="nx">h</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">	<span class="nx">req</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;https://www.baidu.com&#34;</span><span class="p">,</span> <span class="nx">authHeader</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">Header</span><span class="p">{</span><span class="s">&#34;User-Agent&#34;</span><span class="p">:</span> <span class="s">&#34;V1.1&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><blockquote>
+<p>注：请给你的 struct 加上 json tag.</p>
+</blockquote>
+<h2 id="a-nameset-param设置请求参数a"><!-- raw HTML omitted -->设置请求参数<!-- raw HTML omitted --></h2>
+<p>Use <code>req.Param</code> (它实际上是一个 <code>map[string]interface{}</code>)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">param</span> <span class="o">:=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">Param</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;id&#34;</span><span class="p">:</span>  <span class="s">&#34;imroc&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;pwd&#34;</span><span class="p">:</span> <span class="s">&#34;roc&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;http://foo.bar/api&#34;</span><span class="p">,</span> <span class="nx">param</span><span class="p">)</span> <span class="c1">// http://foo.bar/api?id=imroc&amp;pwd=roc
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">req</span><span class="p">.</span><span class="nf">Post</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">param</span><span class="p">)</span>                  <span class="c1">// 请求体 =&gt; id=imroc&amp;pwd=roc
+</span></span></span></code></pre></div><p>使用 <code>req.QueryParam</code> 强制将请求参数拼在url后面 (它实际上也是一个 <code>map[string]interface{}</code>)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">Post</span><span class="p">(</span><span class="s">&#34;http://foo.bar/api&#34;</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">Param</span><span class="p">{</span><span class="s">&#34;name&#34;</span><span class="p">:</span> <span class="s">&#34;roc&#34;</span><span class="p">,</span> <span class="s">&#34;age&#34;</span><span class="p">:</span> <span class="s">&#34;22&#34;</span><span class="p">},</span> <span class="nx">req</span><span class="p">.</span><span class="nx">QueryParam</span><span class="p">{</span><span class="s">&#34;access_token&#34;</span><span class="p">:</span> <span class="s">&#34;fedledGF9Hg9ehTU&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">POST /api?access_token=fedledGF9Hg9ehTU HTTP/1.1
+</span></span></span><span class="line"><span class="cl"><span class="cm">Host: foo.bar
+</span></span></span><span class="line"><span class="cl"><span class="cm">User-Agent: Go-http-client/1.1
+</span></span></span><span class="line"><span class="cl"><span class="cm">Content-Length: 15
+</span></span></span><span class="line"><span class="cl"><span class="cm">Content-Type: application/x-www-form-urlencoded;charset=UTF-8
+</span></span></span><span class="line"><span class="cl"><span class="cm">Accept-Encoding: gzip
+</span></span></span><span class="line"><span class="cl"><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">age=22&amp;name=roc
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></div><h2 id="a-nameset-body设置请求体a"><!-- raw HTML omitted -->设置请求体<!-- raw HTML omitted --></h2>
+<p>Put <code>string</code>, <code>[]byte</code> and <code>io.Reader</code> as body directly.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">Post</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="s">&#34;id=roc&amp;cmd=query&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>将对象作为JSON或XML请求体（自动添加 <code>Content-Type</code> 请求头）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">Post</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nf">BodyJSON</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">foo</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">Post</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nf">BodyXML</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">bar</span><span class="p">))</span>
+</span></span></code></pre></div><h2 id="a-namedebug调试a"><!-- raw HTML omitted -->调试<!-- raw HTML omitted --></h2>
+<p>将全局变量 <code>req.Debug</code> 设置为<code>true</code>，将会把所有请求的详细信息打印在标准输出。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nx">Debug</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">Post</span><span class="p">(</span><span class="s">&#34;http://localhost/test&#34;</span> <span class="s">&#34;hi&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="post.png"
+        data-srcset="post.png, post.png 1.5x, post.png 2x"
+        data-sizes="auto"
+        alt="post.png"
+        title="post" /></p>
+<h2 id="a-nameformat输出格式a"><!-- raw HTML omitted -->输出格式<!-- raw HTML omitted --></h2>
+<p>您可以使用指定类型的输出格式在日志文件中记录请求和响应的信息。例如，在开发阶段使用<code>％+v</code>格式，可以让你观察请求和响应的细节信息。 在生产阶段使用<code>％v</code>或<code>％-v</code>输出格式，只记录所需要的信息。</p>
+<h3 id="v-或-s"><code>%+v</code> 或 <code>%+s</code></h3>
+<p>详细输出</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">r</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">Post</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">header</span><span class="p">,</span> <span class="nx">param</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%+v&#34;</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span> <span class="c1">// 输出格式和Debug开启时的格式一样
+</span></span></span></code></pre></div><h3 id="v-或-s-1"><code>%v</code> 或 <code>%s</code></h3>
+<p>简单输出（默认格式）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">r</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">param</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%v\n&#34;</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span> <span class="c1">// GET http://foo.bar/api?name=roc&amp;cmd=add {&#34;code&#34;:&#34;0&#34;,&#34;msg&#34;:&#34;success&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">log</span><span class="p">.</span><span class="nf">Prinln</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>         <span class="c1">// 和上面一样
+</span></span></span></code></pre></div><h3 id="-v-或--s"><code>%-v</code> 或 <code>%-s</code></h3>
+<p>简单输出并保持所有内容在一行内（请求体或响应体可能包含多行，这种格式会将所有换行、回车替换成<code>&quot; &quot;</code>, 这在会让你在查日志的时候非常有用）</p>
+<h3 id="flag">Flag</h3>
+<p>你可以调用 <code>SetFlags</code> 控制输出内容，决定哪些部分能够被输出。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">const</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">LreqHead</span>  <span class="p">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="kc">iota</span> <span class="c1">// 输出请求首部（包含请求行和请求头）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">LreqBody</span>              <span class="c1">// 输出请求体
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">LrespHead</span>             <span class="c1">// 输出响应首部（包含响应行和响应头）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">LrespBody</span>             <span class="c1">// 输出响应体
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">Lcost</span>                 <span class="c1">// 输出请求所消耗掉时长
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">LstdFlags</span> <span class="p">=</span> <span class="nx">LreqHead</span> <span class="p">|</span> <span class="nx">LreqBody</span> <span class="p">|</span> <span class="nx">LrespHead</span> <span class="p">|</span> <span class="nx">LrespBody</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">SetFlags</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">LreqHead</span> <span class="p">|</span> <span class="nx">req</span><span class="p">.</span><span class="nx">LreqBody</span> <span class="p">|</span> <span class="nx">req</span><span class="p">.</span><span class="nx">LrespHead</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="监控请求耗时">监控请求耗时</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">SetFlags</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">LstdFlags</span> <span class="p">|</span> <span class="nx">req</span><span class="p">.</span><span class="nx">Lcost</span><span class="p">)</span> <span class="c1">// 输出格式显示请求耗时
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">r</span><span class="p">,</span><span class="nx">_</span> <span class="o">:=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span> <span class="c1">// http://foo.bar/api 3.260802ms {&#34;code&#34;:0 &#34;msg&#34;:&#34;success&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="nx">r</span><span class="p">.</span><span class="nf">Cost</span><span class="p">()</span> <span class="p">&gt;</span> <span class="mi">3</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span> <span class="p">{</span> <span class="c1">// 检查耗时
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;WARN: slow request:&#34;</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="a-nametojson-toxmltojson--toxmla"><!-- raw HTML omitted -->ToJSON &amp; ToXML<!-- raw HTML omitted --></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">r</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">r</span><span class="p">.</span><span class="nf">ToJSON</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">foo</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">r</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">Post</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nf">BodyXML</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">bar</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nx">r</span><span class="p">.</span><span class="nf">ToXML</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">baz</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="a-nameresponse获取-httpresponsea"><!-- raw HTML omitted -->获取 *http.Response<!-- raw HTML omitted --></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// func (r *Req) Response() *http.Response
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">r</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">resp</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">Response</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">resp</span><span class="p">.</span><span class="nx">StatusCode</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="a-nameupload上传a"><!-- raw HTML omitted -->上传<!-- raw HTML omitted --></h2>
+<p>使用 <code>req.File</code> 匹配文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">Post</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nf">File</span><span class="p">(</span><span class="s">&#34;imroc.png&#34;</span><span class="p">),</span> <span class="nx">req</span><span class="p">.</span><span class="nf">File</span><span class="p">(</span><span class="s">&#34;/Users/roc/Pictures/*.png&#34;</span><span class="p">))</span>
+</span></span></code></pre></div><p>使用 <code>req.FileUpload</code> 细粒度控制上传</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">file</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="s">&#34;imroc.png&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">Post</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">FileUpload</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">File</span><span class="p">:</span>      <span class="nx">file</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">FieldName</span><span class="p">:</span> <span class="s">&#34;file&#34;</span><span class="p">,</span>       <span class="c1">// FieldName 是表单字段名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">FileName</span><span class="p">:</span>  <span class="s">&#34;avatar.png&#34;</span><span class="p">,</span> <span class="c1">// Filename 是要上传的文件的名称，我们使用它来猜测mimetype，并将其上传到服务器上
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">})</span>
+</span></span></code></pre></div><p>使用<code>req.UploadProgress</code>监听上传进度</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">progress</span> <span class="o">:=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">current</span><span class="p">,</span> <span class="nx">total</span> <span class="kt">int64</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nb">float32</span><span class="p">(</span><span class="nx">current</span><span class="p">)</span><span class="o">/</span><span class="nb">float32</span><span class="p">(</span><span class="nx">total</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="s">&#34;%&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">Post</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nf">File</span><span class="p">(</span><span class="s">&#34;/Users/roc/Pictures/*.png&#34;</span><span class="p">),</span> <span class="nx">req</span><span class="p">.</span><span class="nf">UploadProgress</span><span class="p">(</span><span class="nx">progress</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;upload complete&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="a-namedownload下载a"><!-- raw HTML omitted -->下载<!-- raw HTML omitted --></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">r</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">r</span><span class="p">.</span><span class="nf">ToFile</span><span class="p">(</span><span class="s">&#34;imroc.png&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>使用<code>req.DownloadProgress</code>监听下载进度</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">progress</span> <span class="o">:=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">current</span><span class="p">,</span> <span class="nx">total</span> <span class="kt">int64</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nb">float32</span><span class="p">(</span><span class="nx">current</span><span class="p">)</span><span class="o">/</span><span class="nb">float32</span><span class="p">(</span><span class="nx">total</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="s">&#34;%&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">r</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nf">DownloadProgress</span><span class="p">(</span><span class="nx">progress</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nx">r</span><span class="p">.</span><span class="nf">ToFile</span><span class="p">(</span><span class="s">&#34;hello.mp4&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;download complete&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="a-namecookiecookiea"><!-- raw HTML omitted -->Cookie<!-- raw HTML omitted --></h2>
+<p>默认情况下，底层的 <code>*http.Client</code> 会自动管理你的cookie（如果服务器给你发了cookie，之后的请求它会自动带上cookie请求头给服务器）, 你可以调用这个方法取消自动管理：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">EnableCookie</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+</span></span></code></pre></div><p>你还可以在发送请求的时候自己传入 <code>*http.Cookie</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">cookie</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">Cookie</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// ......
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">req</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">cookie</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="a-nameset-timeout设置超时a"><!-- raw HTML omitted -->设置超时<!-- raw HTML omitted --></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">SetTimeout</span><span class="p">(</span><span class="mi">50</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="a-nameset-proxy设置代理a"><!-- raw HTML omitted -->设置代理<!-- raw HTML omitted --></h2>
+<p>默认情况下，如果系统环境变量有 <code>http_proxy</code> 或 <code>https_proxy</code> ，req会讲对应的地址作为对应协议的代理，你也可以自定义设置代理，或者将其置为<code>nil</code>，即取消代理。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">SetProxy</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">url</span><span class="p">.</span><span class="nx">URL</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nf">Hostname</span><span class="p">(),</span> <span class="s">&#34;google&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">url</span><span class="p">.</span><span class="nf">Parse</span><span class="p">(</span><span class="s">&#34;http://my.vpn.com:23456&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>设置简单代理（将所有请求都转发到指定代理url地址上）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">SetProxyUrl</span><span class="p">(</span><span class="s">&#34;http://my.proxy.com:23456&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><h2 id="a-namecustomize-client自定义http客户端a"><!-- raw HTML omitted -->自定义HTTP客户端<!-- raw HTML omitted --></h2>
+<p>使用 <code>SetClient</code> 改变底层的 <code>*http.Client</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">SetClient</span><span class="p">(</span><span class="nx">client</span><span class="p">)</span>
+</span></span></code></pre></div><p>给某个请求制定特定的 <code>*http.Client</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Client</span><span class="p">{</span><span class="nx">Timeout</span><span class="p">:</span> <span class="mi">30</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">client</span><span class="p">)</span>
+</span></span></code></pre></div><p>改变底层 <code>*http.Client</code> 的某些属性</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nf">Client</span><span class="p">().</span><span class="nx">Jar</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">cookiejar</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">trans</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">Client</span><span class="p">().</span><span class="nx">Transport</span><span class="p">.(</span><span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Transport</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">trans</span><span class="p">.</span><span class="nx">MaxIdleConns</span> <span class="p">=</span> <span class="mi">20</span>
+</span></span><span class="line"><span class="cl"><span class="nx">trans</span><span class="p">.</span><span class="nx">TLSHandshakeTimeout</span> <span class="p">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span>
+</span></span><span class="line"><span class="cl"><span class="nx">trans</span><span class="p">.</span><span class="nx">DisableKeepAlives</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="nx">trans</span><span class="p">.</span><span class="nx">TLSClientConfig</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span><span class="nx">InsecureSkipVerify</span><span class="p">:</span> <span class="kc">true</span><span class="p">}</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-10-09</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/req/" data-title="Go Http Client" data-hashtags="Go,http,req"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/req/" data-hashtag="Go"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/req/" data-title="Go Http Client"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/req/" data-title="Go Http Client"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/req/" data-title="Go Http Client"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/http/">http</a>,&nbsp;<a href="/tags/req/">req</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/go-http/" class="prev" rel="prev" title="Go Http"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Go Http</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
