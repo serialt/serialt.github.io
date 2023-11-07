@@ -62,7 +62,7 @@ deploy:
   - kubectl apply -f k8s.yml
 
 dev:
-  hello-world:
+  hello-world: # 被替换的服务名
     image: okteto/golang:1
     command: bash
     sync:
