@@ -1,6 +1,6 @@
 +++
 title = 'to-mirror'
-date = 2023-11-7T20:00:42+08:00
+date = 2023-11-07T20:00:42+08:00
 draft = false
 
 tags = ["mirror","source","source-to-cn"]
