@@ -1,9 +1,9 @@
 +++
-title = 'to-mirror'
+title = 'To-mirror'
 date = 2023-11-07T20:00:42+08:00
 draft = false
 
-tags = ["mirror","source","source-to-cn"]
+tags = ["mirror","source","mirror-to-cn"]
 categories = ["系统或软件换源"]
 
 +++
