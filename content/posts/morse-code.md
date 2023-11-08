@@ -1,5 +1,5 @@
 +++
-title = 'morse-code'
+title = 'Morse Code'
 date = 2023-11-08T19:44:42+08:00
 draft = false
 

@@ -1,5 +1,5 @@
 +++
-title = 'skopeo'
+title = 'Skopeo'
 date = 2023-11-08T20:26:42+08:00
 draft = false
 
