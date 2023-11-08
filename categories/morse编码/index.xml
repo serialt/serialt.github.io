@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>morse编码 - Category - blog for log</title>
+        <link>https://serialt.github.io/categories/morse%E7%BC%96%E7%A0%81/</link>
+        <description>morse编码 - Category - blog for log</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 08 Nov 2023 19:44:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/morse%E7%BC%96%E7%A0%81/" rel="self" type="application/rss+xml" /><item>
+    <title>morse-code</title>
+    <link>https://serialt.github.io/posts/morse-code/</link>
+    <pubDate>Wed, 08 Nov 2023 19:44:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/morse-code/</guid>
+    <description><![CDATA[Morse Code 二叉树记忆法 start E T I A N M S U R W D K G O H V F L P J B X C Y Z Q . - E T .. .- -. -- I A N M ... ..- .-. ..- -.. -.- --. --- S U R W D K G O .... ...- ..-. .-.. .--. .--- -...]]></description>
+</item>
+</channel>
+</rss>

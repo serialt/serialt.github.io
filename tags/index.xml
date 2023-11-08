@@ -4,7 +4,47 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - blog for log</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Tue, 07 Nov 2023 20:00:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 08 Nov 2023 20:26:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>image</title>
+    <link>https://serialt.github.io/tags/image/</link>
+    <pubDate>Wed, 08 Nov 2023 20:26:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/image/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>oci-image-sync</title>
+    <link>https://serialt.github.io/tags/oci-image-sync/</link>
+    <pubDate>Wed, 08 Nov 2023 20:26:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/oci-image-sync/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>skopeo</title>
+    <link>https://serialt.github.io/tags/skopeo/</link>
+    <pubDate>Wed, 08 Nov 2023 20:26:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/skopeo/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>morse</title>
+    <link>https://serialt.github.io/tags/morse/</link>
+    <pubDate>Wed, 08 Nov 2023 19:44:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/morse/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>morse-code</title>
+    <link>https://serialt.github.io/tags/morse-code/</link>
+    <pubDate>Wed, 08 Nov 2023 19:44:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/morse-code/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>mirror</title>
     <link>https://serialt.github.io/tags/mirror/</link>
     <pubDate>Tue, 07 Nov 2023 20:00:42 &#43;0800</pubDate>
@@ -42,46 +82,6 @@
     <pubDate>Mon, 09 Oct 2023 21:00:42 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/http/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>req</title>
-    <link>https://serialt.github.io/tags/req/</link>
-    <pubDate>Mon, 09 Oct 2023 21:00:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/req/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>dev</title>
-    <link>https://serialt.github.io/tags/dev/</link>
-    <pubDate>Tue, 26 Sep 2023 19:16:02 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/dev/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>kubernetes</title>
-    <link>https://serialt.github.io/tags/kubernetes/</link>
-    <pubDate>Tue, 26 Sep 2023 19:16:02 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/kubernetes/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>okteto</title>
-    <link>https://serialt.github.io/tags/okteto/</link>
-    <pubDate>Tue, 26 Sep 2023 19:16:02 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/okteto/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>vscode</title>
-    <link>https://serialt.github.io/tags/vscode/</link>
-    <pubDate>Tue, 26 Sep 2023 19:16:02 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/vscode/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>
