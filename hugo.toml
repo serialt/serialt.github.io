@@ -4,7 +4,7 @@ baseURL = "https://serialt.github.com/"
 theme = "LoveIt"
 
 # 网站标题
-title = "blog for log"
+title = "Blog"
 
 # 网站语言, 仅在这里 CN 大写 ["en", "zh-CN", "fr", "pl", ...]
 languageCode = "zh-CN"
