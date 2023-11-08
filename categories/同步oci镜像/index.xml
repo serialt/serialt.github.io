@@ -5,7 +5,7 @@
         <description>同步oci镜像 - Category - blog for log</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
             <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 08 Nov 2023 20:26:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/%E5%90%8C%E6%AD%A5oci%E9%95%9C%E5%83%8F/" rel="self" type="application/rss+xml" /><item>
-    <title>skopeo</title>
+    <title>Skopeo</title>
     <link>https://serialt.github.io/posts/skopeo/</link>
     <pubDate>Wed, 08 Nov 2023 20:26:42 &#43;0800</pubDate>
     <author>serialt</author>

@@ -5,7 +5,7 @@
         <description>All Posts | blog for log</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
             <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 08 Nov 2023 20:26:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>skopeo</title>
+    <title>Skopeo</title>
     <link>https://serialt.github.io/posts/skopeo/</link>
     <pubDate>Wed, 08 Nov 2023 20:26:42 &#43;0800</pubDate>
     <author>serialt</author>
@@ -13,7 +13,7 @@
     <description><![CDATA[镜像同步 参考链接： https://lework.github.io/2020/04/13/skopeo/ https://blog.k8s.li/skopeo.html 日常工作中，需要将各种镜像搬到对应的仓库中，docker 适合于构建镜像，将镜像推送于仓库中。镜像被推送到仓库中后，如果]]></description>
 </item>
 <item>
-    <title>morse-code</title>
+    <title>Morse Code</title>
     <link>https://serialt.github.io/posts/morse-code/</link>
     <pubDate>Wed, 08 Nov 2023 19:44:42 &#43;0800</pubDate>
     <author>serialt</author>
