@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>shell - Tag - blog for log</title>
+        <title>shell - Tag - Blog</title>
         <link>https://serialt.github.io/tags/shell/</link>
-        <description>shell - Tag - blog for log</description>
+        <description>shell - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
             <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 24 Sep 2023 18:09:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/shell/" rel="self" type="application/rss+xml" /><item>
     <title>Debug Shell in VSCode</title>

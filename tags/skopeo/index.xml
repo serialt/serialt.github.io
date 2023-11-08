@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>skopeo - Tag - blog for log</title>
+        <title>skopeo - Tag - Blog</title>
         <link>https://serialt.github.io/tags/skopeo/</link>
-        <description>skopeo - Tag - blog for log</description>
+        <description>skopeo - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
             <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 08 Nov 2023 20:26:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/skopeo/" rel="self" type="application/rss+xml" /><item>
     <title>Skopeo</title>

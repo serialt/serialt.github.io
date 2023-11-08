@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>mirrors - Tag - blog for log</title>
+        <title>mirrors - Tag - Blog</title>
         <link>https://serialt.github.io/tags/mirrors/</link>
-        <description>mirrors - Tag - blog for log</description>
+        <description>mirrors - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
             <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 24 Sep 2023 17:01:26 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/mirrors/" rel="self" type="application/rss+xml" /><item>
     <title>Tuna Web</title>
