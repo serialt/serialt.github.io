@@ -5,11 +5,11 @@
         <description>source - Tag - blog for log</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
             <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Tue, 07 Nov 2023 20:00:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/source/" rel="self" type="application/rss+xml" /><item>
-    <title>to-mirror</title>
-    <link>https://serialt.github.io/posts/source-cn/</link>
+    <title>To-mirror</title>
+    <link>https://serialt.github.io/posts/mirror-cn/</link>
     <pubDate>Tue, 07 Nov 2023 20:00:42 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/source-cn/</guid>
+    <guid>https://serialt.github.io/posts/mirror-cn/</guid>
     <description><![CDATA[操作系统或者软件换源加速 1、操作系统 rocky # 8 base sed -e &#39;s|^mirrorlist=|#mirrorlist=|g&#39; \ -e &#39;s|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.ustc.edu.cn/rocky|g&#39; \ -i.bak /etc/yum.repos.d/Rocky*.repo # 8 epel sed -e &#39;s|^metalink=|#metalink=|g&#39; \ -e &#39;s|^#baseurl=https\?://download.fedoraproject.org/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39; \ -e &#39;s|^#baseurl=https\?://download.example/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39; \ -i.bak /etc/yum.repos.d/epel*.repo # 9 base sed -e &#39;s|^mirrorlist=|#mirrorlist=|g&#39; \ -e &#39;s|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.ustc.edu.cn/rocky|g&#39; \ -i.bak /etc/yum.repos.d/rocky*.repo # 9 epel sed -e &#39;s|^metalink=|#metalink=|g&#39; \ -e &#39;s|^#baseurl=https\?://download.fedoraproject.org/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39; \ -e &#39;s|^#baseurl=https\?://download.example/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39;]]></description>
 </item>
 </channel>

@@ -5,11 +5,11 @@
             <loc>https://serialt.github.io/</loc><lastmod>2023-11-07T20:00:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/categories/</loc><lastmod>2023-11-07T20:00:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/mirror/</loc><lastmod>2023-11-07T20:00:42&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/mirror-to-cn/</loc><lastmod>2023-11-07T20:00:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/</loc><lastmod>2023-11-07T20:00:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/source/</loc><lastmod>2023-11-07T20:00:42&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/source-to-cn/</loc><lastmod>2023-11-07T20:00:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/</loc><lastmod>2023-11-07T20:00:42&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/posts/source-cn/</loc><lastmod>2023-11-07T20:00:42&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/mirror-cn/</loc><lastmod>2023-11-07T20:00:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/categories/%E7%B3%BB%E7%BB%9F%E6%88%96%E8%BD%AF%E4%BB%B6%E6%8D%A2%E6%BA%90/</loc><lastmod>2023-11-07T20:00:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/go/</loc><lastmod>2023-10-09T21:00:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/req/</loc><lastmod>2023-10-09T21:00:42&#43;08:00</lastmod></url><url>
@@ -31,4 +31,5 @@
             <loc>https://serialt.github.io/tags/mirrors/</loc><lastmod>2023-09-24T17:01:26&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/tuna-web/</loc><lastmod>2023-09-24T17:01:26&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/helm/</loc><lastmod>2023-09-24T11:05:25&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/posts/helm-migrate-oci/</loc><lastmod>2023-09-24T11:05:25&#43;08:00</lastmod></url></urlset>
+            <loc>https://serialt.github.io/posts/helm-migrate-oci/</loc><lastmod>2023-09-24T11:05:25&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/skopeo/</loc></url></urlset>

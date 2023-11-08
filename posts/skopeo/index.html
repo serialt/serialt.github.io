@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - blog for log</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="title = &lsquo;skopeo&rsquo; date = 2023-11-07T22:00:42&#43;08:00 draft = false tags = [&ldquo;skopeo&rdquo;,&ldquo;image&rdquo;,&ldquo;oci-image-sync&rdquo;] categories = [&ldquo;同步oci镜像&rdquo;] 镜像同步 参考链接： https://lework.github.io/2020/04/13/skopeo/ https://blog.k8s.li/skopeo.html 日常工作中，需要将各种镜像搬到对应的仓库中，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/skopeo/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="title = &lsquo;skopeo&rsquo; date = 2023-11-07T22:00:42&#43;08:00 draft = false tags = [&ldquo;skopeo&rdquo;,&ldquo;image&rdquo;,&ldquo;oci-image-sync&rdquo;] categories = [&ldquo;同步oci镜像&rdquo;] 镜像同步 参考链接： https://lework.github.io/2020/04/13/skopeo/ https://blog.k8s.li/skopeo.html 日常工作中，需要将各种镜像搬到对应的仓库中，"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/skopeo/" /><link rel="next" href="https://serialt.github.io/posts/helm-migrate-oci/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/skopeo\/"
+        },"genre": "posts","wordcount":  2552 ,
+        "url": "https:\/\/serialt.github.io\/posts\/skopeo\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="blog for log">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="blog for log">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2552 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一编译skopeo">一、编译skopeo</a>
+      <ul>
+        <li><a href="#下载-skopeo-源码">下载 skopeo 源码</a></li>
+        <li><a href="#构建build镜像的dockerfile">构建build镜像的Dockerfile</a></li>
+        <li><a href="#构建-build-镜像">构建 build 镜像</a></li>
+        <li><a href="#构建-skopeo-静态二进制可执行文件">构建 skopeo 静态二进制可执行文件</a></li>
+      </ul>
+    </li>
+    <li><a href="#二skopeo-命令使用">二、skopeo 命令使用</a>
+      <ul>
+        <li><a href="#copy镜像">copy镜像</a></li>
+        <li><a href="#删除镜像">删除镜像</a></li>
+        <li><a href="#认证文件">认证文件</a></li>
+        <li><a href="#sync-在-oci-间同步镜像">sync 在 OCI 间同步镜像</a></li>
+      </ul>
+    </li>
+    <li><a href="#三同步镜像">三、同步镜像</a>
+      <ul>
+        <li><a href="#1安装sync-image-和-skopeo">1、安装sync-image 和 skopeo</a></li>
+        <li><a href="#2配置sync-image-yaml-配置文件">2、配置sync-image yaml 配置文件</a></li>
+        <li><a href="#3生成动态同步的-yaml-文件">3、生成动态同步的 yaml 文件</a></li>
+        <li><a href="#4同步镜像">4、同步镜像</a></li>
+        <li><a href="#5github-action-配置文件">5、github action 配置文件</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>title = &lsquo;skopeo&rsquo;
+date = 2023-11-07T22:00:42+08:00
+draft = false</p>
+<p>tags = [&ldquo;skopeo&rdquo;,&ldquo;image&rdquo;,&ldquo;oci-image-sync&rdquo;]
+categories = [&ldquo;同步oci镜像&rdquo;]</p>
+<h1 id="镜像同步">镜像同步</h1>
+<p>参考链接：</p>
+<ul>
+<li><a href="https://lework.github.io/2020/04/13/skopeo/" target="_blank" rel="noopener noreffer ">https://lework.github.io/2020/04/13/skopeo/</a></li>
+<li><a href="https://blog.k8s.li/skopeo.html" target="_blank" rel="noopener noreffer ">https://blog.k8s.li/skopeo.html</a></li>
+</ul>
+<p>日常工作中，需要将各种镜像搬到对应的仓库中，docker 适合于构建镜像，将镜像推送于仓库中。镜像被推送到仓库中后，如果需要对镜像进行搬运，在仓库不提供这个功能的情况下，同步镜像是比较困难的。</p>
+<p>skopeo 是红帽开源的容器镜像管理工具。相比于docker，它有一下的优点：</p>
+<ul>
+<li>
+<p>支持多个平台：skopeo 支持 Linux，Mac 和 Windows。</p>
+</li>
+<li>
+<p>无需 docker 或者 podman：skopeo 可以构建为单一的 cli，不依赖于 docker 服务或者 podman。</p>
+</li>
+<li>
+<p>支持多个 OCI 镜像仓库间同步：支持 OCI 的镜像托管服务，都可以相互同步。</p>
+</li>
+<li>
+<p>支持多架构镜像同步：可以同步多种架构的镜像。</p>
+</li>
+<li>
+<p>镜像验签：skopeo 支持镜像签名，可确保镜像的完整性和可靠性。</p>
+</li>
+</ul>
+<h2 id="一编译skopeo">一、编译skopeo</h2>
+<p>skopeo 官方并不提供编译好的静态二进制可执行文件，常见的系统源中已经包含了 skopeo，但由于 skopeo 的版本迭代比较快，新的功能也随之增加，部分操作系统里提供的安装包版本可能比较低，无法适用，且 skopeo 大多都是链接了动态库，无法通用于多个 linux 发行版，因此可以借助docker实现skopeo的静态编译。</p>
+<p>基于github action构建skopeo: <a href="https://github.com/serialt/skopeo" target="_blank" rel="noopener noreffer ">skopeo</a></p>
+<h3 id="下载-skopeo-源码">下载 skopeo 源码</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># download source code</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">git clone --depth=1  https://github.com/containers/skopeo.git</span><span class="w">
+</span></span></span></code></pre></div><h3 id="构建build镜像的dockerfile">构建build镜像的Dockerfile</h3>
+<p>国内构建则需要修改 alpine 和 go 镜像地址，可直连 github 的可以忽略此步</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> golang:1.19-alpine3.16 AS builder</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> <span class="nv">LANG</span><span class="o">=</span>C.UTF-8<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> <span class="nv">TZ</span><span class="o">=</span>Asia/Shanghai<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> <span class="nv">CGO_ENABLED</span><span class="o">=</span><span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="k">ENV</span> <span class="nv">GOPROXY</span><span class="o">=</span>https://goproxy.cn,direct<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> sed -i <span class="s1">&#39;s/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g&#39;</span> /etc/apk/repositories<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apk update --no-cache <span class="o">&amp;&amp;</span> apk add --no-cache ca-certificates <span class="err">
+</span></span></span></code></pre></div><h3 id="构建-build-镜像">构建 build 镜像</h3>
+<pre tabindex="0"><code>docker build -t skopeo-build .
+</code></pre><h3 id="构建-skopeo-静态二进制可执行文件">构建 skopeo 静态二进制可执行文件</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> skopeo/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 构建 linux amd64 架构</span>
+</span></span><span class="line"><span class="cl">docker run --rm -t -v <span class="nv">$PWD</span>:/build skopeo-build sh -c <span class="s2">&#34;apk update &amp;&amp; apk add gpgme btrfs-progs-dev llvm13-dev gcc musl-dev &amp;&amp; cd /build &amp;&amp; CGO_ENABLE=0 GO111MODULE=on GOOS=linux GOARCH=amd64 go build -mod=vendor &#39;-buildmode=pie&#39; -ldflags &#39;-extldflags -static&#39; -gcflags &#39;&#39; -tags &#39;exclude_graphdriver_devicemapper exclude_graphdriver_btrfs containers_image_openpgp&#39; -o ./bin/skopeo-linux-amd64 ./cmd/skopeo &#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 构建 linux arm64 架构</span>
+</span></span><span class="line"><span class="cl">docker run --rm -t -v <span class="nv">$PWD</span>:/build skopeo-build sh -c <span class="s2">&#34;apk update &amp;&amp; apk add gpgme btrfs-progs-dev llvm13-dev gcc musl-dev &amp;&amp; cd /build &amp;&amp; CGO_ENABLE=0 GO111MODULE=on GOOS=linux GOARCH=arm64 go build -mod=vendor &#39;-buildmode=pie&#39; -ldflags &#39;-extldflags -static&#39; -gcflags &#39;&#39; -tags &#39;exclude_graphdriver_devicemapper exclude_graphdriver_btrfs containers_image_openpgp&#39; -o ./bin/skopeo-linux-arm64 ./cmd/skopeo  &#34;</span>
+</span></span></code></pre></div><h2 id="二skopeo-命令使用">二、skopeo 命令使用</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@tc ~<span class="o">]</span><span class="c1"># skopeo -v</span>
+</span></span><span class="line"><span class="cl">skopeo version 1.11.1-dev
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@tc ~<span class="o">]</span><span class="c1"># skopeo --help</span>
+</span></span><span class="line"><span class="cl">Various operations with container images and container image registries
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Usage:
+</span></span><span class="line"><span class="cl">  skopeo <span class="o">[</span>flags<span class="o">]</span>
+</span></span><span class="line"><span class="cl">  skopeo <span class="o">[</span>command<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Available Commands:
+</span></span><span class="line"><span class="cl">  copy                                          Copy an IMAGE-NAME from one location to another
+</span></span><span class="line"><span class="cl">  delete                                        Delete image IMAGE-NAME
+</span></span><span class="line"><span class="cl">  generate-sigstore-key                         Generate a sigstore public/private key pair
+</span></span><span class="line"><span class="cl">  <span class="nb">help</span>                                          Help about any <span class="nb">command</span>
+</span></span><span class="line"><span class="cl">  inspect                                       Inspect image IMAGE-NAME
+</span></span><span class="line"><span class="cl">  list-tags                                     List tags in the transport/repository specified by the SOURCE-IMAGE
+</span></span><span class="line"><span class="cl">  login                                         Login to a container registry
+</span></span><span class="line"><span class="cl">  <span class="nb">logout</span>                                        Logout of a container registry
+</span></span><span class="line"><span class="cl">  manifest-digest                               Compute a manifest digest of a file
+</span></span><span class="line"><span class="cl">  standalone-sign                               Create a signature using <span class="nb">local</span> files
+</span></span><span class="line"><span class="cl">  standalone-verify                             Verify a signature using <span class="nb">local</span> files
+</span></span><span class="line"><span class="cl">  sync                                          Synchronize one or more images from one location to another
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Flags:
+</span></span><span class="line"><span class="cl">      --command-timeout duration   timeout <span class="k">for</span> the <span class="nb">command</span> execution
+</span></span><span class="line"><span class="cl">      --debug                      <span class="nb">enable</span> debug output
+</span></span><span class="line"><span class="cl">  -h, --help                       <span class="nb">help</span> <span class="k">for</span> skopeo
+</span></span><span class="line"><span class="cl">      --insecure-policy            run the tool without any policy check
+</span></span><span class="line"><span class="cl">      --override-arch ARCH         use ARCH instead of the architecture of the machine <span class="k">for</span> choosing images
+</span></span><span class="line"><span class="cl">      --override-os OS             use OS instead of the running OS <span class="k">for</span> choosing images
+</span></span><span class="line"><span class="cl">      --override-variant VARIANT   use VARIANT instead of the running architecture variant <span class="k">for</span> choosing images
+</span></span><span class="line"><span class="cl">      --policy string              Path to a trust policy file
+</span></span><span class="line"><span class="cl">      --registries.d DIR           use registry configuration files in DIR <span class="o">(</span>e.g. <span class="k">for</span> container signature storage<span class="o">)</span>
+</span></span><span class="line"><span class="cl">      --tmpdir string              directory used to store temporary files
+</span></span><span class="line"><span class="cl">  -v, --version                    Version <span class="k">for</span> Skopeo
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Use <span class="s2">&#34;skopeo [command] --help&#34;</span> <span class="k">for</span> more information about a command.
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 登录与登出 oci</span>
+</span></span><span class="line"><span class="cl">skopeo login -u username  docker.io
+</span></span><span class="line"><span class="cl">skopeo <span class="nb">logout</span> docker.io
+</span></span></code></pre></div><p>不下载镜像情况下获取镜像信息</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@tc ~<span class="o">]</span><span class="c1"># skopeo inspect docker://docker.io/alpine</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Name&#34;</span>: <span class="s2">&#34;docker.io/library/alpine&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Digest&#34;</span>: <span class="s2">&#34;sha256:eece025e432126ce23f223450a0326fbebde39cdf496a85d8c016293fc851978&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;RepoTags&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;20220316&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;20220328&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;20220715&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;20221110&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;20230208&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;20230329&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;20230901&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;3&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;3.17&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;3.17.0&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;3.17.0_rc1&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;3.17.1&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;3.17.2&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;3.17.3&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;3.17.4&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;3.17.5&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;3.18&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;3.18.0&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;3.18.2&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;3.18.3&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;3.18.4&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;edge&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;latest&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">]</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Created&#34;</span>: <span class="s2">&#34;2023-09-28T21:19:27.801479409Z&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;DockerVersion&#34;</span>: <span class="s2">&#34;20.10.23&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Labels&#34;</span>: null,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Architecture&#34;</span>: <span class="s2">&#34;amd64&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Os&#34;</span>: <span class="s2">&#34;linux&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Layers&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;sha256:96526aa774ef0126ad0fe9e9a95764c5fc37f409ab9e97021e7b4775d82bf6fa&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">]</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;LayersData&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">        <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;MIMEType&#34;</span>: <span class="s2">&#34;application/vnd.docker.image.rootfs.diff.tar.gzip&#34;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Digest&#34;</span>: <span class="s2">&#34;sha256:96526aa774ef0126ad0fe9e9a95764c5fc37f409ab9e97021e7b4775d82bf6fa&#34;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Size&#34;</span>: 3401967,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Annotations&#34;</span>: null
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">]</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Env&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><blockquote>
+<p><code>docker://</code>: 是使用 Docker Registry HTTP API V2 进行连接远端</p>
+<p><code>docker.io</code>: 远程仓库</p>
+<p><code>alpine</code>: 镜像名称</p>
+</blockquote>
+<p>获取本地镜像信息</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@tc ~<span class="o">]</span><span class="c1"># skopeo inspect docker-daemon:alpine:3</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Name&#34;</span>: <span class="s2">&#34;docker.io/library/alpine&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Digest&#34;</span>: <span class="s2">&#34;sha256:844bc35fdf7a96e5b6bf5e76e20989a797cc75976fad73275061a36f448b92b9&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;RepoTags&#34;</span>: <span class="o">[]</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Created&#34;</span>: <span class="s2">&#34;2023-09-28T21:19:27.801479409Z&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;DockerVersion&#34;</span>: <span class="s2">&#34;20.10.23&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Labels&#34;</span>: null,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Architecture&#34;</span>: <span class="s2">&#34;amd64&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Os&#34;</span>: <span class="s2">&#34;linux&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Layers&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;sha256:cc2447e1835a40530975ab80bb1f872fbab0f2a0faecf2ab16fbbb89b3589438&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">]</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;LayersData&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">        <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;MIMEType&#34;</span>: <span class="s2">&#34;application/vnd.docker.image.rootfs.diff.tar.gzip&#34;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Digest&#34;</span>: <span class="s2">&#34;sha256:cc2447e1835a40530975ab80bb1f872fbab0f2a0faecf2ab16fbbb89b3589438&#34;</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Size&#34;</span>: 7625728,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Annotations&#34;</span>: null
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">]</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Env&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><blockquote>
+<p><code>docker-daemon</code>: docker守护镜像的镜像</p>
+<p><code>alpine:3</code>: 本地镜像的名称</p>
+</blockquote>
+<h3 id="copy镜像">copy镜像</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># skopeo --insecure-policy copy docker://nginx:1.17.6 docker-archive:/tmp/nginx.tar</span>
+</span></span><span class="line"><span class="cl">Getting image <span class="nb">source</span> signatures
+</span></span><span class="line"><span class="cl">Copying blob 8ec398bc0356 <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Copying blob 465560073b6f <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Copying blob f473f9fd0a8c <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Copying config f7bb5701a3 <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Writing manifest to image destination
+</span></span><span class="line"><span class="cl">Storing signatures
+</span></span><span class="line"><span class="cl"><span class="c1"># ls -alh  /tmp/nginx.tar </span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> root root 125M 4月  <span class="m">13</span> 15:22 /tmp/nginx.tar
+</span></span></code></pre></div><blockquote>
+<p><code>--insecure-policy</code>: 用于忽略安全策略配置文件</p>
+<p><code>docker://nginx:1.17.6</code>: 该命令将会直接通过 http 下载目标镜像</p>
+<p><code>docker-archive</code>: 存储为 /tmp/nginx.tar，此文件可以直接通过 docker load 命令导入</p>
+</blockquote>
+<p>相应的，可以将下载的文件导入到本地</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># skopeo copy docker-archive:/tmp/nginx.tar docker-daemon:nginx:latest</span>
+</span></span><span class="line"><span class="cl">Getting image <span class="nb">source</span> signatures
+</span></span><span class="line"><span class="cl">Copying blob 556c5fb0d91b <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Copying blob 49434cc20e95 <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Copying blob 75248c0d5438 <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Copying config f7bb5701a3 <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Writing manifest to image destination
+</span></span><span class="line"><span class="cl">Storing signatures
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># docker images nginx</span>
+</span></span><span class="line"><span class="cl">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+</span></span><span class="line"><span class="cl">nginx               latest              f7bb5701a33c        <span class="m">3</span> months ago        126MB
+</span></span><span class="line"><span class="cl">COPY
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 也可以将镜像下载到指定目录</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># skopeo copy docker://busybox:latest dir:/tmp/busybox</span>
+</span></span><span class="line"><span class="cl">Getting image <span class="nb">source</span> signatures
+</span></span><span class="line"><span class="cl">Copying blob 0669b0daf1fb <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Copying config 83aa35aa1c <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Writing manifest to image destination
+</span></span><span class="line"><span class="cl">Storing signatures
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ls -alh /tmp/busybox/</span>
+</span></span><span class="line"><span class="cl">总用量 760K
+</span></span><span class="line"><span class="cl">drwxr-xr-x   <span class="m">2</span> root root  <span class="m">186</span> 4月  <span class="m">13</span> 15:26 .
+</span></span><span class="line"><span class="cl">drwxrwxrwt. <span class="m">12</span> root root 4.0K 4月  <span class="m">13</span> 15:25 ..
+</span></span><span class="line"><span class="cl">-rw-r--r--   <span class="m">1</span> root root 743K 4月  <span class="m">13</span> 15:26 0669b0daf1fba90642d105f3bc2c94365c5282155a33cc65ac946347a90d90d1
+</span></span><span class="line"><span class="cl">-rw-r--r--   <span class="m">1</span> root root 1.5K 4月  <span class="m">13</span> 15:26 83aa35aa1c79e4b6957e018da6e322bfca92bf3b4696a211b42502543c242d6f
+</span></span><span class="line"><span class="cl">-rw-r--r--   <span class="m">1</span> root root  <span class="m">527</span> 4月  <span class="m">13</span> 15:26 manifest.json
+</span></span><span class="line"><span class="cl">-rw-r--r--   <span class="m">1</span> root root   <span class="m">33</span> 4月  <span class="m">13</span> 15:25 version
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#或者从指定目录导入到本地</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># skopeo copy dir:/tmp/busybox docker-daemon:busybox:latest</span>
+</span></span><span class="line"><span class="cl">Getting image <span class="nb">source</span> signatures
+</span></span><span class="line"><span class="cl">Copying blob 0669b0daf1fb <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Copying config 83aa35aa1c <span class="k">done</span>
+</span></span><span class="line"><span class="cl">Writing manifest to image destination
+</span></span><span class="line"><span class="cl">Storing signatures
+</span></span><span class="line"><span class="cl"><span class="c1"># docker images busybox</span>
+</span></span><span class="line"><span class="cl">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+</span></span><span class="line"><span class="cl">busybox             latest              83aa35aa1c79        <span class="m">4</span> weeks ago         1.22MB
+</span></span></code></pre></div><h3 id="删除镜像">删除镜像</h3>
+<pre tabindex="0"><code>skopeo delete docker://localhost:5000/nginx:latest
+</code></pre><h3 id="认证文件">认证文件</h3>
+<p>认证文件默认存放在<code> $HOME/.docker/config.json</code></p>
+<p>文件内容</p>
+<pre tabindex="0"><code>{
+	&#34;auths&#34;: {
+		&#34;myregistrydomain.com:5000&#34;: {
+			&#34;auth&#34;: &#34;dGVzdHVzZXI6dGVzdHxxxxxxxx&#34;,
+			&#34;email&#34;: &#34;cc@local.com&#34;
+		}
+	}
+}
+</code></pre><h3 id="sync-在-oci-间同步镜像">sync 在 OCI 间同步镜像</h3>
+<p>使用 docke r在 OCI 间同步镜像的时候，需要先把镜像拉下来，打上 tag ，然后在推送到目的 OCI 上。在这个操作的过程中，即占用了存储，又占用了带宽，在同步大的镜像或者大量的镜像的时候，存储会严重影响镜像在 OCI 间同步的效率。skopeo 正好可以解决这个缺点，skopeo 在同步 OCI 镜像的过程中，只占用带宽，不会把镜像下载到本地。</p>
+<p>基于 yaml 文件的同步</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># sync.yaml</span>
+</span></span><span class="line"><span class="cl">ghcr.io:
+</span></span><span class="line"><span class="cl">  images:
+</span></span><span class="line"><span class="cl">    kube-vip/kube-vip:
+</span></span><span class="line"><span class="cl">    - <span class="s1">&#39;v0.6.0&#39;</span>
+</span></span><span class="line"><span class="cl">    - <span class="s1">&#39;v0.4.4&#39;</span>
+</span></span><span class="line"><span class="cl">    k3d-io/k3d-tools:
+</span></span><span class="line"><span class="cl">    - <span class="s1">&#39;5.5.2&#39;</span>
+</span></span></code></pre></div><p>同步镜像</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">skopeo --insecure-policy sync -a --src yaml --dest docker sync.yaml repo.local.com/serialt
+</span></span></code></pre></div><h2 id="三同步镜像">三、同步镜像</h2>
+<p>目前，常用的 OCI 仓库有：<code>docker.io</code>，<code>quay.io</code>，<code>gcr.io</code>，<code>registry.k8s.io</code>，<code>ghcr.io</code> 等。众所周知，因为某些原因，这些 OCI 仓库在国内无法访问，而一些项目又严重依赖于存储在这些 OCI 仓库的镜像，虽然有热心的大佬们会把 gcr 和 ghcr 上存储的镜像同步到 docker hub 中，但因为这些被推送到 docker hub 中的镜像不是官方维护的，可能会存在比较大的镜像的同步时间差，某些需要的镜像无法在 docker hub 上找到，同时也容易引起容器镜像的供应链安全问题。因此，可以使用 github action 使用 skopeo 进行同步镜像。</p>
+<p>项目地址：<a href="https://github.com/serialt/sync-image" target="_blank" rel="noopener noreffer ">sync-image</a></p>
+<h3 id="1安装sync-image-和-skopeo">1、安装sync-image 和 skopeo</h3>
+<pre tabindex="0"><code>wget https://github.com/serialt/skopeo/releases/download/v1.13.3/skopeo-linux-amd64
+</code></pre><pre tabindex="0"><code>go install github.com/serialt/sync-image@latest
+</code></pre><h3 id="2配置sync-image-yaml-配置文件">2、配置sync-image yaml 配置文件</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># config.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 镜像同步的个数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">last</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># mcr同步的个数，mcr中包含多个 vscode 容器开发的镜像</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">mcrLast</span><span class="p">:</span><span class="w"> </span><span class="m">50</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">autoSyncfile</span><span class="p">:</span><span class="w"> </span><span class="l">sync.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 不同步带有以下关键字的镜像的tag</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">exclude</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;alpha&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;beta&#39;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;rc&#39;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;amd64&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;ppc64le&#39;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;arm64&#39;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;arm&#39;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;s390x&#39;</span><span class="w">   
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;SNAPSHOT&#39;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;snapshot&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;debug&#39;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;master&#39;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;latest&#39;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;main&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;sig&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;sha&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;mips&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 需要同步的镜像</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">images</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">docker.elastic.co</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">elasticsearch/elasticsearch</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">kibana/kibana</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">logstash/logstash</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">beats/filebeat</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">beats/heartbeat</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">beats/packetbeat</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">beats/auditbeat</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">beats/journalbeat</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">beats/metricbeat</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">apm/apm-server</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">app-search/app-search</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">quay.io</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">coreos/flannel</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">ceph/ceph</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">cephcsi/cephcsi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">csiaddons/k8s-sidecar</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">csiaddons/volumereplication-operator</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">prometheus/prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">prometheus/alertmanager</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">prometheus/pushgateway</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">prometheus/blackbox-exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">prometheus/node-exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">prometheus-operator/prometheus-config-reloader</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">prometheus-operator/prometheus-operator</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">brancz/kube-rbac-proxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">jetstack/cert-manager-webhook</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">jetstack/cert-manager-controller</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">jetstack/cert-manager-cainjector</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">k8s.gcr.io</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">conformance</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">dns/k8s-dns-node-cache</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">metrics-server/metrics-server</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">kube-state-metrics/kube-state-metrics</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">prometheus-adapter/prometheus-adapter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">registry.k8s.io</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">sig-storage/local-volume-provisioner</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">metrics-server/metrics-server</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">defaultbackend</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">ingress-nginx/controller</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">ingress-nginx/kube-webhook-certgen</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">sig-storage/nfs-subdir-external-provisioner</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">sig-storage/csi-node-driver-registrar</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">sig-storage/csi-provisioner</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">sig-storage/csi-resizer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">sig-storage/csi-snapshotter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">sig-storage/snapshot-controller</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">sig-storage/snapshot-validation-webhook</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">sig-storage/nfsplugin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">sig-storage/csi-attacher</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">sig-storage/livenessprobe</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">defaultbackend-amd64</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">defaultbackend-arm64</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">pause</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">etcd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">kube-proxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">kube-apiserver</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">kube-scheduler</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">kube-controller-manager</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">coredns/coredns</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">build-image/kube-cross</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">gcr.io</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">kaniko-project/executor</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ghcr.io</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">k3d-io/k3d-tools</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">k3d-io/k3d-proxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">kube-vip/kube-vip</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">mcr.microsoft.com</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">devcontainers/base</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">devcontainers/go</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">docker.io</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">flannel/flannel</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">flannel/flannel-cni-plugin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">calico/kube-controllers</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">serialt/rocky</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">serialt/alma</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">calico/cni</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">calico/pod2daemon-flexvol</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">calico/kube-controllers</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">calico/node</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">rancher/mirrored-flannelcni-flannel-cni-plugin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">rancher/mirrored-flannelcni-flanne</span><span class="w">
+</span></span></span></code></pre></div><h3 id="3生成动态同步的-yaml-文件">3、生成动态同步的 yaml 文件</h3>
+<pre tabindex="0"><code>sync-image -c config.yaml
+</code></pre><h3 id="4同步镜像">4、同步镜像</h3>
+<p>依赖的环境变量</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">DEST_HUB_USERNAME
+</span></span><span class="line"><span class="cl">DEST_HUB_PASSWORD
+</span></span><span class="line"><span class="cl">MY_GITHUB_TOKEN
+</span></span></code></pre></div><p>同步的shell脚本</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">hub</span><span class="o">=</span><span class="s2">&#34;docker.io&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">repo</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$hub</span><span class="s2">/</span><span class="si">${</span><span class="nv">DEST_HUB_USERNAME</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">hub2</span><span class="o">=</span><span class="s2">&#34;registry.cn-hangzhou.aliyuncs.com&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">repo2</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$hub2</span><span class="s2">/</span><span class="si">${</span><span class="nv">DEST_HUB_USERNAME</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> -f sync.yaml <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">   <span class="nb">echo</span> <span class="s2">&#34;[Start] sync.......&#34;</span>
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl">    sudo skopeo login -u <span class="si">${</span><span class="nv">DEST_HUB_USERNAME</span><span class="si">}</span> -p <span class="si">${</span><span class="nv">DEST_HUB_PASSWORD</span><span class="si">}</span> <span class="si">${</span><span class="nv">hub</span><span class="si">}</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> sudo skopeo --insecure-policy sync -a --src yaml --dest docker sync.yaml <span class="si">${</span><span class="nv">repo</span><span class="si">}</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> sudo skopeo --insecure-policy sync -a --src yaml --dest docker custom_sync.yaml <span class="si">${</span><span class="nv">repo</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">    sleep <span class="m">3</span>
+</span></span><span class="line"><span class="cl">    sudo skopeo login -u <span class="si">${</span><span class="nv">DEST_HUB_USERNAME</span><span class="si">}</span> -p <span class="si">${</span><span class="nv">DEST_HUB_PASSWORD</span><span class="si">}</span> <span class="si">${</span><span class="nv">hub2</span><span class="si">}</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> sudo skopeo --insecure-policy sync -a --src yaml --dest docker sync.yaml <span class="si">${</span><span class="nv">repo2</span><span class="si">}</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> sudo skopeo --insecure-policy sync -a  --src yaml --dest docker custom_sync.yaml <span class="si">${</span><span class="nv">repo2</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="nb">echo</span> <span class="s2">&#34;[End] done.&#34;</span>
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;[Error]not found sync.yaml!&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span></code></pre></div><h3 id="5github-action-配置文件">5、github action 配置文件</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">sync</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">schedule</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">cron</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;0 2 * * *&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Allows you to run this workflow manually from the Actions tab</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">sync</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Set up Go </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/setup-go@v4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">go-version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&gt;=1.21.0&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Install dependencies</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">        export version=v1.10.0 &amp;&amp; export  arch=amd64 &amp;&amp; sudo wget https://github.com/lework/skopeo-binary/releases/download/${version}/skopeo-linux-${arch} -O /usr/bin/skopeo &amp;&amp; sudo chmod +x /usr/bin/skopeo
+</span></span></span><span class="line"><span class="cl"><span class="sd">        skopeo --version
+</span></span></span><span class="line"><span class="cl"><span class="sd">        go install github.com/serialt/sync-image@latest</span><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">generate_sync_yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">SRC_HUB_USERNAME</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.SRC_HUB_USERNAME }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">DEST_HUB_USERNAME</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEST_HUB_USERNAME }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">DEST_HUB_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEST_HUB_PASSWORD }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">MY_GITHUB_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.MY_GITHUB_TOKEN }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">timeout-minutes</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">        sync-image</span><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">sync image</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">SRC_HUB_USERNAME</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.SRC_HUB_USERNAME }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">DEST_HUB_USERNAME</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEST_HUB_USERNAME }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">DEST_HUB_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.DEST_HUB_PASSWORD }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">        bash sync.sh</span><span class="w">        
+</span></span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/skopeo/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/skopeo/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/skopeo/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/skopeo/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/skopeo/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/posts/helm-migrate-oci/" class="next" rel="next" title="Helm Migrate OCI">Helm Migrate OCI<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
