@@ -4,7 +4,39 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 08 Nov 2023 20:26:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Fri, 10 Nov 2023 21:20:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Go</title>
+    <link>https://serialt.github.io/tags/go/</link>
+    <pubDate>Fri, 10 Nov 2023 21:20:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/go/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>goph</title>
+    <link>https://serialt.github.io/tags/goph/</link>
+    <pubDate>Fri, 10 Nov 2023 21:20:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/goph/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>sftp</title>
+    <link>https://serialt.github.io/tags/sftp/</link>
+    <pubDate>Fri, 10 Nov 2023 21:20:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/sftp/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>ssh</title>
+    <link>https://serialt.github.io/tags/ssh/</link>
+    <pubDate>Fri, 10 Nov 2023 21:20:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/ssh/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>image</title>
     <link>https://serialt.github.io/tags/image/</link>
     <pubDate>Wed, 08 Nov 2023 20:26:42 &#43;0800</pubDate>
@@ -50,38 +82,6 @@
     <pubDate>Tue, 07 Nov 2023 20:00:42 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/mirror/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>mirror-to-cn</title>
-    <link>https://serialt.github.io/tags/mirror-to-cn/</link>
-    <pubDate>Tue, 07 Nov 2023 20:00:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/mirror-to-cn/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>source</title>
-    <link>https://serialt.github.io/tags/source/</link>
-    <pubDate>Tue, 07 Nov 2023 20:00:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/source/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Go</title>
-    <link>https://serialt.github.io/tags/go/</link>
-    <pubDate>Mon, 09 Oct 2023 21:00:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/go/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>http</title>
-    <link>https://serialt.github.io/tags/http/</link>
-    <pubDate>Mon, 09 Oct 2023 21:00:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/http/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

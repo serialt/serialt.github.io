@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>ssh - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/ssh/</link>
+        <description>ssh - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Fri, 10 Nov 2023 21:20:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/ssh/" rel="self" type="application/rss+xml" /><item>
+    <title>Go goph</title>
+    <link>https://serialt.github.io/posts/go-goth/</link>
+    <pubDate>Fri, 10 Nov 2023 21:20:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/go-goth/</guid>
+    <description><![CDATA[Go goph库 链接地址： github.com/melbahja/goph github.com/serialt/goph (方便指定端口) 特性 易于使用，简化 ssh api。 支持ssh 密码、私钥，带密码的私钥。 支持从本地上传文件和从远程下载文件]]></description>
+</item>
+</channel>
+</rss>
