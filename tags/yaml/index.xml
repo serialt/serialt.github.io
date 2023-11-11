@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>yaml - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/yaml/</link>
+        <description>yaml - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:25:07 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/yaml/" rel="self" type="application/rss+xml" /><item>
+    <title>Go yaml</title>
+    <link>https://serialt.github.io/posts/2023-11-11-go-yaml/</link>
+    <pubDate>Sat, 11 Nov 2023 10:25:07 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-go-yaml/</guid>
+    <description><![CDATA[Go 读取yaml格式配置文件 package config import ( &#34;fmt&#34; &#34;io/ioutil&#34; &#34;gopkg.in/yaml.v3&#34; ) type Service struct { Host string `json:&#34;host&#34; yaml:&#34;host&#34;` Port string `json:&#34;port&#34; yaml:&#34;port&#34;` } type MyConfig struct { Service Service `json:&#34;service&#34; yaml:&#34;service&#34;` } var Config *MyConfig func LoadConfig(filepath string) { if filepath == &#34;&#34; { return } // 读yaml文件 config, err := ioutil.ReadFile(filepath) if]]></description>
+</item>
+</channel>
+</rss>

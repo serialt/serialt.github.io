@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>file - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/file/</link>
+        <description>file - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:23:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/file/" rel="self" type="application/rss+xml" /><item>
+    <title>Go file</title>
+    <link>https://serialt.github.io/posts/2023-11-11-go-file/</link>
+    <pubDate>Sat, 11 Nov 2023 10:23:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-go-file/</guid>
+    <description><![CDATA[Go文件操作 参考链接：https://www.liwenzhou.com/posts/Go/go_file/ 文件 计算机中的文件是存储在外部介]]></description>
+</item>
+</channel>
+</rss>

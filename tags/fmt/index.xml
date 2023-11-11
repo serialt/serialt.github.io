@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>fmt - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/fmt/</link>
+        <description>fmt - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:23:46 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/fmt/" rel="self" type="application/rss+xml" /><item>
+    <title>Go fmt</title>
+    <link>https://serialt.github.io/posts/2023-11-11-go-fmt/</link>
+    <pubDate>Sat, 11 Nov 2023 10:23:46 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-go-fmt/</guid>
+    <description><![CDATA[Go fmt模块 参考链接：https://www.liwenzhou.com/posts/Go/go_fmt/ fmt fmt包实现了类似C语言prin]]></description>
+</item>
+</channel>
+</rss>

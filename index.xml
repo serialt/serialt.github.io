@@ -4,87 +4,87 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Fri, 10 Nov 2023 21:20:42 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:25:07 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>Go goph</title>
-    <link>https://serialt.github.io/posts/go-goth/</link>
-    <pubDate>Fri, 10 Nov 2023 21:20:42 &#43;0800</pubDate>
+    <title>Go gopsutil</title>
+    <link>https://serialt.github.io/posts/2023-11-11-gopsutil/</link>
+    <pubDate>Sat, 11 Nov 2023 10:25:07 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/go-goth/</guid>
-    <description><![CDATA[Go goph库 链接地址： github.com/melbahja/goph github.com/serialt/goph (方便指定端口) 特性 易于使用，简化 ssh api。 支持ssh 密码、私钥，带密码的私钥。 支持从本地上传文件和从远程下载文件]]></description>
+    <guid>https://serialt.github.io/posts/2023-11-11-gopsutil/</guid>
+    <description><![CDATA[gopsutil 库 参考链接：https://segmentfault.com/a/1190000022281174 简介 gopsutil是 Python 工具库psuti]]></description>
 </item>
 <item>
-    <title>Skopeo</title>
-    <link>https://serialt.github.io/posts/skopeo/</link>
-    <pubDate>Wed, 08 Nov 2023 20:26:42 &#43;0800</pubDate>
+    <title>Go yaml</title>
+    <link>https://serialt.github.io/posts/2023-11-11-go-yaml/</link>
+    <pubDate>Sat, 11 Nov 2023 10:25:07 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/skopeo/</guid>
-    <description><![CDATA[镜像同步 参考链接： https://lework.github.io/2020/04/13/skopeo/ https://blog.k8s.li/skopeo.html 日常工作中，需要将各种镜像搬到对应的仓库中，docker 适合于构建镜像，将镜像推送于仓库中。镜像被推送到仓库中后，如果]]></description>
+    <guid>https://serialt.github.io/posts/2023-11-11-go-yaml/</guid>
+    <description><![CDATA[Go 读取yaml格式配置文件 package config import ( &#34;fmt&#34; &#34;io/ioutil&#34; &#34;gopkg.in/yaml.v3&#34; ) type Service struct { Host string `json:&#34;host&#34; yaml:&#34;host&#34;` Port string `json:&#34;port&#34; yaml:&#34;port&#34;` } type MyConfig struct { Service Service `json:&#34;service&#34; yaml:&#34;service&#34;` } var Config *MyConfig func LoadConfig(filepath string) { if filepath == &#34;&#34; { return } // 读yaml文件 config, err := ioutil.ReadFile(filepath) if]]></description>
 </item>
 <item>
-    <title>Morse Code</title>
-    <link>https://serialt.github.io/posts/morse-code/</link>
-    <pubDate>Wed, 08 Nov 2023 19:44:42 &#43;0800</pubDate>
+    <title>Go strconv</title>
+    <link>https://serialt.github.io/posts/2023-11-11-go-strconv/</link>
+    <pubDate>Sat, 11 Nov 2023 10:25:05 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/morse-code/</guid>
-    <description><![CDATA[Morse Code 二叉树记忆法 start E T I A N M S U R W D K G O H V F L P J B X C Y Z Q . - E T .. .- -. -- I A N M ... ..- .-. ..- -.. -.- --. --- S U R W D K G O .... ...- ..-. .-.. .--. .--- -...]]></description>
+    <guid>https://serialt.github.io/posts/2023-11-11-go-strconv/</guid>
+    <description><![CDATA[Go语言内置包之strconv Go语言中strconv包实现了基本数据类型和其字符串表示的相互转换。 strconv包 strconv包实现了基]]></description>
 </item>
 <item>
-    <title>To-mirror</title>
-    <link>https://serialt.github.io/posts/mirror-cn/</link>
-    <pubDate>Tue, 07 Nov 2023 20:00:42 &#43;0800</pubDate>
+    <title>Go tail</title>
+    <link>https://serialt.github.io/posts/2023-11-11-go-tail/</link>
+    <pubDate>Sat, 11 Nov 2023 10:25:05 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/mirror-cn/</guid>
-    <description><![CDATA[操作系统或者软件换源加速 1、操作系统 rocky # 8 base sed -e &#39;s|^mirrorlist=|#mirrorlist=|g&#39; \ -e &#39;s|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.ustc.edu.cn/rocky|g&#39; \ -i.bak /etc/yum.repos.d/Rocky*.repo # 8 epel sed -e &#39;s|^metalink=|#metalink=|g&#39; \ -e &#39;s|^#baseurl=https\?://download.fedoraproject.org/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39; \ -e &#39;s|^#baseurl=https\?://download.example/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39; \ -i.bak /etc/yum.repos.d/epel*.repo # 9 base sed -e &#39;s|^mirrorlist=|#mirrorlist=|g&#39; \ -e &#39;s|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.ustc.edu.cn/rocky|g&#39; \ -i.bak /etc/yum.repos.d/rocky*.repo # 9 epel sed -e &#39;s|^metalink=|#metalink=|g&#39; \ -e &#39;s|^#baseurl=https\?://download.fedoraproject.org/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39; \ -e &#39;s|^#baseurl=https\?://download.example/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39;]]></description>
+    <guid>https://serialt.github.io/posts/2023-11-11-go-tail/</guid>
+    <description><![CDATA[Go tail库 实时读取文件内容 go get github.com/hpcloud/tail 示例： package main import ( &#34;fmt&#34; &#34;time&#34; &#34;github.com/hpcloud/tail&#34; ) func main() { fileName := &#34;./my.log&#34; config := tail.Config{ ReOpen: true, // 重新打开 Follow: true, // 是否跟随 Location: &amp;tail.SeekInfo{Offset: 0, Whence: 2}, // 从文件的哪个地方开始读 MustExist: false,]]></description>
 </item>
 <item>
-    <title>Go Http Client</title>
-    <link>https://serialt.github.io/posts/req/</link>
-    <pubDate>Mon, 09 Oct 2023 21:00:42 &#43;0800</pubDate>
+    <title>Go net</title>
+    <link>https://serialt.github.io/posts/2023-11-11-go-net/</link>
+    <pubDate>Sat, 11 Nov 2023 10:25:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/req/</guid>
-    <description><![CDATA[req Go语言人性化HTTP请求库 特性 轻量级 简单 容易操作JSON和XML 容易调试和日志记录 容易上传和下载文件 容易管理Cookie 容易设置代理 容易]]></description>
+    <guid>https://serialt.github.io/posts/2023-11-11-go-net/</guid>
+    <description><![CDATA[Go语言标准库net包介绍 一、域名解析 DNS 记录是与 DNS 服务器关联的映射文件，无论每个域名与哪个 IP 地址关联，它们都能处理发送到每个域名的请求。ne]]></description>
 </item>
 <item>
-    <title>Go Http</title>
-    <link>https://serialt.github.io/posts/go-http/</link>
-    <pubDate>Mon, 09 Oct 2023 20:00:42 &#43;0800</pubDate>
+    <title>Go mapstructure</title>
+    <link>https://serialt.github.io/posts/2023-11-11-go-mapstructure/</link>
+    <pubDate>Sat, 11 Nov 2023 10:24:54 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/go-http/</guid>
-    <description><![CDATA[Go 原生http库 Go语言内置的net/http包十分的优秀，提供了HTTP客户端和服务端的实现。 一、net/http介绍 Go语言内置的net]]></description>
+    <guid>https://serialt.github.io/posts/2023-11-11-go-mapstructure/</guid>
+    <description><![CDATA[mapstructure 转换库 简介 mapstructure用于将通用的map[string]interface{}解码到对应的 Go 结构体中，或者执行相反的操作。很多]]></description>
 </item>
 <item>
-    <title>Okteto</title>
-    <link>https://serialt.github.io/posts/okteto/</link>
-    <pubDate>Tue, 26 Sep 2023 19:16:02 &#43;0800</pubDate>
+    <title>Go leveldb</title>
+    <link>https://serialt.github.io/posts/2023-11-11-go-leveldb/</link>
+    <pubDate>Sat, 11 Nov 2023 10:24:52 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/okteto/</guid>
-    <description><![CDATA[Dev in kubernetes ​ 传统的开发模式中，是代码存放在本地，使用 IDE 进行编辑和 debug 。但随着容器化火了之后，很多单一服务都进行了拆分，微服务化。在开发阶段，需要本]]></description>
+    <guid>https://serialt.github.io/posts/2023-11-11-go-leveldb/</guid>
+    <description><![CDATA[Go leveldb库 github地址：https://github.com/syndtr/goleveldb 安装： go get github.com/syndtr/goleveldb/leveldb 简介： levelDB在]]></description>
 </item>
 <item>
-    <title>Debug Shell in VSCode</title>
-    <link>https://serialt.github.io/posts/debug-shell-in-vscode/</link>
-    <pubDate>Sun, 24 Sep 2023 18:09:42 &#43;0800</pubDate>
+    <title>Go ini</title>
+    <link>https://serialt.github.io/posts/2023-11-11-go-ini/</link>
+    <pubDate>Sat, 11 Nov 2023 10:24:50 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/debug-shell-in-vscode/</guid>
-    <description><![CDATA[Debug shell 1、安装插件 安装bashdb插件 rogalmic.bash-debug 2、增加一个vscode launch.json配置文件 Select Debug -&gt; Add Configuration to add custom debug configuration 示例： { &#34;configurations&#34;: [ { &#34;type&#34;: &#34;bashdb&#34;, &#34;request&#34;: &#34;launch&#34;, &#34;name&#34;: &#34;Bash-Debug&#34;, &#34;cwd&#34;:]]></description>
+    <guid>https://serialt.github.io/posts/2023-11-11-go-ini/</guid>
+    <description><![CDATA[Go ini库 参考：https://juejin.cn/post/6844904048764649479 简介 ini 是 Windows 上常用的配置文件格式。MySQ]]></description>
 </item>
 <item>
-    <title>Tuna Web</title>
-    <link>https://serialt.github.io/posts/tuna-web/</link>
-    <pubDate>Sun, 24 Sep 2023 17:01:26 &#43;0800</pubDate>
+    <title>Go homedir</title>
+    <link>https://serialt.github.io/posts/2023-11-11-go-homedir/</link>
+    <pubDate>Sat, 11 Nov 2023 10:24:49 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/tuna-web/</guid>
-    <description><![CDATA[清华镜像网页搭建镜像站 tuna mirror-web地址：https://github.com/tuna/mirror-web.git tuna mirror]]></description>
+    <guid>https://serialt.github.io/posts/2023-11-11-go-homedir/</guid>
+    <description><![CDATA[homedir家目录 GitHub地址：https://github.com/mitchellh/go-homedir 使用os/user获取用]]></description>
 </item>
 <item>
-    <title>Helm Migrate OCI</title>
-    <link>https://serialt.github.io/posts/helm-migrate-oci/</link>
-    <pubDate>Sun, 24 Sep 2023 11:05:25 &#43;0800</pubDate>
+    <title>Go fsnotify</title>
+    <link>https://serialt.github.io/posts/2023-11-11-go-fsnotify/</link>
+    <pubDate>Sat, 11 Nov 2023 10:24:42 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/helm-migrate-oci/</guid>
-    <description><![CDATA[helm oci 缘由 Helm 3.8 版本开始，支持使用oci进行存储chart。镜像存储常用的Harbor在v1.6版本开始支持Helm Chart仓库功能， char]]></description>
+    <guid>https://serialt.github.io/posts/2023-11-11-go-fsnotify/</guid>
+    <description><![CDATA[Go Fsnotify库 官方仓库：github.com/fsnotify/fsnotify 用于监控文件或目录的改变 1、官网示例 package main import ( &#34;log&#34; &#34;github.com/fsnotify/fsnotify&#34; ) func main()]]></description>
 </item>
 </channel>
 </rss>

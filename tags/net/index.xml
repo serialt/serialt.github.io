@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>net - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/net/</link>
+        <description>net - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:25:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/net/" rel="self" type="application/rss+xml" /><item>
+    <title>Go net</title>
+    <link>https://serialt.github.io/posts/2023-11-11-go-net/</link>
+    <pubDate>Sat, 11 Nov 2023 10:25:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-go-net/</guid>
+    <description><![CDATA[Go语言标准库net包介绍 一、域名解析 DNS 记录是与 DNS 服务器关联的映射文件，无论每个域名与哪个 IP 地址关联，它们都能处理发送到每个域名的请求。ne]]></description>
+</item>
+</channel>
+</rss>

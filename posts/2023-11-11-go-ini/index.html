@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Go ini - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Go ini" />
+<meta property="og:description" content="Go ini库 参考：https://juejin.cn/post/6844904048764649479 简介 ini 是 Windows 上常用的配置文件格式。MySQ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2023-11-11-go-ini/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-11T10:24:50+08:00" />
+<meta property="article:modified_time" content="2023-11-11T10:24:50+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go ini"/>
+<meta name="twitter:description" content="Go ini库 参考：https://juejin.cn/post/6844904048764649479 简介 ini 是 Windows 上常用的配置文件格式。MySQ"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-11-go-ini/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-11-go-homedir/" /><link rel="next" href="https://serialt.github.io/posts/2023-11-11-go-leveldb/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Go ini",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2023-11-11-go-ini\/"
+        },"genre": "posts","keywords": "Go, ini","wordcount":  2727 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2023-11-11-go-ini\/","datePublished": "2023-11-11T10:24:50+08:00","dateModified": "2023-11-11T10:24:50+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Go ini</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-11">2023-11-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2727 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#go--ini库">Go  ini库</a>
+      <ul>
+        <li><a href="#简介">简介</a></li>
+        <li><a href="#快速使用">快速使用</a></li>
+        <li><a href="#must便捷方法"><code>Must*</code>便捷方法</a></li>
+        <li><a href="#分区操作">分区操作</a></li>
+        <li><a href="#保存配置">保存配置</a></li>
+        <li><a href="#分区与结构体字段映射">分区与结构体字段映射</a></li>
+        <li><a href="#总结">总结</a></li>
+        <li><a href="#参考">参考</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="go--ini库">Go  ini库</h2>
+<p>参考：https://juejin.cn/post/6844904048764649479</p>
+<h3 id="简介">简介</h3>
+<p>ini 是 Windows 上常用的配置文件格式。MySQL 的 Windows 版就是使用 ini 格式存储配置的。 <a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fgo-ini%2Fini" target="_blank" rel="noopener noreffer ">go-ini</a>是 Go 语言中用于操作 ini 文件的第三方库。</p>
+<p>本文介绍<code>go-ini</code>库的使用。</p>
+<h3 id="快速使用">快速使用</h3>
+<p>go-ini 是第三方库，使用前需要安装：</p>
+<pre tabindex="0"><code>$ go get gopkg.in/ini.v1
+</code></pre><p>也可以使用 GitHub 上的仓库：</p>
+<pre tabindex="0"><code>$ go get github.com/go-ini/ini
+</code></pre><p>首先，创建一个<code>my.ini</code>配置文件：</p>
+<pre tabindex="0"><code>app_name = awesome web
+
+# possible values: DEBUG, INFO, WARNING, ERROR, FATAL
+log_level = DEBUG
+
+[mysql]
+ip = 127.0.0.1
+port = 3306
+user = dj
+password = 123456
+database = awesome
+
+[redis]
+ip = 127.0.0.1
+port = 6381
+</code></pre><p>使用 go-ini 库读取：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;log&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;gopkg.in/ini.v1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">cfg</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ini</span><span class="p">.</span><span class="nf">Load</span><span class="p">(</span><span class="s">&#34;my.ini&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Fail to read file: &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;App Name:&#34;</span><span class="p">,</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">Section</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">).</span><span class="nf">Key</span><span class="p">(</span><span class="s">&#34;app_name&#34;</span><span class="p">).</span><span class="nf">String</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Log Level:&#34;</span><span class="p">,</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">Section</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">).</span><span class="nf">Key</span><span class="p">(</span><span class="s">&#34;log_level&#34;</span><span class="p">).</span><span class="nf">String</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;MySQL IP:&#34;</span><span class="p">,</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">Section</span><span class="p">(</span><span class="s">&#34;mysql&#34;</span><span class="p">).</span><span class="nf">Key</span><span class="p">(</span><span class="s">&#34;ip&#34;</span><span class="p">).</span><span class="nf">String</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mysqlPort</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">Section</span><span class="p">(</span><span class="s">&#34;mysql&#34;</span><span class="p">).</span><span class="nf">Key</span><span class="p">(</span><span class="s">&#34;port&#34;</span><span class="p">).</span><span class="nf">Int</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;MySQL Port:&#34;</span><span class="p">,</span> <span class="nx">mysqlPort</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;MySQL User:&#34;</span><span class="p">,</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">Section</span><span class="p">(</span><span class="s">&#34;mysql&#34;</span><span class="p">).</span><span class="nf">Key</span><span class="p">(</span><span class="s">&#34;user&#34;</span><span class="p">).</span><span class="nf">String</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;MySQL Password:&#34;</span><span class="p">,</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">Section</span><span class="p">(</span><span class="s">&#34;mysql&#34;</span><span class="p">).</span><span class="nf">Key</span><span class="p">(</span><span class="s">&#34;password&#34;</span><span class="p">).</span><span class="nf">String</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;MySQL Database:&#34;</span><span class="p">,</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">Section</span><span class="p">(</span><span class="s">&#34;mysql&#34;</span><span class="p">).</span><span class="nf">Key</span><span class="p">(</span><span class="s">&#34;database&#34;</span><span class="p">).</span><span class="nf">String</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Redis IP:&#34;</span><span class="p">,</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">Section</span><span class="p">(</span><span class="s">&#34;redis&#34;</span><span class="p">).</span><span class="nf">Key</span><span class="p">(</span><span class="s">&#34;ip&#34;</span><span class="p">).</span><span class="nf">String</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">redisPort</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">Section</span><span class="p">(</span><span class="s">&#34;redis&#34;</span><span class="p">).</span><span class="nf">Key</span><span class="p">(</span><span class="s">&#34;port&#34;</span><span class="p">).</span><span class="nf">Int</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Redis Port:&#34;</span><span class="p">,</span> <span class="nx">redisPort</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>在 ini 文件中，每个键值对占用一行，中间使用<code>=</code>隔开。以<code>#</code>开头的内容为注释。ini 文件是以分区（section）组织的。 分区以<code>[name]</code>开始，在下一个分区前结束。所有分区前的内容属于默认分区，如<code>my.ini</code>文件中的<code>app_name</code>和<code>log_level</code>。</p>
+<p>使用<code>go-ini</code>读取配置文件的步骤如下：</p>
+<ul>
+<li>首先调用<code>ini.Load</code>加载文件，得到配置对象<code>cfg</code>；</li>
+<li>然后以分区名调用配置对象的<code>Section</code>方法得到对应的分区对象<code>section</code>，默认分区的名字为<code>&quot;&quot;</code>，也可以使用<code>ini.DefaultSection</code>；</li>
+<li>以键名调用分区对象的<code>Key</code>方法得到对应的配置项<code>key</code>对象；</li>
+<li>由于文件中读取出来的都是字符串，<code>key</code>对象需根据类型调用对应的方法返回具体类型的值使用，如上面的<code>String</code>、<code>MustInt</code>方法。</li>
+</ul>
+<p>运行以下程序，得到输出：</p>
+<pre tabindex="0"><code>App Name: awesome web
+Log Level: DEBUG
+MySQL IP: 127.0.0.1
+MySQL Port: 3306
+MySQL User: dj
+MySQL Password: 123456
+MySQL Database: awesome
+Redis IP: 127.0.0.1
+Redis Port: 6381
+</code></pre><p>配置文件中存储的都是字符串，所以类型为字符串的配置项不会出现类型转换失败的，故<code>String()</code>方法只返回一个值。 但如果类型为<code>Int/Uint/Float64</code>这些时，转换可能失败。所以<code>Int()/Uint()/Float64()</code>返回一个值和一个错误。</p>
+<p>要留意这种不一致！如果我们将配置中 redis 端口改成非法的数字 x6381，那么运行程序将报错：</p>
+<pre tabindex="0"><code>2020/01/14 22:43:13 strconv.ParseInt: parsing &#34;x6381&#34;: invalid syntax
+复制代码
+</code></pre><h3 id="must便捷方法"><code>Must*</code>便捷方法</h3>
+<p>如果每次取值都需要进行错误判断，那么代码写起来会非常繁琐。为此，<code>go-ini</code>也提供对应的<code>MustType</code>（Type 为<code>Init/Uint/Float64</code>等）方法，这个方法只返回一个值。 同时它接受可变参数，如果类型无法转换，取参数中第一个值返回，并且该参数设置为这个配置的值，下次调用返回这个值：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;log&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;gopkg.in/ini.v1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">cfg</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ini</span><span class="p">.</span><span class="nf">Load</span><span class="p">(</span><span class="s">&#34;my.ini&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;Fail to read file: &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">redisPort</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">Section</span><span class="p">(</span><span class="s">&#34;redis&#34;</span><span class="p">).</span><span class="nf">Key</span><span class="p">(</span><span class="s">&#34;port&#34;</span><span class="p">).</span><span class="nf">Int</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;before must, get redis port error:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;before must, get redis port:&#34;</span><span class="p">,</span> <span class="nx">redisPort</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;redis Port:&#34;</span><span class="p">,</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">Section</span><span class="p">(</span><span class="s">&#34;redis&#34;</span><span class="p">).</span><span class="nf">Key</span><span class="p">(</span><span class="s">&#34;port&#34;</span><span class="p">).</span><span class="nf">MustInt</span><span class="p">(</span><span class="mi">6381</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">redisPort</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">Section</span><span class="p">(</span><span class="s">&#34;redis&#34;</span><span class="p">).</span><span class="nf">Key</span><span class="p">(</span><span class="s">&#34;port&#34;</span><span class="p">).</span><span class="nf">Int</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;after must, get redis port error:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;after must, get redis port:&#34;</span><span class="p">,</span> <span class="nx">redisPort</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>配置文件还是 redis 端口为非数字 x6381 时的状态，运行程序：</p>
+<pre tabindex="0"><code>before must, get redis port error: strconv.ParseInt: parsing &#34;x6381&#34;: invalid syntax
+redis Port: 6381
+after must, get redis port: 6381
+复制代码
+</code></pre><p>我们看到第一次调用<code>Int</code>返回错误，以 6381 为参数调用<code>MustInt</code>之后，再次调用<code>Int</code>，成功返回 6381。<code>MustInt</code>源码也比较简单：</p>
+<pre tabindex="0"><code>// gopkg.in/ini.v1/key.go
+func (k *Key) MustInt(defaultVal ...int) int {
+  val, err := k.Int()
+  if len(defaultVal) &gt; 0 &amp;&amp; err != nil {
+    k.value = strconv.FormatInt(int64(defaultVal[0]), 10)
+    return defaultVal[0]
+  }
+  return val
+}
+复制代码
+</code></pre><h3 id="分区操作">分区操作</h3>
+<h4 id="获取信息">获取信息</h4>
+<p>在加载配置之后，可以通过<code>Sections</code>方法获取所有分区，<code>SectionStrings()</code>方法获取所有分区名。</p>
+<pre tabindex="0"><code>sections := cfg.Sections()
+names := cfg.SectionStrings()
+
+fmt.Println(&#34;sections: &#34;, sections)
+fmt.Println(&#34;names: &#34;, names)
+复制代码
+</code></pre><p>运行输出 3 个分区：</p>
+<pre tabindex="0"><code>[DEFAULT mysql redis]
+复制代码
+</code></pre><p>调用<code>Section(name)</code>获取名为<code>name</code>的分区，如果该分区不存在，则自动创建一个分区返回：</p>
+<pre tabindex="0"><code>newSection := cfg.Section(&#34;new&#34;)
+
+fmt.Println(&#34;new section: &#34;, newSection)
+fmt.Println(&#34;names: &#34;, cfg.SectionStrings())
+</code></pre><p>创建之后调用<code>SectionStrings</code>方法，新分区也会返回：</p>
+<pre tabindex="0"><code>names:  [DEFAULT mysql redis new]
+</code></pre><p>也可以手动创建一个新分区，如果分区已存在，则返回错误：</p>
+<pre tabindex="0"><code>err := cfg.NewSection(&#34;new&#34;)
+</code></pre><h4 id="父子分区">父子分区</h4>
+<p>在配置文件中，可以使用占位符<code>%(name)s</code>表示用之前已定义的键<code>name</code>的值来替换，这里的<code>s</code>表示值为字符串类型：</p>
+<pre tabindex="0"><code>NAME = ini
+VERSION = v1
+IMPORT_PATH = gopkg.in/%(NAME)s.%(VERSION)s
+
+[package]
+CLONE_URL = https://%(IMPORT_PATH)s
+
+[package.sub]
+</code></pre><p>上面在默认分区中设置<code>IMPORT_PATH</code>的值时，使用了前面定义的<code>NAME</code>和<code>VERSION</code>。 在<code>package</code>分区中设置<code>CLONE_URL</code>的值时，使用了默认分区中定义的<code>IMPORT_PATH</code>。</p>
+<p>我们还可以在分区名中使用<code>.</code>表示两个或多个分区之间的父子关系，例如<code>package.sub</code>的父分区为<code>package</code>，<code>package</code>的父分区为默认分区。 如果某个键在子分区中不存在，则会在它的父分区中再次查找，直到没有父分区为止：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">cfg</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ini</span><span class="p">.</span><span class="nf">Load</span><span class="p">(</span><span class="s">&#34;parent_child.ini&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Fail to read file: &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Clone url from package.sub:&#34;</span><span class="p">,</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">Section</span><span class="p">(</span><span class="s">&#34;package.sub&#34;</span><span class="p">).</span><span class="nf">Key</span><span class="p">(</span><span class="s">&#34;CLONE_URL&#34;</span><span class="p">).</span><span class="nf">String</span><span class="p">())</span>
+</span></span></code></pre></div><p>运行程序输出：</p>
+<pre tabindex="0"><code>Clone url from package.sub: https://gopkg.in/ini.v1
+</code></pre><p>子分区中<code>package.sub</code>中没有键<code>CLONE_URL</code>，返回了父分区<code>package</code>中的值。</p>
+<h3 id="保存配置">保存配置</h3>
+<p>有时候，我们需要将生成的配置写到文件中。例如在写工具的时候。保存有两种类型的接口，一种直接保存到文件，另一种写入到<code>io.Writer</code>中：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">err</span> <span class="p">=</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">SaveTo</span><span class="p">(</span><span class="s">&#34;my.ini&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">err</span> <span class="p">=</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">SaveToIndent</span><span class="p">(</span><span class="s">&#34;my.ini&#34;</span><span class="p">,</span> <span class="s">&#34;\t&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">cfg</span><span class="p">.</span><span class="nf">WriteTo</span><span class="p">(</span><span class="nx">writer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">cfg</span><span class="p">.</span><span class="nf">WriteToIndent</span><span class="p">(</span><span class="nx">writer</span><span class="p">,</span> <span class="s">&#34;\t&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>下面我们通过程序生成前面使用的配置文件<code>my.ini</code>并保存：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;os&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;gopkg.in/ini.v1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">cfg</span> <span class="o">:=</span> <span class="nx">ini</span><span class="p">.</span><span class="nf">Empty</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">defaultSection</span> <span class="o">:=</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">Section</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">defaultSection</span><span class="p">.</span><span class="nf">NewKey</span><span class="p">(</span><span class="s">&#34;app_name&#34;</span><span class="p">,</span> <span class="s">&#34;awesome web&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">defaultSection</span><span class="p">.</span><span class="nf">NewKey</span><span class="p">(</span><span class="s">&#34;log_level&#34;</span><span class="p">,</span> <span class="s">&#34;DEBUG&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">mysqlSection</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">NewSection</span><span class="p">(</span><span class="s">&#34;mysql&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;new mysql section failed:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mysqlSection</span><span class="p">.</span><span class="nf">NewKey</span><span class="p">(</span><span class="s">&#34;ip&#34;</span><span class="p">,</span> <span class="s">&#34;127.0.0.1&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mysqlSection</span><span class="p">.</span><span class="nf">NewKey</span><span class="p">(</span><span class="s">&#34;port&#34;</span><span class="p">,</span> <span class="s">&#34;3306&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mysqlSection</span><span class="p">.</span><span class="nf">NewKey</span><span class="p">(</span><span class="s">&#34;user&#34;</span><span class="p">,</span> <span class="s">&#34;root&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mysqlSection</span><span class="p">.</span><span class="nf">NewKey</span><span class="p">(</span><span class="s">&#34;password&#34;</span><span class="p">,</span> <span class="s">&#34;123456&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mysqlSection</span><span class="p">.</span><span class="nf">NewKey</span><span class="p">(</span><span class="s">&#34;database&#34;</span><span class="p">,</span> <span class="s">&#34;awesome&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">redisSection</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">NewSection</span><span class="p">(</span><span class="s">&#34;redis&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;new redis section failed:&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">redisSection</span><span class="p">.</span><span class="nf">NewKey</span><span class="p">(</span><span class="s">&#34;ip&#34;</span><span class="p">,</span> <span class="s">&#34;127.0.0.1&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">redisSection</span><span class="p">.</span><span class="nf">NewKey</span><span class="p">(</span><span class="s">&#34;port&#34;</span><span class="p">,</span> <span class="s">&#34;6381&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">err</span> <span class="p">=</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">SaveTo</span><span class="p">(</span><span class="s">&#34;my.ini&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;SaveTo failed: &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">err</span> <span class="p">=</span> <span class="nx">cfg</span><span class="p">.</span><span class="nf">SaveToIndent</span><span class="p">(</span><span class="s">&#34;my-pretty.ini&#34;</span><span class="p">,</span> <span class="s">&#34;\t&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;SaveToIndent failed: &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">cfg</span><span class="p">.</span><span class="nf">WriteTo</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">cfg</span><span class="p">.</span><span class="nf">WriteToIndent</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span> <span class="s">&#34;\t&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>运行程序，生成两个文件<code>my.ini</code>和<code>my-pretty.ini</code>，同时控制台输出文件内容。</p>
+<p><code>my.ini</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">app_name</span>  <span class="p">=</span> <span class="nx">awesome</span> <span class="nx">web</span>
+</span></span><span class="line"><span class="cl"><span class="nx">log_level</span> <span class="p">=</span> <span class="nx">DEBUG</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">mysql</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ip</span>       <span class="p">=</span> <span class="mf">127.0</span><span class="p">.</span><span class="mf">0.1</span>
+</span></span><span class="line"><span class="cl"><span class="nx">port</span>     <span class="p">=</span> <span class="mi">3306</span>
+</span></span><span class="line"><span class="cl"><span class="nx">user</span>     <span class="p">=</span> <span class="nx">root</span>
+</span></span><span class="line"><span class="cl"><span class="nx">password</span> <span class="p">=</span> <span class="mi">123456</span>
+</span></span><span class="line"><span class="cl"><span class="nx">database</span> <span class="p">=</span> <span class="nx">awesome</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">redis</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ip</span>   <span class="p">=</span> <span class="mf">127.0</span><span class="p">.</span><span class="mf">0.1</span>
+</span></span><span class="line"><span class="cl"><span class="nx">port</span> <span class="p">=</span> <span class="mi">6381</span>
+</span></span></code></pre></div><p><code>my-pretty.ini</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">app_name</span>  <span class="p">=</span> <span class="nx">awesome</span> <span class="nx">web</span>
+</span></span><span class="line"><span class="cl"><span class="nx">log_level</span> <span class="p">=</span> <span class="nx">DEBUG</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">mysql</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ip</span>       <span class="p">=</span> <span class="mf">127.0</span><span class="p">.</span><span class="mf">0.1</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">port</span>     <span class="p">=</span> <span class="mi">3306</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">user</span>     <span class="p">=</span> <span class="nx">root</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">password</span> <span class="p">=</span> <span class="mi">123456</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">database</span> <span class="p">=</span> <span class="nx">awesome</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">redis</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ip</span>   <span class="p">=</span> <span class="mf">127.0</span><span class="p">.</span><span class="mf">0.1</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">port</span> <span class="p">=</span> <span class="mi">6381</span>
+</span></span></code></pre></div><p><code>*Indent</code>方法会对子分区下的键增加缩进，看起来美观一点。</p>
+<h3 id="分区与结构体字段映射">分区与结构体字段映射</h3>
+<p>定义结构变量，加载完配置文件后，调用<code>MapTo</code>将配置项赋值到结构变量的对应字段中。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;gopkg.in/ini.v1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Config</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">AppName</span>   <span class="kt">string</span> <span class="s">`ini:&#34;app_name&#34;`</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">LogLevel</span>  <span class="kt">string</span> <span class="s">`ini:&#34;log_level&#34;`</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">MySQL</span>     <span class="nx">MySQLConfig</span> <span class="s">`ini:&#34;mysql&#34;`</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Redis</span>     <span class="nx">RedisConfig</span> <span class="s">`ini:&#34;redis&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">MySQLConfig</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">IP</span>        <span class="kt">string</span> <span class="s">`ini:&#34;ip&#34;`</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Port</span>      <span class="kt">int</span> <span class="s">`ini:&#34;port&#34;`</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">User</span>      <span class="kt">string</span> <span class="s">`ini:&#34;user&#34;`</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Password</span>  <span class="kt">string</span> <span class="s">`ini:&#34;password&#34;`</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Database</span>  <span class="kt">string</span> <span class="s">`ini:&#34;database&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">RedisConfig</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">IP</span>      <span class="kt">string</span> <span class="s">`ini:&#34;ip&#34;`</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Port</span>    <span class="kt">int</span> <span class="s">`ini:&#34;port&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">cfg</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ini</span><span class="p">.</span><span class="nf">Load</span><span class="p">(</span><span class="s">&#34;my.ini&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;load my.ini failed: &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">c</span> <span class="o">:=</span> <span class="nx">Config</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">cfg</span><span class="p">.</span><span class="nf">MapTo</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">c</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><code>MapTo</code>内部使用了反射，<strong>所以结构体字段必须都是导出的</strong>。如果键名与字段名不相同，那么需要在结构标签中指定对应的键名。 这一点与 Go 标准库<code>encoding/json</code>和<code>encoding/xml</code>不同。标准库<code>json/xml</code>解析时可以将键名<code>app_name</code>对应到字段名<code>AppName</code>。 或许这是<code>go-ini</code>库可以优化的点？</p>
+<p>先加载，再映射有点繁琐，直接使用<code>ini.MapTo</code>将两步合并：</p>
+<pre tabindex="0"><code>err = ini.MapTo(&amp;c, &#34;my.ini&#34;)
+复制代码
+</code></pre><p>也可以只映射一个分区：</p>
+<pre tabindex="0"><code>mysqlCfg := MySQLConfig{}
+err = cfg.Section(&#34;mysql&#34;).MapTo(&amp;mysqlCfg)
+</code></pre><p>还可以通过结构体生成配置：</p>
+<pre tabindex="0"><code>cfg := ini.Empty()
+
+c := Config {
+  AppName: 	&#34;awesome web&#34;,
+  LogLevel: 	&#34;DEBUG&#34;,
+  MySQL: MySQLConfig {
+    IP: 	&#34;127.0.0.1&#34;,
+    Port:	3306,
+    User:	&#34;root&#34;,
+    Password:&#34;123456&#34;,
+    Database:&#34;awesome&#34;,
+  },
+  Redis: RedisConfig {
+    IP:		&#34;127.0.0.1&#34;,
+    Port:	6381,
+  },
+}
+
+err := ini.ReflectFrom(cfg, &amp;c)
+if err != nil {
+  fmt.Println(&#34;ReflectFrom failed: &#34;, err)
+  return
+}
+
+err = cfg.SaveTo(&#34;my-copy.ini&#34;)
+if err != nil {
+  fmt.Println(&#34;SaveTo failed: &#34;, err)
+  return
+}
+</code></pre><h3 id="总结">总结</h3>
+<p>本文介绍了<code>go-ini</code>库的基本用法和一些有趣的特性。示例代码已上传<a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fdarjun%2Fgo-daily-lib%2Ftree%2Fmaster%2Fgo-ini" target="_blank" rel="noopener noreffer ">GitHub</a>。 其实<code>go-ini</code>还有很多高级特性。<a href="https://link.juejin.cn?target=https%3A%2F%2Fini.unknwon.io%2F" target="_blank" rel="noopener noreffer ">官方文档</a>非常详细，推荐去看，而且有中文哟~ 作者<a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Funknwon" target="_blank" rel="noopener noreffer ">无闻</a>，相信做 Go 开发的都不陌生。</p>
+<h3 id="参考">参考</h3>
+<ol>
+<li><a href="https://link.juejin.cn?target=https%3A%2F%2Fgithub.com%2Fgo-ini%2Fini" target="_blank" rel="noopener noreffer ">go-ini</a> GitHub 仓库</li>
+<li><a href="https://link.juejin.cn?target=https%3A%2F%2Fini.unknwon.io%2F" target="_blank" rel="noopener noreffer ">go-ini</a> 官方文档</li>
+</ol>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-11-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/2023-11-11-go-ini/" data-title="Go ini" data-hashtags="Go,ini"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/2023-11-11-go-ini/" data-hashtag="Go"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/2023-11-11-go-ini/" data-title="Go ini"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/2023-11-11-go-ini/" data-title="Go ini"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/2023-11-11-go-ini/" data-title="Go ini"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/ini/">ini</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023-11-11-go-homedir/" class="prev" rel="prev" title="Go homedir"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Go homedir</a>
+            <a href="/posts/2023-11-11-go-leveldb/" class="next" rel="next" title="Go leveldb">Go leveldb<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Go net - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Go net" />
+<meta property="og:description" content="Go语言标准库net包介绍 一、域名解析 DNS 记录是与 DNS 服务器关联的映射文件，无论每个域名与哪个 IP 地址关联，它们都能处理发送到每个域名的请求。ne" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2023-11-11-go-net/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-11T10:25:01+08:00" />
+<meta property="article:modified_time" content="2023-11-11T10:25:01+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go net"/>
+<meta name="twitter:description" content="Go语言标准库net包介绍 一、域名解析 DNS 记录是与 DNS 服务器关联的映射文件，无论每个域名与哪个 IP 地址关联，它们都能处理发送到每个域名的请求。ne"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-11-go-net/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-11-go-mapstructure/" /><link rel="next" href="https://serialt.github.io/posts/2023-11-11-go-tail/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Go net",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2023-11-11-go-net\/"
+        },"genre": "posts","keywords": "Go, net","wordcount":  1287 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2023-11-11-go-net\/","datePublished": "2023-11-11T10:25:01+08:00","dateModified": "2023-11-11T10:25:01+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Go net</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-11">2023-11-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1287 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#go语言标准库net包介绍">Go语言标准库net包介绍</a>
+      <ul>
+        <li><a href="#一域名解析">一、域名解析</a></li>
+        <li><a href="#参考资料">参考资料</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="go语言标准库net包介绍">Go语言标准库net包介绍</h2>
+<h3 id="一域名解析">一、域名解析</h3>
+<p>DNS 记录是与 DNS 服务器关联的映射文件，无论每个域名与哪个 IP 地址关联，它们都能处理发送到每个域名的请求。net 包包含各种方法来查找 DNS 记录的细节。让我们运行一些示例，收集有关 DNS 服务器的信息以及目标域名的相应记录：</p>
+<p><em>本文是 Go语言中文网组织的 GCTT 翻译，发布在 Go语言中文网公众号，转载请联系我们授权。</em></p>
+<h4 id="1go-程序查找域名的-a-记录">1、Go 程序查找域名的 A 记录</h4>
+<p>net.LookupIP() 函数接受一个字符串（domain-name）并返回一个包含主机的 IPv4 和 IPv6 地址的 net.IP 对象切片。</p>
+<pre tabindex="0"><code>package main
+
+import (
+ &#34;fmt&#34;
+ &#34;net&#34;
+)
+
+func main() {
+ iprecords, _ := net.LookupIP(&#34;facebook.com&#34;)
+ for _, ip := range iprecords {
+  fmt.Println(ip)
+ }
+}
+</code></pre><p>上述程序的输出列出了以 IPv4 和 IPv6 格式返回的 facebook.com 的 A 记录。</p>
+<pre tabindex="0"><code>C:\golang\dns&gt; Go run example1.go
+2a03:2880:f12f:83:face:b00c:0:25de
+31.13.79.35
+</code></pre><h4 id="2go-程序查找域名的-cname-记录">2、Go 程序查找域名的 CNAME 记录</h4>
+<p>CNAME 是规范名称的缩写。CNAME 本质上是绑定路径的域名和子域名的文本别名。net.LookupCNAME()  函数接受主机域名（m.facebook.com）作为字符串，并返回给定主机的单个规范域名</p>
+<pre tabindex="0"><code>package main
+
+import (
+ &#34;fmt&#34;
+ &#34;net&#34;
+)
+
+func main() {
+ cname, _ := net.LookupCNAME(&#34;m.facebook.com&#34;)
+ fmt.Println(cname)
+}
+</code></pre><p>m.facebook.com 域名返回的 CNAME 记录如下所示：</p>
+<pre tabindex="0"><code>C:\golang\dns&gt; Go run example2.go
+star-mini.c10r.facebook.com。
+</code></pre><h4 id="3go-程序查找域名的-ptr-指针记录">3、Go 程序查找域名的 PTR 指针记录</h4>
+<p>这些记录提供从地址到名称的反向绑定。PTR 记录应与正向记录完全匹配。net.LookupAddr() 函数对地址执行反向查找，并返回映射到给定地址的名称列表。</p>
+<pre tabindex="0"><code>package main
+
+import (
+ &#34;fmt&#34;
+ &#34;net&#34;
+)
+
+func main() {
+ ptr, _ := net.LookupAddr(&#34;6.8.8.8&#34;)
+ for _, ptrvalue := range ptr {
+  fmt.Println(ptrvalue)
+ }
+}
+</code></pre><p>对于给定的地址，上述程序返回单个反向记录，如下所示：</p>
+<pre tabindex="0"><code>C:\golang\dns&gt;go run example3.go
+tms_server.yuma.army.mil.
+</code></pre><h4 id="4go-程序查找域名的名称服务器ns记录">4、Go 程序查找域名的名称服务器（NS）记录</h4>
+<p>NS 记录描述了区域的授权名称服务器。NS 还将子域名委托给区域文件上的其他组织。net.LookupNS() 函数将域名（facebook.com）作为字符串，并返回 DNS-NS 记录作为 NS 结构的切片。</p>
+<pre tabindex="0"><code>package main
+
+import (
+ &#34;fmt&#34;
+ &#34;net&#34;
+)
+
+func main() {
+ nameserver, _ := net.LookupNS(&#34;facebook.com&#34;)
+ for _, ns := range nameserver {
+  fmt.Println(ns)
+ }
+}
+</code></pre><p>支持该域名的 NS 记录如下所示：</p>
+<pre tabindex="0"><code>C:\golang\dns&gt;go run example4.go
+&amp;{a.ns.facebook.com.}
+&amp;{b.ns.facebook.com.}
+</code></pre><h4 id="5go-程序查找域的-mx-记录">5、Go 程序查找域的 MX 记录</h4>
+<p>这些记录用来记录可以交换电子邮件的服务器。net.LookupMX() 函数将域名作为字符串，并返回按首选项排序的 MX 结构切片。MX 结构由类型为字符串的 HOST 和 类型为 uint16 的 Pref 组成。</p>
+<pre tabindex="0"><code>package main
+
+import (
+ &#34;fmt&#34;
+ &#34;net&#34;
+)
+
+func main() {
+ mxrecords, _ := net.LookupMX(&#34;facebook.com&#34;)
+ for _, mx := range mxrecords {
+  fmt.Println(mx.Host, mx.Pref)
+ }
+}
+</code></pre><p>域名（facebook.com）的输出列表 MX 记录。</p>
+<pre tabindex="0"><code>C:\golang\dns&gt;go run example5.go
+msgin.vvv.facebook.com. 10
+</code></pre><h4 id="6go-程序查找域名的-srv-服务记录">6、Go 程序查找域名的 SRV 服务记录</h4>
+<p>LookupSRV 函数尝试解析给定服务，协议和域名的 SRV 查询。第二个参数是 “tcp” 或 “udp”。返回的记录按优先级排序，并按照权重随机化。</p>
+<pre tabindex="0"><code>package main
+
+import (
+ &#34;fmt&#34;
+ &#34;net&#34;
+)
+
+func main() {
+ cname, srvs, err := net.LookupSRV(&#34;xmpp-server&#34;, &#34;tcp&#34;, &#34;golang.org&#34;)
+ if err != nil {
+  panic(err)
+ }
+
+ fmt.Printf(&#34;\ncname: %s \n\n&#34;, cname)
+
+ for _, srv := range srvs {
+  fmt.Printf(&#34;%v:%v:%d:%d\n&#34;, srv.Target, srv.Port, srv.Priority, srv.Weight)
+ }
+}
+</code></pre><p>下面的输出演示了 CNAME 返回，后跟由冒号分隔的 SRV 记录的目标，端口，优先级和权重。</p>
+<pre tabindex="0"><code>C:\golang\dns&gt;go run example6.go
+cname: _xmpp-server._tcp.golang.org.
+</code></pre><h4 id="7go-程序查找域名的-txt-记录">7、Go 程序查找域名的 TXT 记录</h4>
+<p>TXT 记录存储有关 SPF 的信息，该信息可以识别授权服务器以代表您的组织发送电子邮件。net.LookupTXT() 函数将域名（facebook.com）作为字符串，并返回 DNS TXT 记录的字符串切片。</p>
+<pre tabindex="0"><code>package main
+
+import (
+ &#34;fmt&#34;
+ &#34;net&#34;
+)
+
+func main() {
+ txtrecords, _ := net.LookupTXT(&#34;facebook.com&#34;)
+
+ for _, txt := range txtrecords {
+  fmt.Println(txt)
+ }
+}
+</code></pre><p>gmail.com 的单个 TXT 记录如下所示。</p>
+<pre tabindex="0"><code>C:\golang\dns&gt;go run example7.go
+v=spf1 redirect=_spf.facebook.com
+</code></pre><hr>
+<p>via: <a href="http://www.golangprograms.com/find-dns-records-programmatically.html" target="_blank" rel="noopener noreffer ">http://www.golangprograms.com/find-dns-records-programmatically.html</a></p>
+<p>作者：<strong>golangprograms</strong>[1]译者：<strong>lovechuck</strong>[2]校对：<strong>polaris1119</strong>[3]</p>
+<h3 id="参考资料">参考资料</h3>
+<p>[1]golangprograms: <em><a href="http://www.golangprograms.com" target="_blank" rel="noopener noreffer ">http://www.golangprograms.com</a></em></p>
+<p>[2]lovechuck: <em><a href="https://github.com/lovechuck" target="_blank" rel="noopener noreffer ">https://github.com/lovechuck</a></em></p>
+<p>[3]polaris1119: <em><a href="https://github.com/polaris1119" target="_blank" rel="noopener noreffer ">https://github.com/polaris1119</a></em></p>
+<p>[4]GCTT: <em><a href="https://github.com/studygolang/GCTT" target="_blank" rel="noopener noreffer ">https://github.com/studygolang/GCTT</a></em></p>
+<p>[5]Go 中文网: <em><a href="https://studygolang.com/" target="_blank" rel="noopener noreffer ">https://studygolang.com/</a></em></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-11-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/2023-11-11-go-net/" data-title="Go net" data-hashtags="Go,net"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/2023-11-11-go-net/" data-hashtag="Go"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/2023-11-11-go-net/" data-title="Go net"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/2023-11-11-go-net/" data-title="Go net"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/2023-11-11-go-net/" data-title="Go net"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/net/">net</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023-11-11-go-mapstructure/" class="prev" rel="prev" title="Go mapstructure"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Go mapstructure</a>
+            <a href="/posts/2023-11-11-go-tail/" class="next" rel="next" title="Go tail">Go tail<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

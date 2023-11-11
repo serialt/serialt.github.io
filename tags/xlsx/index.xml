@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>xlsx - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/xlsx/</link>
+        <description>xlsx - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:21:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/xlsx/" rel="self" type="application/rss+xml" /><item>
+    <title>Go excelize</title>
+    <link>https://serialt.github.io/posts/2023-11-11-go-excelize/</link>
+    <pubDate>Sat, 11 Nov 2023 10:21:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-go-excelize/</guid>
+    <description><![CDATA[Excel库excelize 参考链接：[Go 语言读写 Excel - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/33417413#:~:text=Excelize 是 Go 语言编写的用于操作 Office Excel 文档类库，基于 ECMA-376,标准。 可以使用它来读]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>mapstructure - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/mapstructure/</link>
+        <description>mapstructure - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:24:54 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/mapstructure/" rel="self" type="application/rss+xml" /><item>
+    <title>Go mapstructure</title>
+    <link>https://serialt.github.io/posts/2023-11-11-go-mapstructure/</link>
+    <pubDate>Sat, 11 Nov 2023 10:24:54 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-go-mapstructure/</guid>
+    <description><![CDATA[mapstructure 转换库 简介 mapstructure用于将通用的map[string]interface{}解码到对应的 Go 结构体中，或者执行相反的操作。很多]]></description>
+</item>
+</channel>
+</rss>
