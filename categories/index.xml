@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/categories/</link>
         <description>Categories - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:25:07 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:26:09 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>Go 基础</title>
+    <link>https://serialt.github.io/categories/go-%E5%9F%BA%E7%A1%80/</link>
+    <pubDate>Sat, 11 Nov 2023 10:26:09 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/go-%E5%9F%BA%E7%A1%80/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Go 库文档</title>
     <link>https://serialt.github.io/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/</link>
     <pubDate>Sat, 11 Nov 2023 10:25:07 &#43;0800</pubDate>

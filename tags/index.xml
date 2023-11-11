@@ -4,10 +4,18 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:25:07 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:26:09 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>basic</title>
+    <link>https://serialt.github.io/tags/basic/</link>
+    <pubDate>Sat, 11 Nov 2023 10:26:09 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/basic/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Go</title>
     <link>https://serialt.github.io/tags/go/</link>
-    <pubDate>Sat, 11 Nov 2023 10:25:07 &#43;0800</pubDate>
+    <pubDate>Sat, 11 Nov 2023 10:26:09 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/go/</guid>
     <description><![CDATA[]]></description>
@@ -74,14 +82,6 @@
     <pubDate>Sat, 11 Nov 2023 10:24:50 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/ini/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>homedir</title>
-    <link>https://serialt.github.io/tags/homedir/</link>
-    <pubDate>Sat, 11 Nov 2023 10:24:49 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/homedir/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>
