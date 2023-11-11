@@ -5,14 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>dingbot - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="dingbot" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="钉钉机器人 一、shell脚本 1、基于关键字或者 ip 版 发送txt格式消息 info=&#39;hello&#39; logFile=&#39;/var/log/dingbot.log&#39; #发送消息 sendMsg() { token=&#39;1e18ffe069052b56f5a0f8fe9b6c058373e7df7ef4xxxxxxxxxxxxxxx&#39; result=$(curl -s &#34;https://oapi.dingtalk.com/robot/send?access_token=$token&#34; \ -H &#39;Content-Type: application/json&#39; \ -d &#34;{&#39;msgtype&#39;: &#39;text&#39;,&#39;text&#39;: {&#39;content&#39;: &#39;msg:\n$*&#39;}}&#34;) [ $(echo $result | grep &#34;errmsg.*ok&#34;) ] &amp;&amp; echo &#39;send succees!&#39; echo &#34;$(date" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://serialt.github.io/posts/2023-11-11-dingbot/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-11-11T11:28:14+08:00" />
 <meta property="article:modified_time" content="2023-11-11T11:28:14+08:00" /><meta property="og:site_name" content="Log" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="dingbot"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="钉钉机器人 一、shell脚本 1、基于关键字或者 ip 版 发送txt格式消息 info=&#39;hello&#39; logFile=&#39;/var/log/dingbot.log&#39; #发送消息 sendMsg() { token=&#39;1e18ffe069052b56f5a0f8fe9b6c058373e7df7ef4xxxxxxxxxxxxxxx&#39; result=$(curl -s &#34;https://oapi.dingtalk.com/robot/send?access_token=$token&#34; \ -H &#39;Content-Type: application/json&#39; \ -d &#34;{&#39;msgtype&#39;: &#39;text&#39;,&#39;text&#39;: {&#39;content&#39;: &#39;msg:\n$*&#39;}}&#34;) [ $(echo $result | grep &#34;errmsg.*ok&#34;) ] &amp;&amp; echo &#39;send succees!&#39; echo &#34;$(date"/>
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2023-11-11-dingbot\/"
-        },"genre": "posts","keywords": "dingbot","wordcount":  0 ,
+        },"genre": "posts","keywords": "dingbot","wordcount":  951 ,
         "url": "https:\/\/serialt.github.io\/posts\/2023-11-11-dingbot\/","datePublished": "2023-11-11T11:28:14+08:00","dateModified": "2023-11-11T11:28:14+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,15 +101,260 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">dingbot</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%9F%A5/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>机器人通知</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-11">2023-11-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;0 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;0 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-11">2023-11-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;951 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"></div><div class="post-footer" id="post-footer">
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一shell脚本">一、shell脚本</a>
+      <ul>
+        <li><a href="#1基于关键字或者-ip-版">1、基于关键字或者 ip 版</a></li>
+        <li><a href="#2签名计算版">2、签名计算版</a></li>
+      </ul>
+    </li>
+    <li><a href="#二python版">二、python版</a>
+      <ul>
+        <li><a href="#1基于关键字或者-ip">1、基于关键字或者 ip</a></li>
+        <li><a href="#2基于加签计算">2、基于加签计算</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="钉钉机器人">钉钉机器人</h1>
+<h2 id="一shell脚本">一、shell脚本</h2>
+<h3 id="1基于关键字或者-ip-版">1、基于关键字或者 ip 版</h3>
+<h4 id="发送txt格式消息">发送txt格式消息</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">info</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">logFile</span><span class="o">=</span><span class="s1">&#39;/var/log/dingbot.log&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#发送消息</span>
+</span></span><span class="line"><span class="cl">sendMsg<span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">token</span><span class="o">=</span><span class="s1">&#39;1e18ffe069052b56f5a0f8fe9b6c058373e7df7ef4xxxxxxxxxxxxxxx&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">result</span><span class="o">=</span><span class="k">$(</span>curl -s <span class="s2">&#34;https://oapi.dingtalk.com/robot/send?access_token=</span><span class="nv">$token</span><span class="s2">&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        -H <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        -d <span class="s2">&#34;{&#39;msgtype&#39;: &#39;text&#39;,&#39;text&#39;: {&#39;content&#39;: &#39;msg:\n</span><span class="nv">$*</span><span class="s2">&#39;}}&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">[</span> <span class="k">$(</span><span class="nb">echo</span> <span class="nv">$result</span> <span class="p">|</span> grep <span class="s2">&#34;errmsg.*ok&#34;</span><span class="k">)</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">&#39;send succees!&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;</span><span class="k">$(</span>date +<span class="s1">&#39;%Y-%m-%d %H:%M.%S&#39;</span><span class="k">)</span><span class="s2"> state: </span><span class="nv">$result</span><span class="s2">  msg: </span><span class="nv">$*</span><span class="s2">&#34;</span> &gt;&gt;<span class="nv">$logFile</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sendMsg <span class="nv">$info</span>
+</span></span></code></pre></div><h4 id="发送-markdown-格式消息">发送 markdown 格式消息</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">logFile</span><span class="o">=</span><span class="s1">&#39;/var/log/DingBot.log&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">token</span><span class="o">=</span><span class="s1">&#39;1e18ffe069052b56f5a0f8fe9b6c058373xxxxxxxxxxxxxx&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#发送消息</span>
+</span></span><span class="line"><span class="cl">sendMsg<span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">local</span> <span class="nv">info</span><span class="o">=</span><span class="nv">$*</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">result</span><span class="o">=</span><span class="k">$(</span>curl -s <span class="s2">&#34;https://oapi.dingtalk.com/robot/send?access_token=</span><span class="nv">$token</span><span class="s2">&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        -H <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        -d <span class="s2">&#34;{&#39;msgtype&#39;: &#39;text&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                     &#39;text&#39;: {
+</span></span></span><span class="line"><span class="cl"><span class="s2">                         &#39;content&#39;: &#39;</span><span class="nv">$info</span><span class="s2">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">                         }
+</span></span></span><span class="line"><span class="cl"><span class="s2">                    }&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">[</span> <span class="k">$(</span><span class="nb">echo</span> <span class="nv">$result</span> <span class="p">|</span> grep <span class="s2">&#34;errmsg.*ok&#34;</span><span class="k">)</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">&#39;send succees!&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;</span><span class="k">$(</span>date +<span class="s1">&#39;%Y-%m-%d %H:%M.%S&#39;</span><span class="k">)</span><span class="s2"> state: </span><span class="nv">$result</span><span class="s2">  MessagesType: text     [ text: </span><span class="nv">$*</span><span class="s2"> ]&#34;</span> &gt;&gt;<span class="nv">$logFile</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SendMsgByMD<span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">local</span> <span class="nv">info</span><span class="o">=</span><span class="nv">$1</span>    <span class="c1"># $info markdown的标题</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">local</span> <span class="nv">infoMsg</span><span class="o">=</span><span class="nv">$2</span> <span class="c1"># $infoMsg 内容</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># token=&#39;1e18ffe069052b56f5a0f8fe9b6c058373e7df7xxxxxxxxxxxxxx&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">result</span><span class="o">=</span><span class="k">$(</span>curl -s <span class="s2">&#34;https://oapi.dingtalk.com/robot/send?access_token=</span><span class="nv">$token</span><span class="s2">&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        -H <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        -d <span class="s2">&#34;{
+</span></span></span><span class="line"><span class="cl"><span class="s2">                     &#39;msgtype&#39;: &#39;markdown&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                     &#39;markdown&#39;: {
+</span></span></span><span class="line"><span class="cl"><span class="s2">                         &#39;title&#39;:&#39;</span><span class="nv">$info</span><span class="s2">&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                         &#39;text&#39;: &#39;</span><span class="nv">$infoMsg</span><span class="s2">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">                        },
+</span></span></span><span class="line"><span class="cl"><span class="s2">                     &#39;at&#39;: {
+</span></span></span><span class="line"><span class="cl"><span class="s2">                         &#39;atMobiles&#39;: [
+</span></span></span><span class="line"><span class="cl"><span class="s2">                             &#39;156xxxx8827&#39;, 
+</span></span></span><span class="line"><span class="cl"><span class="s2">                             &#39;189xxxx8325&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">                            ], 
+</span></span></span><span class="line"><span class="cl"><span class="s2">                         &#39;isAtAll&#39;: true
+</span></span></span><span class="line"><span class="cl"><span class="s2">                        }
+</span></span></span><span class="line"><span class="cl"><span class="s2">                   }&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">[</span> <span class="k">$(</span><span class="nb">echo</span> <span class="nv">$result</span> <span class="p">|</span> grep <span class="s2">&#34;errmsg.*ok&#34;</span><span class="k">)</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">&#39;send succees!&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">echo</span> <span class="s2">&#34;</span><span class="k">$(</span>date +<span class="s1">&#39;%Y-%m-%d %H:%M.%S&#39;</span><span class="k">)</span><span class="s2"> state: </span><span class="nv">$result</span><span class="s2">  MessagesType: markdown [ title: </span><span class="nv">$info</span><span class="s2">  text: </span><span class="nv">$infoMsg</span><span class="s2"> ]&#34;</span> &gt;&gt;<span class="nv">$logFile</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#main()</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>sendMsg <span class="s1">&#39;zabbix&#39;</span><span class="o">)</span> <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>SendMsgByMD <span class="s1">&#39;zabbix&#39;</span> <span class="s1">&#39;# send msg&#39;</span><span class="o">)</span> <span class="p">&amp;</span>
+</span></span></code></pre></div><h3 id="2签名计算版">2、签名计算版</h3>
+<p>计算签名是使用的date是linux版的，而mac上的date是unix版的，在mac上需要替换为linux版的date才能正常计算签名。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 钉钉机器人配置</span>
+</span></span><span class="line"><span class="cl"><span class="nv">dingbot_secret</span><span class="o">=</span><span class="s1">&#39;SECa87axxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">dingbot_url</span><span class="o">=</span><span class="s1">&#39;https://oapi.dingtalk.com/robot/send?access_token=cd3xxxxxxxxxxxxx&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## secret_type keywords || sign</span>
+</span></span><span class="line"><span class="cl"><span class="nv">ding_secret_type</span><span class="o">=</span><span class="s1">&#39;sign&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 需要艾特的人的手机号码，以空格隔开</span>
+</span></span><span class="line"><span class="cl"><span class="nv">atMobiles</span><span class="o">=(</span><span class="m">13346123456</span> 13346123457<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## encode url</span>
+</span></span><span class="line"><span class="cl"><span class="k">function</span> url_encode<span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="nv">t</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[[</span> -n <span class="s2">&#34;</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">&amp;&amp;</span> -n <span class="s2">&#34;</span><span class="si">${</span><span class="nv">2</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">]]</span><span class="p">;</span><span class="k">then</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> ! <span class="nb">echo</span> <span class="s1">&#39;xX&#39;</span> <span class="p">|</span> grep -q <span class="s2">&#34;</span><span class="si">${</span><span class="nv">t</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span><span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">t</span><span class="o">=</span><span class="s1">&#39;x&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">fi</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> -n <span class="s2">&#34;</span><span class="si">${</span><span class="nv">2</span><span class="si">}</span><span class="s2">&#34;</span> <span class="p">|</span> od -t d1 <span class="p">|</span> awk -v <span class="nv">a</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">t</span><span class="si">}</span><span class="s2">&#34;</span> <span class="s1">&#39;{for (i = 2; i &lt;= NF; i++) {printf(($i&gt;=48 &amp;&amp; $i&lt;=57) || ($i&gt;=65 &amp;&amp;$i&lt;=90) || ($i&gt;=97 &amp;&amp; $i&lt;=122) ||$i==45 || $i==46 || $i==95 || $i==126 ?&#34;%c&#34; : &#34;%%%02&#34;a, $i)}}&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> -e <span class="s1">&#39;$1 and $2 can not empty\n$1 ==&gt; &#39;</span>x<span class="s1">&#39; or &#39;</span>X<span class="s1">&#39;, x ==&gt; lower, X ==&gt; toupper.\n$2 ==&gt; Strings need to url encode&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## Dingbot</span>
+</span></span><span class="line"><span class="cl"><span class="k">function</span> dingbot<span class="o">(){</span>
+</span></span><span class="line"><span class="cl"><span class="nv">send_strs</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">new_url</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">dingbot_url</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">at_who</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> i in <span class="si">${</span><span class="nv">atMobiles</span><span class="p">[*]</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&#34;</span><span class="si">${</span><span class="nv">at_who</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">at_who</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">at_who</span><span class="si">}</span><span class="s2">,\&#34;</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">\&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">at_who</span><span class="o">=</span><span class="s2">&#34;\&#34;</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">\&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">ding_secret_type</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">==</span> <span class="s1">&#39;keywords&#39;</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+</span></span><span class="line"><span class="cl">  curl -s -X POST -H <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">new_url</span><span class="si">}</span><span class="s2">&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-d <span class="s2">&#34;{\&#34;at\&#34;:{\&#34;atMobiles\&#34;:[</span><span class="si">${</span><span class="nv">at_who</span><span class="si">}</span><span class="s2">]},\&#34;msgtype\&#34;:\&#34;text\&#34;,\&#34;text\&#34;:{\&#34;content\&#34;:\&#34;</span><span class="si">${</span><span class="nv">send_strs</span><span class="si">}</span><span class="s2">\&#34;}}&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">elif</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">ding_secret_type</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">==</span> <span class="s1">&#39;sign&#39;</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">timestamp</span><span class="o">=</span><span class="k">$(</span>date <span class="s2">&#34;+%s%3N&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">dingbot_sign</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> -ne <span class="s2">&#34;</span><span class="si">${</span><span class="nv">timestamp</span><span class="si">}</span><span class="s2">\n</span><span class="si">${</span><span class="nv">dingbot_secret</span><span class="si">}</span><span class="s2">&#34;</span> <span class="p">|</span> openssl dgst -sha256 -hmac <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dingbot_secret</span><span class="si">}</span><span class="s2">&#34;</span> -binary <span class="p">|</span> base64<span class="k">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">dingbot_sign</span><span class="o">=</span><span class="k">$(</span>url_encode <span class="s1">&#39;X&#39;</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dingbot_sign</span><span class="si">}</span><span class="s2">&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">post_url</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">dingbot_url</span><span class="si">}</span><span class="s2">&amp;timestamp=</span><span class="si">${</span><span class="nv">timestamp</span><span class="si">}</span><span class="s2">&amp;sign=</span><span class="si">${</span><span class="nv">dingbot_sign</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  curl -s -X POST -H <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">post_url</span><span class="si">}</span><span class="s2">&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -d <span class="s2">&#34;{\&#34;at\&#34;:{\&#34;atMobiles\&#34;:[</span><span class="si">${</span><span class="nv">at_who</span><span class="si">}</span><span class="s2">]},\&#34;msgtype\&#34;:\&#34;text\&#34;,\&#34;text\&#34;:{\&#34;content\&#34;:\&#34;</span><span class="si">${</span><span class="nv">send_strs</span><span class="si">}</span><span class="s2">\&#34;}}&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> <span class="s2">&#34;secret_type 未知，请检查配置&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">dingbot <span class="s2">&#34;hello&#34;</span>
+</span></span></code></pre></div><h2 id="二python版">二、python版</h2>
+<h3 id="1基于关键字或者-ip">1、基于关键字或者 ip</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/python3</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># encoding: utf-8</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">dingmsg</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">#钉钉机器人的url</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ding_url</span> <span class="o">=</span> <span class="s1">&#39;https://oapi.dingtalk.com/robot/send?access_token=&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#钉钉机器人的token</span>
+</span></span><span class="line"><span class="cl">    <span class="n">token</span> <span class="o">=</span> <span class="s1">&#39;ba9b7c169caebb1048a66845fa8344348b3e8fdaefxxxxxxxxxxx&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#请求的url，webhook的地址</span>
+</span></span><span class="line"><span class="cl">    <span class="n">webhook</span> <span class="o">=</span> <span class="n">ding_url</span><span class="o">+</span><span class="n">token</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">#构建请求的头部</span>
+</span></span><span class="line"><span class="cl">    <span class="n">header</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Content-Type&#34;</span><span class="p">:</span> <span class="s2">&#34;application/json&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Charset&#34;</span><span class="p">:</span> <span class="s2">&#34;UTF-8&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">#构建请求数据</span>
+</span></span><span class="line"><span class="cl">    <span class="n">text</span> <span class="o">=</span> <span class="s2">&#34;this is first python to test dingding&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">msg</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;msgtype&#34;</span><span class="p">:</span> <span class="s2">&#34;text&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;text&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;content&#34;</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">#对请求的数据进行封装</span>
+</span></span><span class="line"><span class="cl">    <span class="n">msg_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">#发起请求</span>
+</span></span><span class="line"><span class="cl">    <span class="n">info</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">webhook</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">msg_json</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">#打印返回的结果</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dingmsg</span><span class="p">()</span>
+</span></span></code></pre></div><h3 id="2基于加签计算">2、基于加签计算</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/python3</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># encoding: utf-8</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">hmac</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">hashlib</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">base64</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">urllib.parse</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">dingRobot</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">dingUrl</span> <span class="o">=</span> <span class="s1">&#39;https://oapi.dingtalk.com/robot/send?access_token=&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">__secret</span> <span class="o">=</span> <span class="s1">&#39;SECc95942d1139feaefcdef6abf33e6497eb3d0120b4ca3dxxxxxxxxxx&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">__token</span> <span class="o">=</span> <span class="s1">&#39;ba9b7c169caebb1048a66845fa8344348b3e8fdaef264e6exxxxxxxxxxxdc&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">__sign</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">__timestamp</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">createTimestampSign</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">__timestamp</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">secret_enc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__secret</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string_to_sign</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="se">\n</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__timestamp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__secret</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string_to_sign_enc</span> <span class="o">=</span> <span class="n">string_to_sign</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">hmac_code</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">secret_enc</span><span class="p">,</span> <span class="n">string_to_sign_enc</span><span class="p">,</span> <span class="n">digestmod</span><span class="o">=</span><span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">__sign</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote_plus</span><span class="p">(</span><span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">hmac_code</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">sendMsg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">text</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">createTimestampSign</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 请求的url，webhook的地址</span>
+</span></span><span class="line"><span class="cl">        <span class="n">webhook</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dingUrl</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__token</span> <span class="o">+</span> <span class="s1">&#39;&amp;timestamp=&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__timestamp</span> <span class="o">+</span> <span class="s1">&#39;&amp;sign=&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sign</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 构建请求的头部</span>
+</span></span><span class="line"><span class="cl">        <span class="n">header</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Content-Type&#34;</span><span class="p">:</span> <span class="s2">&#34;application/json&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;Charset&#34;</span><span class="p">:</span> <span class="s2">&#34;UTF-8&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 构建请求数据</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># text = &#34;this is first python to test dingding&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">msg</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;msgtype&#34;</span><span class="p">:</span> <span class="s2">&#34;text&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;text&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;content&#34;</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 对请求的数据进行封装</span>
+</span></span><span class="line"><span class="cl">        <span class="n">msg_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 发起请求</span>
+</span></span><span class="line"><span class="cl">        <span class="n">info</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">webhook</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">msg_json</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">info</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">robot</span> <span class="o">=</span> <span class="n">dingRobot</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">sendMsg</span><span class="p">(</span><span class="s1">&#39;只是用于测试&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">text</span><span class="p">)[</span><span class="s1">&#39;errcode&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;发送消息成功&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;发送消息失败&#34;</span><span class="p">)</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
