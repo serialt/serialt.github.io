@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>daemon - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="daemon" />
+<meta property="og:description" content="Daemon 守护进程服务 systemd supervisor launchd 一、supervisor ​ 是用Python开发的一套通用的进程管理程序，能将一个普通的命令行进程变为后台daemon，并" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2023-11-11-daemon/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-11T10:28:12+08:00" />
+<meta property="article:modified_time" content="2023-11-11T10:28:12+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="daemon"/>
+<meta name="twitter:description" content="Daemon 守护进程服务 systemd supervisor launchd 一、supervisor ​ 是用Python开发的一套通用的进程管理程序，能将一个普通的命令行进程变为后台daemon，并"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-11-daemon/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-11-coredns/" /><link rel="next" href="https://serialt.github.io/posts/2023-11-11-flatpak/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "daemon",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2023-11-11-daemon\/"
+        },"genre": "posts","keywords": "daemon, systemd, supervisor, launchd","wordcount":  3348 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2023-11-11-daemon\/","datePublished": "2023-11-11T10:28:12+08:00","dateModified": "2023-11-11T10:28:12+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">daemon</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>服务管理</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-11">2023-11-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3348 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一supervisor">一、supervisor</a>
+      <ul>
+        <li><a href="#安装supervisor">安装supervisor</a></li>
+        <li><a href="#配置文件">配置文件</a></li>
+        <li><a href="#supervisor命令说明">supervisor命令说明</a></li>
+        <li><a href="#日志管理">日志管理</a></li>
+      </ul>
+    </li>
+    <li><a href="#二systemd">二、systemd</a></li>
+    <li><a href="#三launchd服务">三、launchd服务</a>
+      <ul>
+        <li><a href="#基本概念">基本概念</a></li>
+        <li><a href="#基本操作">基本操作</a></li>
+        <li><a href="#配置参数">配置参数</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="daemon-守护进程服务">Daemon 守护进程服务</h1>
+<ul>
+<li>systemd</li>
+<li>supervisor</li>
+<li>launchd</li>
+</ul>
+<h2 id="一supervisor">一、supervisor</h2>
+<p>​		是用Python开发的一套通用的进程管理程序，能将一个普通的命令行进程变为后台daemon，并监控进程状态，异常退出时能自动重启。它是通过fork/exec的方式把这些被管理的进程当作supervisor的子进程来启动，这样只要在supervisor的配置文件中，把要管理的进程的可执行文件的路径写进去即可。也实现当子进程挂掉的时候，父进程可以准确获取子进程挂掉的信息的，可以选择是否自己启动和报警。supervisor还提供了一个功能，可以为supervisord或者每个子进程，设置一个非root的user，这个user就可以管理它对应的进程</p>
+<p>supervisor官网：supervisord.org</p>
+<h3 id="安装supervisor">安装supervisor</h3>
+<p>supervisor是用python开发的，支持yum和pip安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># yum install supervisor</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># pip3 install supervisor</span>
+</span></span></code></pre></div><h3 id="配置文件">配置文件</h3>
+<p>若没有配置文件，可以生成主配置文件模板</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># echo_supervisord_conf &gt; /etc/supervisord.conf</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 参考链接</span>
+</span></span><span class="line"><span class="cl">http://supervisord.org/configuration.html
+</span></span></code></pre></div><p>配置模板</p>
+<pre tabindex="0"><code># 参数可以根据需求进行调整
+[program:pock]
+directory=/home/sugars/pock/backend
+command=/home/sugars/pock/pock_venv/bin/python3 /home/sugars/pock/backend/sugars.py
+autostart=true
+autorestart=true
+startsecs=7
+user = sugars
+stderr_logfile=/var/log/supervisor/pock-err.log
+stdout_logfile=/var/log/supervisor/pock.log
+redirect_stderr = true
+stdout_logfile_maxbytes = 50MB
+stdout_logfile_backups = 3
+stopasgroup=true
+killasgroup=true
+</code></pre><p>配置文件读取目录于顺序</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 配置文件明名为supervisor.comf,如果不使用`-c` 指定文件名，则自动匹配的文件路径为</span>
+</span></span><span class="line"><span class="cl">1<span class="o">)</span>  ../etc/supervisord.conf
+</span></span><span class="line"><span class="cl">2<span class="o">)</span>  ../supervisord.conf
+</span></span><span class="line"><span class="cl">3<span class="o">)</span>  <span class="nv">$CWD</span>/supervisord.conf
+</span></span><span class="line"><span class="cl">4<span class="o">)</span>  <span class="nv">$CWD</span>/etc/supervisord.conf
+</span></span><span class="line"><span class="cl">5<span class="o">)</span> /etc/supervisord.conf
+</span></span><span class="line"><span class="cl">6<span class="o">)</span> /etc/supervisor/supervisord.conf
+</span></span></code></pre></div><pre tabindex="0"><code>systemctl start supervisord
+</code></pre><h3 id="supervisor命令说明">supervisor命令说明</h3>
+<pre tabindex="0"><code>supervisorctl status                查看进程运行状态 
+supervisorctl start g_name      启动进程 
+supervisorctl stop g_name      关闭进程 
+supervisorctl restart g_name   重启进程 
+supervisorctl update                重新载入配置文件(配置文件修改后使用该命令加载新的配置) 
+supervisorctl shutdown             关闭
+supervisord supervisorctl clear g_name 清空进程日志 
+supervisorctl 进入到交互模式下。使用help查看所有命令。 
+supervisorctl start/stop/restart + all 表示启动，关闭，重启所有进程
+supervisorctl reload        //重新启动配置中的所有程序
+</code></pre><p>新添加一个<code>program</code>后的操作</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">root@serialt:~#  supervisorctl update sugar
+</span></span></code></pre></div><p>停止<code>sugar</code>服务</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">root@serialt:~#  supervisorctl stop sugar
+</span></span></code></pre></div><p>启动<code>sugar</code>服务</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">root@serialt:~#  supervisorctl start sugar
+</span></span></code></pre></div><p>重启<code>sugar</code>服务</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">root@serialt:~#  supervisorctl restart sugar
+</span></span></code></pre></div><h3 id="日志管理">日志管理</h3>
+<p>在rhel中，supervisord的日志轮转管理是通过调用logrotate来实现的，其配置文件内容是</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">root</span><span class="err">@</span><span class="nx">serialt</span> <span class="err">~</span><span class="p">]</span><span class="c"># cat /etc/logrotate.d/supervisor </span>
+</span></span><span class="line"><span class="cl"><span class="err">/</span><span class="nx">var</span><span class="err">/</span><span class="nx">log</span><span class="err">/</span><span class="nx">supervisor</span><span class="err">/*</span><span class="p">.</span><span class="nx">log</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">       <span class="nx">missingok</span>
+</span></span><span class="line"><span class="cl">       <span class="nx">weekly</span>
+</span></span><span class="line"><span class="cl">       <span class="nx">notifempty</span>
+</span></span><span class="line"><span class="cl">       <span class="nx">nocompress</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>会自动轮转<code>/var/log/supervisor/*.log</code>的文件，若把用supervisor管理的日志也输入到<code>/var/log/supervisor/</code>里会导致日志文件被轮转成带时间戳的格式</p>
+<pre tabindex="0"><code>sugar.log
+sugar.log-20211019
+sugar.log-20211026
+sugar.log.1
+sugar.log.2
+sugar.log.3
+</code></pre><p>两种解决办法：</p>
+<p>1）修改supervisord的日志记录文件，同时修改supervisord的logrotate配置文件</p>
+<p>2）supervisord管理的进程的日志不输出到<code>/var/log/supervisor</code>里</p>
+<h4 id="日志压缩">日志压缩</h4>
+<p>supervisord本身日志只能轮转，不能用于压缩，要实现日志压缩论证，需要借用logrotate</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@tc ~<span class="o">]</span><span class="c1"># cat /etc/logrotate.d/sugar</span>
+</span></span><span class="line"><span class="cl">/var/log/sugar/*.log <span class="o">{</span>
+</span></span><span class="line"><span class="cl">       missingok
+</span></span><span class="line"><span class="cl">       daily
+</span></span><span class="line"><span class="cl">       notifempty
+</span></span><span class="line"><span class="cl">       create <span class="m">0664</span> nobody root
+</span></span><span class="line"><span class="cl">       <span class="c1">#dateext</span>
+</span></span><span class="line"><span class="cl">       <span class="c1">#dateformat .%Y%m%d</span>
+</span></span><span class="line"><span class="cl">       rotate <span class="m">20</span>
+</span></span><span class="line"><span class="cl">       compress
+</span></span><span class="line"><span class="cl">       delaycompress
+</span></span><span class="line"><span class="cl">       copytruncate
+</span></span><span class="line"><span class="cl">       size 10K
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h2 id="二systemd">二、systemd</h2>
+<p>常用命令</p>
+<pre tabindex="0"><code>systemctl restart foo
+systemctl stop foo
+systemctl start foo
+systemctl status foo
+systemctl cat foo
+systemctl daemon-reload
+</code></pre><p>配置模板</p>
+<pre tabindex="0"><code>[Unit]
+Description=Gins
+After=network-online.target
+Documentation=https://serialt.github.io/
+Documentation=https://serialt.github.io on-failure always
+
+[Service]
+Type=simple
+WorkingDirectory=/usr/local/gin
+KillSignal=SIGTERM
+ExecStart=/usr/local/gins/bin/gins start
+ExecStop=/bin/kill -SIGTERM $MAINPID
+Restart=on-failure
+RestartSec=3
+TimeoutSec=50
+User=gins  
+Group=gins 
+
+[Install]
+WantedBy=multi-user.target
+</code></pre><p>systemd 236之后的版本可以直接在systemd的unit文件里面配置<code>StandardOutput</code>和<code>StandardError</code>两个参数来将相关运行日志输出到指定的文件中。</p>
+<pre tabindex="0"><code>[Unit]
+Description=Gins
+After=network.target
+Documentation=https://serialt.github.io/
+Documentation=https://serialt.github.io on-failure always
+
+[Service]
+Type=simple
+WorkingDirectory=/usr/local/gin
+KillSignal=SIGTERM
+ExecStart=/usr/local/gins/bin/gins start
+ExecStop=/bin/kill -SIGTERM $MAINPID
+# append类型可以在原有文件末尾继续追加内容，而file类型则是重新打开一个新文件
+# 两者的区别类似于 echo &gt;&gt; 和 echo &gt;
+StandardOutput=append:/home/coredns/logs/coredns.log
+StandardError=append:/home/coredns/logs/coredns_error.log
+Restart=on-failure
+RestartSec=3
+TimeoutSec=50
+User=gins  
+Group=gins 
+
+[Install]
+WantedBy=multi-user.target
+</code></pre><h2 id="三launchd服务">三、launchd服务</h2>
+<p><a href="https://www.fythonfang.com/blog/2021/4/19/mac-launchd-daemons-and-agents-tutorial" target="_blank" rel="noopener noreffer ">https://www.fythonfang.com/blog/2021/4/19/mac-launchd-daemons-and-agents-tutorial</a></p>
+<h3 id="基本概念">基本概念</h3>
+<p><code>launchd</code> 是 MacOS 上用于管理系统级或者用户级后台服务进程的管理工具。也是官方推荐的系统后台进程管理工具，就好像在 Linux 系统里，我们使用 <code>systemd</code> 去管理后台服务进程一样。</p>
+<p><code>launchd</code> 是一个程序，以系统常驻进程的形态运转，是 MacOS 系统启动后的第一个进程，在 Terminal 终端，键入命令 <code>ps aux</code> 可以看到，<code>launchd</code> 的进程ID（PID）是 <code>1</code>。也即这是系统的<strong>第一个进程</strong>。</p>
+<p>与 <code>launchd</code> 交互的工具，叫 <code>launchctl</code>。可以认为是它的管理客户端程序。通过该命令，我们可以发送指令给 <code>launchd</code> 完成对系统服务或后台进程的管理。</p>
+<p><code>launchd</code> 的管理对象都是后台进程，这些后台进程使用一种特定格式的配置文件叫 <code>launchd.plist</code> 来描述被管理的对象。这种文件是 <code>XML</code> 格式的，根据不同的运行权限，放在不同的目录里面，请看下面的表格。</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/Library/LaunchAgents</code></td>
+<td>用户自己提供的用户级 Agent。</td>
+</tr>
+<tr>
+<td><code>/Library/LaunchAgents</code></td>
+<td>管理员提供的用户级 Agent。</td>
+</tr>
+<tr>
+<td><code>/Library/LaunchDaemons</code></td>
+<td>管理员提供的系统级 Daemon。</td>
+</tr>
+<tr>
+<td><code>/System/Library/LaunchAgents</code></td>
+<td>苹果官方提供的用户级 Agent。</td>
+</tr>
+<tr>
+<td><code>/System/Library/LaunchDaemons</code></td>
+<td>苹果官方提供的系统级 Daemon。</td>
+</tr>
+</tbody>
+</table>
+<p>存放 launchd 配置文件的常用目录</p>
+<p>通过 <code>launchd</code> 管理的进程，人为被分为了几个种类：</p>
+<ul>
+<li>服务（Services）—— 在后台运行，用以支持图形界面应用（GUI App）运行的服务进程，比如响应系统全局快捷键，或者进行网络通信等；</li>
+<li>守护进程（Daemons）—— 理论上，不属于服务的后台进程，都归为守护进程一类，不过这里特指运行在后台，且不能与用户交互图形界面产生联系的进程；</li>
+<li>代理（Agents）—— 以用户的名义，在后台运行的进程，可以和用户图形界面产生联系，比如呼起一个软件的界面，不过官方不推荐这么用。</li>
+</ul>
+<p>一般文件名都以<code>com.domain.programName.plist</code>格式命名，不管是 Daemons 还是 Agents 格式都是一样的，只是存放位置不同。看下面一个 hello world 的例子 <code>~/Library/LaunchAgents/com.example.hello.plist</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE plist PUBLIC &#34;-//Apple//DTD PLIST 1.0//EN&#34; &#34;http://www.apple.com/DTDs/PropertyList-1.0.dtd&#34;&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;plist</span> <span class="na">version=</span><span class="s">&#34;1.0&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;dict&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;key&gt;</span>Label<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;string&gt;</span>com.example.hello<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;key&gt;</span>ProgramArguments<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;array&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;string&gt;</span>/bin/echo<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;string&gt;</span>hello world<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/array&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/dict&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/plist&gt;</span>
+</span></span></code></pre></div><p>上面定义了一个最简单的任务只使用了<code>Label</code>和<code>ProgramAgruments</code>两个键</p>
+<ul>
+<li><code>Label</code>这是个必须的键，指定这个任务名</li>
+<li><code>ProgramArguments</code>是带参数的可执行文件上面等同于运行<code>/bin/echo hello world</code>命令，如果执行的程序不带参数可以使用<code>Program</code>键，但一个任务中必须包含这两个中的其中一个键</li>
+</ul>
+<p>还有一些常用的键名，所有的键可参考<code>man 5 launchd.plist</code>或者<a href="https://www.launchd.info/" target="_blank" rel="noopener noreffer ">这里</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Keys</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>EnvironmentVariables</code></td>
+<td style="text-align:center">设置运行环境变量</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>StandardOutPath</code></td>
+<td style="text-align:center">标准输出到文件</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>StandardErrorPath</code></td>
+<td style="text-align:center">标准错误到文件</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>RunAtLoad</code></td>
+<td style="text-align:center">是否再加载的时候就运行</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>StartInterval</code></td>
+<td style="text-align:center">设置程序每隔多少秒运行一次</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>KeepAlive</code></td>
+<td style="text-align:center">是否设置程序是一直存活着 如果退出就重启</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>UserName</code></td>
+<td style="text-align:center">设置用户名只在 Daemons 可用</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>WorkingDirectory</code></td>
+<td style="text-align:center">设置工作目录</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 检查配置</span>
+</span></span><span class="line"><span class="cl">$ plutil ~/Library/LaunchAgents/com.example.hello.plist
+</span></span><span class="line"><span class="cl">/Users/fython/Library/LaunchAgents/com.example.hello.plist: OK
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 加载配置文件</span>
+</span></span><span class="line"><span class="cl">$ launchctl load ~/Library/LaunchAgents/com.example.hello.plist
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 启动服务</span>
+</span></span><span class="line"><span class="cl">$ launchctl start com.example.hello
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ cat /tmp/hello.log
+</span></span><span class="line"><span class="cl">hello world
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ launchctl list <span class="p">|</span> grep hello
+</span></span><span class="line"><span class="cl">-   <span class="m">0</span>   com.example.hello
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ launchctl remove com.example.hello  <span class="c1"># remove jobs</span>
+</span></span></code></pre></div><p>一个任务首先需要被加载(load)，然后启动(start)正常运行完退出，所以我们查看<code>/tmp</code>目录下会有日志输出</p>
+<p>​		1）任务一般都要手动启动(start)，如果设置了<code>RunAtLoad</code>或者<code>KeepAlive</code>则在<code>launchctl load</code>时就启动</p>
+<p>​		2）使用<code>launchctl list</code>列出当前加载的任务，第一列代表进程id，因为上面的程序运行一次就退出了所以显示<code>-</code>，第二列是程序上次运行退出的code，<code>0</code>代表正常退出，如果是正数代表退出的时候是有错误的，负数代表是接收到信号被终止的</p>
+<p>​		3）<code>launchctl stop &lt;service_name&gt;</code>可以终止一个在运行中的任务，<code>launchctl unload &lt;path&gt;</code>指定路径卸载一个任务，<code>launchctl remove &lt;service_name&gt;</code>通过服务名卸载任务</p>
+<p>​		4）<code>launchctl load &lt;path&gt;</code>只会加载没有被<strong>disable</strong>的任务，可以加<code>-w</code>参数 <code>launchctl load -w &lt;path&gt;</code>覆盖如果设置了disable的，下次开机启动一定会起来。<code>launchctl unload &lt;path&gt;</code>只会停止和卸载这个任务，但下次启动还会加载，可以使用<code>-w</code>参数<code>launchctl unload -w &lt;path&gt;</code>停止任务，下次启动也不会起来，也就是标记了<strong>disable</strong></p>
+<p>​		5）调试一个任务可以配合使用<code>plutil</code>命令检查语法，设置<code>StandardOutPath</code>、<code>StandardErrorPath</code>、<code>Debug</code>键，也可以看看苹果自带的<code>Console.app</code>应用中的<code>system.log</code></p>
+<h3 id="基本操作">基本操作</h3>
+<pre tabindex="0"><code># 罗列系统当前运行的进程清单
+launchctl list
+
+# 查看特定服务的配置信息
+launchctl list com.adobe.AdobeCreativeCloud
+
+# 加载特定的服务配置
+launchctl load &lt;file_path&gt;
+
+# 卸载特定的服务配置
+launchctl unload -w /Library/LaunchAgents/com.adobe.AdobeCreativeCloud.plist
+# 特此说明，-w 参数的作用是，如果自动执行了 load 命令尝试去恢复服务注册，则让其无效
+</code></pre><p>plist 文件配置</p>
+<p><a href="https://www.launchd.info" target="_blank" rel="noopener noreffer ">www.launchd.info</a></p>
+<h3 id="配置参数">配置参数</h3>
+<p>1）配置job名</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;key&gt;</span>Label<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;string&gt;</span>com.local.cmd<span class="nt">&lt;/string&gt;</span>
+</span></span></code></pre></div><p>2）cmd启动配置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;key&gt;</span>ProgramArguments<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;array&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;string&gt;</span>/usr/bin/rsync<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;string&gt;</span>--archive<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;string&gt;</span>--compress-level=9<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;string&gt;</span>/Volumes/Macintosh HD<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;string&gt;</span>/Volumes/Backup<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/array&gt;</span>
+</span></span></code></pre></div><p>执行后命令</p>
+<pre tabindex="0"><code>/usr/bin/rsync --archive --compress-level=9 &#34;/Volumes/Macintosh HD&#34; &#34;/Volumes/Backup&#34;
+</code></pre><p>3）环境变量设置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;key&gt;</span>EnvironmentVariables<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;dict&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;key&gt;</span>PATH<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;string&gt;</span>/bin:/usr/bin:/usr/local/bin<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/dict&gt;</span>
+</span></span></code></pre></div><p>3）设置工作目录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;key&gt;</span>WorkingDirectory<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;string&gt;</span>/tmp<span class="nt">&lt;/string&gt;</span>
+</span></span></code></pre></div><p>4）资源限制</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;key&gt;</span>HardResourceLimits<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;dict&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;key&gt;</span>FileSize<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;integer&gt;</span>1048576<span class="nt">&lt;/integer&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/dict&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;key&gt;</span>SoftResourceLimits<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;dict&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;key&gt;</span>FileSize<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;integer&gt;</span>524288<span class="nt">&lt;/integer&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/dict&gt;</span>
+</span></span></code></pre></div><p>5）其他</p>
+<p><code>RunAtLoad</code></p>
+<pre tabindex="0"><code>&lt;key&gt;RunAtLoad&lt;/key&gt;
+&lt;true/&gt;
+</code></pre><p><code>每隔多少秒执行</code></p>
+<p>单位 秒</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;key&gt;</span>StartInterval<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;integer&gt;</span>3600<span class="nt">&lt;/integer&gt;</span>
+</span></span></code></pre></div><p><code>定时执行</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;key&gt;</span>StartCalendarInterval<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;dict&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;key&gt;</span>Hour<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;integer&gt;</span>3<span class="nt">&lt;/integer&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;key&gt;</span>Minute<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="nt">&lt;integer&gt;</span>0<span class="nt">&lt;/integer&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/dict&gt;</span>
+</span></span></code></pre></div><p>可用参数</p>
+<table>
+<thead>
+<tr>
+<th><em>Month</em></th>
+<th>Integer</th>
+<th>Month of year (1..12, 1 being January)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Day</em></td>
+<td>Integer</td>
+<td>Day of month (1..31)</td>
+</tr>
+<tr>
+<td><em>Weekday</em></td>
+<td>Integer</td>
+<td>Day of week (0..7, 0 and 7 being Sunday)</td>
+</tr>
+<tr>
+<td><em>Hour</em></td>
+<td>Integer</td>
+<td>Hour of day (0..23)</td>
+</tr>
+<tr>
+<td><em>Minute</em></td>
+<td>Integer</td>
+<td>Minute of hour (0..59)</td>
+</tr>
+</tbody>
+</table>
+<p>示例1：</p>
+<p><code>/Library/LaunchDaemons/com.fython.clash.plist</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE plist PUBLIC &#34;-//Apple//DTD PLIST 1.0//EN&#34; &#34;http://www.apple.com/DTDs/PropertyList-1.0.dtd&#34;&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;plist</span> <span class="na">version=</span><span class="s">&#34;1.0&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;dict&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;key&gt;</span>Label<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;string&gt;</span>com.fython.clash<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;key&gt;</span>RunAtLoad<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;true/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;key&gt;</span>UserName<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;string&gt;</span>root<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;key&gt;</span>StandardErrorPath<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;string&gt;</span>/Users/fython/bin/clash/stderr.log<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;key&gt;</span>StandardOutPath<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;string&gt;</span>/Users/fython/bin/clash/stdout.log<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;key&gt;</span>WorkingDirectory<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;string&gt;</span>/Users/fython/bin/clash<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;key&gt;</span>ProgramArguments<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;array&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;string&gt;</span>/Users/fython/bin/clash/clash<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;string&gt;</span>-f<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;string&gt;</span>config.yaml<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;string&gt;</span>-d<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&lt;string&gt;</span>/Users/fython/bin/clash<span class="nt">&lt;/string&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/array&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;key&gt;</span>KeepAlive<span class="nt">&lt;/key&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;true/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/dict&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/plist&gt;</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-11-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/2023-11-11-daemon/" data-title="daemon" data-hashtags="daemon,systemd,supervisor,launchd"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/2023-11-11-daemon/" data-hashtag="daemon"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/2023-11-11-daemon/" data-title="daemon"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/2023-11-11-daemon/" data-title="daemon"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/2023-11-11-daemon/" data-title="daemon"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/daemon/">daemon</a>,&nbsp;<a href="/tags/systemd/">systemd</a>,&nbsp;<a href="/tags/supervisor/">supervisor</a>,&nbsp;<a href="/tags/launchd/">launchd</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023-11-11-coredns/" class="prev" rel="prev" title="coredns"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>coredns</a>
+            <a href="/posts/2023-11-11-flatpak/" class="next" rel="next" title="flatpak">flatpak<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -4,15 +4,71 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:26:09 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 11:28:14 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>dingbot</title>
+    <link>https://serialt.github.io/posts/2023-11-11-dingbot/</link>
+    <pubDate>Sat, 11 Nov 2023 11:28:14 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-dingbot/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>caddy</title>
+    <link>https://serialt.github.io/posts/2023-11-11-caddy/</link>
+    <pubDate>Sat, 11 Nov 2023 10:29:10 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-caddy/</guid>
+    <description><![CDATA[Caddy Caddy 是一个 Go 编写的 Web 服务器，类似于 Nginx，Caddy 提供了更加强大的功能，随着 v2 版本发布 Caddy 已经可以作为中小型站点 Web 服务器的另一个选择；相]]></description>
+</item>
+<item>
+    <title>flatpak</title>
+    <link>https://serialt.github.io/posts/2023-11-11-flatpak/</link>
+    <pubDate>Sat, 11 Nov 2023 10:28:14 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-flatpak/</guid>
+    <description><![CDATA[flatpak 简介 Flatpak 是一种新的通用包装格式。启用 Flatpak 将使您能够轻松安装许多 Linux 应用程序。这是在 Ubuntu 和其他 Linux 发行版中使用 Flatpak 的方法。 在 Linux 中安装应用程序就像打开软件]]></description>
+</item>
+<item>
+    <title>daemon</title>
+    <link>https://serialt.github.io/posts/2023-11-11-daemon/</link>
+    <pubDate>Sat, 11 Nov 2023 10:28:12 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-daemon/</guid>
+    <description><![CDATA[Daemon 守护进程服务 systemd supervisor launchd 一、supervisor ​ 是用Python开发的一套通用的进程管理程序，能将一个普通的命令行进程变为后台daemon，并]]></description>
+</item>
+<item>
+    <title>coredns</title>
+    <link>https://serialt.github.io/posts/2023-11-11-coredns/</link>
+    <pubDate>Sat, 11 Nov 2023 10:28:11 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-coredns/</guid>
+    <description><![CDATA[CoreDNS 在内网服务中，需要部署内部的 dns，用于各种服务的 dns 解析。常见的 dns server 有 bind，dnsmasq，coredns 等。coredns 出名于用于]]></description>
+</item>
+<item>
+    <title>multipass</title>
+    <link>https://serialt.github.io/posts/2023-11-11-multipass/</link>
+    <pubDate>Sat, 11 Nov 2023 10:28:11 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-multipass/</guid>
+    <description><![CDATA[​ Multipass 是一个轻量虚拟机管理器，是由 Ubuntu 运营公司 Canonical 所推出的开源项目。运行环境支持 Linux、Windows、macOS。在不同的操作系统上，使用的]]></description>
+</item>
+<item>
     <title>Go basic</title>
     <link>https://serialt.github.io/posts/2023-11-11-go-basic/</link>
     <pubDate>Sat, 11 Nov 2023 10:26:09 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-11-11-go-basic/</guid>
     <description><![CDATA[1、变量定义 var name string var isOk bool // 隐式申明 a := 100 str := &#34;serialt&#34; // 批量声明 var ( a string b int c bool d float32 ) // 变量的初始化 var name string = &#34;github&#34; var age int = 10 var name, age = &#34;github&#34;, 11 // 类型推导 var name =]]></description>
+</item>
+<item>
+    <title>wsl</title>
+    <link>https://serialt.github.io/posts/2023-11-11-wsl/</link>
+    <pubDate>Sat, 11 Nov 2023 10:25:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-wsl/</guid>
+    <description><![CDATA[WSL2 windows上到linux(windows sub system for linux ) 一、安装 wsl 2 如果系统中带有 wsl，则需要升级到 wsl 2。 以管理员身份打开 PowerShe]]></description>
 </item>
 <item>
     <title>Go gopsutil</title>
@@ -29,62 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-11-11-go-yaml/</guid>
     <description><![CDATA[Go 读取yaml格式配置文件 package config import ( &#34;fmt&#34; &#34;io/ioutil&#34; &#34;gopkg.in/yaml.v3&#34; ) type Service struct { Host string `json:&#34;host&#34; yaml:&#34;host&#34;` Port string `json:&#34;port&#34; yaml:&#34;port&#34;` } type MyConfig struct { Service Service `json:&#34;service&#34; yaml:&#34;service&#34;` } var Config *MyConfig func LoadConfig(filepath string) { if filepath == &#34;&#34; { return } // 读yaml文件 config, err := ioutil.ReadFile(filepath) if]]></description>
-</item>
-<item>
-    <title>Go strconv</title>
-    <link>https://serialt.github.io/posts/2023-11-11-go-strconv/</link>
-    <pubDate>Sat, 11 Nov 2023 10:25:05 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-11-go-strconv/</guid>
-    <description><![CDATA[Go语言内置包之strconv Go语言中strconv包实现了基本数据类型和其字符串表示的相互转换。 strconv包 strconv包实现了基]]></description>
-</item>
-<item>
-    <title>Go tail</title>
-    <link>https://serialt.github.io/posts/2023-11-11-go-tail/</link>
-    <pubDate>Sat, 11 Nov 2023 10:25:05 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-11-go-tail/</guid>
-    <description><![CDATA[Go tail库 实时读取文件内容 go get github.com/hpcloud/tail 示例： package main import ( &#34;fmt&#34; &#34;time&#34; &#34;github.com/hpcloud/tail&#34; ) func main() { fileName := &#34;./my.log&#34; config := tail.Config{ ReOpen: true, // 重新打开 Follow: true, // 是否跟随 Location: &amp;tail.SeekInfo{Offset: 0, Whence: 2}, // 从文件的哪个地方开始读 MustExist: false,]]></description>
-</item>
-<item>
-    <title>Go net</title>
-    <link>https://serialt.github.io/posts/2023-11-11-go-net/</link>
-    <pubDate>Sat, 11 Nov 2023 10:25:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-11-go-net/</guid>
-    <description><![CDATA[Go语言标准库net包介绍 一、域名解析 DNS 记录是与 DNS 服务器关联的映射文件，无论每个域名与哪个 IP 地址关联，它们都能处理发送到每个域名的请求。ne]]></description>
-</item>
-<item>
-    <title>Go mapstructure</title>
-    <link>https://serialt.github.io/posts/2023-11-11-go-mapstructure/</link>
-    <pubDate>Sat, 11 Nov 2023 10:24:54 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-11-go-mapstructure/</guid>
-    <description><![CDATA[mapstructure 转换库 简介 mapstructure用于将通用的map[string]interface{}解码到对应的 Go 结构体中，或者执行相反的操作。很多]]></description>
-</item>
-<item>
-    <title>Go leveldb</title>
-    <link>https://serialt.github.io/posts/2023-11-11-go-leveldb/</link>
-    <pubDate>Sat, 11 Nov 2023 10:24:52 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-11-go-leveldb/</guid>
-    <description><![CDATA[Go leveldb库 github地址：https://github.com/syndtr/goleveldb 安装： go get github.com/syndtr/goleveldb/leveldb 简介： levelDB在]]></description>
-</item>
-<item>
-    <title>Go ini</title>
-    <link>https://serialt.github.io/posts/2023-11-11-go-ini/</link>
-    <pubDate>Sat, 11 Nov 2023 10:24:50 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-11-go-ini/</guid>
-    <description><![CDATA[Go ini库 参考：https://juejin.cn/post/6844904048764649479 简介 ini 是 Windows 上常用的配置文件格式。MySQ]]></description>
-</item>
-<item>
-    <title>Go homedir</title>
-    <link>https://serialt.github.io/posts/2023-11-11-go-homedir/</link>
-    <pubDate>Sat, 11 Nov 2023 10:24:49 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-11-go-homedir/</guid>
-    <description><![CDATA[homedir家目录 GitHub地址：https://github.com/mitchellh/go-homedir 使用os/user获取用]]></description>
 </item>
 </channel>
 </rss>

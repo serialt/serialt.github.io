@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>vm - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/vm/</link>
+        <description>vm - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:28:11 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/vm/" rel="self" type="application/rss+xml" /><item>
+    <title>multipass</title>
+    <link>https://serialt.github.io/posts/2023-11-11-multipass/</link>
+    <pubDate>Sat, 11 Nov 2023 10:28:11 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-multipass/</guid>
+    <description><![CDATA[​ Multipass 是一个轻量虚拟机管理器，是由 Ubuntu 运营公司 Canonical 所推出的开源项目。运行环境支持 Linux、Windows、macOS。在不同的操作系统上，使用的]]></description>
+</item>
+</channel>
+</rss>

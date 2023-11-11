@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>wsl - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="wsl" />
+<meta property="og:description" content="WSL2 windows上到linux(windows sub system for linux ) 一、安装 wsl 2 如果系统中带有 wsl，则需要升级到 wsl 2。 以管理员身份打开 PowerShe" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2023-11-11-wsl/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-11T10:25:27+08:00" />
+<meta property="article:modified_time" content="2023-11-11T10:25:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="wsl"/>
+<meta name="twitter:description" content="WSL2 windows上到linux(windows sub system for linux ) 一、安装 wsl 2 如果系统中带有 wsl，则需要升级到 wsl 2。 以管理员身份打开 PowerShe"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-11-wsl/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-11-gopsutil/" /><link rel="next" href="https://serialt.github.io/posts/2023-11-11-go-basic/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "wsl",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2023-11-11-wsl\/"
+        },"genre": "posts","keywords": "wsl, wsl-2, wsl-windows","wordcount":  1594 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2023-11-11-wsl\/","datePublished": "2023-11-11T10:25:27+08:00","dateModified": "2023-11-11T10:25:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">wsl</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/windows/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>windows</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-11">2023-11-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1594 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#wsl2">WSL2</a>
+      <ul>
+        <li><a href="#一安装-wsl-2">一、安装 wsl 2</a></li>
+        <li><a href="#二wsl-基本命令">二、wsl 基本命令</a></li>
+        <li><a href="#三发行版维护">三、发行版维护</a></li>
+        <li><a href="#四自定义发行版">四、自定义发行版</a></li>
+        <li><a href="#五wsl-配置文件">五、wsl 配置文件</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="wsl2">WSL2</h2>
+<p>windows上到linux(windows sub system for linux )</p>
+<h3 id="一安装-wsl-2">一、安装 wsl 2</h3>
+<p>如果系统中带有 wsl，则需要升级到 wsl 2。
+以管理员身份打开 PowerShell（“开始”菜单 &gt;“PowerShell”&gt; 单击右键 &gt;“以管理员身份运行”），然后输入以下命令：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">dism</span><span class="p">.</span><span class="py">exe</span> <span class="p">/</span><span class="n">online</span> <span class="p">/</span><span class="nb">enable-feature</span> <span class="p">/</span><span class="n">featurename</span><span class="err">:</span><span class="nb">Microsoft-Windows</span><span class="n">-Subsystem-Linux</span> <span class="p">/</span><span class="n">all</span> <span class="p">/</span><span class="n">norestart</span>
+</span></span></code></pre></div><h4 id="启动虚拟化功能然后重启windows">启动虚拟化功能，然后重启windows</h4>
+<pre tabindex="0"><code>dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+</code></pre><h4 id="下载-linux-内核更新包">下载 linux 内核更新包</h4>
+<p><a href="https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi" target="_blank" rel="noopener noreffer ">https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi</a></p>
+<h4 id="修改-wsl-2-为默认的版本">修改 wsl 2 为默认的版本</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">wsl</span> <span class="p">-</span><span class="n">-set-default-version</span> <span class="mf">2</span>
+</span></span></code></pre></div><h4 id="下载-linux-发行版">下载 linux 发行版</h4>
+<ul>
+<li><a href="https://aka.ms/wslubuntu2004" target="_blank" rel="noopener noreffer ">Ubuntu 20.04</a></li>
+<li><a href="https://aka.ms/wslubuntu2004arm" target="_blank" rel="noopener noreffer ">Ubuntu 20.04 ARM</a></li>
+<li><a href="https://aka.ms/wsl-ubuntu-1804" target="_blank" rel="noopener noreffer ">Ubuntu 18.04</a></li>
+<li><a href="https://aka.ms/wsl-ubuntu-1804-arm" target="_blank" rel="noopener noreffer ">Ubuntu 18.04 ARM</a></li>
+<li><a href="https://aka.ms/wsl-ubuntu-1604" target="_blank" rel="noopener noreffer ">Ubuntu 16.04</a></li>
+<li><a href="https://aka.ms/wsl-debian-gnulinux" target="_blank" rel="noopener noreffer ">Debian GNU/Linux</a></li>
+<li><a href="https://aka.ms/wsl-kali-linux-new" target="_blank" rel="noopener noreffer ">Kali Linux</a></li>
+<li><a href="https://aka.ms/wsl-sles-12" target="_blank" rel="noopener noreffer ">SUSE Linux Enterprise Server 12</a></li>
+<li><a href="https://aka.ms/wsl-SUSELinuxEnterpriseServer15SP2" target="_blank" rel="noopener noreffer ">SUSE Linux Enterprise Server 15 SP2</a></li>
+<li><a href="https://aka.ms/wsl-opensuseleap15-2" target="_blank" rel="noopener noreffer ">openSUSE Leap 15.2</a></li>
+<li><a href="https://github.com/WhitewaterFoundry/WSLFedoraRemix/releases/" target="_blank" rel="noopener noreffer ">Fedora Remix for WSL</a></li>
+</ul>
+<p>将获得 <code>&lt;distro&gt;.appx</code> 包</p>
+<h4 id="导入系统">导入系统</h4>
+<p><code>app-name</code> 是 Linux 发行版 .appx 文件的名称。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Add-AppxPackage</span> <span class="p">.\</span><span class="n">app_name</span><span class="p">.</span><span class="py">appx</span>
+</span></span></code></pre></div><h3 id="二wsl-基本命令">二、wsl 基本命令</h3>
+<p>wsl 常用命令</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 安装特定的linux发行版</span>
+</span></span><span class="line"><span class="cl">wsl -d &lt;Distribution Name&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 列出可用的 Linux 发行版</span>
+</span></span><span class="line"><span class="cl">wsl -l -o
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 列出已安装的 Linux 发行版</span>
+</span></span><span class="line"><span class="cl">wsl --list --verbose
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 将 WSL 版本设置为 1 或 2</span>
+</span></span><span class="line"><span class="cl">wsl --set-version <span class="m">2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 设置默认 WSL 版本</span>
+</span></span><span class="line"><span class="cl">wsl --set-default-version &lt;Version&gt;
+</span></span><span class="line"><span class="cl">wsl --set-default-version <span class="m">2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 设置默认 Linux 发行版</span>
+</span></span><span class="line"><span class="cl">wsl --set-default &lt;Distribution Name&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 将目录更改为主页</span>
+</span></span><span class="line"><span class="cl">wsl ~
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 通过 PowerShell 或 CMD 运行特定的 Linux 发行版</span>
+</span></span><span class="line"><span class="cl">wsl --distribution &lt;Distribution Name&gt; --user &lt;User Name&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 启动一个发行版</span>
+</span></span><span class="line"><span class="cl">wsl -d Ubuntu-20.04 -u root
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">更新 WSL
+</span></span><span class="line"><span class="cl">wsl --update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">回滚wsl版本
+</span></span><span class="line"><span class="cl">wsl --update rollback
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">检查 WSL 状态
+</span></span><span class="line"><span class="cl">wsl --status
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">以特定用户的身份运行
+</span></span><span class="line"><span class="cl">wsl -u &lt;Username&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">更改发行版的默认用户
+</span></span><span class="line"><span class="cl">&lt;DistributionName&gt; config --default-user &lt;Username&gt;
+</span></span><span class="line"><span class="cl"><span class="c1"># ubuntu config --default-user johndoe 会将 Ubuntu 发行版的默认用户更改为“johndoe”用户。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">关闭
+</span></span><span class="line"><span class="cl">wsl --shutdown
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">内存限制
+</span></span><span class="line"><span class="cl">.wslconfig 文件
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">关闭一个发行版
+</span></span><span class="line"><span class="cl">wsl --terminate &lt;Distribution Name&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">将发行版导出到 TAR 文件
+</span></span><span class="line"><span class="cl">wsl --export &lt;Distribution Name&gt; &lt;FileName&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">导入新发行版
+</span></span><span class="line"><span class="cl">wsl --import &lt;Distribution Name&gt; &lt;InstallLocation&gt; &lt;FileName&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">注销或卸载 Linux 发行版，注销后就被删除，注意！！！
+</span></span><span class="line"><span class="cl">wsl --unregister &lt;DistributionName&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">装载磁盘或设备
+</span></span><span class="line"><span class="cl">wsl --mount &lt;DiskPath&gt;
+</span></span></code></pre></div><p>安装特定的linux发行版</p>
+<pre tabindex="0"><code>wsl -d &lt;Distribution Name&gt;
+</code></pre><p>wsl 配置文件</p>
+<p><a href="https://docs.microsoft.com/zh-cn/windows/wsl/wsl-config" target="_blank" rel="noopener noreffer ">https://docs.microsoft.com/zh-cn/windows/wsl/wsl-config</a></p>
+<h3 id="三发行版维护">三、发行版维护</h3>
+<h4 id="1迁移工作目录">1、迁移工作目录</h4>
+<p>wsl 默认安装c盘里，c盘因为硬盘分区的问题，可能分配空间比较小，因此可能存在需要迁移的操作。</p>
+<p>1）关闭运行的系统</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">C:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">serialt</span><span class="p">&gt;</span>                    
+</span></span><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">C:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">serialt</span><span class="p">&gt;</span> <span class="n">wsl</span> <span class="n">-l</span> <span class="n">-v</span> 
+</span></span><span class="line"><span class="cl">  <span class="n">NAME</span>                   <span class="n">STATE</span>           <span class="n">VERSION</span>
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="n">Ubuntu</span><span class="p">-</span><span class="mf">20.04</span>           <span class="n">Running</span>         <span class="mf">2</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">docker-desktop</span>         <span class="n">Stopped</span>         <span class="mf">2</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">docker-desktop</span><span class="n">-data</span>    <span class="n">Stopped</span>         <span class="mf">2</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">C:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">serialt</span><span class="p">&gt;</span> <span class="n">wsl</span> <span class="p">-</span><span class="n">-shutdown</span>
+</span></span><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">C:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">serialt</span><span class="p">&gt;</span> <span class="n">wsl</span> <span class="n">-l</span> <span class="n">-v</span>     
+</span></span><span class="line"><span class="cl">  <span class="n">NAME</span>                   <span class="n">STATE</span>           <span class="n">VERSION</span>
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="n">Ubuntu</span><span class="p">-</span><span class="mf">20.04</span>           <span class="n">Stopped</span>         <span class="mf">2</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">docker-desktop</span>         <span class="n">Stopped</span>         <span class="mf">2</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">docker-desktop</span><span class="n">-data</span>    <span class="n">Stopped</span>         <span class="mf">2</span>
+</span></span><span class="line"><span class="cl"><span class="nb">PS </span><span class="n">C:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">serialt</span><span class="p">&gt;</span> 
+</span></span></code></pre></div><p>2）导出与导入发行版</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">wsl</span> <span class="p">-</span><span class="n">-export</span> <span class="nb">docker-desktop</span><span class="n">-data</span> <span class="s2">&#34;E:\wsl\docker-data\docker-desktop-data.tar&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">wsl</span> <span class="p">-</span><span class="n">-unregister</span> <span class="nb">docker-desktop</span><span class="n">-data</span>
+</span></span><span class="line"><span class="cl"><span class="n">wsl</span> <span class="p">-</span><span class="n">-import</span> <span class="nb">docker-desktop</span><span class="n">-data</span> <span class="n">D:</span><span class="p">\</span><span class="n">docker</span><span class="p">\</span><span class="n">desktop</span> <span class="s2">&#34;E:\wsl\docker-data\docker-desktop-data.tar&#34;</span> <span class="p">-</span><span class="n">-version</span> <span class="mf">2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">wsl</span> <span class="p">-</span><span class="n">-export</span> <span class="nb">docker-desktop</span> <span class="s2">&#34;E:\wsl\docker-data\docker-desktop.tar&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">wsl</span> <span class="p">-</span><span class="n">-unregister</span> <span class="nb">docker-desktop</span>
+</span></span><span class="line"><span class="cl"><span class="n">wsl</span> <span class="p">-</span><span class="n">-import</span> <span class="nb">docker-desktop</span> <span class="n">D:</span><span class="p">\</span><span class="n">docker</span><span class="p">\</span><span class="n">desktop</span> <span class="s2">&#34;E:\wsl\docker-data\docker-desktop.tar&#34;</span> <span class="p">-</span><span class="n">-version</span> <span class="mf">2</span>
+</span></span></code></pre></div><h3 id="四自定义发行版">四、自定义发行版</h3>
+<p>参考链接：https://docs.microsoft.com/zh-cn/windows/wsl/use-custom-distro</p>
+<p>通过使用 tar 文件导入任何 Linux 发行版，可在适用于 Linux 的 Windows 子系统 (WSL) 中使用该发行版（即使它不在 <a href="https://www.microsoft.com/en-us/search/shop/apps?q=linux" target="_blank" rel="noopener noreffer ">Microsoft Store</a> 中提供）。</p>
+<p>本文演示了如何通过使用 Docker 容器获取 Linux 发行版 <a href="https://www.centos.org/" target="_blank" rel="noopener noreffer ">CentOS</a> 的 tar 文件来将它导入，以便与 WSL 一起使用。 此过程可应用于导入任何 Linux 发行版。</p>
+<h4 id="1获取发行版的tar文件">1、获取发行版的tar文件</h4>
+<p>首先，需要获取一个 tar 文件，其中包含发行版的所有 Linux 二进制文件。</p>
+<p>可通过多种方式获取 tar 文件，其中两种方式包括：</p>
+<ul>
+<li>下载提供的 tar 文件。 可在 <a href="https://alpinelinux.org/downloads/" target="_blank" rel="noopener noreffer ">Alpine Linux 下载</a>站点的“微型根文件系统”部分找到 Alpine 的示例。</li>
+<li>查找 Linux 发行版容器，将实例导出为 tar 文件。 以下示例将使用 <a href="https://hub.docker.com/_/centos" target="_blank" rel="noopener noreffer ">CentOS 容器</a>演示此过程。</li>
+</ul>
+<h5 id="获取centos的tar文件">获取CentOS的tar文件</h5>
+<p>从容器中导出tar文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="p">[</span><span class="l">root@tc tabby]# docker pull rockylinux</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Using default tag</span><span class="p">:</span><span class="w"> </span><span class="l">latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">latest</span><span class="p">:</span><span class="w"> </span><span class="l">Pulling from library/rockylinux</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">72a2451028f1</span><span class="p">:</span><span class="w"> </span><span class="l">Pull complete</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Digest</span><span class="p">:</span><span class="w"> </span><span class="l">sha256:5fed5497b568bcf7a90a00965987fc099edbcf44b1179a5ef6d4b47758281ca5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">Status</span><span class="p">:</span><span class="w"> </span><span class="l">Downloaded newer image for rockylinux:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">docker.io/library/rockylinux:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="l">root@tc tabby]# docker run -tid --name=rocky rockylinux</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">38b201fca776cc1aadf029cbf5a1d6a1fb57ff62f5d71d4ed0416d870b407550</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="l">root@tc tabby]# docker ps</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">CONTAINER ID   IMAGE        COMMAND       CREATED         STATUS         PORTS     NAMES</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">38b201fca776   rockylinux   &#34;/bin/bash&#34;   4 seconds ago   Up 2 seconds             rocky</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="l">root@tc tabby]# </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="l">root@tc tabby]#  dockerContainerID=$(docker container ls -a | grep -i rocky | awk &#39;{print $1}&#39;)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="l">root@tc tabby]# docker export $dockerContainerID &gt; /mnt/e/rocky.tar</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="l">root@tc tabby]# du -sh /mnt/e/rocky.tar</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">202M    /mnt/e/rocky.tar</span><span class="w">
+</span></span></span></code></pre></div><h4 id="2导入到wsl中">2、导入到wsl中</h4>
+<p>准备好 tar 文件后，可使用以下命令导入它：<code>wsl --import &lt;Distro&gt; &lt;InstallLocation&gt; &lt;FileName&gt;</code>。</p>
+<pre tabindex="0"><code># 创建好存储发行版的目录
+cd E:\wsl2
+mkdir E:\wsl2\Rocky
+
+# 导入tar文件
+PS E:\wsl2&gt; wsl --import Rocky E:\wsl2\Rocky ..\rocky.tar              
+PS E:\wsl2&gt; wsl -l -v
+  NAME                   STATE           VERSION
+* docker-desktop-data    Stopped         2
+  Rocky                  Stopped         2
+  docker-desktop         Stopped         2
+  Ubuntu-20.04           Running         2
+PS E:\wsl2&gt;
+</code></pre><h4 id="3启动">3、启动</h4>
+<pre tabindex="0"><code>wsl -d Rocky -u root
+</code></pre><p>自定义的发行版可能存在因使用system管理服务而无法使用service去管理服务</p>
+<h3 id="五wsl-配置文件">五、wsl 配置文件</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="na">1、wsl.conf</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">​```toml</span>
+</span></span><span class="line"><span class="cl"><span class="na">[root@tc tcs]# cat /etc/wsl.conf </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Automatically mount Windows drive when the distribution is launched</span>
+</span></span><span class="line"><span class="cl"><span class="k">[automount]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Set to true will automount fixed drives (C:/ or D:/) with DrvFs under the root directory set above. Set to false means drives won&#39;t be mounted automatically, but need to be mounted manually or with fstab.</span>
+</span></span><span class="line"><span class="cl"><span class="na">enabled</span> <span class="o">=</span> <span class="s">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Sets the directory where fixed drives will be automatically mounted. This example changes the mount location, so your C-drive would be /c, rather than the default /mnt/c. </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#root = /mnt/d/serialt/</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># DrvFs-specific options can be specified.  </span>
+</span></span><span class="line"><span class="cl"><span class="na">options</span> <span class="o">=</span> <span class="s">&#34;metadata,uid=1003,gid=1003,umask=077,fmask=11,case=off&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Sets the `/etc/fstab` file to be processed when a WSL distribution is launched.</span>
+</span></span><span class="line"><span class="cl"><span class="na">mountFsTab</span> <span class="o">=</span> <span class="s">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Network host settings that enable the DNS server used by WSL 2. This example changes the hostname, sets generateHosts to false, preventing WSL from the default behavior of auto-generating /etc/hosts, and sets generateResolvConf to false, preventing WSL from auto-generating /etc/resolv.conf, so that you can create your own (ie. nameserver 1.1.1.1).</span>
+</span></span><span class="line"><span class="cl"><span class="k">[network]</span>
+</span></span><span class="line"><span class="cl"><span class="na">hostname</span> <span class="o">=</span> <span class="s">tc</span>
+</span></span><span class="line"><span class="cl"><span class="na">generateHosts</span> <span class="o">=</span> <span class="s">true</span>
+</span></span><span class="line"><span class="cl"><span class="na">generateResolvConf</span> <span class="o">=</span> <span class="s">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Set whether WSL supports interop process like launching Windows apps and adding path variables. Setting these to false will block the launch of Windows processes and block adding $PATH environment variables.</span>
+</span></span><span class="line"><span class="cl"><span class="k">[interop]</span>
+</span></span><span class="line"><span class="cl"><span class="na">enabled</span> <span class="o">=</span> <span class="s">false</span>
+</span></span><span class="line"><span class="cl"><span class="na">appendWindowsPath</span> <span class="o">=</span> <span class="s">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Set the user when launching a distribution with WSL.</span>
+</span></span><span class="line"><span class="cl"><span class="k">[user]</span>
+</span></span><span class="line"><span class="cl"><span class="na">default</span> <span class="o">=</span> <span class="s">root</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Set a command to run when a new WSL instance launches. This example starts the Docker container service.</span>
+</span></span><span class="line"><span class="cl"><span class="k">[boot]</span>
+</span></span><span class="line"><span class="cl"><span class="na">command</span> <span class="o">=</span> <span class="s">service docker start</span>
+</span></span><span class="line"><span class="cl"><span class="na">[root@tc tcs]# </span>
+</span></span><span class="line"><span class="cl"><span class="na">​```</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-11-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/2023-11-11-wsl/" data-title="wsl" data-hashtags="wsl,wsl-2,wsl-windows"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/2023-11-11-wsl/" data-hashtag="wsl"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/2023-11-11-wsl/" data-title="wsl"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/2023-11-11-wsl/" data-title="wsl"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/2023-11-11-wsl/" data-title="wsl"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/wsl/">wsl</a>,&nbsp;<a href="/tags/wsl-2/">wsl-2</a>,&nbsp;<a href="/tags/wsl-windows/">wsl-windows</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023-11-11-gopsutil/" class="prev" rel="prev" title="Go gopsutil"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Go gopsutil</a>
+            <a href="/posts/2023-11-11-go-basic/" class="next" rel="next" title="Go basic">Go basic<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

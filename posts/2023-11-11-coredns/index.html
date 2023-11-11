@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>coredns - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="coredns" />
+<meta property="og:description" content="CoreDNS 在内网服务中，需要部署内部的 dns，用于各种服务的 dns 解析。常见的 dns server 有 bind，dnsmasq，coredns 等。coredns 出名于用于" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2023-11-11-coredns/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-11T10:28:11+08:00" />
+<meta property="article:modified_time" content="2023-11-11T10:28:11+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="coredns"/>
+<meta name="twitter:description" content="CoreDNS 在内网服务中，需要部署内部的 dns，用于各种服务的 dns 解析。常见的 dns server 有 bind，dnsmasq，coredns 等。coredns 出名于用于"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-11-coredns/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-11-multipass/" /><link rel="next" href="https://serialt.github.io/posts/2023-11-11-daemon/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "coredns",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2023-11-11-coredns\/"
+        },"genre": "posts","keywords": "dns, coredns","wordcount":  3964 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2023-11-11-coredns\/","datePublished": "2023-11-11T10:28:11+08:00","dateModified": "2023-11-11T10:28:11+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">coredns</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/dns/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DNS</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-11">2023-11-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3964 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一基本使用">一、基本使用</a>
+      <ul>
+        <li></li>
+        <li><a href="#可行的配置">可行的配置</a></li>
+      </ul>
+    </li>
+    <li><a href="#二增加和编译插件">二、增加和编译插件</a>
+      <ul>
+        <li><a href="#1编译">1、编译</a></li>
+        <li><a href="#2验证插件">2、验证插件</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="coredns">CoreDNS</h1>
+<p>在内网服务中，需要部署内部的 dns，用于各种服务的 dns 解析。常见的 dns server 有 bind，dnsmasq，coredns 等。coredns 出名于用于 kubernetes 中 service 到 ip 的解析，由于是使用 go 开发的，构建的二进制很发布部署使用，同时 coredns 也兼容 bind 的域名解析配置文件。</p>
+<p>官网：https://coredns.io/</p>
+<p>参考链接：https://blog.gmem.cc/coredns-study-note</p>
+<h2 id="一基本使用">一、基本使用</h2>
+<p>常用插件</p>
+<p><code>bind</code></p>
+<p>指定服务器监听的网络接口（IP地址）： bind ADDRESS &hellip;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">.</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">bind</span> <span class="err">127.0.0.1</span> <span class="err">::1</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="err">.</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">bind</span> <span class="err">127.0.0.1</span>
+</span></span><span class="line"><span class="cl">    <span class="err">bind</span> <span class="err">::1</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><code>autopath</code></p>
+<p>允许服务器端进行的搜索后缀（search domain）补全。如果插件发现客户端查询的名称，匹配search path的第一个元素，则自动遍历search path中的domain链，并返回第一个非NXDOMAIN结果。如果出现失败，则返回原始查询的应答。</p>
+<p>由于autopath的应答中的名称，和原始问题不匹配，因此他会在CoreDNS中添加一个CNAME，从原始名称指向应答中的名称。</p>
+<pre tabindex="0"><code># ZONE autopath权威负责的Zone
+# RESOLV-CONF 包含search domain的配置文件。或者指向其它插件，例如@kubernetes，这时从其它插件读取search domain
+# 配置文件中必须有 search domain1 domain2 ... 这样的行
+autopath [ZONE...] RESOLV-CONF
+</code></pre><p><code>cache</code></p>
+<p>实现前端缓存，用于查询后端（Upstream、Database&hellip;）成本较高的场景。启用此插件后，除了Zone transfers / Metadata以外的记录会被缓存默认3600s。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">#</span> <span class="err">TTL</span> <span class="err">缓存有效期，单位秒，默认</span><span class="mi">3600</span>
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="err">ZONES</span> <span class="err">哪些Zone支持缓存</span>
+</span></span><span class="line"><span class="cl"><span class="err">cache</span> <span class="p">[</span><span class="err">TTL</span><span class="p">]</span> <span class="p">[</span><span class="err">ZONES...</span><span class="p">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">成功的DNS应答的缓存配置</span>
+</span></span><span class="line"><span class="cl">    <span class="err">success</span> <span class="err">CAPACITY</span> <span class="err">[TTL]</span> <span class="err">[MINTTL]</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">Denial</span> <span class="err">of</span> <span class="err">existence应答的缓存配置</span>
+</span></span><span class="line"><span class="cl">    <span class="err">denial</span> <span class="err">CAPACITY</span> <span class="err">[TTL]</span> <span class="err">[MINTTL]</span>
+</span></span><span class="line"><span class="cl">    <span class="err">prefetch</span> <span class="err">AMOUNT</span> <span class="err">[[DURATION]</span> <span class="err">[PERCENTAGE%]]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><code>loop</code></p>
+<p>能够检测简单的forwarding循环并终止服务器。</p>
+<p><code>debug</code></p>
+<p>能够从Panic中恢复，用于调试用途</p>
+<p><code>errors</code></p>
+<p>启用错误日志记录，格式：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">errors</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">在DURATION期间抓取匹配REGEXP的错误日志，聚合为单条日志</span>
+</span></span><span class="line"><span class="cl">    <span class="err">consolidate</span> <span class="err">DURATION</span> <span class="err">REGEXP</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">.</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">errors</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="err">consolidate</span> <span class="err">5m</span> <span class="nt">&#34;.* i/o timeout$&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">consolidate</span> <span class="mi">30</span><span class="err">s</span> <span class="s2">&#34;^Failed to .+&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span></code></pre></div><p><code>forward</code></p>
+<p>将DNS请求转发给上游DNS服务器，支持DNS  / TCP  / DNS over TLS。该插件代替原先的proxy插件。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">#</span> <span class="err">FROM</span> <span class="err">匹配此后缀的DNS查询会被转发</span>
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="err">TO</span> <span class="err">上游服务器的端点，支持指定协议，例如tls:</span><span class="c1">//9.9.9.9
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">forward</span> <span class="err">FROM</span> <span class="err">TO...</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">空格分隔的，不进行转发的域名列表</span>
+</span></span><span class="line"><span class="cl">    <span class="err">except</span> <span class="err">IGNORED_NAMES...</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">强制基于TCP协议</span>
+</span></span><span class="line"><span class="cl">    <span class="err">force_tcp</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">优先使用UDP</span>
+</span></span><span class="line"><span class="cl">    <span class="err">prefer_udp</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">多久后丢弃连接，</span>
+</span></span><span class="line"><span class="cl">    <span class="err">expire</span> <span class="err">DURATION</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">判定为不健康需要的连续失败辞书</span>
+</span></span><span class="line"><span class="cl">    <span class="err">max_fails</span> <span class="err">INTEGER</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">DNS</span> <span class="err">over</span> <span class="err">TLS配置</span>
+</span></span><span class="line"><span class="cl">    <span class="err">tls</span> <span class="err">CERT</span> <span class="err">KEY</span> <span class="err">CA</span>
+</span></span><span class="line"><span class="cl">    <span class="err">tls_servername</span> <span class="err">NAME</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">选取上游服务器的算法，默认random</span>
+</span></span><span class="line"><span class="cl">    <span class="err">policy</span> <span class="err">random|round_robin|sequential</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">健康检查周期</span>
+</span></span><span class="line"><span class="cl">    <span class="err">health_check</span> <span class="err">DURATION</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>直接转发，用于兜底的示例：</p>
+<pre tabindex="0"><code>forward . 223.5.5.5 1.1.1.1
+</code></pre><p>使用TLS的示例：</p>
+<pre tabindex="0"><code>forward . tls://9.9.9.9 {
+    tls_servername dns.quad9.net
+    health_check 5s
+}
+</code></pre><p>强制TCP转发：</p>
+<pre tabindex="0"><code>svc.k8s.gmem.cc {
+  forward . 127.0.0.1:5353 {
+    force_tcp
+  }
+}
+</code></pre><p>从文件中读取上游DNS：</p>
+<pre tabindex="0"><code>forward . /etc/resolv.conf
+</code></pre><p>如果CoreDNS运行在K8S中，则CoreDNS的Pod的/etc/resolv.conf内容的基础，取决于kubelet的&ndash;resolv-conf配置，默认值指向宿主机的/etc/resolv.conf文件。</p>
+<h4 id="上游健康检查">上游健康检查</h4>
+<p>首次转发，随机选取一个上游服务器，后续一直使用，直到它不健康了。</p>
+<p>当出现一个错误  —— 任何DNS响应都不看作错误（REFUSED, NOTIMPL, SERVFAIL &hellip; ）—— 则CoreDNS启动健康检查循环（默认0.5s一次），直到上游服务器恢复健康。</p>
+<p>如果max_fails设置为0则不进行健康检查，总是认为上游服务器是健康的。</p>
+<p>CoreDNS不向不健康的上游服务器转发请求，如果所有上游服务器都不健康，则随机选取一个转发。</p>
+<p><code>health</code></p>
+<p>启用进程级别的监控检查。示例： <code>health :8080</code>，你可以访问:8080/health获取健康状态。</p>
+<p><code>ready</code></p>
+<p>提供readiness探针。示例： <code>ready localhost:8091</code></p>
+<p><code>hosts</code></p>
+<p>以/etc/hosts风格提供Zone数据，格式：</p>
+<pre tabindex="0"><code># FILE 从文件中读取Zone数据，默认从/etc/hosts读取
+# ZONES 此插件的权威Zone
+hosts [FILE [ZONES...]] {
+    # 内联的HOSTS条目
+    [INLINE]
+    # 修改生成的DNS记录的DNS TTL
+    ttl SECONDS
+    # 禁止自动生成in-addr.arpa或ip6.arpa条目
+    no_reverse
+    # 重新载入文件的间隔，例如 300ms 1.5h 2h45m
+    reload DURATION
+    # 对于匹配的ZONES，如果此插件没有记录，则由下一个插件处理
+    fallthrough [ZONES...]
+}
+</code></pre><pre tabindex="0"><code>hosts {
+   172.21.0.1      kdc-1
+   fallthrough
+}
+</code></pre><p><code>import </code></p>
+<p>该插件有两个用途：</p>
+<ol>
+<li>导入其它配置文件到主配置文件</li>
+<li>导入配置片段</li>
+</ol>
+<p>格式： import PATTERN</p>
+<p><code>log</code></p>
+<p>记录查询日志，格式：</p>
+<pre tabindex="0"><code># NAMES 匹配的DNS查询被记录
+# FORMAT 日志格式，
+log [NAMES...] [FORMAT]
+ 
+log [NAMES...] [FORMAT] {
+    class CLASSES...
+}
+</code></pre><p>CLASSES</p>
+<p>指定哪些<a href="https://blog.gmem.cc/tcp-ip-study-note#dns-rtnmsg" target="_blank" rel="noopener noreffer ">RCode</a>会被记录</p>
+<table>
+<thead>
+<tr>
+<th>取值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>success</td>
+<td>记录成功的请求</td>
+</tr>
+<tr>
+<td>denial</td>
+<td>记录NXDOMAIN的请求、NOERROR但是没有数据的（nodata，域名存在，但是请求的记录类型没有）</td>
+</tr>
+<tr>
+<td>error</td>
+<td>记录SERVFAIL、NOTIMP、REFUSED等等，任何提示远程服务器不愿意解析请求的应答都包含在内</td>
+</tr>
+<tr>
+<td>all</td>
+<td>默认，记录所有请求</td>
+</tr>
+</tbody>
+</table>
+<p><code>rewrite</code></p>
+<p>执行内部的消息重写。格式</p>
+<pre tabindex="0"><code># FIELD 请求/应答的什么字段需要被重写
+# type 请求的TYPE字段
+# class 消息的类型
+# name 请求中的DNS名称
+# answer name 应答中的DNS名称
+# ttl TTL值
+rewrite [continue|stop] FIELD [FROM TO|FROM TTL]
+</code></pre><p>要重写DNS请求中的名称，使用格式：</p>
+<pre tabindex="0"><code>rewrite [continue|stop] name [exact|prefix|suffix|substring|regex] STRING STRING
+</code></pre><p>示例：</p>
+<pre tabindex="0"><code>rewrite name substring k8s.gmem.cc k8s.gmem.site
+rewrite name regex (.*)\.gmem\.cc {1}.gmem.site
+rewrite name suffix .gmem.cc. .gmem.site.
+</code></pre><p>要重写DNS响应中的名称，参考：</p>
+<pre tabindex="0"><code>rewrite stop {
+    name regex (.*)\.gmem\.site {1}.gmem.site
+    answer name (.*)\.gmem\.site {1}.gmem.site
+} 
+</code></pre><p><code>template</code></p>
+<p>提供一个模板，基于请求来动态的生成响应。格式</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">#</span> <span class="err">CLASS</span> <span class="err">查询分类，IN或ANY</span>
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="err">TYPE</span> <span class="err">查询类型，A、PTR...</span> <span class="err">ANY匹配所有类型</span>
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="err">ZONE</span> <span class="err">此模板的Zone</span>
+</span></span><span class="line"><span class="cl"><span class="err">template</span> <span class="err">CLASS</span> <span class="err">TYPE</span> <span class="p">[</span><span class="err">ZONE...</span><span class="p">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">匹配请求DNS名称的正则式</span>
+</span></span><span class="line"><span class="cl">    <span class="err">match</span> <span class="err">REGEX...</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">DNS应答</span>
+</span></span><span class="line"><span class="cl">    <span class="err">answer</span> <span class="err">RR</span>
+</span></span><span class="line"><span class="cl">    <span class="err">additional</span> <span class="err">RR</span>
+</span></span><span class="line"><span class="cl">    <span class="err">authority</span> <span class="err">RR</span>
+</span></span><span class="line"><span class="cl">    <span class="err">rcode</span> <span class="err">CODE</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">用于解析CNAMEs的上有集群</span>
+</span></span><span class="line"><span class="cl">    <span class="err">upstream</span>
+</span></span><span class="line"><span class="cl">    <span class="err">fallthrough</span> <span class="err">[ZONE...]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>泛域名</strong></p>
+<p>使用template插件可以实现泛域名解析，下面是一个例子：</p>
+<pre tabindex="0"><code>template IN A mesh.gmem.cc {
+  match .*\.mesh\.gmem\.cc
+  answer &#34;{{ .Name }} 60 IN A 10.0.11.11&#34;
+  fallthrough
+}
+</code></pre><p>当前版本有一个奇怪的行为： 上述配置导致hosts插件指定的10.0.11.1 mesh.gmem.cc条目失效，必须指定fallthrough才能避免此问题。</p>
+<p>启动服务</p>
+<pre tabindex="0"><code>docker run -d --restart=always --name coredns-srv -p 53:53/udp -v `pwd`/conf:/Conf coredns/coredns -conf /Conf/corefile.conf
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">(common)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">log</span>
+</span></span><span class="line"><span class="cl">  <span class="err">cache</span> <span class="err">120</span>
+</span></span><span class="line"><span class="cl">  <span class="err">loop</span>
+</span></span><span class="line"><span class="cl">    <span class="err">errors</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="err">consolidate</span> <span class="err">5m</span> <span class="nt">&#34;.* i/o timeout$&#34;</span> <span class="err">warning</span>
+</span></span><span class="line"><span class="cl">        <span class="err">consolidate</span> <span class="mi">30</span><span class="err">s</span> <span class="s2">&#34;^Failed to .+&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">local.com:</span><span class="mi">53</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">import</span> <span class="err">common</span>
+</span></span><span class="line"><span class="cl">  <span class="err">file</span> <span class="err">db.local.com</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">reload</span> <span class="err">30s</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="err">minimal</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">ccc</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">auto</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">       <span class="err">directory</span> <span class="err">/etc/coredns/zones/org</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>  
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">sugar.io:</span><span class="mi">53</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">file</span> <span class="err">db.local.com</span>
+</span></span><span class="line"><span class="cl">  <span class="err">log</span>
+</span></span><span class="line"><span class="cl">  <span class="err">errors</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">.:</span><span class="mi">1053</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span> <span class="err">使用DNS-over-TLS</span> <span class="err">(DoT)</span>
+</span></span><span class="line"><span class="cl">    <span class="err">forward</span> <span class="err">.</span> <span class="err">tls:</span><span class="c1">//9.9.9.9 tls://1.0.0.1 {
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>       <span class="err">tls_servername</span> <span class="err">dns.quad9.net</span>
+</span></span><span class="line"><span class="cl">       <span class="err">health_check</span> <span class="err">5s</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="err">cache</span> <span class="mi">30</span>  
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="err">主从配置，查询失败则到</span><span class="mf">10.1</span><span class="err">.</span><span class="mf">2.1</span><span class="err">上去查</span>
+</span></span><span class="line"><span class="cl"><span class="err">example.org</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">secondary</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="err">transfer</span> <span class="err">from</span> <span class="err">10.0.1.1</span> <span class="err">10.1.2.1</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="err">重定向到另外一台服务器查询</span>
+</span></span><span class="line"><span class="cl"><span class="err">example.net</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">secondary</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">        <span class="err">transfer</span> <span class="err">from</span> <span class="err">10.1.2.1</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="err">transfer</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="err">to</span> <span class="err">*</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">.:</span><span class="mi">53</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">health</span> <span class="err">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">lameduck</span> <span class="err">5s</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span> <span class="err">绑定interface</span> <span class="err">ip</span>
+</span></span><span class="line"><span class="cl">  <span class="err">bind</span> <span class="mf">127.0</span><span class="err">.</span><span class="mf">0.1</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span> <span class="err">先走本机的hosts</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span> <span class="err">https:</span><span class="c1">//coredns.io/plugins/hosts/
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="err">hosts</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">自定义sms.service</span> <span class="err">search.service</span> <span class="err">的解析</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">因为解析的域名少我们这里直接用hosts插件即可完成需求</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">如果有大量自定义域名解析那么建议用file插件使用</span> <span class="err">符合RFC</span> <span class="err">1035规范的DNS解析配置文件</span>
+</span></span><span class="line"><span class="cl">    <span class="err">127.0.0.1</span> <span class="err">git.local.com</span>
+</span></span><span class="line"><span class="cl">    <span class="err">127.0.0.1</span> <span class="err">drone.local.com</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">ttl</span>
+</span></span><span class="line"><span class="cl">    <span class="err">ttl</span> <span class="err">60</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">重载hosts配置</span>
+</span></span><span class="line"><span class="cl">    <span class="err">reload</span> <span class="err">1m</span>
+</span></span><span class="line"><span class="cl">    <span class="err">#</span> <span class="err">继续执行</span>
+</span></span><span class="line"><span class="cl">    <span class="err">fallthrough</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span> <span class="err">file</span> <span class="err">enables</span> <span class="err">serving</span> <span class="err">zone</span> <span class="err">data</span> <span class="err">from</span> <span class="err">an</span> <span class="err">RFC</span> <span class="mi">1035</span><span class="err">-style</span> <span class="err">master</span> <span class="err">file.</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span> <span class="err">https:</span><span class="c1">//coredns.io/plugins/file/
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="err">#</span> <span class="err">file</span> <span class="err">service.signed</span> <span class="err">service</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span> <span class="err">最后所有的都转发到系统配置的上游dns服务器去解析</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#forward</span> <span class="err">.</span> <span class="mf">114.114</span><span class="err">.</span><span class="mf">114.114</span> <span class="mf">223.5</span><span class="err">.</span><span class="mf">5.5</span><span class="err">:</span><span class="mi">53</span> <span class="p">[</span><span class="mi">2400</span><span class="err">:</span><span class="mi">3200</span><span class="err">::</span><span class="mi">1</span><span class="p">]</span><span class="err">:</span><span class="mi">53</span>
+</span></span><span class="line"><span class="cl">  <span class="err">forward</span> <span class="err">.</span> <span class="err">/etc/resolv.conf</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">max_concurrent</span> <span class="err">1000</span>
+</span></span><span class="line"><span class="cl">    <span class="err">except</span> <span class="err">example.org</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span> 
+</span></span><span class="line"><span class="cl">  <span class="err">acl</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">block</span> <span class="err">type</span> <span class="err">A</span> <span class="err">net</span> <span class="err">100.100.100.100/32</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">chaos</span> <span class="err">CoreDNS</span><span class="mi">-001</span> <span class="err">info@coredns.io</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">#</span> <span class="err">缓存时间ttl</span>
+</span></span><span class="line"><span class="cl">  <span class="err">cache</span> <span class="mi">120</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span> <span class="err">开启prometheus的mertics</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span> <span class="err">prometheus</span> <span class="mf">0.0</span><span class="err">.</span><span class="mf">0.0</span><span class="err">:</span><span class="mi">0153</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span> <span class="err">自动加载配置文件的间隔时间</span>
+</span></span><span class="line"><span class="cl">  <span class="err">reload</span> <span class="mi">6</span><span class="err">s</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span> <span class="err">输出日志</span>
+</span></span><span class="line"><span class="cl">  <span class="err">log</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span> <span class="err">检测并停止死循环解析</span>
+</span></span><span class="line"><span class="cl">  <span class="err">loop</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="err">#</span> <span class="err">随机化</span> <span class="err">A/AAAA/MX</span> <span class="err">记录的顺序以实现负载均衡，</span> <span class="err">forwald有多个时候。</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span>   <span class="err">因为</span> <span class="err">DNS</span> <span class="err">resolver</span> <span class="err">通常使用第一条记录，而第一条记录是随机的。这样客户端的请求就能被随机分配到多个后端。</span>
+</span></span><span class="line"><span class="cl">  <span class="err">loadbalance</span> <span class="err">round_robin</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span> <span class="err">输出错误</span>
+</span></span><span class="line"><span class="cl">  <span class="err">errors</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span></code></pre></div><pre tabindex="0"><code>.:853 {
+  # 使用DNS-over-TLS (DoT)
+    forward . tls://223.5.5.5 tls://223.6.6.6 tls://2400:3200::1 tls://2400:3200:baba::1 {
+       tls_servername  dns.alidns.com
+       health_check 5s
+    }
+    cache 30  
+}
+
+#.:853 {
+#  # 使用DNS-over-TLS (DoT)
+#    forward . tls://8.8.8.8 tls://8.8.8.8 tls://2001:4860:4860::8888 tls://2001:4860:4860::8844 {
+#       tls_servername  dns.google
+#       health_check 5s
+#    }
+#    cache 30  
+#}
+</code></pre><h3 id="可行的配置">可行的配置</h3>
+<p>参考链接：https://segmentfault.com/a/1190000022179401</p>
+<p>Corefile</p>
+<pre tabindex="0"><code>.:53 {
+  health {
+    lameduck 5s
+  }
+  auto {
+    directory ./zones
+    reload 1m
+  }
+  hosts {
+    127.0.0.1 local.io
+
+    ttl 120
+    reload 1m
+    fallthrough
+  }
+
+  #chaos CoreDNS-001 info@coredns.io
+  # prometheus 0.0.0.0:0153
+  log
+  #cache 120
+  loop
+  errors
+  forward . 114.114.114.114:53 8.8.8.8:53 [2400:3200::1]:53
+  loadbalance
+
+}
+</code></pre><p>db.local.com</p>
+<pre tabindex="0"><code>$TTL 3600 ; 记录超时时间
+$ORIGIN local.com. ; 指定 origin，下面的@符号可以作为他的别名，注意后面的.
+; SOA 格式 [domain_name] IN SOA [域主服务器或主DNS服务器名] [管理员email] (时间信息)
+@           IN  SOA  ns1.local.com. admin.local.com. (
+                     2019071601 ; Serial
+                     4H         ; Refresh
+                     1H         ; Retry
+                     7D         ; Expire
+                     4H )       ; Negative Cache TTL
+
+; 配置 DNS 记录，指向 ns1.local.com
+@           IN  NS   ns1
+; 配置 ns1.local.com 的 A 记录, 指向coredns所在的机器
+ns1         IN  A    192.168.78.51
+; 配置 local.com 的 A 记录，指向网站或其他用途的机器
+@           IN  A    192.168.78.51
+git           IN  A    192.168.78.51
+drone           IN  A    192.168.78.51
+drone-runner           IN  A    192.168.78.51
+www           IN  A    192.168.78.51
+ccc           IN  A    192.168.78.51
+; 配置泛域名，没有准确的三级子域名的域名全部指向此IPV4地址
+*           IN  A    192.168.78.50
+</code></pre><p>启动服务</p>
+<pre tabindex="0"><code>docker run -tid -p 53:53/udp -v /yaml/coredns/Corefile:/Corefile -v /yaml/coredns/zones:/zones --name=coredns coredns/coredns
+</code></pre><h2 id="二增加和编译插件">二、增加和编译插件</h2>
+<p>编译安装coredns：</p>
+<p>coredns官方对于插件的分类基本可以分为三种：Plugins、External Plugins和其他。其中Plugins一般都会被默认编译到coredns的预编译版本中，而External Plugins则不会。官方的<a href="https://coredns.io/2017/07/23/when-should-plugins-be-external/" target="_blank" rel="noopener noreffer ">文档</a>对外部插件的定义有着明确的解释，主要要求大概是有用、高效、符合标准、文档齐全、通过测试等。</p>
+<p>官方给出了一个详细的<a href="https://coredns.io/2017/07/25/compile-time-enabling-or-disabling-plugins/" target="_blank" rel="noopener noreffer ">文档说明</a>，编译插件基本可以分为修改源码和修改编译的配置文件这两种方式，这里我们采用简单高效的修改配置文件的方式进行测试。</p>
+<h3 id="1编译">1、编译</h3>
+<p>下载源码：https://github.com/coredns/coredns.git</p>
+<p>在我们前面下载的官方源码中，有一个<code>plugin</code>的目录，里面是各种插件的安装包，同时还有一个<code>plugin.cfg</code>的文件，里面列出了会编译到coredns中的插件，</p>
+<pre tabindex="0"><code>[root@sugar2 coredns]# tail plugin.cfg 
+secondary:secondary
+etcd:etcd
+loop:loop
+forward:forward
+grpc:grpc
+erratic:erratic
+whoami:whoami
+on:github.com/coredns/caddy/onevent
+sign:sign
+git:github.com/miekg/coredns-git
+</code></pre><p>添加一个git插件</p>
+<pre tabindex="0"><code>git:github.com/miekg/coredns-git
+</code></pre><p>对于在plugin目录下已经存在的插件，则可以直接写成plugin中的目录名，不在的则写插件的仓库，可以使用go get下载：</p>
+<pre tabindex="0"><code>sign:sign
+</code></pre><p>下载插件：</p>
+<pre tabindex="0"><code>go get github.com/miekg/coredns-git
+</code></pre><p>然后我们开始编译</p>
+<pre tabindex="0"><code>[root@sugar2 coredns]# make
+</code></pre><h3 id="2验证插件">2、验证插件</h3>
+<p>可以使用<code>-plugins</code>输出包含的插件</p>
+<pre tabindex="0"><code>[root@sugar2 coredns]# ./coredns -plugins
+Server types:
+  dns
+
+Caddyfile loaders:
+  flag
+  default
+
+Other plugins:
+  dns.acl
+  dns.any
+  dns.auto
+  dns.autopath
+  dns.azure
+  dns.bind
+  dns.bufsize
+  dns.cache
+  dns.cancel
+  dns.chaos
+  dns.clouddns
+  dns.debug
+  dns.dns64
+  dns.dnssec
+  dns.dnstap
+  dns.erratic
+  dns.errors
+  dns.etcd
+  dns.file
+  dns.forward
+  dns.geoip
+  dns.git
+  dns.grpc
+  dns.header
+  dns.health
+  dns.hosts
+  dns.k8s_external
+  dns.kubernetes
+  dns.loadbalance
+  dns.local
+  dns.log
+  dns.loop
+  dns.metadata
+  dns.minimal
+  dns.nsid
+  dns.pprof
+  dns.prometheus
+  dns.ready
+  dns.reload
+  dns.rewrite
+  dns.root
+  dns.route53
+  dns.secondary
+  dns.sign
+  dns.template
+  dns.tls
+  dns.trace
+  dns.transfer
+  dns.whoami
+  on
+</code></pre><p>1）使用git插件</p>
+<p>建立存储zones文件的的git仓库：git@local.io:sugar/coredns_zone.git</p>
+<p>配置文件模板</p>
+<pre tabindex="0"><code>.:53 {
+  health {
+    lameduck 5s
+  }
+  auto {
+    directory /usr/local/coredns/zones
+    reload 1m
+  }
+  hosts {
+
+    ttl 120
+    reload 1m
+    fallthrough
+  }
+
+  #chaos CoreDNS-001 info@coredns.io
+  prometheus 0.0.0.0:9153
+  log
+  cache 300
+  loop
+  errors
+  forward . 114.114.114.114:53 8.8.8.8:53 [2400:3200::1]:53
+  loadbalance
+
+  git git@local.io:sugar/coredns_zone.git /usr/local/coredns/zones {
+    branch master
+    interval 3000 # pull的时间间隔
+    args --depth=1
+    pull_args --force
+
+
+
+  }
+
+
+}
+</code></pre><p>supervisord</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="na">[root@ftp coredns]# cat /etc/supervisord.d/coredns.ini </span>
+</span></span><span class="line"><span class="cl"><span class="k">[program:coredns]</span>
+</span></span><span class="line"><span class="cl"><span class="na">directory</span><span class="o">=</span><span class="s">/usr/local/coredns</span>
+</span></span><span class="line"><span class="cl"><span class="na">command</span><span class="o">=</span><span class="s">/usr/local/coredns/coredns -conf /usr/local/coredns/Corefile</span>
+</span></span><span class="line"><span class="cl"><span class="na">autostart</span><span class="o">=</span><span class="s">true</span>
+</span></span><span class="line"><span class="cl"><span class="na">autorestart</span><span class="o">=</span><span class="s">true</span>
+</span></span><span class="line"><span class="cl"><span class="na">startsecs</span><span class="o">=</span><span class="s">7</span>
+</span></span><span class="line"><span class="cl"><span class="na">user</span> <span class="o">=</span> <span class="s">root</span>
+</span></span><span class="line"><span class="cl"><span class="na">stderr_logfile</span><span class="o">=</span><span class="s">/var/log/coredns/coredns-err.log</span>
+</span></span><span class="line"><span class="cl"><span class="na">stdout_logfile</span><span class="o">=</span><span class="s">/var/log/coredns/coredns.log</span>
+</span></span><span class="line"><span class="cl"><span class="na">redirect_stderr</span> <span class="o">=</span> <span class="s">true</span>
+</span></span><span class="line"><span class="cl"><span class="na">stdout_logfile_maxbytes</span> <span class="o">=</span> <span class="s">100MB</span>
+</span></span><span class="line"><span class="cl"><span class="na">stdout_logfile_backups</span> <span class="o">=</span> <span class="s">4</span>
+</span></span><span class="line"><span class="cl"><span class="na">stopasgroup</span><span class="o">=</span><span class="s">true</span>
+</span></span><span class="line"><span class="cl"><span class="na">killasgroup</span><span class="o">=</span><span class="s">true</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-11-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/2023-11-11-coredns/" data-title="coredns" data-hashtags="dns,coredns"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/2023-11-11-coredns/" data-hashtag="dns"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/2023-11-11-coredns/" data-title="coredns"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/2023-11-11-coredns/" data-title="coredns"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/2023-11-11-coredns/" data-title="coredns"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dns/">dns</a>,&nbsp;<a href="/tags/coredns/">coredns</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023-11-11-multipass/" class="prev" rel="prev" title="multipass"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>multipass</a>
+            <a href="/posts/2023-11-11-daemon/" class="next" rel="next" title="daemon">daemon<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

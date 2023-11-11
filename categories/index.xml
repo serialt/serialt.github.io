@@ -4,12 +4,68 @@
         <link>https://serialt.github.io/categories/</link>
         <description>Categories - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:26:09 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 11:28:14 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>机器人通知</title>
+    <link>https://serialt.github.io/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%9F%A5/</link>
+    <pubDate>Sat, 11 Nov 2023 11:28:14 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%9F%A5/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>web server</title>
+    <link>https://serialt.github.io/categories/web-server/</link>
+    <pubDate>Sat, 11 Nov 2023 10:29:10 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/web-server/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>flatpak</title>
+    <link>https://serialt.github.io/categories/flatpak/</link>
+    <pubDate>Sat, 11 Nov 2023 10:28:14 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/flatpak/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>服务管理</title>
+    <link>https://serialt.github.io/categories/%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86/</link>
+    <pubDate>Sat, 11 Nov 2023 10:28:12 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>DNS</title>
+    <link>https://serialt.github.io/categories/dns/</link>
+    <pubDate>Sat, 11 Nov 2023 10:28:11 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/dns/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>虚拟化</title>
+    <link>https://serialt.github.io/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/</link>
+    <pubDate>Sat, 11 Nov 2023 10:28:11 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Go 基础</title>
     <link>https://serialt.github.io/categories/go-%E5%9F%BA%E7%A1%80/</link>
     <pubDate>Sat, 11 Nov 2023 10:26:09 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/categories/go-%E5%9F%BA%E7%A1%80/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>windows</title>
+    <link>https://serialt.github.io/categories/windows/</link>
+    <pubDate>Sat, 11 Nov 2023 10:25:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/windows/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
@@ -26,54 +82,6 @@
     <pubDate>Wed, 08 Nov 2023 20:26:42 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/categories/%E5%90%8C%E6%AD%A5oci%E9%95%9C%E5%83%8F/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>morse编码</title>
-    <link>https://serialt.github.io/categories/morse%E7%BC%96%E7%A0%81/</link>
-    <pubDate>Wed, 08 Nov 2023 19:44:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/categories/morse%E7%BC%96%E7%A0%81/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>系统或软件换源</title>
-    <link>https://serialt.github.io/categories/%E7%B3%BB%E7%BB%9F%E6%88%96%E8%BD%AF%E4%BB%B6%E6%8D%A2%E6%BA%90/</link>
-    <pubDate>Tue, 07 Nov 2023 20:00:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/categories/%E7%B3%BB%E7%BB%9F%E6%88%96%E8%BD%AF%E4%BB%B6%E6%8D%A2%E6%BA%90/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Go req 库文档</title>
-    <link>https://serialt.github.io/categories/go-req-%E5%BA%93%E6%96%87%E6%A1%A3/</link>
-    <pubDate>Mon, 09 Oct 2023 21:00:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/categories/go-req-%E5%BA%93%E6%96%87%E6%A1%A3/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Kubernetes</title>
-    <link>https://serialt.github.io/categories/kubernetes/</link>
-    <pubDate>Tue, 26 Sep 2023 19:16:02 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/categories/kubernetes/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>vscode</title>
-    <link>https://serialt.github.io/categories/vscode/</link>
-    <pubDate>Sun, 24 Sep 2023 18:09:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/categories/vscode/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>mirror-web</title>
-    <link>https://serialt.github.io/categories/mirror-web/</link>
-    <pubDate>Sun, 24 Sep 2023 17:01:26 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/categories/mirror-web/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

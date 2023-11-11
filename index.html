@@ -90,35 +90,35 @@
     </div><main class="main">
                 <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-11-go-basic/">Go basic</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 基础</a></span></div><div class="content">1、变量定义 var name string var isOk bool // 隐式申明 a := 100 str := &#34;serialt&#34; // 批量声明 var ( a string b int c bool d float32 ) // 变量的初始化 var name string = &#34;github&#34; var age int = 10 var name, age = &#34;github&#34;, 11 // 类型推导 var name =</div><div class="post-footer">
-        <a href="/posts/2023-11-11-go-basic/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/basic/">basic</a></div></div>
+        <a href="/posts/2023-11-11-dingbot/">dingbot</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%9F%A5/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>机器人通知</a></span></div><div class="content"></div><div class="post-footer">
+        <a href="/posts/2023-11-11-dingbot/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dingbot/">dingbot</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-11-gopsutil/">Go gopsutil</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div><div class="content">gopsutil 库 参考链接：https://segmentfault.com/a/1190000022281174 简介 gopsutil是 Python 工具库psuti</div><div class="post-footer">
-        <a href="/posts/2023-11-11-gopsutil/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/gopsutil/">gopsutil</a></div></div>
+        <a href="/posts/2023-11-11-caddy/">caddy</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/web-server/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>web server</a></span></div><div class="content">Caddy Caddy 是一个 Go 编写的 Web 服务器，类似于 Nginx，Caddy 提供了更加强大的功能，随着 v2 版本发布 Caddy 已经可以作为中小型站点 Web 服务器的另一个选择；相</div><div class="post-footer">
+        <a href="/posts/2023-11-11-caddy/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/caddy/">caddy</a>,&nbsp;<a href="/tags/go-web/">go-web</a>,&nbsp;<a href="/tags/web-server/">web-server</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-11-go-yaml/">Go yaml</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div><div class="content">Go 读取yaml格式配置文件 package config import ( &#34;fmt&#34; &#34;io/ioutil&#34; &#34;gopkg.in/yaml.v3&#34; ) type Service struct { Host string `json:&#34;host&#34; yaml:&#34;host&#34;` Port string `json:&#34;port&#34; yaml:&#34;port&#34;` } type MyConfig struct { Service Service `json:&#34;service&#34; yaml:&#34;service&#34;` } var Config *MyConfig func LoadConfig(filepath string) { if filepath == &#34;&#34; { return } // 读yaml文件 config, err := ioutil.ReadFile(filepath) if</div><div class="post-footer">
-        <a href="/posts/2023-11-11-go-yaml/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/yaml/">yaml</a></div></div>
+        <a href="/posts/2023-11-11-flatpak/">flatpak</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/flatpak/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>flatpak</a></span></div><div class="content">flatpak 简介 Flatpak 是一种新的通用包装格式。启用 Flatpak 将使您能够轻松安装许多 Linux 应用程序。这是在 Ubuntu 和其他 Linux 发行版中使用 Flatpak 的方法。 在 Linux 中安装应用程序就像打开软件</div><div class="post-footer">
+        <a href="/posts/2023-11-11-flatpak/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/flatpak/">flatpak</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-11-go-strconv/">Go strconv</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div><div class="content">Go语言内置包之strconv Go语言中strconv包实现了基本数据类型和其字符串表示的相互转换。 strconv包 strconv包实现了基</div><div class="post-footer">
-        <a href="/posts/2023-11-11-go-strconv/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/strconv/">strconv</a></div></div>
+        <a href="/posts/2023-11-11-daemon/">daemon</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>服务管理</a></span></div><div class="content">Daemon 守护进程服务 systemd supervisor launchd 一、supervisor ​ 是用Python开发的一套通用的进程管理程序，能将一个普通的命令行进程变为后台daemon，并</div><div class="post-footer">
+        <a href="/posts/2023-11-11-daemon/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/daemon/">daemon</a>,&nbsp;<a href="/tags/systemd/">systemd</a>,&nbsp;<a href="/tags/supervisor/">supervisor</a>,&nbsp;<a href="/tags/launchd/">launchd</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-11-go-tail/">Go tail</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div><div class="content">Go tail库 实时读取文件内容 go get github.com/hpcloud/tail 示例： package main import ( &#34;fmt&#34; &#34;time&#34; &#34;github.com/hpcloud/tail&#34; ) func main() { fileName := &#34;./my.log&#34; config := tail.Config{ ReOpen: true, // 重新打开 Follow: true, // 是否跟随 Location: &amp;tail.SeekInfo{Offset: 0, Whence: 2}, // 从文件的哪个地方开始读 MustExist: false,</div><div class="post-footer">
-        <a href="/posts/2023-11-11-go-tail/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/tail/">tail</a></div></div>
+        <a href="/posts/2023-11-11-coredns/">coredns</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/dns/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DNS</a></span></div><div class="content">CoreDNS 在内网服务中，需要部署内部的 dns，用于各种服务的 dns 解析。常见的 dns server 有 bind，dnsmasq，coredns 等。coredns 出名于用于</div><div class="post-footer">
+        <a href="/posts/2023-11-11-coredns/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dns/">dns</a>,&nbsp;<a href="/tags/coredns/">coredns</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-11-go-net/">Go net</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div><div class="content">Go语言标准库net包介绍 一、域名解析 DNS 记录是与 DNS 服务器关联的映射文件，无论每个域名与哪个 IP 地址关联，它们都能处理发送到每个域名的请求。ne</div><div class="post-footer">
-        <a href="/posts/2023-11-11-go-net/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/net/">net</a></div></div>
+        <a href="/posts/2023-11-11-multipass/">multipass</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>虚拟化</a></span></div><div class="content">​ Multipass 是一个轻量虚拟机管理器，是由 Ubuntu 运营公司 Canonical 所推出的开源项目。运行环境支持 Linux、Windows、macOS。在不同的操作系统上，使用的</div><div class="post-footer">
+        <a href="/posts/2023-11-11-multipass/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/multipass/">multipass</a>,&nbsp;<a href="/tags/vm/">vm</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -135,7 +135,7 @@
                     <span class="page-link" aria-hidden="true">&hellip;</span>
                 </li><li class="page-item ">
                     <span class="page-link">
-                        <a href="/page/5/">5</a>
+                        <a href="/page/6/">6</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

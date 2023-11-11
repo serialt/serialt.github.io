@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>coredns - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/coredns/</link>
+        <description>coredns - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:28:11 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/coredns/" rel="self" type="application/rss+xml" /><item>
+    <title>coredns</title>
+    <link>https://serialt.github.io/posts/2023-11-11-coredns/</link>
+    <pubDate>Sat, 11 Nov 2023 10:28:11 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-coredns/</guid>
+    <description><![CDATA[CoreDNS 在内网服务中，需要部署内部的 dns，用于各种服务的 dns 解析。常见的 dns server 有 bind，dnsmasq，coredns 等。coredns 出名于用于]]></description>
+</item>
+</channel>
+</rss>

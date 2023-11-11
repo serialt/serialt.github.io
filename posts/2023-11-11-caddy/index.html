@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>caddy - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="caddy" />
+<meta property="og:description" content="Caddy Caddy 是一个 Go 编写的 Web 服务器，类似于 Nginx，Caddy 提供了更加强大的功能，随着 v2 版本发布 Caddy 已经可以作为中小型站点 Web 服务器的另一个选择；相" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2023-11-11-caddy/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-11T10:29:10+08:00" />
+<meta property="article:modified_time" content="2023-11-11T10:29:10+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="caddy"/>
+<meta name="twitter:description" content="Caddy Caddy 是一个 Go 编写的 Web 服务器，类似于 Nginx，Caddy 提供了更加强大的功能，随着 v2 版本发布 Caddy 已经可以作为中小型站点 Web 服务器的另一个选择；相"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-11-caddy/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-11-flatpak/" /><link rel="next" href="https://serialt.github.io/posts/2023-11-11-dingbot/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "caddy",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2023-11-11-caddy\/"
+        },"genre": "posts","keywords": "caddy, go-web, web-server","wordcount":  2470 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2023-11-11-caddy\/","datePublished": "2023-11-11T10:29:10+08:00","dateModified": "2023-11-11T10:29:10+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">caddy</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/web-server/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>web server</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-11">2023-11-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2470 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一caddyfile">一、Caddyfile</a>
+      <ul>
+        <li><a href="#1简单使用">1、简单使用</a></li>
+        <li><a href="#2静态文件管理">2、静态文件管理</a></li>
+        <li><a href="#3反向代理">3、反向代理</a></li>
+        <li><a href="#4启用压缩算法">4、启用压缩算法</a></li>
+        <li><a href="#5多个站点">5、多个站点</a></li>
+        <li><a href="#6匹配器">6、匹配器</a></li>
+        <li><a href="#7地址">7、地址</a></li>
+        <li><a href="#8片段">8、片段</a></li>
+        <li><a href="#9全局参数">9、全局参数</a></li>
+      </ul>
+    </li>
+    <li><a href="#二使用示例">二、使用示例</a>
+      <ul>
+        <li><a href="#三部署">三、部署</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="caddy">Caddy</h1>
+<p>Caddy 是一个 Go 编写的 Web 服务器，类似于 Nginx，Caddy 提供了更加强大的功能，随着 v2 版本发布 Caddy 已经可以作为中小型站点 Web 服务器的另一个选择；相较于 Nginx 来说使用 Caddy 的优势如下:</p>
+<ul>
+<li>自动的 HTTPS 证书申请(ACME HTTP/DNS 挑战)</li>
+<li>自动证书续期以及 OCSP stapling 等</li>
+<li>更高的安全性包括但不限于 TLS 配置以及内存安全等</li>
+<li>友好且强大的配置文件支持</li>
+<li>支持 API 动态调整配置(有木有人可以搞个 Dashboard？)</li>
+<li>支持 HTTP3(QUIC)</li>
+<li>支持动态后端，例如连接 Consul、作为 k8s ingress 等</li>
+<li>后端多种负载策略以及健康检测等</li>
+<li>本身 Go 编写，高度模块化的系统方便扩展(CoreDNS 基于 Caddy1 开发)</li>
+</ul>
+<h2 id="一caddyfile">一、Caddyfile</h2>
+<h3 id="1简单使用">1、简单使用</h3>
+<p>在当前目录下新建Caddyfile文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="k">localhost</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kn">respond</span> <span class="s">&#34;Hello,</span> <span class="s">world!&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">localhost</span><span class="p">:</span><span class="mi">2016</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kn">respond</span> <span class="s">&#34;Goodbye,</span> <span class="s">world!&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span></code></pre></div><p>服务管理</p>
+<pre tabindex="0"><code># 启动服务
+caddy start
+
+# 重启服务，重启服务有两种方式
+caddy reload
+curl localhost:2019/load \
+	-X POST \
+	-H &#34;Content-Type: text/caddyfile&#34; \
+	--data-binary @Caddyfile
+
+
+# 停止服务
+caddy stop
+</code></pre><h3 id="2静态文件管理">2、静态文件管理</h3>
+<p>显示文件列表</p>
+<pre tabindex="0"><code>localhost
+
+file_server browse
+</code></pre><p>文件夹作为站点根目录：</p>
+<pre tabindex="0"><code>localhost
+
+root * /home/me/mysite
+file_server
+</code></pre><h3 id="3反向代理">3、反向代理</h3>
+<pre tabindex="0"><code>localhost
+
+reverse_proxy 127.0.0.1:9000
+</code></pre><h3 id="4启用压缩算法">4、启用压缩算法</h3>
+<pre tabindex="0"><code>localhost
+
+encode zstd gzip
+file_server browse
+</code></pre><h3 id="5多个站点">5、多个站点</h3>
+<pre tabindex="0"><code>:8080 {
+	respond &#34;I am 8080&#34;
+}
+
+:8081 {
+	respond &#34;I am 8081&#34;
+}
+</code></pre><p>多端口</p>
+<pre tabindex="0"><code>:8080, :8081 {
+	...
+}
+</code></pre><h3 id="6匹配器">6、匹配器</h3>
+<p>对某一个api使用反向代理</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="k">localhost</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="s">file_server</span>
+</span></span><span class="line"><span class="cl"><span class="s">reverse_proxy</span> <span class="s">/api/*</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">9005</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 现在反向代理只会处理所有以/api/开始的请求。
+</span></span></span></code></pre></div><p>使用环境变量</p>
+<pre tabindex="0"><code>export SITE_ADDRESS=localhost:9055
+</code></pre><pre tabindex="0"><code>{$SITE_ADDRESS}
+
+file_server
+</code></pre><pre tabindex="0"><code>root *           /var/www  # matcher token: *
+root /index.html /var/www  # matcher token: /index.html
+root @post       /var/www  # matcher token: @post
+</code></pre><p>占位符</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">简写</th>
+<th style="text-align:left">替换</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>{dir}</code></td>
+<td style="text-align:left"><code>{http.request.uri.path.dir}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{file}</code></td>
+<td style="text-align:left"><code>{http.request.uri.path.file}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{header.*}</code></td>
+<td style="text-align:left"><code>{http.request.header.*}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{host}</code></td>
+<td style="text-align:left"><code>{http.request.host}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{labels.*}</code></td>
+<td style="text-align:left"><code>{http.request.host.labels.*}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{hostport}</code></td>
+<td style="text-align:left"><code>{http.request.hostport}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{port}</code></td>
+<td style="text-align:left"><code>{http.request.port}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{method}</code></td>
+<td style="text-align:left"><code>{http.request.method}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{path}</code></td>
+<td style="text-align:left"><code>{http.request.uri.path}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{path.*}</code></td>
+<td style="text-align:left"><code>{http.request.uri.path.*}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{query}</code></td>
+<td style="text-align:left"><code>{http.request.uri.query}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{query.*}</code></td>
+<td style="text-align:left"><code>{http.request.uri.query.*}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{re.*.*}</code></td>
+<td style="text-align:left"><code>{http.regexp.*.*}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{remote}</code></td>
+<td style="text-align:left"><code>{http.request.remote}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{remote_host}</code></td>
+<td style="text-align:left"><code>{http.request.remote.host}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{remote_port}</code></td>
+<td style="text-align:left"><code>{http.request.remote.port}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{scheme}</code></td>
+<td style="text-align:left"><code>{http.request.scheme}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{uri}</code></td>
+<td style="text-align:left"><code>{http.request.uri}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{tls_cipher}</code></td>
+<td style="text-align:left"><code>{http.request.tls.cipher_suite}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{tls_version}</code></td>
+<td style="text-align:left"><code>{http.request.tls.version}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{tls_client_fingerprint}</code></td>
+<td style="text-align:left"><code>{http.request.tls.client.fingerprint}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{tls_client_issuer}</code></td>
+<td style="text-align:left"><code>{http.request.tls.client.issuer}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{tls_client_serial}</code></td>
+<td style="text-align:left"><code>{http.request.tls.client.serial}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{tls_client_subject}</code></td>
+<td style="text-align:left"><code>{http.request.tls.client.subject}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{tls_client_certificate_pem}</code></td>
+<td style="text-align:left"><code>{http.request.tls.client.certificate_pem}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{tls_client_certificate_der_base64}</code></td>
+<td style="text-align:left"><code>{http.request.tls.client.certificate_der_base64}</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{upstream_hostport}</code></td>
+<td style="text-align:left"><code>{http.reverse_proxy.upstream.hostport}</code></td>
+</tr>
+</tbody>
+</table>
+<p>在Caddyfile中，紧跟在指令后面的<strong>匹配器标记</strong>可以限制该指令的范围。匹配器标记可以是以下形式之一：</p>
+<ol>
+<li><strong><code>\*</code></strong> 匹配所有请求（通配符；默认）。</li>
+<li><strong><code>/path</code></strong> 以正斜杠开头以匹配请求路径。</li>
+<li><strong><code>@name</code></strong> 指定一个命名匹配器。</li>
+</ol>
+<p>匹配器标记<a href="https://caddy2.dengxiaolong.com/docs/caddyfile/directives#matchers" target="_blank" rel="noopener noreffer ">通常是可选</a>的。如果省略匹配器标记，则它与通配符匹配器（<code>*</code>）相同。</p>
+<h4 id="命名匹配器">命名匹配器</h4>
+<p>要匹配路径以外的任何内容，请定义一个<a href="https://caddy2.dengxiaolong.com/docs/caddyfile/matchers#named-matchers" target="_blank" rel="noopener noreffer ">命名匹配器</a>并使用<code>@name</code>引用它：</p>
+<pre tabindex="0"><code>@postfoo {
+	method POST
+	path /foo/*
+}
+reverse_proxy @postfoo localhost:9000
+</code></pre><pre tabindex="0"><code>@websockets {
+	header Connection *Upgrade*
+	header Upgrade    websocket
+}
+reverse_proxy @websockets localhost:6001
+</code></pre><h4 id="file">file</h4>
+<pre tabindex="0"><code>file {
+	root       &lt;paths&gt;
+	try_files  &lt;files...&gt;
+	try_policy first_exist|smallest_size|largest_size|most_recent_modified
+	split_path &lt;delims...&gt;
+}
+</code></pre><p>通过文件进行匹配。</p>
+<ul>
+<li>
+<p><code>root</code>定义在其中查找文件的目录。默认是当前工作目录，或者<code>root</code><a href="https://caddy2.dengxiaolong.com/docs/modules/http.handlers.vars" target="_blank" rel="noopener noreffer ">变量</a> (<code>{http.vars.root}</code>)对应的位置 (可以通过<a href="https://caddy2.dengxiaolong.com/docs/caddyfile/directives/root" target="_blank" rel="noopener noreffer "><code>root</code>指令</a>设置)。</p>
+</li>
+<li>
+<p><code>try_files</code>检查其列表中与重试策略(try_policy)匹配的文件。如果<code>try_policy</code>是<code>first_exist</code>，那么列表中的最后一项可能是一个以<code>=</code>(比如<code>=404</code>)开头的数字，作为后备，将触发以这个数字作为错误码的回调; 该错误也可以使用<a href="https://caddy2.dengxiaolong.com/docs/caddyfile/directives/handle_errors" target="_blank" rel="noopener noreffer "><code>handle_errors</code></a>捕获和处理错误。</p>
+</li>
+<li>
+<pre tabindex="0"><code>try_policy
+</code></pre><p>指定如何选择文件。默认为</p>
+<pre tabindex="0"><code>first_exist
+</code></pre><p>.</p>
+<ul>
+<li><code>first_exist</code>检查文件是否存在。选择存在的第一个文件。</li>
+<li><code>smallest_size</code>选择大小最小的文件。</li>
+<li><code>largest_size</code>选择最大的文件。</li>
+<li><code>most_recent_modified</code>选择最近修改的文件。</li>
+</ul>
+</li>
+<li>
+<p><code>split_path</code>将导致路径在每个要尝试的文件路径中找到的列表中的第一个分隔符处拆分。对于每个拆分值，拆分的左侧（包括分隔符本身）将是尝试的文件路径。例如，<code>/remote.php/dav/</code>使用<code>.php</code>作为分隔符，将尝试文件<code>/remote.php</code>。每个分隔符必须出现在 URI 路径组件的末尾，才能用作拆分分隔符。这是一个小众设置，主要用于为 PHP 站点提供服务。</p>
+</li>
+</ul>
+<h3 id="7地址">7、地址</h3>
+<p>有效地址：</p>
+<ul>
+<li><code>localhost</code></li>
+<li><code>example.com</code></li>
+<li><code>:443</code></li>
+<li><code>http://example.com</code></li>
+<li><code>localhost:8080</code></li>
+<li><code>127.0.0.1</code></li>
+<li><code>[::1]:2015</code></li>
+<li><code>example.com/foo/*</code></li>
+<li><code>*.example.com</code></li>
+<li><code>http://</code></li>
+</ul>
+<p>注意：如果你的站点地址包含主机名或 IP 地址，则会启用<a href="https://caddy2.dengxiaolong.com/docs/automatic-https" target="_blank" rel="noopener noreffer ">自动HTTPS</a>。然而，这种行为纯粹是隐含的，因此它永远不会覆盖任何显式配置。例如，如果站点的地址是<code>http://example.com</code>，则不会激活自动HTTPS，因为该方案是明确的<code>http://</code>。</p>
+<p>如果找不到文件，则回退到发出404错误。</p>
+<pre tabindex="0"><code>file {path}.html {path} =404
+</code></pre><h4 id="header">header</h4>
+<pre tabindex="0"><code>header &lt;field&gt; [&lt;value&gt;]
+</code></pre><p>通过请求头字段进行匹配。</p>
+<ul>
+<li>
+<pre tabindex="0"><code>&lt;field&gt;
+</code></pre><p>是要检查的 HTTP 标头字段的名称。</p>
+<ul>
+<li>如果以<code>!</code>为前缀，则该字段必须不存在才能匹配 (省略<code>value</code>参数).</li>
+</ul>
+</li>
+<li>
+<pre tabindex="0"><code>&lt;value&gt;
+</code></pre><p>是字段必须匹配的值。</p>
+<ul>
+<li>如果前缀是<code>*</code>，则执行快速后缀匹配。</li>
+<li>如果后缀为<code>*</code>，则执行快速前缀匹配。</li>
+<li>如果用<code>*</code>括起来，它将执行快速子字符串匹配。</li>
+<li>否则，它是快速精确匹配。</li>
+</ul>
+</li>
+</ul>
+<p>统一集合的不同header字段是“和”的关系。每个字段的多个值之间是“或”的关系。</p>
+<h5 id="示例">示例：</h5>
+<p>匹配请求<code>Connection</code>标头字段包含<code>Upgrade</code>的请求：</p>
+<pre tabindex="0"><code>header Connection *Upgrade*
+</code></pre><p>匹配<code>Foo</code>标头字段包含<code>bar</code>或者<code>baz</code>的请求：</p>
+<pre tabindex="0"><code>@foo {
+	header Foo bar
+	header Foo baz
+}
+</code></pre><p>匹配根本没有<code>Foo</code>标头字段的请求：</p>
+<pre tabindex="0"><code>@not_foo {
+	header !Foo
+}
+</code></pre><h3 id="8片段">8、片段</h3>
+<p>可以定义称为片段的特殊块，方法是给它们一个用括号括起来的名称：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="k">(redirect)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kn">@http</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kn">protocol</span> <span class="s">http</span>
+</span></span><span class="line"><span class="cl">	<span class="err">}</span>
+</span></span><span class="line"><span class="cl">	<span class="s">redir</span> <span class="s">@http</span> <span class="s">https://</span><span class="p">{</span><span class="kn">host}{uri}</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span></code></pre></div><p>然后你可以在任何你需要的地方重复使用它：</p>
+<pre tabindex="0"><code>import redirect
+</code></pre><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="k">(snippet)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kn">respond</span> <span class="s">&#34;Yahaha!</span> <span class="s">You</span> <span class="s">found</span> <span class="p">{</span><span class="kn">args.0}!&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="s">a.example.com</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kn">import</span> <span class="s">snippet</span> <span class="s">&#34;Example</span> <span class="s">A&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="s">b.example.com</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kn">import</span> <span class="s">snippet</span> <span class="s">&#34;Example</span> <span class="s">B&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span></code></pre></div><h3 id="9全局参数">9、全局参数</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="k">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1"># General Options
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="s">debug</span>
+</span></span><span class="line"><span class="cl">	<span class="s">http_port</span>  <span class="s">&lt;port&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">https_port</span> <span class="s">&lt;port&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">order</span> <span class="s">&lt;dir1&gt;</span> <span class="s">first|last|[before|after</span> <span class="s">&lt;dir2&gt;]</span>
+</span></span><span class="line"><span class="cl">	<span class="s">storage</span> <span class="s">&lt;module_name&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kn">&lt;options...&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="err">}</span>
+</span></span><span class="line"><span class="cl">	<span class="s">storage_clean_interval</span> <span class="s">&lt;duration&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">admin</span>   <span class="no">off</span><span class="s">|&lt;addr&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kn">origins</span> <span class="s">&lt;origins...&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="s">enforce_origin</span>
+</span></span><span class="line"><span class="cl">	<span class="err">}</span>
+</span></span><span class="line"><span class="cl">	<span class="s">log</span> <span class="s">[name]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kn">output</span>  <span class="s">&lt;writer_module&gt;</span> <span class="s">...</span>
+</span></span><span class="line"><span class="cl">		<span class="s">format</span>  <span class="s">&lt;encoder_module&gt;</span> <span class="s">...</span>
+</span></span><span class="line"><span class="cl">		<span class="s">level</span>   <span class="s">&lt;level&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="s">include</span> <span class="s">&lt;namespaces...&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="s">exclude</span> <span class="s">&lt;namespaces...&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="err">}</span>
+</span></span><span class="line"><span class="cl">	<span class="s">grace_period</span> <span class="s">&lt;duration&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1"># TLS Options
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="s">auto_https</span> <span class="no">off</span><span class="s">|disable_redirects|ignore_loaded_certs</span>
+</span></span><span class="line"><span class="cl">	<span class="s">email</span> <span class="s">&lt;yours&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">default_sni</span> <span class="s">&lt;name&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">local_certs</span>
+</span></span><span class="line"><span class="cl">	<span class="s">skip_install_trust</span>
+</span></span><span class="line"><span class="cl">	<span class="s">acme_ca</span> <span class="s">&lt;directory_url&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">acme_ca_root</span> <span class="s">&lt;pem_file&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">acme_eab</span> <span class="s">&lt;key_id&gt;</span> <span class="s">&lt;mac_key&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">acme_dns</span> <span class="s">&lt;provider&gt;</span> <span class="s">...</span>
+</span></span><span class="line"><span class="cl">	<span class="no">on</span><span class="s">_demand_tls</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kn">ask</span>      <span class="s">&lt;endpoint&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="s">interval</span> <span class="s">&lt;duration&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="s">burst</span>    <span class="s">&lt;n&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="err">}</span>
+</span></span><span class="line"><span class="cl">	<span class="s">key_type</span> <span class="s">ed25519|p256|p384|rsa2048|rsa4096</span>
+</span></span><span class="line"><span class="cl">	<span class="s">cert_issuer</span> <span class="s">&lt;name&gt;</span> <span class="s">...</span>
+</span></span><span class="line"><span class="cl">	<span class="s">ocsp_stapling</span> <span class="no">off</span>
+</span></span><span class="line"><span class="cl">	<span class="s">preferred_chains</span> <span class="s">[smallest]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kn">root_common_name</span> <span class="s">&lt;common_names...&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="s">any_common_name</span>  <span class="s">&lt;common_names...&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1"># Server Options
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="s">servers</span> <span class="s">[&lt;listener_address&gt;]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kn">listener_wrappers</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="kn">&lt;listener_wrappers...&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="err">}</span>
+</span></span><span class="line"><span class="cl">		<span class="s">timeouts</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="kn">read_body</span>   <span class="s">&lt;duration&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="s">read_header</span> <span class="s">&lt;duration&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="s">write</span>       <span class="s">&lt;duration&gt;</span>
+</span></span><span class="line"><span class="cl">			<span class="s">idle</span>        <span class="s">&lt;duration&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="err">}</span>
+</span></span><span class="line"><span class="cl">		<span class="s">max_header_size</span> <span class="s">&lt;size&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="s">protocol</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="kn">allow_h2c</span>
+</span></span><span class="line"><span class="cl">			<span class="s">experimental_http3</span>
+</span></span><span class="line"><span class="cl">			<span class="s">strict_sni_host</span>
+</span></span><span class="line"><span class="cl">		<span class="err">}</span>
+</span></span><span class="line"><span class="cl">	<span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span></code></pre></div><h2 id="二使用示例">二、使用示例</h2>
+<p>1、静态文件服务器</p>
+<pre tabindex="0"><code>example.com {
+	root * /var/www
+	file_server
+}
+</code></pre><p>像往常一样，第一行是站点地址。该<a href="https://caddy2.dengxiaolong.com/docs/caddyfile/directives/root" target="_blank" rel="noopener noreffer "><code>root</code></a>指令指定站点根目录的路径（<code>*</code>匹配所有请求的方法，以便与<a href="https://caddy2.dengxiaolong.com/docs/caddyfile/matchers#path-matchers" target="_blank" rel="noopener noreffer ">路径匹配器</a>消除歧义）；如果站点不是当前工作目录，则更改站点的路径。最后，我们启用静态文件服务器。</p>
+<p>2、反向代理服务器</p>
+<p>代理所有请求</p>
+<pre tabindex="0"><code>example.com {
+	reverse_proxy localhost:5000
+}
+</code></pre><p>只代理以<code>/api/</code>开头的请求，并为其他所有内容提供静态文件：</p>
+<pre tabindex="0"><code>example.com {}
+    root * /var/www
+    reverse_proxy /api/* localhost:5000
+    file_server
+}
+</code></pre><p>3、php</p>
+<p>在运行PHP FastCGI服务的情况下，类似这样的内容适用于大多数现代PHP应用程序</p>
+<pre tabindex="0"><code>example.com
+
+root * /var/www
+php_fastcgi /blog/* localhost:9000
+file_server
+</code></pre><p>请对应地调整站点根目录和路径匹配器；此示例假定PHP仅位于<code>/blog/</code>子目录中——所有其他请求将作为静态文件提供。</p>
+<p>该<a href="https://caddy2.dengxiaolong.com/docs/caddyfile/directives/php_fastcgi" target="_blank" rel="noopener noreffer "><code>php_fastcgi</code>指令</a>实际上只是<a href="https://caddy2.dengxiaolong.com/docs/caddyfile/directives/php_fastcgi#expanded-form" target="_blank" rel="noopener noreffer ">几个配置</a>的快捷方式。</p>
+<p>4、重定向到<code>www.</code>子域名</p>
+<pre tabindex="0"><code>example.com {
+	redir https://www.example.com{uri}
+}
+
+www.example.com {
+}
+</code></pre><pre tabindex="0"><code>www.example.com {
+	redir https://example.com{uri}
+}
+
+example.com {
+}
+</code></pre><p>5、通配符证书</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="k">*.example.com</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kn">tls</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kn">dns</span> <span class="s">&lt;provider_name&gt;</span> <span class="s">[&lt;params...&gt;]</span>
+</span></span><span class="line"><span class="cl">	<span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">@foo</span> <span class="s">host</span> <span class="s">foo.example.com</span>
+</span></span><span class="line"><span class="cl">	<span class="s">handle</span> <span class="s">@foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kn">respond</span> <span class="s">&#34;Foo!&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">@bar</span> <span class="s">host</span> <span class="s">bar.example.com</span>
+</span></span><span class="line"><span class="cl">	<span class="s">handle</span> <span class="s">@bar</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kn">respond</span> <span class="s">&#34;Bar!&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="err">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1"># Fallback for otherwise unhandled domains
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="s">handle</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kn">abort</span>
+</span></span><span class="line"><span class="cl">	<span class="err">}</span>
+</span></span><span class="line"><span class="cl"><span class="err">}</span>
+</span></span></code></pre></div><p>6、web</p>
+<pre tabindex="0"><code>example.com { # 网站的域名信息
+
+    tls example.com.pem example.com.key # 证书和密钥的 PEM 格式的文件路径
+    encode zstd gzip # 启用压缩
+    root * ./ # 域名映射根路径
+    file_server # 启动文件服务
+}
+
+example2.com { # 网站的域名信息
+    tls example2.com.pem example2.com.key # 证书和密钥的 PEM 格式的文件路径
+	reverse_proxy localhost:9000 # 反向代理
+}
+</code></pre><h3 id="三部署">三、部署</h3>
+<p>docker-compose.yaml</p>
+<pre tabindex="0"><code>version: &#34;3.7&#34;
+
+services:
+  caddy:
+    image: caddy:&lt;version&gt;
+    restart: unless-stopped
+    ports:
+      - &#34;80:80&#34;
+      - &#34;443:443&#34;
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - $PWD/site:/srv
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:
+</code></pre></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-11-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/2023-11-11-caddy/" data-title="caddy" data-hashtags="caddy,go-web,web-server"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/2023-11-11-caddy/" data-hashtag="caddy"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/2023-11-11-caddy/" data-title="caddy"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/2023-11-11-caddy/" data-title="caddy"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/2023-11-11-caddy/" data-title="caddy"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/caddy/">caddy</a>,&nbsp;<a href="/tags/go-web/">go-web</a>,&nbsp;<a href="/tags/web-server/">web-server</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023-11-11-flatpak/" class="prev" rel="prev" title="flatpak"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>flatpak</a>
+            <a href="/posts/2023-11-11-dingbot/" class="next" rel="next" title="dingbot">dingbot<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

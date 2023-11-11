@@ -2,14 +2,44 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
+            <loc>https://serialt.github.io/</loc><lastmod>2023-11-11T11:28:14&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/</loc><lastmod>2023-11-11T11:28:14&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/dingbot/</loc><lastmod>2023-11-11T11:28:14&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2023-11-11-dingbot/</loc><lastmod>2023-11-11T11:28:14&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/</loc><lastmod>2023-11-11T11:28:14&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/</loc><lastmod>2023-11-11T11:28:14&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%9F%A5/</loc><lastmod>2023-11-11T11:28:14&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/caddy/</loc><lastmod>2023-11-11T10:29:10&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2023-11-11-caddy/</loc><lastmod>2023-11-11T10:29:10&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/go-web/</loc><lastmod>2023-11-11T10:29:10&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/web-server/</loc><lastmod>2023-11-11T10:29:10&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/web-server/</loc><lastmod>2023-11-11T10:29:10&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/flatpak/</loc><lastmod>2023-11-11T10:28:14&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/flatpak/</loc><lastmod>2023-11-11T10:28:14&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2023-11-11-flatpak/</loc><lastmod>2023-11-11T10:28:14&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/daemon/</loc><lastmod>2023-11-11T10:28:12&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2023-11-11-daemon/</loc><lastmod>2023-11-11T10:28:12&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/launchd/</loc><lastmod>2023-11-11T10:28:12&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/supervisor/</loc><lastmod>2023-11-11T10:28:12&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/systemd/</loc><lastmod>2023-11-11T10:28:12&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86/</loc><lastmod>2023-11-11T10:28:12&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/coredns/</loc><lastmod>2023-11-11T10:28:11&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2023-11-11-coredns/</loc><lastmod>2023-11-11T10:28:11&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/dns/</loc><lastmod>2023-11-11T10:28:11&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/dns/</loc><lastmod>2023-11-11T10:28:11&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/multipass/</loc><lastmod>2023-11-11T10:28:11&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2023-11-11-multipass/</loc><lastmod>2023-11-11T10:28:11&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/vm/</loc><lastmod>2023-11-11T10:28:11&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/</loc><lastmod>2023-11-11T10:28:11&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/basic/</loc><lastmod>2023-11-11T10:26:09&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/</loc><lastmod>2023-11-11T10:26:09&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/</loc><lastmod>2023-11-11T10:26:09&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/go/</loc><lastmod>2023-11-11T10:26:09&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2023-11-11-go-basic/</loc><lastmod>2023-11-11T10:26:09&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/categories/go-%E5%9F%BA%E7%A1%80/</loc><lastmod>2023-11-11T10:26:09&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/posts/</loc><lastmod>2023-11-11T10:26:09&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/</loc><lastmod>2023-11-11T10:26:09&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/windows/</loc><lastmod>2023-11-11T10:25:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/wsl/</loc><lastmod>2023-11-11T10:25:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2023-11-11-wsl/</loc><lastmod>2023-11-11T10:25:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/wsl-2/</loc><lastmod>2023-11-11T10:25:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/wsl-windows/</loc><lastmod>2023-11-11T10:25:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2023-11-11-gopsutil/</loc><lastmod>2023-11-11T10:25:07&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2023-11-11-go-yaml/</loc><lastmod>2023-11-11T10:25:07&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/</loc><lastmod>2023-11-11T10:25:07&#43;08:00</lastmod></url><url>
@@ -77,4 +107,7 @@
             <loc>https://serialt.github.io/tags/mirrors/</loc><lastmod>2023-09-24T17:01:26&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/tuna-web/</loc><lastmod>2023-09-24T17:01:26&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/helm/</loc><lastmod>2023-09-24T11:05:25&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/posts/helm-migrate-oci/</loc><lastmod>2023-09-24T11:05:25&#43;08:00</lastmod></url></urlset>
+            <loc>https://serialt.github.io/posts/helm-migrate-oci/</loc><lastmod>2023-09-24T11:05:25&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2023-11-11-mysql-basic/</loc></url><url>
+            <loc>https://serialt.github.io/posts/2023-11-11-nexus/</loc></url><url>
+            <loc>https://serialt.github.io/posts/2023-11-11-npm/</loc></url></urlset>

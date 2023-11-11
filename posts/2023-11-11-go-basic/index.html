@@ -16,7 +16,7 @@
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-11-go-basic/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-11-gopsutil/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-11-go-basic/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-11-wsl/" /><link rel="next" href="https://serialt.github.io/posts/2023-11-11-multipass/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -113,8 +113,11 @@
     <li><a href="#1变量定义">1、变量定义</a></li>
     <li><a href="#2流程控制">2、流程控制</a></li>
     <li><a href="#3slice">3、slice</a></li>
-    <li><a href="#4函数">4、函数</a></li>
-    <li><a href="#结构体">结构体</a></li>
+    <li><a href="#4函数">4、函数</a>
+      <ul>
+        <li><a href="#结构体">结构体</a></li>
+      </ul>
+    </li>
     <li><a href="#5编译">5、编译</a></li>
     <li><a href="#6私有仓库设置">6、私有仓库设置</a></li>
     <li><a href="#7makefile">7、makefile</a></li>
@@ -251,7 +254,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kd">func</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-</span></span></code></pre></div><h2 id="结构体">结构体</h2>
+</span></span></code></pre></div><h3 id="结构体">结构体</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 嵌套匿名字段
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">Address</span> <span class="kd">struct</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="nx">Province</span> <span class="kt">string</span>
@@ -494,7 +497,8 @@ Hello world
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/2023-11-11-gopsutil/" class="prev" rel="prev" title="Go gopsutil"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Go gopsutil</a></div>
+    <div class="post-nav"><a href="/posts/2023-11-11-wsl/" class="prev" rel="prev" title="wsl"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>wsl</a>
+            <a href="/posts/2023-11-11-multipass/" class="next" rel="next" title="multipass">multipass<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>wsl - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/wsl/</link>
+        <description>wsl - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:25:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/wsl/" rel="self" type="application/rss+xml" /><item>
+    <title>wsl</title>
+    <link>https://serialt.github.io/posts/2023-11-11-wsl/</link>
+    <pubDate>Sat, 11 Nov 2023 10:25:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-wsl/</guid>
+    <description><![CDATA[WSL2 windows上到linux(windows sub system for linux ) 一、安装 wsl 2 如果系统中带有 wsl，则需要升级到 wsl 2。 以管理员身份打开 PowerShe]]></description>
+</item>
+</channel>
+</rss>

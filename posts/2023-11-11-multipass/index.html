@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>multipass - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="multipass" />
+<meta property="og:description" content="​ Multipass 是一个轻量虚拟机管理器，是由 Ubuntu 运营公司 Canonical 所推出的开源项目。运行环境支持 Linux、Windows、macOS。在不同的操作系统上，使用的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2023-11-11-multipass/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-11T10:28:11+08:00" />
+<meta property="article:modified_time" content="2023-11-11T10:28:11+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="multipass"/>
+<meta name="twitter:description" content="​ Multipass 是一个轻量虚拟机管理器，是由 Ubuntu 运营公司 Canonical 所推出的开源项目。运行环境支持 Linux、Windows、macOS。在不同的操作系统上，使用的"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-11-multipass/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-11-go-basic/" /><link rel="next" href="https://serialt.github.io/posts/2023-11-11-coredns/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "multipass",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2023-11-11-multipass\/"
+        },"genre": "posts","keywords": "multipass, vm","wordcount":  1284 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2023-11-11-multipass\/","datePublished": "2023-11-11T10:28:11+08:00","dateModified": "2023-11-11T10:28:11+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">multipass</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>虚拟化</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-11">2023-11-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1284 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#安装">安装</a></li>
+        <li><a href="#使用">使用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>​		Multipass 是一个轻量虚拟机管理器，是由 Ubuntu 运营公司 Canonical 所推出的开源项目。运行环境支持 Linux、Windows、macOS。在不同的操作系统上，使用的是不同的虚拟化技术。在 Linux 上使用的是 KVM、Window 上使用 Hyper-V、macOS 中使用 HyperKit 以最小开销运行VM，支持在笔记本模拟小型云。Multipass唯一的遗憾是支持Linux版本只有Ubuntu。</p>
+<p>同时，Multipass 提供了一个命令行界面来启动和管理 Linux 实例。下载一个全新的镜像需要几秒钟的时间，并且在几分钟内就可以启动并运行 VM。</p>
+<p>github地址：https://github.com/canonical/multipass</p>
+<p>官网：https://multipass.run/</p>
+<h3 id="安装">安装</h3>
+<p><code>Mac</code>：</p>
+<pre tabindex="0"><code># 1）brew 安装
+brew install --cask multipass
+
+# 2)github或者官网下二进制安装
+</code></pre><p><code>Linux</code>：</p>
+<p>ubuntu官方只release了snap安装版本</p>
+<pre tabindex="0"><code>sudo snap install multipass
+</code></pre><p><code>Windows</code>：</p>
+<p>github下载安装包</p>
+<h3 id="使用">使用</h3>
+<p>1）查找可以下载的ubuntu镜像（multipass官方镜像只有ubuntu）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass find
+</span></span><span class="line"><span class="cl">Image                       Aliases           Version          Description
+</span></span><span class="line"><span class="cl">18.04                       bionic            <span class="m">20221014</span>         Ubuntu 18.04 LTS
+</span></span><span class="line"><span class="cl">20.04                       focal             <span class="m">20221018</span>         Ubuntu 20.04 LTS
+</span></span><span class="line"><span class="cl">22.04                       jammy,lts         20221101.1       Ubuntu 22.04 LTS
+</span></span><span class="line"><span class="cl">anbox-cloud-appliance                         latest           Anbox Cloud Appliance
+</span></span><span class="line"><span class="cl">charm-dev                                     latest           A development and testing environment <span class="k">for</span> charmers
+</span></span><span class="line"><span class="cl">docker                                        latest           A Docker environment with Portainer and related tools
+</span></span><span class="line"><span class="cl">jellyfin                                      latest           Jellyfin is a Free Software Media System that puts you in control of managing and streaming your media.
+</span></span><span class="line"><span class="cl">minikube                                      latest           minikube is <span class="nb">local</span> Kubernetes
+</span></span></code></pre></div><p>2）创建虚拟机</p>
+<p>参数：</p>
+<pre tabindex="0"><code>-n, --name: 名称
+-c, --cpus: cpu核心数, 默认: 1
+-m, --mem: 内存大小, 默认: 1G
+-d, --disk: 硬盘大小, 默认: 5G
+</code></pre><p>创建虚拟机时需要联网下载镜像</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 使用最新版LTS镜像</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass launch -n vm01 -c <span class="m">1</span> -m 1G -d 10G
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 设置使用的镜像</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass launch focal -n vm01 -c <span class="m">1</span> -m 1G -d 10G
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 设置网络</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># name 网卡名</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># mode dhcp方式，auto或者manual，默认auto</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># mac 设置mac地址</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass launch --network en0 --network <span class="nv">name</span><span class="o">=</span>bridge0,mode<span class="o">=</span>manual
+</span></span></code></pre></div><p>修改配置</p>
+<pre tabindex="0"><code>[root@sugar ~]$ multipass set local.&lt;instance-name&gt;.(cpus|disk|memory) xxx
+</code></pre><p>3）与虚拟机交互</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 默认是以ubuntu用户进入</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass shell vm01
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 在虚拟机外执行命令</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass <span class="nb">exec</span> vm01 -- <span class="nb">pwd</span>
+</span></span></code></pre></div><p>4）启动与关闭</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass start vm01
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass start vm01 vm02
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass start --all
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass <span class="nb">suspend</span> vm01
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass <span class="nb">suspend</span> --all
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass stop vm01
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass stop --all
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass delete vm01
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass delete --all
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 从一个删除的实例中恢复</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass recover keen-yak
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 移除一个实例</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass delete keen-yak
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass purge
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span>$ multipass list
+</span></span><span class="line"><span class="cl">No instances found.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 或者</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar ~<span class="o">]</span><span class="nv">$$</span> multipass delete --purge keen-yak
+</span></span></code></pre></div><p>5）数据共享</p>
+<p>mount</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ multipass mount <span class="nv">$HOME</span> keen-yak
+</span></span><span class="line"><span class="cl">$ multipass info keen-yak
+</span></span><span class="line"><span class="cl">…
+</span></span><span class="line"><span class="cl">Mounts:         /home/michal <span class="o">=</span>&gt; /home/michal
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 挂载指定路径</span>
+</span></span><span class="line"><span class="cl">$ multipass mount <span class="nv">$HOME</span> keen-yak:/some/path
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看信息</span>
+</span></span><span class="line"><span class="cl">$ multipass info keen-yak         
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 卸载</span>
+</span></span><span class="line"><span class="cl">$ multipass umount keen-yak
+</span></span></code></pre></div><p>传输文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ multipass transfer keen-yak:/etc/crontab keen-yak:/etc/fstab /home/michal
+</span></span><span class="line"><span class="cl">$ ls -l /home/michal/crontab /home/michal/fstab
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> michal michal <span class="m">722</span> Oct <span class="m">18</span> 12:13 /home/michal/crontab
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> michal michal  <span class="m">82</span> Oct <span class="m">18</span> 12:13 /home/michal/fstab
+</span></span><span class="line"><span class="cl">$ multipass transfer /home/michal/crontab /home/michal/fstab keen-yak:
+</span></span><span class="line"><span class="cl">$ multipass <span class="nb">exec</span> keen-yak -- ls -l crontab fstab
+</span></span><span class="line"><span class="cl">-rw-rw-r-- <span class="m">1</span> ubuntu ubuntu <span class="m">722</span> Oct <span class="m">18</span> 12:14 crontab
+</span></span><span class="line"><span class="cl">-rw-rw-r-- <span class="m">1</span> ubuntu ubuntu  <span class="m">82</span> Oct <span class="m">18</span> 12:14 fstab
+</span></span></code></pre></div><p>6）容器自动化</p>
+<p>为了保持开发环境和线上环境一致性 同时节省部署时间 <strong>multipass</strong> 给我们提供了 <strong>&ndash;cloud-init</strong> 选项进行容器启动初始化配置:</p>
+<pre tabindex="0"><code>multipass launch --name ubuntu --cloud-init config.yaml
+</code></pre><p>上面 <strong>config.yaml</strong> 则是容器的初始化配置文件，例如，我们想在初始化容器的时候，自动下载安装 <strong>Node.js</strong>，内容如下：</p>
+<pre tabindex="0"><code>#cloud-config
+runcmd:
+  - curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+  - sudo apt-get install -y nodejs
+</code></pre><p><code>runcmd</code> 可以指定容器 <strong>首次启动</strong> 时运行的命令</p>
+<pre tabindex="0"><code>凡是用户自定义的cloud-init的配置文件,必须以#cloud-config开头，这是cloud-init识别它的方式。
+</code></pre><p><strong>yaml</strong> 配置文件参考链接：https://cloudinit.readthedocs.io/en/latest/topics/examples.html?highlight=lock-passwd#including-users-and-groups</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-11-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/2023-11-11-multipass/" data-title="multipass" data-hashtags="multipass,vm"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/2023-11-11-multipass/" data-hashtag="multipass"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/2023-11-11-multipass/" data-title="multipass"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/2023-11-11-multipass/" data-title="multipass"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/2023-11-11-multipass/" data-title="multipass"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/multipass/">multipass</a>,&nbsp;<a href="/tags/vm/">vm</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023-11-11-go-basic/" class="prev" rel="prev" title="Go basic"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Go basic</a>
+            <a href="/posts/2023-11-11-coredns/" class="next" rel="next" title="coredns">coredns<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
