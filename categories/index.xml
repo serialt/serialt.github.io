@@ -13,6 +13,14 @@
     <description><![CDATA[]]></description>
 </item>
 <item>
+    <title>linux 基础</title>
+    <link>https://serialt.github.io/categories/linux-%E5%9F%BA%E7%A1%80/</link>
+    <pubDate>Sat, 11 Nov 2023 10:30:09 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/linux-%E5%9F%BA%E7%A1%80/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>web server</title>
     <link>https://serialt.github.io/categories/web-server/</link>
     <pubDate>Sat, 11 Nov 2023 10:29:10 &#43;0800</pubDate>
@@ -61,27 +69,19 @@
     <description><![CDATA[]]></description>
 </item>
 <item>
+    <title>mac</title>
+    <link>https://serialt.github.io/categories/mac/</link>
+    <pubDate>Sat, 11 Nov 2023 10:26:09 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/mac/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>windows</title>
     <link>https://serialt.github.io/categories/windows/</link>
     <pubDate>Sat, 11 Nov 2023 10:25:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/categories/windows/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Go 库文档</title>
-    <link>https://serialt.github.io/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/</link>
-    <pubDate>Sat, 11 Nov 2023 10:25:07 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>同步oci镜像</title>
-    <link>https://serialt.github.io/categories/%E5%90%8C%E6%AD%A5oci%E9%95%9C%E5%83%8F/</link>
-    <pubDate>Wed, 08 Nov 2023 20:26:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/categories/%E5%90%8C%E6%AD%A5oci%E9%95%9C%E5%83%8F/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

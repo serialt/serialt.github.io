@@ -1,0 +1,24 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>linux 基础 - Category - Blog</title>
+        <link>https://serialt.github.io/categories/linux-%E5%9F%BA%E7%A1%80/</link>
+        <description>linux 基础 - Category - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:30:09 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/linux-%E5%9F%BA%E7%A1%80/" rel="self" type="application/rss+xml" /><item>
+    <title>port</title>
+    <link>https://serialt.github.io/posts/2023-11-11-port/</link>
+    <pubDate>Sat, 11 Nov 2023 10:30:09 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-port/</guid>
+    <description><![CDATA[服务器中有关常用端口的信息在/etc/services文件中记录 [root@localhost ~]# vim /etc/services 协议 端口 说明 FTP 21 FTP服务上传和下载文件。 SSH 22 远程连接Linux弹性]]></description>
+</item>
+<item>
+    <title>ubuntu basic</title>
+    <link>https://serialt.github.io/posts/2023-11-11-ubuntu/</link>
+    <pubDate>Sat, 11 Nov 2023 10:26:09 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-ubuntu/</guid>
+    <description><![CDATA[ubuntu 基础 一、apt源 修改apt源为国内源，主配置文件：/etc/apt/sources.list，配置文件目录：/etc/apt/source]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>ubuntu basic - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="ubuntu basic" />
+<meta property="og:description" content="ubuntu 基础 一、apt源 修改apt源为国内源，主配置文件：/etc/apt/sources.list，配置文件目录：/etc/apt/source" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2023-11-11-ubuntu/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-11T10:26:09+08:00" />
+<meta property="article:modified_time" content="2023-11-11T10:26:09+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ubuntu basic"/>
+<meta name="twitter:description" content="ubuntu 基础 一、apt源 修改apt源为国内源，主配置文件：/etc/apt/sources.list，配置文件目录：/etc/apt/source"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-11-ubuntu/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-11-wsl/" /><link rel="next" href="https://serialt.github.io/posts/2023-11-11-mac/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "ubuntu basic",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2023-11-11-ubuntu\/"
+        },"genre": "posts","keywords": "ubuntu, linux","wordcount":  2573 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2023-11-11-ubuntu\/","datePublished": "2023-11-11T10:26:09+08:00","dateModified": "2023-11-11T10:26:09+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">ubuntu basic</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/linux-%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>linux 基础</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-11">2023-11-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2573 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一apt源">一、apt源</a>
+      <ul>
+        <li><a href="#apt-使用问题">apt 使用问题</a></li>
+        <li><a href="#升级系统">升级系统</a></li>
+      </ul>
+    </li>
+    <li><a href="#二安装-docker">二、安装 docker</a></li>
+    <li><a href="#三vim-设置">三、vim 设置</a></li>
+    <li><a href="#四exsi-配置">四、exsi 配置</a></li>
+    <li><a href="#五network配置">五、network配置</a></li>
+    <li><a href="#六rclocal-设置">六、rc.local 设置</a></li>
+    <li><a href="#七ssh-服务配置">七、ssh 服务配置</a></li>
+    <li><a href="#八unsnapd">八、unsnapd</a></li>
+    <li><a href="#九用户管理">九、用户管理</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="ubuntu-基础">ubuntu 基础</h1>
+<h2 id="一apt源">一、apt源</h2>
+<p>修改apt源为国内源，主配置文件：/etc/apt/sources.list，配置文件目录：/etc/apt/sources.d，以1804为例。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 修改 /etc/apt/sources.list</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+</span></span></code></pre></div><p>修改命令</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo sed -i <span class="s2">&#34;s@http://.*archive.ubuntu.com@http://repo.huaweicloud.com@g&#34;</span> /etc/apt/sources.list
+</span></span><span class="line"><span class="cl">sudo sed -i <span class="s2">&#34;s@http://.*security.ubuntu.com@http://repo.huaweicloud.com@g&#34;</span> /etc/apt/sources.list
+</span></span></code></pre></div><h3 id="apt-使用问题">apt 使用问题</h3>
+<p>1）apt-get安装中的E: Sub-process /usr/bin/dpkg returned an error code (1)问题</p>
+<p>参考网址：https://www.cnblogs.com/orzs/p/10844869.html</p>
+<pre tabindex="0"><code>cd /var/lib/dpkg/
+sudo mv info/ info_bak          # 现将info文件夹更名
+sudo mkdir info                 # 再新建一个新的info文件夹
+sudo apt-get update             # 更新
+sudo apt-get -f install         # 修复
+sudo mv info/* info_bak/        # 执行完上一步操作后会在新的info文件夹下生成一些文件，现将这些文件全部移到info_bak文件夹下
+sudo rm -rf info                # 把自己新建的info文件夹删掉
+sudo mv info_bak info           # 把以前的info文件夹重新改回名
+</code></pre><p>2）Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">解决办法：
+</span></span><span class="line"><span class="cl">第一种情况：
+</span></span><span class="line"><span class="cl">进程中存在与apt相关的正在运行的进程：
+</span></span><span class="line"><span class="cl">首先检查是否在运行apt,apt-get相关的进程
+</span></span><span class="line"><span class="cl">ps aux <span class="p">|</span> grep -i apt
+</span></span><span class="line"><span class="cl">如果存在与apt相关的正在运行的进程，kill掉进程；
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo <span class="nb">kill</span> -9 &lt;process id&gt;
+</span></span><span class="line"><span class="cl">或者直接简单粗暴的：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo killall apt apt-get 
+</span></span><span class="line"><span class="cl">如果进行完上面的步骤还是无法顺利执行apt-get 操作，则属于第二种情况：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">第二种情况：
+</span></span><span class="line"><span class="cl">进程列表中已经没有与apt,apt-get相关的进程在运行，但依然报错，在这种情况下，产生错误的根本原因是lock file。 loack file用于防止两个或多个进程使用相同的数据。 当运行apt或apt-commands时，它会在几个地方创建lock files。 当前一个apt命令未正确终止时，lock file未被删除，因此它们会阻止任何新的apt / apt-get命令实例，比如正在执行apt-get upgrade，在执行过程中直接ctrl+c取消了该操作，很有可能就会造成这种情况。
+</span></span><span class="line"><span class="cl">要解决此问题，首先要删除lock file。
+</span></span><span class="line"><span class="cl">使用lsof命令获取持有lock file的进程的进程ID,依次运行如下命令：
+</span></span><span class="line"><span class="cl">lsof /var/lib/dpkg/lock
+</span></span><span class="line"><span class="cl">lsof /var/lib/apt/lists/lock
+</span></span><span class="line"><span class="cl">lsof /var/cache/apt/archives/lock
+</span></span><span class="line"><span class="cl">需要注意的是，以上命令执行结果如果无返回，说明没有正在运行的进程；如果返回了相应的进程，需要kill掉。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">删除所有的lock file
+</span></span><span class="line"><span class="cl">sudo rm /var/lib/apt/lists/lock
+</span></span><span class="line"><span class="cl">sudo rm /var/cache/apt/archives/lock
+</span></span><span class="line"><span class="cl">sudo rm /var/lib/dpkg/lock
+</span></span><span class="line"><span class="cl">最后重新配置一下dpkg：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo dpkg --configure -a
+</span></span><span class="line"><span class="cl">如果上述命令不出任何错误，就万事大吉了。（我是到这里问题就解决了）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">但是有时候，生活总是嫌你不够惨，执行配置命令时可能会出现以下错误：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">dpkg: error: dpkg frontend is locked by another process
+</span></span><span class="line"><span class="cl">这需要我们额外进行一些操作：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">找出正在锁定lock file的进程：
+</span></span><span class="line"><span class="cl">lsof /var/lib/dpkg/lock-frontend
+</span></span><span class="line"><span class="cl">kill掉输出的进程（如果输出为空则忽略）
+</span></span><span class="line"><span class="cl">sudo <span class="nb">kill</span> -9 PID
+</span></span><span class="line"><span class="cl">删除lock file并重新配置dpkg:
+</span></span><span class="line"><span class="cl">sudo rm /var/lib/dpkg/lock-frontend
+</span></span><span class="line"><span class="cl">sudo dpkg --configure -a
+</span></span></code></pre></div><h3 id="升级系统">升级系统</h3>
+<p>ubuntu 1804 升级到2004</p>
+<p>1）切换apt源</p>
+<pre tabindex="0"><code>deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse
+
+deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse
+
+deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse
+
+deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
+
+deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse
+</code></pre><p>2）更新和重启系统</p>
+<pre tabindex="0"><code>apt update
+apt upgrade 
+
+reboot
+</code></pre><p>3）更新系统</p>
+<pre tabindex="0"><code>do-release-upgrade
+
+Reading cache
+
+Checking package manager
+
+Continue running under SSH? 
+
+This session appears to be running under ssh. It is not recommended 
+to perform a upgrade over ssh currently because in case of failure it 
+is harder to recover. 
+
+If you continue, an additional ssh daemon will be started at port 
+&#39;1022&#39;. 
+Do you want to continue? 
+
+Continue [yN] y
+
+Starting additional sshd 
+
+To make recovery in case of failure easier, an additional sshd will 
+be started on port &#39;1022&#39;. If anything goes wrong with the running 
+ssh you can still connect to the additional one. 
+If you run a firewall, you may need to temporarily open this port. As 
+this is potentially dangerous it&#39;s not done automatically. You can 
+open the port with e.g.: 
+&#39;iptables -I INPUT -p tcp --dport 1022 -j ACCEPT&#39; 
+</code></pre><h2 id="二安装-docker">二、安装 docker</h2>
+<p>ubuntu与红帽系列系统不同，在配置apt源时需要先配置要添加的密钥的证书</p>
+<pre tabindex="0"><code>root@harbor:~# curl -fsSL https://mirrors.huaweicloud.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+root@harbor:~# sudo apt-get install software-properties-common
+root@harbor:~# add-apt-repository &#34;deb [arch=amd64] https://mirrors.huaweicloud.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable&#34;
+root@harbor:~# apt-get update
+root@harbor:~# apt-get install docker-ce
+</code></pre><h2 id="三vim-设置">三、vim 设置</h2>
+<p>ubuntu上默认的许多文件的编辑器是nano，其使用非常不友好，可以修改为vim</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">root@ubuntu:~# sudo <span class="k">select</span>-editor
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Select an editor.  To change later, run <span class="s1">&#39;select-editor&#39;</span>.
+</span></span><span class="line"><span class="cl">  1. /bin/nano        &lt;---- easiest
+</span></span><span class="line"><span class="cl">  2. /usr/bin/vim.basic
+</span></span><span class="line"><span class="cl">  3. /usr/bin/vim.tiny
+</span></span><span class="line"><span class="cl">  4. /bin/ed
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Choose 1-4 <span class="o">[</span>1<span class="o">]</span>: <span class="m">2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 先择vim.basic，设置好后就可以在编辑一些文件或服务时使用vim</span>
+</span></span></code></pre></div><h2 id="四exsi-配置">四、exsi 配置</h2>
+<p>exsi 安装ubuntu2004</p>
+<p>报错</p>
+<pre tabindex="0"><code>multipathd[651]: sda: add missing path
+multipathd[651]: sda: failed to get udev uid: Invalid argument
+multipathd[651]: sda: failed to get sysfs uid: Invalid argument
+multipathd[651]: sda: failed to get sgio uid: No such file or directory
+multipathd[651]: sda: add missing path
+multipathd[651]: sda: failed to get udev uid: Invalid argument
+multipathd[651]: sda: failed to get sysfs uid: Invalid argument
+multipathd[651]: sda: failed to get sgio uid: No such file or directory
+</code></pre><p>解决办法：</p>
+<ul>
+<li><a href="https://askubuntu.com/questions/1242731/ubuntu-20-04-multipath-configuration" target="_blank" rel="noopener noreffer ">https://askubuntu.com/questions/1242731/ubuntu-20-04-multipath-configuration</a></li>
+</ul>
+<p>方法一：</p>
+<p>exsi虚拟机配置文件中增加</p>
+<pre tabindex="0"><code>disk.EnableUUID = &#34;TRUE&#34;
+</code></pre><p>方法二：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># vim</span>
+</span></span><span class="line"><span class="cl">defaults <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    user_friendly_names yes
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">blacklist <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    device <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        vendor <span class="s2">&#34;VMware&#34;</span>
+</span></span><span class="line"><span class="cl">        product <span class="s2">&#34;Virtual disk&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 重启</span>
+</span></span><span class="line"><span class="cl">/etc/init.d/multipath-tools restart
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 或者</span>
+</span></span><span class="line"><span class="cl">systemctl restart multipathd
+</span></span></code></pre></div><pre tabindex="0"><code>defaults {
+    user_friendly_names yes
+}
+blacklist {
+    devnode &#34;^(ram|raw|loop|fd|md|dm-|sr|scd|st|sda)[0-9]*&#34;
+}
+</code></pre><h2 id="五network配置">五、network配置</h2>
+<p>静态IP</p>
+<p>1、配置静态ip</p>
+<pre tabindex="0"><code>root@ubuntu:/etc/netplan# pwd
+/etc/netplan
+
+root@ubuntu:/etc/netplan# vim 50-cloud-init.yaml
+network:
+    version: 2
+    renderer: networkd
+    ethernets:
+        ens160:
+            dpch4: no
+            addresses:
+            - 192.168.100.17/24
+            gateway4: 192.168.100.1
+            nameservers:
+                addresses:
+                - 223.5.5.5
+</code></pre><p>或者</p>
+<pre tabindex="0"><code>network:
+    ethernets:
+        ens3:
+            dhcp4: no
+            addresses: [192.168.100.141/24]
+            gateway4: 192.168.100.1
+            nameservers:
+              addresses: [114.114.114.114,8.8.8.8]
+    version: 2
+</code></pre><p>2204开始</p>
+<pre tabindex="0"><code>network:
+  version: 2
+  ethernets:
+    ens3:
+      dhcp4: false
+      addresses: [192.168.100.141/24]
+      routes:
+        - to: default
+          via: 192.168.100.1
+      nameservers:
+        addresses: [114.114.114.114,8.8.8.8]
+</code></pre><p>2、加载配置</p>
+<pre tabindex="0"><code>root@ubuntu:~# netplan apply
+
+#测试网络
+root@ubuntu:~# ping baidu.com
+</code></pre><p>3、连接wifi</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">network</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">wifis</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">wlan0</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">dhcp4</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">access-points</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">&#34;sugar&#34;: </span><span class="w"> </span><span class="c"># ssid name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;password&#34;</span><span class="w">
+</span></span></span></code></pre></div><h2 id="六rclocal-设置">六、rc.local 设置</h2>
+<pre tabindex="0"><code>[root@tc ~]# cat /etc/systemd/system/rc-local.service
+[Unit]
+Description=/etc/rc.local Compatibility
+Documentation=man:systemd-rc-local-generator(8)
+ConditionFileIsExecutable=/etc/rc.local
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/etc/rc.local
+TimeoutStartSec=0
+TimeoutStopSec=30
+RemainAfterExit=yes
+GuessMainPID=no
+
+[Install]
+WantedBy=multi-user.target
+</code></pre><pre tabindex="0"><code>[root@tc rc.d]# cat rc.local 
+#!/bin/bash
+
+date &gt;&gt; /tmp/data.txt
+
+exit 0
+</code></pre><h2 id="七ssh-服务配置">七、ssh 服务配置</h2>
+<p>ubuntu默认不安装openssh-server</p>
+<p>1、安装openssl-server</p>
+<pre tabindex="0"><code>root@ubuntu:~# apt-get install openssh-sevrer 
+root@ubuntu:~# systemctl start ssh
+root@ubuntu:~# systemctl enable ssh
+</code></pre><p>2、允许root用户远程登陆</p>
+<p>ubuntu默认不允许root用户远程登陆</p>
+<pre tabindex="0"><code>root@ubuntu:~# vim /etc/ssh/sshd_config
+32 #PermitRootLogin prohibit-password
+修改为
+33 PermitRootLogin yes
+ 
+打开密钥认证
+56 #PasswordAuthentication yes
+修改为
+57 PasswordAuthentication yes
+ 
+为root用户设置密码
+root@ubuntu:~# passwd root
+
+
+重启ssh服务
+root@ubuntu:~# systemctl restart ssh
+</code></pre><h2 id="八unsnapd">八、unsnapd</h2>
+<p>ubuntu 系统卸载snap</p>
+<p>停止开机自启</p>
+<pre tabindex="0"><code>sudo systemctl disable snapd.service
+sudo systemctl disable snapd.socket
+sudo systemctl disable snapd.seeded.service
+</code></pre><p>卸载snap安装的软件</p>
+<pre tabindex="0"><code># 查询当前系统上snap安装了哪些app
+snap list
+
+# 卸载
+sudo snap remove xxxxx_app
+</code></pre><p>禁止重新安装snap</p>
+<pre tabindex="0"><code>sudo vim /etc/apt/preferences.d/nosnap.pref
+
+Package: snapd
+Pin: release a=*
+Pin-Priority: -10
+</code></pre><h2 id="九用户管理">九、用户管理</h2>
+<p>1、用户</p>
+<p>Ubuntu系统中存在的是nobody和nogroup</p>
+<p>在使用useradd命令创建用户的时候，ubuntu不会为主动为用户创建家目录，其默认的shell也不是bash</p>
+<p>创建一个具有家目录的用户，其shell为bash</p>
+<pre tabindex="0"><code>root@ubuntu:~# useradd -m test3 -s /bin/bash
+
+# 若没有指定shell，可以进行修改
+root@ubuntu:~# chsh -s /bin/bash test1
+</code></pre><p>2、创建用户，非交互式更改密码</p>
+<pre tabindex="0"><code>root@ubuntu:~# useradd tom
+
+root@ubuntu:~# echo tom:jerry | chpasswd
+</code></pre><pre tabindex="0"><code>格式：echo username:password   | chpasswd
+</code></pre><p>3、sudo权限免密</p>
+<pre tabindex="0"><code>root@ubuntu:~# vim /etc/sudoers
+ops_serialt ALL=(ALL) NOPASSWD: ALL
+</code></pre><p>4、ubuntu 2004重置密码</p>
+<p>参考链接：https://blog.51cto.com/u_15169172/2793265</p>
+<p>1）重启服务器后按e进入grub菜单</p>
+<p>2）在linux的一行的最后修改为<code>rw init=/bin/bash</code></p>
+<p>3）按<code>ctrl + x</code>启动系统</p>
+<p>按下<code>Ctrl+c</code>可以撤销登录</p>
+<p>4）查看根目录是否有写的权限：<code>mount | grep -w /</code></p>
+<p>5）重置密码</p>
+<p>确认根目录正处于<code>rw</code>状态后，那就可以直接重置或破解Ubuntu 20.04任何用户的密码了。</p>
+<p>重置<code>root</code>密码：</p>
+<pre tabindex="0"><code>passwd root
+</code></pre><p>6）重启</p>
+<p>完成重置密码或者破解密码的工作后，重启Ubuntu 20.04，执行以下命令重启服务器：</p>
+<pre tabindex="0"><code>exec /sbin/init
+</code></pre></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-11-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/2023-11-11-ubuntu/" data-title="ubuntu basic" data-hashtags="ubuntu,linux"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/2023-11-11-ubuntu/" data-hashtag="ubuntu"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/2023-11-11-ubuntu/" data-title="ubuntu basic"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/2023-11-11-ubuntu/" data-title="ubuntu basic"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/2023-11-11-ubuntu/" data-title="ubuntu basic"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/ubuntu/">ubuntu</a>,&nbsp;<a href="/tags/linux/">linux</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023-11-11-wsl/" class="prev" rel="prev" title="wsl"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>wsl</a>
+            <a href="/posts/2023-11-11-mac/" class="next" rel="next" title="mac">mac<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
