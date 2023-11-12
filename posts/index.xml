@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/posts/</link>
         <description>All Posts | Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 12 Nov 2023 10:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 12 Nov 2023 10:29:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>security-info</title>
+    <link>https://serialt.github.io/posts/2023-11-12-security-info/</link>
+    <pubDate>Sun, 12 Nov 2023 10:29:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-12-security-info/</guid>
+    <description><![CDATA[漏洞信息 云服务商安全服务公告 云服务商 链接 cve官网 https://cve.mitre.org/ 阿里云 https://help.aliyun.com/noticelist/9213612.html?spm=a2c4g.789004748.n2.3.cddb4c07NBt9Rl 华为云 https://www.huaweicloud.com/notice.securecenter.html 腾讯云 https://cloud.tencent.com/announce?categorys=21&page=1 阿里云漏洞数据库 https://avd.aliyun.com/ 国家信息漏洞库 http://www.cnnvd.org.cn/ 常用软件官方安全公告链接 名称 链]]></description>
+</item>
+<item>
     <title>sqlite3</title>
     <link>https://serialt.github.io/posts/2023-11-12-sqlite3/</link>
     <pubDate>Sun, 12 Nov 2023 10:26:27 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-11-11-go-basic/</guid>
     <description><![CDATA[1、变量定义 var name string var isOk bool // 隐式申明 a := 100 str := &#34;serialt&#34; // 批量声明 var ( a string b int c bool d float32 ) // 变量的初始化 var name string = &#34;github&#34; var age int = 10 var name, age = &#34;github&#34;, 11 // 类型推导 var name =]]></description>
-</item>
-<item>
-    <title>mac</title>
-    <link>https://serialt.github.io/posts/2023-11-11-mac/</link>
-    <pubDate>Sat, 11 Nov 2023 10:26:09 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-11-mac/</guid>
-    <description><![CDATA[Mac 优化 1、mac终端增加颜色，参考centos7 eval &#34;$(/opt/homebrew/bin/brew shellenv)&#34; # Setting PATH for Python 3.9 # The original version is saved in .bash_profile.pysave PATH=&#34;/Library/Frameworks/Python.framework/Versions/3.9/bin:${PATH}&#34; export PG_HOME=/opt/homebrew/Cellar/postgresql@10/10.17 export PATH export GOPROXY=https://goproxy.cn,direct export GOPATH=/Users/sugar/go export GO111MODULE=&#34;on&#34; export GOBIN=$GOPATH/bin export PATH=$PATH:$GOROOT/bin:$GOBIN:$PG_HOME/bin # 参考RHEL console export PS1=&#34;[\u@\h \W]\\$ &#34; export CLICOLOR=1]]></description>
 </item>
 </channel>
 </rss>
