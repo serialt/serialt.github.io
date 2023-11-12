@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/categories/</link>
         <description>Categories - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 11:28:14 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 12 Nov 2023 10:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>Database</title>
+    <link>https://serialt.github.io/categories/database/</link>
+    <pubDate>Sun, 12 Nov 2023 10:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/database/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>机器人通知</title>
     <link>https://serialt.github.io/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%9F%A5/</link>
     <pubDate>Sat, 11 Nov 2023 11:28:14 &#43;0800</pubDate>
@@ -74,14 +82,6 @@
     <pubDate>Sat, 11 Nov 2023 10:26:09 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/categories/mac/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>windows</title>
-    <link>https://serialt.github.io/categories/windows/</link>
-    <pubDate>Sat, 11 Nov 2023 10:25:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/categories/windows/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

@@ -2,12 +2,17 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://serialt.github.io/</loc><lastmod>2023-11-11T11:28:14&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/</loc><lastmod>2023-11-11T11:28:14&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/</loc><lastmod>2023-11-12T10:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/</loc><lastmod>2023-11-12T10:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/database/</loc><lastmod>2023-11-12T10:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/db/</loc><lastmod>2023-11-12T10:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/</loc><lastmod>2023-11-12T10:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/sqlite/</loc><lastmod>2023-11-12T10:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/sqlite3/</loc><lastmod>2023-11-12T10:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2023-11-12-sqlite3/</loc><lastmod>2023-11-12T10:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/</loc><lastmod>2023-11-12T10:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/dingbot/</loc><lastmod>2023-11-11T11:28:14&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2023-11-11-dingbot/</loc><lastmod>2023-11-11T11:28:14&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/posts/</loc><lastmod>2023-11-11T11:28:14&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/</loc><lastmod>2023-11-11T11:28:14&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%9F%A5/</loc><lastmod>2023-11-11T11:28:14&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/categories/linux-%E5%9F%BA%E7%A1%80/</loc><lastmod>2023-11-11T10:30:09&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/port/</loc><lastmod>2023-11-11T10:30:09&#43;08:00</lastmod></url><url>

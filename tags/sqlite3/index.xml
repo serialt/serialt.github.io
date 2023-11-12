@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>sqlite3 - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/sqlite3/</link>
+        <description>sqlite3 - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 12 Nov 2023 10:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/sqlite3/" rel="self" type="application/rss+xml" /><item>
+    <title>sqlite3</title>
+    <link>https://serialt.github.io/posts/2023-11-12-sqlite3/</link>
+    <pubDate>Sun, 12 Nov 2023 10:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-12-sqlite3/</guid>
+    <description><![CDATA[SQLite SQLite是一种开源，零配置，独立的，独立的，事务关系数据库引擎，旨在嵌入到应用程序中。 一、安装sqlite SQLite以其零配置而闻名]]></description>
+</item>
+</channel>
+</rss>
