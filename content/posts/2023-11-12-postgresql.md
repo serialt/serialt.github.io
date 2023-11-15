@@ -230,6 +230,8 @@ alter default privileges in schema public grant select on SEQUENCES to readonly;
 
 ## 三、从库配置
 
+参考链接：https://help.aliyun.com/document_detail/53096.html
+
 ### 1、配置PostgreSQL主节点
 
 1）输入以下SQL语句创建数据库账号replica，并设置密码及登录权限和备份权限。
@@ -269,6 +271,47 @@ max_connections = 100    #最大连接数，从库的max_connections必须要大
 
 ### 2、从节点上操作
 
+```bash
+pg_basebackup --help 
+用法：
+  pg_basebackup [选项] ...
+
+控制输出的选项：
+  -D, --pgdata=DIRECTORY 接收基本备份到目录，如果不存在会自动创建
+  -F, --format=p|t       输出格式（plain,直接拷贝数据文件，tar 配合 -z -Z 进行打包压缩）
+  -r, --max-rate=RATE         传输数据目录的最大传输速率（以 kB/s 为单位，或使用后缀“k”或“M”）
+  -R,--write-recovery-conf 是否输出recovery-conf文件，方便后续使用备份快速搭建出从节点
+  -T, --tablespace-mapping=OLDDIR=NEWDIR 将 OLDDIR 中的表空间重定位到 NEWDIR
+      --waldir=WALDIR             预写日志目录的位置
+  -X, --wal-method=none|fetch|stream 包含指定方法所需的 WAL 文件
+  -z, --gzip                   压缩 tar 输出
+  -Z, --compress=0-9    使用给定的压缩级别压缩 tar 输出
+
+常规选项：
+  -c, --checkpoint=fast|spread 设置快速或扩展检查点
+  -C, --create-slot   创建复制槽
+  -l, --label=LABEL  设置备份标签
+  -n, --no-clean     出错后不清理
+  -N, --no-sync     不等待更改安全写入磁盘
+  -P, --progress    显示进度信息
+  -S, --slot=SLOTNAME 要使用的复制槽
+  -v, --verbose 输出详细信息
+  -V, --version 输出版本信息，然后退出
+      --no-slot 防止创建临时复制槽
+      --no-verify-checksums 不验证校验和
+  -?, --help 显示此帮助，然后退出
+
+连接选项：
+  -d, --dbname  数据库名称
+  -h, --host      数据库服务器主机ip或套接字目录
+  -p, --port      数据库口号
+  -s, --status-interval=状态包发送到服务器的间隔时间（以秒为单位）
+  -U, --username 连接用户，要有super权限
+  -w, --no-password 从不提示输入密码
+```
+
+
+
 1）备份数据
 
 使用pg_basebackup基础备份工具指定备份目录。
@@ -276,13 +319,14 @@ max_connections = 100    #最大连接数，从库的max_connections必须要大
 ```shell
 pg_basebackup -D /var/lib/pgsql/11/data -h <主节点IP> -p 5432 -U replica -X stream -P
 
- pg_basebackup -h 192.168.10.183 -p 5432 -U replica -D /data/postgresql -X stream -P --write-recovery-conf
+pg_basebackup -h 192.168.10.183 -p 5432 -U replica -D /data/postgresql --checkpoint=fast -X stream -P -R -F t
+
+# -F t 压缩传输
 ```
 
 新建并修改recovery.conf配置文件。
 
 ```shell
-cp /usr/pgsql-11/share/recovery.conf.sample /var/lib/pgsql/11/data/recovery.conf
 vim /var/lib/pgsql/11/data/recovery.conf
 
 ####分别找到以下参数，并将参数修改为以下内容：
@@ -297,7 +341,7 @@ recovery_target_timeline = 'latest' #流复制同步到最新的数据
 max_connections = 1000             # 最大连接数，从节点需设置比主节点大
 hot_standby = on                   # 开启热备
 max_standby_streaming_delay = 30s  # 数据流备份的最大延迟时间
-wal_receiver_status_interval = 1s  # 从节点向主节点报告自身状态的最长间隔时间
+wal_receiver_status_interval = 5s  # 从节点向主节点报告自身状态的最长间隔时间
 hot_standby_feedback = on          # 如果有错误的数据复制向主进行反馈
 ```
 
