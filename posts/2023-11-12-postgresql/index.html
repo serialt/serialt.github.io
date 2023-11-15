@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2023-11-12-postgresql\/"
-        },"genre": "posts","keywords": "pg, postgresql, db","wordcount":  1914 ,
+        },"genre": "posts","keywords": "pg, postgresql, db","wordcount":  2409 ,
         "url": "https:\/\/serialt.github.io\/posts\/2023-11-12-postgresql\/","datePublished": "2023-11-12T10:30:27+08:00","dateModified": "2023-11-12T10:30:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,8 +101,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">postgresql</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/database/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Database</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-12">2023-11-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1914 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-12">2023-11-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2409 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -297,6 +297,7 @@ postgres=# show timezone;
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 新增加的序列都默认增加权限
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">alter</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="k">privileges</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="k">grant</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">SEQUENCES</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">readonly</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></div><h2 id="三从库配置">三、从库配置</h2>
+<p>参考链接：https://help.aliyun.com/document_detail/53096.html</p>
 <h3 id="1配置postgresql主节点">1、配置PostgreSQL主节点</h3>
 <p>1）输入以下SQL语句创建数据库账号replica，并设置密码及登录权限和备份权限。</p>
 <p>本示例中将密码设置为<code>replica</code>。</p>
@@ -316,14 +317,51 @@ postgres=# show timezone;
 </span></span><span class="line"><span class="cl"><span class="nv">max_connections</span> <span class="o">=</span> <span class="m">100</span>    <span class="c1">#最大连接数，从库的max_connections必须要大于主库的</span>
 </span></span></code></pre></div><p>修改完后重启服务</p>
 <h3 id="2从节点上操作">2、从节点上操作</h3>
-<p>1）备份数据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pg_basebackup --help 
+</span></span><span class="line"><span class="cl">用法：
+</span></span><span class="line"><span class="cl">  pg_basebackup <span class="o">[</span>选项<span class="o">]</span> ...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">控制输出的选项：
+</span></span><span class="line"><span class="cl">  -D, --pgdata<span class="o">=</span>DIRECTORY 接收基本备份到目录，如果不存在会自动创建
+</span></span><span class="line"><span class="cl">  -F, --format<span class="o">=</span>p<span class="p">|</span>t       输出格式（plain,直接拷贝数据文件，tar 配合 -z -Z 进行打包压缩）
+</span></span><span class="line"><span class="cl">  -r, --max-rate<span class="o">=</span>RATE         传输数据目录的最大传输速率（以 kB/s 为单位，或使用后缀“k”或“M”）
+</span></span><span class="line"><span class="cl">  -R,--write-recovery-conf 是否输出recovery-conf文件，方便后续使用备份快速搭建出从节点
+</span></span><span class="line"><span class="cl">  -T, --tablespace-mapping<span class="o">=</span><span class="nv">OLDDIR</span><span class="o">=</span>NEWDIR 将 OLDDIR 中的表空间重定位到 NEWDIR
+</span></span><span class="line"><span class="cl">      --waldir<span class="o">=</span>WALDIR             预写日志目录的位置
+</span></span><span class="line"><span class="cl">  -X, --wal-method<span class="o">=</span>none<span class="p">|</span>fetch<span class="p">|</span>stream 包含指定方法所需的 WAL 文件
+</span></span><span class="line"><span class="cl">  -z, --gzip                   压缩 tar 输出
+</span></span><span class="line"><span class="cl">  -Z, --compress<span class="o">=</span>0-9    使用给定的压缩级别压缩 tar 输出
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">常规选项：
+</span></span><span class="line"><span class="cl">  -c, --checkpoint<span class="o">=</span>fast<span class="p">|</span>spread 设置快速或扩展检查点
+</span></span><span class="line"><span class="cl">  -C, --create-slot   创建复制槽
+</span></span><span class="line"><span class="cl">  -l, --label<span class="o">=</span>LABEL  设置备份标签
+</span></span><span class="line"><span class="cl">  -n, --no-clean     出错后不清理
+</span></span><span class="line"><span class="cl">  -N, --no-sync     不等待更改安全写入磁盘
+</span></span><span class="line"><span class="cl">  -P, --progress    显示进度信息
+</span></span><span class="line"><span class="cl">  -S, --slot<span class="o">=</span>SLOTNAME 要使用的复制槽
+</span></span><span class="line"><span class="cl">  -v, --verbose 输出详细信息
+</span></span><span class="line"><span class="cl">  -V, --version 输出版本信息，然后退出
+</span></span><span class="line"><span class="cl">      --no-slot 防止创建临时复制槽
+</span></span><span class="line"><span class="cl">      --no-verify-checksums 不验证校验和
+</span></span><span class="line"><span class="cl">  -?, --help 显示此帮助，然后退出
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">连接选项：
+</span></span><span class="line"><span class="cl">  -d, --dbname  数据库名称
+</span></span><span class="line"><span class="cl">  -h, --host      数据库服务器主机ip或套接字目录
+</span></span><span class="line"><span class="cl">  -p, --port      数据库口号
+</span></span><span class="line"><span class="cl">  -s, --status-interval<span class="o">=</span>状态包发送到服务器的间隔时间（以秒为单位）
+</span></span><span class="line"><span class="cl">  -U, --username 连接用户，要有super权限
+</span></span><span class="line"><span class="cl">  -w, --no-password 从不提示输入密码
+</span></span></code></pre></div><p>1）备份数据</p>
 <p>使用pg_basebackup基础备份工具指定备份目录。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pg_basebackup -D /var/lib/pgsql/11/data -h &lt;主节点IP&gt; -p <span class="m">5432</span> -U replica -X stream -P
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> pg_basebackup -h 192.168.10.183 -p <span class="m">5432</span> -U replica -D /data/postgresql -X stream -P --write-recovery-conf
+</span></span><span class="line"><span class="cl">pg_basebackup -h 192.168.10.183 -p <span class="m">5432</span> -U replica -D /data/postgresql --checkpoint<span class="o">=</span>fast -X stream -P -R -F t
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># -F t 压缩传输</span>
 </span></span></code></pre></div><p>新建并修改recovery.conf配置文件。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cp /usr/pgsql-11/share/recovery.conf.sample /var/lib/pgsql/11/data/recovery.conf
-</span></span><span class="line"><span class="cl">vim /var/lib/pgsql/11/data/recovery.conf
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">vim /var/lib/pgsql/11/data/recovery.conf
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">####分别找到以下参数，并将参数修改为以下内容：</span>
 </span></span><span class="line"><span class="cl"><span class="nv">standby_mode</span> <span class="o">=</span> on     <span class="c1">#声明此节点为从库</span>
@@ -333,7 +371,7 @@ postgres=# show timezone;
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">max_connections</span> <span class="o">=</span> <span class="m">1000</span>             <span class="c1"># 最大连接数，从节点需设置比主节点大</span>
 </span></span><span class="line"><span class="cl"><span class="nv">hot_standby</span> <span class="o">=</span> on                   <span class="c1"># 开启热备</span>
 </span></span><span class="line"><span class="cl"><span class="nv">max_standby_streaming_delay</span> <span class="o">=</span> 30s  <span class="c1"># 数据流备份的最大延迟时间</span>
-</span></span><span class="line"><span class="cl"><span class="nv">wal_receiver_status_interval</span> <span class="o">=</span> 1s  <span class="c1"># 从节点向主节点报告自身状态的最长间隔时间</span>
+</span></span><span class="line"><span class="cl"><span class="nv">wal_receiver_status_interval</span> <span class="o">=</span> 5s  <span class="c1"># 从节点向主节点报告自身状态的最长间隔时间</span>
 </span></span><span class="line"><span class="cl"><span class="nv">hot_standby_feedback</span> <span class="o">=</span> on          <span class="c1"># 如果有错误的数据复制向主进行反馈</span>
 </span></span></code></pre></div><p>修改数据目录的权限</p>
 <pre tabindex="0"><code>chown -R postgres.postgres /var/lib/pgsql/11/data
