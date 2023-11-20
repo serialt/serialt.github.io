@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>tz - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/tz/</link>
+        <description>tz - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 20 Nov 2023 21:22:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/tz/" rel="self" type="application/rss+xml" /><item>
+    <title>Timezone</title>
+    <link>https://serialt.github.io/posts/2023-11-20-timezone/</link>
+    <pubDate>Mon, 20 Nov 2023 21:22:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-20-timezone/</guid>
+    <description><![CDATA[Timezone 参考链接： https://bbs.huaweicloud.com/blogs/detail/243151 http://www.timeofdate.com/timezone/abbr/all 一、设置时区 timedatectl set-timezone Asia/Shanghai 二、时区详细 1、概念 ​ 在以前全球国家都处于农业社会的时候，人们通过每天观察太阳的位置来决定时间，这就使得不]]></description>
+</item>
+</channel>
+</rss>

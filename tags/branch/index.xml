@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>branch - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/branch/</link>
+        <description>branch - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 19 Nov 2023 11:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/branch/" rel="self" type="application/rss+xml" /><item>
+    <title>Git-to-use</title>
+    <link>https://serialt.github.io/posts/2023-11-19-git-to-use/</link>
+    <pubDate>Sun, 19 Nov 2023 11:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-19-git-to-use/</guid>
+    <description><![CDATA[Git使用规范 一、commit &lt;type&gt;(scope): &lt;subject&gt; Header &lt;BLANK LINE&gt; &lt;body&gt; Body &lt;BALNK LINE&gt; &lt;footer&gt; Footer commit message包含Header、Body、Footer三个部分，其中Header是必须]]></description>
+</item>
+</channel>
+</rss>

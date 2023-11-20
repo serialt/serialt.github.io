@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>svn - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/svn/</link>
+        <description>svn - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 18 Nov 2023 11:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/svn/" rel="self" type="application/rss+xml" /><item>
+    <title>svn</title>
+    <link>https://serialt.github.io/posts/2023-11-18-svn/</link>
+    <pubDate>Sat, 18 Nov 2023 11:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-18-svn/</guid>
+    <description><![CDATA[SVN 介绍： 代码版本管理工具 能记住本版修改的情况 查看所有的修改记录 恢复到任何历史版本 恢复已经删除的文件 svn与git相比的优势: 使用简单、上手快]]></description>
+</item>
+</channel>
+</rss>

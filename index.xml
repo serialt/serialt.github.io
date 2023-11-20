@@ -4,9 +4,57 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 12 Nov 2023 10:30:27 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 20 Nov 2023 21:22:27 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Timezone</title>
+    <link>https://serialt.github.io/posts/2023-11-20-timezone/</link>
+    <pubDate>Mon, 20 Nov 2023 21:22:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-20-timezone/</guid>
+    <description><![CDATA[Timezone 参考链接： https://bbs.huaweicloud.com/blogs/detail/243151 http://www.timeofdate.com/timezone/abbr/all 一、设置时区 timedatectl set-timezone Asia/Shanghai 二、时区详细 1、概念 ​ 在以前全球国家都处于农业社会的时候，人们通过每天观察太阳的位置来决定时间，这就使得不]]></description>
+</item>
+<item>
+    <title>Recovery</title>
+    <link>https://serialt.github.io/posts/2023-11-20-pc/</link>
+    <pubDate>Mon, 20 Nov 2023 21:20:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-20-pc/</guid>
+    <description><![CDATA[电脑一键恢复： Dell： F12 &ndash;&gt; Supportassist OS Recovery MSI：F3 Huawei: F10 Mac: 长按电源键直到Option出现（m系列mac）]]></description>
+</item>
+<item>
+    <title>Git-to-use</title>
+    <link>https://serialt.github.io/posts/2023-11-19-git-to-use/</link>
+    <pubDate>Sun, 19 Nov 2023 11:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-19-git-to-use/</guid>
+    <description><![CDATA[Git使用规范 一、commit &lt;type&gt;(scope): &lt;subject&gt; Header &lt;BLANK LINE&gt; &lt;body&gt; Body &lt;BALNK LINE&gt; &lt;footer&gt; Footer commit message包含Header、Body、Footer三个部分，其中Header是必须]]></description>
+</item>
+<item>
+    <title>svn</title>
+    <link>https://serialt.github.io/posts/2023-11-18-svn/</link>
+    <pubDate>Sat, 18 Nov 2023 11:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-18-svn/</guid>
+    <description><![CDATA[SVN 介绍： 代码版本管理工具 能记住本版修改的情况 查看所有的修改记录 恢复到任何历史版本 恢复已经删除的文件 svn与git相比的优势: 使用简单、上手快]]></description>
+</item>
+<item>
+    <title>Git</title>
+    <link>https://serialt.github.io/posts/2023-11-18-git/</link>
+    <pubDate>Sat, 18 Nov 2023 10:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-18-git/</guid>
+    <description><![CDATA[Git 一、git基本使用 1、commit [root@node01 project]# git add 1.txt [root@node01 project]# git commit -m &#34;create new 1.txt&#34; [master (root-commit) 3e8ce87] create new 1.txt 1 file changed, 0 insertions(+), 0 deletions(-) create mode 100644 1.txt 2、diff文件 [root@node01 project]# git diff 1.txt diff --git a/1.txt b/1.txt index e69de29..21d56a0 100644 --- a/1.txt]]></description>
+</item>
+<item>
+    <title>Nexus</title>
+    <link>https://serialt.github.io/posts/2023-11-18-nexus/</link>
+    <pubDate>Sat, 18 Nov 2023 09:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-18-nexus/</guid>
+    <description><![CDATA[Nexus 参考： https://juejin.cn/post/6844904016762109959 https://cloud.tencent.com/developer/article/1764866 官网：https://help.sonatype.com/repomanager3/ 介绍 生产环境中，一般不会允许所有服务器都能访]]></description>
+</item>
+<item>
     <title>postgresql</title>
     <link>https://serialt.github.io/posts/2023-11-12-postgresql/</link>
     <pubDate>Sun, 12 Nov 2023 10:30:27 &#43;0800</pubDate>
@@ -37,54 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-11-11-dingbot/</guid>
     <description><![CDATA[钉钉机器人 一、shell脚本 1、基于关键字或者 ip 版 发送txt格式消息 info=&#39;hello&#39; logFile=&#39;/var/log/dingbot.log&#39; #发送消息 sendMsg() { token=&#39;1e18ffe069052b56f5a0f8fe9b6c058373e7df7ef4xxxxxxxxxxxxxxx&#39; result=$(curl -s &#34;https://oapi.dingtalk.com/robot/send?access_token=$token&#34; \ -H &#39;Content-Type: application/json&#39; \ -d &#34;{&#39;msgtype&#39;: &#39;text&#39;,&#39;text&#39;: {&#39;content&#39;: &#39;msg:\n$*&#39;}}&#34;) [ $(echo $result | grep &#34;errmsg.*ok&#34;) ] &amp;&amp; echo &#39;send succees!&#39; echo &#34;$(date]]></description>
-</item>
-<item>
-    <title>port</title>
-    <link>https://serialt.github.io/posts/2023-11-11-port/</link>
-    <pubDate>Sat, 11 Nov 2023 10:30:09 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-11-port/</guid>
-    <description><![CDATA[服务器中有关常用端口的信息在/etc/services文件中记录 [root@localhost ~]# vim /etc/services 协议 端口 说明 FTP 21 FTP服务上传和下载文件。 SSH 22 远程连接Linux弹性]]></description>
-</item>
-<item>
-    <title>caddy</title>
-    <link>https://serialt.github.io/posts/2023-11-11-caddy/</link>
-    <pubDate>Sat, 11 Nov 2023 10:29:10 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-11-caddy/</guid>
-    <description><![CDATA[Caddy Caddy 是一个 Go 编写的 Web 服务器，类似于 Nginx，Caddy 提供了更加强大的功能，随着 v2 版本发布 Caddy 已经可以作为中小型站点 Web 服务器的另一个选择；相]]></description>
-</item>
-<item>
-    <title>flatpak</title>
-    <link>https://serialt.github.io/posts/2023-11-11-flatpak/</link>
-    <pubDate>Sat, 11 Nov 2023 10:28:14 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-11-flatpak/</guid>
-    <description><![CDATA[flatpak 简介 Flatpak 是一种新的通用包装格式。启用 Flatpak 将使您能够轻松安装许多 Linux 应用程序。这是在 Ubuntu 和其他 Linux 发行版中使用 Flatpak 的方法。 在 Linux 中安装应用程序就像打开软件]]></description>
-</item>
-<item>
-    <title>daemon</title>
-    <link>https://serialt.github.io/posts/2023-11-11-daemon/</link>
-    <pubDate>Sat, 11 Nov 2023 10:28:12 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-11-daemon/</guid>
-    <description><![CDATA[Daemon 守护进程服务 systemd supervisor launchd 一、supervisor ​ 是用Python开发的一套通用的进程管理程序，能将一个普通的命令行进程变为后台daemon，并]]></description>
-</item>
-<item>
-    <title>coredns</title>
-    <link>https://serialt.github.io/posts/2023-11-11-coredns/</link>
-    <pubDate>Sat, 11 Nov 2023 10:28:11 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-11-coredns/</guid>
-    <description><![CDATA[CoreDNS 在内网服务中，需要部署内部的 dns，用于各种服务的 dns 解析。常见的 dns server 有 bind，dnsmasq，coredns 等。coredns 出名于用于]]></description>
-</item>
-<item>
-    <title>multipass</title>
-    <link>https://serialt.github.io/posts/2023-11-11-multipass/</link>
-    <pubDate>Sat, 11 Nov 2023 10:28:11 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-11-multipass/</guid>
-    <description><![CDATA[​ Multipass 是一个轻量虚拟机管理器，是由 Ubuntu 运营公司 Canonical 所推出的开源项目。运行环境支持 Linux、Windows、macOS。在不同的操作系统上，使用的]]></description>
 </item>
 </channel>
 </rss>

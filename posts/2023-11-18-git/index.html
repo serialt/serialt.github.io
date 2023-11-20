@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Git - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Git" />
+<meta property="og:description" content="Git 一、git基本使用 1、commit [root@node01 project]# git add 1.txt [root@node01 project]# git commit -m &#34;create new 1.txt&#34; [master (root-commit) 3e8ce87] create new 1.txt 1 file changed, 0 insertions(&#43;), 0 deletions(-) create mode 100644 1.txt 2、diff文件 [root@node01 project]# git diff 1.txt diff --git a/1.txt b/1.txt index e69de29..21d56a0 100644 --- a/1.txt" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2023-11-18-git/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-18T10:26:27+08:00" />
+<meta property="article:modified_time" content="2023-11-18T10:26:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git"/>
+<meta name="twitter:description" content="Git 一、git基本使用 1、commit [root@node01 project]# git add 1.txt [root@node01 project]# git commit -m &#34;create new 1.txt&#34; [master (root-commit) 3e8ce87] create new 1.txt 1 file changed, 0 insertions(&#43;), 0 deletions(-) create mode 100644 1.txt 2、diff文件 [root@node01 project]# git diff 1.txt diff --git a/1.txt b/1.txt index e69de29..21d56a0 100644 --- a/1.txt"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-18-git/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-18-nexus/" /><link rel="next" href="https://serialt.github.io/posts/2023-11-18-svn/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Git",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2023-11-18-git\/"
+        },"genre": "posts","keywords": "git, vcs, dev","wordcount":  8361 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2023-11-18-git\/","datePublished": "2023-11-18T10:26:27+08:00","dateModified": "2023-11-18T10:26:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Git</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-18">2023-11-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;8361 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;17 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一git基本使用">一、git基本使用</a>
+      <ul>
+        <li><a href="#1commit">1、commit</a></li>
+        <li><a href="#2diff文件">2、diff文件</a></li>
+        <li><a href="#3版本回退">3、版本回退</a></li>
+        <li><a href="#4撤销更改">4、撤销更改</a></li>
+      </ul>
+    </li>
+    <li><a href="#二git配置">二、git配置</a>
+      <ul>
+        <li><a href="#1配置基本信息">1、配置基本信息</a></li>
+        <li><a href="#2gitconfig配置文件">2、gitconfig配置文件</a></li>
+        <li><a href="#3windows上终端打开出现乱码">3、windows上终端打开出现乱码</a></li>
+      </ul>
+    </li>
+    <li><a href="#三分支管理">三、分支管理</a>
+      <ul>
+        <li><a href="#1创建分支">1、创建分支</a></li>
+      </ul>
+    </li>
+    <li><a href="#四tag管理">四、tag管理</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#五cherry-pick">五、cherry-pick</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#六合并commit">六、合并commit</a>
+      <ul>
+        <li><a href="#1查看提交历史">1、查看提交历史</a></li>
+        <li><a href="#2git-rebase">2、git rebase</a></li>
+        <li><a href="#3选择要合并的提交">3、选择要合并的提交</a></li>
+        <li><a href="#4冲突解决">4）冲突解决</a></li>
+        <li><a href="#5检查">5）检查</a></li>
+      </ul>
+    </li>
+    <li><a href="#七git-hook">七、Git Hook</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#八git-gc">八、Git GC</a></li>
+    <li><a href="#九git-gpg签名">九、Git gpg签名</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="git">Git</h1>
+<h2 id="一git基本使用">一、git基本使用</h2>
+<h3 id="1commit">1、commit</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git add 1.txt</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git commit -m &#34;create new 1.txt&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>master <span class="o">(</span>root-commit<span class="o">)</span> 3e8ce87<span class="o">]</span> create new 1.txt
+</span></span><span class="line"><span class="cl"> <span class="m">1</span> file changed, <span class="m">0</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">0</span> deletions<span class="o">(</span>-<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> create mode <span class="m">100644</span> 1.txt
+</span></span></code></pre></div><h3 id="2diff文件">2、diff文件</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git diff 1.txt</span>
+</span></span><span class="line"><span class="cl">diff --git a/1.txt b/1.txt
+</span></span><span class="line"><span class="cl">index e69de29..21d56a0 <span class="m">100644</span>
+</span></span><span class="line"><span class="cl">--- a/1.txt
+</span></span><span class="line"><span class="cl">+++ b/1.txt
+</span></span><span class="line"><span class="cl">@@ -0,0 +1 @@
+</span></span><span class="line"><span class="cl">+1111111111111111
+</span></span></code></pre></div><h3 id="3版本回退">3、版本回退</h3>
+<p>在进行版本回退时，使用HEAD代表当前版本，<code>HEAD^</code> 代表上一个版本，<code>HEAD^^</code>代表上上个版本，还可以使用HEAD~10代表前10个版本</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git reset --hard HEAD^</span>
+</span></span><span class="line"><span class="cl">HEAD is now at fdf9d68 add new <span class="m">1111</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># cat 1.txt </span>
+</span></span><span class="line"><span class="cl"><span class="m">1111111111111111</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># </span>
+</span></span></code></pre></div><p>也可以使用如下命令格式:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span> git reset --hard &lt;commit_id&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git reflog 1.txt</span>
+</span></span><span class="line"><span class="cl">fdf9d68 HEAD@<span class="o">{</span>0<span class="o">}</span>: reset: moving to HEAD^
+</span></span><span class="line"><span class="cl">996cc77 HEAD@<span class="o">{</span>1<span class="o">}</span>: commit: add new <span class="m">222</span>
+</span></span><span class="line"><span class="cl">fdf9d68 HEAD@<span class="o">{</span>2<span class="o">}</span>: commit: add new <span class="m">1111</span>
+</span></span><span class="line"><span class="cl">3e8ce87 HEAD@<span class="o">{</span>3<span class="o">}</span>: commit <span class="o">(</span>initial<span class="o">)</span>: create new 1.txt
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git reset --hard 996cc77</span>
+</span></span></code></pre></div><h3 id="4撤销更改">4、撤销更改</h3>
+<p>1）对于尚未添加到暂存区的修改，可直接通过编辑原文件或者使用<code>git checkout -- &lt;file&gt;</code>的方式进行撤销</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git checkout -- 1.txt</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git status </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># On branch master</span>
+</span></span><span class="line"><span class="cl">nothing to commit, working directory clean
+</span></span></code></pre></div><p>2）对于已经添加到暂存区，但还没有git commit的修改，可使用<code>git reset HEAD &lt;file&gt;</code>的方式撤销</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># vim 1.txt </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git add 1.txt</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git status </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># On branch master</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Changes to be committed:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   (use &#34;git reset HEAD &lt;file&gt;...&#34; to unstage)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#	modified:   1.txt</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git reset HEAD 1.txt</span>
+</span></span><span class="line"><span class="cl">Unstaged changes after reset:
+</span></span><span class="line"><span class="cl">M	1.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git status </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># On branch master</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Changes not staged for commit:</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   (use &#34;git add &lt;file&gt;...&#34; to update what will be committed)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   (use &#34;git checkout -- &lt;file&gt;...&#34; to discard changes in working directory)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#	modified:   1.txt</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl">no changes added to commit <span class="o">(</span>use <span class="s2">&#34;git add&#34;</span> and/or <span class="s2">&#34;git commit -a&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git checkout -- 1.txt</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git status </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># On branch master</span>
+</span></span><span class="line"><span class="cl">nothing to commit, working directory clean
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># cat 1.txt </span>
+</span></span><span class="line"><span class="cl"><span class="m">1111111111111111</span>
+</span></span><span class="line"><span class="cl"><span class="m">22222222222222222</span>
+</span></span><span class="line"><span class="cl"><span class="m">3333333333333</span>
+</span></span></code></pre></div><p>3）对于已经添加到暂存区，并已经提交的修改可通过git reset &ndash;hard &lt;commit_id&gt;的方式进行撤销</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># vim 1.txt </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git add 1.txt</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git commit -m &#34;add new 44444444&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>master 240af53<span class="o">]</span> add new <span class="m">44444444</span>
+</span></span><span class="line"><span class="cl"> <span class="m">1</span> file changed, <span class="m">1</span> insertion<span class="o">(</span>+<span class="o">)</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git reflog 1.txt</span>
+</span></span><span class="line"><span class="cl">240af53 HEAD@<span class="o">{</span>0<span class="o">}</span>: commit: add new <span class="m">44444444</span>
+</span></span><span class="line"><span class="cl"><span class="m">5424335</span> HEAD@<span class="o">{</span>1<span class="o">}</span>: commit: add new <span class="m">333333</span>
+</span></span><span class="line"><span class="cl">996cc77 HEAD@<span class="o">{</span>2<span class="o">}</span>: reset: moving to 996cc77
+</span></span><span class="line"><span class="cl">3e8ce87 HEAD@<span class="o">{</span>3<span class="o">}</span>: reset: moving to 3e8ce87
+</span></span><span class="line"><span class="cl">996cc77 HEAD@<span class="o">{</span>4<span class="o">}</span>: reset: moving to 996cc77
+</span></span><span class="line"><span class="cl">fdf9d68 HEAD@<span class="o">{</span>5<span class="o">}</span>: reset: moving to HEAD^
+</span></span><span class="line"><span class="cl">996cc77 HEAD@<span class="o">{</span>6<span class="o">}</span>: commit: add new <span class="m">222</span>
+</span></span><span class="line"><span class="cl">fdf9d68 HEAD@<span class="o">{</span>7<span class="o">}</span>: commit: add new <span class="m">1111</span>
+</span></span><span class="line"><span class="cl">3e8ce87 HEAD@<span class="o">{</span>8<span class="o">}</span>: commit <span class="o">(</span>initial<span class="o">)</span>: create new 1.txt
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git reset --hard 5424335</span>
+</span></span><span class="line"><span class="cl">HEAD is now at <span class="m">5424335</span> add new <span class="m">333333</span>
+</span></span></code></pre></div><h2 id="二git配置">二、git配置</h2>
+<h3 id="1配置基本信息">1、配置基本信息</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@localhost srv<span class="o">]</span><span class="c1"># git config --global user.name &#39;sugar&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost srv<span class="o">]</span><span class="c1"># git config --global user.email &#39;t@local.com&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost srv<span class="o">]</span><span class="c1"># git config --global color.ui true      #配置显示的颜色，方便看到更改的信息</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost srv<span class="o">]</span><span class="c1"># git config --global core.ignorecase false     # 配置大小写敏感，git默认大小写不敏感</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span></code></pre></div><h3 id="2gitconfig配置文件">2、gitconfig配置文件</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[user]</span>
+</span></span><span class="line"><span class="cl">        <span class="na">name</span> <span class="o">=</span> <span class="s">sugar
+</span></span></span><span class="line"><span class="cl"><span class="s">        email = t@local.com</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#       signingkey = DCE96Cxxxxxxxxxxxxxxxxxxxxxxxx</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#[commit]</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#        gpgsign = true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ~/github/ 目录下的项目使用~/github/.gitconfig下的gitconfig配置文件</span>
+</span></span><span class="line"><span class="cl"><span class="k">[includeIf &#34;gitdir:~/github/&#34;]</span>
+</span></span><span class="line"><span class="cl">  <span class="na">path</span> <span class="o">=</span> <span class="s">~/github/.gitconfig</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[includeIf &#34;gitdir:~/my-prod/&#34;]</span>
+</span></span><span class="line"><span class="cl">  <span class="na">path</span> <span class="o">=</span> <span class="s">~/my-prod/.gitconfig</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[init]</span>
+</span></span><span class="line"><span class="cl">        <span class="na">defaultBranch</span> <span class="o">=</span> <span class="s">main </span>
+</span></span><span class="line"><span class="cl"><span class="k">[color]</span>
+</span></span><span class="line"><span class="cl">        <span class="na">ui</span> <span class="o">=</span> <span class="s">true</span>
+</span></span><span class="line"><span class="cl"><span class="k">[alias]</span>
+</span></span><span class="line"><span class="cl">        <span class="na">lg</span> <span class="o">=</span> <span class="s">log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit</span>
+</span></span><span class="line"><span class="cl"><span class="k">[alias]</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># status</span>
+</span></span><span class="line"><span class="cl">        <span class="na">st</span>  <span class="o">=</span> <span class="s">status
+</span></span></span><span class="line"><span class="cl"><span class="s">        ss = status --short --branch</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># stash</span>
+</span></span><span class="line"><span class="cl">        <span class="na">sh</span>  <span class="o">=</span> <span class="s">stash
+</span></span></span><span class="line"><span class="cl"><span class="s">        shp = stash pop
+</span></span></span><span class="line"><span class="cl"><span class="s">        shl = stash list
+</span></span></span><span class="line"><span class="cl"><span class="s">        shs = stash save
+</span></span></span><span class="line"><span class="cl"><span class="s">        sha = stash apply
+</span></span></span><span class="line"><span class="cl"><span class="s">        std = stash drop</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># branch</span>
+</span></span><span class="line"><span class="cl">        <span class="na">br</span>  <span class="o">=</span> <span class="s">branch
+</span></span></span><span class="line"><span class="cl"><span class="s">        bra = branch -a
+</span></span></span><span class="line"><span class="cl"><span class="s">        brm = branch -m
+</span></span></span><span class="line"><span class="cl"><span class="s">        co  = checkout
+</span></span></span><span class="line"><span class="cl"><span class="s">        cob = checkout -b
+</span></span></span><span class="line"><span class="cl"><span class="s">        sw  = switch
+</span></span></span><span class="line"><span class="cl"><span class="s">        swc = switch -c
+</span></span></span><span class="line"><span class="cl"><span class="s">        
+</span></span></span><span class="line"><span class="cl"><span class="s">        # remote
+</span></span></span><span class="line"><span class="cl"><span class="s">        ra  = remote add
+</span></span></span><span class="line"><span class="cl"><span class="s">        rao = remote add origin
+</span></span></span><span class="line"><span class="cl"><span class="s">        ru  = remote set-url
+</span></span></span><span class="line"><span class="cl"><span class="s">        ruo = remote set-url origin
+</span></span></span><span class="line"><span class="cl"><span class="s">        rv = remote -v</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># fetch</span>
+</span></span><span class="line"><span class="cl">        <span class="na">fe</span>  <span class="o">=</span> <span class="s">fetch
+</span></span></span><span class="line"><span class="cl"><span class="s">        fep = fetch -p
+</span></span></span><span class="line"><span class="cl"><span class="s">        fo  = fetch origin
+</span></span></span><span class="line"><span class="cl"><span class="s">        fop = fetch origin -p</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># merge</span>
+</span></span><span class="line"><span class="cl">        <span class="na">mr</span>  <span class="o">=</span> <span class="s">merge
+</span></span></span><span class="line"><span class="cl"><span class="s">        mnc = merge --no-commit
+</span></span></span><span class="line"><span class="cl"><span class="s">        # msq = merge --squash</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># commit</span>
+</span></span><span class="line"><span class="cl">        <span class="na">cm</span> <span class="o">=</span> <span class="s">commit -m</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># config user and mail</span>
+</span></span><span class="line"><span class="cl">        <span class="na">user</span> <span class="o">=</span> <span class="s">config user.name
+</span></span></span><span class="line"><span class="cl"><span class="s">        mail = config user.email</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[url &#34;git@github.com:username&#34;]</span>
+</span></span><span class="line"><span class="cl">        <span class="na">insteadOf</span> <span class="o">=</span> <span class="s">https://github.com/username</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 强制https转ssh协议</span>
+</span></span><span class="line"><span class="cl"><span class="k">[url &#34;ssh://git@local.com/&#34;]</span>
+</span></span><span class="line"><span class="cl">        <span class="na">insteadOf</span> <span class="o">=</span> <span class="s">https://local.com/</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[core]</span>
+</span></span><span class="line"><span class="cl">        <span class="na">excludesfile</span> <span class="o">=</span> <span class="s">~/.gitignore_global
+</span></span></span><span class="line"><span class="cl"><span class="s">        autocrlf = input
+</span></span></span><span class="line"><span class="cl"><span class="s">        quotepath = false
+</span></span></span><span class="line"><span class="cl"><span class="s">        ignorecase = false
+</span></span></span><span class="line"><span class="cl"><span class="s">        editor = vim</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#       sshCommand = ssh -i ~/.ssh/id_rsa -o IdentitiesOnly=yes -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[i18n &#34;commit&#34;]</span>
+</span></span><span class="line"><span class="cl">        <span class="na">encoding</span> <span class="o">=</span> <span class="s">utf-8</span>
+</span></span><span class="line"><span class="cl"><span class="k">[i18n]</span>
+</span></span><span class="line"><span class="cl">        <span class="na">logoutputencoding</span> <span class="o">=</span> <span class="s">utf-8</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[http &#34;https://github.com&#34;]</span>
+</span></span><span class="line"><span class="cl">        <span class="na">proxy</span> <span class="o">=</span> <span class="s">socks5://127.0.0.1:8888</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">[http]</span>
+</span></span><span class="line"><span class="cl">        <span class="na">proxy</span> <span class="o">=</span> <span class="s">http://127.0.0.1:8889</span>
+</span></span><span class="line"><span class="cl"><span class="k">[https]</span>
+</span></span><span class="line"><span class="cl">        <span class="na">proxy</span> <span class="o">=</span> <span class="s">http://127.0.0.1:8889</span>
+</span></span></code></pre></div><h3 id="3windows上终端打开出现乱码">3、windows上终端打开出现乱码</h3>
+<p>cmd配置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git config --global core.quotepath <span class="nb">false</span> 
+</span></span><span class="line"><span class="cl">git config --global gui.encoding utf-8
+</span></span><span class="line"><span class="cl">git config --global i18n.commit.encoding utf-8 
+</span></span><span class="line"><span class="cl">git config --global i18n.logoutputencoding utf-8 
+</span></span><span class="line"><span class="cl"><span class="c1"># bash 环境下</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">LESSCHARSET</span><span class="o">=</span>utf-8
+</span></span><span class="line"><span class="cl"><span class="c1"># cmd环境下：</span>
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> <span class="nv">LESSCHARSET</span><span class="o">=</span>utf-8
+</span></span></code></pre></div><p>powershell配置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">git</span> <span class="n">config</span> <span class="p">-</span><span class="n">-global</span> <span class="n">core</span><span class="p">.</span><span class="py">quotepath</span> <span class="n">false</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">config</span> <span class="p">-</span><span class="n">-global</span> <span class="n">gui</span><span class="p">.</span><span class="py">encoding</span> <span class="n">utf</span><span class="p">-</span><span class="mf">8</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">config</span> <span class="p">-</span><span class="n">-global</span> <span class="n">i18n</span><span class="p">.</span><span class="py">commit</span><span class="p">.</span><span class="py">encoding</span> <span class="n">utf</span><span class="p">-</span><span class="mf">8</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">config</span> <span class="p">-</span><span class="n">-global</span> <span class="n">i18n</span><span class="p">.</span><span class="py">logoutputencoding</span> <span class="n">utf</span><span class="p">-</span><span class="mf">8</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$env:LESSCHARSET</span><span class="p">=</span><span class="s1">&#39;utf-8&#39;</span>
+</span></span></code></pre></div><p>git bash</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sugar@sugar MINGW64 /e/Desktop/company/github <span class="o">(</span>master<span class="o">)</span>
+</span></span><span class="line"><span class="cl">$ cat /etc/bash.bashrc
+</span></span><span class="line"><span class="cl"><span class="nb">alias</span> <span class="nv">ls</span><span class="o">=</span><span class="s1">&#39;ls -F --color --show-control-chars&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">NOW_DIR</span><span class="o">=</span><span class="s2">&#34;E:\Desktop&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> <span class="si">${</span><span class="nv">NOW_DIR</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">LESSCHARSET</span><span class="o">=</span>utf-8
+</span></span></code></pre></div><h2 id="三分支管理">三、分支管理</h2>
+<p>git版本库所有的操作都是运行在分支上，git仓库创建时会建立默认的分支，名称为master；所有的操作都在master分支上进行
+在对版本库中的文件进行操作时，可以创建不同的分支，不同的操作运行在不同的分支上，不同分支上的操作不会相互干扰，操作进行完成后，可以合并不同分支上的操作</p>
+<h3 id="1创建分支">1、创建分支</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git checkout -b game</span>
+</span></span><span class="line"><span class="cl">Switched to a new branch <span class="s1">&#39;game&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git branch </span>
+</span></span><span class="line"><span class="cl">  dev
+</span></span><span class="line"><span class="cl">* game
+</span></span><span class="line"><span class="cl">  master
+</span></span></code></pre></div><p>1）远程chekout到本地</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git checkout origin/develop -b develop</span>
+</span></span></code></pre></div><p>2）删除分支</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 删除本地分支</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git branch -d release-1.1.0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 强制删除</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git branch -D release-1.1.0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 删除远程分支</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git push origin --delete  release-1.1.0</span>
+</span></span><span class="line"><span class="cl">或者
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git push origin :release-1.1.0</span>
+</span></span></code></pre></div><p>3）根据hash值进行checkout</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">git checkout  d21a8c517ca3xxxxxxxxxxxxxxxxxxxxxxxxxxx
+</span></span></code></pre></div><p>4）分支合并</p>
+<p>切换到准备合并后的分支，合并其他分支到当前分支</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@node01 project<span class="o">]</span><span class="c1"># git merge dev </span>
+</span></span><span class="line"><span class="cl">Updating bb6fb7a..d83dae8
+</span></span><span class="line"><span class="cl">Fast-forward
+</span></span><span class="line"><span class="cl"> 1.txt <span class="p">|</span> <span class="m">2</span> ++
+</span></span><span class="line"><span class="cl"> <span class="m">1</span> file changed, <span class="m">2</span> insertions<span class="o">(</span>+<span class="o">)</span>
+</span></span></code></pre></div><h2 id="四tag管理">四、tag管理</h2>
+<p>打标签，用于仓库某个提交打上标签，以表示其特殊性。比较有代表性的是人们会使用这个功能来标记发布结点（ <code>v1.0</code> 、 <code>v2.0</code> 等等）</p>
+<h4 id="1查看本地已有标签">1、查看本地已有标签</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@localhost github_web<span class="o">]</span><span class="c1"># git tag</span>
+</span></span><span class="line"><span class="cl">4.101.0
+</span></span><span class="line"><span class="cl">4.103.0
+</span></span><span class="line"><span class="cl">4.103.1
+</span></span></code></pre></div><p>列出所有标签 <code>-l</code>或者<code>--list</code>，指定某些提交信息<code>-l &quot;v4.4*&quot;</code></p>
+<h4 id="2创建tag">2、创建tag</h4>
+<p>Git 支持两种标签：</p>
+<ul>
+<li>
+<p>轻量标签（lightweight）</p>
+</li>
+<li>
+<p>附注标签（annotated）。</p>
+</li>
+</ul>
+<p>轻量标签很像一个不会改变的分支——它只是某个特定提交的引用。</p>
+<p>而附注标签是存储在 Git 数据库中的一个完整对象， 它们是可以被校验的，其中包含打标签者的名字、电子邮件地址、日期时间， 此外还有一个标签信息，并且可以使用 GNU Privacy Guard （GPG）签名并验证。 通常会建议创建附注标签，这样你可以拥有以上所有信息。但是如果你只是想用一个临时的标签， 或者因为某些原因不想要保存这些信息，那么也可以用轻量标签。</p>
+<h5 id="附属标签">附属标签：</h5>
+<pre tabindex="0"><code>git tag -a v1.4 -m &#34;my version 1.4&#34;
+</code></pre><p>查看详细信息</p>
+<pre tabindex="0"><code>git show v1.4
+</code></pre><p>输出显示了打标签者的信息、打标签的日期时间、附注信息，然后显示具体的提交信息。</p>
+<h5 id="轻量标签">轻量标签:</h5>
+<p>另一种给提交打标签的方式是使用轻量标签。 轻量标签本质上是将提交校验和存储到一个文件中——没有保存任何其他信息。 创建轻量标签，不需要使用 <code>-a</code>、<code>-s</code> 或 <code>-m</code> 选项，只需要提供标签名字：</p>
+<pre tabindex="0"><code>$ git tag v1.4-lw
+$ git tag
+v0.1
+v1.3
+v1.4
+</code></pre><p>这时，如果在标签上运行 <code>git show</code>，你不会看到额外的标签信息。 命令只会显示出提交信息：</p>
+<pre tabindex="0"><code>$ git show v1.4-lw
+commit ca82a6dff817ec66f44342007202690a93763949
+Author: Scott Chacon &lt;t@local.com&gt;
+Date:   Mon Mar 17 21:52:11 2008 -0700
+
+    changed the version number
+</code></pre><h5 id="后期打标签">后期打标签</h5>
+<pre tabindex="0"><code>git tag -a v1.2 9fceb02
+</code></pre><h5 id="共享标签">共享标签</h5>
+<p>默认情况下，<code>git push</code> 命令并不会传送标签到远程仓库服务器上。 在创建完标签后你必须显式地推送标签到共享服务器上。 这个过程就像共享远程分支一样——你可以运行 <code>git push origin &lt;tagname&gt;</code>。</p>
+<pre tabindex="0"><code>$ git push origin v1.5
+Counting objects: 14, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (12/12), done.
+Writing objects: 100% (14/14), 2.05 KiB | 0 bytes/s, done.
+Total 14 (delta 3), reused 0 (delta 0)
+To git@github.com:schacon/simplegit.git
+ * [new tag]         v1.5 -&gt; v1.5
+</code></pre><p>如果想要一次性推送很多标签，也可以使用带有 <code>--tags</code> 选项的 <code>git push</code> 命令。 这将会把所有不在远程仓库服务器上的标签全部传送到那里。</p>
+<pre tabindex="0"><code>$ git push origin --tags
+Counting objects: 1, done.
+Writing objects: 100% (1/1), 160 bytes | 0 bytes/s, done.
+Total 1 (delta 0), reused 0 (delta 0)
+To git@github.com:schacon/simplegit.git
+ * [new tag]         v1.4 -&gt; v1.4
+ * [new tag]         v1.4-lw -&gt; v1.4-lw
+</code></pre><h4 id="3删除标签">3、删除标签</h4>
+<p>要删除掉你本地仓库上的标签，可以使用命令 <code>git tag -d &lt;tagname&gt;</code>。 例如，可以使用以下命令删除一个轻量标签：</p>
+<pre tabindex="0"><code>$ git tag -d v1.4-lw
+Deleted tag &#39;v1.4-lw&#39; (was e7d5add)
+</code></pre><p>注意上述命令并不会从任何远程仓库中移除这个标签，你必须用 <code>git push &lt;remote&gt; :refs/tags/&lt;tagname&gt;</code> 来更新你的远程仓库：</p>
+<p><strong>方法一</strong>：<code>git push &lt;remote&gt; :refs/tags/&lt;tagname&gt;</code></p>
+<pre tabindex="0"><code>$ git push origin :refs/tags/v1.4-lw
+To /git@github.com:username/project.git
+ - [deleted]         v1.4-lw
+</code></pre><p>上面这种操作的含义是，将冒号前面的空值推送到远程标签名，从而高效地删除它。</p>
+<p><strong>方法二</strong>：直接删除远程标签</p>
+<pre tabindex="0"><code>$ git push origin --delete &lt;tagname&gt;
+</code></pre><h4 id="4检出标签">4、检出标签</h4>
+<p>检出标签为一个分支，格式为<code>git checkout -b branch_name tag_name</code></p>
+<pre tabindex="0"><code>git checkout -b version2 v2.0.0
+</code></pre><h4 id="5git-目录">5、.git 目录</h4>
+<pre tabindex="0"><code> ├── HEAD    
+    ├── branches
+    ├── config
+    ├── description
+    ├── hooks
+    │ ├── pre-commit.sample
+    │ ├── pre-push.sample
+    │ └── ...
+    ├── info
+    │ └── exclude
+    ├── objects
+    │ ├── info
+    │ └── pack
+    └── refs
+     ├── heads
+     └── tags
+</code></pre><ul>
+<li>config （配置）该文件包含你的仓库配置，比如远程的 url ，你的邮箱和用户名等。每次你在控制台使用 git config&hellip; 都会对这里产生影响。</li>
+<li>description（描述）供 gitweb ( github 的一种前身) 使用，显示仓库的描述。</li>
+<li>hooks (钩子)这是一个有趣的特性。 Git 提供了一套脚本，可以在每个有意义的 Git 阶段自动运行。这些被称为钩子的脚本可以在提交 (commit)、变基 (rebase)、拉取 ( pull ) 操作的前后运行。脚本命预示着它的执行时机。如我们可以编写 pre-push 的作为钩子，进行推送代码前的检查。</li>
+<li>info (信息)你可以将不想被 git 管理的文件记录到 .gitignore 文件中。排除文件的意思是不想共享这个文件。例如你不想共享你的 IDE 自定义配置，将其添加到 .gitignore 文件中即可。</li>
+</ul>
+<h2 id="五cherry-pick">五、cherry-pick</h2>
+<p>参考：https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html</p>
+<p>对于多分支的代码库，将代码从一个分支转移到另一个分支是常见需求。</p>
+<p>这时分两种情况。一种情况是，你需要另一个分支的所有代码变动，那么就采用合并（<code>git merge</code>）。另一种情况是，你只需要部分代码变动（某几个提交），这时可以采用 Cherry pick。</p>
+<h4 id="1基本语法">1、基本语法</h4>
+<p><code>git cherry-pick</code>命令的作用，就是将指定的提交（commit）应用于其他分支。</p>
+<pre tabindex="0"><code>$ git cherry-pick &lt;commitHash&gt;
+</code></pre><p>上面命令就会将指定的提交<code>commitHash</code>，应用于当前分支。这会在当前分支产生一个新的提交，当然它们的哈希值会不一样。</p>
+<p>举例来说，代码仓库有<code>master</code>和<code>feature</code>两个分支。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> a - b - c - d   Master
+</span></span><span class="line"><span class="cl">      <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        e - f - g Feature
+</span></span></code></pre></div></blockquote>
+<p>现在将提交<code>f</code>应用到<code>master</code>分支。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 切换到 master 分支</span>
+</span></span><span class="line"><span class="cl">$ git checkout master
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Cherry pick 操作</span>
+</span></span><span class="line"><span class="cl">$ git cherry-pick f
+</span></span></code></pre></div></blockquote>
+<p>上面的操作完成以后，代码库就变成了下面的样子。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> a - b - c - d - f   Master
+</span></span><span class="line"><span class="cl">      <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>        e - f - g Feature
+</span></span></code></pre></div></blockquote>
+<p>从上面可以看到，<code>master</code>分支的末尾增加了一个提交<code>f</code>。</p>
+<p><code>git cherry-pick</code>命令的参数，不一定是提交的哈希值，分支名也是可以的，表示转移该分支的最新提交。</p>
+<blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git cherry-pick feature
+</span></span></code></pre></div></blockquote>
+<p>上面代码表示将<code>feature</code>分支的最近一次提交，转移到当前分支。</p>
+<p>操作示例：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>sugar@centos-7 git-test<span class="o">]</span>$ git log -1
+</span></span><span class="line"><span class="cl">commit dcf3a215fd6ba3288ad21584d2112bdab5a713b4
+</span></span><span class="line"><span class="cl">Author: sugar &lt;cccc@gmail.com&gt;
+</span></span><span class="line"><span class="cl">Date:   Sun Sep <span class="m">12</span> 14:29:26 <span class="m">2021</span> +0800
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    feat: v1 version 1s add
+</span></span><span class="line"><span class="cl"><span class="o">[</span>sugar@centos-7 git-test<span class="o">]</span>$ git checkout master
+</span></span><span class="line"><span class="cl">Switched to branch <span class="s1">&#39;master&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>sugar@centos-7 git-test<span class="o">]</span>$ git log
+</span></span><span class="line"><span class="cl">commit 31da420cc2d2ae6094f88e368a72f0353541d89f
+</span></span><span class="line"><span class="cl">Author: sugar &lt;cccc@gmail.com&gt;
+</span></span><span class="line"><span class="cl">Date:   Sun Sep <span class="m">12</span> 14:25:43 <span class="m">2021</span> +0800
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    feat: 第一此增加
+</span></span><span class="line"><span class="cl"><span class="o">[</span>sugar@centos-7 git-test<span class="o">]</span>$ git cherry-pick dcf3a215fd6ba3288ad21584d2112bdab5a713b4
+</span></span><span class="line"><span class="cl"><span class="o">[</span>master fa78bb0<span class="o">]</span> feat: v1 version 1s add
+</span></span><span class="line"><span class="cl"> <span class="m">1</span> file changed, <span class="m">2</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">1</span> deletion<span class="o">(</span>-<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>sugar@centos-7 git-test<span class="o">]</span>$ ls
+</span></span><span class="line"><span class="cl">cccc.txt
+</span></span><span class="line"><span class="cl"><span class="o">[</span>sugar@centos-7 git-test<span class="o">]</span>$ git log -1
+</span></span><span class="line"><span class="cl">commit fa78bb090d3221ba2ff9cae59efa1f8691677115
+</span></span><span class="line"><span class="cl">Author: sugar &lt;cccc@gmail.com&gt;
+</span></span><span class="line"><span class="cl">Date:   Sun Sep <span class="m">12</span> 14:29:26 <span class="m">2021</span> +0800
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    feat: v1 version 1s add
+</span></span></code></pre></div><h4 id="2转移多个commit">2、转移多个commit</h4>
+<p>Cherry pick 支持一次转移多个提交</p>
+<pre tabindex="0"><code>[sugar@centos-7 git-test]$ git cherry-pick &lt;HashA&gt; &lt;HashB&gt;
+</code></pre><p>连续提交多个commit</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 提交A到B的commit，但不包含A；提交A必须早于提交B，否则命令将失败，但不会报错。</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>sugar@centos-7 git-test<span class="o">]</span>$ git cherry-pick A..B 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 提交A到B的commit，包含A</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>sugar@centos-7 git-test<span class="o">]</span>$ git cherry-pick A^..B 
+</span></span></code></pre></div><h4 id="3参数">3、参数</h4>
+<p><code>git cherry-pick</code>命令的常用配置项如下。</p>
+<p>（1）<code>-e</code>，<code>--edit</code></p>
+<p>打开外部编辑器，编辑提交信息。</p>
+<p>（2）<code>-n</code>，<code>--no-commit</code></p>
+<p>只更新工作区和暂存区，不产生新的提交。</p>
+<p>（3）<code>-x</code></p>
+<p>在提交信息的末尾追加一行<code>(cherry picked from commit ...)</code>，方便以后查到这个提交是如何产生的。</p>
+<p>（4）<code>-s</code>，<code>--signoff</code></p>
+<p>在提交信息的末尾追加一行操作者的签名，表示是谁进行了这个操作。</p>
+<p>（5）<code>-m parent-number</code>，<code>--mainline parent-number</code></p>
+<p>如果原始提交是一个合并节点，来自于两个分支的合并，那么 Cherry pick 默认将失败，因为它不知道应该采用哪个分支的代码变动。</p>
+<p><code>-m</code>配置项告诉 Git，应该采用哪个分支的变动。它的参数<code>parent-number</code>是一个从<code>1</code>开始的整数，代表原始提交的父分支编号。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ git cherry-pick -m <span class="m">1</span> &lt;commitHash&gt;
+</span></span></code></pre></div><p>上面命令表示，Cherry pick 采用提交<code>commitHash</code>来自编号1的父分支的变动。</p>
+<p>一般来说，1号父分支是接受变动的分支（the branch being merged into），2号父分支是作为变动来源的分支（the branch being merged from）。</p>
+<h4 id="4代码冲突">4、代码冲突</h4>
+<p>如果操作过程中发生代码冲突，Cherry pick 会停下来，让用户决定如何继续操作。</p>
+<p>1）<code>--contine</code></p>
+<p>用户解决代码冲突后，第一步将修改的文件重新加入暂存区（<code>git add .</code>），第二步使用下面的命令，让 Cherry pick 过程继续执行。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ git cherry-pick --continue
+</span></span></code></pre></div><p>2）<code>--abort</code></p>
+<p>发生代码冲突后，放弃合并，回到操作前的样子。</p>
+<p>3）<code>--quit</code></p>
+<p>发生代码冲突后，退出 Cherry pick，但是不回到操作前的样子。</p>
+<h4 id="5转移到另外一个仓库">5、转移到另外一个仓库</h4>
+<p>Cherry pick 也支持转移另一个代码库的提交，方法是先将该库加为远程仓库。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 添加一个远程仓库</span>
+</span></span><span class="line"><span class="cl">$ git remote add target git://gitUrl
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 将远程仓库的代码抓取到本地</span>
+</span></span><span class="line"><span class="cl">$ git fetch target
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 检查一下要从远程仓库转移的提交，获取它的哈希值</span>
+</span></span><span class="line"><span class="cl">$ git log target/master
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 使用git cherry-pick命令转移提交</span>
+</span></span><span class="line"><span class="cl">$ git cherry-pick &lt;commitHash&gt;
+</span></span></code></pre></div><h2 id="六合并commit">六、合并commit</h2>
+<p>在使用 Git 作为版本控制的时候，我们可能会由于各种各样的原因提交了许多临时的 commit，而这些 commit 拼接起来才是完整的任务。那么我们为了避免太多的 commit 而造成版本控制的混乱，通常我们推荐将这些 commit 合并成一个。</p>
+<h3 id="1查看提交历史">1、查看提交历史</h3>
+<pre tabindex="0"><code>$ git log
+commit 3ca6ec340edc66df13423f36f52919dfa3......
+
+commit 1b4056686d1b494a5c86757f9eaed844......
+
+commit 53f244ac8730d33b353bee3b24210b07......
+
+commit 3a4226b4a0b6fa68783b07f1cee7b688.......
+</code></pre><h3 id="2git-rebase">2、git rebase</h3>
+<p>想要合并1-3条，有两个方法</p>
+<p>1）从HEAD版本开始往过去数3个版本</p>
+<pre tabindex="0"><code>$ git rebase -i HEAD~3
+</code></pre><p>2）指名要合并的版本之前的版本号</p>
+<pre tabindex="0"><code>$ git rebase -i 3a4226b
+</code></pre><p>请注意<code>3a4226b</code>这个版本是不参与合并的，只是把它当做一个坐标</p>
+<h3 id="3选择要合并的提交">3、选择要合并的提交</h3>
+<p>p是保留，s是合并</p>
+<p>1）执行了rebase命令之后，会弹出一个窗口，头几行如下：</p>
+<pre tabindex="0"><code>pick 3ca6ec3   &#39;注释**********&#39;
+
+pick 1b40566   &#39;注释*********&#39;
+
+pick 53f244a   &#39;注释**********&#39;
+</code></pre><p>2）将pick改为squash或者s,之后保存并关闭文本编辑窗口即可。改完之后文本内容如下：</p>
+<pre tabindex="0"><code>pick 3ca6ec3   &#39;注释**********&#39;
+
+s 1b40566   &#39;注释*********&#39;
+
+s 53f244a   &#39;注释**********&#39;
+</code></pre><p>3）然后保存退出，Git会压缩提交历史，如果有冲突，需要修改，修改的时候要注意，保留最新的历史，不然我们的修改就丢弃了。修改以后要记得敲下面的命令：</p>
+<pre tabindex="0"><code>pick 3ca6ec3   &#39;注释**********&#39;
+
+s 1b40566   &#39;注释*********&#39;
+
+s 53f244a   &#39;注释**********&#39;
+</code></pre><h3 id="4冲突解决">4）冲突解决</h3>
+<p>然后保存退出，Git会压缩提交历史，如果有冲突，需要修改，修改的时候要注意，保留最新的历史</p>
+<pre tabindex="0"><code>git add .  
+
+# 继续合并
+git rebase --continue 
+
+# 放弃合并
+git rebase --abort  
+</code></pre><p>如果没有冲突，或者冲突已经解决，则会出现如下的编辑窗口：</p>
+<pre tabindex="0"><code># This is a combination of 4 commits.  
+#The first commit’s message is:  
+注释......
+# The 2nd commit’s message is:  
+注释......
+# The 3rd commit’s message is:  
+注释......
+# Please enter the commit message for your changes. Lines starting # with ‘#’ will be ignored, and an empty message aborts the commit.
+</code></pre><h3 id="5检查">5）检查</h3>
+<p>git log查看 commit 历史信息，查询commit的信息</p>
+<h2 id="七git-hook">七、Git Hook</h2>
+<p>Git Hook 也分为两个端: 客户端和服务端。</p>
+<p>客户端的 Git Hook 就是工作在我们本地机器的，服务端的 Git Hook 则是工作在我们提交到远程的服务器仓库中。</p>
+<p>客户端 Git Hook:</p>
+<ul>
+<li>pre-commit: 执行git commit命令时触发，常用于检查代码风格</li>
+<li>prepare-commit-msg: 触发于 commit message 编辑器呼起前 ,default commit message创建后,常用于生成默认的标准化的提交说明</li>
+<li>commit-msg: 开发者编写完并确认commit message后触发，常用于校验提交说明是否标准</li>
+<li>post-commit: 整个git commit完成后触发，常用于邮件通知、提醒</li>
+<li>applypatch-msg: 执行git am命令时触发，常用于检查命令提取出来的提交信息是否符合特定格式</li>
+<li>pre-applypatch: git am提取出补丁并应用于当前分支后，准备提交前触发，常用于执行测试用例或检查缓冲区代码</li>
+<li>post-applypatch: git am提交后触发，常用于通知、或补丁邮件回复（此钩子不能停止git am过程）</li>
+<li>pre-rebase: 执行git rebase命令时触发</li>
+<li>post-rewrite: 执行会替换commit的命令时触发，比如git rebase或git commit –amend</li>
+<li>post-checkout: 执行git checkout命令成功后触发，可用于生成特定文档，处理大二进制文件等</li>
+<li>post-merge: 成功完成一次 merge行为后触发</li>
+<li>pre-push: 执行git push命令时触发，可用于执行测试用例</li>
+<li>pre-auto-gc: 执行垃圾回收前触发</li>
+</ul>
+<p>服务端 Git Hook:</p>
+<ul>
+<li>pre-receive: 当服务端收到一个 push 操作请求时触发，可用于检测 push 的内容</li>
+<li>update: update 脚本和 pre-receive 脚本十分类似，不同之处在于它会为每一个准备更新的分支各运行一次。 假如推送者同时向多个分支推送内容，pre-receive 只运行一次，相比之下 update 则会为每一个被推送的分支各运行一次。</li>
+<li>post-receive: post-receive 挂钩在整个过程完结以后运行，可以用来更新其他系统服务或者通知用户。它的用途包括给某个邮件列表发信，通知持续集成（continous integration）的服务器，或者更新问题追踪系统（ticket-tracking system） —— 甚至可以通过分析提交信息来决定某个问题（ticket）是否应该被开启，修改或者关闭。</li>
+</ul>
+<h5 id="使用git-hook">使用git hook</h5>
+<p>Git Hook 本身自带有脚本，会存放在仓库 .git/hooks 文件夹中，目录一般是这样的:</p>
+<pre tabindex="0"><code>- YourGitRepo
+  |- .git
+     |- hooks
+        |- hooks--commit-msg.sample
+        |- hooks--post-update.sample
+        ...
+</code></pre><p>注意如果是 sample 文件，要去掉 .sample 后缀，变成前面 <code>Git Hook 分类</code> 中提到对应的操作来作为文件名。</p>
+<p>比如我要做的校验 commit 的提交信息，那么使用的 Git Hook 脚本名应该为 <code>commit-msg</code>.</p>
+<p>在 <code>hooks--commit-msg.sample</code> 里的内容为:</p>
+<pre tabindex="0"><code>#!/bin/sh
+#
+# An example hook script to check the commit log message.
+# Called by &#34;git commit&#34; with one argument, the name of the file
+# that has the commit message.  The hook should exit with non-zero
+# status after issuing an appropriate message if it wants to stop the
+# commit.  The hook is allowed to edit the commit message file.
+#
+# To enable this hook, rename this file to &#34;commit-msg&#34;.
+
+# Uncomment the below to add a Signed-off-by line to the message.
+# Doing this in a hook is a bad idea in general, but the prepare-commit-msg
+# hook is more suited to it.
+#
+# SOB=$(git var GIT_AUTHOR_IDENT | sed -n &#39;s/^\(.*&gt;\).*$/Signed-off-by: \1/p&#39;)
+# grep -qs &#34;^$SOB&#34; &#34;$1&#34; || echo &#34;$SOB&#34; &gt;&gt; &#34;$1&#34;
+
+# This example catches duplicate Signed-off-by lines.
+
+test &#34;&#34; = &#34;$(grep &#39;^Signed-off-by: &#39; &#34;$1&#34; |
+	 sort | uniq -c | sed -e &#39;/^[ 	]*1[ 	]/d&#39;)&#34; || {
+	echo &gt;&amp;2 Duplicate Signed-off-by lines.
+	exit 1
+}
+</code></pre><p>上面说明里有一些基本说明, 这里获得的 $1 参数，其实是存放 commit msg 内容的文件路径，为 <code>.git/COMMIT_EDITMSG</code>.</p>
+<p>利用命令:</p>
+<pre tabindex="0"><code>msg=$(cat $1)
+</code></pre><p>就能取到 commit 的信息，稍作修改，就能达到我说的，校验团队 commit 信息的规范的目的了。</p>
+<h5 id="git-hook-不生效">Git Hook 不生效</h5>
+<p>如果遇到不起作用的，可能脚本没有打开执行权限，导致没办法执行。我就是这样的情况。</p>
+<p>cd 到 .git/hooks 目录下,执行 <code>chmod 777</code> 命令即可,如：</p>
+<pre tabindex="0"><code>chmod 777 commit-msg
+</code></pre><h2 id="八git-gc">八、Git GC</h2>
+<p>清理不必要的文件并优化本地存储库</p>
+<p>参考链接：<a href="https://cloud.tencent.com/developer/section/1138643" target="_blank" rel="noopener noreffer ">Git - 管理 | Administration - git gc - 开发者手册 - 云+社区 - 腾讯云 (tencent.com)</a></p>
+<p>Git的底层并没有采用 CVS、SVN 底层所采用的那套增量式文件系统，而是采用一套自行维护的存储文件系统。当文件变动发生提交时，该文件系统存储的不是文件的差异信息，而是文件快照，即整个文件内容，并保存指向快照的索引。这种做法，提高 Git 分支的使用效率；但也容易导致代码仓库中内容重复程度过高，从而仓库体积过大。当遇到这种情况时，或者需要将仓库推送到远程主机时，就需要Git中的gc（garbage collect）功能，也就是垃圾回收功能。</p>
+<p>大体来说，当运行 &ldquo;git gc&rdquo; 命令时，Git会收集所有松散对象并将它们存入 packfile，合并这些 packfile 进一个大的 packfile，然后将不被任何 commit 引用并且已存在一段时间 (数月) 的对象删除。 此外，Git还会将所有引用 (references) 并入一个单独文件。</p>
+<p>就细节而言，Git做了这几件事：</p>
+<ul>
+<li>pack_refs 过程</li>
+<li>reflog expire 过程</li>
+<li>repack 过程</li>
+<li>prune 过程</li>
+<li>rerere 过程</li>
+</ul>
+<p>概要：</p>
+<pre tabindex="0"><code>git gc [--aggressive] [--auto] [--quiet] [--prune=&lt;date&gt; | --no-prune] [--force]
+</code></pre><p>描述：</p>
+<p>在当前存储库中运行许多内务处理任务，例如压缩文件修订（以减少磁盘空间并提高性能）并移除可能由之前<code>git add</code>调用创建的不可达对象。</p>
+<p>鼓励用户在每个存储库中定期运行此任务，以保持良好的磁盘空间利用率和良好的操作性能。</p>
+<p>一些git命令可能会自动运行<code>git gc</code>; <code>--auto</code>详细信息请参阅下面的标志。如果您知道自己在做什么，并且所有您想要的都是永久禁用此行为而无需进一步考虑，请执行以下操作：</p>
+<pre tabindex="0"><code>$ git config --global gc.auto 0
+</code></pre><p>选项：</p>
+<ul>
+<li>&ndash;aggressive</li>
+</ul>
+<p>通常<code>git gc</code>运行速度很快，同时提供良好的磁盘空间利用率和性能 此选项将导致<code>git gc</code>更积极地优化存储库，但花费更多时间。这种优化的效果是持久的，所以这个选项只需要偶尔使用; 每隔几百个变更集左右。</p>
+<ul>
+<li>&ndash;auto</li>
+</ul>
+<p>使用此选项，<code>git gc</code>检查是否需要进行任何清洁工作; 如果没有，它会退出而不执行任何工作。一些git命令<code>git gc --auto</code>在执行可能会产生许多松散对象的操作之后运行。</p>
+<p>如果存储库中的松散对象太多或包装太多，则需要进行内务处理。如果松散对象的数量超过了<code>gc.auto</code>配置变量的值，则所有松散对象都将使用组合到一个包中<code>git repack -d -l</code>。将值设置<code>gc.auto</code>为0将禁用自动填充松散物体。</p>
+<p>如果包装数量超过了价值<code>gc.autoPackLimit</code>，那么现有包装（标有<code>.keep</code>文件的包装除外）将通过使用<code>-A</code>选项合并到一个包装中<code>git repack</code>。设置<code>gc.autoPackLimit</code>为0将禁用自动合并包装。</p>
+<ul>
+<li>&ndash;prune=<!-- raw HTML omitted --></li>
+</ul>
+<p>修剪比日期更旧的松散对象（默认为2周前，可由配置变量覆盖<code>gc.pruneExpire</code>）。&ndash;prune =不管年龄大小，都修剪松散的物体，并且如果另一个进程同时写入存储库，则会增加腐败风险; 请参阅下面的“注意事项”。&ndash;prune默认打开。</p>
+<ul>
+<li>&ndash;no-prune</li>
+</ul>
+<p>不要修剪任何松动的物体。</p>
+<ul>
+<li>&ndash;quiet</li>
+</ul>
+<p>取消所有进度报告。</p>
+<ul>
+<li>&ndash;force</li>
+</ul>
+<p><code>git gc</code>即使可能有另一个<code>git gc</code>实例在此存储库上运行，也强制运行。</p>
+<p>注意：</p>
+<p><code>git gc</code>尽量不要删除在存储库中任何位置引用的对象。特别是，它不仅会保存当前一组分支和标记所引用的对象，还会保留由索引引用的对象，远程跟踪分支，<code>git filter-branch</code>refs / original /中保存的引用或reflogs（可引用分支中的提交后来修改或倒带）。如果您希望某些对象被删除而不是，请检查所有这些位置，并决定在您的情况下删除这些引用是否有意义。</p>
+<p>另一方面，当<code>git gc</code>与另一个进程同时运行时，可能会删除另一个进程正在使用但尚未创建引用的对象。这可能会导致其他进程失败或者可能会损坏存储库，如果其他进程稍后添加对已删除对象的引用。Git有两个功能可以显着缓解这个问题：</p>
+<ol>
+<li>
+<p><code>--prune</code>保留修改时间比日期更新的任何对象以及可从其访问的所有对象。</p>
+</li>
+<li>
+<p>将对象添加到数据库的大多数操作都会更新对象的修改时间（如果该对象已存在，以便应用＃1）。</p>
+</li>
+</ol>
+<p>然而，这些功能并不能提供完整的解决方案，因此，同时运行命令的用户必须忍受一些腐败风险（实践中似乎很低），除非他们关闭自动垃圾收集<code>git config gc.auto 0</code></p>
+<h2 id="九git-gpg签名">九、Git gpg签名</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 查看gpg密钥</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@local ~<span class="o">]</span><span class="c1"># gpg --list-key</span>
+</span></span><span class="line"><span class="cl">/root/.gnupg/pubring.kbx
+</span></span><span class="line"><span class="cl">------------------------
+</span></span><span class="line"><span class="cl">pub   rsa4096 2021-08-23 <span class="o">[</span>SC<span class="o">]</span>
+</span></span><span class="line"><span class="cl">      C40EA42A60xxxxxxxxxxxxxxxxxx
+</span></span><span class="line"><span class="cl">uid           <span class="o">[</span> 绝对 <span class="o">]</span> cccc <span class="o">(</span><span class="nb">local</span><span class="o">)</span> &lt;t@local.com&gt;
+</span></span><span class="line"><span class="cl">sub   rsa4096 2021-08-23 <span class="o">[</span>E<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">pub   rsa4096 2021-08-23 <span class="o">[</span>SC<span class="o">]</span>
+</span></span><span class="line"><span class="cl">      3CB22116355xxxxxxxxxxxxxxxxxx
+</span></span><span class="line"><span class="cl">uid           <span class="o">[</span> 绝对 <span class="o">]</span> tom <span class="o">(</span>github<span class="o">)</span> &lt;t@local.cc&gt;
+</span></span><span class="line"><span class="cl">sub   rsa4096 2021-08-23 <span class="o">[</span>E<span class="o">]</span>
+</span></span></code></pre></div><p>配置使用gpg签名</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># git 配置使用gpg签名</span>
+</span></span><span class="line"><span class="cl">git config --global user.signingkey &lt;gpg-key-id&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 提交是否强制 GPG，带上--global 是作用全局，局部的去除--global</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar2 ~<span class="o">]</span><span class="c1"># git config --global commit.gpgsign true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># commit 提交设置GPG签名，如果没有设置强制，则需要加上-S</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar2 ~<span class="o">]</span><span class="c1"># git commit -S -m “commit message&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 在github上签名的提交将显示包含“ Verified”</span>
+</span></span></code></pre></div><p>问题：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@sugar ssl<span class="o">]</span><span class="c1"># git commit -m &#34;init repo&#34;</span>
+</span></span><span class="line"><span class="cl">error: gpg 数据签名失败
+</span></span><span class="line"><span class="cl">fatal: 写提交对象失败
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">参考链接：https://zhuanlan.zhihu.com/p/97984430
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">解决办法：export <span class="nv">GPG_TTY</span><span class="o">=</span><span class="k">$(</span>tty<span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">在环境变量里增加一项GPG_TTY
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-11-18</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/2023-11-18-git/" data-title="Git" data-hashtags="git,vcs,dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/2023-11-18-git/" data-hashtag="git"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/2023-11-18-git/" data-title="Git"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/2023-11-18-git/" data-title="Git"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/2023-11-18-git/" data-title="Git"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/git/">git</a>,&nbsp;<a href="/tags/vcs/">vcs</a>,&nbsp;<a href="/tags/dev/">dev</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023-11-18-nexus/" class="prev" rel="prev" title="Nexus"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Nexus</a>
+            <a href="/posts/2023-11-18-svn/" class="next" rel="next" title="svn">svn<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -4,84 +4,84 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 12 Nov 2023 10:30:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
-    <title>db</title>
-    <link>https://serialt.github.io/tags/db/</link>
-    <pubDate>Sun, 12 Nov 2023 10:30:27 &#43;0800</pubDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 20 Nov 2023 21:22:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>timezone</title>
+    <link>https://serialt.github.io/tags/timezone/</link>
+    <pubDate>Mon, 20 Nov 2023 21:22:27 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/db/</guid>
+    <guid>https://serialt.github.io/tags/timezone/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>pg</title>
-    <link>https://serialt.github.io/tags/pg/</link>
-    <pubDate>Sun, 12 Nov 2023 10:30:27 &#43;0800</pubDate>
+    <title>tz</title>
+    <link>https://serialt.github.io/tags/tz/</link>
+    <pubDate>Mon, 20 Nov 2023 21:22:27 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/pg/</guid>
+    <guid>https://serialt.github.io/tags/tz/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>postgresql</title>
-    <link>https://serialt.github.io/tags/postgresql/</link>
-    <pubDate>Sun, 12 Nov 2023 10:30:27 &#43;0800</pubDate>
+    <title>pc</title>
+    <link>https://serialt.github.io/tags/pc/</link>
+    <pubDate>Mon, 20 Nov 2023 21:20:27 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/postgresql/</guid>
+    <guid>https://serialt.github.io/tags/pc/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>cve</title>
-    <link>https://serialt.github.io/tags/cve/</link>
-    <pubDate>Sun, 12 Nov 2023 10:29:27 &#43;0800</pubDate>
+    <title>recovery</title>
+    <link>https://serialt.github.io/tags/recovery/</link>
+    <pubDate>Mon, 20 Nov 2023 21:20:27 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/cve/</guid>
+    <guid>https://serialt.github.io/tags/recovery/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>security</title>
-    <link>https://serialt.github.io/tags/security/</link>
-    <pubDate>Sun, 12 Nov 2023 10:29:27 &#43;0800</pubDate>
+    <title>branch</title>
+    <link>https://serialt.github.io/tags/branch/</link>
+    <pubDate>Sun, 19 Nov 2023 11:26:27 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/security/</guid>
+    <guid>https://serialt.github.io/tags/branch/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>sqlite</title>
-    <link>https://serialt.github.io/tags/sqlite/</link>
-    <pubDate>Sun, 12 Nov 2023 10:26:27 &#43;0800</pubDate>
+    <title>dev</title>
+    <link>https://serialt.github.io/tags/dev/</link>
+    <pubDate>Sun, 19 Nov 2023 11:26:27 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/sqlite/</guid>
+    <guid>https://serialt.github.io/tags/dev/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>sqlite3</title>
-    <link>https://serialt.github.io/tags/sqlite3/</link>
-    <pubDate>Sun, 12 Nov 2023 10:26:27 &#43;0800</pubDate>
+    <title>git-branch</title>
+    <link>https://serialt.github.io/tags/git-branch/</link>
+    <pubDate>Sun, 19 Nov 2023 11:26:27 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/sqlite3/</guid>
+    <guid>https://serialt.github.io/tags/git-branch/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>dingbot</title>
-    <link>https://serialt.github.io/tags/dingbot/</link>
-    <pubDate>Sat, 11 Nov 2023 11:28:14 &#43;0800</pubDate>
+    <title>svn</title>
+    <link>https://serialt.github.io/tags/svn/</link>
+    <pubDate>Sat, 18 Nov 2023 11:26:27 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/dingbot/</guid>
+    <guid>https://serialt.github.io/tags/svn/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>port</title>
-    <link>https://serialt.github.io/tags/port/</link>
-    <pubDate>Sat, 11 Nov 2023 10:30:09 &#43;0800</pubDate>
+    <title>vcs</title>
+    <link>https://serialt.github.io/tags/vcs/</link>
+    <pubDate>Sat, 18 Nov 2023 11:26:27 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/port/</guid>
+    <guid>https://serialt.github.io/tags/vcs/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>caddy</title>
-    <link>https://serialt.github.io/tags/caddy/</link>
-    <pubDate>Sat, 11 Nov 2023 10:29:10 &#43;0800</pubDate>
+    <title>git</title>
+    <link>https://serialt.github.io/tags/git/</link>
+    <pubDate>Sat, 18 Nov 2023 10:26:27 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/caddy/</guid>
+    <guid>https://serialt.github.io/tags/git/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

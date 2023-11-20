@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Nexus - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Nexus" />
+<meta property="og:description" content="Nexus 参考： https://juejin.cn/post/6844904016762109959 https://cloud.tencent.com/developer/article/1764866 官网：https://help.sonatype.com/repomanager3/ 介绍 生产环境中，一般不会允许所有服务器都能访" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2023-11-18-nexus/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-18T09:26:27+08:00" />
+<meta property="article:modified_time" content="2023-11-18T09:26:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Nexus"/>
+<meta name="twitter:description" content="Nexus 参考： https://juejin.cn/post/6844904016762109959 https://cloud.tencent.com/developer/article/1764866 官网：https://help.sonatype.com/repomanager3/ 介绍 生产环境中，一般不会允许所有服务器都能访"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-18-nexus/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-12-postgresql/" /><link rel="next" href="https://serialt.github.io/posts/2023-11-18-git/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Nexus",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2023-11-18-nexus\/"
+        },"genre": "posts","keywords": "nexus, repo","wordcount":  2118 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2023-11-18-nexus\/","datePublished": "2023-11-18T09:26:27+08:00","dateModified": "2023-11-18T09:26:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Nexus</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-18">2023-11-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2118 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#介绍">介绍</a></li>
+    <li><a href="#二安装">二、安装</a></li>
+    <li><a href="#二nexus仓库">二、nexus仓库</a></li>
+    <li><a href="#二数据接入prometheus">二、数据接入prometheus</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="nexus">Nexus</h1>
+<p>参考：</p>
+<ul>
+<li>
+<p><a href="https://juejin.cn/post/6844904016762109959" target="_blank" rel="noopener noreffer ">https://juejin.cn/post/6844904016762109959</a></p>
+</li>
+<li>
+<p><a href="https://cloud.tencent.com/developer/article/1764866" target="_blank" rel="noopener noreffer ">https://cloud.tencent.com/developer/article/1764866</a></p>
+</li>
+</ul>
+<p>官网：https://help.sonatype.com/repomanager3/</p>
+<h2 id="介绍">介绍</h2>
+<p>生产环境中，一般不会允许所有服务器都能访问<code>公网</code>，理想的情况是有几台服务器作为<code>访问代理</code>，同时作为缓存服务器。当服务器中有所需包时通过内网获取，如无则通过公网获取同时在本地保存。常用搭建私有<code>yum</code>源的方法是<code>createrepo</code>生成本地仓库，其它服务器通过<code>http</code>访问仓库。这种方法的弊端是如果当前仓库中没有所需软件包会导致安装失败，不会去其它源获取数据。Nexus是一个强大的仓库管理器，它极大地简化了自己内部仓库的维护和外部仓库的访问。</p>
+<p>Nexus是一个强大的Maven仓库管理器，它极大地简化了本地内部仓库的维护和外部仓库的访问。 如果使用了公共的Maven仓库服务器，可以从Maven中央仓库下载所需要的构件（Artifact），但这通常不是一个好的做法。</p>
+<p>正常做法是在本地架设一个Maven仓库服务器，即利用Nexus可以只在一个地方就能够完全控制访问和部署在你所维护仓库中的每个Artifact。 Nexus在代理远程仓库的同时维护本地仓库，以降低中央仓库的负荷,节省外网带宽和时间，Nexus就可以满足这样的需要。</p>
+<p>Nexus是一套“开箱即用”的系统不需要数据库，它使用文件系统加Lucene来组织数据。</p>
+<p>Nexus使用ExtJS来开发界面，利用Restlet来提供完整的REST APIs，通过m2eclipse与Eclipse集成使用。</p>
+<p>Nexus支持WebDAV与LDAP安全身份认证。</p>
+<p>Nexus还提供了强大的仓库管理功能，构件搜索功能，它基于REST，友好的UI是一个extjs的REST客户端，它占用较少的内存，基于简单文件系统而非数据库。</p>
+<p><strong>为什么要构建Nexus私服？</strong></p>
+<p>如果没有Nexus私服，我们所需的所有构件都需要通过maven的中央仓库和第三方的Maven仓库下载到本地，而一个团队中的所有人都重复的从maven仓库下载构件无疑加大了仓库的负载和浪费了外网带宽，如果网速慢的话，还会影响项目的进程。很多情况下项目的开发都是在内网进行的，连接不到maven仓库怎么办呢？开发的公共构件怎么让其它项目使用？这个时候我们不得不为自己的团队搭建属于自己的maven私服，这样既节省了网络带宽也会加速项目搭建的进程，当然前提条件就是你的私服中拥有项目所需的所有构件。</p>
+<p>同时Nexus支持仓库有：<code>Apt</code>、<code>Bower</code>、<code>CocoaPods</code>、<code>Conda</code>、<code>Docker</code>、<code>Git LFS</code>、<code>Go</code>、<code>Maven</code>、<code>Npm</code>、<code>NuGet</code>、<code>PyPi</code>、<code>Raw</code>、<code>RubyGems</code>、<code>Yum</code></p>
+<h2 id="二安装">二、安装</h2>
+<p>二进制安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 下载地址</span>
+</span></span><span class="line"><span class="cl">https://help.sonatype.com/repomanager3/download
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 解压</span>
+</span></span><span class="line"><span class="cl">tar zxf nexus-3.23.0-03-unix.tar.gz
+</span></span><span class="line"><span class="cl">mv nexus-3.23.0-03 sonatype-work /data
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;NEXUS_HOME=&#34;/data/nexus-3.23.0-03&#34;&#39;</span> &gt;&gt; ~/.bashrc
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;run_as_user=&#34;root&#34;&#39;</span> &gt;&gt; /data/nexus-3.23.0-03/bin/nexus.rc
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 配置systemd服务</span>
+</span></span><span class="line"><span class="cl">$ vim /etc/systemd/system/nexus.service
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Unit<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Description</span><span class="o">=</span>nexus service
+</span></span><span class="line"><span class="cl"><span class="nv">After</span><span class="o">=</span>network.target
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Service<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Type</span><span class="o">=</span>forking
+</span></span><span class="line"><span class="cl"><span class="nv">LimitNOFILE</span><span class="o">=</span><span class="m">65536</span>
+</span></span><span class="line"><span class="cl"><span class="nv">ExecStart</span><span class="o">=</span>/data/nexus-3.23.0-03/bin/nexus start
+</span></span><span class="line"><span class="cl"><span class="nv">ExecStop</span><span class="o">=</span>/data/nexus-3.23.0-03/bin/nexus stop
+</span></span><span class="line"><span class="cl"><span class="nv">User</span><span class="o">=</span>root
+</span></span><span class="line"><span class="cl"><span class="nv">Restart</span><span class="o">=</span>on-abort
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Install<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 启动服务</span>
+</span></span><span class="line"><span class="cl">systemctl start nexus
+</span></span><span class="line"><span class="cl"><span class="c1"># 此处启动后，请耐心等待，netstat -tunlp 查看端口8081监听后继续</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看admin用户的密码</span>
+</span></span><span class="line"><span class="cl">cat /data/sonatype-work/nexus3/admin.password
+</span></span></code></pre></div><p>基于docker安装nexus</p>
+<pre tabindex="0"><code>mkdir -p /data/nexus/data &amp;&amp; chown -R 200 /data/nexus/data
+docker run -d -p 8081:8081 --name nexus -v /data/nexus/data:/nexus-data sonatype/nexus3
+</code></pre><p>docker-compose安装</p>
+<pre tabindex="0"><code>mkdir -p /data/nexus/data &amp;&amp; chown -R 200 /data/nexus/data
+
+# docker-compose 
+cat &gt;docker-compose.yaml &lt;&lt;EOF
+version: &#34;3&#34;
+services:
+  nexus3:
+    image: sonatype/nexus3
+    container_name: nexus3
+    restart: always
+    privileged: true
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - &#39;8081:8081&#39;
+    volumes:
+      - /data/nexus/data:/nexus-data
+EOF
+</code></pre><p>查看密码</p>
+<pre tabindex="0"><code>管理员：admin
+密码：cat /data/nexus/data/admin.passwor
+</code></pre><p>nginx代理设置</p>
+<pre tabindex="0"><code>upstream nexus-server{
+    server 127.0.0.1:8081;
+}
+
+#server {
+#    listen 80;
+#    server_name mirrors.cccc.io;
+#    location / {
+#        return 301 https://xx.xx;
+#    }
+
+#    location ~ /.well-known {
+#        root /tmp;
+#    }
+#}
+
+
+server {
+    listen 80;
+    server_name mirrors.local.com;
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Real-IP $remote_addr;
+        #proxy_set_header X-Forwarded-Proto &#34;https&#34;;
+        proxy_max_temp_file_size 0;
+        proxy_pass http://nexus-server;
+        
+        # This is the maximum upload size
+        client_max_body_size       1024m;
+        client_body_buffer_size    128k;
+
+   	    proxy_connect_timeout      90;
+        proxy_send_timeout         90;
+        proxy_read_timeout         90;
+
+        proxy_temp_file_write_size 64k;
+
+        # Required for new HTTP-based CLI
+        #proxy_http_version 1.1;
+        #proxy_request_buffering off;
+        #proxy_buffering off; # Required for HTTP-based CLI to work over SSL
+    	    
+    }
+    #ssl_certificate cert/xx.pem;
+    #ssl_certificate_key cert/xx.key;
+
+}
+</code></pre><h2 id="二nexus仓库">二、nexus仓库</h2>
+<p>Nexus 仓库按照类型（Type）区分，主要分为以下 3 个类型：</p>
+<ul>
+<li>代理仓库（proxy）：主要用于代理缓存访问外网上其他公开的仓库，将每次从代理仓库拉取的制品缓存到nexus文件系统中，下次再拉取相同版本制品时就不需再次从外网拉取，起到代理访问缓存的功能。</li>
+<li>宿主仓库（hosted）：类型的仓库主要用于存放各个项目组产出的、用于共享、不能放到公网上、私有的制品。有两种版本策略，一种是Snapshots版本策略类型的，对于相同版本制品的上传，nexus会自动追加时间戳加以区分；一种是Release版本策略类型的，对于相同的制品，要明确版本，不能存放相同版本。可以理解为snapshots仓库存放一些内容变更频繁的制品，这样不管上传还是使用时不用频繁变更版本号就能拉取到最新版本。而release仓库存放一些内容稳定变更少的制品，使用时指定好版本就行，无需经常变动。</li>
+<li>仓库组（group）：主要用于组合其他仓库，统一对外使用方式。可设置组仓库组合其他仓库的顺序。例如组合顺序为先拉取maven格式aliyun代理仓库中的制品，如果其中没有想要的制品，再去拉取maven格式Central代理仓库中的制品。如果还没有，就去maven格式hosted类型仓库中拉取，直到遍历完所有的组合仓库。同时，拉取使用时不需要配置那么多的仓库地址，只需要配置group仓库地址就行。</li>
+</ul>
+<p>group仓库可以包含proxy和hosted类型的仓库，并对外提供统一的服务</p>
+<h2 id="二数据接入prometheus">二、数据接入prometheus</h2>
+<p>grafana模板：</p>
+<p><code>155563</code> <code> https://grafana.com/grafana/dashboards/16459</code></p>
+<p>neuxs 官方参考地址：</p>
+<p><a href="https://help.sonatype.com/repomanager3/nexus-repository-administration/support-features#SupportFeatures-Prometheus" target="_blank" rel="noopener noreffer ">https://help.sonatype.com/repomanager3/nexus-repository-administration/support-features#SupportFeatures-Prometheus</a></p>
+<p>配置文件模板</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">global</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">scrape_interval</span><span class="p">:</span><span class="w"> </span><span class="l">15s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">scrape_timeout</span><span class="p">:</span><span class="w"> </span><span class="l">10s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">evaluation_interval</span><span class="p">:</span><span class="w"> </span><span class="l">15s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">alerting</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">alertmanagers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">static_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">scheme</span><span class="p">:</span><span class="w"> </span><span class="l">http</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l">10s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">scrape_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="l">nxrm</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">scrape_interval</span><span class="p">:</span><span class="w"> </span><span class="l">15s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">scrape_timeout</span><span class="p">:</span><span class="w"> </span><span class="l">10s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">metrics_path</span><span class="p">:</span><span class="w"> </span><span class="l">/service/metrics/prometheus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">scheme</span><span class="p">:</span><span class="w"> </span><span class="l">http</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">basic_auth</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">admin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">admin123</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">static_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">targets</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">localhost:8081</span><span class="w">
+</span></span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-11-18</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/2023-11-18-nexus/" data-title="Nexus" data-hashtags="nexus,repo"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/2023-11-18-nexus/" data-hashtag="nexus"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/2023-11-18-nexus/" data-title="Nexus"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/2023-11-18-nexus/" data-title="Nexus"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/2023-11-18-nexus/" data-title="Nexus"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/nexus/">nexus</a>,&nbsp;<a href="/tags/repo/">repo</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023-11-12-postgresql/" class="prev" rel="prev" title="postgresql"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>postgresql</a>
+            <a href="/posts/2023-11-18-git/" class="next" rel="next" title="Git">Git<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

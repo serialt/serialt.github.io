@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Timezone - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Timezone" />
+<meta property="og:description" content="Timezone 参考链接： https://bbs.huaweicloud.com/blogs/detail/243151 http://www.timeofdate.com/timezone/abbr/all 一、设置时区 timedatectl set-timezone Asia/Shanghai 二、时区详细 1、概念 ​ 在以前全球国家都处于农业社会的时候，人们通过每天观察太阳的位置来决定时间，这就使得不" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2023-11-20-timezone/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-20T21:22:27+08:00" />
+<meta property="article:modified_time" content="2023-11-20T21:22:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Timezone"/>
+<meta name="twitter:description" content="Timezone 参考链接： https://bbs.huaweicloud.com/blogs/detail/243151 http://www.timeofdate.com/timezone/abbr/all 一、设置时区 timedatectl set-timezone Asia/Shanghai 二、时区详细 1、概念 ​ 在以前全球国家都处于农业社会的时候，人们通过每天观察太阳的位置来决定时间，这就使得不"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-20-timezone/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-20-pc/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Timezone",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2023-11-20-timezone\/"
+        },"genre": "posts","keywords": "timezone, tz","wordcount":  1567 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2023-11-20-timezone\/","datePublished": "2023-11-20T21:22:27+08:00","dateModified": "2023-11-20T21:22:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Timezone</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-20">2023-11-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1567 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一设置时区">一、设置时区</a></li>
+    <li><a href="#二时区详细">二、时区详细</a>
+      <ul>
+        <li><a href="#1概念">1、概念</a></li>
+        <li><a href="#2通用名词解释">2、通用名词解释</a></li>
+        <li><a href="#3linux时区存储位置">3、linux时区存储位置</a></li>
+      </ul>
+    </li>
+    <li><a href="#三时区简写">三、时区简写</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="timezone">Timezone</h1>
+<p>参考链接：</p>
+<ul>
+<li>
+<p><a href="https://bbs.huaweicloud.com/blogs/detail/243151" target="_blank" rel="noopener noreffer ">https://bbs.huaweicloud.com/blogs/detail/243151</a></p>
+</li>
+<li>
+<p><a href="http://www.timeofdate.com/timezone/abbr/all" target="_blank" rel="noopener noreffer ">http://www.timeofdate.com/timezone/abbr/all</a></p>
+</li>
+</ul>
+<h2 id="一设置时区">一、设置时区</h2>
+<pre tabindex="0"><code>timedatectl set-timezone Asia/Shanghai
+</code></pre><h2 id="二时区详细">二、时区详细</h2>
+<h3 id="1概念">1、概念</h3>
+<p>​    	在以前全球国家都处于农业社会的时候，人们通过每天观察太阳的位置来决定时间，这就使得不同经度的地方有不同的时间。当时人们旅行主要靠走和马匹，不同地方时间不一致的问题没有那么突出。但是到了十九世纪随着火车的发明，人们一天旅行的距离一下子延长了很多，到不同的地方因此迫切需要一个通用的方法把各个地方的时间统一起来。1853年8月12日，美国东部罗德岛州，两辆火车迎头相撞，14人因此死亡。事故的原因在今天看来难以置信——两车工程师的手表差了2分钟。</p>
+<p>1863年，首次使用时区的概念。时区通过设立一个区域的标准时间部分地解决了这个问题。
+1870年代加拿大铁路工程师弗莱明首次提出全世界按统一标准划分时区。
+1883年11月18日，美国铁路部门正式实施五个时区。
+1884年华盛顿子午线国际会议正式通过采纳这种时区划分，称为世界标准时制度。因此，世界标准时区的诞生同其它全球标准一样也是有一个缓慢的发展过程。</p>
+<h3 id="2通用名词解释">2、通用名词解释</h3>
+<p><strong>时区</strong> ：时区是地球上的区域使用同一个时间定义。以前，人们通过观察太阳的位置（时角）决定时间，这就使得不同经度的地方的时间有所不同（地方时）。1863年，首次使用时区的概念。时区通过设立一个区域的标准时间部分地解决了这个问题。世界各个国家位于地球不同位置上，因此不同国家，特别是东西跨度大的国家日出、日落时间必定有所偏差。这些偏差就是所谓的时差。</p>
+<p><strong>格林尼治标准时间</strong>： GMT（Greenwich Mean Time）是指位于英国伦敦郊区的皇家格林尼治天文台的标准时间，因为本初子午线被定义为在那里通过的经线。由于地球在它的椭圆轨道里的运动速度不均匀，地球每天的自转是有些不规则的，而且正在缓慢减速。所以，格林尼治时间已经不再被作为标准时间使用。</p>
+<p><strong>世界协调时间</strong> ：UTC（Coordinated Universal Time）是经过平均太阳时(以格林威治时间GMT为准)、地轴运动修正后的新时标以及以「秒」为单位的国际原子时所综合精算而成的时间。UTC比GMT来得更加精准。对于现行表款来说，GMT与UTC的功能与精确度是没有差别的。</p>
+<p><strong>夏日节约时间</strong> ：DST（Daylight Saving Time）又称日光节约时制，在英国称为夏令时间(Summer Time)。是一种为节约能源而人为规定地方时间的制度，在这一制度实行期间所采用的统一时间称为“夏令时间”。一般在天亮较早的夏季人为将时间调快一小时，可以使人早起早睡，减少照明量，以充分利用光照资源，从而节约照明用电。各个采纳夏时制的国家规定不同。</p>
+<p><strong>时区表示法</strong> 如果时间是以协调世界时（UTC）表示，则在时间后面直接加上一个“Z”（不加空格）。“Z”是协调世界时中0时区的标志。因此，“09:30 UTC”就写作“09:30Z”或是“0930Z”。“14:45:15 UTC”则为“14:45:15Z”或“144515Z”。UTC时间也被叫做祖鲁时间，因为在北约音标字母中用“Zulu”表示“Z”。</p>
+<p><strong>UTC偏移量</strong> ：UTC偏移量是协调世界时（UTC）和特定地点的日期与时间差异，其单位为小时和分钟。它通常以 ±[hh]:[mm]、±[hh][mm]、或 ±[hh]的格式显示。所以，如果被描述的时间比UTC早一小时（例如柏林的冬季时间），UTC的偏移量将是”+01:00”、”+0100”、或简单显示为”+01”。</p>
+<h3 id="3linux时区存储位置">3、linux时区存储位置</h3>
+<p>为了避免因国家或地区问题，一般时区设置是以城市为标准</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@sugar2 Asia<span class="o">]</span><span class="c1"># pwd</span>
+</span></span><span class="line"><span class="cl">/usr/share/zoneinfo/Asia
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@sugar2 Asia<span class="o">]</span><span class="c1"># ls</span>
+</span></span><span class="line"><span class="cl">Aden       Baku        Colombo    Ho_Chi_Minh  Kashgar       Magadan       Pyongyang  Singapore      Ujung_Pandang
+</span></span><span class="line"><span class="cl">Almaty     Bangkok     Dacca      Hong_Kong    Kathmandu     Makassar      Qatar      Srednekolymsk  Ulaanbaatar
+</span></span><span class="line"><span class="cl">Amman      Barnaul     Damascus   Hovd         Katmandu      Manila        Qostanay   Taipei         Ulan_Bator
+</span></span><span class="line"><span class="cl">Anadyr     Beirut      Dhaka      Irkutsk      Khandyga      Muscat        Qyzylorda  Tashkent       Urumqi
+</span></span><span class="line"><span class="cl">Aqtau      Bishkek     Dili       Istanbul     Kolkata       Nicosia       Rangoon    Tbilisi        Ust-Nera
+</span></span><span class="line"><span class="cl">Aqtobe     Brunei      Dubai      Jakarta      Krasnoyarsk   Novokuznetsk  Riyadh     Tehran         Vientiane
+</span></span><span class="line"><span class="cl">Ashgabat   Calcutta    Dushanbe   Jayapura     Kuala_Lumpur  Novosibirsk   Saigon     Tel_Aviv       Vladivostok
+</span></span><span class="line"><span class="cl">Ashkhabad  Chita       Famagusta  Jerusalem    Kuching       Omsk          Sakhalin   Thimbu         Yakutsk
+</span></span><span class="line"><span class="cl">Atyrau     Choibalsan  Gaza       Kabul        Kuwait        Oral          Samarkand  Thimphu        Yangon
+</span></span><span class="line"><span class="cl">Baghdad    Chongqing   Harbin     Kamchatka    Macao         Phnom_Penh    Seoul      Tokyo          Yekaterinburg
+</span></span><span class="line"><span class="cl">Bahrain    Chungking   Hebron     Karachi      Macau         Pontianak     Shanghai   Tomsk          Yerevan
+</span></span></code></pre></div><h2 id="三时区简写">三、时区简写</h2>
+<pre tabindex="0"><code>UTC
+GMT
+SGT 新加坡时间   Singapore（CST时间有多个地区相同的名字）
+HKT 香港时间 Hongkong Asia/Hong_Kong 
+</code></pre></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-11-20</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/2023-11-20-timezone/" data-title="Timezone" data-hashtags="timezone,tz"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/2023-11-20-timezone/" data-hashtag="timezone"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/2023-11-20-timezone/" data-title="Timezone"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/2023-11-20-timezone/" data-title="Timezone"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/2023-11-20-timezone/" data-title="Timezone"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/timezone/">timezone</a>,&nbsp;<a href="/tags/tz/">tz</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023-11-20-pc/" class="prev" rel="prev" title="Recovery"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Recovery</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

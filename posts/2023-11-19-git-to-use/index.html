@@ -4,31 +4,31 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title> - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
-<meta property="og:description" content="" />
+        <title>Git-to-use - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Git-to-use" />
+<meta property="og:description" content="Git使用规范 一、commit &lt;type&gt;(scope): &lt;subject&gt; Header &lt;BLANK LINE&gt; &lt;body&gt; Body &lt;BALNK LINE&gt; &lt;footer&gt; Footer commit message包含Header、Body、Footer三个部分，其中Header是必须" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://serialt.github.io/posts/2023-11-11-nexus/" /><meta property="article:section" content="posts" />
-
-<meta property="og:site_name" content="Log" />
+<meta property="og:url" content="https://serialt.github.io/posts/2023-11-19-git-to-use/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-19T11:26:27+08:00" />
+<meta property="article:modified_time" content="2023-11-19T11:26:27+08:00" /><meta property="og:site_name" content="Log" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content=""/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="Git-to-use"/>
+<meta name="twitter:description" content="Git使用规范 一、commit &lt;type&gt;(scope): &lt;subject&gt; Header &lt;BLANK LINE&gt; &lt;body&gt; Body &lt;BALNK LINE&gt; &lt;footer&gt; Footer commit message包含Header、Body、Footer三个部分，其中Header是必须"/>
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-11-nexus/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-11-npm/" /><link rel="next" href="https://serialt.github.io/posts/2023-11-11-mysql-basic/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-19-git-to-use/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-18-svn/" /><link rel="next" href="https://serialt.github.io/posts/2023-11-20-pc/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "",
+        "headline": "Git-to-use",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/serialt.github.io\/posts\/2023-11-11-nexus\/"
-        },"genre": "posts","wordcount":  0 ,
-        "url": "https:\/\/serialt.github.io\/posts\/2023-11-11-nexus\/","publisher": {
+            "@id": "https:\/\/serialt.github.io\/posts\/2023-11-19-git-to-use\/"
+        },"genre": "posts","keywords": "git-branch, branch, dev","wordcount":  650 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2023-11-19-git-to-use\/","datePublished": "2023-11-19T11:26:27+08:00","dateModified": "2023-11-19T11:26:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -99,39 +99,82 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;0 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;0 minutes&nbsp;</div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Git-to-use</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-19">2023-11-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;650 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"></div><div class="post-footer" id="post-footer">
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#二分支命名规范">二、分支命名规范</a></li>
+        <li><a href="#三保护分支">三、保护分支</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="git使用规范">Git使用规范</h1>
+<p>一、commit</p>
+<pre tabindex="0"><code>&lt;type&gt;(scope): &lt;subject&gt;						Header
+&lt;BLANK LINE&gt;
+&lt;body&gt;															Body
+&lt;BALNK LINE&gt;
+&lt;footer&gt;														Footer
+</code></pre><p>commit message包含Header、Body、Footer三个部分，其中Header是必须的</p>
+<p>Header</p>
+<p>用于说明commit的类型</p>
+<ul>
+<li>feat：新功能</li>
+<li>fix：BUG修复</li>
+<li>docs：对文档或说明的改变</li>
+<li>revert：revert之前的commit</li>
+</ul>
+<h3 id="二分支命名规范">二、分支命名规范</h3>
+<p>master：长期分支，与生产环境发布的代码保持同步，每个commit就是一个发布版本</p>
+<p>develop：长期分支，用于汇总各分支代码</p>
+<p>release-*：短期分支，每个版本的测试阶段和发布阶段时使用的分支</p>
+<p>hotfix-*：短期分支，用于生产环境发生问题时，用来解决问题而拉取的分支，进行修改bug</p>
+<p>feature-*：短期分支，用于开发新功能</p>
+<p>格式为：</p>
+<ul>
+<li>release-6.5.0</li>
+<li>hotfix-6.5.0</li>
+<li>feature-6.5.0</li>
+<li>feature-somesymbol</li>
+</ul>
+<h3 id="三保护分支">三、保护分支</h3>
+<p>1、master和develop为保护分支（protect branch）只有管理员有权操作。</p>
+<p>master分支的每一个commit对应一个tag（发布的版本）</p>
+<p>2、release-*分支时在develop合并feature分支后，拉出的新分支，release分支一定是要从develop拉出的新分支，用户测试以及pre上线，期间产生的bug都在release分支上提交，在pre上测试通过后再发布生产环境，然后再将release分支合并到develop和master分支，并在master上新建tag</p>
+<p>3、hotfix分支是生产环境发生问题，从master的commit或tag中拉出的分支，经过测试和发布后分别合到develop和master分支。</p>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 0001-01-01</span>
+                <span>Updated on 2023-11-19</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/2023-11-11-nexus/" data-title=""><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/2023-11-11-nexus/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/2023-11-11-nexus/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/2023-11-11-nexus/" data-title=""><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/2023-11-11-nexus/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/2023-11-19-git-to-use/" data-title="Git-to-use" data-hashtags="git-branch,branch,dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/2023-11-19-git-to-use/" data-hashtag="git-branch"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/2023-11-19-git-to-use/" data-title="Git-to-use"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/2023-11-19-git-to-use/" data-title="Git-to-use"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/2023-11-19-git-to-use/" data-title="Git-to-use"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/git-branch/">git-branch</a>,&nbsp;<a href="/tags/branch/">branch</a>,&nbsp;<a href="/tags/dev/">dev</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/2023-11-11-npm/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
-            <a href="/posts/2023-11-11-mysql-basic/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/posts/2023-11-18-svn/" class="prev" rel="prev" title="svn"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>svn</a>
+            <a href="/posts/2023-11-20-pc/" class="next" rel="next" title="Recovery">Recovery<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

@@ -4,7 +4,31 @@
         <link>https://serialt.github.io/tags/dev/</link>
         <description>dev - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Tue, 26 Sep 2023 19:16:02 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 19 Nov 2023 11:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>Git-to-use</title>
+    <link>https://serialt.github.io/posts/2023-11-19-git-to-use/</link>
+    <pubDate>Sun, 19 Nov 2023 11:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-19-git-to-use/</guid>
+    <description><![CDATA[Git使用规范 一、commit &lt;type&gt;(scope): &lt;subject&gt; Header &lt;BLANK LINE&gt; &lt;body&gt; Body &lt;BALNK LINE&gt; &lt;footer&gt; Footer commit message包含Header、Body、Footer三个部分，其中Header是必须]]></description>
+</item>
+<item>
+    <title>svn</title>
+    <link>https://serialt.github.io/posts/2023-11-18-svn/</link>
+    <pubDate>Sat, 18 Nov 2023 11:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-18-svn/</guid>
+    <description><![CDATA[SVN 介绍： 代码版本管理工具 能记住本版修改的情况 查看所有的修改记录 恢复到任何历史版本 恢复已经删除的文件 svn与git相比的优势: 使用简单、上手快]]></description>
+</item>
+<item>
+    <title>Git</title>
+    <link>https://serialt.github.io/posts/2023-11-18-git/</link>
+    <pubDate>Sat, 18 Nov 2023 10:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-18-git/</guid>
+    <description><![CDATA[Git 一、git基本使用 1、commit [root@node01 project]# git add 1.txt [root@node01 project]# git commit -m &#34;create new 1.txt&#34; [master (root-commit) 3e8ce87] create new 1.txt 1 file changed, 0 insertions(+), 0 deletions(-) create mode 100644 1.txt 2、diff文件 [root@node01 project]# git diff 1.txt diff --git a/1.txt b/1.txt index e69de29..21d56a0 100644 --- a/1.txt]]></description>
+</item>
+<item>
     <title>Okteto</title>
     <link>https://serialt.github.io/posts/okteto/</link>
     <pubDate>Tue, 26 Sep 2023 19:16:02 &#43;0800</pubDate>
