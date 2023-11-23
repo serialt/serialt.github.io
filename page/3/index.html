@@ -90,6 +90,21 @@
     </div><main class="main">
                 <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/2023-11-11-dingbot/">dingbot</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%9F%A5/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>机器人通知</a></span></div><div class="content">钉钉机器人 一、shell脚本 1、基于关键字或者 ip 版 发送txt格式消息 info=&#39;hello&#39; logFile=&#39;/var/log/dingbot.log&#39; #发送消息 sendMsg() { token=&#39;1e18ffe069052b56f5a0f8fe9b6c058373e7df7ef4xxxxxxxxxxxxxxx&#39; result=$(curl -s &#34;https://oapi.dingtalk.com/robot/send?access_token=$token&#34; \ -H &#39;Content-Type: application/json&#39; \ -d &#34;{&#39;msgtype&#39;: &#39;text&#39;,&#39;text&#39;: {&#39;content&#39;: &#39;msg:\n$*&#39;}}&#34;) [ $(echo $result | grep &#34;errmsg.*ok&#34;) ] &amp;&amp; echo &#39;send succees!&#39; echo &#34;$(date</div><div class="post-footer">
+        <a href="/posts/2023-11-11-dingbot/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dingbot/">dingbot</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/2023-11-11-port/">port</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/linux-%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>linux 基础</a></span></div><div class="content">服务器中有关常用端口的信息在/etc/services文件中记录 [root@localhost ~]# vim /etc/services 协议 端口 说明 FTP 21 FTP服务上传和下载文件。 SSH 22 远程连接Linux弹性</div><div class="post-footer">
+        <a href="/posts/2023-11-11-port/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/port/">port</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/2023-11-11-caddy/">caddy</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/web-server/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>web server</a></span></div><div class="content">Caddy Caddy 是一个 Go 编写的 Web 服务器，类似于 Nginx，Caddy 提供了更加强大的功能，随着 v2 版本发布 Caddy 已经可以作为中小型站点 Web 服务器的另一个选择；相</div><div class="post-footer">
+        <a href="/posts/2023-11-11-caddy/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/caddy/">caddy</a>,&nbsp;<a href="/tags/go-web/">go-web</a>,&nbsp;<a href="/tags/web-server/">web-server</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/2023-11-11-flatpak/">flatpak</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/flatpak/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>flatpak</a></span></div><div class="content">flatpak 简介 Flatpak 是一种新的通用包装格式。启用 Flatpak 将使您能够轻松安装许多 Linux 应用程序。这是在 Ubuntu 和其他 Linux 发行版中使用 Flatpak 的方法。 在 Linux 中安装应用程序就像打开软件</div><div class="post-footer">
         <a href="/posts/2023-11-11-flatpak/">Read More</a><div class="post-tags">
@@ -104,21 +119,6 @@
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/dns/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DNS</a></span></div><div class="content">CoreDNS 在内网服务中，需要部署内部的 dns，用于各种服务的 dns 解析。常见的 dns server 有 bind，dnsmasq，coredns 等。coredns 出名于用于</div><div class="post-footer">
         <a href="/posts/2023-11-11-coredns/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dns/">dns</a>,&nbsp;<a href="/tags/coredns/">coredns</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-11-multipass/">multipass</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>虚拟化</a></span></div><div class="content">​ Multipass 是一个轻量虚拟机管理器，是由 Ubuntu 运营公司 Canonical 所推出的开源项目。运行环境支持 Linux、Windows、macOS。在不同的操作系统上，使用的</div><div class="post-footer">
-        <a href="/posts/2023-11-11-multipass/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/multipass/">multipass</a>,&nbsp;<a href="/tags/vm/">vm</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-11-go-basic/">Go basic</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 基础</a></span></div><div class="content">1、变量定义 var name string var isOk bool // 隐式申明 a := 100 str := &#34;serialt&#34; // 批量声明 var ( a string b int c bool d float32 ) // 变量的初始化 var name string = &#34;github&#34; var age int = 10 var name, age = &#34;github&#34;, 11 // 类型推导 var name =</div><div class="post-footer">
-        <a href="/posts/2023-11-11-go-basic/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/basic/">basic</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-11-mac/">mac</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/mac/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>mac</a></span></div><div class="content">Mac 优化 1、mac终端增加颜色，参考centos7 eval &#34;$(/opt/homebrew/bin/brew shellenv)&#34; # Setting PATH for Python 3.9 # The original version is saved in .bash_profile.pysave PATH=&#34;/Library/Frameworks/Python.framework/Versions/3.9/bin:${PATH}&#34; export PG_HOME=/opt/homebrew/Cellar/postgresql@10/10.17 export PATH export GOPROXY=https://goproxy.cn,direct export GOPATH=/Users/sugar/go export GO111MODULE=&#34;on&#34; export GOBIN=$GOPATH/bin export PATH=$PATH:$GOROOT/bin:$GOBIN:$PG_HOME/bin # 参考RHEL console export PS1=&#34;[\u@\h \W]\\$ &#34; export CLICOLOR=1</div><div class="post-footer">
-        <a href="/posts/2023-11-11-mac/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/mac/">mac</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -143,7 +143,7 @@
                     <span class="page-link" aria-hidden="true">&hellip;</span>
                 </li><li class="page-item ">
                     <span class="page-link">
-                        <a href="/page/8/">8</a>
+                        <a href="/page/9/">9</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

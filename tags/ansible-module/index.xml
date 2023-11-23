@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>ansible-module - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/ansible-module/</link>
+        <description>ansible-module - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/ansible-module/" rel="self" type="application/rss+xml" /><item>
+    <title>Python ansible module</title>
+    <link>https://serialt.github.io/posts/2023-11-22-python-ansible-module/</link>
+    <pubDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-22-python-ansible-module/</guid>
+    <description><![CDATA[Ansible Module 参考链接：https://ansible.leops.cn/dev/modules/ 1、自定义模块开发 该模块的目的是在远程主机上将远程源]]></description>
+</item>
+</channel>
+</rss>

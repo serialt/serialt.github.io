@@ -4,7 +4,31 @@
         <link>https://serialt.github.io/posts/</link>
         <description>All Posts | Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 20 Nov 2023 21:22:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Python ansible module</title>
+    <link>https://serialt.github.io/posts/2023-11-22-python-ansible-module/</link>
+    <pubDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-22-python-ansible-module/</guid>
+    <description><![CDATA[Ansible Module 参考链接：https://ansible.leops.cn/dev/modules/ 1、自定义模块开发 该模块的目的是在远程主机上将远程源]]></description>
+</item>
+<item>
+    <title>Python basic</title>
+    <link>https://serialt.github.io/posts/2023-11-22-python-basic/</link>
+    <pubDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-22-python-basic/</guid>
+    <description><![CDATA[Python 基础 一、基础语法 1、输出语句的使用 1）引号的使用 &gt;&gt;&gt; print (&#39;hello world&#39;) hello world &gt;&gt;&gt; print (&#34;hello world&#34;) hello world &gt;&gt;&gt; 2）三引号: 输出多行内容 &gt;&gt;&gt; print (&#34;&#34;&#34;abc ... cdc ... ddd ... ccc ... fff&#34;&#34;&#34;) abc cdc ddd ccc fff 注释符：]]></description>
+</item>
+<item>
+    <title>Terraform handbook</title>
+    <link>https://serialt.github.io/posts/2023-11-22-terraform-handbook/</link>
+    <pubDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-22-terraform-handbook/</guid>
+    <description><![CDATA[Terraform handbook 参考链接：https://blog.gmem.cc/terraform 一、简介 Terraform用于实现基础设施即代码（infrastr]]></description>
+</item>
+<item>
     <title>Timezone</title>
     <link>https://serialt.github.io/posts/2023-11-20-timezone/</link>
     <pubDate>Mon, 20 Nov 2023 21:22:27 &#43;0800</pubDate>
@@ -18,7 +42,7 @@
     <pubDate>Mon, 20 Nov 2023 21:20:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-11-20-pc/</guid>
-    <description><![CDATA[电脑一键恢复： Dell： F12 &ndash;&gt; Supportassist OS Recovery MSI：F3 Huawei: F10 Mac: 长按电源键直到Option出现（m系列mac）]]></description>
+    <description><![CDATA[电脑一键恢复： Dell： F12 &ndash;&gt; Supportassist OS Recovery MSI：F3 Huawei: F10 Mac: 长按电源键直到Option出现（m系列mac） ventoy 1、使用说明 ventoy下载链接： 官方：]]></description>
 </item>
 <item>
     <title>Git-to-use</title>
@@ -59,30 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-11-12-postgresql/</guid>
     <description><![CDATA[PostgreSQL 一、安装 docker 安装 # docker-compose.yaml version: &#34;3&#34; services: postgres10-5432: image: &#34;postgres:10-bullseye&#34; container_name: postgres10-5432 shm_size: &#34;1gb&#34; restart: always ports: - &#34;5432:5432&#34; volumes: - /data/postgresql:/var/lib/postgresql/data - $PWD/init.sql:/docker-entrypoint-initdb.d/init.sql environment: - POSTGRES_PASSWORD=xxxxxxxxxxx # init.sql CREATE USER db_user WITH CREATEDB ENCRYPTED PASSWORD &#39;xxxxxxxxxx&#39;; alter user db_user superuser; 二、配置 1、修改数据库时区 postgres=# show timezone; TimeZone ---------- Etc/UTC (1 row) sed -i]]></description>
-</item>
-<item>
-    <title>security-info</title>
-    <link>https://serialt.github.io/posts/2023-11-12-security-info/</link>
-    <pubDate>Sun, 12 Nov 2023 10:29:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-12-security-info/</guid>
-    <description><![CDATA[漏洞信息 云服务商安全服务公告 云服务商 链接 cve官网 https://cve.mitre.org/ 阿里云 https://help.aliyun.com/noticelist/9213612.html?spm=a2c4g.789004748.n2.3.cddb4c07NBt9Rl 华为云 https://www.huaweicloud.com/notice.securecenter.html 腾讯云 https://cloud.tencent.com/announce?categorys=21&page=1 阿里云漏洞数据库 https://avd.aliyun.com/ 国家信息漏洞库 http://www.cnnvd.org.cn/ 常用软件官方安全公告链接 名称 链]]></description>
-</item>
-<item>
-    <title>sqlite3</title>
-    <link>https://serialt.github.io/posts/2023-11-12-sqlite3/</link>
-    <pubDate>Sun, 12 Nov 2023 10:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-12-sqlite3/</guid>
-    <description><![CDATA[SQLite SQLite是一种开源，零配置，独立的，独立的，事务关系数据库引擎，旨在嵌入到应用程序中。 一、安装sqlite SQLite以其零配置而闻名]]></description>
-</item>
-<item>
-    <title>dingbot</title>
-    <link>https://serialt.github.io/posts/2023-11-11-dingbot/</link>
-    <pubDate>Sat, 11 Nov 2023 11:28:14 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-11-dingbot/</guid>
-    <description><![CDATA[钉钉机器人 一、shell脚本 1、基于关键字或者 ip 版 发送txt格式消息 info=&#39;hello&#39; logFile=&#39;/var/log/dingbot.log&#39; #发送消息 sendMsg() { token=&#39;1e18ffe069052b56f5a0f8fe9b6c058373e7df7ef4xxxxxxxxxxxxxxx&#39; result=$(curl -s &#34;https://oapi.dingtalk.com/robot/send?access_token=$token&#34; \ -H &#39;Content-Type: application/json&#39; \ -d &#34;{&#39;msgtype&#39;: &#39;text&#39;,&#39;text&#39;: {&#39;content&#39;: &#39;msg:\n$*&#39;}}&#34;) [ $(echo $result | grep &#34;errmsg.*ok&#34;) ] &amp;&amp; echo &#39;send succees!&#39; echo &#34;$(date]]></description>
 </item>
 </channel>
 </rss>

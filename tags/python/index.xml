@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>python - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/python/</link>
+        <description>python - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
+    <title>Python basic</title>
+    <link>https://serialt.github.io/posts/2023-11-22-python-basic/</link>
+    <pubDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-22-python-basic/</guid>
+    <description><![CDATA[Python 基础 一、基础语法 1、输出语句的使用 1）引号的使用 &gt;&gt;&gt; print (&#39;hello world&#39;) hello world &gt;&gt;&gt; print (&#34;hello world&#34;) hello world &gt;&gt;&gt; 2）三引号: 输出多行内容 &gt;&gt;&gt; print (&#34;&#34;&#34;abc ... cdc ... ddd ... ccc ... fff&#34;&#34;&#34;) abc cdc ddd ccc fff 注释符：]]></description>
+</item>
+</channel>
+</rss>

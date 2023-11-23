@@ -4,7 +4,55 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 20 Nov 2023 21:22:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>ansible-module</title>
+    <link>https://serialt.github.io/tags/ansible-module/</link>
+    <pubDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/ansible-module/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>python</title>
+    <link>https://serialt.github.io/tags/python/</link>
+    <pubDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/python/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>python-ansible</title>
+    <link>https://serialt.github.io/tags/python-ansible/</link>
+    <pubDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/python-ansible/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>python-basic</title>
+    <link>https://serialt.github.io/tags/python-basic/</link>
+    <pubDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/python-basic/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>terraform</title>
+    <link>https://serialt.github.io/tags/terraform/</link>
+    <pubDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/terraform/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>tf</title>
+    <link>https://serialt.github.io/tags/tf/</link>
+    <pubDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/tf/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>timezone</title>
     <link>https://serialt.github.io/tags/timezone/</link>
     <pubDate>Mon, 20 Nov 2023 21:22:27 &#43;0800</pubDate>
@@ -34,54 +82,6 @@
     <pubDate>Mon, 20 Nov 2023 21:20:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/recovery/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>branch</title>
-    <link>https://serialt.github.io/tags/branch/</link>
-    <pubDate>Sun, 19 Nov 2023 11:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/branch/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>dev</title>
-    <link>https://serialt.github.io/tags/dev/</link>
-    <pubDate>Sun, 19 Nov 2023 11:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/dev/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>git-branch</title>
-    <link>https://serialt.github.io/tags/git-branch/</link>
-    <pubDate>Sun, 19 Nov 2023 11:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/git-branch/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>svn</title>
-    <link>https://serialt.github.io/tags/svn/</link>
-    <pubDate>Sat, 18 Nov 2023 11:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/svn/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>vcs</title>
-    <link>https://serialt.github.io/tags/vcs/</link>
-    <pubDate>Sat, 18 Nov 2023 11:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/vcs/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>git</title>
-    <link>https://serialt.github.io/tags/git/</link>
-    <pubDate>Sat, 18 Nov 2023 10:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/git/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

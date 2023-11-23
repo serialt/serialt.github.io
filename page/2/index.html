@@ -90,6 +90,21 @@
     </div><main class="main">
                 <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/2023-11-18-svn/">svn</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-18">2023-11-18</time></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div><div class="content">SVN 介绍： 代码版本管理工具 能记住本版修改的情况 查看所有的修改记录 恢复到任何历史版本 恢复已经删除的文件 svn与git相比的优势: 使用简单、上手快</div><div class="post-footer">
+        <a href="/posts/2023-11-18-svn/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/svn/">svn</a>,&nbsp;<a href="/tags/vcs/">vcs</a>,&nbsp;<a href="/tags/dev/">dev</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/2023-11-18-git/">Git</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-18">2023-11-18</time></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div><div class="content">Git 一、git基本使用 1、commit [root@node01 project]# git add 1.txt [root@node01 project]# git commit -m &#34;create new 1.txt&#34; [master (root-commit) 3e8ce87] create new 1.txt 1 file changed, 0 insertions(+), 0 deletions(-) create mode 100644 1.txt 2、diff文件 [root@node01 project]# git diff 1.txt diff --git a/1.txt b/1.txt index e69de29..21d56a0 100644 --- a/1.txt</div><div class="post-footer">
+        <a href="/posts/2023-11-18-git/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/git/">git</a>,&nbsp;<a href="/tags/vcs/">vcs</a>,&nbsp;<a href="/tags/dev/">dev</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/2023-11-18-nexus/">Nexus</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-18">2023-11-18</time></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div><div class="content">Nexus 参考： https://juejin.cn/post/6844904016762109959 https://cloud.tencent.com/developer/article/1764866 官网：https://help.sonatype.com/repomanager3/ 介绍 生产环境中，一般不会允许所有服务器都能访</div><div class="post-footer">
+        <a href="/posts/2023-11-18-nexus/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/nexus/">nexus</a>,&nbsp;<a href="/tags/repo/">repo</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/2023-11-12-postgresql/">postgresql</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-12">2023-11-12</time></span>&nbsp;<span class="post-category">included in <a href="/categories/database/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Database</a></span></div><div class="content">PostgreSQL 一、安装 docker 安装 # docker-compose.yaml version: &#34;3&#34; services: postgres10-5432: image: &#34;postgres:10-bullseye&#34; container_name: postgres10-5432 shm_size: &#34;1gb&#34; restart: always ports: - &#34;5432:5432&#34; volumes: - /data/postgresql:/var/lib/postgresql/data - $PWD/init.sql:/docker-entrypoint-initdb.d/init.sql environment: - POSTGRES_PASSWORD=xxxxxxxxxxx # init.sql CREATE USER db_user WITH CREATEDB ENCRYPTED PASSWORD &#39;xxxxxxxxxx&#39;; alter user db_user superuser; 二、配置 1、修改数据库时区 postgres=# show timezone; TimeZone ---------- Etc/UTC (1 row) sed -i</div><div class="post-footer">
         <a href="/posts/2023-11-12-postgresql/">Read More</a><div class="post-tags">
@@ -104,21 +119,6 @@
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-12">2023-11-12</time></span>&nbsp;<span class="post-category">included in <a href="/categories/database/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Database</a></span></div><div class="content">SQLite SQLite是一种开源，零配置，独立的，独立的，事务关系数据库引擎，旨在嵌入到应用程序中。 一、安装sqlite SQLite以其零配置而闻名</div><div class="post-footer">
         <a href="/posts/2023-11-12-sqlite3/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/sqlite/">sqlite</a>,&nbsp;<a href="/tags/sqlite3/">sqlite3</a>,&nbsp;<a href="/tags/db/">db</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-11-dingbot/">dingbot</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%9F%A5/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>机器人通知</a></span></div><div class="content">钉钉机器人 一、shell脚本 1、基于关键字或者 ip 版 发送txt格式消息 info=&#39;hello&#39; logFile=&#39;/var/log/dingbot.log&#39; #发送消息 sendMsg() { token=&#39;1e18ffe069052b56f5a0f8fe9b6c058373e7df7ef4xxxxxxxxxxxxxxx&#39; result=$(curl -s &#34;https://oapi.dingtalk.com/robot/send?access_token=$token&#34; \ -H &#39;Content-Type: application/json&#39; \ -d &#34;{&#39;msgtype&#39;: &#39;text&#39;,&#39;text&#39;: {&#39;content&#39;: &#39;msg:\n$*&#39;}}&#34;) [ $(echo $result | grep &#34;errmsg.*ok&#34;) ] &amp;&amp; echo &#39;send succees!&#39; echo &#34;$(date</div><div class="post-footer">
-        <a href="/posts/2023-11-11-dingbot/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dingbot/">dingbot</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-11-port/">port</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/linux-%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>linux 基础</a></span></div><div class="content">服务器中有关常用端口的信息在/etc/services文件中记录 [root@localhost ~]# vim /etc/services 协议 端口 说明 FTP 21 FTP服务上传和下载文件。 SSH 22 远程连接Linux弹性</div><div class="post-footer">
-        <a href="/posts/2023-11-11-port/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/port/">port</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-11-caddy/">caddy</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/web-server/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>web server</a></span></div><div class="content">Caddy Caddy 是一个 Go 编写的 Web 服务器，类似于 Nginx，Caddy 提供了更加强大的功能，随着 v2 版本发布 Caddy 已经可以作为中小型站点 Web 服务器的另一个选择；相</div><div class="post-footer">
-        <a href="/posts/2023-11-11-caddy/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/caddy/">caddy</a>,&nbsp;<a href="/tags/go-web/">go-web</a>,&nbsp;<a href="/tags/web-server/">web-server</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -139,7 +139,7 @@
                     <span class="page-link" aria-hidden="true">&hellip;</span>
                 </li><li class="page-item ">
                     <span class="page-link">
-                        <a href="/page/8/">8</a>
+                        <a href="/page/9/">9</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">
