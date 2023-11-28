@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Shell handbook - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Shell handbook" />
+<meta property="og:description" content="Shell handbok 一、特殊符号 参考链接: https://blog.csdn.net/jiezi2016/article/details/79649382 https://blog.csdn.net/wangzhaotongalex/article/details/73321766 介绍下Shell中的${}、##和%%使用范例，本文给出了不同情况下得到的结果。 假设定义了一个变量为： 代码如下" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2023-11-24-shell-handbook/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-24T20:22:27+08:00" />
+<meta property="article:modified_time" content="2023-11-24T20:22:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Shell handbook"/>
+<meta name="twitter:description" content="Shell handbok 一、特殊符号 参考链接: https://blog.csdn.net/jiezi2016/article/details/79649382 https://blog.csdn.net/wangzhaotongalex/article/details/73321766 介绍下Shell中的${}、##和%%使用范例，本文给出了不同情况下得到的结果。 假设定义了一个变量为： 代码如下"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-24-shell-handbook/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-24-switch-case/" /><link rel="next" href="https://serialt.github.io/posts/2023-11-28-gorm-gen/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Shell handbook",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2023-11-24-shell-handbook\/"
+        },"genre": "posts","keywords": "shell, shell-handbook","wordcount":  2495 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2023-11-24-shell-handbook\/","datePublished": "2023-11-24T20:22:27+08:00","dateModified": "2023-11-24T20:22:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Shell handbook</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-24">2023-11-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2495 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一特殊符号">一、特殊符号</a></li>
+    <li><a href="#二重定向与变量">二、重定向与变量</a></li>
+    <li><a href="#三判断">三、判断</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#四高级语法">四、高级语法</a>
+      <ul>
+        <li></li>
+        <li><a href="#sed">sed</a></li>
+        <li><a href="#awk">awk</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="shell-handbok">Shell handbok</h1>
+<h2 id="一特殊符号">一、特殊符号</h2>
+<p>参考链接:</p>
+<ul>
+<li><a href="https://blog.csdn.net/jiezi2016/article/details/79649382" target="_blank" rel="noopener noreffer ">https://blog.csdn.net/jiezi2016/article/details/79649382</a></li>
+<li><a href="https://blog.csdn.net/wangzhaotongalex/article/details/73321766" target="_blank" rel="noopener noreffer ">https://blog.csdn.net/wangzhaotongalex/article/details/73321766</a></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">介绍下Shell中的<span class="si">${}</span>、##和%%使用范例，本文给出了不同情况下得到的结果。
+</span></span><span class="line"><span class="cl">假设定义了一个变量为：
+</span></span><span class="line"><span class="cl">代码如下:
+</span></span><span class="line"><span class="cl"><span class="nv">file</span><span class="o">=</span>/dir1/dir2/dir3/my.file.txt
+</span></span><span class="line"><span class="cl">可以用<span class="si">${</span><span class="p"> </span><span class="si">}</span>分别替换得到不同的值：
+</span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nv">file</span><span class="p">#*/</span><span class="si">}</span>：删掉第一个 / 及其左边的字符串：dir1/dir2/dir3/my.file.txt
+</span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nv">file</span><span class="p">##*/</span><span class="si">}</span>：删掉最后一个 /  及其左边的字符串：my.file.txt
+</span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nv">file</span><span class="p">#*.</span><span class="si">}</span>：删掉第一个 .  及其左边的字符串：file.txt
+</span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nv">file</span><span class="p">##*.</span><span class="si">}</span>：删掉最后一个 .  及其左边的字符串：txt
+</span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nv">file</span><span class="p">%/*</span><span class="si">}</span>：删掉最后一个  /  及其右边的字符串：/dir1/dir2/dir3
+</span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nv">file</span><span class="p">%%/*</span><span class="si">}</span>：删掉第一个 /  及其右边的字符串：<span class="o">(</span>空值<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nv">file</span><span class="p">%.*</span><span class="si">}</span>：删掉最后一个  .  及其右边的字符串：/dir1/dir2/dir3/my.file
+</span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nv">file</span><span class="p">%%.*</span><span class="si">}</span>：删掉第一个  .   及其右边的字符串：/dir1/dir2/dir3/my
+</span></span><span class="line"><span class="cl">记忆的方法为：
+</span></span><span class="line"><span class="cl"><span class="c1"># 是 去掉左边（键盘上#在 $ 的左边）</span>
+</span></span><span class="line"><span class="cl">%是去掉右边（键盘上% 在$ 的右边）
+</span></span><span class="line"><span class="cl">单一符号是最小匹配；两个符号是最大匹配
+</span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nv">file</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">5</span><span class="si">}</span>：提取最左边的 <span class="m">5</span> 个字节：/dir1
+</span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nv">file</span><span class="p">:</span><span class="nv">5</span><span class="p">:</span><span class="nv">5</span><span class="si">}</span>：提取第 <span class="m">5</span> 个字节右边的连续5个字节：/dir2
+</span></span><span class="line"><span class="cl">也可以对变量值里的字符串作替换：
+</span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nv">file</span><span class="p">/dir/path</span><span class="si">}</span>：将第一个dir 替换为path：/path1/dir2/dir3/my.file.txt
+</span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nv">file</span><span class="p">//dir/path</span><span class="si">}</span>：将全部dir 替换为 path：/path1/path2/path3/my.file.txt
+</span></span></code></pre></div><p><code>$*</code>与<code>$@</code></p>
+<p>$*和$@都表示传递给函数或脚本的所有参数，不被双引号“”包含时，都以$1 $2 …$n的形式输出所有参数。</p>
+<p>当它们被双引号“”包含时，“$*”会将所有的参数作为一个整体，以“$1 $2 …$n”的形式输出所有参数；“$@”会将各个参数分开，以“$1” “$2”…”$n”的形式输出所有参数。</p>
+<h2 id="二重定向与变量">二、重定向与变量</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat &gt;&gt;test.txt <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">1、安装kvm
+</span></span></span><span class="line"><span class="cl"><span class="s">2、卸载kvm
+</span></span></span><span class="line"><span class="cl"><span class="s">3、安装python
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">$0</span>	shell脚本的名字
+</span></span><span class="line"><span class="cl"><span class="nv">$n</span>	第n个参数
+</span></span><span class="line"><span class="cl"><span class="nv">$#</span>  获取参数的个数
+</span></span><span class="line"><span class="cl"><span class="nv">$*</span>	所有参数
+</span></span><span class="line"><span class="cl"><span class="nv">$@</span>	所有参数
+</span></span><span class="line"><span class="cl">	两者区别：
+</span></span><span class="line"><span class="cl">	<span class="s2">&#34;</span><span class="nv">$*</span><span class="s2">&#34;</span>会把所有位置参数当成一个整体（或者说当成一个单词），如果没有位置参数，则<span class="s2">&#34;</span><span class="nv">$*</span><span class="s2">&#34;</span>为空，如果有两个位置参数并且IFS为空格时，<span class="s2">&#34;</span><span class="nv">$*</span><span class="s2">&#34;</span>相当于<span class="s2">&#34;</span><span class="nv">$1</span><span class="s2"> </span><span class="nv">$2</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span>  会把所有位置参数当成一个单独的字段，如果没有位置参数（<span class="nv">$#</span>为0），则<span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span>展开为空（不是空字符串，而是空列表），如果存在一个位置参数，则<span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span>相当于<span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>，如果有两个参数，则<span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span>相当于<span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>  <span class="s2">&#34;</span><span class="nv">$2</span><span class="s2">&#34;</span>等等
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$?</span>	用于记录上一条命令的执行状态 
+</span></span><span class="line"><span class="cl">		0---255
+</span></span><span class="line"><span class="cl">		0：执行成功 
+</span></span><span class="line"><span class="cl"><span class="nv">$$</span>	获取当前执行Shell脚本的进程号（PID）
+</span></span><span class="line"><span class="cl"><span class="nv">$!</span>	获取上一个在后台工作的进程的进程号
+</span></span><span class="line"><span class="cl"><span class="nv">$_</span>	获取在此之前执行的命令或脚本的最后一个参数
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">特殊扩展变量
+</span></span><span class="line"><span class="cl">可以man bash 命令，然后搜索<span class="s2">&#34;Parameter Expansion&#34;</span>来查找相关的内容帮助
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nv">parameter</span><span class="k">:-</span><span class="nv">word</span><span class="si">}</span>       如果parameter的变量值为空或没赋值，则返回word字符串并代替变量的值（变量没定义，返回备用的值，防止变量为空或没定义报错）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nv">parameter</span><span class="p">:=word</span><span class="si">}</span>      如果parameter的变量值为空或没赋值，。。。同上，（变量没定义为防止出错，找的备胎变量）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nv">parameter</span><span class="p">:?word</span><span class="si">}</span>      如果parameter的变量值为空或者没赋值，word字符串就作为标准错误输出，否则出书变量的值（捕捉由于变量未定义导致的错误，并退出）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="si">${</span><span class="nv">parameter</span><span class="p">:+word</span><span class="si">}</span>      若果parameter的变量值为空或者未赋值，则什么都不做，否则word字符串将代替变量的值。
+</span></span></code></pre></div><h2 id="三判断">三、判断</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">条件判断
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-z 判断字符串是否为空串
+</span></span><span class="line"><span class="cl">-n	字符段长度是否非零的 如果结果为真值 返回值为0 如果结果为假值
+</span></span><span class="line"><span class="cl">-eq	等于
+</span></span><span class="line"><span class="cl">-gt	大于
+</span></span><span class="line"><span class="cl">-lt 小于
+</span></span><span class="line"><span class="cl">-ge	大于等于
+</span></span><span class="line"><span class="cl">-le	小于等于
+</span></span><span class="line"><span class="cl">-ne 不等于
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">根据文件类型判断
+</span></span><span class="line"><span class="cl">-d	文件存在且必须是目录
+</span></span><span class="line"><span class="cl">-e	文件存在，不判断文件类型
+</span></span><span class="line"><span class="cl">-f	文件存在且是标准普通文件
+</span></span><span class="line"><span class="cl">-h	文件存在且是软连接，同 -L
+</span></span><span class="line"><span class="cl">-r	文件存在且可读
+</span></span><span class="line"><span class="cl">-w	文件存在且可写
+</span></span><span class="line"><span class="cl">-x	文件存在且可执行
+</span></span><span class="line"><span class="cl">-s 文件存在且至少有一个字符
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">双目表达式
+</span></span><span class="line"><span class="cl">单目表达式， 所有的单目表达式都可以使用!表示取反   <span class="o">[</span> ! -f file_name <span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if标准写法
+</span></span><span class="line"><span class="cl"><span class="k">if</span> 条件<span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">   操作语句
+</span></span><span class="line"><span class="cl">   操作语句
+</span></span><span class="line"><span class="cl">   ....
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl">   操作语句 
+</span></span><span class="line"><span class="cl">   操作语句 
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span> file1 -ef file2 <span class="o">]</span>	两个文件有相同的设备编号和inode编号 <span class="o">(</span>判断硬链接<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="s1">&#39;a&#39;</span> !<span class="o">=</span> <span class="s1">&#39;b&#39;</span><span class="o">]</span><span class="p">;</span><span class="k">then</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">echo</span> <span class="s1">&#39;a&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">以上可以简写为: <span class="o">[</span> <span class="s1">&#39;a&#39;</span> !<span class="o">=</span> <span class="s1">&#39;b&#39;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">&#39;a&#39;</span>
+</span></span></code></pre></div><h4 id="case-语法">case 语法</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">read</span> -p <span class="s2">&#34;Enter string: &#34;</span> str_01
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">case</span> <span class="nv">$str_01</span> in
+</span></span><span class="line"><span class="cl">   linux<span class="p">|</span>Linux<span class="o">)</span>
+</span></span><span class="line"><span class="cl">     <span class="nb">echo</span> <span class="s2">&#34;CentOS&#34;</span>
+</span></span><span class="line"><span class="cl">     <span class="p">;;</span>
+</span></span><span class="line"><span class="cl">   windows<span class="p">|</span>Windows<span class="o">)</span>
+</span></span><span class="line"><span class="cl">     <span class="nb">echo</span> <span class="s2">&#34;Microsoft&#34;</span>
+</span></span><span class="line"><span class="cl">     <span class="p">;;</span>
+</span></span><span class="line"><span class="cl">   *<span class="o">)</span>
+</span></span><span class="line"><span class="cl">     <span class="nb">echo</span> <span class="s2">&#34;Other&#34;</span>
+</span></span><span class="line"><span class="cl">     <span class="p">;;</span>
+</span></span><span class="line"><span class="cl"><span class="k">esac</span>
+</span></span></code></pre></div><h4 id="for-循环">for 循环</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 普通循环</span>
+</span></span><span class="line"><span class="cl"><span class="nv">sum</span><span class="o">=</span><span class="m">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> i in <span class="sb">`</span>seq 100<span class="sb">`</span><span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">let</span> <span class="nv">sum</span><span class="o">=</span><span class="nv">$sum</span>+<span class="nv">$i</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$sum</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 类C写法</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="o">((</span><span class="nv">i</span><span class="o">=</span>1<span class="p">;</span>i&lt;8<span class="p">;</span>i++<span class="o">))</span><span class="p">;</span><span class="k">do</span>
+</span></span><span class="line"><span class="cl">    cmd1
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></div><h4 id="while循环">while循环</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="k">while</span> 条件<span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">    操作语句 
+</span></span><span class="line"><span class="cl">    操作语句 
+</span></span><span class="line"><span class="cl">    存在一条可以改变条件真假的语句
+</span></span><span class="line"><span class="cl"><span class="k">done</span> 
+</span></span></code></pre></div><h4 id="until循环">until循环</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">当条件为假时才循环
+</span></span><span class="line"><span class="cl"><span class="k">until</span> 条件测试 <span class="p">;</span><span class="k">do</span>
+</span></span><span class="line"><span class="cl">  cmd1
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></div><h4 id="数组与循环">数组与循环</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ca.crt        /etc/openvpn/easy-rsa/pki</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># server.crt    /etc/openvpn/easy-rsa/pki/issued</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># user.crt      /etc/openvpn/easy-rsa/pki/issued</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># user.key      /etc/openvpn/easy-rsa/pki/private</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ca.key        /etc/openvpn/easy-rsa/pki/private</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ta.key        /etc/openvpn/easy-rsa</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 定义用户</span>
+</span></span><span class="line"><span class="cl"><span class="nv">accounts</span><span class="o">=(</span>
+</span></span><span class="line"><span class="cl">client2,用户2
+</span></span><span class="line"><span class="cl">client3,用户3
+</span></span><span class="line"><span class="cl">client4,用户4
+</span></span><span class="line"><span class="cl"><span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">OPENVPN_DIR</span><span class="o">=</span><span class="s2">&#34;/etc/openvpn&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">EASY_RSA_DIR</span><span class="o">=</span><span class="s2">&#34;/etc/openvpn/easy-rsa&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 分配好的证书</span>
+</span></span><span class="line"><span class="cl"><span class="nv">OVPN_DIR</span><span class="o">=</span><span class="s2">&#34;/tmp/openvpn&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建key</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># $1 用户证书名  </span>
+</span></span><span class="line"><span class="cl">create_key<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="o">[[</span> ! -f <span class="si">${</span><span class="nv">EASY_RSA_DIR</span><span class="si">}</span>/easyrsa <span class="o">]]</span>  <span class="o">&amp;&amp;</span> <span class="nb">exit</span> <span class="m">55</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">cd</span> <span class="si">${</span><span class="nv">EASY_RSA_DIR</span><span class="si">}</span>/ <span class="o">&amp;&amp;</span> ./easyrsa build-client-full <span class="nv">$1</span> nopass
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># $1 用户名</span>
+</span></span><span class="line"><span class="cl">create_ovpn<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="o">[[</span> ! -f <span class="si">${</span><span class="nv">OVPN_DIR</span><span class="si">}</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> mkdir -p <span class="si">${</span><span class="nv">OVPN_DIR</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">  cat &gt; <span class="si">${</span><span class="nv">OVPN_DIR</span><span class="si">}</span>/<span class="nv">$1</span>.ovpn <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">client
+</span></span></span><span class="line"><span class="cl"><span class="s">dev tun
+</span></span></span><span class="line"><span class="cl"><span class="s">proto tcp
+</span></span></span><span class="line"><span class="cl"><span class="s">remote vpn.local.com 50000
+</span></span></span><span class="line"><span class="cl"><span class="s">resolv-retry infinite
+</span></span></span><span class="line"><span class="cl"><span class="s">nobind
+</span></span></span><span class="line"><span class="cl"><span class="s">persist-key
+</span></span></span><span class="line"><span class="cl"><span class="s">persist-tun
+</span></span></span><span class="line"><span class="cl"><span class="s">remote-cert-tls server
+</span></span></span><span class="line"><span class="cl"><span class="s">cipher AES-256-CBC
+</span></span></span><span class="line"><span class="cl"><span class="s">comp-lzo
+</span></span></span><span class="line"><span class="cl"><span class="s">verb 3
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># $1 用户名</span>
+</span></span><span class="line"><span class="cl">insert_file<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">ca</span><span class="o">=</span><span class="sb">`</span>cat <span class="si">${</span><span class="nv">EASY_RSA_DIR</span><span class="si">}</span>/pki/ca.crt<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">user_crt</span><span class="o">=</span><span class="sb">`</span>cat <span class="si">${</span><span class="nv">EASY_RSA_DIR</span><span class="si">}</span>/pki/issued/<span class="nv">$1</span>.crt<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">user_key</span><span class="o">=</span><span class="sb">`</span>cat <span class="si">${</span><span class="nv">EASY_RSA_DIR</span><span class="si">}</span>/pki/private/<span class="nv">$1</span>.key<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">ta</span><span class="o">=</span><span class="sb">`</span>cat <span class="si">${</span><span class="nv">EASY_RSA_DIR</span><span class="si">}</span>/ta.key<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cat &gt;&gt; <span class="si">${</span><span class="nv">OVPN_DIR</span><span class="si">}</span>/<span class="nv">$1</span>.ovpn <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;ca&gt; 
+</span></span></span><span class="line"><span class="cl"><span class="s">${ca}
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;/ca&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;cert&gt; 
+</span></span></span><span class="line"><span class="cl"><span class="s">${user_crt}
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;/cert&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;key&gt; 
+</span></span></span><span class="line"><span class="cl"><span class="s">${user_key}
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;/key&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">key-direction 1 
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;tls-auth&gt; 
+</span></span></span><span class="line"><span class="cl"><span class="s">${ta}
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;/tls-auth&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## main</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> aobj in <span class="si">${</span><span class="nv">accounts</span><span class="p">[@]</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">arr</span><span class="o">=(</span><span class="si">${</span><span class="nv">aobj</span><span class="p">//,/ </span><span class="si">}</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">actName</span><span class="o">=</span><span class="si">${</span><span class="nv">arr</span><span class="p">[0]</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">chineseName</span><span class="o">=</span><span class="si">${</span><span class="nv">arr</span><span class="p">[1]</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  create_ovpn <span class="si">${</span><span class="nv">actName</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">  create_key <span class="si">${</span><span class="nv">actName</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">  insert_file <span class="si">${</span><span class="nv">actName</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></div><h2 id="四高级语法">四、高级语法</h2>
+<h4 id="可选参数">可选参数</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="k">while</span> <span class="nb">getopts</span> <span class="s2">&#34;🅰️b:c:&#34;</span> opt
+</span></span><span class="line"><span class="cl"><span class="k">do</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="nv">$opt</span> in
+</span></span><span class="line"><span class="cl">        a<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> <span class="s2">&#34;参数a的值</span><span class="nv">$OPTARG</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">;;</span>
+</span></span><span class="line"><span class="cl">        b<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> <span class="s2">&#34;参数b的值</span><span class="nv">$OPTARG</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">;;</span>
+</span></span><span class="line"><span class="cl">        c<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> <span class="s2">&#34;参数c的值</span><span class="nv">$OPTARG</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">;;</span>
+</span></span><span class="line"><span class="cl">        ?<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> <span class="s2">&#34;未知参数&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">exit</span> 1<span class="p">;;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">esac</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></div><h3 id="sed">sed</h3>
+<pre tabindex="0"><code>d  删除符合条件的行
+  # sed &#39;1,2d&#39; /etc/inittab 
+  删除文件中包含oot的行
+  # sed &#39;/oot/d&#39; /etc/fstab 
+  删除第1行及其后2行
+  # sed &#39;1,+2d&#39; /etc/fstab 
+  删除第1行
+  # sed &#39;1d&#39; /etc/fstab 
+  删除以/开头的行
+  # sed &#39;/^\//d&#39; /etc/fstab 
+  
+a \string	在符合条件的行后追加新行，string为追加的内容
+  在以/开头的行后面追加# hello world 
+  # sed &#39;/^\//a \# hello world&#39; /etc/fstab 
+  
+  在以/开头的行后面追加两行内容，分别为# hello worl  # hello linux 
+  # sed &#39;/^\//a \# hello world\n# hello linux&#39; /etc/fstab 
+	
+i \string	在符合条件的行前添加新行，string为追加的内容
+   在文件第1行添加# hello world 
+   # sed &#39;1i \# hello world&#39; /etc/fstab 
+
+c \string 	替换指定行的内容
+   将文件中最后一行内容替换为End Of File
+   # sed &#39;$c \End Of File&#39; /1.txt 
+   
+   # sed &#39;7c \SELINUX=disabled&#39; /etc/sysconfig/selinux 
+</code></pre><h3 id="awk">awk</h3>
+<pre tabindex="0"><code># awk -F: &#39;/^r/{print $1}&#39; /etc/passwd
+</code></pre></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-11-24</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/2023-11-24-shell-handbook/" data-title="Shell handbook" data-hashtags="shell,shell-handbook"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/2023-11-24-shell-handbook/" data-hashtag="shell"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/2023-11-24-shell-handbook/" data-title="Shell handbook"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/2023-11-24-shell-handbook/" data-title="Shell handbook"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/2023-11-24-shell-handbook/" data-title="Shell handbook"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/shell/">shell</a>,&nbsp;<a href="/tags/shell-handbook/">shell-handbook</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023-11-24-switch-case/" class="prev" rel="prev" title="switch-case handbook"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>switch-case handbook</a>
+            <a href="/posts/2023-11-28-gorm-gen/" class="next" rel="next" title="Gorm gen">Gorm gen<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2023-11-12-postgresql\/"
-        },"genre": "posts","keywords": "pg, postgresql, db","wordcount":  2409 ,
+        },"genre": "posts","keywords": "pg, postgresql, db","wordcount":  2551 ,
         "url": "https:\/\/serialt.github.io\/posts\/2023-11-12-postgresql\/","datePublished": "2023-11-12T10:30:27+08:00","dateModified": "2023-11-12T10:30:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,8 +101,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">postgresql</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/database/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Database</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-12">2023-11-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2409 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-12">2023-11-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2551 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -206,6 +206,10 @@ postgres=# show timezone;
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">all_tables</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">total_size</span><span class="w"> </span><span class="k">DESC</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pretty_sizes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 修改用户密码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">ALTER</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">password</span><span class="w"> </span><span class="s1">&#39;hello_world&#39;</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></div><p>schema 管理</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 创建schema
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">create</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="n">test</span><span class="p">;</span><span class="w">
@@ -220,8 +224,14 @@ postgres=# show timezone;
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">alter</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">rename</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">testa</span><span class="p">;</span><span class="w"> 
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">create</span><span class="w"> </span><span class="k">schema</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">authorization</span><span class="w"> </span><span class="n">highgo</span><span class="p">;;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 切换schema
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">set</span><span class="w"> </span><span class="n">search_path</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">test_schema</span><span class="w">
 </span></span></span></code></pre></div><p>修改数据库名</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 将数据库的名称由database2改成database1
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 修改数据库名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">alter</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="n">src_dbname</span><span class="w"> </span><span class="k">rename</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">dst_dbname</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 将数据库的名称由database2改成database1
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">UPDATE</span><span class="w"> </span><span class="n">pg_database</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">datname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;database1&#39;</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">datname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;database2&#39;</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></div><p>慢查询配置</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># postgresql.conf</span>
@@ -317,6 +327,7 @@ postgres=# show timezone;
 </span></span><span class="line"><span class="cl"><span class="nv">max_connections</span> <span class="o">=</span> <span class="m">100</span>    <span class="c1">#最大连接数，从库的max_connections必须要大于主库的</span>
 </span></span></code></pre></div><p>修改完后重启服务</p>
 <h3 id="2从节点上操作">2、从节点上操作</h3>
+<p>参考链接：https://blog.51cto.com/u_13482808/6875114</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pg_basebackup --help 
 </span></span><span class="line"><span class="cl">用法：
 </span></span><span class="line"><span class="cl">  pg_basebackup <span class="o">[</span>选项<span class="o">]</span> ...
@@ -355,11 +366,17 @@ postgres=# show timezone;
 </span></span><span class="line"><span class="cl">  -w, --no-password 从不提示输入密码
 </span></span></code></pre></div><p>1）备份数据</p>
 <p>使用pg_basebackup基础备份工具指定备份目录。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">pg_basebackup -D /var/lib/pgsql/11/data -h &lt;主节点IP&gt; -p <span class="m">5432</span> -U replica -X stream -P
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">#保持pg data目录格式</span>
+</span></span><span class="line"><span class="cl">pg_basebackup -h 192.168.1.1 -p <span class="m">5432</span> -U replica -D /data/test -cfast -Xs -Pv
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">pg_basebackup -h 192.168.10.183 -p <span class="m">5432</span> -U replica -D /data/postgresql --checkpoint<span class="o">=</span>fast -X stream -P -R -F t
+</span></span><span class="line"><span class="cl"><span class="c1"># 自动创建recovery.conf </span>
+</span></span><span class="line"><span class="cl">pg_basebackup -h 192.168.1.1 -p <span class="m">5432</span> -U replica -D /data/test -cfast -Xs -Pv -R
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># -F t 压缩传输</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 打包成tar文件</span>
+</span></span><span class="line"><span class="cl">pg_basebackup -h 192.168.1.1 -p <span class="m">5432</span> -U replica -D /data/test -cfast -Xs -Pv -Ft
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 打包成tar.gz文件</span>
+</span></span><span class="line"><span class="cl">pg_basebackup -h 192.168.1.1 -p <span class="m">5432</span> -U replica -D /data/test -cfast -Xs -Pv -Ft -z 
 </span></span></code></pre></div><p>新建并修改recovery.conf配置文件。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">vim /var/lib/pgsql/11/data/recovery.conf
 </span></span><span class="line"><span class="cl">
