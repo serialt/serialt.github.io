@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>switch - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/switch/</link>
+        <description>switch - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Fri, 24 Nov 2023 20:22:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/switch/" rel="self" type="application/rss+xml" /><item>
+    <title>switch-case handbook</title>
+    <link>https://serialt.github.io/posts/2023-11-24-switch-case/</link>
+    <pubDate>Fri, 24 Nov 2023 20:22:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-24-switch-case/</guid>
+    <description><![CDATA[switch-case语法 shell 语法 case 变量 in 取值1) 操作语句 操作语句 ;; 取值2) 操作语句 操作语句 ;; 取值3) 操作语句 操作语句 ;; *) 操作语句 操作语句 ;; esac]]></description>
+</item>
+</channel>
+</rss>

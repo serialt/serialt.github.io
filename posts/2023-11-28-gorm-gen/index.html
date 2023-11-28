@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Gorm gen - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Gorm gen" />
+<meta property="og:description" content="Gorm gen 参考链接： https://nickxu.me/2023/03/29/GORM%E7%9A%84GEN%E6%A8%A1%E5%BC%8F%E5%88%9D%E4%B8%8A%E6%89%8B/ https://www.liwenzhou.com/posts/Go/gen/ 示例代码： https://github.com/serialt/genc Gen是一个基于GORM的安全ORM框架，其主要通过代码生成方式实现GORM代码封装。使用Gen框架能够自动生" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2023-11-28-gorm-gen/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-28T20:22:27+08:00" />
+<meta property="article:modified_time" content="2023-11-28T20:22:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Gorm gen"/>
+<meta name="twitter:description" content="Gorm gen 参考链接： https://nickxu.me/2023/03/29/GORM%E7%9A%84GEN%E6%A8%A1%E5%BC%8F%E5%88%9D%E4%B8%8A%E6%89%8B/ https://www.liwenzhou.com/posts/Go/gen/ 示例代码： https://github.com/serialt/genc Gen是一个基于GORM的安全ORM框架，其主要通过代码生成方式实现GORM代码封装。使用Gen框架能够自动生"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-28-gorm-gen/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-24-switch-case/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Gorm gen",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2023-11-28-gorm-gen\/"
+        },"genre": "posts","keywords": "gorm, gorm-gen","wordcount":  828 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2023-11-28-gorm-gen\/","datePublished": "2023-11-28T20:22:27+08:00","dateModified": "2023-11-28T20:22:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Gorm gen</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-28">2023-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;828 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#gen介绍">Gen介绍</a></li>
+    <li><a href="#gen-使用">Gen 使用</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="gorm-gen">Gorm gen</h1>
+<p>参考链接：</p>
+<ul>
+<li><a href="https://nickxu.me/2023/03/29/GORM%E7%9A%84GEN%E6%A8%A1%E5%BC%8F%E5%88%9D%E4%B8%8A%E6%89%8B/" target="_blank" rel="noopener noreffer ">https://nickxu.me/2023/03/29/GORM%E7%9A%84GEN%E6%A8%A1%E5%BC%8F%E5%88%9D%E4%B8%8A%E6%89%8B/</a></li>
+<li><a href="https://www.liwenzhou.com/posts/Go/gen/" target="_blank" rel="noopener noreffer ">https://www.liwenzhou.com/posts/Go/gen/</a></li>
+</ul>
+<p>示例代码：</p>
+<ul>
+<li><a href="https://github.com/serialt/genc" target="_blank" rel="noopener noreffer ">https://github.com/serialt/genc</a></li>
+</ul>
+<p>Gen是一个基于GORM的安全ORM框架，其主要通过代码生成方式实现GORM代码封装。使用Gen框架能够自动生成Model结构体和类型安全的CRUD代码，极大提升CRUD效率。</p>
+<h2 id="gen介绍">Gen介绍</h2>
+<p><a href="https://github.com/go-gorm/gen" target="_blank" rel="noopener noreffer ">Gen</a>是由字节跳动无恒实验室与GORM作者联合研发的一个基于GORM的安全ORM框架，主要通过代码生成方式实现GORM代码封装。</p>
+<p>Gen框架在GORM框架的基础上提供了以下能力：</p>
+<ul>
+<li>基于原始SQL语句生成可重用的CRUD API</li>
+<li>生成不使用<code>interface{}</code>的100%安全的DAO API</li>
+<li>依据数据库生成遵循GORM约定的结构体Model</li>
+<li>支持GORM的所有特性</li>
+</ul>
+<p>简单来说，使用Gen框架后我们无需手动定义结构体Model，同时Gen框架也能帮我们生成类型安全的CRUD代码。</p>
+<p>更多详细介绍请查看<a href="https://gorm.io/gen/" target="_blank" rel="noopener noreffer ">Gen官方文档</a>。</p>
+<p>此外，Facebook开源的<a href="https://github.com/ent/ent" target="_blank" rel="noopener noreffer ">ent</a>也是社区中常用的类似框架，大家可按需选择使用。</p>
+<h2 id="gen-使用">Gen 使用</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">go get grom.io/gen
+</span></span></code></pre></div><p>在项目根目录新建 <code>model</code>文件夹，然后创建 <code>model.go</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">model</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Student</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Id</span>   <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Name</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">TeacherID</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Teacher</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Id</span>   <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Name</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// has many
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">Student</span> <span class="p">[]</span><span class="nx">Student</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>然后使用go 生成代码</p>
+<p>创建<code>cmd/gen/generate.go </code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/root/genc/model&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;gorm.io/gen&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//// Dynamic SQL
+</span></span></span><span class="line"><span class="cl"><span class="c1">//type Querier interface {
+</span></span></span><span class="line"><span class="cl"><span class="c1">//	// SELECT * FROM @@table WHERE name = @name{{if role !=&#34;&#34;}} AND role = @role{{end}}
+</span></span></span><span class="line"><span class="cl"><span class="c1">//	FilterWithNameAndRole(name, role string) ([]gen.T, error)
+</span></span></span><span class="line"><span class="cl"><span class="c1">//}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">g</span> <span class="o">:=</span> <span class="nx">gen</span><span class="p">.</span><span class="nf">NewGenerator</span><span class="p">(</span><span class="nx">gen</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">OutPath</span><span class="p">:</span> <span class="s">&#34;../../query&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Mode</span><span class="p">:</span>    <span class="nx">gen</span><span class="p">.</span><span class="nx">WithoutContext</span> <span class="p">|</span> <span class="nx">gen</span><span class="p">.</span><span class="nx">WithDefaultQuery</span> <span class="p">|</span> <span class="nx">gen</span><span class="p">.</span><span class="nx">WithQueryInterface</span><span class="p">,</span> <span class="c1">// generate mode
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// gormdb, _ := gorm.Open(mysql.Open(&#34;root:@(127.0.0.1:3306)/demo?charset=utf8mb4&amp;parseTime=True&amp;loc=Local&#34;))
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">//g.UseDB(gormdb) // reuse your gorm db
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// Generate basic type-safe DAO API for struct `model.User` following conventions
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">g</span><span class="p">.</span><span class="nf">ApplyBasic</span><span class="p">(</span><span class="nx">model</span><span class="p">.</span><span class="nx">Student</span><span class="p">{},</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Teacher</span><span class="p">{})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// Generate Type Safe API with Dynamic SQL defined on Querier interface for `model.User` and `model.Company`
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">//g.ApplyInterface(func(Querier) {}, model.User{}, model.Company{})
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// Generate the code
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">g</span><span class="p">.</span><span class="nf">Execute</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>运行命令 <code>go run cmd/gen/generate.go</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@Sugar genc<span class="o">]</span>🐳 go run cmd/gen/generate.go
+</span></span><span class="line"><span class="cl">2023/11/28 01:10:21 Start generating code.
+</span></span><span class="line"><span class="cl">2023/11/28 01:10:21 generate query file: /Users/root/github/genc/query/students.gen.go
+</span></span><span class="line"><span class="cl">2023/11/28 01:10:21 generate query file: /Users/root/github/genc/query/teachers.gen.go
+</span></span><span class="line"><span class="cl">2023/11/28 01:10:21 generate query file: /Users/root/github/genc/query/gen.go
+</span></span><span class="line"><span class="cl">2023/11/28 01:10:21 Generate code <span class="k">done</span>.
+</span></span></code></pre></div><p>server main文件</p>
+<p><code>cmd/sugar/sugar.go</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/glebarez/sqlite&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/root/genc/model&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/root/genc/query&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;gorm.io/gorm&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;gorm.io/gorm/schema&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// dsn := &#34;root:12345678@tcp(127.0.0.1:3306)/gorm_learning?charset=utf8mb4&amp;parseTime=True&amp;loc=Local&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">db</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">gorm</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="nx">sqlite</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="s">&#34;test.db&#34;</span><span class="p">),</span> <span class="o">&amp;</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">DisableForeignKeyConstraintWhenMigrating</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">NamingStrategy</span><span class="p">:</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">NamingStrategy</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">SingularTable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// 设置创建表名时不使用复数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">err</span> <span class="p">=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">AutoMigrate</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">model</span><span class="p">.</span><span class="nx">Student</span><span class="p">{},</span> <span class="o">&amp;</span><span class="nx">model</span><span class="p">.</span><span class="nx">Teacher</span><span class="p">{})</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">query</span><span class="p">.</span><span class="nf">SetDefault</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 增
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">student1</span> <span class="o">:=</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Student</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;student1&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">student2</span> <span class="o">:=</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Student</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;student2&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">student3</span> <span class="o">:=</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Student</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;student3&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span> <span class="p">=</span> <span class="nx">query</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">student1</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">student2</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">student3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">teacher1</span> <span class="o">:=</span> <span class="nx">model</span><span class="p">.</span><span class="nx">Teacher</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;teacher1&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span> <span class="p">=</span> <span class="nx">query</span><span class="p">.</span><span class="nx">Teacher</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">teacher1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 删
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">_</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">query</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nx">Id</span><span class="p">.</span><span class="nf">Eq</span><span class="p">(</span><span class="mi">3</span><span class="p">)).</span><span class="nf">Delete</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 改
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">_</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">query</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nx">Id</span><span class="p">.</span><span class="nf">Eq</span><span class="p">(</span><span class="mi">2</span><span class="p">)).</span><span class="nf">Update</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span> <span class="s">&#34;student2_new&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 查
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">student</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">query</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nx">Id</span><span class="p">.</span><span class="nf">Eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)).</span><span class="nf">Take</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">teacher</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">query</span><span class="p">.</span><span class="nx">Teacher</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">Teacher</span><span class="p">.</span><span class="nx">Id</span><span class="p">.</span><span class="nf">Eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)).</span><span class="nf">Take</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">student</span><span class="p">)</span> <span class="c1">// {1 student1 0}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">teacher</span><span class="p">)</span> <span class="c1">// {1 teacher1 []}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 关联
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">_</span> <span class="p">=</span> <span class="nx">query</span><span class="p">.</span><span class="nx">Teacher</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nf">Model</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">teacher1</span><span class="p">).</span><span class="nf">Append</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">student1</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">student2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">teacher</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">query</span><span class="p">.</span><span class="nx">Teacher</span><span class="p">.</span><span class="nf">Preload</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">Teacher</span><span class="p">.</span><span class="nx">Student</span><span class="p">).</span><span class="nf">Where</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">Teacher</span><span class="p">.</span><span class="nx">Id</span><span class="p">.</span><span class="nf">Eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)).</span><span class="nf">Take</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">teacher</span><span class="p">)</span> <span class="c1">// {1 teacher1 [{1 student1 1} {2 student2_new 1}]}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nf">TableName</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">Teacher</span><span class="p">.</span><span class="nf">TableName</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>运行主服务</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@Sugar genc<span class="o">]</span>🐳 go run cmd/sugar/main.go 
+</span></span><span class="line"><span class="cl"><span class="p">&amp;</span><span class="o">{</span><span class="m">1</span> student1 1<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&amp;</span><span class="o">{</span><span class="m">1</span> teacher1 <span class="o">[]}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&amp;</span><span class="o">{</span><span class="m">1</span> teacher1 <span class="o">[{</span><span class="m">1</span> student1 1<span class="o">}</span> <span class="o">{</span><span class="m">2</span> student2_new 1<span class="o">}]}</span>
+</span></span><span class="line"><span class="cl">student
+</span></span><span class="line"><span class="cl">teacher
+</span></span></code></pre></div><p>更新字段使用对比</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">GLOBAL_DB</span><span class="p">.</span><span class="nf">Model</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">Student</span><span class="p">{}).</span><span class="nf">Where</span><span class="p">(</span><span class="s">&#34;ID = ?&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">).</span><span class="nf">Update</span><span class="p">(</span><span class="s">&#34;Name&#34;</span><span class="p">,</span> <span class="s">&#34;student2_new&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">query</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nx">Id</span><span class="p">.</span><span class="nf">Eq</span><span class="p">(</span><span class="mi">2</span><span class="p">)).</span><span class="nf">Update</span><span class="p">(</span><span class="nx">query</span><span class="p">.</span><span class="nx">Student</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span> <span class="s">&#34;student2_new&#34;</span><span class="p">)</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-11-28</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/2023-11-28-gorm-gen/" data-title="Gorm gen" data-hashtags="gorm,gorm-gen"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/2023-11-28-gorm-gen/" data-hashtag="gorm"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/2023-11-28-gorm-gen/" data-title="Gorm gen"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/2023-11-28-gorm-gen/" data-title="Gorm gen"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/2023-11-28-gorm-gen/" data-title="Gorm gen"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/gorm/">gorm</a>,&nbsp;<a href="/tags/gorm-gen/">gorm-gen</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023-11-24-switch-case/" class="prev" rel="prev" title="switch-case handbook"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>switch-case handbook</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
