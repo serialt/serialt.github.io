@@ -112,6 +112,11 @@ FROM information_schema.tables
 ) AS all_tables
 ORDER BY total_size DESC
 ) AS pretty_sizes
+
+
+-- 修改用户密码
+ALTER USER postgres with password 'hello_world';
+
 ```
 
 schema 管理
@@ -131,11 +136,16 @@ alter schema test rename to testa;
 
 create schema test authorization highgo;;
 
+-- 切换schema
+set search_path to test_schema
 ```
 
 修改数据库名
 
 ```sql
+-- 修改数据库名
+alter database src_dbname rename to dst_dbname;
+
 -- 将数据库的名称由database2改成database1
 UPDATE pg_database SET datname = 'database1' WHERE datname = 'database2';
 ```
@@ -271,6 +281,8 @@ max_connections = 100    #最大连接数，从库的max_connections必须要大
 
 ### 2、从节点上操作
 
+参考链接：https://blog.51cto.com/u_13482808/6875114
+
 ```bash
 pg_basebackup --help 
 用法：
@@ -317,11 +329,19 @@ pg_basebackup --help
 使用pg_basebackup基础备份工具指定备份目录。
 
 ```shell
-pg_basebackup -D /var/lib/pgsql/11/data -h <主节点IP> -p 5432 -U replica -X stream -P
+#保持pg data目录格式
+pg_basebackup -h 192.168.1.1 -p 5432 -U replica -D /data/test -cfast -Xs -Pv
 
-pg_basebackup -h 192.168.10.183 -p 5432 -U replica -D /data/postgresql --checkpoint=fast -X stream -P -R -F t
+# 自动创建recovery.conf 
+pg_basebackup -h 192.168.1.1 -p 5432 -U replica -D /data/test -cfast -Xs -Pv -R
 
-# -F t 压缩传输
+# 打包成tar文件
+pg_basebackup -h 192.168.1.1 -p 5432 -U replica -D /data/test -cfast -Xs -Pv -Ft
+
+# 打包成tar.gz文件
+pg_basebackup -h 192.168.1.1 -p 5432 -U replica -D /data/test -cfast -Xs -Pv -Ft -z 
+
+
 ```
 
 新建并修改recovery.conf配置文件。
