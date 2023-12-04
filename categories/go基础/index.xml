@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Go基础 - Category - Blog</title>
+        <link>https://serialt.github.io/categories/go%E5%9F%BA%E7%A1%80/</link>
+        <description>Go基础 - Category - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Fri, 01 Dec 2023 20:22:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/go%E5%9F%BA%E7%A1%80/" rel="self" type="application/rss+xml" /><item>
+    <title>Go channel</title>
+    <link>https://serialt.github.io/posts/2023-12-2-go-channel/</link>
+    <pubDate>Fri, 01 Dec 2023 20:22:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-12-2-go-channel/</guid>
+    <description><![CDATA[通道 channel 介绍 概括 Go语言设计团队的首任负责人Rob Pike对并发编程的一个建议是不要让计算通过共享内存来通讯，而应该让它们通过通讯来共享内存。]]></description>
+</item>
+</channel>
+</rss>

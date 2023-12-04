@@ -4,9 +4,17 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Tue, 28 Nov 2023 20:22:27 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Fri, 01 Dec 2023 20:22:27 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Go channel</title>
+    <link>https://serialt.github.io/posts/2023-12-2-go-channel/</link>
+    <pubDate>Fri, 01 Dec 2023 20:22:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-12-2-go-channel/</guid>
+    <description><![CDATA[通道 channel 介绍 概括 Go语言设计团队的首任负责人Rob Pike对并发编程的一个建议是不要让计算通过共享内存来通讯，而应该让它们通过通讯来共享内存。]]></description>
+</item>
+<item>
     <title>Gorm gen</title>
     <link>https://serialt.github.io/posts/2023-11-28-gorm-gen/</link>
     <pubDate>Tue, 28 Nov 2023 20:22:27 &#43;0800</pubDate>
@@ -77,14 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-11-19-git-to-use/</guid>
     <description><![CDATA[Git使用规范 一、commit &lt;type&gt;(scope): &lt;subject&gt; Header &lt;BLANK LINE&gt; &lt;body&gt; Body &lt;BALNK LINE&gt; &lt;footer&gt; Footer commit message包含Header、Body、Footer三个部分，其中Header是必须]]></description>
-</item>
-<item>
-    <title>svn</title>
-    <link>https://serialt.github.io/posts/2023-11-18-svn/</link>
-    <pubDate>Sat, 18 Nov 2023 11:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-18-svn/</guid>
-    <description><![CDATA[SVN 介绍： 代码版本管理工具 能记住本版修改的情况 查看所有的修改记录 恢复到任何历史版本 恢复已经删除的文件 svn与git相比的优势: 使用简单、上手快]]></description>
 </item>
 </channel>
 </rss>
