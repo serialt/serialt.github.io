@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Gitlab - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Gitlab" />
+<meta property="og:description" content="Gitlab 版本介绍 gitlab分社区版和企业版，与其他企业版软件不同的是，社区版和企业版都不收费，都可以免费使用 官方文档：https://docs." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2023-12-4-gitlab/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-04T20:26:27+08:00" />
+<meta property="article:modified_time" content="2023-12-04T20:26:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Gitlab"/>
+<meta name="twitter:description" content="Gitlab 版本介绍 gitlab分社区版和企业版，与其他企业版软件不同的是，社区版和企业版都不收费，都可以免费使用 官方文档：https://docs."/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-12-4-gitlab/" /><link rel="prev" href="https://serialt.github.io/posts/2023-12-7-dev-terraform-provider/" /><link rel="next" href="https://serialt.github.io/posts/2023-12-4-ansible-handbook/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Gitlab",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2023-12-4-gitlab\/"
+        },"genre": "posts","keywords": "gitlab, git","wordcount":  6719 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2023-12-4-gitlab\/","datePublished": "2023-12-04T20:26:27+08:00","dateModified": "2023-12-04T20:26:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Gitlab</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-04">2023-12-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6719 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#版本介绍">版本介绍</a>
+      <ul>
+        <li><a href="#授权模式">授权模式</a></li>
+      </ul>
+    </li>
+    <li><a href="#一部署">一、部署</a>
+      <ul>
+        <li><a href="#1包部署">1、包部署</a></li>
+        <li><a href="#2docker部署">2、docker部署</a></li>
+      </ul>
+    </li>
+    <li><a href="#二配置">二、配置</a></li>
+    <li><a href="#三gitlab-runner">三、gitlab-runner</a>
+      <ul>
+        <li><a href="#1包安装">1、包安装</a></li>
+        <li><a href="#2docker安装">2、docker安装</a></li>
+        <li><a href="#3gitlab-ciyml-模版">3、.gitlab-ci.yml 模版</a></li>
+      </ul>
+    </li>
+    <li><a href="#四备份与恢复">四、备份与恢复</a>
+      <ul>
+        <li><a href="#1备份">1、备份</a></li>
+        <li><a href="#2数据恢复">2、数据恢复</a></li>
+      </ul>
+    </li>
+    <li><a href="#五升级">五、升级</a>
+      <ul>
+        <li><a href="#数据备份">数据备份</a></li>
+        <li><a href="#迁移">迁移</a></li>
+        <li><a href="#可能出现的问题">可能出现的问题：</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="gitlab">Gitlab</h1>
+<h2 id="版本介绍">版本介绍</h2>
+<p>gitlab分社区版和企业版，与其他企业版软件不同的是，社区版和企业版都不收费，都可以免费使用</p>
+<p>官方文档：https://docs.gitlab.com/</p>
+<h3 id="授权模式">授权模式</h3>
+<p>GitLab基于开源核心模型 (open core model)。即以为着Gitlab有两个版本：社区版<code>Community Edition</code> 和 企业版<code>Enterprise Edition</code>。</p>
+<p>GitLab 社区版是MIT许可的open source。
+GitLab 企业版基于社区版：使用了同样的内核，但是添加了额外的功能、特性。 这是在所有权授权下。</p>
+<p>对于所有的版本：Gitlab 所有的 javascript 源码 都是 open source 的。Gtilab 开发的所有的 javascript code 都是 MIT 授权许可。</p>
+<p>企业版虽然是免费使用，但免费但功能跟社区版一致。</p>
+<h2 id="一部署">一、部署</h2>
+<h3 id="1包部署">1、包部署</h3>
+<p>1）下载安装包</p>
+<p>清华源：https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce</p>
+<p>南京大学镜像：https://mirrors.nju.edu.cn/gitlab-ce/</p>
+<p>gitlab安装包比较大，建议先下载到本地再安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@gitlab3 ~<span class="o">]</span><span class="c1"># ls</span>
+</span></span><span class="line"><span class="cl">anaconda-ks.cfg  gitlab-ce-12.9.7-ce.0.el7.x86_64.rpm
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@gitlab3 ~<span class="o">]</span><span class="c1"># yum -y localinstall gitlab-ce-12.9.7-ce.0.el7.x86_64.rpm</span>
+</span></span></code></pre></div><p>2）配置gitlab</p>
+<p>gitlab使用chef进行安装，配置文件为<code>/etc/gitlab/gitlab.rb</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 配置访问地址</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@gitlab3 ~<span class="o">]</span><span class="c1"># vim /etc/gitlab/gitlab.rb</span>
+</span></span><span class="line"><span class="cl">  <span class="m">29</span> external_url <span class="s1">&#39;http://gitlab.example.com&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 配置通知邮箱</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 官方邮箱配置示例：https://docs.gitlab.com/omnibus/settings/smtp.html</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@gitlab1 ~<span class="o">]</span><span class="c1"># vim /etc/gitlab/gitlab.rb </span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;smtp_enable&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;smtp_address&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&#34;smtphz.qiye.163.com&#34;</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;smtp_port&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">994</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;smtp_user_name&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&#34;cccccc@163.com&#34;</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;smtp_password&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&#34;xxxxxxxxxx&#34;</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;smtp_domain&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&#34;qiye.163.com&#34;</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;smtp_authentication&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&#34;login&#34;</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;smtp_enable_starttls_auto&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;smtp_tls&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">user<span class="o">[</span><span class="s1">&#39;git_user_email&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&#34;cccc@163.com&#34;</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;gitlab_email_from&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;cccc@163.com&#39;</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;gitlab_email_reply_to&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;cccc@163.com&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 配置重启服务</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@gitlab1 ~<span class="o">]</span><span class="c1"># gitlab-ctl stop</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@gitlab1 ~<span class="o">]</span><span class="c1"># gitlab-ctl reconfigure</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@gitlab1 ~<span class="o">]</span><span class="c1"># gitlab-ctl restart </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 测试邮件发送</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@gitlab1 ~<span class="o">]</span><span class="c1"># gitlab-rails console</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Notify.test_email<span class="o">(</span><span class="s1">&#39;t@local.com&#39;</span>,<span class="s1">&#39;gitlab&#39;</span>,<span class="s1">&#39;this is test&#39;</span><span class="o">)</span>.deliver_now
+</span></span><span class="line"><span class="cl">                                  邮箱               主题      内容
+</span></span></code></pre></div><h3 id="2docker部署">2、docker部署</h3>
+<p>使用docker部署时建议先修改ssh端口，预留22给gitlab</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -p 443:443 -p 80:80 -p 22:22 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --name gitlab <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --volume /data/gitlab/config:/etc/gitlab <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --volume /data/gitlab/logs:/var/log/gitlab <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --volume /data/gitlab/data:/var/opt/gitlab <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    gitlab/gitlab-ce:13.12.9-ce.0
+</span></span></code></pre></div><p>docker-compose</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">gitlab</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">gitlab/gitlab-ce:13.12.9-ce.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">gitlab</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">privileged</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">TZ</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Asia/Shanghai&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">GITLAB_OMNIBUS_CONFIG</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">        external_url = &#34;http://git.local.com&#34;</span><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;80:80&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;443:443&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;2222:22&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;/dataDisk/gitlab/config:/etc/gitlab&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;/dataDisk/gitlab/logs:/var/log/gitlab&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;/dataDisk/gitlab/data:/var/opt/gitlab&#39;</span><span class="w">
+</span></span></span></code></pre></div><h2 id="二配置">二、配置</h2>
+<p>1、gitlab修改url</p>
+<p>（如果是迁移或者重新配置）</p>
+<p>1）修改gitlab的配置文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@gitlab1 ~<span class="o">]</span><span class="c1"># vim /etc/gitlab/gitlab.rb</span>
+</span></span><span class="line"><span class="cl">  <span class="m">30</span> external_url <span class="s1">&#39;http://192.168.100.103&#39;</span>   <span class="c1">#修改为域名或者IP</span>
+</span></span></code></pre></div><p>2）修改git clone的路径
+查看gitlab.yml软连接的路径</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@gitlab1 ~<span class="o">]</span><span class="c1"># cd /opt/gitlab/embedded/service/gitlab-rails/config</span>
+</span></span><span class="line"><span class="cl">lrwxrwxrwx <span class="m">1</span> root root    <span class="m">43</span> Jun <span class="m">19</span> 15:23 gitlab.yml -&gt; /var/opt/gitlab/gitlab-rails/etc/gitlab.yml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@gitlab1 config<span class="o">]</span><span class="c1"># vim /var/opt/gitlab/gitlab-rails/etc/gitlab.yml</span>
+</span></span><span class="line"><span class="cl"><span class="m">10</span>   <span class="c1">## GitLab settings</span>
+</span></span><span class="line"><span class="cl"> <span class="m">11</span>   gitlab:
+</span></span><span class="line"><span class="cl"> <span class="m">12</span>     <span class="c1">## Web server settings (note: host is the FQDN, do not include http://)</span>
+</span></span><span class="line"><span class="cl"> <span class="m">13</span>     host: 192.168.100.103    <span class="c1">#gitlab登陆后访问的路径</span>
+</span></span><span class="line"><span class="cl"> <span class="m">14</span>     port: <span class="m">80</span>
+</span></span><span class="line"><span class="cl"> <span class="m">15</span>     https: <span class="nb">false</span>
+</span></span></code></pre></div><h2 id="三gitlab-runner">三、gitlab-runner</h2>
+<h3 id="1包安装">1、包安装</h3>
+<p>1）下载和安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@gitlab1 ~<span class="o">]</span><span class="c1"># yum -y install  https://mirror.nju.edu.cn/gitlab-runner/yum/el8-x86_64/gitlab-runner-14.8.3-1.x86_64.rpm</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@gitlab1 ~<span class="o">]</span><span class="c1"># yum -y install git</span>
+</span></span></code></pre></div><p>2）注册gitlab-runner</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@gitlab1 ~<span class="o">]</span><span class="c1"># gitlab-runner register \ </span>
+</span></span><span class="line"><span class="cl">	--non-interactive <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>	--executor <span class="s2">&#34;shell&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>	--url <span class="s2">&#34;http://192.168.23.100/&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>	--registration-token <span class="s2">&#34;JRzzw2j1Ji6aBjwvkxAv&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  	--description <span class="s2">&#34;xxxxx-devops-runner&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  	--tag-list <span class="s2">&#34;build,deploy,runner-shell,runner&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  	--run-untagged<span class="o">=</span><span class="s2">&#34;true&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  	--locked<span class="o">=</span><span class="s2">&#34;false&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  	--access-level<span class="o">=</span><span class="s2">&#34;not_protected&#34;</span>
+</span></span></code></pre></div><p>会要求输入gitlab的url和Token.
+查找过程如下：
+进入仓库-&gt;settings-&gt;CI/CD，找到Runner Settings这一项，点击Expend,即可在Setup a specific Runner manually这项中找到。</p>
+<p>注册完后查看runner状态</p>
+<p>进入仓库-&gt;settings-&gt;CI/CD，找到Runner Settings这一项，点击Expend,即可看到Gitlab-Runenr的运行状态</p>
+<h3 id="2docker安装">2、docker安装</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">gitrunner</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;gitlab/gitlab-runner:ubuntu-v15.8.3&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;gitlab-runner&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;run --user=root --working-directory=/home/gitlab-runner&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;/data/gitlab-runner/config:/etc/gitlab-runner&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;/data/gitlab-runner/cache:/tmp/cache&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># - &#39;/data/gitlab-runner/ssl:/etc/gitlab-runner/certs/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;/usr/bin/docker:/usr/bin/docker&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;/var/run/docker.sock:/var/run/docker.sock&#39;</span><span class="w">
+</span></span></span></code></pre></div><p>注册</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker <span class="nb">exec</span> -it gitlab-runner gitlab-runner register --non-interactive --executor <span class="s2">&#34;shell&#34;</span> --url <span class="s2">&#34;http://local.com&#34;</span>  --registration-token <span class="s2">&#34;XmWa6cccc-ccccccc&#34;</span> --description <span class="s2">&#34;runner&#34;</span> --tag-list <span class="s2">&#34;docker-runner,gitlab-runner-shell,runner&#34;</span> --run-untagged<span class="o">=</span><span class="s2">&#34;true&#34;</span>  --locked<span class="o">=</span><span class="s2">&#34;false&#34;</span>  --access-level<span class="o">=</span><span class="s2">&#34;not_protected&#34;</span> 
+</span></span></code></pre></div><p>runner in docker</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker <span class="nb">exec</span> -it gitlab-runner gitlab-runner register --non-interactive --executor <span class="s2">&#34;docker&#34;</span> --docker-image<span class="o">=</span>debian:11  --url <span class="s2">&#34;http://local.com&#34;</span>  --registration-token <span class="s2">&#34;XmWa6cccc-ccccccc&#34;</span> --description <span class="s2">&#34;docker-runner&#34;</span> --tag-list <span class="s2">&#34;docker-runner,gitlab-runner-docker&#34;</span> --run-untagged<span class="o">=</span><span class="s2">&#34;true&#34;</span>  --locked<span class="o">=</span><span class="s2">&#34;false&#34;</span>  --access-level<span class="o">=</span><span class="s2">&#34;not_protected&#34;</span> 
+</span></span></code></pre></div><h3 id="3gitlab-ciyml-模版">3、.gitlab-ci.yml 模版</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">default</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;centos:7&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">before_script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo Hello World</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">after_script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo end</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="l">gitlab-runner-shell</span><span class="w"> </span><span class="c"># 指定gitlab runner 的tag</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cache</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">paths</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">vendor/]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">DEPLOY_VARIABLE</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;default-deploy&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">variables</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">IMAGE</span><span class="p">:</span><span class="w"> </span><span class="l">name/${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">workflow</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l">$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">variables</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">DEPLOY_VARIABLE</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;deploy-production&#34;</span><span class="w">  </span><span class="c"># Override globally-defined DEPLOY_VARIABLE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l">$CI_COMMIT_REF_NAME =~ /feature/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">variables</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">IS_A_FEATURE</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">                  </span><span class="c"># Define a new variable.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l">always </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">stages</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">package</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">deploy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">cleanup</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">test_all</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;pymicro&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">pull_policy</span><span class="p">:</span><span class="w"> </span><span class="l">if-not-present</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-postgres:11.7</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l">db-postgres</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">pull_policy</span><span class="p">:</span><span class="w"> </span><span class="l">if-not-present</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">entrypoint</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;/usr/local/bin/db-postgres&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;start&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">veriables</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">MYSQL_DATABASE</span><span class="p">:</span><span class="w"> </span><span class="l">db</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l">password</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allow_failure</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">  </span><span class="c"># job 允许失败</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">before_script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s1">&#39;command -v ssh-agent &gt;/dev/null || ( apt-get update -y &amp;&amp; apt-get install openssh-client -y )&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">eval $(ssh-agent -s)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;$SSH_PRIVATE_KEY&#34; | tr -d &#39;\r&#39; | ssh-add -</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">mkdir -p ~/.ssh</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">chmod 700 ~/.ssh</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span>- <span class="l">echo -e &#34;Host *\n\tStrictHostKeyChecking no\n\n&#34; &gt; ~/.ssh/config&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">flake8 app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">pytest tests</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">after_script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">execute this after my script</span><span class="w"> </span><span class="c"># 执行命令</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">build_image</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">name docker:17.11</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">pull_policy</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w"> </span><span class="c"># if-not-present</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c">#entrypoint: [&#34;echo hellow-world&#34;]  #覆盖 entrypoint命令</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># command: [&#34;start&#34;] 覆盖command命令</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-postgres:11.7</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l">db-postgres</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">entrypoint</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;/usr/local/bin/db-postgres&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;start&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">variables</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">DOCKER_HOST</span><span class="p">:</span><span class="w"> </span><span class="l">tcp://dockerd:2375</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 缓存 binaries 中以 .apk 和 .config 文件结尾的所有文件：</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cache</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">binaries-cache</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">binaries/*.apk</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">.config</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">only</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tags</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">| </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="l">docker build -t ${IMAGE_TAG} -f Dockerfile .</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="l">docker push ${IMAGE_TAG}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">package_app</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l">$CI_COMMIT_MESSAGE =~ /build-app-a/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">variables</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">GITLAB_app_NAME</span><span class="p">:</span><span class="w"> </span><span class="l">gitea-drone</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l">$CI_COMMIT_MESSAGE =~ /build-app-b/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">variables</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">GITLAB_app_NAME</span><span class="p">:</span><span class="w"> </span><span class="l">gitea-drone-b</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$CI_PIPELINE_SOURCE == &#34;merge_request_event&#34;&#39;</span><span class="w">   
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">changes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">Dockerfile  </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l">manual</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">allow_failure</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">if</span><span class="p">:</span><span class="w"> </span><span class="l">$CI_PIPELINE_SOURCE == &#34;merge_request_event&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">changes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="l">Dockerfile</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">exists</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">Dockerfile    </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">before_script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">hello</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  	</span>- <span class="l">echo &#34;${GITLAB_app_NAME}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">after_script</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;world&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allow_failure</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">exit_codes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">137</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">255</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 当Gemfile.lock有变化时候，重新生成缓存</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cache</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">key</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">files</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">Gemfile.lock</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">package.json</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">vendor/ruby</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">node_modules</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">last-job</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">.post</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">echo &#34;This job runs in the .post stage, after all other stages.&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">deploy_production</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">deploy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">variables</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">GIT_STRATEGY</span><span class="p">:</span><span class="w"> </span><span class="l">none</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">needs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">job</span><span class="p">:</span><span class="w"> </span><span class="l">test-job2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">optional</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">job</span><span class="p">:</span><span class="w"> </span><span class="l">test-job1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># only/except</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">only</span><span class="p">:</span><span class="w"> </span><span class="c"># </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">main</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/^issue-.*$/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">merge_requests</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">tags</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">variables</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">$RELEASE == &#34;staging&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">refs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">branches</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">changes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">Dockerfile</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">docker/scripts/  </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">allow_failure</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l">manual</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tags</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">deploy-production</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">kubectl set image deploy/myproject &#34;app=${IMAGE_TAG}&#34; --record</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">cache</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">untracked</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="c"># 来缓存 Git 仓库中所有未跟踪的文件</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">binaries/    </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">cleanup_job</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">stage</span><span class="p">:</span><span class="w"> </span><span class="l">cleanup</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">cleanup after jobs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span></code></pre></div><p>内置变量，参考地址：https://docs.gitlab.cn/jh/ci/variables/predefined_variables.html</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">变量</th>
+<th style="text-align:left">GitLab</th>
+<th style="text-align:left">Runner</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>CHAT_CHANNEL</code></td>
+<td style="text-align:left">10.6</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">触发 ChatOps 命令的源聊天频道。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CHAT_INPUT</code></td>
+<td style="text-align:left">10.6</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">使用 ChatOps 命令传递的附加参数。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CHAT_USER_ID</code></td>
+<td style="text-align:left">14.4</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">触发 ChatOps 命令的用户的聊天服务用户 ID。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">0.4</td>
+<td style="text-align:left">适用于在 CI/CD 中执行的所有作业。可用时为 <code>true</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_API_V4_URL</code></td>
+<td style="text-align:left">11.7</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">GitLab API v4 根 URL。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_BUILDS_DIR</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">11.10</td>
+<td style="text-align:left">执行构建的顶级目录。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_COMMIT_AUTHOR</code></td>
+<td style="text-align:left">13.11</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left"><code>Name &lt;email&gt;</code> 格式的提交作者。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_COMMIT_BEFORE_SHA</code></td>
+<td style="text-align:left">11.2</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">出现在分支或标签上的上一个最新提交。在合并请求的流水线中总是 <code>0000000000000000000000000000000000000000</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_COMMIT_BRANCH</code></td>
+<td style="text-align:left">12.6</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">提交分支名称。在分支流水线中可用，包括默认分支的流水线。在合并请求流水线或标签流水线中不可用。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_COMMIT_DESCRIPTION</code></td>
+<td style="text-align:left">10.8</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">提交的描述。如果标题短于 100 个字符，则消息没有第一行。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_COMMIT_MESSAGE</code></td>
+<td style="text-align:left">10.8</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">完整的提交消息。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_COMMIT_REF_NAME</code></td>
+<td style="text-align:left">9.0</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">为其构建项目的分支或标签名称。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_COMMIT_REF_PROTECTED</code></td>
+<td style="text-align:left">11.11</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">如果作业正在运行以获取受保护的 ref 为 <code>true</code> 。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_COMMIT_REF_SLUG</code></td>
+<td style="text-align:left">9.0</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left"><code>CI_COMMIT_REF_NAME</code> 小写，缩短为 63 字节，除了 <code>0-9</code> 和 <code>a-z</code> 之外的所有内容都替换为 <code>-</code>。没有前导/尾随<code>-</code>。 在 URL、主机名和域名中使用。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_COMMIT_SHA</code></td>
+<td style="text-align:left">9.0</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">项目为其构建的提交修订。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_COMMIT_SHORT_SHA</code></td>
+<td style="text-align:left">11.7</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left"><code>CI_COMMIT_SHA</code> 的前八个字符。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_COMMIT_TAG</code></td>
+<td style="text-align:left">9.0</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">提交标签名称。仅在标签流水线中可用。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_COMMIT_TAG_MESSAGE</code></td>
+<td style="text-align:left">15.5</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">提交标签消息。仅在标签流水线中可用。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_COMMIT_TIMESTAMP</code></td>
+<td style="text-align:left">13.4</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left"><a href="https://www.rfc-editor.org/rfc/rfc3339#appendix-A" target="_blank" rel="noopener noreffer ">ISO 8601</a> 格式的提交时间戳。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_COMMIT_TITLE</code></td>
+<td style="text-align:left">10.8</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">提交的标题。消息的完整第一行。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_CONCURRENT_ID</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">11.10</td>
+<td style="text-align:left">单个 executor 中构建执行的唯一 ID。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_CONCURRENT_PROJECT_ID</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">11.10</td>
+<td style="text-align:left">单个 executor 和项目中构建执行的唯一 ID。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_CONFIG_PATH</code></td>
+<td style="text-align:left">9.4</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">CI/CD 配置文件的路径。默认为<code>.gitlab-ci.yml</code>。在正在运行的流水线中只读。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_DEBUG_TRACE</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">1.7</td>
+<td style="text-align:left">如果 <a href="https://docs.gitlab.cn/jh/ci/variables/index.html#enable-debug-logging" target="_blank" rel="noopener noreffer ">debug 日志 (跟踪)</a> 已启用为<code>true</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_DEBUG_SERVICES</code></td>
+<td style="text-align:left">15.7</td>
+<td style="text-align:left">15.7</td>
+<td style="text-align:left"><code>true</code> 如果启用了<a href="https://docs.gitlab.cn/jh/ci/services/index.html#capturing-service-container-logs" target="_blank" rel="noopener noreffer ">服务容器日志</a>，值为 <code>true</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_DEFAULT_BRANCH</code></td>
+<td style="text-align:left">12.4</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">项目默认分支的名称。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX</code></td>
+<td style="text-align:left">13.7</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">通过 Dependency Proxy 拉取镜像的顶级群组镜像前缀。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_DEPENDENCY_PROXY_DIRECT_GROUP_IMAGE_PREFIX</code></td>
+<td style="text-align:left">14.3</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">通过 Dependency Proxy 拉取镜像的直接群组镜像前缀。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_DEPENDENCY_PROXY_PASSWORD</code></td>
+<td style="text-align:left">13.7</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">通过 Dependency Proxy 拉取镜像的密码。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_DEPENDENCY_PROXY_SERVER</code></td>
+<td style="text-align:left">13.7</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">用于登录 Dependency Proxy 的服务器。相当于 <code>$CI_SERVER_HOST:$CI_SERVER_PORT</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_DEPENDENCY_PROXY_USER</code></td>
+<td style="text-align:left">13.7</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">通过 Dependency Proxy 拉取镜像的用户名。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_DEPLOY_FREEZE</code></td>
+<td style="text-align:left">13.2</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">仅当流水线在部署冻结窗口期间运行时才可用。可用时为 <code>true</code> 。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_DEPLOY_PASSWORD</code></td>
+<td style="text-align:left">10.8</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">GitLab Deploy Token 的认证密码，如果项目有的话。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_DEPLOY_USER</code></td>
+<td style="text-align:left">10.8</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">GitLab Deploy Token 的认证用户名，如果项目有的话。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_DISPOSABLE_ENVIRONMENT</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">10.1</td>
+<td style="text-align:left">仅当作业在一次性环境中执行时才可用（仅为该作业创建并在执行后处理/销毁 - 除 <code>shell</code> 和 <code>ssh</code> 之外的所有 executor）。可用时为 <code>true</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_ENVIRONMENT_NAME</code></td>
+<td style="text-align:left">8.15</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">此作业的环境名称。 如果设置了 <a href="https://docs.gitlab.cn/jh/ci/yaml/index.html#environmentname" target="_blank" rel="noopener noreffer "><code>environment:name</code></a>，则可用。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_ENVIRONMENT_SLUG</code></td>
+<td style="text-align:left">8.15</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">环境名称的简化版本，适合包含在 DNS、URL、Kubernetes labels 等。如果设置了 <a href="https://docs.gitlab.cn/jh/ci/yaml/index.html#environmentname" target="_blank" rel="noopener noreffer "><code>environment:name</code></a>，则可用。Slug 被截断为 24 个字符。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_ENVIRONMENT_URL</code></td>
+<td style="text-align:left">9.3</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">此作业的环境 URL。如果设置了 <a href="https://docs.gitlab.cn/jh/ci/yaml/index.html#environmenturl" target="_blank" rel="noopener noreffer "><code>environment:url</code></a>，则可用。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_ENVIRONMENT_ACTION</code></td>
+<td style="text-align:left">13.11</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">为此作业的环境指定的操作注释。如果设置了 <a href="https://docs.gitlab.cn/jh/ci/yaml/index.html#environmentaction" target="_blank" rel="noopener noreffer "><code>environment:action</code></a>，则可用。可以是<code>start</code>、<code>prepare</code> 或 <code>stop</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_ENVIRONMENT_TIER</code></td>
+<td style="text-align:left">14.0</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">此作业的环境部署级别。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_RELEASE_DESCRIPTION</code></td>
+<td style="text-align:left">15.5</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">发布的描述。仅在标签流水线上可用。描述长度限制为前 1024 个字符。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_GITLAB_FIPS_MODE</code></td>
+<td style="text-align:left">14.10</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">实例中是否启用 FIPS 模式的配置设置。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_HAS_OPEN_REQUIREMENTS</code></td>
+<td style="text-align:left">13.1</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">仅当流水线的项目具有打开的<a href="https://docs.gitlab.cn/jh/user/project/requirements/index.html" target="_blank" rel="noopener noreffer ">需求</a> 时才可用。可用时为 <code>true</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_JOB_ID</code></td>
+<td style="text-align:left">9.0</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">作业的内部 ID，在 GitLab 实例中的所有作业中是唯一的。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_JOB_IMAGE</code></td>
+<td style="text-align:left">12.9</td>
+<td style="text-align:left">12.9</td>
+<td style="text-align:left">运行作业的 Docker 镜像的名称。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_JOB_JWT</code></td>
+<td style="text-align:left">12.10</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">一个 RS256 JSON Web 令牌，用于与支持 JWT 身份验证的第三方系统进行身份验证，例如 <a href="https://docs.gitlab.cn/jh/ci/secrets/index.html" target="_blank" rel="noopener noreffer ">HashiCorp’s Vault</a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_JOB_JWT_V1</code></td>
+<td style="text-align:left">14.6</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">与 <code>CI_JOB_JWT</code> 相同的值。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_JOB_MANUAL</code></td>
+<td style="text-align:left">8.12</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">如果作业是手动启动为 <code>true</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_JOB_NAME</code></td>
+<td style="text-align:left">9.0</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">作业名称</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_JOB_NAME_SLUG</code></td>
+<td style="text-align:left">15.4</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left"><code>CI_JOB_NAME_SLUG</code> 的小写，缩短为 63 字节，除 <code>0-9</code> 和 <code>a-z</code> 以外的所有内容都替换为 <code>-</code>。没有前导/尾随的 <code>-</code>。在路径中使用。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_JOB_STAGE</code></td>
+<td style="text-align:left">9.0</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">作业阶段名称</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_JOB_STATUS</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">13.5</td>
+<td style="text-align:left">执行每个 runner 阶段时的作业状态。与 <a href="https://docs.gitlab.cn/jh/ci/yaml/index.html#after_script" target="_blank" rel="noopener noreffer "><code>after_script</code></a> 一起使用。可以是 <code>success</code>，<code>failed</code> 或 <code>canceled</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_JOB_TIMEOUT</code></td>
+<td style="text-align:left">15.7</td>
+<td style="text-align:left">15.7</td>
+<td style="text-align:left">作业超时的值。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_JOB_TOKEN</code></td>
+<td style="text-align:left">9.0</td>
+<td style="text-align:left">1.2</td>
+<td style="text-align:left">使用某些 API 端点进行身份验证的令牌。只要作业正在运行，令牌就有效。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_JOB_URL</code></td>
+<td style="text-align:left">11.1</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">作业详细信息 URL。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_JOB_STARTED_AT</code></td>
+<td style="text-align:left">13.10</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">作业开始时的 UTC 日期时间，采用 <a href="https://www.rfc-editor.org/rfc/rfc3339#appendix-A" target="_blank" rel="noopener noreffer ">ISO 8601</a> 格式。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_KUBERNETES_ACTIVE</code></td>
+<td style="text-align:left">13.0</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">仅当流水线具有可用于部署的 Kubernetes 集群时才可用。可用时为 <code>true</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_NODE_INDEX</code></td>
+<td style="text-align:left">11.5</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">作业集中的作业 index。仅当作业使用 <a href="https://docs.gitlab.cn/jh/ci/yaml/index.html#parallel" target="_blank" rel="noopener noreffer "><code>parallel</code></a> 时可用。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_NODE_TOTAL</code></td>
+<td style="text-align:left">11.5</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">此作业并行运行的实例总数。如果作业不使用 <a href="https://docs.gitlab.cn/jh/ci/yaml/index.html#parallel" target="_blank" rel="noopener noreffer "><code>parallel</code></a>，则设置为 <code>1</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_OPEN_MERGE_REQUESTS</code></td>
+<td style="text-align:left">13.8</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">使用当前分支和项目作为合并请求源的最多四个合并请求的逗号分隔列表。如果分支具有关联的合并请求，则仅在分支和合并请求流水线中可用。例如，<code>gitlab-org/gitlab!333,gitlab-org/gitlab-foss!11</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PAGES_DOMAIN</code></td>
+<td style="text-align:left">11.8</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">托管 GitLab Pages 的配置域名。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PAGES_URL</code></td>
+<td style="text-align:left">11.8</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">GitLab Pages 站点的 URL。始终是 <code>CI_PAGES_DOMAIN</code> 的子域名。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PIPELINE_ID</code></td>
+<td style="text-align:left">8.10</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">当前流水线的实例级 ID。该 ID 在实例上的所有项目中都是唯一的。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PIPELINE_IID</code></td>
+<td style="text-align:left">11.0</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">当前流水线的项目级 IID（内部 ID）。此 ID 仅在当前项目中是唯一的。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PIPELINE_SOURCE</code></td>
+<td style="text-align:left">10.0</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">流水线是如何触发的。可以是 <code>push</code>、<code>web</code>、<code>schedule</code>、<code>api</code>、<code>external</code>、<code>chat</code>、<code>webide</code>、<code>merge_request_event</code>、<code>external_pull_request_event</code>、<code>parent_pipeline</code>、<a href="https://docs.gitlab.cn/jh/ci/triggers/index.html#%e8%ba%ab%e4%bb%bd%e9%aa%8c%e8%af%81%e4%bb%a4%e7%89%8c" target="_blank" rel="noopener noreffer "><code>trigger</code> 或 <code>pipeline </code></a>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PIPELINE_TRIGGERED</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">如果作业是<a href="https://docs.gitlab.cn/jh/ci/triggers/index.html" target="_blank" rel="noopener noreffer ">触发的</a>为 true。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PIPELINE_URL</code></td>
+<td style="text-align:left">11.1</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">流水线详细信息的 URL。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PIPELINE_CREATED_AT</code></td>
+<td style="text-align:left">13.10</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">创建流水线时的 UTC 日期时间，采用 <a href="https://tools.ietf.org/html/rfc3339#appendix-A" target="_blank" rel="noopener noreffer ">ISO 8601</a> 格式。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PROJECT_DIR</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">仓库克隆到的完整路径，以及作业从哪里运行。如果设置了 GitLab Runner <code>builds_dir</code> 参数，这个变量是相对于 <code>builds_dir</code> 的值设置的。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PROJECT_ID</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">当前项目的 ID。该 ID 在实例上的所有项目中都是唯一的。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PROJECT_NAME</code></td>
+<td style="text-align:left">8.10</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">项目目录的名称。例如，如果项目 URL 是 <code>gitlab.example.com/group-name/project-1</code>，则 <code>CI_PROJECT_NAME</code> 是 <code>project-1</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PROJECT_NAMESPACE</code></td>
+<td style="text-align:left">8.10</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">作业的项目命名空间（用户名或组名）。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PROJECT_NAMESPACE_ID</code></td>
+<td style="text-align:left">15.7</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">作业的项目命名空间 ID。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PROJECT_PATH_SLUG</code></td>
+<td style="text-align:left">9.3</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left"><code>$CI_PROJECT_PATH</code> 小写，不是 <code>a-z</code> 或 <code>0-9</code> 的字符替换为 <code>-</code> 并缩短为 63 字节。 在 URL 和域名中使用。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PROJECT_PATH</code></td>
+<td style="text-align:left">8.10</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">包含项目名称的项目命名空间。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PROJECT_REPOSITORY_LANGUAGES</code></td>
+<td style="text-align:left">12.3</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">仓库中使用的语言的逗号分隔的小写列表。例如<code>ruby,javascript,html,css</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PROJECT_ROOT_NAMESPACE</code></td>
+<td style="text-align:left">13.2</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">作业的根项目命名空间（用户名或组名）。例如，如果<code>CI_PROJECT_NAMESPACE</code> 是 <code>root-group/child-group/grandchild-group</code>，则 <code>CI_PROJECT_ROOT_NAMESPACE</code> 是 <code>root-group</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PROJECT_TITLE</code></td>
+<td style="text-align:left">12.4</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">Web 界面中显示的人类可读的项目名称。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PROJECT_DESCRIPTION</code></td>
+<td style="text-align:left">15.1</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">Web 界面中显示的项目描述。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PROJECT_URL</code></td>
+<td style="text-align:left">8.10</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">项目的 HTTP(S) 地址。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PROJECT_VISIBILITY</code></td>
+<td style="text-align:left">10.3</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">项目可见性。可以是 <code>internal</code>、<code>private</code> 或 <code>public</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_PROJECT_CLASSIFICATION_LABEL</code></td>
+<td style="text-align:left">14.2</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">项目外部授权分类标记。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_REGISTRY_IMAGE</code></td>
+<td style="text-align:left">8.10</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">项目的 Container Registry 的地址。仅当为项目启用了 Container Registry 时才可用。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_REGISTRY_PASSWORD</code></td>
+<td style="text-align:left">9.0</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">将容器推送到项目的 GitLab Container Registry 的密码。仅当为项目启用了 Container Registry 时才可用。 此密码值与 <code>CI_JOB_TOKEN</code> 相同，并且仅在作业运行时有效。使用 <code>CI_DEPLOY_PASSWORD</code> 长期访问镜像库。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_REGISTRY_USER</code></td>
+<td style="text-align:left">9.0</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">将容器推送到项目的 GitLab Container Registry 的用户名。仅当为项目启用了 Container Registry 时才可用。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_REGISTRY</code></td>
+<td style="text-align:left">8.10</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">GitLab Container Registry 的地址。仅当为项目启用了 Container Registry 时才可用。 如果在镜像库配置中指定了一个值，则此变量包括一个 <code>:port</code> 值。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_REPOSITORY_URL</code></td>
+<td style="text-align:left">9.0</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">克隆 Git 仓库的 URL。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_RUNNER_DESCRIPTION</code></td>
+<td style="text-align:left">8.10</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">runner 的描述。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_RUNNER_EXECUTABLE_ARCH</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">10.6</td>
+<td style="text-align:left">GitLab Runner 可执行文件的操作系统/架构。可能和 executor 的环境不一样。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_RUNNER_ID</code></td>
+<td style="text-align:left">8.10</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">正在使用的 runner 的唯一 ID。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_RUNNER_REVISION</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">10.6</td>
+<td style="text-align:left">运行作业的 runner 的修订版。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_RUNNER_SHORT_TOKEN</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">12.3</td>
+<td style="text-align:left">runner 的唯一 ID，用于验证新的作业请求。在 14.9 及更高版本中，令牌包含前缀，并且使用前 17 个字符。在 14.9 版本之前，使用前八个字符。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_RUNNER_TAGS</code></td>
+<td style="text-align:left">8.10</td>
+<td style="text-align:left">0.5</td>
+<td style="text-align:left">以逗号分隔的 runner 标签列表。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_RUNNER_VERSION</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">10.6</td>
+<td style="text-align:left">运行作业的 GitLab Runner 的版本。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_SERVER_HOST</code></td>
+<td style="text-align:left">12.1</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">GitLab 实例 URL 的主机，没有协议或端口。例如<code>gitlab.example.com</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_SERVER_NAME</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">协调作业的 CI/CD 服务器的名称。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_SERVER_PORT</code></td>
+<td style="text-align:left">12.8</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">GitLab 实例 URL 的端口，没有主机或协议。例如 <code>8080</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_SERVER_PROTOCOL</code></td>
+<td style="text-align:left">12.8</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">GitLab 实例 URL 的协议，没有主机或端口。例如 <code>https</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_SERVER_REVISION</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">计划作业的 GitLab 修订版。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_SERVER_TLS_CA_FILE</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">包含 TLS CA 证书的文件，用于在 runner 设置中设置 <code>tls-ca-file</code> 时验证极狐GitLab 服务器。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_SERVER_TLS_CERT_FILE</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">包含 TLS 证书的文件，用于在 runner 设置中设置 <code>tls-ca-file</code> 时验证极狐GitLab 服务器。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_SERVER_TLS_KEY_FILE</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">包含 TLS 密钥的文件，用于在 runner 设置中设置 <code>tls-ca-file</code> 时验证极狐GitLab 服务器。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_SERVER_URL</code></td>
+<td style="text-align:left">12.7</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">GitLab 实例的基本 URL，包括协议和端口。 例如<code>https://gitlab.example.com:8080</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_SERVER_VERSION_MAJOR</code></td>
+<td style="text-align:left">11.4</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">GitLab 实例的主版本。例如，如果版本为 <code>13.6.1</code>，则<code>CI_SERVER_VERSION_MAJOR</code> 为 <code>13</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_SERVER_VERSION_MINOR</code></td>
+<td style="text-align:left">11.4</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">GitLab 实例的小版本。例如，如果版本为 <code>13.6.1</code>，则<code>CI_SERVER_VERSION_MINOR</code> 为 <code>6</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_SERVER_VERSION_PATCH</code></td>
+<td style="text-align:left">11.4</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">GitLab 实例的补丁版本。例如，如果版本为 <code>13.6.1</code>，则<code>CI_SERVER_VERSION_PATCH</code> 为 <code>1</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_SERVER_VERSION</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">GitLab 实例的完整版本。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_SERVER</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">适用于在 CI/CD 中执行的所有作业。可用时为 <code>true</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_SHARED_ENVIRONMENT</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">10.1</td>
+<td style="text-align:left">仅当作业在共享环境中执行时才可用（跨 CI/CD 调用持久化的，如 <code>shell</code> 或 <code>ssh</code> executor）。可用时为 <code>true</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>GITLAB_CI</code></td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">适用于在 CI/CD 中执行的所有作业。可用时为 <code>true</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>GITLAB_FEATURES</code></td>
+<td style="text-align:left">10.6</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">可用于实例和许可证的许可功能的逗号分隔列表。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>GITLAB_USER_EMAIL</code></td>
+<td style="text-align:left">8.12</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">启动流水线的用户的电子邮件，除非作业是手动作业。在手动作业中，该值是启动作业的用户的电子邮件。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>GITLAB_USER_ID</code></td>
+<td style="text-align:left">8.12</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">启动流水线的用户的 ID，除非作业是手动作业。在手动作业中，该值是启动作业的用户的 ID。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>GITLAB_USER_LOGIN</code></td>
+<td style="text-align:left">10.0</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">启动流水线的用户的用户名，除非作业是手动作业。在手动作业中，该值是启动作业的用户的用户名。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>GITLAB_USER_NAME</code></td>
+<td style="text-align:left">10.0</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">启动流水线的用户的姓名，除非作业是手动作业。在手动作业中，该值是启动作业的用户的姓名。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>TRIGGER_PAYLOAD</code></td>
+<td style="text-align:left">13.9</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">webhook 负载。仅当流水线使用 webhook 触发时可用。</td>
+</tr>
+</tbody>
+</table>
+<p>这些变量在以下情况下可用：</p>
+<ul>
+<li>流水线<a href="https://docs.gitlab.cn/jh/ci/pipelines/merge_request_pipelines.html" target="_blank" rel="noopener noreffer ">是合并请求流水线</a>。</li>
+<li>合并请求已打开。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">变量</th>
+<th style="text-align:left">GitLab</th>
+<th style="text-align:left">Runner</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_APPROVED</code></td>
+<td style="text-align:left">14.1</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的批准状态。当<a href="https://docs.gitlab.cn/jh/user/project/merge_requests/approvals/index.html" target="_blank" rel="noopener noreffer ">合并请求批准</a> 可用并且合并请求已被批准时为 <code>true</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_ASSIGNEES</code></td>
+<td style="text-align:left">11.9</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的指派人用户名的逗号分隔列表。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_ID</code></td>
+<td style="text-align:left">11.6</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的实例级 ID。这是 GitLab 上所有项目的唯一 ID。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_IID</code></td>
+<td style="text-align:left">11.6</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的项目级 IID（内部 ID）。此 ID 对于当前项目是唯一的。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_LABELS</code></td>
+<td style="text-align:left">11.9</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的逗号分隔标签名称。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_MILESTONE</code></td>
+<td style="text-align:left">11.9</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的里程碑标题。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_PROJECT_ID</code></td>
+<td style="text-align:left">11.6</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的项目 ID。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_PROJECT_PATH</code></td>
+<td style="text-align:left">11.6</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的项目路径。例如 <code>namespace/awesome-project</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_PROJECT_URL</code></td>
+<td style="text-align:left">11.6</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的项目的 URL。例如，<code>http://192.168.10.15:3000/namespace/awesome-project</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_REF_PATH</code></td>
+<td style="text-align:left">11.6</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的引用路径。例如，<code>refs/merge-requests/1/head</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_SOURCE_BRANCH_NAME</code></td>
+<td style="text-align:left">11.6</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的源分支名称。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_SOURCE_BRANCH_SHA</code></td>
+<td style="text-align:left">11.9</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的源分支的 HEAD SHA。该变量在合并请求流水线中为空。SHA 仅存在于<a href="https://docs.gitlab.cn/jh/ci/pipelines/merged_results_pipelines.html" target="_blank" rel="noopener noreffer ">合并结果流水线</a>中。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_SOURCE_PROJECT_ID</code></td>
+<td style="text-align:left">11.6</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的源项目的 ID。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_SOURCE_PROJECT_PATH</code></td>
+<td style="text-align:left">11.6</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的源项目路径。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_SOURCE_PROJECT_URL</code></td>
+<td style="text-align:left">11.6</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的源项目的 URL。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_TARGET_BRANCH_NAME</code></td>
+<td style="text-align:left">11.6</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的目标分支名称。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_TARGET_BRANCH_PROTECTED</code></td>
+<td style="text-align:left">15.2</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的目标分支的保护状态。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_TARGET_BRANCH_SHA</code></td>
+<td style="text-align:left">11.9</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的目标分支的 HEAD SHA。该变量在合并请求流水线中为空。SHA 仅存在于<a href="https://docs.gitlab.cn/jh/ci/pipelines/merged_results_pipelines.html" target="_blank" rel="noopener noreffer ">合并结果流水线</a>中。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_TITLE</code></td>
+<td style="text-align:left">11.9</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的标题。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_EVENT_TYPE</code></td>
+<td style="text-align:left">12.3</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求的事件类型。可以是 <code>detached</code>、<code>merged_result</code> 或 <code>merge_train</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_DIFF_ID</code></td>
+<td style="text-align:left">13.7</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求差异的版本。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CI_MERGE_REQUEST_DIFF_BASE_SHA</code></td>
+<td style="text-align:left">13.7</td>
+<td style="text-align:left">all</td>
+<td style="text-align:left">合并请求差异的基本 SHA。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="四备份与恢复">四、备份与恢复</h2>
+<h3 id="1备份">1、备份</h3>
+<pre tabindex="0"><code>[root@gitlab1 ~]# gitlab-rake gitlab:backup:create
+</code></pre><p>使用以上命令会在/var/opt/gitlab/backups目录下创建一个名称类似为1530156812_2018_06_28_10.8.4_gitlab_backup.tar的压缩包, 这个压缩包就是Gitlab整个的完整部分, 其中开头的1530156812_2018_06_28_10.8.4是备份创建的日期</p>
+<h3 id="2数据恢复">2、数据恢复</h3>
+<pre tabindex="0"><code>[root@gitlab1 ~]# gitlab-ctl stop unicorn
+[root@gitlab1 ~]# gitlab-ctl stop sidekiq
+</code></pre><p>备份文件增加777权限，并且文件需要存放在/var/opt/gitlab/backups里</p>
+<pre tabindex="0"><code>[root@gitlab1 ~]# gitlab-rake gitlab:backup:restore BACKUP=1530156812_2018_06_28_10.8.4    # 输入两次yes
+</code></pre><p>启动服务</p>
+<pre tabindex="0"><code>[root@gitlab1 ~]# gitlab-ctl restart 
+</code></pre><h2 id="五升级">五、升级</h2>
+<p>gitlab的跨版本升级需要升级中间多个小版本，为了方便升级，可以基于docker升级。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">gitlab</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">gitlab/gitlab-ce:12.9.7-ce.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">gitlab</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">privileged</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">TZ</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Asia/Shanghai&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">GITLAB_OMNIBUS_CONFIG</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">        external_url = &#34;http://git.local.com&#34;</span><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;80:80&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;443:443&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;2222:22&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;/dataDisk/gitlab/config:/etc/gitlab&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;/dataDisk/gitlab/logs:/var/log/gitlab&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;/dataDisk/gitlab/data:/var/opt/gitlab&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">gitlab</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">gitlab</span><span class="p">:</span><span class="w">
+</span></span></span></code></pre></div><h3 id="数据备份">数据备份</h3>
+<pre tabindex="0"><code># 备份产生目录 /var/opt/gitlab/backups/
+gitlab-rake gitlab:backup:create  
+
+# 容器备份
+sudo docker exec -t gitlab gitlab-rake gitlab:backup:create  
+</code></pre><h3 id="迁移">迁移</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">### 配置文件说明 </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 原本： /etc/gitlab/gitlab.rb  </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 容器： /data/gitlab/config/gitlab.rb  </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 授权备份文件</span>
+</span></span><span class="line"><span class="cl">scp 1586766848_2020_04_13_10.3.3_gitlab_backup.tar root@10.0.0.2:/var/opt/gitlab/backups/
+</span></span><span class="line"><span class="cl">chown <span class="m">777</span> /var/opt/gitlab/backups/1586766848_2020_04_13_10.3.3_gitlab_backup.tar
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 加载备份路径  默认 /var/opt/gitlab/backups</span>
+</span></span><span class="line"><span class="cl">vim /data/gitlab/config/gitlab.rb
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;backup_path&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&#34;/var/opt/gitlab/backups&#34;</span>
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;backup_archive_permissions&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">0644</span>  
+</span></span><span class="line"><span class="cl">gitlab_rails<span class="o">[</span><span class="s1">&#39;backup_keep_time&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="m">864000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 重载配置</span>
+</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -t gitlab gitlab-ctl reconfigure
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 停止数据库进程</span>
+</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -t gitlab gitlab-ctl status        
+</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -t gitlab gitlab-ctl stop puma
+</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -t gitlab gitlab-ctl stop sidekiq
+</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -t gitlab gitlab-ctl status        
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 恢复备份文件 （输入两次yes）</span>
+</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -ti gitlab bash
+</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -t gitlab gitlab-rake gitlab:backup:restore <span class="nv">BACKUP</span><span class="o">=</span>1586766848_2020_04_13_10.3.3
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">gitlab-backup restore <span class="nv">BACKUP</span><span class="o">=</span>11493107454_2018_04_25_10.6.4-ce
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 重启与检测</span>
+</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -t gitlab gitlab-ctl restart
+</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -t gitlab gitlab-rake gitlab:check <span class="nv">SANITIZE</span><span class="o">=</span><span class="nb">true</span>
+</span></span></code></pre></div><h3 id="可能出现的问题">可能出现的问题：</h3>
+<p>公钥不受信任，要么按提示需要输入yes，要么把config也进行迁移</p>
+<pre tabindex="0"><code>ssh -T git@local.com
+</code></pre></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-04</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/2023-12-4-gitlab/" data-title="Gitlab" data-hashtags="gitlab,git"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/2023-12-4-gitlab/" data-hashtag="gitlab"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/2023-12-4-gitlab/" data-title="Gitlab"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/2023-12-4-gitlab/" data-title="Gitlab"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/2023-12-4-gitlab/" data-title="Gitlab"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/gitlab/">gitlab</a>,&nbsp;<a href="/tags/git/">git</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023-12-7-dev-terraform-provider/" class="prev" rel="prev" title="Gitlab"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Gitlab</a>
+            <a href="/posts/2023-12-4-ansible-handbook/" class="next" rel="next" title="Ansible handbook">Ansible handbook<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

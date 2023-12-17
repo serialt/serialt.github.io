@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>k3s - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="k3s" />
+<meta property="og:description" content="k3s 参考链接： https://www.escapelife.site/posts/754ba85c.html 一、简介 K3s 是一个轻量级的 Kubernetes 发行版，它针对边缘计算、物联网等场景进行了高度优化。 CNCF 认证的 Kubernetes 发行版 支持 X86_64, ARM64, ARMv7 平台 单一进程包含 Kubernetes ma" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2023-12-16-k3s/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-16T20:26:27+08:00" />
+<meta property="article:modified_time" content="2023-12-16T20:26:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="k3s"/>
+<meta name="twitter:description" content="k3s 参考链接： https://www.escapelife.site/posts/754ba85c.html 一、简介 K3s 是一个轻量级的 Kubernetes 发行版，它针对边缘计算、物联网等场景进行了高度优化。 CNCF 认证的 Kubernetes 发行版 支持 X86_64, ARM64, ARMv7 平台 单一进程包含 Kubernetes ma"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-12-16-k3s/" /><link rel="prev" href="https://serialt.github.io/posts/2023-12-4-ansible-handbook/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "k3s",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2023-12-16-k3s\/"
+        },"genre": "posts","keywords": "k3s, k8s","wordcount":  6854 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2023-12-16-k3s\/","datePublished": "2023-12-16T20:26:27+08:00","dateModified": "2023-12-16T20:26:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">k3s</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-16">2023-12-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6854 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一简介">一、简介</a></li>
+    <li><a href="#二单机部署">二、单机部署</a>
+      <ul>
+        <li><a href="#1在线部署">1、在线部署</a></li>
+        <li><a href="#2离线部署">2、离线部署</a></li>
+      </ul>
+    </li>
+    <li><a href="#二高级配置">二、高级配置</a>
+      <ul>
+        <li><a href="#1设置节点hostname">1、设置节点hostname</a></li>
+        <li><a href="#2可用环境变量">2、可用环境变量</a></li>
+        <li><a href="#3k3s安装参数设置">3、k3s安装参数设置</a></li>
+        <li><a href="#4网络选项配置">4、网络选项配置</a></li>
+        <li><a href="#5镜像仓库设置">5、镜像仓库设置</a></li>
+        <li><a href="#6证书管理">6、证书管理</a></li>
+      </ul>
+    </li>
+    <li><a href="#三多master高可用生产级别部署---在线版">三、多master高可用生产级别部署&mdash;在线版</a>
+      <ul>
+        <li><a href="#1配置内核参数">1、配置内核参数</a></li>
+        <li><a href="#2安装kube-vip">2、安装kube-vip</a></li>
+        <li><a href="#四多master高可用生产级别部署---离线版">四、多master高可用生产级别部署&mdash;离线版</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="k3s">k3s</h1>
+<p>参考链接：</p>
+<ul>
+<li><a href="https://www.escapelife.site/posts/754ba85c.html" target="_blank" rel="noopener noreffer ">https://www.escapelife.site/posts/754ba85c.html</a></li>
+</ul>
+<h2 id="一简介">一、简介</h2>
+<p><code>K3s</code> 是一个轻量级的 <code>Kubernetes</code> 发行版，它针对边缘计算、物联网等场景进行了高度优化。</p>
+<ul>
+<li><code>CNCF</code> 认证的 <code>Kubernetes</code> 发行版</li>
+<li>支持 <code>X86_64</code>, <code>ARM64</code>, <code>ARMv7</code> 平台</li>
+<li>单一进程包含 <code>Kubernetes master</code>，<code>kubelet</code> 和 <code>containerd</code></li>
+</ul>
+<p><code>K3s</code> 有以下增强功能：</p>
+<ul>
+<li>打包为单个二进制文件
+<ul>
+<li>把 <code>K8S</code> 相关的组件，比如 <code>kube-api</code>/ <code>kube-manager</code> 都打包到同一个二进制文件里面，这样的话，只需要启动这个文件就可以快速的启动对应的组件。</li>
+</ul>
+</li>
+<li>使用基于 sqlite3 的默认存储机制
+<ul>
+<li>同时支持使用 <code>etcd3</code>、<code>MySQL</code> 和 <code>PostgreSQL</code> 作为存储机制。</li>
+</ul>
+</li>
+<li>默认情况下是安全的
+<ul>
+<li>在 <code>K3s</code> 中有一个默认的证书管理机制(默认一年有效期)，也有一个可以轮转证书的功能(就是在小于九十天之内重启 <code>K3s</code> 的话，就会自动续一年)。</li>
+</ul>
+</li>
+<li>功能强大的 <code>batteries-included</code> 功能
+<ul>
+<li>就是虽然有些服务本身这个二进制文件并没有提供，但是可以通过内置的服务，将配置文件放到指定的目录下面，就可以在启动的时候一并将该服务启动或替换默认组件。</li>
+</ul>
+</li>
+<li>所有 <code>K8S control-plane</code> 组件都封装在单个二进制文件和进程中
+<ul>
+<li>因为封装在二进制文件中，所以启动的时候只有一个进程。好处在于只需要管理这个单一进程就可以了，同时也具备操作复杂集群的能力。</li>
+</ul>
+</li>
+<li>最大程度减轻了外部依赖性
+<ul>
+<li>即稍新一点的 <code>Linux</code> 内核就可以了(需要 <code>kernel</code> 和 <code>cgroup</code> 挂载)。</li>
+</ul>
+</li>
+</ul>
+<p>之所以叫做 <code>K3S</code> 是因为希望安装的 <code>K8S</code> 在内存占用方面只是一半的大小，而一半大的东西就是一个 <code>5</code> 个字母的单词，简写为 <code>K3S</code>。</p>
+<ul>
+<li>生命周期
+<ul>
+<li>同时支持 <code>3</code> 个 <code>K8s</code> 版本，支持的生命周期与 <code>K8s</code> 相同</li>
+<li>可以参考: <a href="https://kubernetes.io/zh/docs/setup/release/version-skew-policy/" target="_blank" rel="noopener noreffer ">Kubernetes 版本及版本偏差支持策略</a> 进行学习</li>
+</ul>
+</li>
+<li>更新周期
+<ul>
+<li>当 <code>K8s</code> 更新新版本后，一般 <code>K3s</code> 在一周内同步更新</li>
+<li>可以通过 <a href="https://update.k3s.io/v1-release/channels" target="_blank" rel="noopener noreffer ">这个链接</a> 获取 <strong><code>latest</code>/<code>stable</code>/<code>testing</code></strong> 版本</li>
+<li>我们默认安装的是 <code>stable</code> 版本，可以运行通过命令进行查看</li>
+</ul>
+</li>
+<li>命名规范
+<ul>
+<li><strong>v1.20.4+k3s1</strong>: <code>v1.20.4</code> 为 <code>K8s</code> 版本，<code>k3s1</code> 为补丁版本</li>
+</ul>
+</li>
+</ul>
+<h2 id="二单机部署">二、单机部署</h2>
+<h3 id="1在线部署">1、在线部署</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh <span class="p">|</span> <span class="nv">INSTALL_K3S_SELINUX_WARN</span><span class="o">=</span><span class="nb">false</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&#34;--write-kubeconfig ~/.kube/config  --write-kubeconfig-mode 644 &#34;</span>  sh - 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># token存放在/var/lib/rancher/k3s/server/node-token</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl">cat /var/lib/rancher/k3s/server/node-token
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh <span class="p">|</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn   
+</span></span><span class="line"><span class="cl"><span class="nv">K3S_URL</span><span class="o">=</span>https://172.16.1.5:6443   <span class="nv">K3S_TOKEN</span><span class="o">=</span>K102fa20edba4cd43952970c2bce3d40e771da0382b595e70e108cf637dcf79a653::server:d0f4dec273e0e9d0b74f72b2f24a1c59  sh - 
+</span></span></code></pre></div><h3 id="2离线部署">2、离线部署</h3>
+<p>1）下载k3s二进制包、镜像和安装脚本</p>
+<p>二进制包：https://github.com/rancher/k3s/releases</p>
+<p>镜像：https://github.com/k3s-io/k3s/releases</p>
+<p>部署脚本：https://github.com/k3s-io/k3s/blob/master/install.sh</p>
+<p>RHEL系列需要安装selinux：https://github.com/k3s-io/k3s-selinux/releases</p>
+<p>一下以 Rocky 9 arm64 为示例</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># download</span>
+</span></span><span class="line"><span class="cl">wget https://github.com/k3s-io/k3s/releases/download/v1.28.4%2Bk3s2/k3s-arm64
+</span></span><span class="line"><span class="cl">wget https://github.com/k3s-io/k3s-selinux/releases/download/v1.4.stable.1/k3s-selinux-1.4-1.el9.noarch.rpm
+</span></span><span class="line"><span class="cl">wget https://github.com/k3s-io/k3s/releases/download/v1.28.4%2Bk3s2/k3s-airgap-images-arm64.tar.gz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># wget https://get.k3s.io -o ./install.sh</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># wget http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh</span>
+</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/k3s-io/k3s/master/install.sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># set k3s</span>
+</span></span><span class="line"><span class="cl">cp ./k3s /usr/local/bin/
+</span></span><span class="line"><span class="cl">chmod <span class="m">755</span> /usr/local/bin/k3s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># set images</span>
+</span></span><span class="line"><span class="cl">tar -xf k3s-airgap-images-<span class="nv">$ARCH</span>.tar.gz
+</span></span><span class="line"><span class="cl">mkdir -p /var/lib/rancher/k3s/agent/images/
+</span></span><span class="line"><span class="cl">cp ./k3s-airgap-images-<span class="nv">$ARCH</span>.tar /var/lib/rancher/k3s/agent/images/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># install selinux and set system</span>
+</span></span><span class="line"><span class="cl">yum -y localinstall k3s-selinux-.rpm
+</span></span><span class="line"><span class="cl">systemctl stop firewalld
+</span></span><span class="line"><span class="cl">systemctl disable firewalld
+</span></span><span class="line"><span class="cl">setenforce <span class="m">0</span>
+</span></span><span class="line"><span class="cl">sed -ri <span class="s1">&#39;/^SELINUX=/cSELINUX=disabled&#39;</span> /etc/selinux/config
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># install k3s</span>
+</span></span><span class="line"><span class="cl"><span class="nv">INSTALL_K3S_SKIP_DOWNLOAD</span><span class="o">=</span><span class="nb">true</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn  <span class="nv">INSTALL_K3S_SELINUX_WARN</span><span class="o">=</span><span class="nb">true</span> <span class="nv">INSTALL_K3S_SKIP_SELINUX_RPM</span><span class="o">=</span><span class="nb">true</span> <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&#34;--write-kubeconfig ~/.kube/config  --write-kubeconfig-mode 644 &#34;</span>  ./install.sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 其他节点加入</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># token存放在/var/lib/rancher/k3s/server/node-token</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl">cat /var/lib/rancher/k3s/server/node-token
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">INSTALL_K3S_SKIP_DOWNLOAD</span><span class="o">=</span><span class="nb">true</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="nv">INSTALL_K3S_SELINUX_WARN</span><span class="o">=</span><span class="nb">false</span> <span class="nv">K3S_URL</span><span class="o">=</span>https://172.16.1.5:6443 <span class="nv">K3S_TOKEN</span><span class="o">=</span>K101e11731af882398bc6757080f0d8e4b46f8cdb2a17a2edfce54d7971cb3411d1::server:81ee583304cc2b38bf15190298403d34 ./install.sh
+</span></span></code></pre></div><h2 id="二高级配置">二、高级配置</h2>
+<h3 id="1设置节点hostname">1、设置节点hostname</h3>
+<p>集群中不能有共同的主机名，如果hostname有相同，则需要在加入集群时设置一下主机名</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 为每个节点指定主机名</span>
+</span></span><span class="line"><span class="cl">curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">K3S_NODE_NAME</span><span class="o">=</span><span class="s2">&#34;k3s2&#34;</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">K3S_URL</span><span class="o">=</span>https://192.168.64.3:6443 <span class="nv">K3S_TOKEN</span><span class="o">=</span>xxx sh -
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 为每个节点指定主机名</span>
+</span></span><span class="line"><span class="cl">curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="nv">K3S_URL</span><span class="o">=</span>https://192.168.64.3:6443 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">K3S_TOKEN</span><span class="o">=</span>xxx sh -s - --node-name k3s2
+</span></span></code></pre></div><h3 id="2可用环境变量">2、可用环境变量</h3>
+<table>
+<thead>
+<tr>
+<th>Environment Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>INSTALL_K3S_SKIP_DOWNLOAD</code></td>
+<td>如果设置为 &ldquo;true &ldquo;将不会下载 K3s 的哈希值或二进制。</td>
+</tr>
+<tr>
+<td><code>INSTALL_K3S_SYMLINK</code></td>
+<td>默认情况下，如果路径中不存在命令，将为 kubectl、crictl 和 ctr 二进制文件创建符号链接。如果设置为&rsquo;skip&rsquo;将不会创建符号链接，而&rsquo;force&rsquo;将覆盖。</td>
+</tr>
+<tr>
+<td><code>INSTALL_K3S_SKIP_ENABLE</code></td>
+<td>如果设置为 &ldquo;true&rdquo;，将不启用或启动 K3s 服务。</td>
+</tr>
+<tr>
+<td><code>INSTALL_K3S_SKIP_START</code></td>
+<td>如果设置为 &ldquo;true &ldquo;将不会启动 K3s 服务。</td>
+</tr>
+<tr>
+<td><code>INSTALL_K3S_VERSION</code></td>
+<td>从 Github 下载 K3s 的版本。如果没有指定，将尝试从&quot;stable&quot;频道下载。</td>
+</tr>
+<tr>
+<td><code>INSTALL_K3S_BIN_DIR</code></td>
+<td>安装 K3s 二进制文件、链接和卸载脚本的目录，或者使用<code>/usr/local/bin</code>作为默认目录。</td>
+</tr>
+<tr>
+<td><code>INSTALL_K3S_BIN_DIR_READ_ONLY</code></td>
+<td>如果设置为 true 将不会把文件写入<code>INSTALL_K3S_BIN_DIR</code>，强制设置<code>INSTALL_K3S_SKIP_DOWNLOAD=true</code>。</td>
+</tr>
+<tr>
+<td><code>INSTALL_K3S_SYSTEMD_DIR</code></td>
+<td>安装 systemd 服务和环境文件的目录，或者使用<code>/etc/systemd/system</code>作为默认目录。</td>
+</tr>
+<tr>
+<td><code>INSTALL_K3S_EXEC</code></td>
+<td>带有标志的命令，用于在服务中启动 K3s。如果未指定命令，并且设置了<code>K3S_URL</code>，它将默认为“agent”。如果未设置<code>K3S_URL</code>，它将默认为“server”。要获得帮助，请参考<a href="https://docs.rancher.cn/docs/k3s/installation/install-options/how-to-flags/_index#%e7%a4%ba%e4%be%8b-b-install_k3s_exec" target="_blank" rel="noopener noreffer ">此示例。</a></td>
+</tr>
+<tr>
+<td><code>INSTALL_K3S_NAME</code></td>
+<td>要创建的 systemd 服务名称，如果以服务器方式运行 k3s，则默认为&rsquo;k3s&rsquo;；如果以 agent 方式运行 k3s，则默认为&rsquo;k3s-agent&rsquo;。如果指定了服务名，则服务名将以&rsquo;k3s-&lsquo;为前缀。</td>
+</tr>
+<tr>
+<td><code>INSTALL_K3S_TYPE</code></td>
+<td>要创建的 systemd 服务类型，如果没有指定，将默认使用 K3s exec 命令。</td>
+</tr>
+<tr>
+<td><code>INSTALL_K3S_SELINUX_WARN</code></td>
+<td>如果设置为 true，则在没有找到 k3s-selinux 策略的情况下将继续。</td>
+</tr>
+<tr>
+<td><code>INSTALL_K3S_SKIP_SELINUX_RPM</code></td>
+<td>如果设置为 &ldquo;true &ldquo;将跳过 k3s RPM 的自动安装。</td>
+</tr>
+<tr>
+<td><code>INSTALL_K3S_CHANNEL_URL</code></td>
+<td>用于获取 K3s 下载网址的频道 URL。默认为 <a href="https://update.k3s.io/v1-release/channels" target="_blank" rel="noopener noreffer ">https://update.k3s.io/v1-release/channels</a> 。</td>
+</tr>
+<tr>
+<td><code>INSTALL_K3S_CHANNEL</code></td>
+<td>用于获取 K3s 下载 URL 的通道。默认值为 &ldquo;stable&rdquo;。选项包括：<code>stable</code>, <code>latest</code>, <code>testing</code>。</td>
+</tr>
+<tr>
+<td><code>K3S_CONFIG_FILE</code></td>
+<td>指定配置文件的位置。默认目录为<code>/etc/rancher/k3s/config.yaml</code>。</td>
+</tr>
+<tr>
+<td><code>K3S_TOKEN</code></td>
+<td>用于将 server 或 agent 加入集群的共享 secret。</td>
+</tr>
+<tr>
+<td><code>K3S_TOKEN_FILE</code></td>
+<td>指定 <code>cluster-secret</code>,<code>token</code> 的文件目录。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3k3s安装参数设置">3、k3s安装参数设置</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 使用docker作为容器运行时</span>
+</span></span><span class="line"><span class="cl">$ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&#34;--docker&#34;</span> sh -
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 指定运行时工具</span>
+</span></span><span class="line"><span class="cl">$ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&#34;--container-runtime-endpoint containerd&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    sh -
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="c1"># 设置私有镜像仓库配置文件</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 默认配置文件: /etc/rancher/k3s/registries.yaml</span>
+</span></span><span class="line"><span class="cl">$ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&#34;--private-registry xxx&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    sh -
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 针对多网卡主机安装K3s集群</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 默认多网卡会使用默认网关的那个卡</span>
+</span></span><span class="line"><span class="cl">$ rout -n
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># K3s server</span>
+</span></span><span class="line"><span class="cl">$ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&#34;--node-ip=192.168.100.100&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    sh -
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># K3s agent</span>
+</span></span><span class="line"><span class="cl">$ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">K3S_URL</span><span class="o">=</span>https://192.168.99.211:6443 <span class="nv">K3S_TOKEN</span><span class="o">=</span>xxx <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&#34;--node-ip=192.168.100.100&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    sh -
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># --tls-san</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 在TLS证书中添加其他主机名或IP作为主机备用名称</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 即在公网环境下允许通过公网IP访问控制、操作远程集群</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 或者部署多个Server并使用LB进行负责，就需要保留公网地址</span>
+</span></span><span class="line"><span class="cl">$ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&#34;--tls-san 1.1.1.1&#34;</span>  <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    sh -
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 获取配置</span>
+</span></span><span class="line"><span class="cl">$ kubectl get secret k3s-serving -n kube-system -o yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 然后本机复制公网主节点对应的yaml文件即可本地操作了</span>
+</span></span><span class="line"><span class="cl">$ scp ci@1.1.1.1:/etc/rancher/k3s/k3s.yaml ~/.kube/config
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 修改启动的服务对应配置(调整节点的启动的最大Pod数量)</span>
+</span></span><span class="line"><span class="cl">$ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s1">&#39;--kubelet-arg=max-pods=200&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    sh -
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 修改启动的服务对应配置(使用ipvs作为服务调度工具)</span>
+</span></span><span class="line"><span class="cl">$ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s1">&#39;--kube-proxy-arg=proxy-mode=ipvs&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    sh -
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 修改启动的服务对应配置(调整服务启动的端口范围)</span>
+</span></span><span class="line"><span class="cl">$ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s1">&#39;--kube-apiserver-arg=service-node-port-range=40000-50000&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    sh -
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># kubelet-arg     --kubelet-arg</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># kube-apiserver  --kube-apiserver-arg</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># kube-proxy-arg  --kube-proxy-arg</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># kube-proxy-arg  --kube-proxy-arg=proxy-mode=ipvs</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># --data-dir</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 修改K3s数据存储目录</span>
+</span></span><span class="line"><span class="cl">$ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s1">&#39;--data-dir=/opt/k3s-data&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    sh -
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 禁用组件</span>
+</span></span><span class="line"><span class="cl">$ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s1">&#39;--disable traefik&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    sh -
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 自己加自己需要的服务</span>
+</span></span><span class="line"><span class="cl">$ ls /var/lib/rancher/k3s/server/manifests
+</span></span><span class="line"><span class="cl">$ kubectl get pods -A <span class="p">|</span> grep traefik
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 添加label和taint标识</span>
+</span></span><span class="line"><span class="cl">$ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s1">&#39;--node-label foo=bar,hello=world \
+</span></span></span><span class="line"><span class="cl"><span class="s1">        --node-taint key1=value1:NoExecute&#39;</span>
+</span></span><span class="line"><span class="cl">    sh -
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看一下</span>
+</span></span><span class="line"><span class="cl">$ kubectl describe nodes
+</span></span></code></pre></div><p><strong>K3s Server/Agent - 数据库选项</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 指定数据源名称</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 标志位: --datastore-endpoint&amp;nbsp;value</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 环境变量: K3S_DATASTORE_ENDPOINT</span>
+</span></span><span class="line"><span class="cl">$ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s1">&#39;--datastore-endpoint&amp;nbsp;etcd&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    sh -
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="c1"># cron规范中的快照间隔时间</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># --etcd-snapshot-schedule-cron&amp;nbsp;value</span>
+</span></span><span class="line"><span class="cl">$ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s1">&#39;--etcd-snapshot-schedule-cron *&amp;nbsp;*/5&amp;nbsp;*&amp;nbsp;*&amp;nbsp;*&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    sh -
+</span></span></code></pre></div><h3 id="4网络选项配置">4、网络选项配置</h3>
+<p>默认情况下，<code>K3s</code> 将以 <code>flannel</code> 作为 <code>CNI</code> 运行，使用 <code>VXLAN</code> 作为默认后端，<code>CNI</code> 和默认后端都可以通过参数修改。要启用加密，请使用下面的 <code>IPSec</code> 或 <code>WireGuard</code> 选项。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 默认安装K3s之后的网络配置</span>
+</span></span><span class="line"><span class="cl">$ sudo cat /var/lib/rancher/k3s/agent/etc/flannel/net-conf.json
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Network&#34;</span>: <span class="s2">&#34;10.42.0.0/16&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;EnableIPv6&#34;</span>: false,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;EnableIPv4&#34;</span>: true,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;IPv6Network&#34;</span>: <span class="s2">&#34;::/0&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Backend&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Type&#34;</span>: <span class="s2">&#34;vxlan&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><table>
+<thead>
+<tr>
+<th style="text-align:left">CLI Flag 和 Value</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>--flannel-backend=vxlan</code></td>
+<td style="text-align:left">使用 <code>VXLAN</code> 后端(默认)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>--flannel-backend=host-gw</code></td>
+<td style="text-align:left">使用 <code>host-gw</code> 后端</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>--flannel-backend=ipsec</code></td>
+<td style="text-align:left">使用 <code>IPSEC</code> 后端；对网络流量进行加密</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>--flannel-backend=wireguard</code></td>
+<td style="text-align:left">使用 <code>WireGuard</code> 后端；对网络流量进行加密</td>
+</tr>
+</tbody>
+</table>
+<h4 id="1配置-flannel-选项">1）配置 Flannel 选项</h4>
+<p>这样，我就可以在安装 <code>K3s</code> 或者之后修改对应配置文件，来修改 <code>Flannel</code> 默认的后端网络配置选项(重启会覆盖不生效)了。下面，我们演示下，如何修改为 <code>host-gw</code> 模式。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 主节点</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># flannel-backend使用host-gw</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 该模式会把对端主机的IP当做默认网管(多Server情况)</span>
+</span></span><span class="line"><span class="cl">$ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s1">&#39;--flannel-backend=host-gw&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    sh -
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 工作节点</span>
+</span></span><span class="line"><span class="cl">$ curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="nv">K3S_URL</span><span class="o">=</span>https://192.168.100.100:6443 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nv">K3S_TOKEN</span><span class="o">=</span>xxx sh -
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 默认的路由信息</span>
+</span></span><span class="line"><span class="cl">$ route -n
+</span></span><span class="line"><span class="cl">0.0.0.0         172.16.64.1     0.0.0.0         UG    <span class="m">100</span>    <span class="m">0</span>        <span class="m">0</span> enp0s2
+</span></span><span class="line"><span class="cl">10.42.1.0       172.16.64.9     255.255.255.0   UG    <span class="m">0</span>      <span class="m">0</span>        <span class="m">0</span> enp0s2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看配置之后的网络配置</span>
+</span></span><span class="line"><span class="cl">$ sudo cat /var/lib/rancher/k3s/agent/etc/flannel/net-conf.json
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Network&#34;</span>: <span class="s2">&#34;10.42.0.0/16&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Backend&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Type&#34;</span>: <span class="s2">&#34;host-gw&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="5镜像仓库设置">5、镜像仓库设置</h3>
+<p><code>K3s</code> 默认使用 <code>containerd</code> 作为容器运行时，所以在 <code>docker</code> 上配置镜像仓库是不生效的。<code>K3s</code> 镜像仓库配置文件由两大部分组成：<code>mirrors</code> 和  <code>configs</code>。</p>
+<ul>
+<li><code>Mirrors</code> 是一个用于定义专用镜像仓库的名称和 <code>endpoint</code> 的指令</li>
+<li><code>Configs</code> 部分定义了每个 <code>mirror</code> 的 <code>TLS</code> 和证书配置</li>
+<li>对于每个 <code>mirror</code>，你可以定义 <code>auth</code> 和 <code>/</code> 或 <code>tls</code></li>
+</ul>
+<p><code>K3s registry</code> 配置目录为： <code>/etc/rancher/k3s/registries.yaml</code>。<code>K3s</code> 启动时会检查  <code>/etc/rancher/k3s/</code> 中是否存在  <code>registries.yaml</code> 文件，并指示 <code>containerd</code> 使用文件中定义的镜像仓库。如果你想使用一个私有的镜像仓库，那么你需要在每个使用镜像仓库的节点上以 <code>root</code> 身份创建这个文件。</p>
+<p>请注意，<code>server</code> 节点默认是可以调度的。如果你没有在 <code>server</code> 节点上设置污点，那么将在它们上运行工作负载，请确保在每个 <code>server</code> 节点上创建  <code>registries.yaml</code> 文件。</p>
+<p><code>containerd</code> 使用了类似 <code>K8S</code> 中 <code>svc</code> 与 <code>endpoint</code> 的概念，<code>svc</code> 可以理解为访问名称，这个名称会解析到对应的 <code>endpoint</code> 上。也可以理解 <code>mirror</code> 配置就是一个反向代理，它把客户端的请求代理到 <code>endpoint</code> 配置的后端镜像仓库。<code>mirror</code> 名称可以随意填写，但是必须符合 <code>IP</code> 或域名的定义规则。并且可以配置多个 <code>endpoint</code>，默认解析到第一个 <code>endpoint</code>，如果第一个 <code>endpoint</code> 没有返回数据，则自动切换到第二个 <code>endpoint</code>，以此类推。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># /etc/rancher/k3s/registries.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 同时可以设置多个mirrors地址</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 可以对mirrors设置权限和证书</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">mirrors</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="s2">&#34;172.31.6.200:5000&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;http://172.31.6.200:5000&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;http://x.x.x.x:5000&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;http://y.y.y.y:5000&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="s2">&#34;rancher.ksd.top:5000&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;http://172.31.6.200:5000&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="s2">&#34;docker.io&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;https://fogjl973.mirror.aliyuncs.com&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;https://registry-1.docker.io&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="s2">&#34;172.31.6.200:5000&#34;</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">auth</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">admin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">Harbor@12345</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tls</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">cert_file</span><span class="p">:</span><span class="w"> </span><span class="l">/home/ubuntu/harbor2.escapelife.site.cert</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">key_file</span><span class="p">:</span><span class="w"> </span><span class="l">/home/ubuntu/harbor2.escapelife.site.key</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ca_file</span><span class="p">:</span><span class="w"> </span><span class="l">/home/ubuntu/ca.crt</span><span class="w">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 镜像都是从同一个仓库获取到的</span>
+</span></span><span class="line"><span class="cl">$ sudo systemctl restart k3s.service
+</span></span><span class="line"><span class="cl">$ sudo crictl pull 172.31.6.200:5000/library/alpine
+</span></span><span class="line"><span class="cl">$ sudo crictl pull rancher.ksd.top:5000/library/alpine
+</span></span></code></pre></div><p>这里我们介绍下，如何使用 <code>TLS</code> 配置。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 证书颁发机构颁发的证书</span>
+</span></span><span class="line"><span class="cl">$ cat &gt;&gt; /etc/rancher/k3s/registries.yaml <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">mirrors:
+</span></span></span><span class="line"><span class="cl"><span class="s">  &#34;harbor.escapelife.site&#34;:
+</span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://harbor.escapelife.site&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">configs:
+</span></span></span><span class="line"><span class="cl"><span class="s">  &#34;harbor.escapelife.site&#34;:
+</span></span></span><span class="line"><span class="cl"><span class="s">    auth:
+</span></span></span><span class="line"><span class="cl"><span class="s">      username: admin
+</span></span></span><span class="line"><span class="cl"><span class="s">      password: Harbor@12345
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ sudo systemctl restart k3s
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 自签名证书</span>
+</span></span><span class="line"><span class="cl">$ cat &gt;&gt; /etc/rancher/k3s/registries.yaml <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">mirrors:
+</span></span></span><span class="line"><span class="cl"><span class="s">  &#34;harbor2.escapelife.site&#34;:
+</span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://harbor2.escapelife.site&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">configs:
+</span></span></span><span class="line"><span class="cl"><span class="s">  &#34;harbor2.escapelife.site&#34;:
+</span></span></span><span class="line"><span class="cl"><span class="s">    auth:
+</span></span></span><span class="line"><span class="cl"><span class="s">      username: admin
+</span></span></span><span class="line"><span class="cl"><span class="s">      password: Harbor@12345
+</span></span></span><span class="line"><span class="cl"><span class="s">    tls:
+</span></span></span><span class="line"><span class="cl"><span class="s">      cert_file: /home/ubuntu/harbor2.escapelife.site.cert
+</span></span></span><span class="line"><span class="cl"><span class="s">      key_file:  /home/ubuntu/harbor2.escapelife.site.key
+</span></span></span><span class="line"><span class="cl"><span class="s">      ca_file:   /home/ubuntu/ca.crt
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ sudo systemctl restart k3s
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 不使用TLS证书</span>
+</span></span><span class="line"><span class="cl">$ cat &gt;&gt; /etc/rancher/k3s/registries.yaml <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">mirrors:
+</span></span></span><span class="line"><span class="cl"><span class="s">  &#34;docker.io&#34;:
+</span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://fogjl973.mirror.aliyuncs.com&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://registry-1.docker.io&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ sudo systemctl restart k3s
+</span></span></code></pre></div><p><code>K3s</code> 将会在 <code>/var/lib/rancher/k3s/agent/etc/containerd/config.toml</code> 中为 <code>containerd</code> 生成  <code>config.toml</code>。如果要对这个文件进行高级设置，你可以在同一目录中创建另一个名为  <code>config.toml.tmpl</code> 的文件，此文件将会代替默认设置。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 可用示例</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># mkdir -p /etc/rancher/k3s</span>
+</span></span><span class="line"><span class="cl">cat &gt; /etc/rancher/k3s/registries.yaml <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">mirrors:
+</span></span></span><span class="line"><span class="cl"><span class="s">  docker.io:
+</span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://docker.mirrors.sjtug.sjtu.edu.cn&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://docker.nju.edu.cn&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  quay.io:
+</span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://quay.nju.edu.cn&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  gcr.io:
+</span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://gcr.nju.edu.cn&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  ghcr.io:
+</span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://ghcr.nju.edu.cn&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  nvcr.io:
+</span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://ngc.nju.edu.cn&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl restart k3s
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 完整示例</span>
+</span></span><span class="line"><span class="cl">$ cat &gt;&gt; /etc/rancher/k3s/registries.yaml
+</span></span><span class="line"><span class="cl">mirrors:
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;harbor.escapelife.site&#34;</span>:
+</span></span><span class="line"><span class="cl">     endpoint:
+</span></span><span class="line"><span class="cl">     - <span class="s2">&#34;https://harbor.escapelife.site&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;harbor2.escapelife.site&#34;</span>:
+</span></span><span class="line"><span class="cl">     endpoint:
+</span></span><span class="line"><span class="cl">     - <span class="s2">&#34;https://harbor2.escapelife.site&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;172.31.19.227:5000&#34;</span>:
+</span></span><span class="line"><span class="cl">     endpoint:
+</span></span><span class="line"><span class="cl">     - <span class="s2">&#34;http://172.31.19.227:5000&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;docker.io&#34;</span>:
+</span></span><span class="line"><span class="cl">     endpoint:
+</span></span><span class="line"><span class="cl">     - <span class="s2">&#34;https://fogjl973.mirror.aliyuncs.com&#34;</span>
+</span></span><span class="line"><span class="cl">     - <span class="s2">&#34;https://registry-1.docker.io&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">configs:
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;harbor.escapelife.site&#34;</span>:
+</span></span><span class="line"><span class="cl">     auth:
+</span></span><span class="line"><span class="cl">       username: admin
+</span></span><span class="line"><span class="cl">       password: Harbor@12345
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;harbor2.escapelife.site&#34;</span>:
+</span></span><span class="line"><span class="cl">     auth:
+</span></span><span class="line"><span class="cl">       username: admin
+</span></span><span class="line"><span class="cl">       password: Harbor@12345
+</span></span><span class="line"><span class="cl">     tls:
+</span></span><span class="line"><span class="cl">       cert_file: /home/ubuntu/harbor2.escapelife.site.cert
+</span></span><span class="line"><span class="cl">       key_file:  /home/ubuntu/harbor2.escapelife.site.key
+</span></span><span class="line"><span class="cl">       ca_file:   /home/ubuntu/ca.crt
+</span></span></code></pre></div><h3 id="6证书管理">6、证书管理</h3>
+<p>参考链接：https://blog.starudream.cn/2023/07/21/k3s-client-cert-extend/</p>
+<p>默认情况下，<code>K3s</code> 的证书在 <code>12</code> 个月内过期。如果证书已经过期或剩余的时间不足 <code>90</code> 天，则在 <code>K3s</code> 重启时轮换证书。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 查询K3s证书过期时间</span>
+</span></span><span class="line"><span class="cl">$ <span class="k">for</span> i in <span class="sb">`</span>ls /var/lib/rancher/k3s/server/tls/*.crt<span class="sb">`</span><span class="p">;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  <span class="k">do</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="nb">echo</span> <span class="nv">$i</span><span class="p">;</span><span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    openssl x509 -enddate -noout -in <span class="nv">$i</span><span class="p">;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  <span class="k">done</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 修改系统时间为证书过期前90天或证书过期后</span>
+</span></span><span class="line"><span class="cl">$ timedatectl set-ntp no
+</span></span><span class="line"><span class="cl">$ date -s <span class="m">20220807</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 重启K3s服务</span>
+</span></span><span class="line"><span class="cl">$ service k3s restart
+</span></span></code></pre></div><p><code>k3s</code> 默认的根证书签发 十年，客户端证书签发 一年。</p>
+<p>经常需要重新签发客户端证书，可以通过修改 <code>k3s</code> 的环境变量来延长客户端证书的有效期。</p>
+<p>新增 <code>/etc/default/k3s</code> 文件，并添加以下内容：</p>
+<pre tabindex="0"><code>CATTLE_NEW_SIGNED_CERT_EXPIRATION_DAYS=&#34;3650&#34;
+</code></pre><p>该变量在 <code>k3s server</code> 重新签发证书时有效，或者在安装之前设置。</p>
+<pre tabindex="0"><code># 轮换证书
+k3s certificate rotate
+
+# 启动 K3s
+systemctl start k3s
+</code></pre><h2 id="三多master高可用生产级别部署---在线版">三、多master高可用生产级别部署&mdash;在线版</h2>
+<ul>
+<li>
+<p><a href="https://kube-vip.io/docs/usage/k3s/" target="_blank" rel="noopener noreffer ">https://kube-vip.io/docs/usage/k3s/</a></p>
+</li>
+<li>
+<p><a href="https://zhuanlan.zhihu.com/p/651292552" target="_blank" rel="noopener noreffer ">https://zhuanlan.zhihu.com/p/651292552</a></p>
+</li>
+</ul>
+<p>HA + kube-vip</p>
+<h3 id="1配置内核参数">1、配置内核参数</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@k8s-m1 ~<span class="o">]</span><span class="c1">#  cat &lt;&lt;EOF &gt; /etc/sysctl.d/k8s.conf</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># https://github.com/moby/moby/issues/31208 </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ipvsadm -l --timout</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 修复ipvs模式下长连接timeout问题 小于900即可</span>
+</span></span><span class="line"><span class="cl">net.ipv4.tcp_keepalive_time <span class="o">=</span> <span class="m">600</span>
+</span></span><span class="line"><span class="cl">net.ipv4.tcp_keepalive_intvl <span class="o">=</span> <span class="m">30</span>
+</span></span><span class="line"><span class="cl">net.ipv4.tcp_keepalive_probes <span class="o">=</span> <span class="m">10</span>
+</span></span><span class="line"><span class="cl">net.ipv6.conf.all.disable_ipv6 <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">net.ipv6.conf.default.disable_ipv6 <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">net.ipv6.conf.lo.disable_ipv6 <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">net.ipv4.neigh.default.gc_stale_time <span class="o">=</span> <span class="m">120</span>
+</span></span><span class="line"><span class="cl">net.ipv4.conf.all.rp_filter <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">net.ipv4.conf.default.rp_filter <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">net.ipv4.conf.default.arp_announce <span class="o">=</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl">net.ipv4.conf.lo.arp_announce <span class="o">=</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl">net.ipv4.conf.all.arp_announce <span class="o">=</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl">net.ipv4.ip_forward <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">net.ipv4.tcp_max_tw_buckets <span class="o">=</span> <span class="m">5000</span>
+</span></span><span class="line"><span class="cl">net.ipv4.tcp_syncookies <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">net.ipv4.tcp_max_syn_backlog <span class="o">=</span> <span class="m">1024</span>
+</span></span><span class="line"><span class="cl">net.ipv4.tcp_synack_retries <span class="o">=</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 要求iptables不对bridge的数据进行处理</span>
+</span></span><span class="line"><span class="cl">net.bridge.bridge-nf-call-ip6tables <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">net.bridge.bridge-nf-call-iptables <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">net.bridge.bridge-nf-call-arptables <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">net.netfilter.nf_conntrack_max <span class="o">=</span> <span class="m">2310720</span>
+</span></span><span class="line"><span class="cl">fs.inotify.max_user_watches<span class="o">=</span><span class="m">89100</span>
+</span></span><span class="line"><span class="cl">fs.may_detach_mounts <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">fs.file-max <span class="o">=</span> <span class="m">52706963</span>
+</span></span><span class="line"><span class="cl">fs.nr_open <span class="o">=</span> <span class="m">52706963</span>
+</span></span><span class="line"><span class="cl">vm.swappiness <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">vm.overcommit_memory<span class="o">=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">vm.panic_on_oom<span class="o">=</span><span class="m">0</span>
+</span></span><span class="line"><span class="cl">EOF
+</span></span></code></pre></div><p>加载内核参数</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@k8s-m1 ~<span class="o">]</span><span class="c1"># sysctl -p </span>
+</span></span></code></pre></div><h4 id="ipvs配置">ipvs配置</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@k8s-m1 ~<span class="o">]</span><span class="c1"># yum install ipset ipvsadm -y</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@k8s-m1 ~<span class="o">]</span><span class="c1"># cat &gt;/etc/modules-load.d/ipvs.conf&lt;&lt;EOF</span>
+</span></span><span class="line"><span class="cl">ip_vs
+</span></span><span class="line"><span class="cl"><span class="c1"># 负载均衡调度算法-最少连接</span>
+</span></span><span class="line"><span class="cl">ip_vs_lc
+</span></span><span class="line"><span class="cl"><span class="c1"># 负载均衡调度算法-加权最少连接</span>
+</span></span><span class="line"><span class="cl">ip_vs_wlc
+</span></span><span class="line"><span class="cl"><span class="c1"># 负载均衡调度算法-轮询</span>
+</span></span><span class="line"><span class="cl">ip_vs_rr
+</span></span><span class="line"><span class="cl"><span class="c1"># 负载均衡调度算法-加权轮询</span>
+</span></span><span class="line"><span class="cl">ip_vs_wrr
+</span></span><span class="line"><span class="cl"><span class="c1"># 源地址散列调度算法</span>
+</span></span><span class="line"><span class="cl">ip_vs_sh
+</span></span><span class="line"><span class="cl">nf_conntrack
+</span></span><span class="line"><span class="cl">br_netfilter
+</span></span><span class="line"><span class="cl">EOF
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@k8s-m1 ~<span class="o">]</span><span class="c1"># systemctl restart systemd-modules-load.service</span>
+</span></span></code></pre></div><p>查看加载情况</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@k8s-m1 ~<span class="o">]</span><span class="c1"># lsmod | grep -e ip_vs -e nf_conntrack -e br_netfilter</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">systemctl stop firewalld
+</span></span><span class="line"><span class="cl">systemctl disable firewalld
+</span></span><span class="line"><span class="cl">setenforce <span class="m">0</span>
+</span></span><span class="line"><span class="cl">sed -ri <span class="s1">&#39;/^SELINUX=/cSELINUX=disabled&#39;</span> /etc/selinux/config
+</span></span></code></pre></div><p>换源</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sed -e <span class="s1">&#39;s|^mirrorlist=|#mirrorlist=|g&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e <span class="s1">&#39;s|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.ustc.edu.cn/rocky|g&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -i.bak <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    /etc/yum.repos.d/rocky-extras.repo <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    /etc/yum.repos.d/rocky.repo
+</span></span></code></pre></div><p>自签名ca [可选]</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir -p /var/lib/rancher/k3s/server/tls
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /var/lib/rancher/k3s/server/tls
+</span></span><span class="line"><span class="cl">openssl genrsa -out client-ca.key <span class="m">2048</span>
+</span></span><span class="line"><span class="cl">openssl genrsa -out server-ca.key <span class="m">2048</span>
+</span></span><span class="line"><span class="cl">openssl genrsa -out request-header-ca.key <span class="m">2048</span>
+</span></span><span class="line"><span class="cl">openssl req -x509 -new -nodes -key client-ca.key -sha256 -days <span class="m">3650</span> -out client-ca.crt -addext <span class="nv">keyUsage</span><span class="o">=</span>critical,digitalSignature,keyEncipherment,keyCertSign -subj <span class="s1">&#39;/CN=k3s-client-ca&#39;</span>
+</span></span><span class="line"><span class="cl">openssl req -x509 -new -nodes -key server-ca.key -sha256 -days <span class="m">3650</span> -out server-ca.crt -addext <span class="nv">keyUsage</span><span class="o">=</span>critical,digitalSignature,keyEncipherment,keyCertSign -subj <span class="s1">&#39;/CN=k3s-server-ca&#39;</span>
+</span></span><span class="line"><span class="cl">openssl req -x509 -new -nodes -key request-header-ca.key -sha256 -days <span class="m">3650</span> -out request-header-ca.crt -addext <span class="nv">keyUsage</span><span class="o">=</span>critical,digitalSignature,keyEncipherment,keyCertSign -subj <span class="s1">&#39;/CN=k3s-request-header-ca&#39;</span>
+</span></span></code></pre></div><p>设置k3s续签的证书有效期</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;CATTLE_NEW_SIGNED_CERT_EXPIRATION_DAYS=3650&#34;</span> &gt; /etc/default/k3s
+</span></span><span class="line"><span class="cl"><span class="c1"># 或者</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#echo &#34;CATTLE_NEW_SIGNED_CERT_EXPIRATION_DAYS=3650&#34; &gt; /etc/sysconfig/k3s</span>
+</span></span></code></pre></div><h3 id="2安装kube-vip">2、安装kube-vip</h3>
+<p>操作过程：首先生成一个用于部署在 K3s 集群中的 kube-vip Manifest，然后再启动一个高可用的 K3s 集群，启动 K3s 集群时会自动部署 kube-vip 的 Manifest 文件，从而通过 kube-vip 实现控制平面的高可用。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 创建manifests目录</span>
+</span></span><span class="line"><span class="cl">mkdir -p /var/lib/rancher/k3s/server/manifests/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 获取 kube-vip RBAC 清单</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># kube-vip 在 K3s 下作为 DaemonSet 运行，我们需要 RBAC 资源来确保 ServiceAccount 存在并进行绑定，来确保它具有与 API 服务器通信所需的权限。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl https://kube-vip.io/manifests/rbac.yaml &gt; /var/lib/rancher/k3s/server/manifests/kube-vip-rbac.yaml
+</span></span></code></pre></div><p>生成kube-vip DaemonSet Manifest</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">VIP</span><span class="o">=</span>172.16.1.222 <span class="c1"># 设置虚拟 IP 用于访问控制平面的地址</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">INTERFACE</span><span class="o">=</span>ens160 <span class="c1"># 设置控制平面所在主机的网卡名称</span>
+</span></span><span class="line"><span class="cl"><span class="nv">KVVERSION</span><span class="o">=</span><span class="k">$(</span>curl -sL https://api.github.com/repos/kube-vip/kube-vip/releases <span class="p">|</span> jq -r <span class="s2">&#34;.[0].name&#34;</span><span class="k">)</span>  <span class="c1"># 获取 kube-vip 版本</span>
+</span></span><span class="line"><span class="cl"><span class="nb">alias</span> kube-vip<span class="o">=</span><span class="s2">&#34;docker run --network host --rm ghcr.io/kube-vip/kube-vip:</span><span class="nv">$KVVERSION</span><span class="s2">&#34;</span> <span class="c1"># 针对 docker 环境设置别名</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建 kube-vip 清单</span>
+</span></span><span class="line"><span class="cl">kube-vip manifest daemonset <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --interface <span class="nv">$INTERFACE</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --address <span class="nv">$VIP</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --inCluster <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --taint <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --controlplane <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --services <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --arp <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --leaderElection &gt; /var/lib/rancher/k3s/server/manifests/kube-vip.yaml
+</span></span></code></pre></div><p>文件内容</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ServiceAccount</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kube-vip</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kube-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">rbac.authorization.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterRole</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">rbac.authorization.kubernetes.io/autoupdate</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">system:kube-vip-role</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">apiGroups</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;services&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;services/status&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;nodes&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;endpoints&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">verbs</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;list&#34;</span><span class="p">,</span><span class="s2">&#34;get&#34;</span><span class="p">,</span><span class="s2">&#34;watch&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;update&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">apiGroups</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;coordination.k8s.io&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;leases&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">verbs</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;list&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;get&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;watch&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;update&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;create&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterRoleBinding</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">rbac.authorization.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">system:kube-vip-binding</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">roleRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">apiGroup</span><span class="p">:</span><span class="w"> </span><span class="l">rbac.authorization.k8s.io</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterRole</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">system:kube-vip-role</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">subjects</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ServiceAccount</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kube-vip</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kube-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">DaemonSet</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">creationTimestamp</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kube-vip-ds</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kube-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kube-vip-ds</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">creationTimestamp</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kube-vip-ds</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">affinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">nodeAffinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">requiredDuringSchedulingIgnoredDuringExecution</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">nodeSelectorTerms</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">matchExpressions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">node-role.kubernetes.io/master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">Exists</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">matchExpressions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">node-role.kubernetes.io/control-plane</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">Exists</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">args</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">manager</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">vip_arp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">port</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;6443&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">vip_interface</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">ens160</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">vip_cidr</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;32&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">cp_enable</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">cp_namespace</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">kube-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">vip_ddns</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;false&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">svc_enable</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">vip_leaderelection</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">vip_leaseduration</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;5&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">vip_renewdeadline</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">vip_retryperiod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;1&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">address</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="m">172.16.1.222</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c"># image: ghcr.io/kube-vip/kube-vip:v0.6.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">ghcr.nju.edu.cn/kube-vip/kube-vip:v0.6.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">Always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kube-vip</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">resources</span><span class="p">:</span><span class="w"> </span>{}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">securityContext</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">capabilities</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">add</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">NET_ADMIN</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">NET_RAW</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">SYS_TIME</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">hostNetwork</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">serviceAccountName</span><span class="p">:</span><span class="w"> </span><span class="l">kube-vip</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">tolerations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">effect</span><span class="p">:</span><span class="w"> </span><span class="l">NoSchedule</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">Exists</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">effect</span><span class="p">:</span><span class="w"> </span><span class="l">NoExecute</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">Exists</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">updateStrategy</span><span class="p">:</span><span class="w"> </span>{}<span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">status</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">currentNumberScheduled</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">desiredNumberScheduled</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">numberMisscheduled</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">numberReady</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span></code></pre></div><h4 id="3安装ha-k3s集群">3、安装HA K3s集群</h4>
+<p>K3s 支持多种 HA 安装方式，本次示例采用嵌入式 ETCD 的方式搭建高可用的 K3s 集群，这样集群中就存在了 3 个控制平面，然后通过 kube-vip 实现这些控制平面的高可用。</p>
+<p>安装 K3s 时需要指定 <code>--tls-san</code> 参数，这样 K3s 就会使用 kube-vip 虚拟 IP 地址生成 API 服务器证书。</p>
+<p><strong>master节点上</strong></p>
+<p>第一个server</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh <span class="p">|</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&#34; --cluster-init --tls-san 172.16.1.222 --disable=traefik --disable servicelb  --kube-proxy-arg proxy-mode=ipvs --write-kubeconfig ~/.kube/config  --write-kubeconfig-mode 644 &#34;</span>  sh - 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看token</span>
+</span></span><span class="line"><span class="cl">cat /var/lib/rancher/k3s/server/token
+</span></span></code></pre></div><p>其他server</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh <span class="p">|</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn  <span class="nv">K3S_TOKEN</span><span class="o">=</span>K107f47359a4c5125056975c2bb8e4bee90a099366efa61e207092782f19f209abd::server:83a5baabf15d41e9cdf1de4a84b5367f <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&#34; --server https://172.16.1.164:6443   --tls-san 172.16.1.222 --disable=traefik --disable servicelb  --kube-proxy-arg proxy-mode=ipvs --write-kubeconfig ~/.kube/config  --write-kubeconfig-mode 644 &#34;</span>  sh -
+</span></span></code></pre></div><p>agent</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh <span class="p">|</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&#34;agent --server https://k3s.example.com --token mypassword&#34;</span> sh -s -
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh <span class="p">|</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="nv">K3S_TOKEN</span><span class="o">=</span>K107f47359a4c5125056975c2bb8e4bee90a099366efa61e207092782f19f209abd::server:83a5baabf15d41e9cdf1de4a84b5367f sh -s - agent --server https://172.16.1.222:6443 --with-node-id 172.16.1.165
+</span></span></code></pre></div><h4 id="4kube-vip-cloud-提供lb-ip地址段-可选">4、kube-vip-cloud 提供LB IP地址段 [可选]</h4>
+<p><a href="https://kube-vip.io/docs/usage/cloud-provider/#install-the-kube-vip-cloud-provider" target="_blank" rel="noopener noreffer ">https://kube-vip.io/docs/usage/cloud-provider/#install-the-kube-vip-cloud-provider</a></p>
+<pre tabindex="0"><code>wget  https://raw.githubusercontent.com/kube-vip/kube-vip-cloud-provider/main/manifest/kube-vip-cloud-controller.yaml
+
+kubectl apply -f kube-vip-cloud-controller.yaml
+</code></pre><p>文件内容</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ServiceAccount</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kube-vip-cloud-controller</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kube-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">rbac.authorization.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterRole</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">rbac.authorization.kubernetes.io/autoupdate</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;true&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">system:kube-vip-cloud-controller-role</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">apiGroups</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;coordination.k8s.io&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;leases&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">verbs</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;get&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;create&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;update&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;list&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;put&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">apiGroups</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;configmaps&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;endpoints&#34;</span><span class="p">,</span><span class="s2">&#34;events&#34;</span><span class="p">,</span><span class="s2">&#34;services/status&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;leases&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">verbs</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;*&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">apiGroups</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;nodes&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;services&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">verbs</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;list&#34;</span><span class="p">,</span><span class="s2">&#34;get&#34;</span><span class="p">,</span><span class="s2">&#34;watch&#34;</span><span class="p">,</span><span class="s2">&#34;update&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterRoleBinding</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">rbac.authorization.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">system:kube-vip-cloud-controller-binding</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">roleRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">apiGroup</span><span class="p">:</span><span class="w"> </span><span class="l">rbac.authorization.k8s.io</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterRole</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">system:kube-vip-cloud-controller-role</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">subjects</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ServiceAccount</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kube-vip-cloud-controller</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kube-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kube-vip-cloud-provider</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kube-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">revisionHistoryLimit</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">kube-vip</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">component</span><span class="p">:</span><span class="w"> </span><span class="l">kube-vip-cloud-provider</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">rollingUpdate</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">maxSurge</span><span class="p">:</span><span class="w"> </span><span class="m">25</span><span class="l">%</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">maxUnavailable</span><span class="p">:</span><span class="w"> </span><span class="m">25</span><span class="l">%</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">RollingUpdate</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">kube-vip</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">component</span><span class="p">:</span><span class="w"> </span><span class="l">kube-vip-cloud-provider</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">command</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">/kube-vip-cloud-provider</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- --<span class="l">leader-elect-resource-name=kube-vip-cloud-controller</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">ghcr.io/kube-vip/kube-vip-cloud-provider:v0.0.7</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kube-vip-cloud-provider</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">imagePullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">Always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">dnsPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterFirst</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">Always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">terminationGracePeriodSeconds</span><span class="p">:</span><span class="w"> </span><span class="m">30</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">serviceAccountName</span><span class="p">:</span><span class="w"> </span><span class="l">kube-vip-cloud-controller</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">tolerations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">node-role.kubernetes.io/master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">effect</span><span class="p">:</span><span class="w"> </span><span class="l">NoSchedule</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">node-role.kubernetes.io/control-plane</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">effect</span><span class="p">:</span><span class="w"> </span><span class="l">NoSchedule</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">affinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">nodeAffinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">preferredDuringSchedulingIgnoredDuringExecution</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="nt">weight</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">preference</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">matchExpressions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">node-role.kubernetes.io/control-plane</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">Exists</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="nt">weight</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">preference</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span><span class="nt">matchExpressions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">node-role.kubernetes.io/master</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">Exists</span><span class="w">
+</span></span></span></code></pre></div><p>创建对应的ip地址段</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ConfigMap</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">kubevip</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kube-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">data</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#cidr-default: 192.168.0.200/29                      # CIDR-based IP range for use in the default Namespace</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#range-development: 192.168.0.210-192.168.0.219      # Range-based IP range for use in the development Namespace</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#cidr-finance: 192.168.0.220/29,192.168.0.230/29     # Multiple CIDR-based ranges for use in the finance Namespace</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c">#cidr-global: 192.168.0.240/29                       # CIDR-based range which can be used in any Namespace</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">range-global</span><span class="p">:</span><span class="w"> </span><span class="m">172.16.1.230-172.16.1.239</span><span class="w">           </span><span class="c"># Range-based IP range which can be used in any Namespace</span><span class="w">
+</span></span></span></code></pre></div><p>LB测试</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">myapp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">myapp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">LoadBalancer   </span><span class="w"> </span><span class="c">#类型选择LoadBalancer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">myapp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">myapp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">myapp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">myapp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span></code></pre></div><h3 id="四多master高可用生产级别部署---离线版">四、多master高可用生产级别部署&mdash;离线版</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># download</span>
+</span></span><span class="line"><span class="cl">wget https://github.com/k3s-io/k3s/releases/download/v1.28.4%2Bk3s2/k3s-arm64
+</span></span><span class="line"><span class="cl">wget https://github.com/k3s-io/k3s/releases/download/v1.28.4%2Bk3s2/k3s-airgap-images-arm64.tar.gz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 下载rpm包</span>
+</span></span><span class="line"><span class="cl">wget https://github.com/k3s-io/k3s-selinux/releases/download/v1.4.stable.1/k3s-selinux-1.4-1.el9.noarch.rpm
+</span></span><span class="line"><span class="cl">yum -y localinstall k3s-selinux-1.4-1.el9.noarch.rpm --downloadonly  --downloaddir<span class="o">=</span>./k3s-rpm
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">yum -y install  ipvsadm ipset --downloadonly  --downloaddir<span class="o">=</span>./k3s-rpm
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 下载安装脚本</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># wget https://get.k3s.io -o ./install.sh</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># wget http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh</span>
+</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/k3s-io/k3s/master/install.sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#分发到所有节点</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># set k3s</span>
+</span></span><span class="line"><span class="cl">cp ./k3s /usr/local/bin/
+</span></span><span class="line"><span class="cl">chmod <span class="m">755</span> /usr/local/bin/k3s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># set images</span>
+</span></span><span class="line"><span class="cl">tar -xf k3s-airgap-images-<span class="nv">$ARCH</span>.tar.gz
+</span></span><span class="line"><span class="cl">mkdir -p /var/lib/rancher/k3s/agent/images/
+</span></span><span class="line"><span class="cl">cp ./k3s-airgap-images-<span class="nv">$ARCH</span>.tar /var/lib/rancher/k3s/agent/images/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl stop firewalld
+</span></span><span class="line"><span class="cl">systemctl disable firewalld
+</span></span><span class="line"><span class="cl">setenforce <span class="m">0</span>
+</span></span><span class="line"><span class="cl">sed -ri <span class="s1">&#39;/^SELINUX=/cSELINUX=disabled&#39;</span> /etc/selinux/config
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 内核参数设置</span>
+</span></span><span class="line"><span class="cl">cat <span class="s">&lt;&lt;EOF &gt; /etc/sysctl.d/k8s.conf
+</span></span></span><span class="line"><span class="cl"><span class="s"># https://github.com/moby/moby/issues/31208 
+</span></span></span><span class="line"><span class="cl"><span class="s"># ipvsadm -l --timout
+</span></span></span><span class="line"><span class="cl"><span class="s"># 修复ipvs模式下长连接timeout问题 小于900即可
+</span></span></span><span class="line"><span class="cl"><span class="s">net.ipv4.tcp_keepalive_time = 600
+</span></span></span><span class="line"><span class="cl"><span class="s">net.ipv4.tcp_keepalive_intvl = 30
+</span></span></span><span class="line"><span class="cl"><span class="s">net.ipv4.tcp_keepalive_probes = 10
+</span></span></span><span class="line"><span class="cl"><span class="s">net.ipv6.conf.all.disable_ipv6 = 1
+</span></span></span><span class="line"><span class="cl"><span class="s">net.ipv6.conf.default.disable_ipv6 = 1
+</span></span></span><span class="line"><span class="cl"><span class="s">net.ipv6.conf.lo.disable_ipv6 = 1
+</span></span></span><span class="line"><span class="cl"><span class="s">net.ipv4.neigh.default.gc_stale_time = 120
+</span></span></span><span class="line"><span class="cl"><span class="s">net.ipv4.conf.all.rp_filter = 0
+</span></span></span><span class="line"><span class="cl"><span class="s">net.ipv4.conf.default.rp_filter = 0
+</span></span></span><span class="line"><span class="cl"><span class="s">net.ipv4.conf.default.arp_announce = 2
+</span></span></span><span class="line"><span class="cl"><span class="s">net.ipv4.conf.lo.arp_announce = 2
+</span></span></span><span class="line"><span class="cl"><span class="s">net.ipv4.conf.all.arp_announce = 2
+</span></span></span><span class="line"><span class="cl"><span class="s">net.ipv4.ip_forward = 1
+</span></span></span><span class="line"><span class="cl"><span class="s">net.ipv4.tcp_max_tw_buckets = 5000
+</span></span></span><span class="line"><span class="cl"><span class="s">net.ipv4.tcp_syncookies = 1
+</span></span></span><span class="line"><span class="cl"><span class="s">net.ipv4.tcp_max_syn_backlog = 1024
+</span></span></span><span class="line"><span class="cl"><span class="s">net.ipv4.tcp_synack_retries = 2
+</span></span></span><span class="line"><span class="cl"><span class="s"># 要求iptables不对bridge的数据进行处理
+</span></span></span><span class="line"><span class="cl"><span class="s">net.bridge.bridge-nf-call-ip6tables = 1
+</span></span></span><span class="line"><span class="cl"><span class="s">net.bridge.bridge-nf-call-iptables = 1
+</span></span></span><span class="line"><span class="cl"><span class="s">net.bridge.bridge-nf-call-arptables = 1
+</span></span></span><span class="line"><span class="cl"><span class="s">net.netfilter.nf_conntrack_max = 2310720
+</span></span></span><span class="line"><span class="cl"><span class="s">fs.inotify.max_user_watches=89100
+</span></span></span><span class="line"><span class="cl"><span class="s">fs.may_detach_mounts = 1
+</span></span></span><span class="line"><span class="cl"><span class="s">fs.file-max = 52706963
+</span></span></span><span class="line"><span class="cl"><span class="s">fs.nr_open = 52706963
+</span></span></span><span class="line"><span class="cl"><span class="s">vm.swappiness = 0
+</span></span></span><span class="line"><span class="cl"><span class="s">vm.overcommit_memory=1
+</span></span></span><span class="line"><span class="cl"><span class="s">vm.panic_on_oom=0
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sysctl -p 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cat &gt;/etc/modules-load.d/ipvs.conf<span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">ip_vs
+</span></span></span><span class="line"><span class="cl"><span class="s"># 负载均衡调度算法-最少连接
+</span></span></span><span class="line"><span class="cl"><span class="s">ip_vs_lc
+</span></span></span><span class="line"><span class="cl"><span class="s"># 负载均衡调度算法-加权最少连接
+</span></span></span><span class="line"><span class="cl"><span class="s">ip_vs_wlc
+</span></span></span><span class="line"><span class="cl"><span class="s"># 负载均衡调度算法-轮询
+</span></span></span><span class="line"><span class="cl"><span class="s">ip_vs_rr
+</span></span></span><span class="line"><span class="cl"><span class="s"># 负载均衡调度算法-加权轮询
+</span></span></span><span class="line"><span class="cl"><span class="s">ip_vs_wrr
+</span></span></span><span class="line"><span class="cl"><span class="s"># 源地址散列调度算法
+</span></span></span><span class="line"><span class="cl"><span class="s">ip_vs_sh
+</span></span></span><span class="line"><span class="cl"><span class="s">nf_conntrack
+</span></span></span><span class="line"><span class="cl"><span class="s">br_netfilter
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl restart systemd-modules-load.service
+</span></span><span class="line"><span class="cl">lsmod <span class="p">|</span> grep -e ip_vs -e nf_conntrack -e br_netfilter
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 设置续签时间</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;CATTLE_NEW_SIGNED_CERT_EXPIRATION_DAYS=3650&#34;</span> &gt; /etc/default/k3s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 设置镜像加速</span>
+</span></span><span class="line"><span class="cl">mkdir -p /etc/rancher/k3s
+</span></span><span class="line"><span class="cl">cat &gt; /etc/rancher/k3s/registries.yaml <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">mirrors:
+</span></span></span><span class="line"><span class="cl"><span class="s">  docker.io:
+</span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://docker.mirrors.sjtug.sjtu.edu.cn&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://docker.nju.edu.cn&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  quay.io:
+</span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://quay.nju.edu.cn&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  gcr.io:
+</span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://gcr.nju.edu.cn&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  ghcr.io:
+</span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://ghcr.nju.edu.cn&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  nvcr.io:
+</span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://ngc.nju.edu.cn&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></div><p>第一个server</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 配置kube-vip </span>
+</span></span><span class="line"><span class="cl">mkdir -p /var/lib/rancher/k3s/server/manifests/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cat &gt; kube-vip.yaml <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: kube-vip
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: kube-system
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  annotations:
+</span></span></span><span class="line"><span class="cl"><span class="s">    rbac.authorization.kubernetes.io/autoupdate: &#34;true&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: system:kube-vip-role
+</span></span></span><span class="line"><span class="cl"><span class="s">rules:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - apiGroups: [&#34;&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s">    resources: [&#34;services&#34;, &#34;services/status&#34;, &#34;nodes&#34;, &#34;endpoints&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s">    verbs: [&#34;list&#34;,&#34;get&#34;,&#34;watch&#34;, &#34;update&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  - apiGroups: [&#34;coordination.k8s.io&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s">    resources: [&#34;leases&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s">    verbs: [&#34;list&#34;, &#34;get&#34;, &#34;watch&#34;, &#34;update&#34;, &#34;create&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRoleBinding
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: system:kube-vip-binding
+</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: system:kube-vip-role
+</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
+</span></span></span><span class="line"><span class="cl"><span class="s">- kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: kube-vip
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: kube-system
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: apps/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: DaemonSet
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  creationTimestamp: null
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: kube-vip-ds
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: kube-system
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">    matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">      name: kube-vip-ds
+</span></span></span><span class="line"><span class="cl"><span class="s">  template:
+</span></span></span><span class="line"><span class="cl"><span class="s">    metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">      creationTimestamp: null
+</span></span></span><span class="line"><span class="cl"><span class="s">      labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">        name: kube-vip-ds
+</span></span></span><span class="line"><span class="cl"><span class="s">    spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">      affinity:
+</span></span></span><span class="line"><span class="cl"><span class="s">        nodeAffinity:
+</span></span></span><span class="line"><span class="cl"><span class="s">          requiredDuringSchedulingIgnoredDuringExecution:
+</span></span></span><span class="line"><span class="cl"><span class="s">            nodeSelectorTerms:
+</span></span></span><span class="line"><span class="cl"><span class="s">            - matchExpressions:
+</span></span></span><span class="line"><span class="cl"><span class="s">              - key: node-role.kubernetes.io/master
+</span></span></span><span class="line"><span class="cl"><span class="s">                operator: Exists
+</span></span></span><span class="line"><span class="cl"><span class="s">            - matchExpressions:
+</span></span></span><span class="line"><span class="cl"><span class="s">              - key: node-role.kubernetes.io/control-plane
+</span></span></span><span class="line"><span class="cl"><span class="s">                operator: Exists
+</span></span></span><span class="line"><span class="cl"><span class="s">      containers:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - args:
+</span></span></span><span class="line"><span class="cl"><span class="s">        - manager
+</span></span></span><span class="line"><span class="cl"><span class="s">        env:
+</span></span></span><span class="line"><span class="cl"><span class="s">        - name: vip_arp
+</span></span></span><span class="line"><span class="cl"><span class="s">          value: &#34;true&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        - name: port
+</span></span></span><span class="line"><span class="cl"><span class="s">          value: &#34;6443&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        - name: vip_interface
+</span></span></span><span class="line"><span class="cl"><span class="s">          value: ens160
+</span></span></span><span class="line"><span class="cl"><span class="s">        - name: vip_cidr
+</span></span></span><span class="line"><span class="cl"><span class="s">          value: &#34;32&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        - name: cp_enable
+</span></span></span><span class="line"><span class="cl"><span class="s">          value: &#34;true&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        - name: cp_namespace
+</span></span></span><span class="line"><span class="cl"><span class="s">          value: kube-system
+</span></span></span><span class="line"><span class="cl"><span class="s">        - name: vip_ddns
+</span></span></span><span class="line"><span class="cl"><span class="s">          value: &#34;false&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        - name: svc_enable
+</span></span></span><span class="line"><span class="cl"><span class="s">          value: &#34;true&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        - name: vip_leaderelection
+</span></span></span><span class="line"><span class="cl"><span class="s">          value: &#34;true&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        - name: vip_leaseduration
+</span></span></span><span class="line"><span class="cl"><span class="s">          value: &#34;5&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        - name: vip_renewdeadline
+</span></span></span><span class="line"><span class="cl"><span class="s">          value: &#34;3&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        - name: vip_retryperiod
+</span></span></span><span class="line"><span class="cl"><span class="s">          value: &#34;1&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        - name: address
+</span></span></span><span class="line"><span class="cl"><span class="s">          value: 172.16.1.222
+</span></span></span><span class="line"><span class="cl"><span class="s">        # image: ghcr.io/kube-vip/kube-vip:v0.6.0
+</span></span></span><span class="line"><span class="cl"><span class="s">        image: ghcr.nju.edu.cn/kube-vip/kube-vip:v0.6.0
+</span></span></span><span class="line"><span class="cl"><span class="s">        imagePullPolicy: Always
+</span></span></span><span class="line"><span class="cl"><span class="s">        name: kube-vip
+</span></span></span><span class="line"><span class="cl"><span class="s">        resources: {}
+</span></span></span><span class="line"><span class="cl"><span class="s">        securityContext:
+</span></span></span><span class="line"><span class="cl"><span class="s">          capabilities:
+</span></span></span><span class="line"><span class="cl"><span class="s">            add:
+</span></span></span><span class="line"><span class="cl"><span class="s">            - NET_ADMIN
+</span></span></span><span class="line"><span class="cl"><span class="s">            - NET_RAW
+</span></span></span><span class="line"><span class="cl"><span class="s">            - SYS_TIME
+</span></span></span><span class="line"><span class="cl"><span class="s">      hostNetwork: true
+</span></span></span><span class="line"><span class="cl"><span class="s">      serviceAccountName: kube-vip
+</span></span></span><span class="line"><span class="cl"><span class="s">      tolerations:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - effect: NoSchedule
+</span></span></span><span class="line"><span class="cl"><span class="s">        operator: Exists
+</span></span></span><span class="line"><span class="cl"><span class="s">      - effect: NoExecute
+</span></span></span><span class="line"><span class="cl"><span class="s">        operator: Exists
+</span></span></span><span class="line"><span class="cl"><span class="s">  updateStrategy: {}
+</span></span></span><span class="line"><span class="cl"><span class="s">status:
+</span></span></span><span class="line"><span class="cl"><span class="s">  currentNumberScheduled: 0
+</span></span></span><span class="line"><span class="cl"><span class="s">  desiredNumberScheduled: 0
+</span></span></span><span class="line"><span class="cl"><span class="s">  numberMisscheduled: 0
+</span></span></span><span class="line"><span class="cl"><span class="s">  numberReady: 0
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">INSTALL_K3S_SKIP_DOWNLOAD</span><span class="o">=</span><span class="nb">true</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&#34;  --cluster-init --tls-san 172.16.1.222 --disable=traefik --disable servicelb  --kube-proxy-arg proxy-mode=ipvs --write-kubeconfig ~/.kube/config  --write-kubeconfig-mode 644  &#34;</span>  ./install.sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看token</span>
+</span></span><span class="line"><span class="cl">cat /var/lib/rancher/k3s/server/token
+</span></span></code></pre></div><p>其他server</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">INSTALL_K3S_SKIP_DOWNLOAD</span><span class="o">=</span><span class="nb">true</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="nv">K3S_TOKEN</span><span class="o">=</span>K107f47359a4c5125056975c2bb8e4bee90a099366efa61e207092782f19f209abd::server:83a5baabf15d41e9cdf1de4a84b5367f <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&#34; --server https://172.16.1.164:6443   --tls-san 172.16.1.222 --disable=traefik --disable servicelb  --kube-proxy-arg proxy-mode=ipvs --write-kubeconfig ~/.kube/config  --write-kubeconfig-mode 644 &#34;</span>  ./install.sh
+</span></span></code></pre></div><p>agent</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">INSTALL_K3S_SKIP_DOWNLOAD</span><span class="o">=</span><span class="nb">true</span> <span class="nv">K3S_URL</span><span class="o">=</span>https://172.16.1.222:6443 <span class="nv">K3S_TOKEN</span><span class="o">=</span>K107f47359a4c5125056975c2bb8e4bee90a099366efa61e207092782f19f209abd::server:83a5baabf15d41e9cdf1de4a84b5367f  ./install.sh
+</span></span></code></pre></div><h4 id="kube-vip-cloud-设置">kube-vip-cloud 设置</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat &gt; kube-vip-cloud-controller.yaml <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: kube-vip-cloud-controller
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: kube-system
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  annotations:
+</span></span></span><span class="line"><span class="cl"><span class="s">    rbac.authorization.kubernetes.io/autoupdate: &#34;true&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: system:kube-vip-cloud-controller-role
+</span></span></span><span class="line"><span class="cl"><span class="s">rules:
+</span></span></span><span class="line"><span class="cl"><span class="s">  - apiGroups: [&#34;coordination.k8s.io&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s">    resources: [&#34;leases&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s">    verbs: [&#34;get&#34;, &#34;create&#34;, &#34;update&#34;, &#34;list&#34;, &#34;put&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  - apiGroups: [&#34;&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s">    resources: [&#34;configmaps&#34;, &#34;endpoints&#34;,&#34;events&#34;,&#34;services/status&#34;, &#34;leases&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s">    verbs: [&#34;*&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s">  - apiGroups: [&#34;&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s">    resources: [&#34;nodes&#34;, &#34;services&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s">    verbs: [&#34;list&#34;,&#34;get&#34;,&#34;watch&#34;,&#34;update&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ClusterRoleBinding
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: rbac.authorization.k8s.io/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: system:kube-vip-cloud-controller-binding
+</span></span></span><span class="line"><span class="cl"><span class="s">roleRef:
+</span></span></span><span class="line"><span class="cl"><span class="s">  apiGroup: rbac.authorization.k8s.io
+</span></span></span><span class="line"><span class="cl"><span class="s">  kind: ClusterRole
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: system:kube-vip-cloud-controller-role
+</span></span></span><span class="line"><span class="cl"><span class="s">subjects:
+</span></span></span><span class="line"><span class="cl"><span class="s">- kind: ServiceAccount
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: kube-vip-cloud-controller
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: kube-system
+</span></span></span><span class="line"><span class="cl"><span class="s">---
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: apps/v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: Deployment
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: kube-vip-cloud-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: kube-system
+</span></span></span><span class="line"><span class="cl"><span class="s">spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">  replicas: 1
+</span></span></span><span class="line"><span class="cl"><span class="s">  revisionHistoryLimit: 10
+</span></span></span><span class="line"><span class="cl"><span class="s">  selector:
+</span></span></span><span class="line"><span class="cl"><span class="s">    matchLabels:
+</span></span></span><span class="line"><span class="cl"><span class="s">      app: kube-vip
+</span></span></span><span class="line"><span class="cl"><span class="s">      component: kube-vip-cloud-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">  strategy:
+</span></span></span><span class="line"><span class="cl"><span class="s">    rollingUpdate:
+</span></span></span><span class="line"><span class="cl"><span class="s">      maxSurge: 25%
+</span></span></span><span class="line"><span class="cl"><span class="s">      maxUnavailable: 25%
+</span></span></span><span class="line"><span class="cl"><span class="s">    type: RollingUpdate
+</span></span></span><span class="line"><span class="cl"><span class="s">  template:
+</span></span></span><span class="line"><span class="cl"><span class="s">    metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">      labels:
+</span></span></span><span class="line"><span class="cl"><span class="s">        app: kube-vip
+</span></span></span><span class="line"><span class="cl"><span class="s">        component: kube-vip-cloud-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">    spec:
+</span></span></span><span class="line"><span class="cl"><span class="s">      containers:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - command:
+</span></span></span><span class="line"><span class="cl"><span class="s">        - /kube-vip-cloud-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">        - --leader-elect-resource-name=kube-vip-cloud-controller
+</span></span></span><span class="line"><span class="cl"><span class="s">        image: ghcr.io/kube-vip/kube-vip-cloud-provider:v0.0.7
+</span></span></span><span class="line"><span class="cl"><span class="s">        name: kube-vip-cloud-provider
+</span></span></span><span class="line"><span class="cl"><span class="s">        imagePullPolicy: Always
+</span></span></span><span class="line"><span class="cl"><span class="s">      dnsPolicy: ClusterFirst
+</span></span></span><span class="line"><span class="cl"><span class="s">      restartPolicy: Always
+</span></span></span><span class="line"><span class="cl"><span class="s">      terminationGracePeriodSeconds: 30
+</span></span></span><span class="line"><span class="cl"><span class="s">      serviceAccountName: kube-vip-cloud-controller
+</span></span></span><span class="line"><span class="cl"><span class="s">      tolerations:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - key: node-role.kubernetes.io/master
+</span></span></span><span class="line"><span class="cl"><span class="s">        effect: NoSchedule
+</span></span></span><span class="line"><span class="cl"><span class="s">      - key: node-role.kubernetes.io/control-plane
+</span></span></span><span class="line"><span class="cl"><span class="s">        effect: NoSchedule
+</span></span></span><span class="line"><span class="cl"><span class="s">      affinity:
+</span></span></span><span class="line"><span class="cl"><span class="s">        nodeAffinity:
+</span></span></span><span class="line"><span class="cl"><span class="s">          preferredDuringSchedulingIgnoredDuringExecution:
+</span></span></span><span class="line"><span class="cl"><span class="s">          - weight: 10
+</span></span></span><span class="line"><span class="cl"><span class="s">            preference:
+</span></span></span><span class="line"><span class="cl"><span class="s">              matchExpressions:
+</span></span></span><span class="line"><span class="cl"><span class="s">              - key: node-role.kubernetes.io/control-plane
+</span></span></span><span class="line"><span class="cl"><span class="s">                operator: Exists
+</span></span></span><span class="line"><span class="cl"><span class="s">          - weight: 10
+</span></span></span><span class="line"><span class="cl"><span class="s">            preference:
+</span></span></span><span class="line"><span class="cl"><span class="s">              matchExpressions:
+</span></span></span><span class="line"><span class="cl"><span class="s">              - key: node-role.kubernetes.io/master
+</span></span></span><span class="line"><span class="cl"><span class="s">                operator: Exists
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f kube-vip-cloud-controller.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 设置LB ip 地址池</span>
+</span></span><span class="line"><span class="cl">cat &gt; LB-ip-pool.yaml <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">apiVersion: v1
+</span></span></span><span class="line"><span class="cl"><span class="s">kind: ConfigMap
+</span></span></span><span class="line"><span class="cl"><span class="s">metadata:
+</span></span></span><span class="line"><span class="cl"><span class="s">  name: kubevip
+</span></span></span><span class="line"><span class="cl"><span class="s">  namespace: kube-system
+</span></span></span><span class="line"><span class="cl"><span class="s">data:
+</span></span></span><span class="line"><span class="cl"><span class="s">  #cidr-default: 192.168.0.200/29                      # CIDR-based IP range for use in the default Namespace
+</span></span></span><span class="line"><span class="cl"><span class="s">  #range-development: 192.168.0.210-192.168.0.219      # Range-based IP range for use in the development Namespace
+</span></span></span><span class="line"><span class="cl"><span class="s">  #cidr-finance: 192.168.0.220/29,192.168.0.230/29     # Multiple CIDR-based ranges for use in the finance Namespace
+</span></span></span><span class="line"><span class="cl"><span class="s">  #cidr-global: 192.168.0.240/29                       # CIDR-based range which can be used in any Namespace
+</span></span></span><span class="line"><span class="cl"><span class="s">  range-global: 172.16.1.230-172.16.1.239           # Range-based IP range which can be used in any Namespace
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f LB-ip-pool.yaml
+</span></span></code></pre></div><p>LB测试</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">myapp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">myapp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">LoadBalancer   </span><span class="w"> </span><span class="c">#类型选择LoadBalancer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">myapp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">myapp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">myapp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">myapp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-16</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/2023-12-16-k3s/" data-title="k3s" data-hashtags="k3s,k8s"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/2023-12-16-k3s/" data-hashtag="k3s"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/2023-12-16-k3s/" data-title="k3s"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/2023-12-16-k3s/" data-title="k3s"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/2023-12-16-k3s/" data-title="k3s"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/k3s/">k3s</a>,&nbsp;<a href="/tags/k8s/">k8s</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023-12-4-ansible-handbook/" class="prev" rel="prev" title="Ansible handbook"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Ansible handbook</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

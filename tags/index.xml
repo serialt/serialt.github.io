@@ -4,7 +4,47 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Fri, 01 Dec 2023 20:22:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 16 Dec 2023 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>k3s</title>
+    <link>https://serialt.github.io/tags/k3s/</link>
+    <pubDate>Sat, 16 Dec 2023 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/k3s/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>k8s</title>
+    <link>https://serialt.github.io/tags/k8s/</link>
+    <pubDate>Sat, 16 Dec 2023 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/k8s/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>ansible</title>
+    <link>https://serialt.github.io/tags/ansible/</link>
+    <pubDate>Mon, 04 Dec 2023 20:28:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/ansible/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>git</title>
+    <link>https://serialt.github.io/tags/git/</link>
+    <pubDate>Mon, 04 Dec 2023 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/git/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>gitlab</title>
+    <link>https://serialt.github.io/tags/gitlab/</link>
+    <pubDate>Mon, 04 Dec 2023 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/gitlab/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>channel</title>
     <link>https://serialt.github.io/tags/channel/</link>
     <pubDate>Fri, 01 Dec 2023 20:22:27 &#43;0800</pubDate>
@@ -42,46 +82,6 @@
     <pubDate>Fri, 24 Nov 2023 20:22:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/case/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>shell</title>
-    <link>https://serialt.github.io/tags/shell/</link>
-    <pubDate>Fri, 24 Nov 2023 20:22:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/shell/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>shell-handbook</title>
-    <link>https://serialt.github.io/tags/shell-handbook/</link>
-    <pubDate>Fri, 24 Nov 2023 20:22:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/shell-handbook/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>switch</title>
-    <link>https://serialt.github.io/tags/switch/</link>
-    <pubDate>Fri, 24 Nov 2023 20:22:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/switch/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>switch-case</title>
-    <link>https://serialt.github.io/tags/switch-case/</link>
-    <pubDate>Fri, 24 Nov 2023 20:22:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/switch-case/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>ansible-module</title>
-    <link>https://serialt.github.io/tags/ansible-module/</link>
-    <pubDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/ansible-module/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

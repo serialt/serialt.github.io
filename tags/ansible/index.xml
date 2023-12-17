@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>ansible - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/ansible/</link>
+        <description>ansible - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 04 Dec 2023 20:28:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/ansible/" rel="self" type="application/rss+xml" /><item>
+    <title>Ansible handbook</title>
+    <link>https://serialt.github.io/posts/2023-12-4-ansible-handbook/</link>
+    <pubDate>Mon, 04 Dec 2023 20:28:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-12-4-ansible-handbook/</guid>
+    <description><![CDATA[Ansible handbook 一、ansible配置 1、ansible.cfg https://ansible-tran.readthedocs.io/en/latest/docs/intro_configuration.html * ANSIBLE_CONFIG (一个环境变量) * ansible.cfg (位于当前目录中) * .ansible.cfg (位于家目录中) * /etc/ansible/ansible.cfg 生成ansible的]]></description>
+</item>
+</channel>
+</rss>

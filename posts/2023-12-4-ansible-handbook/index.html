@@ -1,0 +1,2316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Ansible handbook - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Ansible handbook" />
+<meta property="og:description" content="Ansible handbook 一、ansible配置 1、ansible.cfg https://ansible-tran.readthedocs.io/en/latest/docs/intro_configuration.html * ANSIBLE_CONFIG (一个环境变量) * ansible.cfg (位于当前目录中) * .ansible.cfg (位于家目录中) * /etc/ansible/ansible.cfg 生成ansible的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2023-12-4-ansible-handbook/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-04T20:28:27+08:00" />
+<meta property="article:modified_time" content="2023-12-04T20:28:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Ansible handbook"/>
+<meta name="twitter:description" content="Ansible handbook 一、ansible配置 1、ansible.cfg https://ansible-tran.readthedocs.io/en/latest/docs/intro_configuration.html * ANSIBLE_CONFIG (一个环境变量) * ansible.cfg (位于当前目录中) * .ansible.cfg (位于家目录中) * /etc/ansible/ansible.cfg 生成ansible的"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-12-4-ansible-handbook/" /><link rel="prev" href="https://serialt.github.io/posts/2023-12-4-gitlab/" /><link rel="next" href="https://serialt.github.io/posts/2023-12-16-k3s/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Ansible handbook",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2023-12-4-ansible-handbook\/"
+        },"genre": "posts","keywords": "ansible","wordcount":  7368 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2023-12-4-ansible-handbook\/","datePublished": "2023-12-04T20:28:27+08:00","dateModified": "2023-12-04T20:28:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Ansible handbook</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-04">2023-12-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7368 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一ansible配置">一、ansible配置</a>
+      <ul>
+        <li><a href="#1ansiblecfg">1、ansible.cfg</a></li>
+        <li><a href="#2hosts">2、hosts</a></li>
+      </ul>
+    </li>
+    <li><a href="#二playbook示例">二、playbook示例</a>
+      <ul>
+        <li><a href="#三公钥受信">三、公钥受信</a></li>
+      </ul>
+    </li>
+    <li><a href="#四模块简介">四、模块简介</a>
+      <ul>
+        <li><a href="#ping">ping</a></li>
+        <li><a href="#shell">shell</a></li>
+        <li><a href="#copy">copy</a></li>
+        <li><a href="#fetch">fetch</a></li>
+        <li><a href="#cron">cron</a></li>
+        <li><a href="#file">file</a></li>
+        <li><a href="#hostsname">hostsname</a></li>
+        <li><a href="#yum">yum</a></li>
+        <li><a href="#yum_repository">yum_repository</a></li>
+        <li><a href="#service">service</a></li>
+        <li><a href="#systemd">systemd</a></li>
+        <li><a href="#git">git</a></li>
+        <li><a href="#supervisorctl">supervisorctl</a></li>
+        <li><a href="#pip">pip</a></li>
+        <li><a href="#archive">archive</a></li>
+        <li><a href="#unarchive">unarchive</a></li>
+        <li><a href="#uri">uri</a></li>
+        <li><a href="#group">group</a></li>
+        <li><a href="#user">user</a></li>
+        <li><a href="#script">script</a></li>
+        <li><a href="#setup">setup</a></li>
+        <li><a href="#template">template</a></li>
+        <li><a href="#script-1">script</a></li>
+        <li><a href="#lineinfile">lineinfile</a></li>
+        <li><a href="#fail">fail</a></li>
+        <li><a href="#stat">stat</a></li>
+        <li><a href="#pause">pause</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="ansible-handbook">Ansible handbook</h1>
+<h2 id="一ansible配置">一、ansible配置</h2>
+<h3 id="1ansiblecfg">1、ansible.cfg</h3>
+<p><a href="https://ansible-tran.readthedocs.io/en/latest/docs/intro_configuration.html" target="_blank" rel="noopener noreffer ">https://ansible-tran.readthedocs.io/en/latest/docs/intro_configuration.html</a></p>
+<pre tabindex="0"><code>* ANSIBLE_CONFIG (一个环境变量)
+* ansible.cfg (位于当前目录中)
+* .ansible.cfg (位于家目录中)
+* /etc/ansible/ansible.cfg
+</code></pre><p>生成ansible的配置文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ansible-config init --disabled &gt; ~/.ansible.cfg
+</span></span></code></pre></div><p>使用环境变量关闭Key验证提示</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">export</span> <span class="nv">ANSIBLE_HOST_KEY_CHECKING</span><span class="o">=</span>False
+</span></span></code></pre></div><p>可使用的模板</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[defaults]</span>
+</span></span><span class="line"><span class="cl"><span class="na">interpreter_python</span> <span class="o">=</span> <span class="s">auto</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#interpreter_python = /usr/bin/python3</span>
+</span></span><span class="line"><span class="cl"><span class="na">host_key_checking</span><span class="o">=</span><span class="s">False</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#inventory=~/.ansible/hosts</span>
+</span></span><span class="line"><span class="cl"><span class="na">private_key_file</span><span class="o">=</span><span class="s">/path/to/file.pem</span>
+</span></span><span class="line"><span class="cl"><span class="na">remote_user</span> <span class="o">=</span> <span class="s">root</span>
+</span></span><span class="line"><span class="cl"><span class="na">sudo_user</span><span class="o">=</span><span class="s">root</span>
+</span></span></code></pre></div><h3 id="2hosts">2、hosts</h3>
+<p><code>写法一</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="na">node1.ansible.com                 </span>
+</span></span><span class="line"><span class="cl"><span class="na">node2.ansible.com </span>
+</span></span><span class="line"><span class="cl">    <span class="na">192.168.1.1</span>
+</span></span></code></pre></div><p><code>写法二</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="na">[webserver]                            </span>
+</span></span><span class="line"><span class="cl"><span class="na">192.168.10.1</span>
+</span></span><span class="line"><span class="cl"><span class="na">192.168.10.2                </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">[dbserver]    </span>
+</span></span><span class="line"><span class="cl"><span class="na">192.168.20.1</span>
+</span></span><span class="line"><span class="cl"><span class="na">192.168.20.2</span>
+</span></span></code></pre></div><p>注意：如果主机建未做ssh互信，则可以按以下写法</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="c1"># 连续IP</span>
+</span></span><span class="line"><span class="cl"><span class="k">[test1]</span>
+</span></span><span class="line"><span class="cl"><span class="na">name1 ansible_ssh_host</span><span class="o">=</span><span class="s">192.168.1.[20:50] ansible_ssh_user=&#34;root&#34; ansible_ssh_pass=&#34;1234&#34; ansible_ssh_port=22 ansible_ssh_private_key_file=~/.ssh/id_rsa</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 带参数</span>
+</span></span><span class="line"><span class="cl"><span class="k">[test1]</span>
+</span></span><span class="line"><span class="cl"><span class="na">name1 ansible_ssh_host</span><span class="o">=</span><span class="s">192.168.1.[20:50]</span>
+</span></span><span class="line"><span class="cl"><span class="k">[test1:vars]</span>
+</span></span><span class="line"><span class="cl"><span class="na">ansible_ssh_user</span><span class="o">=</span><span class="s">root</span>
+</span></span><span class="line"><span class="cl"><span class="na">ansible_ssh_pass</span><span class="o">=</span><span class="s">&#34;1234&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="na">testvar</span><span class="o">=</span><span class="s">&#34;test&#34;</span>
+</span></span></code></pre></div><p>host文件常用变量</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="na">ansible_ssh_host     #用于指定被管理的主机的真实IP</span>
+</span></span><span class="line"><span class="cl"><span class="na">ansible_ssh_port     #用于指定连接到被管理主机的ssh端口号，默认是22</span>
+</span></span><span class="line"><span class="cl"><span class="na">ansible_ssh_user     #ssh连接时默认使用的用户名</span>
+</span></span><span class="line"><span class="cl"><span class="na">ansible_ssh_pass     #ssh连接时的密码</span>
+</span></span><span class="line"><span class="cl"><span class="na">ansible_sudo_pass     #使用sudo连接用户时的密码</span>
+</span></span><span class="line"><span class="cl"><span class="na">ansible_sudo_exec     #如果sudo命令不在默认路径，需要指定sudo命令路径</span>
+</span></span><span class="line"><span class="cl"><span class="na">ansible_ssh_private_key_file     #秘钥文件路径，秘钥文件如果不想使用ssh-agent管理时可以使用此选项</span>
+</span></span><span class="line"><span class="cl"><span class="na">ansible_shell_type     #目标系统的shell的类型，默认sh</span>
+</span></span><span class="line"><span class="cl"><span class="na">ansible_connection     #SSH 连接的类型： local , ssh , paramiko，在 ansible 1.2 之前默认是 paramiko ，后来智能选择，优先使用基于 ControlPersist 的 ssh （支持的前提）</span>
+</span></span><span class="line"><span class="cl"><span class="na">ansible_python_interpreter     #用来指定python解释器的路径，默认为/usr/bin/python 同样可以指定ruby 、perl 的路径</span>
+</span></span><span class="line"><span class="cl"><span class="na">ansible_*_interpreter     #其他解释器路径，用法与ansible_python_interpreter类似，这里&#34;*&#34;可以是ruby或才perl等</span>
+</span></span></code></pre></div><h2 id="二playbook示例">二、playbook示例</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">rocky</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">become</span><span class="p">:</span><span class="w"> </span><span class="kc">yes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">become_user</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">roles</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c">#- role: serialt.centos_init</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l">repo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">vars</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">elrepo_install</span><span class="p">:</span><span class="w"> </span><span class="kc">False</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l">serialt.os_init</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">vars</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">login_info</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;        Welcome to local OPS&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">fail2ban_ignore_ip</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">ssh_key_message</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;t@local.com&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l">python  </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l">serialt.docker</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">vars</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">docker_insecure_registries</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;repo.local.com&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># - role: serialt.chrony</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c">#- role: serialt.kernel</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="c"># - role: zabbix-server</span><span class="w">
+</span></span></span></code></pre></div><p>补充</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 本地执行</span>
+</span></span><span class="line"><span class="cl">- name: check <span class="p">|</span> 发布文件是否存在。
+</span></span><span class="line"><span class="cl">  shell: <span class="s2">&#34;ls {{ deploy_file }}&#34;</span>
+</span></span><span class="line"><span class="cl">  connection: <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># 判断</span>
+</span></span><span class="line"><span class="cl">- name: Create software directory.
+</span></span><span class="line"><span class="cl">  file: 
+</span></span><span class="line"><span class="cl">    path: <span class="s2">&#34;{{ software_files_path }}&#34;</span>
+</span></span><span class="line"><span class="cl">    state: directory
+</span></span><span class="line"><span class="cl">  connection: <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">  when: not go_file_result.stat.exists
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># 串行执行</span>
+</span></span><span class="line"><span class="cl">- hosts: server1
+</span></span><span class="line"><span class="cl">  become: yes
+</span></span><span class="line"><span class="cl">  gather_facts: yes
+</span></span><span class="line"><span class="cl">  serial: <span class="m">1</span>
+</span></span><span class="line"><span class="cl">  tasks:
+</span></span><span class="line"><span class="cl">    - YOUR TASKS HERE
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">- hosts: serialt
+</span></span><span class="line"><span class="cl">  become: yes
+</span></span><span class="line"><span class="cl">  become_user: root
+</span></span><span class="line"><span class="cl">  vars:
+</span></span><span class="line"><span class="cl">    go_version: <span class="s2">&#34;1.20.2&#34;</span>
+</span></span><span class="line"><span class="cl">  tasks:
+</span></span><span class="line"><span class="cl">    - name: check <span class="p">|</span> 发布文件是否存在。
+</span></span><span class="line"><span class="cl">      shell: <span class="s2">&#34;ls {{ deploy_file }}&#34;</span>
+</span></span><span class="line"><span class="cl">      connection: <span class="nb">local</span>
+</span></span><span class="line"><span class="cl">        
+</span></span></code></pre></div><h3 id="三公钥受信">三、公钥受信</h3>
+<p><code>ad hoc</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">ansible add-public-key -m authorized_key -a <span class="s2">&#34;user=root state=present key=&#39;{{ lookup(&#39;file&#39;, &#39;/home/root/.ssh/id_rsa.pub&#39;) }}&#39;&#34;</span>
+</span></span></code></pre></div><p><code>playbook</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">add-public-key</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Add local public key to remote hosts.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">authorized_key</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l">sugar</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ lookup(&#39;file&#39;, &#39;/Users/serialt/.ssh/id_rsa.pub&#39;) }}&#34;</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">present</span><span class="w">
+</span></span></span></code></pre></div><p><code>hosts</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">add-public-key</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="mf">172.16</span><span class="p">.</span><span class="mf">78.53</span> <span class="nx">ansible_connection</span><span class="p">=</span><span class="nx">ssh</span>  <span class="nx">ansible_ssh_user</span><span class="p">=</span><span class="s2">&#34;sugar&#34;</span> <span class="nx">ansible_ssh_pass</span><span class="p">=</span><span class="s2">&#34;ubuntu&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">;</span> <span class="mf">172.25</span><span class="p">.</span><span class="mf">70.2</span> <span class="nx">ansible_connection</span><span class="p">=</span><span class="nx">ssh</span>  <span class="nx">ansible_ssh_user</span><span class="p">=</span><span class="s2">&#34;root&#34;</span> <span class="nx">ansible_ssh_pass</span><span class="p">=</span><span class="s2">&#34;redhat&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">;</span> <span class="mf">172.25</span><span class="p">.</span><span class="mf">70.3</span> <span class="nx">ansible_connection</span><span class="p">=</span><span class="nx">ssh</span>  <span class="nx">ansible_ssh_user</span><span class="p">=</span><span class="s2">&#34;sugar&#34;</span> <span class="nx">ansible_ssh_pass</span><span class="p">=</span><span class="s2">&#34;redhat&#34;</span>
+</span></span></code></pre></div><h2 id="四模块简介">四、模块简介</h2>
+<h3 id="ping">ping</h3>
+<p>检测被管理端是否在线</p>
+<p><code>ad-hoc</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@localhost test<span class="o">]</span><span class="c1"># ansible k8s -m ping</span>
+</span></span><span class="line"><span class="cl">192.168.122.100 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ansible_facts&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;discovered_interpreter_python&#34;</span>: <span class="s2">&#34;/usr/bin/python&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: false, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ping&#34;</span>: <span class="s2">&#34;pong&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p><code>playbook</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># ping模块没有参数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">[</span><span class="l">root@localhost test]# cat ping.yaml </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">k8s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">test ping</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ping</span><span class="p">:</span><span class="w">
+</span></span></span></code></pre></div><h3 id="shell">shell</h3>
+<p>在被管理端执行命令，支持重定向和管道</p>
+<p><code>ad-hoc</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@localhost test<span class="o">]</span><span class="c1"># ansible k8s -m  shell  -a &#34; uptime&#34;</span>
+</span></span><span class="line"><span class="cl">192.168.122.100 <span class="p">|</span> CHANGED <span class="p">|</span> <span class="nv">rc</span><span class="o">=</span><span class="m">0</span> &gt;&gt;
+</span></span><span class="line"><span class="cl"> 11:11:05 up <span class="m">25</span> days,  1:14,  <span class="m">2</span> users,  load average: 0.31, 0.44, 0.39
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 参数 </span>
+</span></span><span class="line"><span class="cl"><span class="nv">chdir</span><span class="o">=</span>&lt;Directory&gt;
+</span></span></code></pre></div><p><code>playbook</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="p">[</span><span class="l">root@localhost test]# cat shell.yaml </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">k8s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l">root</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">gather_facts</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">test shell</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">shell</span><span class="p">:</span><span class="w"> </span><span class="l">date &amp;&amp; pwd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">args</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">chdir</span><span class="p">:</span><span class="w"> </span><span class="l">/tmp/</span><span class="w">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Run expect to wait for a successful PXE boot via out-of-band CIMC</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">shell</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">        set timeout 300
+</span></span></span><span class="line"><span class="cl"><span class="sd">        spawn ssh admin@{{ cimc_host }}
+</span></span></span><span class="line"><span class="cl"><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">        expect &#34;password:&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">        send &#34;{{ cimc_password }}\n&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">        expect &#34;\n{{ cimc_name }}&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">        send &#34;connect host\n&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">        expect &#34;pxeboot.n12&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">        send &#34;\n&#34;
+</span></span></span><span class="line"><span class="cl"><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">        exit 0</span><span class="w">        
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">args</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">executable</span><span class="p">:</span><span class="w"> </span><span class="l">/usr/bin/expect</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">delegate_to</span><span class="p">:</span><span class="w"> </span><span class="l">localhost</span><span class="w">
+</span></span></span></code></pre></div><h3 id="copy">copy</h3>
+<p>拷贝ansible管理端的文件到远程主机的指定位置</p>
+<p>常见参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dest</td>
+<td>string</td>
+<td>null</td>
+<td>指明拷贝文件的目标目录位置，使用绝对路径，如果源是目录，则目标也要是目录,如果目标文件已存在，会覆盖原有内容</td>
+</tr>
+<tr>
+<td>src</td>
+<td>string</td>
+<td>null</td>
+<td>指明本地路径下的某个文件，可以使用相对路径和绝对路径，支持直接指定目录，如果源是目录，则目标也要是目录</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>权限位</td>
+<td>无</td>
+<td>指明复制时，目标文件的权限</td>
+</tr>
+<tr>
+<td>owner</td>
+<td>string</td>
+<td>null</td>
+<td>指明复制时，目标文件的属主</td>
+</tr>
+<tr>
+<td>group</td>
+<td>string</td>
+<td>null</td>
+<td>指明复制时，目标文件的属组</td>
+</tr>
+<tr>
+<td>content</td>
+<td>string</td>
+<td>null</td>
+<td>指明复制到目标主机上的内容，不能与src一起使用，相当于复制content指明的数据，到目标文件中</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@localhost test<span class="o">]</span><span class="c1"># ansible k8s -m copy -a &#34;src=/etc/hosts dest=/tmp/&#34;</span>
+</span></span><span class="line"><span class="cl">192.168.122.100 <span class="p">|</span> <span class="nv">CHANGED</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ansible_facts&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;discovered_interpreter_python&#34;</span>: <span class="s2">&#34;/usr/bin/python&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: true, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;checksum&#34;</span>: <span class="s2">&#34;42d592f8ed1579880187c900197e1edd09688992&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;dest&#34;</span>: <span class="s2">&#34;/tmp/hosts&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;gid&#34;</span>: 0, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;group&#34;</span>: <span class="s2">&#34;root&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;md5sum&#34;</span>: <span class="s2">&#34;f4c82671111086eb6fa6d869e80e1128&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;mode&#34;</span>: <span class="s2">&#34;0644&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;owner&#34;</span>: <span class="s2">&#34;root&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;size&#34;</span>: 803, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;src&#34;</span>: <span class="s2">&#34;/root/.ansible/tmp/ansible-tmp-1608693775.8-22394-277593855767937/source&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;state&#34;</span>: <span class="s2">&#34;file&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;uid&#34;</span>: <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="fetch">fetch</h3>
+<p>从远程主机拉取文件到本地（ 一般情况下，只会从一个远程节点拉取数据）</p>
+<p>常见参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dest</td>
+<td>string</td>
+<td>null</td>
+<td>从远程主机上拉取的文件存放在本地的位置，一般只能是目录</td>
+</tr>
+<tr>
+<td>src</td>
+<td>string</td>
+<td>null</td>
+<td>指明远程主机上要拉取的文件，只能是文件，不能是目录</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m fetch -a &#39;src=/etc/passwd dest=/tmp&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: true, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;checksum&#34;</span>: <span class="s2">&#34;974b44c114ecbd71bdee11e09a9bc14c9b0395bd&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;dest&#34;</span>: <span class="s2">&#34;/tmp/192.168.100.102/etc/passwd&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;md5sum&#34;</span>: <span class="s2">&#34;01d72332a8d9737631212995fe1494f4&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;remote_checksum&#34;</span>: <span class="s2">&#34;974b44c114ecbd71bdee11e09a9bc14c9b0395bd&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;remote_md5sum&#34;</span>: null
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="cron">cron</h3>
+<p>管理计划任务</p>
+<p>常见参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值0</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>minute</td>
+<td>0-59, * , * / 2</td>
+<td>*</td>
+<td>指明计划任务的分钟</td>
+</tr>
+<tr>
+<td>hour</td>
+<td>0-23, * , * / 2</td>
+<td>*</td>
+<td></td>
+</tr>
+<tr>
+<td>day</td>
+<td>1-31</td>
+<td>*</td>
+<td></td>
+</tr>
+<tr>
+<td>month</td>
+<td>1-12</td>
+<td>*</td>
+<td></td>
+</tr>
+<tr>
+<td>weekday</td>
+<td>0-6</td>
+<td>*</td>
+<td></td>
+</tr>
+<tr>
+<td>reboot</td>
+<td>yes | no</td>
+<td>null</td>
+<td>指明计划任务执行的时间为每次重启之后</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>null</td>
+<td>给该计划任务取个名称,必须要给明。每个任务的名称不能一样</td>
+</tr>
+<tr>
+<td>job</td>
+<td>string</td>
+<td>null</td>
+<td>执行的任务是什么，当state=present时才有意义</td>
+</tr>
+<tr>
+<td>state</td>
+<td>present | absent</td>
+<td>present</td>
+<td>表示这个任务是创建还是删除，present表示创建，absent表示删除，默认是present</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m cron -a &#39;minute=*/5 name=Ajob job=&#34;/usr/sbin/ntpdate 172.16.8.100 &amp;&gt; /dev/null&#34; state=present&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: true, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;envs&#34;</span>: <span class="o">[]</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;jobs&#34;</span>: <span class="o">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;Ajob&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m shell -a &#39;crontab -l&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> SUCCESS <span class="p">|</span> <span class="nv">rc</span><span class="o">=</span><span class="m">0</span> &gt;&gt;
+</span></span><span class="line"><span class="cl"><span class="c1">#Ansible: Ajob</span>
+</span></span><span class="line"><span class="cl">*/5 * * * * /usr/sbin/ntpdate 172.16.8.100 <span class="p">&amp;</span>&gt; /dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m cron -a &#39;minute=*/5 name=Ajob job=&#34;/usr/sbin/ntpdate 172.16.8.100 &amp;&gt; /dev/null&#34; state=absent&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: true, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;envs&#34;</span>: <span class="o">[]</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;jobs&#34;</span>: <span class="o">[]</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="file">file</h3>
+<p>用于设定远程主机上的文件属性</p>
+<p>常见参数:</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td>string</td>
+<td>null</td>
+<td>指明对哪个文件修改其属性</td>
+</tr>
+<tr>
+<td>src</td>
+<td>string</td>
+<td>null</td>
+<td>指明path=指明的文件是软链接文件，其对应的源文件是谁，必须要在state=link时才有用</td>
+</tr>
+<tr>
+<td>state</td>
+<td>directory | link| absent</td>
+<td>null</td>
+<td>表示创建的文件是目录还是软链接</td>
+</tr>
+<tr>
+<td>owner</td>
+<td>string</td>
+<td>null</td>
+<td>指明文件的属主</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>权限位</td>
+<td>无</td>
+<td>指明文件的权限</td>
+</tr>
+</tbody>
+</table>
+<p>使用示例：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">创建软链接的用法：
+</span></span><span class="line"><span class="cl">	<span class="nv">src</span><span class="o">=</span>  <span class="nv">path</span><span class="o">=</span>  <span class="nv">state</span><span class="o">=</span>link
+</span></span><span class="line"><span class="cl">修改文件属性的用法：
+</span></span><span class="line"><span class="cl">	<span class="nv">path</span><span class="o">=</span>  <span class="nv">owner</span><span class="o">=</span>  <span class="nv">mode</span><span class="o">=</span>  <span class="nv">group</span><span class="o">=</span>
+</span></span><span class="line"><span class="cl">创建目录的用法：
+</span></span><span class="line"><span class="cl">	<span class="nv">path</span><span class="o">=</span>  <span class="nv">state</span><span class="o">=</span>directory
+</span></span><span class="line"><span class="cl">删除文件：
+</span></span><span class="line"><span class="cl">	<span class="nv">path</span><span class="o">=</span> <span class="nv">state</span><span class="o">=</span>absent
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@ansible etc<span class="o">]</span><span class="c1"># ansible testsrv -m file -a &#34;path=/tmp/1.txt mode=600 owner=root group=nobody&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@ansible ~<span class="o">]</span><span class="c1"># ansible testsrv -m file -a &#34;path=/tmp/bb mode=777 recurse=yes&#34;</span>
+</span></span></code></pre></div><p>创建软链接</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m file -a &#39;src=/etc/passwd path=/tmp/passwd.link state=link&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: true, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;dest&#34;</span>: <span class="s2">&#34;/tmp/passwd.link&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;gid&#34;</span>: 0, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;group&#34;</span>: <span class="s2">&#34;root&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;mode&#34;</span>: <span class="s2">&#34;0777&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;owner&#34;</span>: <span class="s2">&#34;root&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;size&#34;</span>: 11, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;src&#34;</span>: <span class="s2">&#34;/etc/passwd&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;state&#34;</span>: <span class="s2">&#34;link&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;uid&#34;</span>: <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>删除文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m file -a &#39;path=/tmp/cc.txt state=absent&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: true, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;path&#34;</span>: <span class="s2">&#34;/tmp/cc.txt&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;state&#34;</span>: <span class="s2">&#34;absent&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>修改文件属性</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m file -a &#39;path=/tmp/bb.txt mode=700 owner=root group=nobody&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: true, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;gid&#34;</span>: 99, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;group&#34;</span>: <span class="s2">&#34;nobody&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;mode&#34;</span>: <span class="s2">&#34;0700&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;owner&#34;</span>: <span class="s2">&#34;root&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;path&#34;</span>: <span class="s2">&#34;/tmp/bb.txt&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;size&#34;</span>: 14, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;state&#34;</span>: <span class="s2">&#34;file&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;uid&#34;</span>: <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m shell -a &#39;ls -l /tmp/bb.txt&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> SUCCESS <span class="p">|</span> <span class="nv">rc</span><span class="o">=</span><span class="m">0</span> &gt;&gt;
+</span></span><span class="line"><span class="cl">-rwx------ <span class="m">1</span> root nobody <span class="m">14</span> Dec  <span class="m">2</span>  <span class="m">2016</span> /tmp/bb.txt
+</span></span></code></pre></div><p>创建目录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m file -a &#39;path=/tmp/bj state=directory&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: true, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;gid&#34;</span>: 0, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;group&#34;</span>: <span class="s2">&#34;root&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;mode&#34;</span>: <span class="s2">&#34;0755&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;owner&#34;</span>: <span class="s2">&#34;root&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;path&#34;</span>: <span class="s2">&#34;/tmp/bj&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;size&#34;</span>: 4096, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;state&#34;</span>: <span class="s2">&#34;directory&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;uid&#34;</span>: <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>删除目录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m file -a &#39;path=/tmp/bj state=absent&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: true, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;path&#34;</span>: <span class="s2">&#34;/tmp/bj&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;state&#34;</span>: <span class="s2">&#34;absent&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m shell -a &#39;ls -l /tmp&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> SUCCESS <span class="p">|</span> <span class="nv">rc</span><span class="o">=</span><span class="m">0</span> &gt;&gt;
+</span></span><span class="line"><span class="cl">total <span class="m">16</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> root   root      <span class="m">0</span> Dec  <span class="m">2</span>  <span class="m">2016</span> aa.txt
+</span></span><span class="line"><span class="cl">drwx------ <span class="m">2</span> root   root   <span class="m">4096</span> Dec  <span class="m">2</span> 13:41 ansible_twMJYb
+</span></span><span class="line"><span class="cl">-rwx------ <span class="m">1</span> root   nobody   <span class="m">14</span> Dec  <span class="m">2</span>  <span class="m">2016</span> bb.txt
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> root   root    <span class="m">158</span> Dec  <span class="m">2</span>  <span class="m">2016</span> hosts
+</span></span><span class="line"><span class="cl">-rw------- <span class="m">1</span> nobody nobody  <span class="m">947</span> Dec  <span class="m">2</span>  <span class="m">2016</span> passwd
+</span></span><span class="line"><span class="cl">lrwxrwxrwx <span class="m">1</span> root   root     <span class="m">11</span> Dec  <span class="m">2</span> 13:35 passwd.link -&gt; /etc/passwd
+</span></span><span class="line"><span class="cl">-rw------- <span class="m">1</span> root   root      <span class="m">0</span> Dec  <span class="m">2</span> 00:58 yum.log
+</span></span></code></pre></div><h3 id="hostsname">hostsname</h3>
+<p>管理远程主机的主机名</p>
+<p>参数：</p>
+<ul>
+<li>name=  指明主机名</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m shell -a &#39;hostname&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> SUCCESS <span class="p">|</span> <span class="nv">rc</span><span class="o">=</span><span class="m">0</span> &gt;&gt;
+</span></span><span class="line"><span class="cl">node1.ansible.com
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m hostname -a &#39;name=node2.ansible.com&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ansible_facts&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_domain&#34;</span>: <span class="s2">&#34;ansible.com&#34;</span>, 
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_fqdn&#34;</span>: <span class="s2">&#34;node2.ansible.com&#34;</span>, 
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_hostname&#34;</span>: <span class="s2">&#34;node2&#34;</span>, 
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ansible_nodename&#34;</span>: <span class="s2">&#34;node2.ansible.com&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: true, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;name&#34;</span>: <span class="s2">&#34;node2.ansible.com&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="yum">yum</h3>
+<p>基于yum机制，对远程主机管理程序包</p>
+<p>常用参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>null</td>
+<td>指明程序包的名称，可以带上版本号，不指明版本，就是默认最新版本</td>
+</tr>
+<tr>
+<td>state</td>
+<td>present|lastest|absent</td>
+<td>null</td>
+<td>指明对程序包执行的操作，present表示安装程序包，latest表示安装最新版本的程序包，absent表示卸载程序包</td>
+</tr>
+<tr>
+<td>disablerepo</td>
+<td>yes|no</td>
+<td>null</td>
+<td>在用yum安装时，临时禁用某个仓库，仓库的ID</td>
+</tr>
+<tr>
+<td>enablerepo</td>
+<td>yes|no</td>
+<td>null</td>
+<td>在用yum安装时，临时启用某个仓库,仓库的ID</td>
+</tr>
+<tr>
+<td>conf_file=</td>
+<td>string</td>
+<td>null</td>
+<td>指明yum运行时采用哪个配置文件，而不是使用默认的配置文件</td>
+</tr>
+<tr>
+<td>disable_gpg_check</td>
+<td>yes|no</td>
+<td>null</td>
+<td>是否启用gpg-check</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 卸载软件包:</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m yum -a &#39;name=httpd state=absent&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m shell -a &#39;rpm -q httpd&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装软件包:</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m yum -a &#39;name=httpd state=present&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@ansible ~<span class="o">]</span><span class="c1"># ansible 192.168.122.102 -m yum -a &#34;name=ftp state=present disablerepo=zabbix&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@ansible_server ~<span class="o">]</span><span class="c1"># ansible test_server -m yum -a &#34;name=zabbix-agent state=present enablerepo=zabbix3.2 disablerepo=zabbix&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 更新软件</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@ansible_server ~<span class="o">]</span><span class="c1"># ansible test_server -m yum -a &#34;name=zabbix-agent state=latest&#34;</span>
+</span></span></code></pre></div><p><code>palybook</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">hosts</span><span class="p">:</span><span class="w"> </span><span class="l">all</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tasks</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">yum</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">yum</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ item }}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">present</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">with_items</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">git</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">httpd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">mysql</span><span class="w">
+</span></span></span></code></pre></div><h3 id="yum_repository">yum_repository</h3>
+<p>管理远程主机上的 yum 仓库</p>
+<p>常用参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>null</td>
+<td>必须参数，用于指定要操作的唯一的仓库ID，也就是”.repo”配置文件中每个仓库对应的”中括号”内的仓库ID</td>
+</tr>
+<tr>
+<td>baseurl</td>
+<td>string</td>
+<td>null</td>
+<td>用于设置 yum 仓库的 baseurl</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>null</td>
+<td>用于设置仓库的注释信息，也就是”.repo”配置文件中每个仓库对应的”name字段”对应的内容</td>
+</tr>
+<tr>
+<td>file</td>
+<td>string</td>
+<td>null</td>
+<td>用于设置仓库的配置文件名称，即设置”.repo”配置文件的文件名前缀，在不使用此参数的情况下，默认以 name 参数的仓库ID作为”.repo”配置文件的文件名前缀，同一个”.repo” 配置文件中可以存在多个 yum 源</td>
+</tr>
+<tr>
+<td>enabled</td>
+<td>string</td>
+<td>yes</td>
+<td>用于设置是否激活对应的 yum 源，此参数默认值为 yes，表示启用对应的 yum 源，设置为 no 表示不启用对应的 yum 源</td>
+</tr>
+<tr>
+<td>gpgcheck</td>
+<td>string</td>
+<td>no</td>
+<td>用于设置是否开启 rpm 包验证功能，默认值为 no，表示不启用包验证，设置为 yes 表示开启包验证功能</td>
+</tr>
+<tr>
+<td>gpgcakey</td>
+<td>string</td>
+<td>null</td>
+<td>当 gpgcheck 参数设置为 yes 时，需要使用此参数指定验证包所需的公钥</td>
+</tr>
+<tr>
+<td>state</td>
+<td>present</td>
+<td>present</td>
+<td>当值设置为 absent 时，表示删除对应的 yum 源</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@ansible-manager ~<span class="o">]</span><span class="c1"># ansible ansible-demo3 -m yum_repository -a &#39;name=aliEpel description=&#34;alibaba EPEL&#34; baseurl=https://mirrors.aliyun.com/epel/$releasever\Server/$basearch/&#39;</span>
+</span></span><span class="line"><span class="cl">ansible-demo3 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: true, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;repo&#34;</span>: <span class="s2">&#34;aliEpel&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;state&#34;</span>: <span class="s2">&#34;present&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>配置postgresql 清华源</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@localhost test<span class="o">]</span><span class="c1"># cat yum_repo.yaml </span>
+</span></span><span class="line"><span class="cl">- hosts: 127.0.0.1
+</span></span><span class="line"><span class="cl">  user: root
+</span></span><span class="line"><span class="cl">  gather_facts: <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">  tasks:
+</span></span><span class="line"><span class="cl">    - name: config postgresql with tsinghua
+</span></span><span class="line"><span class="cl">      yum_repository:
+</span></span><span class="line"><span class="cl">        file: postgresql-10
+</span></span><span class="line"><span class="cl">        name: postgresql
+</span></span><span class="line"><span class="cl">        description: postgresql-10 tsinghua
+</span></span><span class="line"><span class="cl">        baseurl: https://mirrors.tuna.tsinghua.edu.cn/postgresql/repos/yum/10/redhat/rhel-7-x86_64/
+</span></span><span class="line"><span class="cl">        enabled: yes
+</span></span><span class="line"><span class="cl">        gpgcheck: no
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost yum.repos.d<span class="o">]</span><span class="c1"># cat postgresql-10.repo </span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>postgresql<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">baseurl</span> <span class="o">=</span> https://mirrors.tuna.tsinghua.edu.cn/postgresql/repos/yum/10/redhat/rhel-7-x86_64/
+</span></span><span class="line"><span class="cl"><span class="nv">enabled</span> <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="nv">gpgcheck</span> <span class="o">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="nv">name</span> <span class="o">=</span> postgresql-10 tsinghua
+</span></span></code></pre></div><h3 id="service">service</h3>
+<p>管理远程主机上的服务的模块</p>
+<p>常用参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>null</td>
+<td>被管理的服务名称(/etc/init.d)</td>
+</tr>
+<tr>
+<td>state</td>
+<td>started|stopped|restarted</td>
+<td>started</td>
+<td>启动或关闭或重起</td>
+</tr>
+<tr>
+<td>enabled</td>
+<td>yes|no</td>
+<td>no</td>
+<td>设定该服务开机自启动</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m service -a &#39;name=nginx state=started&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: true, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;name&#34;</span>: <span class="s2">&#34;nginx&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;state&#34;</span>: <span class="s2">&#34;started&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m shell -a &#39;service nginx status&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> SUCCESS <span class="p">|</span> <span class="nv">rc</span><span class="o">=</span><span class="m">0</span> &gt;&gt;
+</span></span><span class="line"><span class="cl">nginx <span class="o">(</span>pid  4054<span class="o">)</span> is running...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m service -a &#39;name=nginx state=stopped&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: true, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;name&#34;</span>: <span class="s2">&#34;nginx&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;state&#34;</span>: <span class="s2">&#34;stopped&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m shell -a &#39;service nginx status&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> FAILED <span class="p">|</span> <span class="nv">rc</span><span class="o">=</span><span class="m">3</span> &gt;&gt;
+</span></span><span class="line"><span class="cl">nginx is stopped
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m service -a &#39;name=nginx state=started enabled=yes runlevel=2345&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> <span class="nv">SUCCESS</span> <span class="o">=</span>&gt; <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;changed&#34;</span>: true, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;enabled&#34;</span>: true, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;name&#34;</span>: <span class="s2">&#34;nginx&#34;</span>, 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;state&#34;</span>: <span class="s2">&#34;started&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master ~<span class="o">]</span><span class="c1"># ansible test -m shell -a &#39;chkconfig --list nginx&#39;</span>
+</span></span><span class="line"><span class="cl">192.168.100.102 <span class="p">|</span> SUCCESS <span class="p">|</span> <span class="nv">rc</span><span class="o">=</span><span class="m">0</span> &gt;&gt;
+</span></span><span class="line"><span class="cl">nginx          	0:off	1:off	2:on	3:on	4:on	5:on	6:off
+</span></span></code></pre></div><h3 id="systemd">systemd</h3>
+<p>管理被控制主机的systemd服务</p>
+<p>常见参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>daemon_reload</td>
+<td>yes|no</td>
+<td>无</td>
+<td>重启守护进程，与其他systemd参数排斥</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>null</td>
+<td>被管理的服务名</td>
+</tr>
+<tr>
+<td>enabled</td>
+<td>yes|no</td>
+<td>null</td>
+<td>服务设置为开机自启</td>
+</tr>
+<tr>
+<td>state</td>
+<td>reloaded|restarted|started|stopped</td>
+<td>null</td>
+<td>服务状态</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@localhost test<span class="o">]</span><span class="c1"># cat daemon_reload.yaml </span>
+</span></span><span class="line"><span class="cl">- hosts: 127.0.0.1
+</span></span><span class="line"><span class="cl">  user: root
+</span></span><span class="line"><span class="cl">  gather_facts: <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">  tasks:
+</span></span><span class="line"><span class="cl">    - name: daemon reload
+</span></span><span class="line"><span class="cl">      systemd:
+</span></span><span class="line"><span class="cl">        daemon_reload: yes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost test<span class="o">]</span><span class="c1"># cat nginx.yaml </span>
+</span></span><span class="line"><span class="cl">- hosts: 127.0.0.1
+</span></span><span class="line"><span class="cl">  user: root
+</span></span><span class="line"><span class="cl">  gather_facts: <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">  tasks:
+</span></span><span class="line"><span class="cl">    - name: daemon reload
+</span></span><span class="line"><span class="cl">      systemd:
+</span></span><span class="line"><span class="cl">        name: nginx
+</span></span><span class="line"><span class="cl">        enabled: yes
+</span></span><span class="line"><span class="cl">        state: restarted
+</span></span></code></pre></div><h3 id="git">git</h3>
+<p>管理git服务模块</p>
+<p>常见参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bare</td>
+<td>yes|no</td>
+<td>no</td>
+<td>建立裸仓库，用于服务器端git仓库存储</td>
+</tr>
+<tr>
+<td>clone</td>
+<td>yes|no</td>
+<td>yes</td>
+<td>本地镜像仓库不存在则clone</td>
+</tr>
+<tr>
+<td>depth</td>
+<td>数字</td>
+<td>null</td>
+<td>clone时克隆的commit深度，1表示只克隆最新一次提交，默认null</td>
+</tr>
+<tr>
+<td>dest</td>
+<td>string</td>
+<td>null</td>
+<td>clone出的仓库存储的路径，仅当clone=no时不用设置</td>
+</tr>
+<tr>
+<td>force</td>
+<td>yes|no</td>
+<td>no</td>
+<td>强制</td>
+</tr>
+<tr>
+<td>remote</td>
+<td>string</td>
+<td>null</td>
+<td>远程仓库的名称，默认是origin</td>
+</tr>
+<tr>
+<td>repo</td>
+<td>string</td>
+<td>null</td>
+<td>远程仓库的地址</td>
+</tr>
+<tr>
+<td>version</td>
+<td>string</td>
+<td>null</td>
+<td>checkout的版本，支持分支、tag、hash</td>
+</tr>
+<tr>
+<td>archive</td>
+<td>string</td>
+<td>null</td>
+<td>clone后的压缩文件存储文件，支持格式zip、tar.gz、tar、tgz</td>
+</tr>
+</tbody>
+</table>
+<pre tabindex="0"><code>- hosts: 127.0.0.1
+  user: root
+  gather_facts: false
+  vars:
+    - GIT_REPO: git@serialt.io:sugars/sugars_backend.git
+    - SRC_HASH: 4949e0b60be3f6a80826d3e02exxxxxxxxxxxx
+  tasks:
+    - name: clone a git repo 
+      git:
+        repo: &#34;{{ item.repo }}&#34; 
+        version: &#34;{{ item.hash }}&#34;   
+        dest: /tmp/serialt_backend
+      with_items:
+        - {repo: &#34;{{ GIT_REPO }}&#34;,hash: &#34;{{ SRC_HASH }}&#34; }
+</code></pre><h3 id="supervisorctl">supervisorctl</h3>
+<p>管理supervisorctl服务</p>
+<p>常见参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>config</td>
+<td>string</td>
+<td>null</td>
+<td>supervisor配置文件路径</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>null</td>
+<td>supervisord program的名字，支持program和program组</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>nul</td>
+<td>可选present, started, stopped, restarted, absent, signalled</td>
+</tr>
+<tr>
+<td>supervisorctl_path</td>
+<td>string</td>
+<td>null</td>
+<td>supervisorctl命令的路径</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">EXAMPLES</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Manage the state of program to be in &#39;started&#39; state.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">supervisorctl</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my_app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">started</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Manage the state of program group to be in &#39;started&#39; state.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">supervisorctl</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;my_apps:&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">started</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Restart my_app, reading supervisorctl configuration from a specified file.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">supervisorctl</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my_app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">restarted</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">config</span><span class="p">:</span><span class="w"> </span><span class="l">/var/opt/my_project/supervisord.conf</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Restart my_app, connecting to supervisord with credentials and server URL.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">supervisorctl</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my_app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">restarted</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">test</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">testpass</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">server_url</span><span class="p">:</span><span class="w"> </span><span class="l">http://localhost:9001</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Send a signal to my_app via supervisorctl</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">supervisorctl</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my_app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l">signalled</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">signal</span><span class="p">:</span><span class="w"> </span><span class="l">USR1</span><span class="w">
+</span></span></span></code></pre></div><h3 id="pip">pip</h3>
+<p>管理python库依赖模块</p>
+<p>常见参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chdir</td>
+<td>string</td>
+<td>null</td>
+<td>执行时的路径</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>null</td>
+<td>pip安装的包名</td>
+</tr>
+<tr>
+<td>requirements</td>
+<td>string</td>
+<td>null</td>
+<td>安装依赖的包文件</td>
+</tr>
+<tr>
+<td>executable</td>
+<td>string</td>
+<td>null</td>
+<td>安装依赖包时使用的python路径</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>present</td>
+<td>依赖包的状态，absent, forcereinstall, latest, present，默认present</td>
+</tr>
+<tr>
+<td>virtualenv</td>
+<td>string</td>
+<td>null</td>
+<td>所使用的虚拟环境目录</td>
+</tr>
+<tr>
+<td>virtualenv_command</td>
+<td>string</td>
+<td>null</td>
+<td>创建虚拟环境的命令</td>
+</tr>
+<tr>
+<td>virtualenv_python</td>
+<td>string</td>
+<td>null</td>
+<td>虚拟环境的python版本</td>
+</tr>
+<tr>
+<td>extra_args=</td>
+<td>string</td>
+<td>null</td>
+<td>附加参数，可以用来指定所使用的安装源</td>
+</tr>
+</tbody>
+</table>
+<pre tabindex="0"><code>[root@localhost test]# cat pip.yaml 
+- hosts: 192.168.100.105
+  user: root
+  gather_facts: false
+  tasks:
+    - name: install python venv 
+      pip:
+        requirements: /tmp/requirements.txt 
+        state: present
+        virtualenv: /tmp/serialt_venv/
+</code></pre><h3 id="archive">archive</h3>
+<p>压缩文件模块</p>
+<p>常用参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dest</td>
+<td>string</td>
+<td>null</td>
+<td>文件归档后的压缩包文件名，当 <code>path</code>中有多个文件或目录时，需提供 <code>dest</code> 参数</td>
+</tr>
+<tr>
+<td>exclude_path</td>
+<td>string</td>
+<td>null</td>
+<td>排除的path</td>
+</tr>
+<tr>
+<td>format</td>
+<td>string</td>
+<td>gz</td>
+<td>支持bz2, gz, tar, xz, zip，默认gz</td>
+</tr>
+<tr>
+<td>path</td>
+<td>string</td>
+<td>null</td>
+<td>要压缩的路径</td>
+</tr>
+<tr>
+<td>remove</td>
+<td>bool</td>
+<td>False</td>
+<td>删除源文件</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">EXAMPLES</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Compress directory /path/to/foo/ into /path/to/foo.tgz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">archive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/foo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/foo.tgz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Compress regular file /path/to/foo into /path/to/foo.gz and remove it</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">archive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/foo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">remove</span><span class="p">:</span><span class="w"> </span><span class="kc">yes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Create a zip archive of /path/to/foo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">archive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/foo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l">zip</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Create a bz2 archive of multiple files, rooted at /path</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">archive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/path/to/foo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/path/wong/foo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/path/file.tar.bz2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l">bz2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Create a bz2 archive of a globbed path, while excluding specific dirnames</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">archive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/path/to/foo/*</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/path/file.tar.bz2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">exclude_path</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/path/to/foo/bar</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/path/to/foo/baz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l">bz2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Create a bz2 archive of a globbed path, while excluding a glob of dirnames</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">archive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/path/to/foo/*</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/path/file.tar.bz2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">exclude_path</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/path/to/foo/ba*</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l">bz2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Use gzip to compress a single archive (i.e don&#39;t archive it first with tar)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">archive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/foo/single.file</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/path/file.gz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l">gz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Create a tar.gz archive of a single file.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">archive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/foo/single.file</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/path/file.tar.gz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l">gz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">force_archive</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">RETURN VALUES</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Create a zip archive of /path/to/foo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">archive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/foo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l">zip</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Create a bz2 archive of multiple files, rooted at /path</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">archive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/path/to/foo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/path/wong/foo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/path/file.tar.bz2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l">bz2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Create a bz2 archive of a globbed path, while excluding specific dirnames</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">archive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/path/to/foo/*</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/path/file.tar.bz2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">exclude_path</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/path/to/foo/bar</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/path/to/foo/baz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l">bz2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Create a bz2 archive of a globbed path, while excluding a glob of dirnames</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">archive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/path/to/foo/*</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/path/file.tar.bz2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">exclude_path</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">/path/to/foo/ba*</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l">bz2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Use gzip to compress a single archive (i.e don&#39;t archive it first with tar)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">archive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/foo/single.file</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/path/file.gz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l">gz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Create a tar.gz archive of a single file.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">archive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/foo/single.file</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/path/file.tar.gz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">format</span><span class="p">:</span><span class="w"> </span><span class="l">gz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">force_archive</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></div><h3 id="unarchive">unarchive</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>creates</td>
+<td>string</td>
+<td>null</td>
+<td>文件名，当它已经存在时，这个步骤将不会被运行</td>
+</tr>
+<tr>
+<td>copy</td>
+<td>yes / no</td>
+<td>yes</td>
+<td>拷贝的文件从ansible主机复制到远程主机，no在远程主机上寻找src源文件解压</td>
+</tr>
+<tr>
+<td>src</td>
+<td>string</td>
+<td>null</td>
+<td>tar源路径，可以是ansible主机上的路径，也可以是远程主机上的路径，如果是远程主机上的路径，则需设置copy=no</td>
+</tr>
+<tr>
+<td>dest</td>
+<td>string</td>
+<td>null</td>
+<td>远程主机上的目标绝对路径</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>数字</td>
+<td>无</td>
+<td>设置解压缩后的文件权限</td>
+</tr>
+<tr>
+<td>exec</td>
+<td>无</td>
+<td>无</td>
+<td>列出需要排除的目录和文件</td>
+</tr>
+<tr>
+<td>owner</td>
+<td>string</td>
+<td>无</td>
+<td>解压后文件或目录的属主</td>
+</tr>
+<tr>
+<td>group</td>
+<td>srting</td>
+<td>无</td>
+<td>解压后的目录或文件的属组</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">EXAMPLES</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Extract foo.tgz into /var/lib/foo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">unarchive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">foo.tgz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/var/lib/foo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Unarchive a file that is already on the remote machine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">unarchive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">/tmp/foo.zip</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/usr/local/bin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">remote_src</span><span class="p">:</span><span class="w"> </span><span class="kc">yes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Unarchive a file that needs to be downloaded (added in 2.0)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">unarchive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">https://example.com/example.zip</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/usr/local/bin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">remote_src</span><span class="p">:</span><span class="w"> </span><span class="kc">yes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Unarchive a file with extra options</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">unarchive</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">/tmp/foo.zip</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">dest</span><span class="p">:</span><span class="w"> </span><span class="l">/usr/local/bin</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">extra_opts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- --<span class="l">transform</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">s/^xxx/yyy/</span><span class="w">
+</span></span></span></code></pre></div><h3 id="uri">uri</h3>
+<p>用于请求某个网页</p>
+<p>常见参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>body</td>
+<td>raw</td>
+<td>null</td>
+<td>当body_format设置为json时的键值对</td>
+</tr>
+<tr>
+<td>body_format</td>
+<td>string</td>
+<td>raw</td>
+<td>数据格式，form-urlencoded, json, raw</td>
+</tr>
+<tr>
+<td>method</td>
+<td>string</td>
+<td>GET</td>
+<td>指明请求的方法，如GET、POST, PUT, DELETE, HEAD</td>
+</tr>
+<tr>
+<td>dest</td>
+<td>string</td>
+<td>null</td>
+<td>下载文件的路径</td>
+</tr>
+<tr>
+<td>force</td>
+<td>bool</td>
+<td>False</td>
+<td></td>
+</tr>
+<tr>
+<td>force_basic_auth</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>headers</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>method</td>
+<td></td>
+<td></td>
+<td>指明请求的方法，如GET、POST, PUT, DELETE, HEAD</td>
+</tr>
+<tr>
+<td>return_content</td>
+<td>bool</td>
+<td>False</td>
+<td></td>
+</tr>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>null</td>
+<td></td>
+</tr>
+<tr>
+<td>url_password</td>
+<td></td>
+<td></td>
+<td>如果请求的url需要认证，则填写认证的密码</td>
+</tr>
+<tr>
+<td>url_username</td>
+<td></td>
+<td></td>
+<td>如果请求的url需要认证，则填写用户名</td>
+</tr>
+</tbody>
+</table>
+<pre tabindex="0"><code>[root@master ~]# ansible test -m url -a &#39;url=http://192.168.100.102/index.html&#39;
+192.168.100.102 | SUCCESS =&gt; {
+    &#34;accept_ranges&#34;: &#34;bytes&#34;, 
+    &#34;changed&#34;: false, 
+    &#34;connection&#34;: &#34;close&#34;, 
+    &#34;content_length&#34;: &#34;612&#34;, 
+    &#34;content_type&#34;: &#34;text/html&#34;, 
+    &#34;date&#34;: &#34;Fri, 02 Dec 2016 06:31:58 GMT&#34;, 
+    &#34;etag&#34;: &#34;\&#34;571f8501-264\&#34;&#34;, 
+    &#34;last_modified&#34;: &#34;Tue, 26 Apr 2016 15:10:57 GMT&#34;, 
+    &#34;msg&#34;: &#34;OK (612 bytes)&#34;, 
+    &#34;redirected&#34;: false, 
+    &#34;server&#34;: &#34;nginx/1.10.0&#34;, 
+    &#34;status&#34;: 200, 
+    &#34;url&#34;: &#34;http://192.168.100.102/index.html&#34;
+}
+[root@master ~]# 
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">EXAMPLES</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Check that you can connect (GET) to a page and it returns a status 200</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">uri</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">http://www.example.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Check that a page returns a status 200 and fail if the word AWESOME is not in the page contents</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">uri</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">http://www.example.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">return_content</span><span class="p">:</span><span class="w"> </span><span class="kc">yes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">this</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">failed_when</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;&#39;AWESOME&#39; not in this.content&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Create a JIRA issue</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">uri</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">https://your.jira.example.com/rest/api/2/issue/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l">your_username</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">your_pass</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l">POST</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">body</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ lookup(&#39;file&#39;,&#39;issue.json&#39;) }}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">force_basic_auth</span><span class="p">:</span><span class="w"> </span><span class="kc">yes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">status_code</span><span class="p">:</span><span class="w"> </span><span class="m">201</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">body_format</span><span class="p">:</span><span class="w"> </span><span class="l">json</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Login to a form based webpage, then use the returned cookie to access the app in later tasks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">uri</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">https://your.form.based.auth.example.com/index.php</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l">POST</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">body_format</span><span class="p">:</span><span class="w"> </span><span class="l">form-urlencoded</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">body</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">your_username</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">your_password</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">enter</span><span class="p">:</span><span class="w"> </span><span class="l">Sign in</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">status_code</span><span class="p">:</span><span class="w"> </span><span class="m">302</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">login</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Login to a form based webpage using a list of tuples</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">uri</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">https://your.form.based.auth.example.com/index.php</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l">POST</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">body_format</span><span class="p">:</span><span class="w"> </span><span class="l">form-urlencoded</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">body</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="p">[</span><span class="w"> </span><span class="l">name, your_username ]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="p">[</span><span class="w"> </span><span class="l">password, your_password ]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="p">[</span><span class="w"> </span><span class="l">enter, Sign in ]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">status_code</span><span class="p">:</span><span class="w"> </span><span class="m">302</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">login</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Connect to website using a previously stored cookie</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">uri</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">https://your.form.based.auth.example.com/dashboard.php</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l">GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">return_content</span><span class="p">:</span><span class="w"> </span><span class="kc">yes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">headers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">Cookie</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ login.set_cookie }}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Queue build of a project in Jenkins</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">uri</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">http://{{ jenkins.host }}/job/{{ jenkins.job }}/build?token={{ jenkins.token }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ jenkins.user }}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ jenkins.password }}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l">GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">force_basic_auth</span><span class="p">:</span><span class="w"> </span><span class="kc">yes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">status_code</span><span class="p">:</span><span class="w"> </span><span class="m">201</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">POST from contents of local file</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">uri</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">https://httpbin.org/post</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l">POST</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">file.json</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">POST from contents of remote file</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">uri</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">https://httpbin.org/post</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l">POST</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/my/file.json</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">remote_src</span><span class="p">:</span><span class="w"> </span><span class="kc">yes</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Pause play until a URL is reachable from this host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">uri</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;http://192.0.2.1/some/test&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">follow_redirects</span><span class="p">:</span><span class="w"> </span><span class="l">none</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l">GET</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">_result</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">until</span><span class="p">:</span><span class="w"> </span><span class="l">_result.status == 200</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">retries</span><span class="p">:</span><span class="w"> </span><span class="m">720</span><span class="w"> </span><span class="c"># 720 * 5 seconds = 1hour (60*60/5)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">delay</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="c"># Every 5 seconds</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># There are issues in a supporting Python library that is discussed in</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># https://github.com/ansible/ansible/issues/52705 where a proxy is defined</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># but you want to bypass proxy use on CIDR masks by using no_proxy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Work around a python issue that doesn&#39;t support no_proxy envvar</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">uri</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">follow_redirects</span><span class="p">:</span><span class="w"> </span><span class="l">none</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">validate_certs</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;http://{{ ip_address }}:{{ port | default(80) }}&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">uri_data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">failed_when</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">changed_when</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">vars</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ip_address</span><span class="p">:</span><span class="w"> </span><span class="m">192.0.2.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">      {
+</span></span></span><span class="line"><span class="cl"><span class="sd">        {% for no_proxy in (lookup(&#39;env&#39;, &#39;no_proxy&#39;) | regex_replace(&#39;\s*,\s*&#39;, &#39; &#39;) ).split() %}
+</span></span></span><span class="line"><span class="cl"><span class="sd">          {% if no_proxy | regex_search(&#39;\/&#39;) and
+</span></span></span><span class="line"><span class="cl"><span class="sd">                no_proxy | ipaddr(&#39;net&#39;) != &#39;&#39; and
+</span></span></span><span class="line"><span class="cl"><span class="sd">                no_proxy | ipaddr(&#39;net&#39;) != false and
+</span></span></span><span class="line"><span class="cl"><span class="sd">                ip_address | ipaddr(no_proxy) is not none and
+</span></span></span><span class="line"><span class="cl"><span class="sd">                ip_address | ipaddr(no_proxy) != false %}
+</span></span></span><span class="line"><span class="cl"><span class="sd">            &#39;no_proxy&#39;: &#39;{{ ip_address }}&#39;
+</span></span></span><span class="line"><span class="cl"><span class="sd">          {% elif no_proxy | regex_search(&#39;:&#39;) != &#39;&#39; and
+</span></span></span><span class="line"><span class="cl"><span class="sd">                  no_proxy | regex_search(&#39;:&#39;) != false and
+</span></span></span><span class="line"><span class="cl"><span class="sd">                  no_proxy == ip_address + &#39;:&#39; + (port | default(80)) %}
+</span></span></span><span class="line"><span class="cl"><span class="sd">            &#39;no_proxy&#39;: &#39;{{ ip_address }}:{{ port | default(80) }}&#39;
+</span></span></span><span class="line"><span class="cl"><span class="sd">          {% elif no_proxy | ipaddr(&#39;host&#39;) != &#39;&#39; and
+</span></span></span><span class="line"><span class="cl"><span class="sd">                  no_proxy | ipaddr(&#39;host&#39;) != false and
+</span></span></span><span class="line"><span class="cl"><span class="sd">                  no_proxy == ip_address %}
+</span></span></span><span class="line"><span class="cl"><span class="sd">            &#39;no_proxy&#39;: &#39;{{ ip_address }}&#39;
+</span></span></span><span class="line"><span class="cl"><span class="sd">          {% elif no_proxy | regex_search(&#39;^(\*|)\.&#39;) != &#39;&#39; and
+</span></span></span><span class="line"><span class="cl"><span class="sd">                  no_proxy | regex_search(&#39;^(\*|)\.&#39;) != false and
+</span></span></span><span class="line"><span class="cl"><span class="sd">                  no_proxy | regex_replace(&#39;\*&#39;, &#39;&#39;) in ip_address %}
+</span></span></span><span class="line"><span class="cl"><span class="sd">            &#39;no_proxy&#39;: &#39;{{ ip_address }}&#39;
+</span></span></span><span class="line"><span class="cl"><span class="sd">          {% endif %}
+</span></span></span><span class="line"><span class="cl"><span class="sd">        {% endfor %}
+</span></span></span><span class="line"><span class="cl"><span class="sd">      }</span><span class="w">      
+</span></span></span></code></pre></div><h3 id="group">group</h3>
+<p>用来添加或删除远端主机的用户组</p>
+<p>常见参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>null</td>
+<td></td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>present</td>
+<td></td>
+</tr>
+<tr>
+<td>gid</td>
+<td>int</td>
+<td>null</td>
+<td>GID</td>
+</tr>
+<tr>
+<td>system</td>
+<td>bool</td>
+<td>False</td>
+<td>创建系统用户</td>
+</tr>
+</tbody>
+</table>
+<pre tabindex="0"><code>[root@master ~]# ansible test -m group -a &#39;name=hr gid=2000 state=present&#39;
+192.168.100.102 | SUCCESS =&gt; {
+    &#34;changed&#34;: true, 
+    &#34;gid&#34;: 2000, 
+    &#34;name&#34;: &#34;hr&#34;, 
+    &#34;state&#34;: &#34;present&#34;, 
+    &#34;system&#34;: false
+}
+
+[root@master ~]# ansible test -m shell -a &#39;tail -1 /etc/group&#39;
+192.168.100.102 | SUCCESS | rc=0 &gt;&gt;
+hr❌2000:
+</code></pre><h3 id="user">user</h3>
+<p>管理远程主机上的用户的账号</p>
+<p>常见参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>null</td>
+<td>指明要管理的账号名称</td>
+</tr>
+<tr>
+<td>state</td>
+<td>string</td>
+<td>present</td>
+<td>指明是创建账号还是删除账号，present表示创建，absent表示删除</td>
+</tr>
+<tr>
+<td>system</td>
+<td>bool</td>
+<td>False</td>
+<td>指定系统用户</td>
+</tr>
+<tr>
+<td>uid</td>
+<td>int</td>
+<td>null</td>
+<td>用户的uid</td>
+</tr>
+<tr>
+<td>shell</td>
+<td>string</td>
+<td>null</td>
+<td>shell类型</td>
+</tr>
+<tr>
+<td>home</td>
+<td>string</td>
+<td>null</td>
+<td>家目录位置</td>
+</tr>
+<tr>
+<td>group</td>
+<td>string</td>
+<td>null</td>
+<td>指明用户的基本组</td>
+</tr>
+<tr>
+<td>groups</td>
+<td>string</td>
+<td>null</td>
+<td>指明用户的附加组</td>
+</tr>
+<tr>
+<td>move_home</td>
+<td>bool</td>
+<td>False</td>
+<td>当home设定了家目录，如果要创建的家目录已存在，是否将已存在的家目录进行移动</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>null</td>
+<td>指明用户的密码，最好使用加密好的字符串</td>
+</tr>
+<tr>
+<td>comment</td>
+<td>string</td>
+<td>null</td>
+<td>指明用户的注释信息</td>
+</tr>
+<tr>
+<td>remove</td>
+<td>bool</td>
+<td>null</td>
+<td>当state=absent时，也就是删除用户时，是否要删除用户的而家目录</td>
+</tr>
+</tbody>
+</table>
+<pre tabindex="0"><code>[root@master ~]# ansible test -m user -a &#39;name=martin group=hr groups=shichang uid=500 shell=/bin/bash home=/home/martin comment=&#34;martin user&#34;&#39;
+192.168.100.102 | SUCCESS =&gt; {
+    &#34;changed&#34;: true, 
+    &#34;comment&#34;: &#34;martin user&#34;, 
+    &#34;createhome&#34;: true, 
+    &#34;group&#34;: 2000, 
+    &#34;groups&#34;: &#34;shichang&#34;, 
+    &#34;home&#34;: &#34;/home/martin&#34;, 
+    &#34;name&#34;: &#34;martin&#34;, 
+    &#34;shell&#34;: &#34;/bin/bash&#34;, 
+    &#34;state&#34;: &#34;present&#34;, 
+    &#34;system&#34;: false, 
+    &#34;uid&#34;: 500
+}
+[root@master ~]# ansible test -m shell -a &#39;grep &#34;martin:&#34; /etc/passwd&#39;
+192.168.100.102 | SUCCESS | rc=0 &gt;&gt;
+martin❌500:2000:martin user:/home/martin:/bin/bash
+
+
+[root@master ~]# ansible test -m user -a &#39;name=martin state=absent remove=yes&#39;
+192.168.100.102 | SUCCESS =&gt; {
+    &#34;changed&#34;: true, 
+    &#34;force&#34;: false, 
+    &#34;name&#34;: &#34;martin&#34;, 
+    &#34;remove&#34;: true, 
+    &#34;state&#34;: &#34;absent&#34;
+}
+</code></pre><pre tabindex="0"><code>EXAMPLES:
+
+- name: Add the user &#39;johnd&#39; with a specific uid and a primary group of &#39;admin&#39;
+  user:
+    name: johnd
+    comment: John Doe
+    uid: 1040
+    group: admin
+
+- name: Add the user &#39;james&#39; with a bash shell, appending the group &#39;admins&#39; and &#39;developers&#39; to the user&#39;s gro
+  user:
+    name: james
+    shell: /bin/bash
+    groups: admins,developers
+    append: yes
+
+- name: Remove the user &#39;johnd&#39;
+  user:
+    name: johnd
+    state: absent
+    remove: yes
+
+- name: Create a 2048-bit SSH key for user jsmith in ~jsmith/.ssh/id_rsa
+  user:
+    name: jsmith
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+
+- name: Added a consultant whose account you want to expire
+  user:
+    name: james18
+    shell: /bin/zsh
+    groups: developers
+    expires: 1422403387
+
+- name: Starting at Ansible 2.6, modify user, remove expiry time
+  user:
+    name: james18
+    expires: -1
+</code></pre><h3 id="script">script</h3>
+<p>将管理端的某个脚本，移动到远端主机(不需要指明传递到远端主机的哪个路径下，系统会自动移动，然后执行)，         一般是自动移动到远端主机的/root/.ansible/tmp目录下，然后自动给予其权限，然后再开个子shell然后运行脚本，运行完成后删除脚本</p>
+<pre tabindex="0"><code>[root@master ~]# ansible test -m script -a &#39;/root/1.sh&#39;
+192.168.100.102 | SUCCESS =&gt; {
+    &#34;changed&#34;: true, 
+    &#34;rc&#34;: 0, 
+    &#34;stderr&#34;: &#34;&#34;, 
+    &#34;stdout&#34;: &#34;&#34;, 
+    &#34;stdout_lines&#34;: []
+}
+[root@master ~]#
+</code></pre><h3 id="setup">setup</h3>
+<p>可收集远程主机的facts变量的信息，相当于收集了目标主机的相关信息(如内核版本、操作系统信息、cpu、…)，保存在ansible的内置变量中，之后我们有需要用到时，直接调用变量即可</p>
+<pre tabindex="0"><code>[root@master ~]# ansible test -m setup
+192.168.100.102 | SUCCESS =&gt; {
+    &#34;ansible_facts&#34;: {
+        &#34;ansible_all_ipv4_addresses&#34;: [
+            &#34;192.168.100.102&#34;
+        ], 
+        &#34;ansible_all_ipv6_addresses&#34;: [
+            &#34;fe80::20c:29ff:fe0c:5ab9&#34;
+        ], 
+        &#34;ansible_architecture&#34;: &#34;x86_64&#34;, 
+        &#34;ansible_bios_date&#34;: &#34;05/20/2014&#34;,  
+        &#34;ansible_bios_version&#34;: &#34;6.00&#34;, 
+</code></pre><h3 id="template">template</h3>
+<p>基于模板方式，生成一个模板文件，复制到远程主机，让远程主机基于模板，生成符合远程主机自身的文件</p>
+<p>注意：此模块不能在命令行使用，只能用在playbook中</p>
+<p>常见参数：</p>
+<ul>
+<li>src=          指明管理端本地的模板文件的目录</li>
+<li>dest=          指明将模板文件拷贝到远程主机的哪个目录下</li>
+<li>owner=      指明拷贝到远程主机的文件的属主</li>
+<li>group=          指明拷贝到远程主机的文件的属组</li>
+<li>mode=     指明拷贝到远程主机的文件的权限</li>
+</ul>
+<pre tabindex="0"><code>[root@master ~]# cat temp.txt 
+this is {{ ansible_hostname  }}    
+
+[root@master ~]# cat test.yml 
+- hosts: 192.168.10.202
+  remote_user: root
+  tasks:
+  - name: test template 
+    template: src=/root/temp.txt dest=/tmp
+
+[root@master ~]# ansible-playbook test.yml 
+
+PLAY [192.168.10.202] **********************************************************
+
+TASK [setup] *******************************************************************
+ok: [192.168.10.202]
+
+TASK [test template module] ****************************************************
+changed: [192.168.10.202]
+
+PLAY RECAP *********************************************************************
+192.168.10.202             : ok=2    changed=1    unreachable=0    failed=0   
+
+[root@master ~]# ansible 192.168.10.202 -m shell -a &#39;cat /tmp/temp.txt&#39;
+192.168.10.202 | SUCCESS | rc=0 &gt;&gt;
+this is agent202
+</code></pre><h3 id="script-1">script</h3>
+<p>script 模块可以在远程主机上执行 ansible 管理主机上的脚本，也就是说，脚本一直存在于 ansible 管理主机本地，不需要手动拷贝到远程主机后再执行。</p>
+<p>常用参数：</p>
+<ul>
+<li>chdir：执行脚本时所在的目录</li>
+<li>creates：使用此参数指定一个远程主机中的文件，当指定的文件存在时，就不执行对应脚本</li>
+<li>removes：使用此参数指定一个远程主机中的文件，当指定的文件不存在时，就不执行对应脚本</li>
+</ul>
+<p>示例：</p>
+<pre tabindex="0"><code>- name: Run a script with arguments (free form)
+  script: /some/local/script.sh
+</code></pre><h3 id="lineinfile">lineinfile</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td>string</td>
+<td>null</td>
+<td>操作的文件</td>
+</tr>
+<tr>
+<td>line</td>
+<td>string</td>
+<td>null</td>
+<td>替换的内容</td>
+</tr>
+<tr>
+<td>regexp</td>
+<td>string</td>
+<td>null</td>
+<td>匹配表达式</td>
+</tr>
+<tr>
+<td>state</td>
+<td>present|absent</td>
+<td>present</td>
+<td></td>
+</tr>
+<tr>
+<td>insertafter</td>
+<td>string</td>
+<td>无</td>
+<td>插入到匹配行后</td>
+</tr>
+<tr>
+<td>insertbefore</td>
+<td>string</td>
+<td>无</td>
+<td>插入匹配行前</td>
+</tr>
+<tr>
+<td>backup</td>
+<td>yes|no</td>
+<td>无</td>
+<td>改变前备份</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>示例：开启selinux</p>
+<pre tabindex="0"><code>- name: Ensure SELinux is set to enforcing mode
+  lineinfile:
+    path: /etc/selinux/config
+    regexp: &#39;^SELINUX=&#39;
+    line: SELINUX=enforcing
+</code></pre><pre tabindex="0"><code>- name: Make sure group wheel is not in the sudoers configuration
+  lineinfile:
+    path: /etc/sudoers
+    state: absent
+    regexp: &#39;^%wheel&#39;
+</code></pre><pre tabindex="0"><code>- name: Replace a localhost entry with our own
+  lineinfile:
+    path: /etc/hosts
+    regexp: &#39;^127\.0\.0\.1&#39;
+    line: 127.0.0.1 localhost
+    owner: root
+    group: root
+    mode: &#39;0644&#39;
+</code></pre><h3 id="fail">fail</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>null</td>
+<td>满足条件执行时输出的信息</td>
+</tr>
+</tbody>
+</table>
+<pre tabindex="0"><code>- fail:
+    msg: The system may not be provisioned according to the CMDB status.
+  when: cmdb_status != &#34;to-be-staged&#34;
+</code></pre><h3 id="stat">stat</h3>
+<p>检查文件或文件系统的状态，对于Windows目标，则使用win_stat模块</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td>string</td>
+<td>null</td>
+<td>文件或目录的路径，必选参数</td>
+</tr>
+<tr>
+<td>checksum_algorithm</td>
+<td>string</td>
+<td>sha1</td>
+<td>计算文件的算法，可选md5, sha1, sha224, sha256, sha384, sha512</td>
+</tr>
+</tbody>
+</table>
+<p>stat模块的返回值</p>
+<table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>取值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exists</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>path</td>
+<td>str</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>str</td>
+</tr>
+<tr>
+<td>isdir</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>islnk</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>uid</td>
+<td>int</td>
+</tr>
+<tr>
+<td>gid</td>
+<td>int</td>
+</tr>
+<tr>
+<td>size</td>
+<td>int</td>
+</tr>
+<tr>
+<td>inode</td>
+<td>int</td>
+</tr>
+<tr>
+<td>lnk_source</td>
+<td>str</td>
+</tr>
+<tr>
+<td>md5</td>
+<td>str</td>
+</tr>
+</tbody>
+</table>
+<p>使用示例</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">stat</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/foo.conf</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">st</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">fail</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Whoops! file ownership has changed&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l">st.stat.pw_name != &#39;root&#39;</span><span class="w">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">stat</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/something</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">sym</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">debug</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;islnk isn&#39;t defined (path doesn&#39;t exist)&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l">sym.stat.islnk is not defined</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">debug</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;islnk is defined (path must exist)&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l">sym.stat.islnk is defined</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">debug</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Path exists and is a symlink&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l">sym.stat.islnk is defined and sym.stat.islnk</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">debug</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Path exists and isn&#39;t a symlink&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l">sym.stat.islnk is defined and sym.stat.islnk == False</span><span class="w">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">stat</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/something</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l">p</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">debug</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">msg</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Path exists and is a directory&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">when</span><span class="p">:</span><span class="w"> </span><span class="l">p.stat.isdir is defined and p.stat.isdir</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Don&#39;t do checksum</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">stat</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/myhugefile</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">get_checksum</span><span class="p">:</span><span class="w"> </span><span class="kc">no</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Use sha256 to calculate checksum</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">stat</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/path/to/something</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">checksum_algorithm</span><span class="p">:</span><span class="w"> </span><span class="l">sha256</span><span class="w">
+</span></span></span></code></pre></div><h3 id="pause">pause</h3>
+<p>暂停一段时间等待终端输入</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>取值</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>echo</td>
+<td>bool</td>
+<td>yes</td>
+<td>是否输出键盘的输入值</td>
+</tr>
+<tr>
+<td>minutes</td>
+<td>string</td>
+<td>null</td>
+<td>暂停多少分钟</td>
+</tr>
+<tr>
+<td>prompt</td>
+<td>string</td>
+<td>null</td>
+<td>打印一串信息提示用户操作</td>
+</tr>
+<tr>
+<td>seconds</td>
+<td>string</td>
+<td>null</td>
+<td>暂停多少秒</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>pause模块的返回值</p>
+<table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>取值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>delta</td>
+<td>string</td>
+</tr>
+<tr>
+<td>echo</td>
+<td>bool</td>
+</tr>
+<tr>
+<td>start</td>
+<td>string</td>
+</tr>
+<tr>
+<td>stdout</td>
+<td>string</td>
+</tr>
+<tr>
+<td>stop</td>
+<td>string</td>
+</tr>
+<tr>
+<td>user_input</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<p>使用示例</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Pause for 5 minutes to build app cache</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">pause</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">minutes</span><span class="p">:</span><span class="w"> </span><span class="m">5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Pause until you can verify updates to an application were successful</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">pause</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">A helpful reminder of what to look out for post-update</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">pause</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">prompt</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Make sure org.foo.FooOverload exception is not present&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Did you Backup DB</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">pause</span><span class="p">:</span><span class="w"> </span><span class="l">prompt=&#34;Did you commit it? Enter to continue or CTRL-C to quit.&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Pause to get some sensitive input</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">pause</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">prompt</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Enter a secret&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">echo</span><span class="p">:</span><span class="w"> </span><span class="kc">no</span><span class="w">
+</span></span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-04</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://serialt.github.io/posts/2023-12-4-ansible-handbook/" data-title="Ansible handbook" data-hashtags="ansible"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://serialt.github.io/posts/2023-12-4-ansible-handbook/" data-hashtag="ansible"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://serialt.github.io/posts/2023-12-4-ansible-handbook/" data-title="Ansible handbook"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://serialt.github.io/posts/2023-12-4-ansible-handbook/" data-title="Ansible handbook"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://serialt.github.io/posts/2023-12-4-ansible-handbook/" data-title="Ansible handbook"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/ansible/">ansible</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2023-12-4-gitlab/" class="prev" rel="prev" title="Gitlab"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Gitlab</a>
+            <a href="/posts/2023-12-16-k3s/" class="next" rel="next" title="k3s">k3s<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

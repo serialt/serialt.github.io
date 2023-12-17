@@ -1,10 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>git - Tag - Blog</title>
-        <link>https://serialt.github.io/tags/git/</link>
-        <description>git - Tag - Blog</description>
+        <title>gitlab - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/gitlab/</link>
+        <description>gitlab - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 04 Dec 2023 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/git/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 04 Dec 2023 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/gitlab/" rel="self" type="application/rss+xml" /><item>
     <title>Gitlab</title>
     <link>https://serialt.github.io/posts/2023-12-4-gitlab/</link>
     <pubDate>Mon, 04 Dec 2023 20:26:27 &#43;0800</pubDate>
@@ -19,14 +19,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-12-7-dev-terraform-provider/</guid>
     <description><![CDATA[Dev terraform provider 基于新框架tpf开发 main.go func main() { var debug bool flag.BoolVar(&amp;debug, &#34;debug&#34;, false, &#34;debug terraform provider&#34;) flag.Parse() opts := providerserver.ServeOpts{ Address: &#34;hashicorp.com/edu/hashicups&#34;, Debug: debug, } err := providerserver.Serve(context.Background(), provider.New(version), opts) if err != nil { log.Fatal(err.Error()) } } provider.go package provider import ( &#34;context&#34; &#34;github.com/hashicorp/terraform-plugin-framework/datasource&#34; &#34;github.com/hashicorp/terraform-plugin-framework/provider&#34; &#34;github.com/hashicorp/terraform-plugin-framework/provider/schema&#34; &#34;github.com/hashicorp/terraform-plugin-framework/resource&#34; ) var ( _ provider.Provider = &amp;hashicupsProvider{} ) func New(version string) func()]]></description>
-</item>
-<item>
-    <title>Git</title>
-    <link>https://serialt.github.io/posts/2023-11-18-git/</link>
-    <pubDate>Sat, 18 Nov 2023 10:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-18-git/</guid>
-    <description><![CDATA[Git 一、git基本使用 1、commit [root@node01 project]# git add 1.txt [root@node01 project]# git commit -m &#34;create new 1.txt&#34; [master (root-commit) 3e8ce87] create new 1.txt 1 file changed, 0 insertions(+), 0 deletions(-) create mode 100644 1.txt 2、diff文件 [root@node01 project]# git diff 1.txt diff --git a/1.txt b/1.txt index e69de29..21d56a0 100644 --- a/1.txt]]></description>
 </item>
 </channel>
 </rss>
