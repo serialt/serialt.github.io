@@ -86,6 +86,7 @@ select datname, pg_size_pretty (pg_database_size(datname)) AS size from pg_datab
 
 ```sql
 --数据库中单个表的大小（不包含索引）
+
 select pg_size_pretty(pg_relation_size('表名'));
 
 --查出所有表（包含索引）并排序
@@ -183,6 +184,7 @@ select * from pg_stat_activity where state<>'idle' and now()-query_start > inter
 
 ```shell
 # 断开数据库连接
+
 select pg_terminate_backend(pid) from (select pid from pg_stat_activity where datname = 'db_name' ) as a;
 
 # 创建一个数据库归属其他用户
