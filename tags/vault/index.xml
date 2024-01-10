@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>vault - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/vault/</link>
+        <description>vault - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 07 Jan 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/vault/" rel="self" type="application/rss+xml" /><item>
+    <title>Vault</title>
+    <link>https://serialt.github.io/posts/2024-01-07-vault/</link>
+    <pubDate>Sun, 07 Jan 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-01-07-vault/</guid>
+    <description><![CDATA[Vault 参考链接：https://thiscute.world/posts/experience-of-vault/#%E4%B8%80vault]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>sqlserver - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/sqlserver/</link>
+        <description>sqlserver - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 27 Dec 2023 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/sqlserver/" rel="self" type="application/rss+xml" /><item>
+    <title>SQL Server</title>
+    <link>https://serialt.github.io/posts/2023-12-27-mssql/</link>
+    <pubDate>Wed, 27 Dec 2023 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-12-27-mssql/</guid>
+    <description><![CDATA[SQL Server docker run -e &#34;ACCEPT_EULA=Y&#34; -e &#34;SA_PASSWORD=Y.sa123456&#34; -p 1433:1433 --name mssql2022 -d mcr.microsoft.com/mssql/server:2022-latest 其中 sa123456 为 SQL Server sa 用户的密码，SA_PASSWORD=Y.sa123456 为密码，要求是最少8位的强密码，要有大写字]]></description>
+</item>
+</channel>
+</rss>

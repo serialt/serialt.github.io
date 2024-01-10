@@ -2,14 +2,21 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://serialt.github.io/</loc><lastmod>2023-12-16T20:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/</loc><lastmod>2023-12-16T20:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/devops/</loc><lastmod>2023-12-16T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/</loc><lastmod>2024-01-07T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/</loc><lastmod>2024-01-07T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/devops/</loc><lastmod>2024-01-07T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/</loc><lastmod>2024-01-07T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/</loc><lastmod>2024-01-07T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/vault/</loc><lastmod>2024-01-07T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-01-07-vault/</loc><lastmod>2024-01-07T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/database/</loc><lastmod>2023-12-27T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/db/</loc><lastmod>2023-12-27T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/mssql/</loc><lastmod>2023-12-27T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2023-12-27-mssql/</loc><lastmod>2023-12-27T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/sqlserver/</loc><lastmod>2023-12-27T20:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/k3s/</loc><lastmod>2023-12-16T20:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2023-12-16-k3s/</loc><lastmod>2023-12-16T20:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/k8s/</loc><lastmod>2023-12-16T20:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/posts/</loc><lastmod>2023-12-16T20:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/</loc><lastmod>2023-12-16T20:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/ansible/</loc><lastmod>2023-12-04T20:28:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2023-12-4-ansible-handbook/</loc><lastmod>2023-12-04T20:28:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/git/</loc><lastmod>2023-12-04T20:26:27&#43;08:00</lastmod></url><url>
@@ -57,8 +64,6 @@
             <loc>https://serialt.github.io/tags/nexus/</loc><lastmod>2023-11-18T09:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2023-11-18-nexus/</loc><lastmod>2023-11-18T09:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/repo/</loc><lastmod>2023-11-18T09:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/database/</loc><lastmod>2023-11-12T10:30:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/db/</loc><lastmod>2023-11-12T10:30:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/pg/</loc><lastmod>2023-11-12T10:30:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/postgresql/</loc><lastmod>2023-11-12T10:30:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2023-11-12-postgresql/</loc><lastmod>2023-11-12T10:30:27&#43;08:00</lastmod></url><url>

@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/categories/devops/</link>
         <description>DevOps - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 16 Dec 2023 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 07 Jan 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+    <title>Vault</title>
+    <link>https://serialt.github.io/posts/2024-01-07-vault/</link>
+    <pubDate>Sun, 07 Jan 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-01-07-vault/</guid>
+    <description><![CDATA[Vault 参考链接：https://thiscute.world/posts/experience-of-vault/#%E4%B8%80vault]]></description>
+</item>
+<item>
     <title>k3s</title>
     <link>https://serialt.github.io/posts/2023-12-16-k3s/</link>
     <pubDate>Sat, 16 Dec 2023 20:26:27 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-11-22-python-basic/</guid>
     <description><![CDATA[Python 基础 一、基础语法 1、输出语句的使用 1）引号的使用 &gt;&gt;&gt; print (&#39;hello world&#39;) hello world &gt;&gt;&gt; print (&#34;hello world&#34;) hello world &gt;&gt;&gt; 2）三引号: 输出多行内容 &gt;&gt;&gt; print (&#34;&#34;&#34;abc ... cdc ... ddd ... ccc ... fff&#34;&#34;&#34;) abc cdc ddd ccc fff 注释符：]]></description>
-</item>
-<item>
-    <title>Terraform handbook</title>
-    <link>https://serialt.github.io/posts/2023-11-22-terraform-handbook/</link>
-    <pubDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-22-terraform-handbook/</guid>
-    <description><![CDATA[Terraform handbook 参考链接：https://blog.gmem.cc/terraform 一、简介 Terraform用于实现基础设施即代码（infrastr]]></description>
 </item>
 </channel>
 </rss>

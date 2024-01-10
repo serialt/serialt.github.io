@@ -4,7 +4,23 @@
         <link>https://serialt.github.io/posts/</link>
         <description>All Posts | Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 16 Dec 2023 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 07 Jan 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Vault</title>
+    <link>https://serialt.github.io/posts/2024-01-07-vault/</link>
+    <pubDate>Sun, 07 Jan 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-01-07-vault/</guid>
+    <description><![CDATA[Vault 参考链接：https://thiscute.world/posts/experience-of-vault/#%E4%B8%80vault]]></description>
+</item>
+<item>
+    <title>SQL Server</title>
+    <link>https://serialt.github.io/posts/2023-12-27-mssql/</link>
+    <pubDate>Wed, 27 Dec 2023 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-12-27-mssql/</guid>
+    <description><![CDATA[SQL Server docker run -e &#34;ACCEPT_EULA=Y&#34; -e &#34;SA_PASSWORD=Y.sa123456&#34; -p 1433:1433 --name mssql2022 -d mcr.microsoft.com/mssql/server:2022-latest 其中 sa123456 为 SQL Server sa 用户的密码，SA_PASSWORD=Y.sa123456 为密码，要求是最少8位的强密码，要有大写字]]></description>
+</item>
+<item>
     <title>k3s</title>
     <link>https://serialt.github.io/posts/2023-12-16-k3s/</link>
     <pubDate>Sat, 16 Dec 2023 20:26:27 &#43;0800</pubDate>
@@ -67,22 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-11-24-switch-case/</guid>
     <description><![CDATA[switch-case语法 shell 语法 case 变量 in 取值1) 操作语句 操作语句 ;; 取值2) 操作语句 操作语句 ;; 取值3) 操作语句 操作语句 ;; *) 操作语句 操作语句 ;; esac]]></description>
-</item>
-<item>
-    <title>Python ansible module</title>
-    <link>https://serialt.github.io/posts/2023-11-22-python-ansible-module/</link>
-    <pubDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-22-python-ansible-module/</guid>
-    <description><![CDATA[Ansible Module 参考链接：https://ansible.leops.cn/dev/modules/ 1、自定义模块开发 该模块的目的是在远程主机上将远程源]]></description>
-</item>
-<item>
-    <title>Python basic</title>
-    <link>https://serialt.github.io/posts/2023-11-22-python-basic/</link>
-    <pubDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-22-python-basic/</guid>
-    <description><![CDATA[Python 基础 一、基础语法 1、输出语句的使用 1）引号的使用 &gt;&gt;&gt; print (&#39;hello world&#39;) hello world &gt;&gt;&gt; print (&#34;hello world&#34;) hello world &gt;&gt;&gt; 2）三引号: 输出多行内容 &gt;&gt;&gt; print (&#34;&#34;&#34;abc ... cdc ... ddd ... ccc ... fff&#34;&#34;&#34;) abc cdc ddd ccc fff 注释符：]]></description>
 </item>
 </channel>
 </rss>
