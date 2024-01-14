@@ -45,14 +45,6 @@
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>机器人通知</title>
-    <link>https://serialt.github.io/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%9F%A5/</link>
-    <pubDate>Sat, 11 Nov 2023 11:28:14 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/categories/%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%80%9A%E7%9F%A5/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
     <title>linux 基础</title>
     <link>https://serialt.github.io/categories/linux-%E5%9F%BA%E7%A1%80/</link>
     <pubDate>Sat, 11 Nov 2023 10:30:09 &#43;0800</pubDate>
@@ -69,19 +61,27 @@
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>flatpak</title>
-    <link>https://serialt.github.io/categories/flatpak/</link>
-    <pubDate>Sat, 11 Nov 2023 10:28:14 &#43;0800</pubDate>
+    <title>DNS</title>
+    <link>https://serialt.github.io/categories/dns/</link>
+    <pubDate>Sat, 11 Nov 2023 10:28:11 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/categories/flatpak/</guid>
+    <guid>https://serialt.github.io/categories/dns/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>服务管理</title>
-    <link>https://serialt.github.io/categories/%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86/</link>
-    <pubDate>Sat, 11 Nov 2023 10:28:12 &#43;0800</pubDate>
+    <title>虚拟化</title>
+    <link>https://serialt.github.io/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/</link>
+    <pubDate>Sat, 11 Nov 2023 10:28:11 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/categories/%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86/</guid>
+    <guid>https://serialt.github.io/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Go 基础</title>
+    <link>https://serialt.github.io/categories/go-%E5%9F%BA%E7%A1%80/</link>
+    <pubDate>Sat, 11 Nov 2023 10:26:09 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/go-%E5%9F%BA%E7%A1%80/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>
