@@ -5,7 +5,7 @@ title = 'Okteto'
 date = 2023-09-26T19:16:02+08:00
 draft = false
 tags = ["okteto","kubernetes","vscode","dev"]
-categories = ["Kubernetes"]
+categories = ["Kubernetes","DevOps"]
 
 +++
 

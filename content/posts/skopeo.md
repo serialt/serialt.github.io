@@ -4,7 +4,7 @@ date = 2023-11-08T20:26:42+08:00
 draft = false
 
 tags = ["skopeo","image","oci-image-sync"]
-categories = ["同步oci镜像"]
+categories = ["DevOps"]
 +++
 
 

@@ -3,7 +3,7 @@ title = 'Tuna Web'
 date = 2023-09-24T17:01:26+08:00
 draft = false
 tags = ["mirrors"]
-categories = ["mirror-web"]
+categories = ["DevOps"]
 +++
 
 ## 清华镜像网页搭建镜像站
