@@ -14,7 +14,7 @@ languageName = "简体中文"
 hasCJKLanguage = true
 
 # 默认每页列表显示的文章数目
-paginate = 15
+paginate = 26
 
 # 是否使用 git 信息
 enableGitInfo = false
@@ -164,6 +164,10 @@ typeit = false
 rss = 10
 # Home page profile
 # 主页个人信息
+[params.social]
+GitHub = "https://github.com/serialt"
+
+
 [params.home.profile]
 enable = true
 # Gravatar Email for preferred avatar in home page
@@ -248,4 +252,7 @@ auto = true
 copy = true
 # the maximum number of lines of displayed code by default
 # 默认展开显示的代码行数
-maxShownLines = 50
+maxShownLines = 80
+
+[params.page.share]
+enable = false
