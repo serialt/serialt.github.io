@@ -4,9 +4,17 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 07 Jan 2024 20:26:27 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 14 Jan 2024 20:26:27 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Terraform Registry</title>
+    <link>https://serialt.github.io/posts/2024-01-14-terraform-registry/</link>
+    <pubDate>Sun, 14 Jan 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-01-14-terraform-registry/</guid>
+    <description><![CDATA[Terraform Registry 一、Registry 协议 文档地址：https://developer.hashicorp.com/terraform/internals]]></description>
+</item>
+<item>
     <title>Vault</title>
     <link>https://serialt.github.io/posts/2024-01-07-vault/</link>
     <pubDate>Sun, 07 Jan 2024 20:26:27 &#43;0800</pubDate>
@@ -77,14 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-11-24-shell-handbook/</guid>
     <description><![CDATA[Shell handbok 一、特殊符号 参考链接: https://blog.csdn.net/jiezi2016/article/details/79649382 https://blog.csdn.net/wangzhaotongalex/article/details/73321766 介绍下Shell中的${}、##和%%使用范例，本文给出了不同情况下得到的结果。 假设定义了一个变量为： 代码如下]]></description>
-</item>
-<item>
-    <title>switch-case handbook</title>
-    <link>https://serialt.github.io/posts/2023-11-24-switch-case/</link>
-    <pubDate>Fri, 24 Nov 2023 20:22:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-24-switch-case/</guid>
-    <description><![CDATA[switch-case语法 shell 语法 case 变量 in 取值1) 操作语句 操作语句 ;; 取值2) 操作语句 操作语句 ;; 取值3) 操作语句 操作语句 ;; *) 操作语句 操作语句 ;; esac]]></description>
 </item>
 </channel>
 </rss>

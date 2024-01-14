@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/categories/devops/</link>
         <description>DevOps - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 07 Jan 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 14 Jan 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+    <title>Terraform Registry</title>
+    <link>https://serialt.github.io/posts/2024-01-14-terraform-registry/</link>
+    <pubDate>Sun, 14 Jan 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-01-14-terraform-registry/</guid>
+    <description><![CDATA[Terraform Registry 一、Registry 协议 文档地址：https://developer.hashicorp.com/terraform/internals]]></description>
+</item>
+<item>
     <title>Vault</title>
     <link>https://serialt.github.io/posts/2024-01-07-vault/</link>
     <pubDate>Sun, 07 Jan 2024 20:26:27 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-11-22-python-ansible-module/</guid>
     <description><![CDATA[Ansible Module 参考链接：https://ansible.leops.cn/dev/modules/ 1、自定义模块开发 该模块的目的是在远程主机上将远程源]]></description>
-</item>
-<item>
-    <title>Python basic</title>
-    <link>https://serialt.github.io/posts/2023-11-22-python-basic/</link>
-    <pubDate>Wed, 22 Nov 2023 21:22:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-22-python-basic/</guid>
-    <description><![CDATA[Python 基础 一、基础语法 1、输出语句的使用 1）引号的使用 &gt;&gt;&gt; print (&#39;hello world&#39;) hello world &gt;&gt;&gt; print (&#34;hello world&#34;) hello world &gt;&gt;&gt; 2）三引号: 输出多行内容 &gt;&gt;&gt; print (&#34;&#34;&#34;abc ... cdc ... ddd ... ccc ... fff&#34;&#34;&#34;) abc cdc ddd ccc fff 注释符：]]></description>
 </item>
 </channel>
 </rss>

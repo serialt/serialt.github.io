@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>terraform-registry - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/terraform-registry/</link>
+        <description>terraform-registry - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 14 Jan 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/terraform-registry/" rel="self" type="application/rss+xml" /><item>
+    <title>Terraform Registry</title>
+    <link>https://serialt.github.io/posts/2024-01-14-terraform-registry/</link>
+    <pubDate>Sun, 14 Jan 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-01-14-terraform-registry/</guid>
+    <description><![CDATA[Terraform Registry 一、Registry 协议 文档地址：https://developer.hashicorp.com/terraform/internals]]></description>
+</item>
+</channel>
+</rss>
