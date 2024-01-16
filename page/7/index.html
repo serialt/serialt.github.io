@@ -90,6 +90,11 @@
     </div><main class="main">
                 <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/https://github.com/serialt" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/2023-11-11-go-yaml/">Go yaml</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div><div class="content">Go 读取yaml格式配置文件 package config import ( &#34;fmt&#34; &#34;io/ioutil&#34; &#34;gopkg.in/yaml.v3&#34; ) type Service struct { Host string `json:&#34;host&#34; yaml:&#34;host&#34;` Port string `json:&#34;port&#34; yaml:&#34;port&#34;` } type MyConfig struct { Service Service `json:&#34;service&#34; yaml:&#34;service&#34;` } var Config *MyConfig func LoadConfig(filepath string) { if filepath == &#34;&#34; { return } // 读yaml文件 config, err := ioutil.ReadFile(filepath) if</div><div class="post-footer">
+        <a href="/posts/2023-11-11-go-yaml/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/yaml/">yaml</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/2023-11-11-go-strconv/">Go strconv</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div><div class="content">Go语言内置包之strconv Go语言中strconv包实现了基本数据类型和其字符串表示的相互转换。 strconv包 strconv包实现了基</div><div class="post-footer">
         <a href="/posts/2023-11-11-go-strconv/">Read More</a><div class="post-tags">
@@ -114,11 +119,6 @@
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div><div class="content">Go leveldb库 github地址：https://github.com/syndtr/goleveldb 安装： go get github.com/syndtr/goleveldb/leveldb 简介： levelDB在</div><div class="post-footer">
         <a href="/posts/2023-11-11-go-leveldb/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/leveldb/">leveldb</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-11-go-ini/">Go ini</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-11">2023-11-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div><div class="content">Go ini库 参考：https://juejin.cn/post/6844904048764649479 简介 ini 是 Windows 上常用的配置文件格式。MySQ</div><div class="post-footer">
-        <a href="/posts/2023-11-11-go-ini/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/ini/">ini</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -146,8 +146,10 @@
                         <a href="/page/9/">9</a>
                     </span>
                 </li><li class="page-item ">
+                    <span class="page-link" aria-hidden="true">&hellip;</span>
+                </li><li class="page-item ">
                     <span class="page-link">
-                        <a href="/page/10/">10</a>
+                        <a href="/page/11/">11</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

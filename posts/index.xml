@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/posts/</link>
         <description>All Posts | Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 14 Jan 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Tue, 16 Jan 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Python Cert</title>
+    <link>https://serialt.github.io/posts/2024-01-15-python-cert/</link>
+    <pubDate>Tue, 16 Jan 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-01-15-python-cert/</guid>
+    <description><![CDATA[Python 自签名证书 mozilla 维护者一个公共ca的文件，在使用http客户端使用自签名证书的时候可以把对应的文件合并然后再导入，示例代码： requirements.txt certifi==2023.11.17 urllib3==2.1.0 #!/usr/bin/env python3 # coding=utf-8 # ***********************************************************************]]></description>
+</item>
+<item>
     <title>Terraform Registry</title>
     <link>https://serialt.github.io/posts/2024-01-14-terraform-registry/</link>
     <pubDate>Sun, 14 Jan 2024 20:26:27 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-11-28-gorm-gen/</guid>
     <description><![CDATA[Gorm gen 参考链接： https://nickxu.me/2023/03/29/GORM%E7%9A%84GEN%E6%A8%A1%E5%BC%8F%E5%88%9D%E4%B8%8A%E6%89%8B/ https://www.liwenzhou.com/posts/Go/gen/ 示例代码： https://github.com/serialt/genc Gen是一个基于GORM的安全ORM框架，其主要通过代码生成方式实现GORM代码封装。使用Gen框架能够自动生]]></description>
-</item>
-<item>
-    <title>Shell handbook</title>
-    <link>https://serialt.github.io/posts/2023-11-24-shell-handbook/</link>
-    <pubDate>Fri, 24 Nov 2023 20:22:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-24-shell-handbook/</guid>
-    <description><![CDATA[Shell handbok 一、特殊符号 参考链接: https://blog.csdn.net/jiezi2016/article/details/79649382 https://blog.csdn.net/wangzhaotongalex/article/details/73321766 介绍下Shell中的${}、##和%%使用范例，本文给出了不同情况下得到的结果。 假设定义了一个变量为： 代码如下]]></description>
 </item>
 </channel>
 </rss>
