@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>ktconnect - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/ktconnect/</link>
+        <description>ktconnect - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 29 Jan 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/ktconnect/" rel="self" type="application/rss+xml" /><item>
+    <title>ktconnect</title>
+    <link>https://serialt.github.io/posts/2024-01-29-ktconnect/</link>
+    <pubDate>Mon, 29 Jan 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-01-29-ktconnect/</guid>
+    <description><![CDATA[KtConnect 官方文档：https://alibaba.github.io/kt-connect/#/zh-cn/guide/quickstart 简单示]]></description>
+</item>
+</channel>
+</rss>

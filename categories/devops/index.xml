@@ -4,7 +4,23 @@
         <link>https://serialt.github.io/categories/devops/</link>
         <description>DevOps - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Tue, 16 Jan 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 29 Jan 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+    <title>ktconnect</title>
+    <link>https://serialt.github.io/posts/2024-01-29-ktconnect/</link>
+    <pubDate>Mon, 29 Jan 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-01-29-ktconnect/</guid>
+    <description><![CDATA[KtConnect 官方文档：https://alibaba.github.io/kt-connect/#/zh-cn/guide/quickstart 简单示]]></description>
+</item>
+<item>
+    <title>Alpine vm</title>
+    <link>https://serialt.github.io/posts/2024-01-22-alpine-vm/</link>
+    <pubDate>Mon, 22 Jan 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-01-22-alpine-vm/</guid>
+    <description><![CDATA[alpine 虚拟机安装 使用alpine-vm iso 文件进行安装 参考文档： https://www.qunniao.net/1408.html https://wener.me/notes/os/alpine/intro https://blog.xiaohack.org/4674.html https://tonylee.name/Alpine-Linux-4f1cbdb482754c65a61e7f08e9691234 关闭交换分区减小镜像大小： vi /sbin/setup-alpine # 在 setup-disk 增加参数关闭交换分区 setup-disk -s 0 alpine 3.19 镜像可以]]></description>
+</item>
+<item>
     <title>Python Cert</title>
     <link>https://serialt.github.io/posts/2024-01-15-python-cert/</link>
     <pubDate>Tue, 16 Jan 2024 20:26:27 &#43;0800</pubDate>
@@ -67,22 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-11-28-gorm-gen/</guid>
     <description><![CDATA[Gorm gen 参考链接： https://nickxu.me/2023/03/29/GORM%E7%9A%84GEN%E6%A8%A1%E5%BC%8F%E5%88%9D%E4%B8%8A%E6%89%8B/ https://www.liwenzhou.com/posts/Go/gen/ 示例代码： https://github.com/serialt/genc Gen是一个基于GORM的安全ORM框架，其主要通过代码生成方式实现GORM代码封装。使用Gen框架能够自动生]]></description>
-</item>
-<item>
-    <title>Shell handbook</title>
-    <link>https://serialt.github.io/posts/2023-11-24-shell-handbook/</link>
-    <pubDate>Fri, 24 Nov 2023 20:22:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-24-shell-handbook/</guid>
-    <description><![CDATA[Shell handbok 一、特殊符号 参考链接: https://blog.csdn.net/jiezi2016/article/details/79649382 https://blog.csdn.net/wangzhaotongalex/article/details/73321766 介绍下Shell中的${}、##和%%使用范例，本文给出了不同情况下得到的结果。 假设定义了一个变量为： 代码如下]]></description>
-</item>
-<item>
-    <title>switch-case handbook</title>
-    <link>https://serialt.github.io/posts/2023-11-24-switch-case/</link>
-    <pubDate>Fri, 24 Nov 2023 20:22:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-24-switch-case/</guid>
-    <description><![CDATA[switch-case语法 shell 语法 case 变量 in 取值1) 操作语句 操作语句 ;; 取值2) 操作语句 操作语句 ;; 取值3) 操作语句 操作语句 ;; *) 操作语句 操作语句 ;; esac]]></description>
 </item>
 </channel>
 </rss>

@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>alpine-vm - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/alpine-vm/</link>
+        <description>alpine-vm - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 22 Jan 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/alpine-vm/" rel="self" type="application/rss+xml" /><item>
+    <title>Alpine vm</title>
+    <link>https://serialt.github.io/posts/2024-01-22-alpine-vm/</link>
+    <pubDate>Mon, 22 Jan 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-01-22-alpine-vm/</guid>
+    <description><![CDATA[alpine 虚拟机安装 使用alpine-vm iso 文件进行安装 参考文档： https://www.qunniao.net/1408.html https://wener.me/notes/os/alpine/intro https://blog.xiaohack.org/4674.html https://tonylee.name/Alpine-Linux-4f1cbdb482754c65a61e7f08e9691234 关闭交换分区减小镜像大小： vi /sbin/setup-alpine # 在 setup-disk 增加参数关闭交换分区 setup-disk -s 0 alpine 3.19 镜像可以]]></description>
+</item>
+</channel>
+</rss>

@@ -2,13 +2,17 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://serialt.github.io/</loc><lastmod>2024-01-16T20:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/</loc><lastmod>2024-01-16T20:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/devops/</loc><lastmod>2024-01-16T20:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/posts/</loc><lastmod>2024-01-16T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/</loc><lastmod>2024-01-29T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/</loc><lastmod>2024-01-29T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/devops/</loc><lastmod>2024-01-29T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/ktconnect/</loc><lastmod>2024-01-29T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-01-29-ktconnect/</loc><lastmod>2024-01-29T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/</loc><lastmod>2024-01-29T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/</loc><lastmod>2024-01-29T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-01-22-alpine-vm/</loc><lastmod>2024-01-22T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/alpine-vm/</loc><lastmod>2024-01-22T20:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-01-15-python-cert/</loc><lastmod>2024-01-16T20:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/python-cert/</loc><lastmod>2024-01-16T20:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/</loc><lastmod>2024-01-16T20:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-01-14-terraform-registry/</loc><lastmod>2024-01-14T20:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/terraform-registry/</loc><lastmod>2024-01-14T20:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/vault/</loc><lastmod>2024-01-07T20:26:27&#43;08:00</lastmod></url><url>
