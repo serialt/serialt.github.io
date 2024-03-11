@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-01-07-vault\/"
-        },"genre": "posts","keywords": "vault","wordcount":  8963 ,
+        },"genre": "posts","keywords": "vault","wordcount":  9155 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-01-07-vault\/","datePublished": "2024-01-07T20:26:27+08:00","dateModified": "2024-01-07T20:26:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,8 +101,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Vault</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-07">2024-01-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;8963 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;18 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-07">2024-01-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;9155 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;19 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -139,7 +139,11 @@
         <li><a href="#2创建令牌时附加策略">2、创建令牌时附加策略</a></li>
       </ul>
     </li>
-    <li><a href="#六terraform-管理">六、terraform 管理</a></li>
+    <li><a href="#六terraform-管理">六、terraform 管理</a>
+      <ul>
+        <li><a href="#terraform-vault-unseal">Terraform vault unseal</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="vault">Vault</h1>
@@ -884,18 +888,6 @@ policies             [&#34;root&#34;]
 </span></span></span><span class="line"><span class="cl"><span class="s">path &#34;Monitor/+&#34; {
 </span></span></span><span class="line"><span class="cl"><span class="s">  capabilities = [&#34;read&#34;, &#34;list&#34;]
 </span></span></span><span class="line"><span class="cl"><span class="s">}
-</span></span></span><span class="line"><span class="cl"><span class="s">path &#34;DBMiddleware/+&#34; {
-</span></span></span><span class="line"><span class="cl"><span class="s">  capabilities = [&#34;list&#34;]
-</span></span></span><span class="line"><span class="cl"><span class="s">}
-</span></span></span><span class="line"><span class="cl"><span class="s">path &#34;DBMiddleware/+/+&#34; {
-</span></span></span><span class="line"><span class="cl"><span class="s">  capabilities = [&#34;read&#34;, &#34;list&#34;]
-</span></span></span><span class="line"><span class="cl"><span class="s">}
-</span></span></span><span class="line"><span class="cl"><span class="s">path &#34;Management/+&#34; {
-</span></span></span><span class="line"><span class="cl"><span class="s">  capabilities = [&#34;read&#34;, &#34;list&#34;]
-</span></span></span><span class="line"><span class="cl"><span class="s">}
-</span></span></span><span class="line"><span class="cl"><span class="s">path &#34;Management/Admin/*&#34; {
-</span></span></span><span class="line"><span class="cl"><span class="s">  capabilities = [&#34;deny&#34;]
-</span></span></span><span class="line"><span class="cl"><span class="s">}
 </span></span></span><span class="line"><span class="cl"><span class="s">EOT</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">
@@ -927,6 +919,61 @@ policies             [&#34;root&#34;]
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="terraform-vault-unseal">Terraform vault unseal</h3>
+<p>vault 官方支持的自动 unseal 依赖于第三方服务，除此以外可以使用 vault cli 和 http 方式解封。</p>
+<p>基于 <code>scottwinkler/shell</code>，通过执行命令进行 vault 的初始化和 unseal</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">terraform <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  required_providers <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">helm</span> <span class="o">=</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">source</span>  <span class="o">=</span> <span class="s2">&#34;hashicorp/helm&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">shell</span> <span class="o">=</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">source</span>  <span class="o">=</span> <span class="s2">&#34;scottwinkler/shell&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="nv">version</span> <span class="o">=</span> <span class="s2">&#34;1.7.10&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">module <span class="s2">&#34;vault&#34;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">count</span>  <span class="o">=</span> var.vault.enabled ? <span class="m">1</span> : <span class="m">0</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">source</span> <span class="o">=</span> <span class="s2">&#34;xxxx&#34;</span>
+</span></span><span class="line"><span class="cl">  xxxxx
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">resource <span class="s2">&#34;shell_script&#34;</span> <span class="s2">&#34;vault_init&#34;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">count</span>  <span class="o">=</span> var.vault.enabled ? <span class="m">1</span> : <span class="m">0</span>
+</span></span><span class="line"><span class="cl">  lifecycle_commands <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">create</span> <span class="o">=</span> <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">      sleep 50
+</span></span></span><span class="line"><span class="cl"><span class="s">      kubectl -n ${module.vault[0].namespace} exec vault-0 -- vault operator init -key-shares=6  -key-threshold=3 -format=json
+</span></span></span><span class="line"><span class="cl"><span class="s">    EOF</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">delete</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">environment</span> <span class="o">=</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">KUBECONFIG</span> <span class="o">=</span> var.kubeconfig
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">depends_on</span> <span class="o">=</span> <span class="o">[</span>
+</span></span><span class="line"><span class="cl">    module.vault,
+</span></span><span class="line"><span class="cl">    <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">resource <span class="s2">&#34;shell_script&#34;</span> <span class="s2">&#34;vault_unseal&#34;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">count</span> <span class="o">=</span> var.vault.enabled ? <span class="m">1</span> : <span class="m">0</span>
+</span></span><span class="line"><span class="cl">  lifecycle_commands <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">create</span> <span class="o">=</span> <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">      kubectl -n ${module.vault[0].namespace} exec vault-0 -- vault operator unseal ${jsondecode(shell_script.vault_init[0].output.unseal_keys_b64)[0]}
+</span></span></span><span class="line"><span class="cl"><span class="s">      kubectl -n ${module.vault[0].namespace} exec vault-0 -- vault operator unseal ${jsondecode(shell_script.vault_init[0].output.unseal_keys_b64)[1]}
+</span></span></span><span class="line"><span class="cl"><span class="s">      kubectl -n ${module.vault[0].namespace} exec vault-0 -- vault operator unseal ${jsondecode(shell_script.vault_init[0].output.unseal_keys_b64)[2]}
+</span></span></span><span class="line"><span class="cl"><span class="s">    EOF</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">delete</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">environment</span> <span class="o">=</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">KUBECONFIG</span> <span class="o">=</span> var.kubeconfig
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">depends_on</span> <span class="o">=</span> <span class="o">[</span>module.vault<span class="o">]</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">

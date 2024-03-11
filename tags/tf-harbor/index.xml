@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>TF Harbor - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/tf-harbor/</link>
+        <description>TF Harbor - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 09 Mar 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/tf-harbor/" rel="self" type="application/rss+xml" /><item>
+    <title>TF Harbor</title>
+    <link>https://serialt.github.io/posts/2024-03-09-tf-harbor/</link>
+    <pubDate>Sat, 09 Mar 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-03-09-tf-harbor/</guid>
+    <description><![CDATA[Terraform Harbor 管理 provider.tf terraform { required_providers { harbor = { source = &#34;goharbor/harbor&#34; version = &#34;3.10.9&#34; } } } # set env # HARBOR_USERNAME # HARBOR_PASSWORD provider &#34;harbor&#34; { url = var.harbor.url insecure = var.harbor.insecure } user.tf resource &#34;harbor_user&#34; &#34;upload&#34; { admin = true comment = &#34;用于镜像上传和下载使用&#34; email]]></description>
+</item>
+</channel>
+</rss>

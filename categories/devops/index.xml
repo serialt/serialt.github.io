@@ -4,7 +4,31 @@
         <link>https://serialt.github.io/categories/devops/</link>
         <description>DevOps - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 29 Jan 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 11 Mar 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+    <title>k3s-cert</title>
+    <link>https://serialt.github.io/posts/2024-03-11-k3s-cert/</link>
+    <pubDate>Mon, 11 Mar 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-03-11-k3s-cert/</guid>
+    <description><![CDATA[K3s 证书 k3s 根CA证书默认10年，签署的证书有效期默认1年，在到期前的90天内需要重启，重启后会自动轮转证书。 参考文档： https://forums.rancher.cn/t/k3s-ca-10/331 https://blog.starudream.cn/2023/07/21/k3s-client-cert-extend/ https://forums.rancher.cn/t/k3s-ca-10/331/37 https://github.com/qkboy/k3s/tree/v1.29.0%2Bk3s1-longcert https://docs.k3s.io/zh/cli/certificate#%E8%BD%AE%E6%8D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%81%E4%B9%A6 https://www.linuxfly.org/post/733/ 一、手动轮转]]></description>
+</item>
+<item>
+    <title>TF Harbor</title>
+    <link>https://serialt.github.io/posts/2024-03-09-tf-harbor/</link>
+    <pubDate>Sat, 09 Mar 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-03-09-tf-harbor/</guid>
+    <description><![CDATA[Terraform Harbor 管理 provider.tf terraform { required_providers { harbor = { source = &#34;goharbor/harbor&#34; version = &#34;3.10.9&#34; } } } # set env # HARBOR_USERNAME # HARBOR_PASSWORD provider &#34;harbor&#34; { url = var.harbor.url insecure = var.harbor.insecure } user.tf resource &#34;harbor_user&#34; &#34;upload&#34; { admin = true comment = &#34;用于镜像上传和下载使用&#34; email]]></description>
+</item>
+<item>
+    <title>tf-code</title>
+    <link>https://serialt.github.io/posts/2024-02-25-tf-code/</link>
+    <pubDate>Sun, 25 Feb 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-02-25-tf-code/</guid>
+    <description><![CDATA[Terraform 代码片段 1、变量控制代码是否启用 module &#34;istio&#34; { count = var.istio.enabled ? 1 : 0 source = &#34;xxxxxx&#34; } 2、state文件中获取数据 state文件中需要有output，才能使用 data &#34;terraform_remote_state&#34; &#34;global&#34;]]></description>
+</item>
+<item>
     <title>ktconnect</title>
     <link>https://serialt.github.io/posts/2024-01-29-ktconnect/</link>
     <pubDate>Mon, 29 Jan 2024 20:26:27 &#43;0800</pubDate>
@@ -59,30 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-12-4-ansible-handbook/</guid>
     <description><![CDATA[Ansible handbook 一、ansible配置 1、ansible.cfg https://ansible-tran.readthedocs.io/en/latest/docs/intro_configuration.html * ANSIBLE_CONFIG (一个环境变量) * ansible.cfg (位于当前目录中) * .ansible.cfg (位于家目录中) * /etc/ansible/ansible.cfg 生成ansible的]]></description>
-</item>
-<item>
-    <title>Gitlab</title>
-    <link>https://serialt.github.io/posts/2023-12-4-gitlab/</link>
-    <pubDate>Mon, 04 Dec 2023 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-12-4-gitlab/</guid>
-    <description><![CDATA[Gitlab 版本介绍 gitlab分社区版和企业版，与其他企业版软件不同的是，社区版和企业版都不收费，都可以免费使用 官方文档：https://docs.]]></description>
-</item>
-<item>
-    <title>Gitlab</title>
-    <link>https://serialt.github.io/posts/2023-12-7-dev-terraform-provider/</link>
-    <pubDate>Mon, 04 Dec 2023 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-12-7-dev-terraform-provider/</guid>
-    <description><![CDATA[Dev terraform provider 基于新框架tpf开发 main.go func main() { var debug bool flag.BoolVar(&amp;debug, &#34;debug&#34;, false, &#34;debug terraform provider&#34;) flag.Parse() opts := providerserver.ServeOpts{ Address: &#34;hashicorp.com/edu/hashicups&#34;, Debug: debug, } err := providerserver.Serve(context.Background(), provider.New(version), opts) if err != nil { log.Fatal(err.Error()) } } provider.go package provider import ( &#34;context&#34; &#34;github.com/hashicorp/terraform-plugin-framework/datasource&#34; &#34;github.com/hashicorp/terraform-plugin-framework/provider&#34; &#34;github.com/hashicorp/terraform-plugin-framework/provider/schema&#34; &#34;github.com/hashicorp/terraform-plugin-framework/resource&#34; ) var ( _ provider.Provider = &amp;hashicupsProvider{} ) func New(version string) func()]]></description>
-</item>
-<item>
-    <title>Gorm gen</title>
-    <link>https://serialt.github.io/posts/2023-11-28-gorm-gen/</link>
-    <pubDate>Tue, 28 Nov 2023 20:22:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-28-gorm-gen/</guid>
-    <description><![CDATA[Gorm gen 参考链接： https://nickxu.me/2023/03/29/GORM%E7%9A%84GEN%E6%A8%A1%E5%BC%8F%E5%88%9D%E4%B8%8A%E6%89%8B/ https://www.liwenzhou.com/posts/Go/gen/ 示例代码： https://github.com/serialt/genc Gen是一个基于GORM的安全ORM框架，其主要通过代码生成方式实现GORM代码封装。使用Gen框架能够自动生]]></description>
 </item>
 </channel>
 </rss>

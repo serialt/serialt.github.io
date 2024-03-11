@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>tf code - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/tf-code/</link>
+        <description>tf code - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 25 Feb 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/tf-code/" rel="self" type="application/rss+xml" /><item>
+    <title>tf-code</title>
+    <link>https://serialt.github.io/posts/2024-02-25-tf-code/</link>
+    <pubDate>Sun, 25 Feb 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-02-25-tf-code/</guid>
+    <description><![CDATA[Terraform 代码片段 1、变量控制代码是否启用 module &#34;istio&#34; { count = var.istio.enabled ? 1 : 0 source = &#34;xxxxxx&#34; } 2、state文件中获取数据 state文件中需要有output，才能使用 data &#34;terraform_remote_state&#34; &#34;global&#34;]]></description>
+</item>
+</channel>
+</rss>
