@@ -1647,3 +1647,12 @@ pause模块的返回值
 
 
 
+
+
+### 六、变量
+
+```
+# 使用文件进行传参数
+ansible-playbook site.yml  -i hosts -e @env.yaml 
+```
+

@@ -13,6 +13,14 @@ categories = ["DevOps"]
 
 基于新框架tpf开发
 
+开发示例：
+
+* https://github.com/hashicorp/terraform-provider-scaffolding-framework
+
+* https://github.com/serialt/terraform-provider-demo
+
+
+
 main.go
 
 ```go
