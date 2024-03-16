@@ -4,7 +4,39 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 11 Mar 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 16 Mar 2024 18:37:07 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>hashicorp</title>
+    <link>https://serialt.github.io/tags/hashicorp/</link>
+    <pubDate>Sat, 16 Mar 2024 18:37:07 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/hashicorp/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>packer</title>
+    <link>https://serialt.github.io/tags/packer/</link>
+    <pubDate>Sat, 16 Mar 2024 18:37:07 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/packer/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>embed</title>
+    <link>https://serialt.github.io/tags/embed/</link>
+    <pubDate>Sat, 16 Mar 2024 18:25:07 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/embed/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Go</title>
+    <link>https://serialt.github.io/tags/go/</link>
+    <pubDate>Sat, 16 Mar 2024 18:25:07 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/go/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>k3s cert</title>
     <link>https://serialt.github.io/tags/k3s-cert/</link>
     <pubDate>Mon, 11 Mar 2024 20:26:27 &#43;0800</pubDate>
@@ -50,38 +82,6 @@
     <pubDate>Tue, 16 Jan 2024 20:26:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/python-cert/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>terraform-registry</title>
-    <link>https://serialt.github.io/tags/terraform-registry/</link>
-    <pubDate>Sun, 14 Jan 2024 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/terraform-registry/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>vault</title>
-    <link>https://serialt.github.io/tags/vault/</link>
-    <pubDate>Sun, 07 Jan 2024 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/vault/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>db</title>
-    <link>https://serialt.github.io/tags/db/</link>
-    <pubDate>Wed, 27 Dec 2023 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/db/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>mssql</title>
-    <link>https://serialt.github.io/tags/mssql/</link>
-    <pubDate>Wed, 27 Dec 2023 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/mssql/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

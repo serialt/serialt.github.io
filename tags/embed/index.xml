@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>embed - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/embed/</link>
+        <description>embed - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 16 Mar 2024 18:25:07 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/embed/" rel="self" type="application/rss+xml" /><item>
+    <title>Go Embed</title>
+    <link>https://serialt.github.io/posts/2024-03-15-go-embed/</link>
+    <pubDate>Sat, 16 Mar 2024 18:25:07 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-03-15-go-embed/</guid>
+    <description><![CDATA[Go embed 实现将文件打包到Go程序中 参考链接：https://juejin.cn/post/7103539856805986334 Go是一门编译型]]></description>
+</item>
+</channel>
+</rss>

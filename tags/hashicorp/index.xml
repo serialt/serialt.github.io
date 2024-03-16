@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>hashicorp - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/hashicorp/</link>
+        <description>hashicorp - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 16 Mar 2024 18:37:07 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/hashicorp/" rel="self" type="application/rss+xml" /><item>
+    <title>Packer</title>
+    <link>https://serialt.github.io/posts/2024-03-15-packer/</link>
+    <pubDate>Sat, 16 Mar 2024 18:37:07 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-03-15-packer/</guid>
+    <description><![CDATA[Packer 参考链接： https://developer.hashicorp.com/packer/docs?product_intent=packer https://blog.k8s.li/packer-vsphere-example.html https://cloud.tencent.com/developer/article/1474736 https://blog.csdn.net/weixin_45941099/article/details/123838526 https://github.com/serialt/packer-demo https://lonegunmanb.github.io/packer-handbook/ 介绍： Packer是用一个配置文件，在多种云计算平台上创建完全一致镜像的开源工具。Packer是由HashiCorp]]></description>
+</item>
+</channel>
+</rss>

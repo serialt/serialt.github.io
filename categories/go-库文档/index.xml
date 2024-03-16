@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/</link>
         <description>Go 库文档 - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:25:07 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 16 Mar 2024 18:25:07 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/" rel="self" type="application/rss+xml" /><item>
+    <title>Go Embed</title>
+    <link>https://serialt.github.io/posts/2024-03-15-go-embed/</link>
+    <pubDate>Sat, 16 Mar 2024 18:25:07 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-03-15-go-embed/</guid>
+    <description><![CDATA[Go embed 实现将文件打包到Go程序中 参考链接：https://juejin.cn/post/7103539856805986334 Go是一门编译型]]></description>
+</item>
+<item>
     <title>Go gopsutil</title>
     <link>https://serialt.github.io/posts/2023-11-11-gopsutil/</link>
     <pubDate>Sat, 11 Nov 2023 10:25:07 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-11-11-go-homedir/</guid>
     <description><![CDATA[homedir家目录 GitHub地址：https://github.com/mitchellh/go-homedir 使用os/user获取用]]></description>
-</item>
-<item>
-    <title>Go fsnotify</title>
-    <link>https://serialt.github.io/posts/2023-11-11-go-fsnotify/</link>
-    <pubDate>Sat, 11 Nov 2023 10:24:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-11-go-fsnotify/</guid>
-    <description><![CDATA[Go Fsnotify库 官方仓库：github.com/fsnotify/fsnotify 用于监控文件或目录的改变 1、官网示例 package main import ( &#34;log&#34; &#34;github.com/fsnotify/fsnotify&#34; ) func main()]]></description>
 </item>
 </channel>
 </rss>

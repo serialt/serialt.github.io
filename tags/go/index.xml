@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/tags/go/</link>
         <description>Go - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:26:09 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/go/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 16 Mar 2024 18:25:07 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/go/" rel="self" type="application/rss+xml" /><item>
+    <title>Go Embed</title>
+    <link>https://serialt.github.io/posts/2024-03-15-go-embed/</link>
+    <pubDate>Sat, 16 Mar 2024 18:25:07 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-03-15-go-embed/</guid>
+    <description><![CDATA[Go embed 实现将文件打包到Go程序中 参考链接：https://juejin.cn/post/7103539856805986334 Go是一门编译型]]></description>
+</item>
+<item>
     <title>Go basic</title>
     <link>https://serialt.github.io/posts/2023-11-11-go-basic/</link>
     <pubDate>Sat, 11 Nov 2023 10:26:09 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-11-11-go-ini/</guid>
     <description><![CDATA[Go ini库 参考：https://juejin.cn/post/6844904048764649479 简介 ini 是 Windows 上常用的配置文件格式。MySQ]]></description>
-</item>
-<item>
-    <title>Go homedir</title>
-    <link>https://serialt.github.io/posts/2023-11-11-go-homedir/</link>
-    <pubDate>Sat, 11 Nov 2023 10:24:49 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-11-go-homedir/</guid>
-    <description><![CDATA[homedir家目录 GitHub地址：https://github.com/mitchellh/go-homedir 使用os/user获取用]]></description>
 </item>
 </channel>
 </rss>
