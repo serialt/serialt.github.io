@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Terraform Registry Mirror - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Terraform Registry Mirror" />
+<meta property="og:description" content="Terraform Registry Mirror terraform 的 provider 托管在海外，使用时候会经常因为网络问题导致下载失败，terraform 官方有 Provider Network Mirror Protocol，支持使用本地文件和 Static Webs" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2024-03-17-tf-mirror-registery/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-03-17T16:37:07+08:00" />
+<meta property="article:modified_time" content="2024-03-17T16:37:07+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Terraform Registry Mirror"/>
+<meta name="twitter:description" content="Terraform Registry Mirror terraform 的 provider 托管在海外，使用时候会经常因为网络问题导致下载失败，terraform 官方有 Provider Network Mirror Protocol，支持使用本地文件和 Static Webs"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2024-03-17-tf-mirror-registery/" /><link rel="prev" href="https://serialt.github.io/posts/2024-03-15-packer/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Terraform Registry Mirror",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2024-03-17-tf-mirror-registery\/"
+        },"genre": "posts","keywords": "terraform-registry, hashicorp","wordcount":  939 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2024-03-17-tf-mirror-registery\/","datePublished": "2024-03-17T16:37:07+08:00","dateModified": "2024-03-17T16:37:07+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Terraform Registry Mirror</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-03-17">2024-03-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;939 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#terraform-registry-mirror">Terraform Registry Mirror</a>
+      <ul>
+        <li><a href="#1制作离线-provider-资源">1、制作离线 provider 资源</a></li>
+        <li><a href="#2本地文件镜像">2、本地文件镜像</a></li>
+        <li><a href="#3网络镜像">3、网络镜像</a></li>
+        <li><a href="#4基于脚本下载-provider-离线资源">4、基于脚本下载 provider 离线资源</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="terraform-registry-mirror">Terraform Registry Mirror</h2>
+<p>terraform 的 provider 托管在海外，使用时候会经常因为网络问题导致下载失败，terraform 官方有 Provider Network Mirror Protocol，支持使用本地文件和 Static Website，制作方法都依赖于<code>terraform providers mirror </code>命令获取到的资源。</p>
+<h3 id="1制作离线-provider-资源">1、制作离线 provider 资源</h3>
+<h4 id="在当前目录下生成-providertf-文件">在当前目录下生成 provider.tf 文件</h4>
+<pre tabindex="0"><code>terraform {
+  required_providers {
+    docker = {
+      source  = &#34;kreuzwerker/docker&#34;
+      version = &#34;2.20.3&#34;
+    }
+  }
+
+}
+</code></pre><h4 id="创建存储的目录并下载-provider">创建存储的目录，并下载 provider</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 下载当前版 terraform 架构的 provider 到 provider 目录，可以用 -platform=OS_ARCH 指定架构</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>serialt@Sugar tf-demo<span class="o">]</span>🐳 mkdir providers
+</span></span><span class="line"><span class="cl">terraform providers mirror providers 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 下载 darwin_arm64 linux_amd64 </span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>serialt@Sugar tf-demo<span class="o">]</span>🐳 terraform providers mirror -platform<span class="o">=</span>linux_amd64 providers 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>serialt@Sugar tf-demo<span class="o">]</span>🐳 terraform providers mirror -platform<span class="o">=</span>darwin_arm64 providers 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>serialt@Sugar tf-demo<span class="o">]</span>🐳 tree providers
+</span></span><span class="line"><span class="cl">providers
+</span></span><span class="line"><span class="cl">└── registry.terraform.io
+</span></span><span class="line"><span class="cl">    └── kreuzwerker
+</span></span><span class="line"><span class="cl">        └── docker
+</span></span><span class="line"><span class="cl">            ├── 2.20.3.json
+</span></span><span class="line"><span class="cl">            ├── index.json
+</span></span><span class="line"><span class="cl">            ├── terraform-provider-docker_2.20.3_darwin_arm64.zip
+</span></span><span class="line"><span class="cl">            └── terraform-provider-docker_2.20.3_linux_amd64.zip
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">3</span> directories, <span class="m">4</span> files
+</span></span></code></pre></div><h3 id="2本地文件镜像">2、本地文件镜像</h3>
+<p>配置插件缓存目录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">TF_PLUGIN_CACHE_DIR</span><span class="o">=</span>/home/user/.terraform.d/plugin-cache
+</span></span></code></pre></div><p>配置<code> ~/.terraformrc</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">provider_installation <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  filesystem_mirror <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">path</span>    <span class="o">=</span> <span class="s2">&#34;/home/user/tf-demo/providers&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">include</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&#34;*/*/*&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  direct <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">exclude</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&#34;*/*/*&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>serialt@Sugar tf-ccc<span class="o">]</span>🐳 terraform init
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Initializing the backend...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Initializing provider plugins...
+</span></span><span class="line"><span class="cl">- Finding kreuzwerker/docker versions matching <span class="s2">&#34;2.20.3&#34;</span>...
+</span></span><span class="line"><span class="cl">- Installing kreuzwerker/docker v2.20.3...
+</span></span><span class="line"><span class="cl">- Installed kreuzwerker/docker v2.20.3 <span class="o">(</span>unauthenticated<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform has created a lock file .terraform.lock.hcl to record the provider
+</span></span><span class="line"><span class="cl">selections it made above. Include this file in your version control repository
+</span></span><span class="line"><span class="cl">so that Terraform can guarantee to make the same selections by default when
+</span></span><span class="line"><span class="cl">you run <span class="s2">&#34;terraform init&#34;</span> in the future.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">╷
+</span></span><span class="line"><span class="cl">│ Warning: Incomplete lock file information <span class="k">for</span> providers
+</span></span><span class="line"><span class="cl">│ 
+</span></span><span class="line"><span class="cl">│ Due to your customized provider installation methods, Terraform was forced to
+</span></span><span class="line"><span class="cl">│ calculate lock file checksums locally <span class="k">for</span> the following providers:
+</span></span><span class="line"><span class="cl">│   - kreuzwerker/docker
+</span></span><span class="line"><span class="cl">│ 
+</span></span><span class="line"><span class="cl">│ The current .terraform.lock.hcl file only includes checksums <span class="k">for</span>
+</span></span><span class="line"><span class="cl">│ darwin_arm64, so Terraform running on another platform will fail to install
+</span></span><span class="line"><span class="cl">│ these providers.
+</span></span><span class="line"><span class="cl">│ 
+</span></span><span class="line"><span class="cl">│ To calculate additional checksums <span class="k">for</span> another platform, run:
+</span></span><span class="line"><span class="cl">│   terraform providers lock -platform<span class="o">=</span>linux_amd64
+</span></span><span class="line"><span class="cl">│ <span class="o">(</span>where linux_amd64 is the platform to generate<span class="o">)</span>
+</span></span><span class="line"><span class="cl">╵
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform has been successfully initialized!
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">You may now begin working with Terraform. Try running <span class="s2">&#34;terraform plan&#34;</span> to see
+</span></span><span class="line"><span class="cl">any changes that are required <span class="k">for</span> your infrastructure. All Terraform commands
+</span></span><span class="line"><span class="cl">should now work.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">If you ever <span class="nb">set</span> or change modules or backend configuration <span class="k">for</span> Terraform,
+</span></span><span class="line"><span class="cl">rerun this <span class="nb">command</span> to reinitialize your working directory. If you forget, other
+</span></span><span class="line"><span class="cl">commands will detect it and remind you to <span class="k">do</span> so <span class="k">if</span> necessary.
+</span></span></code></pre></div><h3 id="3网络镜像">3、网络镜像</h3>
+<h4 id="nginx配置文件">nginx配置文件</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="k">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server_name</span> <span class="s">tf-mirror.local.com</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">return</span> <span class="mi">301</span> <span class="s">https://</span><span class="nv">$server_name$request_uri</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">server{</span>
+</span></span><span class="line"><span class="cl">        <span class="s">server_name</span> <span class="s">tf-mirror.local.com</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">listen</span> <span class="mi">443</span> <span class="s">ssl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">charset</span> <span class="s">utf-8</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">gzip</span> <span class="no">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">gzip_min_length</span> <span class="s">1K</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">gzip_comp_level</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">gzip_buffers</span> <span class="mi">32</span> <span class="s">4K</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">gzip_types</span> <span class="s">text/plain</span> <span class="s">application/javascript</span> <span class="s">application/x-javascript</span> <span class="s">text/css</span> <span class="s">application/xml</span> <span class="s">text/javascript</span> <span class="s">application/x-httpd-php</span> <span class="s">image/jpeg</span> <span class="s">image/gif</span> <span class="s">image/png</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">gzip_vary</span> <span class="no">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">add_header</span> <span class="s">Strict-Transport-Security</span> <span class="s">&#34;max-age=31536000</span><span class="p">;</span> <span class="k">includeSubDomians</span><span class="p">;</span><span class="k">proload&#34;</span> <span class="s">always</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">root</span> <span class="s">/data/terraform-mirror/</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">index</span> <span class="s">index.html</span> <span class="s">index.htm</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try_files</span> <span class="nv">$uri</span> <span class="nv">$uri/</span> <span class="s">/index.html</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">client_max_body_size</span>  <span class="mi">20m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">access_log</span> <span class="s">/var/log/nginx/tf-mirror.local.com.log</span> <span class="s">main</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">error_log</span> <span class="s">/var/log/nginx/tf-mirror.local.com-err.log</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">ssl_certificate</span> <span class="s">/etc/nginx/cert_files/local.com.crt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">ssl_certificate_key</span> <span class="s">/etc/nginx/cert_files/local.com.key</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">}</span>
+</span></span></code></pre></div><h4 id="上传下载的-provider-资源到-web-根目录">上传下载的 provider 资源到 web 根目录</h4>
+<p>例如：<code>/data/terraform-mirror/</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>serialt@Sugar tf-ccc<span class="o">]</span>🐳 scp -r ./providers  local.com:/data/terraform-mirror/
+</span></span></code></pre></div><p>启动nginx服务</p>
+<p>配置<code>~/.terraformrc</code>文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">provider_installation <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  network_mirror <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">url</span> <span class="o">=</span> <span class="s2">&#34;https://tf-mirror.local.com/providers/&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>serialt@Sugar tf-ccc<span class="o">]</span>🐳 terraform init
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Initializing the backend...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Initializing provider plugins...
+</span></span><span class="line"><span class="cl">- Finding latest version of hashicorp/random...
+</span></span><span class="line"><span class="cl">- Installing hashicorp/random v3.6.0...
+</span></span><span class="line"><span class="cl">- Installed hashicorp/random v3.6.0 <span class="o">(</span>verified checksum<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform has created a lock file .terraform.lock.hcl to record the provider
+</span></span><span class="line"><span class="cl">selections it made above. Include this file in your version control repository
+</span></span><span class="line"><span class="cl">so that Terraform can guarantee to make the same selections by default when
+</span></span><span class="line"><span class="cl">you run <span class="s2">&#34;terraform init&#34;</span> in the future.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform has been successfully initialized!
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">You may now begin working with Terraform. Try running <span class="s2">&#34;terraform plan&#34;</span> to see
+</span></span><span class="line"><span class="cl">any changes that are required <span class="k">for</span> your infrastructure. All Terraform commands
+</span></span><span class="line"><span class="cl">should now work.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">If you ever <span class="nb">set</span> or change modules or backend configuration <span class="k">for</span> Terraform,
+</span></span><span class="line"><span class="cl">rerun this <span class="nb">command</span> to reinitialize your working directory. If you forget, other
+</span></span><span class="line"><span class="cl">commands will detect it and remind you to <span class="k">do</span> so <span class="k">if</span> necessary.
+</span></span></code></pre></div><h3 id="4基于脚本下载-provider-离线资源">4、基于脚本下载 provider 离线资源</h3>
+<ul>
+<li><a href="https://github.com/serialt/terraform-registry-mirror" target="_blank" rel="noopener noreffer ">https://github.com/serialt/terraform-registry-mirror</a></li>
+</ul>
+<p>要求：</p>
+<ul>
+<li>terraform</li>
+<li>jq</li>
+</ul>
+<p>1）修改下载的平台和架构</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sed -ri <span class="nv">PLATFORMS</span><span class="o">=</span><span class="s2">&#34;linux_amd64 darwin_amd64 darwin_arm64&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sed -ri <span class="s1">&#39;/^PLATFORMS=/cPLATFORMS=&#34;linux_amd64 darwin_amd64 darwin_arm64&#34;&#39;</span> bin/mirror.sh
+</span></span><span class="line"><span class="cl">sed -ri <span class="s1">&#39;/^PLATFORMS=/cPLATFORMS=&#34;linux_amd64 darwin_amd64 darwin_arm64&#34;&#39;</span> bin/core.sh
+</span></span></code></pre></div><p>2）下载 terraform</p>
+<pre tabindex="0"><code>bin/core.sh terraform.json
+</code></pre><p>3）下载 provider</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 下载单个</span>
+</span></span><span class="line"><span class="cl">bin/core.sh ./providers/aws.json
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 下载多个</span>
+</span></span><span class="line"><span class="cl">mirror<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">action</span><span class="o">=</span><span class="nv">$1</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">providers</span><span class="o">=</span><span class="sb">`</span>ls ./providers<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> i in <span class="si">${</span><span class="nv">providers</span><span class="si">}</span><span class="p">;</span><span class="k">do</span> 
+</span></span><span class="line"><span class="cl">        bash ./bin/<span class="si">${</span><span class="nv">action</span><span class="si">}</span> ./providers/<span class="si">${</span><span class="nv">i</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">done</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mirror mirror.sh
+</span></span><span class="line"><span class="cl"><span class="c1"># mirror updater.sh</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-03-17</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/terraform-registry/">terraform-registry</a>,&nbsp;<a href="/tags/hashicorp/">hashicorp</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2024-03-15-packer/" class="prev" rel="prev" title="Packer"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Packer</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

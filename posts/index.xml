@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/posts/</link>
         <description>All Posts | Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 16 Mar 2024 18:37:07 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 17 Mar 2024 16:37:07 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Terraform Registry Mirror</title>
+    <link>https://serialt.github.io/posts/2024-03-17-tf-mirror-registery/</link>
+    <pubDate>Sun, 17 Mar 2024 16:37:07 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-03-17-tf-mirror-registery/</guid>
+    <description><![CDATA[Terraform Registry Mirror terraform 的 provider 托管在海外，使用时候会经常因为网络问题导致下载失败，terraform 官方有 Provider Network Mirror Protocol，支持使用本地文件和 Static Webs]]></description>
+</item>
+<item>
     <title>Packer</title>
     <link>https://serialt.github.io/posts/2024-03-15-packer/</link>
     <pubDate>Sat, 16 Mar 2024 18:37:07 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-01-14-terraform-registry/</guid>
     <description><![CDATA[Terraform Registry 一、Registry 协议 文档地址：https://developer.hashicorp.com/terraform/internals]]></description>
-</item>
-<item>
-    <title>Vault</title>
-    <link>https://serialt.github.io/posts/2024-01-07-vault/</link>
-    <pubDate>Sun, 07 Jan 2024 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-01-07-vault/</guid>
-    <description><![CDATA[Vault 参考链接：https://thiscute.world/posts/experience-of-vault/#%E4%B8%80vault]]></description>
 </item>
 </channel>
 </rss>
