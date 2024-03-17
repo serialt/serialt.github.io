@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-03-15-packer\/"
-        },"genre": "posts","keywords": "packer, hashicorp","wordcount":  4898 ,
+        },"genre": "posts","keywords": "packer, hashicorp","wordcount":  4905 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-03-15-packer\/","datePublished": "2024-03-16T18:37:07+08:00","dateModified": "2024-03-16T18:37:07+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Packer</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-03-16">2024-03-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4898 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-03-16">2024-03-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4905 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -209,6 +209,9 @@
 </span></span></code></pre></div><p>RHEL系列系统中已经有packer命令，在下载 hashicorp packer 后为了防止冲突，可以将 hashicorp 的 packer 改名为 packer.io</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 安装 docker的插件</span>
 </span></span><span class="line"><span class="cl">packer.io plugins install github.com/hashicorp/docker
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 自动补全</span>
+</span></span><span class="line"><span class="cl">packer.io -autocomplete-install
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 列出已经安装的插件</span>
 </span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev docker<span class="o">]</span><span class="c1"># packer.io --version</span>
