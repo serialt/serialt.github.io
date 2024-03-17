@@ -1,6 +1,6 @@
 +++
 title = 'Terraform Registry Mirror'
-date = 2024-03-17T18:37:07+08:00
+date = 2024-03-17T16:37:07+08:00
 draft = false
 
 tags = ["terraform-registry","hashicorp"]
