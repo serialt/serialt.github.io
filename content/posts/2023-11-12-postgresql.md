@@ -202,6 +202,10 @@ postgres=> show max_connections;
 # 进入容器，修改最大连接数
 root@ip142:~# docker exec -ti postgres10-5433 bash
 root@568a83e098a5:/# sed  -ri   '/max_connections/c max_connections = 2000' /var/lib/postgresql/data/postgresql.conf
+
+
+# sql 加载配置
+select pg_reload_conf();
 ```
 
 用户只读权限设置：https://blog.csdn.net/qq_41018743/article/details/105492884
