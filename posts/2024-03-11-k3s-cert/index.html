@@ -8,15 +8,15 @@
 <meta property="og:description" content="K3s 证书 k3s 根CA证书默认10年，签署的证书有效期默认1年，在到期前的90天内需要重启，重启后会自动轮转证书。 参考文档： https://forums.rancher.cn/t/k3s-ca-10/331 https://blog.starudream.cn/2023/07/21/k3s-client-cert-extend/ https://forums.rancher.cn/t/k3s-ca-10/331/37 https://github.com/qkboy/k3s/tree/v1.29.0%2Bk3s1-longcert https://docs.k3s.io/zh/cli/certificate#%E8%BD%AE%E6%8D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%81%E4%B9%A6 https://www.linuxfly.org/post/733/ 一、手动轮转" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://serialt.github.io/posts/2024-03-11-k3s-cert/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-03-11T20:26:27+08:00" />
-<meta property="article:modified_time" content="2024-03-11T20:26:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta property="article:published_time" content="2024-03-21T21:26:27+08:00" />
+<meta property="article:modified_time" content="2024-03-21T21:26:27+08:00" /><meta property="og:site_name" content="Log" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="k3s-cert"/>
 <meta name="twitter:description" content="K3s 证书 k3s 根CA证书默认10年，签署的证书有效期默认1年，在到期前的90天内需要重启，重启后会自动轮转证书。 参考文档： https://forums.rancher.cn/t/k3s-ca-10/331 https://blog.starudream.cn/2023/07/21/k3s-client-cert-extend/ https://forums.rancher.cn/t/k3s-ca-10/331/37 https://github.com/qkboy/k3s/tree/v1.29.0%2Bk3s1-longcert https://docs.k3s.io/zh/cli/certificate#%E8%BD%AE%E6%8D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%81%E4%B9%A6 https://www.linuxfly.org/post/733/ 一、手动轮转"/>
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2024-03-11-k3s-cert/" /><link rel="prev" href="https://serialt.github.io/posts/2024-03-09-tf-harbor/" /><link rel="next" href="https://serialt.github.io/posts/2024-03-15-go-embed/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2024-03-11-k3s-cert/" /><link rel="prev" href="https://serialt.github.io/posts/2024-03-17-tf-mirror-registery/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -27,8 +27,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-03-11-k3s-cert\/"
-        },"genre": "posts","keywords": "k3s cert","wordcount":  325 ,
-        "url": "https:\/\/serialt.github.io\/posts\/2024-03-11-k3s-cert\/","datePublished": "2024-03-11T20:26:27+08:00","dateModified": "2024-03-11T20:26:27+08:00","publisher": {
+        },"genre": "posts","keywords": "k3s cert","wordcount":  671 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2024-03-11-k3s-cert\/","datePublished": "2024-03-21T21:26:27+08:00","dateModified": "2024-03-21T21:26:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -101,8 +101,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">k3s-cert</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-03-11">2024-03-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;325 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;671 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -113,6 +113,7 @@
     <li><a href="#一手动轮转证书">一、手动轮转证书</a></li>
     <li><a href="#二修改源码方式">二、修改源码方式</a></li>
     <li><a href="#三自定义证书">三、自定义证书</a></li>
+    <li><a href="#四rbac-管理">四、RBAC 管理</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="k3s-证书">K3s 证书</h1>
@@ -173,11 +174,82 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl get secret -n kube-system k3s-serving -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.data.tls\.crt}&#39;</span> <span class="p">|</span> base64 -d <span class="p">|</span> openssl x509 -noout -text <span class="p">|</span> grep Not
+</span></span></code></pre></div><h2 id="四rbac-管理">四、RBAC 管理</h2>
+<p>1、创建证书和签名请求</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># openssl genrsa -out dev.key 2048</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># openssl req -new -key dev.key -out dev.csr -subj &#34;/CN=dev/O=dev&#34;</span>
+</span></span></code></pre></div><p>2、创建 csr ，请求签名</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># cat &lt;&lt;EOF | kubectl apply -f -</span>
+</span></span><span class="line"><span class="cl">apiVersion: certificates.k8s.io/v1
+</span></span><span class="line"><span class="cl">kind: CertificateSigningRequest
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: dev
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  groups:
+</span></span><span class="line"><span class="cl">  - system:authenticated
+</span></span><span class="line"><span class="cl">  request: <span class="k">$(</span>cat dev.csr <span class="p">|</span> base64 <span class="p">|</span> tr -d <span class="s1">&#39;\n&#39;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">  signerName: kubernetes.io/kube-apiserver-client
+</span></span><span class="line"><span class="cl">  usages:
+</span></span><span class="line"><span class="cl">  - client auth
+</span></span><span class="line"><span class="cl">EOF
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># kubectl get csr</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># kubectl certificate approve dev</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># kubectl get csr dev -o jsonpath=&#39;{.status.certificate}&#39;  | base64 -d &gt; dev.crt</span>
+</span></span></code></pre></div><p>3、生成证书</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 复制一份当前的证书作为模板</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># cp ~/.kube/config  local-config</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># kubectl config set-credentials default --client-key=dev.key --client-certificate=dev.crt --embed-certs=true   --kubeconfig=local-config</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># kubectl config set-context default --cluster=default --user=default    --kubeconfig=local-config</span>
+</span></span></code></pre></div><p>证书有效期默认是一年</p>
+<p>4、rbac 配置</p>
+<p><a href="https://github.com/serialt/terraform-module-k8s-rbac" target="_blank" rel="noopener noreffer ">https://github.com/serialt/terraform-module-k8s-rbac</a></p>
+<p>rbac（用于测试）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># cat &gt; rbac.yaml &lt;&lt;EOF</span>
+</span></span><span class="line"><span class="cl">apiVersion: rbac.authorization.k8s.io/v1
+</span></span><span class="line"><span class="cl">kind: Role
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  namespace: default
+</span></span><span class="line"><span class="cl">  name: dev
+</span></span><span class="line"><span class="cl">rules:
+</span></span><span class="line"><span class="cl">- apiGroups: <span class="o">[</span><span class="s2">&#34;&#34;</span><span class="o">]</span> <span class="c1">#core api组</span>
+</span></span><span class="line"><span class="cl">  resources: <span class="o">[</span><span class="s2">&#34;pods&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">  verbs: <span class="o">[</span><span class="s2">&#34;get&#34;</span>, <span class="s2">&#34;watch&#34;</span>, <span class="s2">&#34;list&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">apiVersion: rbac.authorization.k8s.io/v1
+</span></span><span class="line"><span class="cl">kind: RoleBinding
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: dev
+</span></span><span class="line"><span class="cl">  namespace: default <span class="c1">#授权的命名空间为default</span>
+</span></span><span class="line"><span class="cl">subjects:
+</span></span><span class="line"><span class="cl">- kind: User
+</span></span><span class="line"><span class="cl">  name: dev <span class="c1"># 绑定dev用户</span>
+</span></span><span class="line"><span class="cl">  apiGroup: rbac.authorization.k8s.io
+</span></span><span class="line"><span class="cl">roleRef:
+</span></span><span class="line"><span class="cl">  kind: Role
+</span></span><span class="line"><span class="cl">  name: dev <span class="c1">#绑定Role</span>
+</span></span><span class="line"><span class="cl">  apiGroup: rbac.authorization.k8s.io
+</span></span><span class="line"><span class="cl">EOF
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f rbac.yaml
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># export KUBECONFIG=local-config </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1">#kubectl get pod</span>
+</span></span><span class="line"><span class="cl">NAME                               READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">myapp-deployment-6587ffc4b-ws4hm   1/1     Running   <span class="m">2</span>          27d
+</span></span><span class="line"><span class="cl">myapp-deployment-6587ffc4b-zx8g2   1/1     Running   <span class="m">1</span>          27d
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master-01 user<span class="o">]</span><span class="c1"># kubectl get ns</span>
+</span></span><span class="line"><span class="cl">Error from server <span class="o">(</span>Forbidden<span class="o">)</span>: namespaces is forbidden: User <span class="s2">&#34;dev&#34;</span> cannot list resource <span class="s2">&#34;namespaces&#34;</span> in API group <span class="s2">&#34;&#34;</span> at the cluster scope
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># kubectl get svc </span>
+</span></span><span class="line"><span class="cl">Error from server <span class="o">(</span>Forbidden<span class="o">)</span>: services is forbidden: User <span class="s2">&#34;dev&#34;</span> cannot list resource <span class="s2">&#34;services&#34;</span> in API group <span class="s2">&#34;&#34;</span> in the namespace <span class="s2">&#34;default&#34;</span>
 </span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-03-11</span>
+                <span>Updated on 2024-03-21</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
@@ -194,8 +266,7 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/2024-03-09-tf-harbor/" class="prev" rel="prev" title="TF Harbor"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>TF Harbor</a>
-            <a href="/posts/2024-03-15-go-embed/" class="next" rel="next" title="Go Embed">Go Embed<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/posts/2024-03-17-tf-mirror-registery/" class="prev" rel="prev" title="Terraform Registry Mirror"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Terraform Registry Mirror</a></div>
 </div>
 </article></div>
             </main><footer class="footer">

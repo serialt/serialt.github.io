@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 17 Mar 2024 16:37:07 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Thu, 21 Mar 2024 21:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>k3s cert</title>
+    <link>https://serialt.github.io/tags/k3s-cert/</link>
+    <pubDate>Thu, 21 Mar 2024 21:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/k3s-cert/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>hashicorp</title>
     <link>https://serialt.github.io/tags/hashicorp/</link>
     <pubDate>Sun, 17 Mar 2024 16:37:07 &#43;0800</pubDate>
@@ -42,14 +50,6 @@
     <pubDate>Sat, 16 Mar 2024 18:25:07 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/go/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>k3s cert</title>
-    <link>https://serialt.github.io/tags/k3s-cert/</link>
-    <pubDate>Mon, 11 Mar 2024 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/k3s-cert/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>

@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/posts/</link>
         <description>All Posts | Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 17 Mar 2024 16:37:07 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Thu, 21 Mar 2024 21:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>k3s-cert</title>
+    <link>https://serialt.github.io/posts/2024-03-11-k3s-cert/</link>
+    <pubDate>Thu, 21 Mar 2024 21:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-03-11-k3s-cert/</guid>
+    <description><![CDATA[K3s 证书 k3s 根CA证书默认10年，签署的证书有效期默认1年，在到期前的90天内需要重启，重启后会自动轮转证书。 参考文档： https://forums.rancher.cn/t/k3s-ca-10/331 https://blog.starudream.cn/2023/07/21/k3s-client-cert-extend/ https://forums.rancher.cn/t/k3s-ca-10/331/37 https://github.com/qkboy/k3s/tree/v1.29.0%2Bk3s1-longcert https://docs.k3s.io/zh/cli/certificate#%E8%BD%AE%E6%8D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%81%E4%B9%A6 https://www.linuxfly.org/post/733/ 一、手动轮转]]></description>
+</item>
+<item>
     <title>Terraform Registry Mirror</title>
     <link>https://serialt.github.io/posts/2024-03-17-tf-mirror-registery/</link>
     <pubDate>Sun, 17 Mar 2024 16:37:07 &#43;0800</pubDate>
@@ -27,14 +35,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-03-15-go-embed/</guid>
     <description><![CDATA[Go embed 实现将文件打包到Go程序中 参考链接：https://juejin.cn/post/7103539856805986334 Go是一门编译型]]></description>
-</item>
-<item>
-    <title>k3s-cert</title>
-    <link>https://serialt.github.io/posts/2024-03-11-k3s-cert/</link>
-    <pubDate>Mon, 11 Mar 2024 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-03-11-k3s-cert/</guid>
-    <description><![CDATA[K3s 证书 k3s 根CA证书默认10年，签署的证书有效期默认1年，在到期前的90天内需要重启，重启后会自动轮转证书。 参考文档： https://forums.rancher.cn/t/k3s-ca-10/331 https://blog.starudream.cn/2023/07/21/k3s-client-cert-extend/ https://forums.rancher.cn/t/k3s-ca-10/331/37 https://github.com/qkboy/k3s/tree/v1.29.0%2Bk3s1-longcert https://docs.k3s.io/zh/cli/certificate#%E8%BD%AE%E6%8D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%81%E4%B9%A6 https://www.linuxfly.org/post/733/ 一、手动轮转]]></description>
 </item>
 <item>
     <title>TF Harbor</title>
