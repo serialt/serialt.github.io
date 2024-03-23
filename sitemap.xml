@@ -2,13 +2,16 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://serialt.github.io/</loc><lastmod>2024-03-21T21:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/</loc><lastmod>2024-03-21T21:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/devops/</loc><lastmod>2024-03-21T21:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/</loc><lastmod>2024-03-23T10:37:07&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/</loc><lastmod>2024-03-23T10:37:07&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/devops/</loc><lastmod>2024-03-23T10:37:07&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/openconnect/</loc><lastmod>2024-03-23T10:37:07&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-03-21-openconnect/</loc><lastmod>2024-03-23T10:37:07&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/</loc><lastmod>2024-03-23T10:37:07&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/</loc><lastmod>2024-03-23T10:37:07&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/vpn/</loc><lastmod>2024-03-23T10:37:07&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/k3s-cert/</loc><lastmod>2024-03-21T21:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-03-11-k3s-cert/</loc><lastmod>2024-03-21T21:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/posts/</loc><lastmod>2024-03-21T21:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/</loc><lastmod>2024-03-21T21:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/hashicorp/</loc><lastmod>2024-03-17T16:37:07&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-03-17-tf-mirror-registery/</loc><lastmod>2024-03-17T16:37:07&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/terraform-registry/</loc><lastmod>2024-03-17T16:37:07&#43;08:00</lastmod></url><url>

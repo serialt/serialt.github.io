@@ -4,9 +4,17 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Thu, 21 Mar 2024 21:26:27 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 23 Mar 2024 10:37:07 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>OpenConnect</title>
+    <link>https://serialt.github.io/posts/2024-03-21-openconnect/</link>
+    <pubDate>Sat, 23 Mar 2024 10:37:07 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-03-21-openconnect/</guid>
+    <description><![CDATA[OpenConnect 参考文档 https://github.com/huataihuang/cloud-atlas-draft/blob/master/security/vpn/openconnect/deploy_ocserv_vpn_server_on_ubuntu.md https://www.cnblogs.com/grafin/p/17785264.html https://cn.linux-console.net/?p=22087 OpenConnect起源于对Cisco AnyConnect VPN客户端的开源替代方案的需求。Cisco AnyConnect是一款商业VPN解]]></description>
+</item>
+<item>
     <title>k3s-cert</title>
     <link>https://serialt.github.io/posts/2024-03-11-k3s-cert/</link>
     <pubDate>Thu, 21 Mar 2024 21:26:27 &#43;0800</pubDate>
@@ -77,14 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-01-15-python-cert/</guid>
     <description><![CDATA[Python 自签名证书 mozilla 维护者一个公共ca的文件，在使用http客户端使用自签名证书的时候可以把对应的文件合并然后再导入，示例代码： requirements.txt certifi==2023.11.17 urllib3==2.1.0 #!/usr/bin/env python3 # coding=utf-8 # ***********************************************************************]]></description>
-</item>
-<item>
-    <title>Terraform Registry</title>
-    <link>https://serialt.github.io/posts/2024-01-14-terraform-registry/</link>
-    <pubDate>Sun, 14 Jan 2024 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-01-14-terraform-registry/</guid>
-    <description><![CDATA[Terraform Registry 一、Registry 协议 文档地址：https://developer.hashicorp.com/terraform/internals]]></description>
 </item>
 </channel>
 </rss>

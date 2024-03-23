@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>OpenConnect - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="OpenConnect" />
+<meta property="og:description" content="OpenConnect 参考文档 https://github.com/huataihuang/cloud-atlas-draft/blob/master/security/vpn/openconnect/deploy_ocserv_vpn_server_on_ubuntu.md https://www.cnblogs.com/grafin/p/17785264.html https://cn.linux-console.net/?p=22087 OpenConnect起源于对Cisco AnyConnect VPN客户端的开源替代方案的需求。Cisco AnyConnect是一款商业VPN解" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2024-03-21-openconnect/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-03-23T10:37:07+08:00" />
+<meta property="article:modified_time" content="2024-03-23T10:37:07+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="OpenConnect"/>
+<meta name="twitter:description" content="OpenConnect 参考文档 https://github.com/huataihuang/cloud-atlas-draft/blob/master/security/vpn/openconnect/deploy_ocserv_vpn_server_on_ubuntu.md https://www.cnblogs.com/grafin/p/17785264.html https://cn.linux-console.net/?p=22087 OpenConnect起源于对Cisco AnyConnect VPN客户端的开源替代方案的需求。Cisco AnyConnect是一款商业VPN解"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2024-03-21-openconnect/" /><link rel="prev" href="https://serialt.github.io/posts/2024-03-11-k3s-cert/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "OpenConnect",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2024-03-21-openconnect\/"
+        },"genre": "posts","keywords": "OpenConnect, vpn","wordcount":  1703 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2024-03-21-openconnect\/","datePublished": "2024-03-23T10:37:07+08:00","dateModified": "2024-03-23T10:37:07+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">OpenConnect</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-03-23">2024-03-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1703 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#openconnect">OpenConnect</a>
+      <ul>
+        <li><a href="#一部署">一、部署</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="openconnect">OpenConnect</h2>
+<p>参考文档</p>
+<ul>
+<li><a href="https://github.com/huataihuang/cloud-atlas-draft/blob/master/security/vpn/openconnect/deploy_ocserv_vpn_server_on_ubuntu.md" target="_blank" rel="noopener noreffer ">https://github.com/huataihuang/cloud-atlas-draft/blob/master/security/vpn/openconnect/deploy_ocserv_vpn_server_on_ubuntu.md</a></li>
+<li><a href="https://www.cnblogs.com/grafin/p/17785264.html" target="_blank" rel="noopener noreffer ">https://www.cnblogs.com/grafin/p/17785264.html</a></li>
+<li><a href="https://cn.linux-console.net/?p=22087" target="_blank" rel="noopener noreffer ">https://cn.linux-console.net/?p=22087</a></li>
+</ul>
+<p>OpenConnect起源于对Cisco AnyConnect VPN客户端的开源替代方案的需求。Cisco AnyConnect是一款商业VPN解决方案，用于建立安全的远程连接。然而，由于其闭源和商业性质，社区对于一个开源的替代品的需求逐渐增加。OpenConnect的发展旨在填补这一空白，为用户提供一个自由、灵活且安全的VPN连接选项。</p>
+<p><strong>工作原理</strong></p>
+<p>OpenConnect的工作原理基于与Cisco AnyConnect服务器建立的安全连接。它使用SSL和DTLS协议进行身份验证和加密通信。用户首先提供所需的连接参数，例如服务器地址、用户名和密码。然后，OpenConnect使用这些参数与服务器进行握手和认证。一旦身份验证成功，VPN连接将建立起来，用户可以通过加密通道安全地传输数据。</p>
+<p>软件分为客户端和服务端：</p>
+<ul>
+<li>
+<p>服务端：ocserv</p>
+</li>
+<li>
+<p>客户端：openconnect</p>
+</li>
+</ul>
+<p>客户端支持的vpn服务有</p>
+<ul>
+<li>Cisco AnyConnect SSL VPN</li>
+<li>Juniper Network Connect</li>
+<li>GlobalProtect SSL VPN</li>
+<li>F5 BIG-IP SSL VPN</li>
+<li>FortiGate SSL VPN</li>
+<li>Array Networks SSL VPN</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">Set VPN protocol:
+</span></span><span class="line"><span class="cl">      --protocol<span class="o">=</span>anyconnect       Compatible with Cisco AnyConnect SSL VPN, as well as ocserv <span class="o">(</span>default<span class="o">)</span>
+</span></span><span class="line"><span class="cl">      --protocol<span class="o">=</span>nc               Compatible with Juniper Network Connect
+</span></span><span class="line"><span class="cl">      --protocol<span class="o">=</span>gp               Compatible with Palo Alto Networks <span class="o">(</span>PAN<span class="o">)</span> GlobalProtect SSL VPN
+</span></span><span class="line"><span class="cl">      --protocol<span class="o">=</span>pulse            Compatible with Pulse Connect Secure SSL VPN
+</span></span><span class="line"><span class="cl">      --protocol<span class="o">=</span>f5               Compatible with F5 BIG-IP SSL VPN
+</span></span><span class="line"><span class="cl">      --protocol<span class="o">=</span>fortinet         Compatible with FortiGate SSL VPN
+</span></span><span class="line"><span class="cl">      --protocol<span class="o">=</span>array            Compatible with Array Networks SSL VPN
+</span></span></code></pre></div><h3 id="一部署">一、部署</h3>
+<h4 id="1安装-ocserv">1、安装 ocserv</h4>
+<p><code>RHEL 系列</code></p>
+<p>ocserv 已经在 epel 仓库中提供了，所以可以直接通过 yum 安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># yum install epel-release</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># gnutls-utils 包含证书的制作工具 certtool</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># yum install ocserv gnutls-utils</span>
+</span></span></code></pre></div><h4 id="2生成证书">2、生成证书</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># mkdir /opt/anyconnect</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># cd /opt/anyconnect/</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 生成 CA 证书</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># certtool --generate-privkey --outfile ca-key.pem</span>
+</span></span><span class="line"><span class="cl">cat &gt;ca.tmpl <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">cn = &#34;VPN CA&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">organization = &#34;Local Corp&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">serial = 1
+</span></span></span><span class="line"><span class="cl"><span class="s">expiration_days = 36500
+</span></span></span><span class="line"><span class="cl"><span class="s">ca
+</span></span></span><span class="line"><span class="cl"><span class="s">signing_key
+</span></span></span><span class="line"><span class="cl"><span class="s">cert_signing_key
+</span></span></span><span class="line"><span class="cl"><span class="s">crl_signing_key
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># certtool --generate-self-signed --load-privkey ca-key.pem \</span>
+</span></span><span class="line"><span class="cl">--template ca.tmpl --outfile ca-cert.pem
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 复制 CA 证书到 ocserv 配置目录中</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># cp ca-key.pem /etc/ocserv/</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建服务端证书</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># certtool --generate-privkey --outfile server-key.pem</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># cat &gt;server.tmpl &lt;&lt;EOF</span>
+</span></span><span class="line"><span class="cl"><span class="nv">cn</span> <span class="o">=</span> <span class="s2">&#34;VPN server&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">organization</span> <span class="o">=</span> <span class="s2">&#34;Local&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">serial</span> <span class="o">=</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl"><span class="nv">expiration_days</span> <span class="o">=</span> <span class="m">3650</span>
+</span></span><span class="line"><span class="cl">encryption_key
+</span></span><span class="line"><span class="cl">signing_key
+</span></span><span class="line"><span class="cl">tls_www_server
+</span></span><span class="line"><span class="cl">EOF
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># certtool --generate-certificate --load-privkey server-key.pem \</span>
+</span></span><span class="line"><span class="cl">--load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>--template server.tmpl --outfile server-cert.pem
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># cp server-cert.pem server-key.pem /etc/ocserv/</span>
+</span></span></code></pre></div><h4 id="3配置ocserv">3、配置ocserv</h4>
+<p><code>/etc/ocserv/ocserv.conf     </code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="c">#ocserv支持多种认证方式，这是自带的密码认证，使用ocpasswd创建密码文件</span>
+</span></span><span class="line"><span class="cl"><span class="c">#ocserv还支持证书认证，可以通过Pluggable Authentication Modules (PAM)使用radius等认证方式</span>
+</span></span><span class="line"><span class="cl"><span class="nx">auth</span> <span class="p">=</span> <span class="s2">&#34;plain[passwd=/etc/ocserv/ocpasswd]&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c">#指定替代的登录方式，这里使用证书登录作为第二种登录方式</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#指定替代的登录方式，这里使用证书登录作为第二种登录方式</span>
+</span></span><span class="line"><span class="cl"><span class="c">#enable-auth = &#34;certificate&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#tcp和udp端口</span>
+</span></span><span class="line"><span class="cl"><span class="nx">tcp-port</span> <span class="p">=</span> <span class="mi">44333</span>
+</span></span><span class="line"><span class="cl"><span class="nx">udp-port</span> <span class="p">=</span> <span class="mi">44333</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#运行用户和组</span>
+</span></span><span class="line"><span class="cl"><span class="nx">run-as-user</span> <span class="p">=</span> <span class="nx">ocserv</span>
+</span></span><span class="line"><span class="cl"><span class="nx">run-as-group</span> <span class="p">=</span> <span class="nx">ocserv</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># socket文件</span>
+</span></span><span class="line"><span class="cl"><span class="nx">socket-file</span> <span class="p">=</span> <span class="err">/</span><span class="nx">var</span><span class="err">/</span><span class="nx">run</span><span class="err">/</span><span class="nx">ocserv</span><span class="p">.</span><span class="nx">sock</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#证书路径</span>
+</span></span><span class="line"><span class="cl"><span class="nx">server-cert</span> <span class="p">=</span> <span class="err">/</span><span class="nx">etc</span><span class="err">/</span><span class="nx">ocserv</span><span class="err">/</span><span class="nx">server-cert</span><span class="p">.</span><span class="nx">pem</span>
+</span></span><span class="line"><span class="cl"><span class="nx">server-key</span> <span class="p">=</span> <span class="err">/</span><span class="nx">etc</span><span class="err">/</span><span class="nx">ocserv</span><span class="err">/</span><span class="nx">server-key</span><span class="p">.</span><span class="nx">pem</span>
+</span></span><span class="line"><span class="cl"><span class="c">#ca路径</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ca-cert</span> <span class="p">=</span> <span class="err">/</span><span class="nx">etc</span><span class="err">/</span><span class="nx">ocserv</span><span class="err">/</span><span class="nx">ca-cert</span><span class="p">.</span><span class="nx">pem</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 开启lz4压缩</span>
+</span></span><span class="line"><span class="cl"><span class="nx">compression</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 隔离工作，默认不动</span>
+</span></span><span class="line"><span class="cl"><span class="nx">isolate-workers</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 最大客户端数量，0表示无限数量</span>
+</span></span><span class="line"><span class="cl"><span class="nx">max-clients</span> <span class="p">=</span> <span class="mi">16</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 同一用户可以同时登陆的客户端数量</span>
+</span></span><span class="line"><span class="cl"><span class="nx">max-same-clients</span> <span class="p">=</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 默认不动</span>
+</span></span><span class="line"><span class="cl"><span class="nx">rate-limit-ms</span> <span class="p">=</span> <span class="mi">100</span>
+</span></span><span class="line"><span class="cl"><span class="c"># 服务器统计重置时间，不动</span>
+</span></span><span class="line"><span class="cl"><span class="nx">server-stats-reset-time</span> <span class="p">=</span> <span class="mi">604800</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 保持连接，每隔多少秒向客户端发送连接数据包，防止断线。</span>
+</span></span><span class="line"><span class="cl"><span class="c"># IOS系统5分钟会关闭后台数据通讯，然后就会断线。</span>
+</span></span><span class="line"><span class="cl"><span class="c"># 因此将keepalive和mobile-dpd设置成200秒</span>
+</span></span><span class="line"><span class="cl"><span class="nx">keepalive</span> <span class="p">=</span> <span class="mi">200</span>
+</span></span><span class="line"><span class="cl"><span class="nx">dpd</span> <span class="p">=</span> <span class="mi">90</span>
+</span></span><span class="line"><span class="cl"><span class="nx">mobile-dpd</span> <span class="p">=</span> <span class="mi">200</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># udp端口无传输25秒后转成tcp端口</span>
+</span></span><span class="line"><span class="cl"><span class="nx">switch-to-tcp-timeout</span> <span class="p">=</span> <span class="mi">25</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 启用MTU转发以优化性能</span>
+</span></span><span class="line"><span class="cl"><span class="nx">try-mtu-discovery</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 空闲断开时间，如果想无限期连接，注释这两行</span>
+</span></span><span class="line"><span class="cl"><span class="c"># idle-timeout=1200</span>
+</span></span><span class="line"><span class="cl"><span class="c"># mobile-idle-timeout=2400</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 仅使用TLS1.2以上版本</span>
+</span></span><span class="line"><span class="cl"><span class="nx">cert-user-oid</span> <span class="p">=</span> <span class="mf">0.9</span><span class="p">.</span><span class="mf">2342.19200300</span><span class="p">.</span><span class="mf">100.1</span><span class="p">.</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="nx">tls-priorities</span> <span class="p">=</span> <span class="s2">&#34;NORMAL:%SERVER_PRECEDENCE:%COMPAT:-RSA:-VERS-SSL3.0:-ARCFOUR-128:-VERS-TLS1.0:-VERS-TLS1.1&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 认证超时时间</span>
+</span></span><span class="line"><span class="cl"><span class="nx">auth-timeout</span> <span class="p">=</span> <span class="mi">240</span>
+</span></span><span class="line"><span class="cl"><span class="c"># 最小重新认证时间</span>
+</span></span><span class="line"><span class="cl"><span class="nx">min-reauth-time</span> <span class="p">=</span> <span class="mi">300</span>
+</span></span><span class="line"><span class="cl"><span class="nx">max-ban-score</span> <span class="p">=</span> <span class="mi">80</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ban-reset-time</span> <span class="p">=</span> <span class="mi">1200</span>
+</span></span><span class="line"><span class="cl"><span class="nx">cookie-timeout</span> <span class="p">=</span> <span class="mi">324000</span>
+</span></span><span class="line"><span class="cl"><span class="nx">deny-roaming</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl"><span class="nx">rekey-time</span> <span class="p">=</span> <span class="mi">172800</span>
+</span></span><span class="line"><span class="cl"><span class="nx">rekey-method</span> <span class="p">=</span> <span class="nx">ssl</span>
+</span></span><span class="line"><span class="cl"><span class="nx">use-occtl</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="nx">pid-file</span> <span class="p">=</span> <span class="err">/</span><span class="nx">var</span><span class="err">/</span><span class="nx">run</span><span class="err">/</span><span class="nx">ocserv</span><span class="p">.</span><span class="nx">pid</span>
+</span></span><span class="line"><span class="cl"><span class="nx">device</span> <span class="p">=</span> <span class="nx">vpns</span>
+</span></span><span class="line"><span class="cl"><span class="nx">predictable-ips</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 默认域名，修改为你的域名或ip地址，这个设置没有任何作用</span>
+</span></span><span class="line"><span class="cl"><span class="nx">default-domain</span> <span class="p">=</span> <span class="nx">xxx</span><span class="p">.</span><span class="nx">com</span><span class="err">:</span><span class="mi">4433</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 配置自定义私有IP地址范围(vpn客户端)，注释默认的两行</span>
+</span></span><span class="line"><span class="cl"><span class="c">#ipv4-network = 192.168.1.0</span>
+</span></span><span class="line"><span class="cl"><span class="c">#ipv4-netmask = 255.255.255.0</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ipv4-network</span> <span class="p">=</span> <span class="mf">10.70</span><span class="p">.</span><span class="mf">25.0</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ipv4-netmask</span> <span class="p">=</span> <span class="mf">255.255</span><span class="p">.</span><span class="mf">255.0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 以VPN隧道传输所有DNS查询</span>
+</span></span><span class="line"><span class="cl"><span class="nx">tunnel-all-dns</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 更改DNS服务器(国内服务器就填写国内dns)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">dns</span> <span class="p">=</span> <span class="mf">8.8</span><span class="p">.</span><span class="mf">8.8</span>
+</span></span><span class="line"><span class="cl"><span class="nx">dns</span> <span class="p">=</span> <span class="mf">1.1</span><span class="p">.</span><span class="mf">1.1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 允许思科客户端连接</span>
+</span></span><span class="line"><span class="cl"><span class="nx">cisco-client-compat</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 以下路由表不通过VPN隧道，直接本地网络连接</span>
+</span></span><span class="line"><span class="cl"><span class="c"># 一定要添加自己服务器的ip地址，否则连上VPN后打不开自己的网站</span>
+</span></span><span class="line"><span class="cl"><span class="nx">no-route</span> <span class="p">=</span> <span class="nx">x</span><span class="p">.</span><span class="nx">x</span><span class="p">.</span><span class="nx">x</span><span class="p">.</span><span class="nx">x</span><span class="err">/</span><span class="mf">255.255</span><span class="p">.</span><span class="mf">255.255</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">#只允许访问下面的网段(推送的路由)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">route</span> <span class="p">=</span> <span class="mf">192.168</span><span class="p">.</span><span class="mf">0.0</span><span class="err">/</span><span class="mf">255.255</span><span class="p">.</span><span class="mf">0.0</span>
+</span></span><span class="line"><span class="cl"><span class="nx">route</span> <span class="p">=</span> <span class="mf">172.16</span><span class="p">.</span><span class="mf">0.0</span><span class="err">/</span><span class="mf">255.255</span><span class="p">.</span><span class="mf">0.0</span>
+</span></span></code></pre></div><h4 id="4创建用户">4、创建用户</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">#username为你要添加的用户名</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># ocpasswd -c /etc/ocserv/ocpasswd username</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 检查内核转发</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># cat /proc/sys/net/ipv4/ip_forward</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 开启内核转发</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># echo &#34;net.ipv4.ip_forward = 1&#34; &gt;&gt; /etc/sysctl.conf</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># sysctl -p</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 配置iptables规则(不需要配置)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 对指定的表 table 进行操作，添加一个规则，把192.168.111.0的流量指定到ens36出去</span>
+</span></span><span class="line"><span class="cl">iptables -t nat -A POSTROUTING -s 192.168.111.0 -o ens36 -j MASQUERADE
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">iptables -A FORWARD -i vpns+ -j ACCEPT
+</span></span><span class="line"><span class="cl">iptables -A FORWARD -o vpns+ -j ACCEPT
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 保存路由表</span>
+</span></span><span class="line"><span class="cl">iptables-save &gt; /etc/sysconfig/iptables
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 放行端口(firewalld配置)</span>
+</span></span><span class="line"><span class="cl">firewall-cmd --permanent --add-port<span class="o">=</span>44333/tcp
+</span></span><span class="line"><span class="cl">firewall-cmd --permanent --add-port<span class="o">=</span>44333/udp
+</span></span><span class="line"><span class="cl">firewall-cmd --add-masquerade --permanent <span class="c1">#必须配置，重要</span>
+</span></span><span class="line"><span class="cl">firewall-cmd --reload
+</span></span></code></pre></div><h4 id="5测试">5、测试</h4>
+<p>测试服务启动</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># ocserv -c /etc/ocserv/ocserv.conf -f -d 10</span>
+</span></span></code></pre></div><p>启动服务</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># systemctl enable ocserv</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># systemctl start ocserv</span>
+</span></span></code></pre></div><h4 id="6-客户端连接">6 客户端连接</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># RHEL</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># yum install epel-release</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># yum -y install openconnect</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 密码连接</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># echo -n password | openconnect --protocol=gp -u username --passwd-on-stdin xxxx:44333</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 证书连接</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># echo -n password | openconnect -u username --passwd-on-stdin xxxx:44333</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-03-23</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/openconnect/">OpenConnect</a>,&nbsp;<a href="/tags/vpn/">vpn</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2024-03-11-k3s-cert/" class="prev" rel="prev" title="k3s-cert"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>k3s-cert</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
