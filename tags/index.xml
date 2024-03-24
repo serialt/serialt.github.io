@@ -4,7 +4,31 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 23 Mar 2024 10:37:07 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 23 Mar 2024 22:16:02 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>ac</title>
+    <link>https://serialt.github.io/tags/ac/</link>
+    <pubDate>Sat, 23 Mar 2024 22:16:02 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/ac/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>ap</title>
+    <link>https://serialt.github.io/tags/ap/</link>
+    <pubDate>Sat, 23 Mar 2024 22:16:02 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/ap/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>network</title>
+    <link>https://serialt.github.io/tags/network/</link>
+    <pubDate>Sat, 23 Mar 2024 22:16:02 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/network/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>OpenConnect</title>
     <link>https://serialt.github.io/tags/openconnect/</link>
     <pubDate>Sat, 23 Mar 2024 10:37:07 &#43;0800</pubDate>
@@ -58,30 +82,6 @@
     <pubDate>Sat, 16 Mar 2024 18:25:07 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/embed/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Go</title>
-    <link>https://serialt.github.io/tags/go/</link>
-    <pubDate>Sat, 16 Mar 2024 18:25:07 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/go/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>TF Harbor</title>
-    <link>https://serialt.github.io/tags/tf-harbor/</link>
-    <pubDate>Sat, 09 Mar 2024 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/tf-harbor/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>tf code</title>
-    <link>https://serialt.github.io/tags/tf-code/</link>
-    <pubDate>Sun, 25 Feb 2024 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/tf-code/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

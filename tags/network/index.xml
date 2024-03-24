@@ -1,0 +1,24 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>network - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/network/</link>
+        <description>network - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 23 Mar 2024 22:16:02 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/network/" rel="self" type="application/rss+xml" /><item>
+    <title>wlan</title>
+    <link>https://serialt.github.io/posts/2024-03-24-wlan/</link>
+    <pubDate>Sat, 23 Mar 2024 22:16:02 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-03-24-wlan/</guid>
+    <description><![CDATA[wlan组网 一、概述 无线局域网(Wireless Local Area Networks； WLAN)利用无线技术在空中传输数据、话音和视频信号。作为传统布线网络]]></description>
+</item>
+<item>
+    <title>Route&amp;Swich 基础</title>
+    <link>https://serialt.github.io/posts/2024-03-24-route-switch-base/</link>
+    <pubDate>Sat, 23 Mar 2024 21:16:02 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-03-24-route-switch-base/</guid>
+    <description><![CDATA[路由交换基础配置 设备名修改 &lt;Huawei&gt; system-view [Huawei] sysname Server [Server] undo sysname [Huawei] 查看配置 # 查看当前配置 display this # 查看当前所有配置 display current-configuration 禁用ftp功能 &lt;Huawei&gt; system-view [Huawei] ftp server enable [Huawei] undo ftp server 删除port版]]></description>
+</item>
+</channel>
+</rss>

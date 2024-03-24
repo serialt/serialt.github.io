@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>ap - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/ap/</link>
+        <description>ap - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 23 Mar 2024 22:16:02 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/ap/" rel="self" type="application/rss+xml" /><item>
+    <title>wlan</title>
+    <link>https://serialt.github.io/posts/2024-03-24-wlan/</link>
+    <pubDate>Sat, 23 Mar 2024 22:16:02 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-03-24-wlan/</guid>
+    <description><![CDATA[wlan组网 一、概述 无线局域网(Wireless Local Area Networks； WLAN)利用无线技术在空中传输数据、话音和视频信号。作为传统布线网络]]></description>
+</item>
+</channel>
+</rss>
