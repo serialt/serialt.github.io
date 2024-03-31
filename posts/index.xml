@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/posts/</link>
         <description>All Posts | Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 23 Mar 2024 22:16:02 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 31 Mar 2024 16:16:02 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Publish Provider to Registry</title>
+    <link>https://serialt.github.io/posts/2024-03-31-publish-terraform-provider/</link>
+    <pubDate>Sun, 31 Mar 2024 16:16:02 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-03-31-publish-terraform-provider/</guid>
+    <description><![CDATA[Publish Terraform Provider https://registry.terraform.io/ 上的provider只能托管在 github 上 1、Terraform Registry 官网上注册账号 账号使用 github 登录，设置 github 需要对 terraform registry 的授权 2、创建 github projec]]></description>
+</item>
+<item>
     <title>wlan</title>
     <link>https://serialt.github.io/posts/2024-03-24-wlan/</link>
     <pubDate>Sat, 23 Mar 2024 22:16:02 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-02-25-tf-code/</guid>
     <description><![CDATA[Terraform 代码片段 1、变量控制代码是否启用 module &#34;istio&#34; { count = var.istio.enabled ? 1 : 0 source = &#34;xxxxxx&#34; } 2、state文件中获取数据 state文件中需要有output，才能使用 data &#34;terraform_remote_state&#34; &#34;global&#34;]]></description>
-</item>
-<item>
-    <title>ktconnect</title>
-    <link>https://serialt.github.io/posts/2024-01-29-ktconnect/</link>
-    <pubDate>Mon, 29 Jan 2024 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-01-29-ktconnect/</guid>
-    <description><![CDATA[KtConnect 官方文档：https://alibaba.github.io/kt-connect/#/zh-cn/guide/quickstart 简单示]]></description>
 </item>
 </channel>
 </rss>

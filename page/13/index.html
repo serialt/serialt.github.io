@@ -90,35 +90,9 @@
     </div><main class="main">
                 <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/https://github.com/serialt" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-18-svn/">svn</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-18">2023-11-18</time></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div><div class="content">SVN 介绍： 代码版本管理工具 能记住本版修改的情况 查看所有的修改记录 恢复到任何历史版本 恢复已经删除的文件 svn与git相比的优势: 使用简单、上手快</div><div class="post-footer">
-        <a href="/posts/2023-11-18-svn/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/svn/">svn</a>,&nbsp;<a href="/tags/vcs/">vcs</a>,&nbsp;<a href="/tags/dev/">dev</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-18-git/">Git</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-18">2023-11-18</time></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div><div class="content">Git 一、git基本使用 1、commit [root@node01 project]# git add 1.txt [root@node01 project]# git commit -m &#34;create new 1.txt&#34; [master (root-commit) 3e8ce87] create new 1.txt 1 file changed, 0 insertions(+), 0 deletions(-) create mode 100644 1.txt 2、diff文件 [root@node01 project]# git diff 1.txt diff --git a/1.txt b/1.txt index e69de29..21d56a0 100644 --- a/1.txt</div><div class="post-footer">
-        <a href="/posts/2023-11-18-git/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/git/">git</a>,&nbsp;<a href="/tags/vcs/">vcs</a>,&nbsp;<a href="/tags/dev/">dev</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-18-nexus/">Nexus</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-18">2023-11-18</time></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div><div class="content">Nexus 参考： https://juejin.cn/post/6844904016762109959 https://cloud.tencent.com/developer/article/1764866 官网：https://help.sonatype.com/repomanager3/ 介绍 生产环境中，一般不会允许所有服务器都能访</div><div class="post-footer">
-        <a href="/posts/2023-11-18-nexus/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/nexus/">nexus</a>,&nbsp;<a href="/tags/repo/">repo</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-12-postgresql/">postgresql</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-12">2023-11-12</time></span>&nbsp;<span class="post-category">included in <a href="/categories/database/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Database</a></span></div><div class="content">PostgreSQL 一、安装 docker 安装 # docker-compose.yaml version: &#34;3&#34; services: postgres10-5432: image: &#34;postgres:10-bullseye&#34; container_name: postgres10-5432 shm_size: &#34;1gb&#34; restart: always ports: - &#34;5432:5432&#34; volumes: - /data/postgresql:/var/lib/postgresql/data - $PWD/init.sql:/docker-entrypoint-initdb.d/init.sql environment: - POSTGRES_PASSWORD=xxxxxxxxxxx # init.sql CREATE USER db_user WITH CREATEDB ENCRYPTED PASSWORD &#39;xxxxxxxxxx&#39;; alter user db_user superuser; 二、配置 1、修改数据库时区 postgres=# show timezone; TimeZone ---------- Etc/UTC (1 row) sed -i</div><div class="post-footer">
-        <a href="/posts/2023-11-12-postgresql/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/pg/">pg</a>,&nbsp;<a href="/tags/postgresql/">postgresql</a>,&nbsp;<a href="/tags/db/">db</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-12-security-info/">security-info</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-12">2023-11-12</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%AE%89%E5%85%A8%E4%BF%A1%E6%81%AF/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>安全信息</a></span></div><div class="content">漏洞信息 云服务商安全服务公告 云服务商 链接 cve官网 https://cve.mitre.org/ 阿里云 https://help.aliyun.com/noticelist/9213612.html?spm=a2c4g.789004748.n2.3.cddb4c07NBt9Rl 华为云 https://www.huaweicloud.com/notice.securecenter.html 腾讯云 https://cloud.tencent.com/announce?categorys=21&page=1 阿里云漏洞数据库 https://avd.aliyun.com/ 国家信息漏洞库 http://www.cnnvd.org.cn/ 常用软件官方安全公告链接 名称 链</div><div class="post-footer">
-        <a href="/posts/2023-11-12-security-info/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/security/">security</a>,&nbsp;<a href="/tags/cve/">cve</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2023-11-12-sqlite3/">sqlite3</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-11-12">2023-11-12</time></span>&nbsp;<span class="post-category">included in <a href="/categories/database/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Database</a></span></div><div class="content">SQLite SQLite是一种开源，零配置，独立的，独立的，事务关系数据库引擎，旨在嵌入到应用程序中。 一、安装sqlite SQLite以其零配置而闻名</div><div class="post-footer">
-        <a href="/posts/2023-11-12-sqlite3/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/sqlite/">sqlite</a>,&nbsp;<a href="/tags/sqlite3/">sqlite3</a>,&nbsp;<a href="/tags/db/">db</a></div></div>
+        <a href="/posts/2023-11-11-npm/"></a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="0001-01-01">0001-01-01</time></span></div><div class="content"></div><div class="post-footer">
+        <a href="/posts/2023-11-11-npm/">Read More</a></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -127,27 +101,13 @@
                     <span class="page-link" aria-hidden="true">&hellip;</span>
                 </li><li class="page-item ">
                     <span class="page-link">
-                        <a href="/page/4/">4</a>
+                        <a href="/page/11/">11</a>
                     </span>
                 </li><li class="page-item ">
                     <span class="page-link">
-                        <a href="/page/5/">5</a>
+                        <a href="/page/12/">12</a>
                     </span>
                 </li><li class="page-item active">
-                    <span class="page-link">
-                        <a href="/page/6/">6</a>
-                    </span>
-                </li><li class="page-item ">
-                    <span class="page-link">
-                        <a href="/page/7/">7</a>
-                    </span>
-                </li><li class="page-item ">
-                    <span class="page-link">
-                        <a href="/page/8/">8</a>
-                    </span>
-                </li><li class="page-item ">
-                    <span class="page-link" aria-hidden="true">&hellip;</span>
-                </li><li class="page-item ">
                     <span class="page-link">
                         <a href="/page/13/">13</a>
                     </span>

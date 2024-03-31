@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/tags/hashicorp/</link>
         <description>hashicorp - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 17 Mar 2024 16:37:07 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/hashicorp/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 31 Mar 2024 16:16:02 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/hashicorp/" rel="self" type="application/rss+xml" /><item>
+    <title>Publish Provider to Registry</title>
+    <link>https://serialt.github.io/posts/2024-03-31-publish-terraform-provider/</link>
+    <pubDate>Sun, 31 Mar 2024 16:16:02 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-03-31-publish-terraform-provider/</guid>
+    <description><![CDATA[Publish Terraform Provider https://registry.terraform.io/ 上的provider只能托管在 github 上 1、Terraform Registry 官网上注册账号 账号使用 github 登录，设置 github 需要对 terraform registry 的授权 2、创建 github projec]]></description>
+</item>
+<item>
     <title>Terraform Registry Mirror</title>
     <link>https://serialt.github.io/posts/2024-03-17-tf-mirror-registery/</link>
     <pubDate>Sun, 17 Mar 2024 16:37:07 &#43;0800</pubDate>
