@@ -4,9 +4,17 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 31 Mar 2024 16:16:02 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 24 Apr 2024 19:26:27 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Nexus</title>
+    <link>https://serialt.github.io/posts/2024-04-24-nexus/</link>
+    <pubDate>Wed, 24 Apr 2024 19:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-04-24-nexus/</guid>
+    <description><![CDATA[Nexus 参考： https://juejin.cn/post/6844904016762109959 https://cloud.tencent.com/developer/article/1764866 官网：https://help.sonatype.com/repomanager3/ 介绍 生产环境中，一般不会允许所有服务器都能访]]></description>
+</item>
+<item>
     <title>Publish Provider to Registry</title>
     <link>https://serialt.github.io/posts/2024-03-31-publish-terraform-provider/</link>
     <pubDate>Sun, 31 Mar 2024 16:16:02 &#43;0800</pubDate>
@@ -77,14 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-03-09-tf-harbor/</guid>
     <description><![CDATA[Terraform Harbor 管理 provider.tf terraform { required_providers { harbor = { source = &#34;goharbor/harbor&#34; version = &#34;3.10.9&#34; } } } # set env # HARBOR_USERNAME # HARBOR_PASSWORD provider &#34;harbor&#34; { url = var.harbor.url insecure = var.harbor.insecure } user.tf resource &#34;harbor_user&#34; &#34;upload&#34; { admin = true comment = &#34;用于镜像上传和下载使用&#34; email]]></description>
-</item>
-<item>
-    <title>tf-code</title>
-    <link>https://serialt.github.io/posts/2024-02-25-tf-code/</link>
-    <pubDate>Sun, 25 Feb 2024 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-02-25-tf-code/</guid>
-    <description><![CDATA[Terraform 代码片段 1、变量控制代码是否启用 module &#34;istio&#34; { count = var.istio.enabled ? 1 : 0 source = &#34;xxxxxx&#34; } 2、state文件中获取数据 state文件中需要有output，才能使用 data &#34;terraform_remote_state&#34; &#34;global&#34;]]></description>
 </item>
 </channel>
 </rss>

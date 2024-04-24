@@ -4,12 +4,12 @@
         <link>https://serialt.github.io/tags/nexus/</link>
         <description>nexus - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 18 Nov 2023 09:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/nexus/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 24 Apr 2024 19:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/nexus/" rel="self" type="application/rss+xml" /><item>
     <title>Nexus</title>
-    <link>https://serialt.github.io/posts/2023-11-18-nexus/</link>
-    <pubDate>Sat, 18 Nov 2023 09:26:27 &#43;0800</pubDate>
+    <link>https://serialt.github.io/posts/2024-04-24-nexus/</link>
+    <pubDate>Wed, 24 Apr 2024 19:26:27 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-18-nexus/</guid>
+    <guid>https://serialt.github.io/posts/2024-04-24-nexus/</guid>
     <description><![CDATA[Nexus 参考： https://juejin.cn/post/6844904016762109959 https://cloud.tencent.com/developer/article/1764866 官网：https://help.sonatype.com/repomanager3/ 介绍 生产环境中，一般不会允许所有服务器都能访]]></description>
 </item>
 </channel>
