@@ -13,14 +13,6 @@
     <description><![CDATA[Gitlab 版本介绍 gitlab分社区版和企业版，与其他企业版软件不同的是，社区版和企业版都不收费，都可以免费使用 官方文档：https://docs.]]></description>
 </item>
 <item>
-    <title>Gitlab</title>
-    <link>https://serialt.github.io/posts/2023-12-7-dev-terraform-provider/</link>
-    <pubDate>Mon, 04 Dec 2023 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-12-7-dev-terraform-provider/</guid>
-    <description><![CDATA[Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo main.go func main() { var debug bool flag.BoolVar(&amp;debug, &#34;debug&#34;, false, &#34;debug terraform provider&#34;) flag.Parse() opts := providerserver.ServeOpts{ Address: &#34;hashicorp.com/edu/hashicups&#34;, Debug: debug, } err := providerserver.Serve(context.Background(), provider.New(version), opts) if err != nil { log.Fatal(err.Error()) } } provider.go package provider import ( &#34;context&#34; &#34;github.com/hashicorp/terraform-plugin-framework/datasource&#34; &#34;github.com/hashicorp/terraform-plugin-framework/provider&#34; &#34;github.com/hashicorp/terraform-plugin-framework/provider/schema&#34; &#34;github.com/hashicorp/terraform-plugin-framework/resource&#34; ) var ( _ provider.Provider]]></description>
-</item>
-<item>
     <title>Git</title>
     <link>https://serialt.github.io/posts/2023-11-18-git/</link>
     <pubDate>Sat, 18 Nov 2023 10:26:27 &#43;0800</pubDate>

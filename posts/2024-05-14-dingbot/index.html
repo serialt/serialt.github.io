@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>dingbot - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="dingbot" />
+<meta property="og:description" content="钉钉机器人发消息 1、签名计算 由于 mac 上的是 BSD 的 date，与 linux 上的 date 不同，在 mac 上使用需要替换为 linux 的 gdate。 #!/usr/bin/env bash ## 需要艾特的人的手机号码，以空" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2024-05-14-dingbot/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-05-14T19:26:27+08:00" />
+<meta property="article:modified_time" content="2024-05-14T19:26:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="dingbot"/>
+<meta name="twitter:description" content="钉钉机器人发消息 1、签名计算 由于 mac 上的是 BSD 的 date，与 linux 上的 date 不同，在 mac 上使用需要替换为 linux 的 gdate。 #!/usr/bin/env bash ## 需要艾特的人的手机号码，以空"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2024-05-14-dingbot/" /><link rel="prev" href="https://serialt.github.io/posts/2024-04-24-nexus/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "dingbot",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2024-05-14-dingbot\/"
+        },"genre": "posts","keywords": "dingbot","wordcount":  918 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2024-05-14-dingbot\/","datePublished": "2024-05-14T19:26:27+08:00","dateModified": "2024-05-14T19:26:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">dingbot</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-14">2024-05-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;918 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#钉钉机器人发消息">钉钉机器人发消息</a>
+      <ul>
+        <li><a href="#1签名计算">1、签名计算</a></li>
+        <li><a href="#2通用版">2、通用版</a></li>
+        <li><a href="#3其他-shell-版本">3、其他 shell 版本</a></li>
+        <li><a href="#4python-版">4、python 版</a></li>
+        <li><a href="#5go版">5、go版</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="钉钉机器人发消息">钉钉机器人发消息</h2>
+<h3 id="1签名计算">1、签名计算</h3>
+<p>由于 mac 上的是 BSD 的 date，与 linux 上的 date 不同，在 mac 上使用需要替换为 linux 的 gdate。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/usr/bin/env bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">## 需要艾特的人的手机号码，以空格隔开</span>
+</span></span><span class="line"><span class="cl"><span class="nv">atMobiles</span><span class="o">=(</span><span class="m">13333333333</span> 18888888888<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">ACCESS_TOKEN</span><span class="o">=</span><span class="s2">&#34;fdebf803ece5080bdb432446ef6649e8c371bcxxxxxxxxxxx&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">SECRET</span><span class="o">=</span><span class="s2">&#34;SEC4622afcfbf51b8e71f0cc22154ba2f6f87xxxxxxxxxxxx&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">dingbot<span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">message</span><span class="o">=</span><span class="nv">$1</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">timestamp</span><span class="o">=</span><span class="k">$(</span>date +%s%3N<span class="k">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">stringtosign</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">timestamp</span><span class="si">}</span><span class="s2">\n</span><span class="si">${</span><span class="nv">SECRET</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">signdata</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">stringtosign</span><span class="si">}</span><span class="s2">&#34;</span> <span class="p">|</span> openssl dgst -sha256 -hmac <span class="si">${</span><span class="nv">SECRET</span><span class="si">}</span> -binary <span class="p">|</span> base64<span class="k">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">sign</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> -n <span class="s2">&#34;</span><span class="si">${</span><span class="nv">signdata</span><span class="si">}</span><span class="s2">&#34;</span> <span class="p">|</span> xxd -plain <span class="p">|</span> tr -d <span class="s1">&#39;\n&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/\(..\)/%\1/g&#39;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">webhook_url</span><span class="o">=</span><span class="s2">&#34;https://oapi.dingtalk.com/robot/send?access_token=</span><span class="si">${</span><span class="nv">ACCESS_TOKEN</span><span class="si">}</span><span class="s2">&amp;timestamp=</span><span class="si">${</span><span class="nv">timestamp</span><span class="si">}</span><span class="s2">&amp;sign=</span><span class="si">${</span><span class="nv">sign</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">at_who</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span> <span class="s1">&#39;&#34;%s&#34;,&#39;</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">atMobiles</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">at_who</span><span class="o">=</span><span class="si">${</span><span class="nv">at_who</span><span class="p">%,</span><span class="si">}</span>  <span class="c1"># 移除最后一个逗号</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 构造JSON数据</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">json_data</span><span class="o">=</span><span class="k">$(</span>cat <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">{
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;at&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;atMobiles&#34;: [${at_who}]
+</span></span></span><span class="line"><span class="cl"><span class="s">    },
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;msgtype&#34;: &#34;text&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;text&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;content&#34;: &#34;${message}&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">}
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">    <span class="k">)</span>
+</span></span><span class="line"><span class="cl">    curl -s -X POST -H <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">webhook_url</span><span class="si">}</span><span class="s2">&#34;</span> -d <span class="s2">&#34;</span><span class="si">${</span><span class="nv">json_data</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">dingbot <span class="s2">&#34;你好，这是一个测试消息。&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">function</span> dingbotMD<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">title</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">message</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$2</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">timestamp</span><span class="o">=</span><span class="k">$(</span>date +%s%3N<span class="k">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">stringtosign</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">timestamp</span><span class="si">}</span><span class="s2">\n</span><span class="si">${</span><span class="nv">SECRET</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">signdata</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">stringtosign</span><span class="si">}</span><span class="s2">&#34;</span> <span class="p">|</span> openssl dgst -sha256 -hmac <span class="si">${</span><span class="nv">SECRET</span><span class="si">}</span> -binary <span class="p">|</span> base64<span class="k">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">sign</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> -n <span class="s2">&#34;</span><span class="si">${</span><span class="nv">signdata</span><span class="si">}</span><span class="s2">&#34;</span> <span class="p">|</span> xxd -plain <span class="p">|</span> tr -d <span class="s1">&#39;\n&#39;</span> <span class="p">|</span> sed <span class="s1">&#39;s/\(..\)/%\1/g&#39;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">webhook_url</span><span class="o">=</span><span class="s2">&#34;https://oapi.dingtalk.com/robot/send?access_token=</span><span class="si">${</span><span class="nv">ACCESS_TOKEN</span><span class="si">}</span><span class="s2">&amp;timestamp=</span><span class="si">${</span><span class="nv">timestamp</span><span class="si">}</span><span class="s2">&amp;sign=</span><span class="si">${</span><span class="nv">sign</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">at_who</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span> <span class="s1">&#39;&#34;%s&#34;,&#39;</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">atMobiles</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">at_who</span><span class="o">=</span><span class="si">${</span><span class="nv">at_who</span><span class="p">%,</span><span class="si">}</span>  <span class="c1"># 移除最后一个逗号</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 构造JSON数据</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">json_data</span><span class="o">=</span><span class="k">$(</span>cat <span class="s">&lt;&lt;EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">{
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;msgtype&#34;: &#34;markdown&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;markdown&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;title&#34;: &#34;${title}&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;text&#34;: &#34;${message}&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    }
+</span></span></span><span class="line"><span class="cl"><span class="s">}
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">    <span class="k">)</span>   
+</span></span><span class="line"><span class="cl">    curl -s -X POST -H <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">webhook_url</span><span class="si">}</span><span class="s2">&#34;</span> -d <span class="s2">&#34;</span><span class="si">${</span><span class="nv">json_data</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">dingbotMD <span class="s2">&#34;msg&#34;</span> <span class="s2">&#34;### 东八区时间：</span><span class="si">${</span><span class="nv">msg</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span>
+</span></span></code></pre></div><h3 id="2通用版">2、通用版</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/usr/bin/env bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1"># ***********************************************************************</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Description   : Dingbot for shell</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Author        : serialt</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Email         : tserialt@gmail.com</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># FilePath      : /shell/DingMsg.sh</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Other         : </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#               :          </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#                 </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   支持安全类型：【关键字】 和 【加签】</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   依赖命令：curl openssl date echo </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#   注意：mac上的date命令是bsd的，与linux上的date不同，获取不到毫秒，不能用于签名计算。</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#        或者安装coreutils，使用gdate替换date</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ***********************************************************************</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 钉钉机器人配置</span>
+</span></span><span class="line"><span class="cl"><span class="nv">dingbot_secret</span><span class="o">=</span><span class="s1">&#39;SECa87a39d5b80e32xxxxxxxxxxxxxxxxxxxxxxxx&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">dingbot_url</span><span class="o">=</span><span class="s1">&#39;https://oapi.dingtalk.com/robot/send?access_token=cd316d9df306852b6da7d10xxxxxxxxxxxxxxxxxxxxxxx&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## secret_type keywords || sign</span>
+</span></span><span class="line"><span class="cl"><span class="nv">ding_secret_type</span><span class="o">=</span><span class="s1">&#39;sign&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">## 需要艾特的人的手机号码，以空格隔开</span>
+</span></span><span class="line"><span class="cl"><span class="nv">atMobiles</span><span class="o">=(</span><span class="m">13333333333</span> 18888888888<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## encode url</span>
+</span></span><span class="line"><span class="cl"><span class="k">function</span> url_encode<span class="o">()</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl"><span class="nv">t</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[[</span> -n <span class="s2">&#34;</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">&amp;&amp;</span> -n <span class="s2">&#34;</span><span class="si">${</span><span class="nv">2</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">]]</span><span class="p">;</span><span class="k">then</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> ! <span class="nb">echo</span> <span class="s1">&#39;xX&#39;</span> <span class="p">|</span> grep -q <span class="s2">&#34;</span><span class="si">${</span><span class="nv">t</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span><span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">t</span><span class="o">=</span><span class="s1">&#39;x&#39;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">fi</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> -n <span class="s2">&#34;</span><span class="si">${</span><span class="nv">2</span><span class="si">}</span><span class="s2">&#34;</span> <span class="p">|</span> od -t d1 <span class="p">|</span> awk -v <span class="nv">a</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">t</span><span class="si">}</span><span class="s2">&#34;</span> <span class="s1">&#39;{for (i = 2; i &lt;= NF; i++) {printf(($i&gt;=48 &amp;&amp; $i&lt;=57) || ($i&gt;=65 &amp;&amp;$i&lt;=90) || ($i&gt;=97 &amp;&amp; $i&lt;=122) ||$i==45 || $i==46 || $i==95 || $i==126 ?&#34;%c&#34; : &#34;%%%02&#34;a, $i)}}&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> -e <span class="s1">&#39;$1 and $2 can not empty\n$1 ==&gt; &#39;</span>x<span class="s1">&#39; or &#39;</span>X<span class="s1">&#39;, x ==&gt; lower, X ==&gt; toupper.\n$2 ==&gt; Strings need to url encode&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## dingbot</span>
+</span></span><span class="line"><span class="cl"><span class="k">function</span> dingbot<span class="o">(){</span>
+</span></span><span class="line"><span class="cl"><span class="nv">send_strs</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">new_url</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">dingbot_url</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">at_who</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> i in <span class="si">${</span><span class="nv">atMobiles</span><span class="p">[*]</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">do</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&#34;</span><span class="si">${</span><span class="nv">at_who</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">at_who</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">at_who</span><span class="si">}</span><span class="s2">,\&#34;</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">\&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">at_who</span><span class="o">=</span><span class="s2">&#34;\&#34;</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">\&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">ding_secret_type</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">==</span> <span class="s1">&#39;keywords&#39;</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+</span></span><span class="line"><span class="cl">  curl -s -X POST -H <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">new_url</span><span class="si">}</span><span class="s2">&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>-d <span class="s2">&#34;{\&#34;at\&#34;:{\&#34;atMobiles\&#34;:[</span><span class="si">${</span><span class="nv">at_who</span><span class="si">}</span><span class="s2">]},\&#34;msgtype\&#34;:\&#34;text\&#34;,\&#34;text\&#34;:{\&#34;content\&#34;:\&#34;</span><span class="si">${</span><span class="nv">send_strs</span><span class="si">}</span><span class="s2">\&#34;}}&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">elif</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">ding_secret_type</span><span class="si">}</span><span class="s2">&#34;</span> <span class="o">==</span> <span class="s1">&#39;sign&#39;</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">timestamp</span><span class="o">=</span><span class="k">$(</span>date <span class="s2">&#34;+%s%3N&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">dingbot_sign</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> -ne <span class="s2">&#34;</span><span class="si">${</span><span class="nv">timestamp</span><span class="si">}</span><span class="s2">\n</span><span class="si">${</span><span class="nv">dingbot_secret</span><span class="si">}</span><span class="s2">&#34;</span> <span class="p">|</span> openssl dgst -sha256 -hmac <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dingbot_secret</span><span class="si">}</span><span class="s2">&#34;</span> -binary <span class="p">|</span> base64<span class="k">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">dingbot_sign</span><span class="o">=</span><span class="k">$(</span>url_encode <span class="s1">&#39;X&#39;</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">dingbot_sign</span><span class="si">}</span><span class="s2">&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">post_url</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">${</span><span class="nv">dingbot_url</span><span class="si">}</span><span class="s2">&amp;timestamp=</span><span class="si">${</span><span class="nv">timestamp</span><span class="si">}</span><span class="s2">&amp;sign=</span><span class="si">${</span><span class="nv">dingbot_sign</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  curl -s -X POST -H <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="s2">&#34;</span><span class="si">${</span><span class="nv">post_url</span><span class="si">}</span><span class="s2">&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -d <span class="s2">&#34;{\&#34;at\&#34;:{\&#34;atMobiles\&#34;:[</span><span class="si">${</span><span class="nv">at_who</span><span class="si">}</span><span class="s2">]},\&#34;msgtype\&#34;:\&#34;text\&#34;,\&#34;text\&#34;:{\&#34;content\&#34;:\&#34;</span><span class="si">${</span><span class="nv">send_strs</span><span class="si">}</span><span class="s2">\&#34;}}&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">echo</span> <span class="s2">&#34;secret_type 未知，请检查配置&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">dingbot <span class="s2">&#34;东八区时间：</span><span class="si">${</span><span class="nv">msg</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span></code></pre></div><h3 id="3其他-shell-版本">3、其他 shell 版本</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/usr/bin/env bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nv">info</span><span class="o">=</span><span class="s1">&#39;msg to you&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#发送消息</span>
+</span></span><span class="line"><span class="cl">sendMsg<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">token</span><span class="o">=</span><span class="s1">&#39;1e18ffe069052b56f5a0f8fe9b6c058373e7df7ef49dc24baa6xxxxxxxxxxxxxx&#39;</span>
+</span></span><span class="line"><span class="cl">    curl -s <span class="s2">&#34;https://oapi.dingtalk.com/robot/send?access_token=</span><span class="nv">$token</span><span class="s2">&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  		-H <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>   		-d <span class="s2">&#34;{&#39;msgtype&#39;: &#39;text&#39;,&#39;text&#39;: {&#39;content&#39;: &#39;msg:\n</span><span class="nv">$*</span><span class="s2">&#39;}}
+</span></span></span><span class="line"><span class="cl"><span class="s2">}  
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">main(){
+</span></span></span><span class="line"><span class="cl"><span class="s2">	logRotate
+</span></span></span><span class="line"><span class="cl"><span class="s2">	sendMsg </span><span class="nv">$info</span><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">}
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">main
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1"># ******************************************************</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Description  	:       send msg by dingRobot</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#                       使用脚本前请设置钉钉机器人的安全类型，脚本支持关键字和IP</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#  </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ******************************************************</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">logFile</span><span class="o">=</span><span class="s1">&#39;/var/log/dingbot.log&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#发送消息</span>
+</span></span><span class="line"><span class="cl">sendMsg<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">local</span> <span class="nv">info</span><span class="o">=</span><span class="nv">$*</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">token</span><span class="o">=</span><span class="s1">&#39;1e18ffe069052b56f5a0f8fe9b6c058373e7df7ef49dc24bacccccccccccc&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">result</span><span class="o">=</span><span class="sb">`</span>curl -s <span class="s2">&#34;https://oapi.dingtalk.com/robot/send?access_token=</span><span class="nv">$token</span><span class="s2">&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  		-H <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>   		-d <span class="s2">&#34;{&#39;msgtype&#39;: &#39;text&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                     &#39;text&#39;: {
+</span></span></span><span class="line"><span class="cl"><span class="s2">                         &#39;content&#39;: &#39;</span><span class="nv">$info</span><span class="s2">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">                         }
+</span></span></span><span class="line"><span class="cl"><span class="s2">                    }&#34;</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl"> 	<span class="o">[</span> <span class="sb">`</span><span class="nb">echo</span> <span class="nv">$result</span> <span class="p">|</span> grep <span class="s2">&#34;errmsg.*ok&#34;</span><span class="sb">`</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">&#39;send succees!&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> <span class="s2">&#34;</span><span class="k">$(</span>date +<span class="s1">&#39;%Y-%m-%d %H:%M.%S&#39;</span><span class="k">)</span><span class="s2"> state: </span><span class="nv">$result</span><span class="s2">  MessagesType: text     [ text: </span><span class="nv">$*</span><span class="s2"> ]&#34;</span> &gt;&gt; <span class="nv">$logFile</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SendMsgByMD<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">local</span> <span class="nv">info</span><span class="o">=</span><span class="nv">$1</span>    	<span class="c1"># $info markdown的标题</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">local</span> <span class="nv">infoMsg</span><span class="o">=</span><span class="nv">$2</span> 	<span class="c1"># $infoMsg 内容</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">token</span><span class="o">=</span><span class="s1">&#39;1e18ffe069052b56f5a0f8fe9b6c058373e7df7ef49dc24baa6cccccccccc&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">result</span><span class="o">=</span><span class="sb">`</span>curl -s <span class="s2">&#34;https://oapi.dingtalk.com/robot/send?access_token=</span><span class="nv">$token</span><span class="s2">&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>                -H <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>                -d <span class="s2">&#34;{
+</span></span></span><span class="line"><span class="cl"><span class="s2">                     &#39;msgtype&#39;: &#39;markdown&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                     &#39;markdown&#39;: {
+</span></span></span><span class="line"><span class="cl"><span class="s2">                         &#39;title&#39;:&#39;</span><span class="nv">$info</span><span class="s2">&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                         &#39;text&#39;: &#39;</span><span class="nv">$infoMsg</span><span class="s2">&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">                        },
+</span></span></span><span class="line"><span class="cl"><span class="s2">                     &#39;at&#39;: {
+</span></span></span><span class="line"><span class="cl"><span class="s2">                         &#39;atMobiles&#39;: [
+</span></span></span><span class="line"><span class="cl"><span class="s2">                             &#39;156xxxx8827&#39;, 
+</span></span></span><span class="line"><span class="cl"><span class="s2">                             &#39;189xxxx8325&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">                            ], 
+</span></span></span><span class="line"><span class="cl"><span class="s2">                         &#39;isAtAll&#39;: true
+</span></span></span><span class="line"><span class="cl"><span class="s2">                        }
+</span></span></span><span class="line"><span class="cl"><span class="s2">                   }&#34;</span><span class="sb">`</span>
+</span></span><span class="line"><span class="cl">         
+</span></span><span class="line"><span class="cl"> 	<span class="o">[</span> <span class="sb">`</span><span class="nb">echo</span> <span class="nv">$result</span> <span class="p">|</span> grep <span class="s2">&#34;errmsg.*ok&#34;</span><span class="sb">`</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">&#39;send succees!&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">echo</span> <span class="s2">&#34;</span><span class="k">$(</span>date +<span class="s1">&#39;%Y-%m-%d %H:%M.%S&#39;</span><span class="k">)</span><span class="s2"> state: </span><span class="nv">$result</span><span class="s2">  MessagesType: markdown [ title: </span><span class="nv">$info</span><span class="s2">  text: </span><span class="nv">$infoMsg</span><span class="s2"> ]&#34;</span> &gt;&gt; <span class="nv">$logFile</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c1">#main()</span>
+</span></span><span class="line"><span class="cl">	<span class="o">(</span>sendMsg <span class="s1">&#39;zabbix&#39;</span> <span class="o">)</span><span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl">	<span class="o">(</span>SendMsgByMD <span class="s1">&#39;zabbix&#39;</span> <span class="s1">&#39;# send msg&#39;</span><span class="o">)</span><span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">exit</span> <span class="m">55</span>
+</span></span></code></pre></div><h3 id="4python-版">4、python 版</h3>
+<p><a href="https://github.com/zhuifengshen/DingtalkChatbot" target="_blank" rel="noopener noreffer ">https://github.com/zhuifengshen/DingtalkChatbot</a></p>
+<h3 id="5go版">5、go版</h3>
+<p><a href="https://github.com/blinkbean/dingtalk" target="_blank" rel="noopener noreffer ">https://github.com/blinkbean/dingtalk</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-05-14</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dingbot/">dingbot</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2024-04-24-nexus/" class="prev" rel="prev" title="Nexus"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Nexus</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

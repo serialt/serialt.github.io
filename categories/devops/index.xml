@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/categories/devops/</link>
         <description>DevOps - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 24 Apr 2024 19:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Tue, 14 May 2024 19:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+    <title>dingbot</title>
+    <link>https://serialt.github.io/posts/2024-05-14-dingbot/</link>
+    <pubDate>Tue, 14 May 2024 19:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-05-14-dingbot/</guid>
+    <description><![CDATA[钉钉机器人发消息 1、签名计算 由于 mac 上的是 BSD 的 date，与 linux 上的 date 不同，在 mac 上使用需要替换为 linux 的 gdate。 #!/usr/bin/env bash ## 需要艾特的人的手机号码，以空]]></description>
+</item>
+<item>
     <title>Nexus</title>
     <link>https://serialt.github.io/posts/2024-04-24-nexus/</link>
     <pubDate>Wed, 24 Apr 2024 19:26:27 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-01-29-ktconnect/</guid>
     <description><![CDATA[KtConnect 官方文档：https://alibaba.github.io/kt-connect/#/zh-cn/guide/quickstart 简单示]]></description>
-</item>
-<item>
-    <title>Alpine vm</title>
-    <link>https://serialt.github.io/posts/2024-01-22-alpine-vm/</link>
-    <pubDate>Mon, 22 Jan 2024 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-01-22-alpine-vm/</guid>
-    <description><![CDATA[alpine 虚拟机安装 使用alpine-vm iso 文件进行安装 参考文档： https://www.qunniao.net/1408.html https://wener.me/notes/os/alpine/intro https://blog.xiaohack.org/4674.html https://tonylee.name/Alpine-Linux-4f1cbdb482754c65a61e7f08e9691234 关闭交换分区减小镜像大小： vi /sbin/setup-alpine # 在 setup-disk 增加参数关闭交换分区 setup-disk -s 0 alpine 3.19 镜像可以]]></description>
 </item>
 </channel>
 </rss>
