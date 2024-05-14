@@ -118,6 +118,8 @@ ORDER BY total_size DESC
 -- 修改用户密码
 ALTER USER postgres with password 'hello_world';
 
+-- 修改数据库名
+alter  database  db1  rename  to  db2;
 ```
 
 schema 管理
