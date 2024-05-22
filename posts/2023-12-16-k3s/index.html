@@ -214,8 +214,9 @@
 </span></span><span class="line"><span class="cl"><span class="c1">#</span>
 </span></span><span class="line"><span class="cl">cat /var/lib/rancher/k3s/server/node-token
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh <span class="p">|</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn   
-</span></span><span class="line"><span class="cl"><span class="nv">K3S_URL</span><span class="o">=</span>https://172.16.1.5:6443   <span class="nv">K3S_TOKEN</span><span class="o">=</span>K102fa20edba4cd43952970c2bce3d40e771da0382b595e70e108cf637dcf79a653::server:d0f4dec273e0e9d0b74f72b2f24a1c59  sh - 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh <span class="p">|</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn <span class="nv">K3S_URL</span><span class="o">=</span>https://172.16.1.164:6443 <span class="nv">K3S_TOKEN</span><span class="o">=</span>K105b756f7f9ce7b0d7f776405cc197e74fa5002701ac76dc63edd57dce8cd272ba::server:a61905854a82cc9280a3ac57ccd649d5 sh -
 </span></span></code></pre></div><h3 id="2离线部署">2、离线部署</h3>
 <p>1）下载k3s二进制包、镜像和安装脚本</p>
 <p>二进制包：https://github.com/rancher/k3s/releases</p>

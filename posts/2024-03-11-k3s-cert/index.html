@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-03-11-k3s-cert\/"
-        },"genre": "posts","keywords": "k3s cert","wordcount":  671 ,
+        },"genre": "posts","keywords": "k3s cert","wordcount":  695 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-03-11-k3s-cert\/","datePublished": "2024-03-21T21:26:27+08:00","dateModified": "2024-03-21T21:26:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">k3s-cert</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;671 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-03-21">2024-03-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;695 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -141,10 +141,16 @@
 </ul>
 <h2 id="一手动轮转证书">一、手动轮转证书</h2>
 <p>1、检查证书有效期</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="k">for</span> i in <span class="sb">`</span>ls /var/lib/rancher/k3s/server/tls/*.crt<span class="sb">`</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> <span class="nv">$i</span><span class="p">;</span> openssl x509 -enddate -noout -in <span class="nv">$i</span><span class="p">;</span> <span class="k">done</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># server</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> i in <span class="sb">`</span>ls /var/lib/rancher/k3s/server/tls/*.crt<span class="sb">`</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> <span class="nv">$i</span><span class="p">;</span> openssl x509 -enddate -noout -in <span class="nv">$i</span><span class="p">;</span> <span class="k">done</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># agent</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> i in <span class="sb">`</span>ls /var/lib/rancher/k3s/agent/*.crt<span class="sb">`</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> <span class="nv">$i</span><span class="p">;</span> openssl x509 -enddate -noout -in <span class="nv">$i</span><span class="p">;</span> <span class="k">done</span>
 </span></span></code></pre></div><p>2、设置环境变量</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">CATTLE_NEW_SIGNED_CERT_EXPIRATION_DAYS</span><span class="o">=</span><span class="s2">&#34;3600&#34;</span> &gt;&gt; /etc/default/k3s 
 </span></span></code></pre></div><p>3、轮转证书</p>
+<p><code>server</code></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 停止 K3s</span>
 </span></span><span class="line"><span class="cl">systemctl stop k3s
 </span></span><span class="line"><span class="cl">
@@ -153,7 +159,9 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 启动 K3s</span>
 </span></span><span class="line"><span class="cl">systemctl start k3s
-</span></span></code></pre></div><p>4、检查证书有效期</p>
+</span></span></code></pre></div><p><code>agent</code></p>
+<pre tabindex="0"><code>systemctl restart k3s-agent
+</code></pre><p>4、检查证书有效期</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="k">for</span> i in <span class="sb">`</span>ls /var/lib/rancher/k3s/server/tls/*.crt<span class="sb">`</span><span class="p">;</span> <span class="k">do</span> <span class="nb">echo</span> <span class="nv">$i</span><span class="p">;</span> openssl x509 -enddate -noout -in <span class="nv">$i</span><span class="p">;</span> <span class="k">done</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">kubectl get secret -n kube-system k3s-serving -o <span class="nv">jsonpath</span><span class="o">=</span><span class="s1">&#39;{.data.tls\.crt}&#39;</span> <span class="p">|</span> base64 -d <span class="p">|</span> openssl x509 -noout -text <span class="p">|</span> grep Not
