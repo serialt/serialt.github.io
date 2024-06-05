@@ -90,35 +90,35 @@
     </div><main class="main">
                 <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/https://github.com/serialt" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2024-02-25-tf-code/">tf-code</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-02-25">2024-02-25</time></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div><div class="content">Terraform 代码片段 1、变量控制代码是否启用 module &#34;istio&#34; { count = var.istio.enabled ? 1 : 0 source = &#34;xxxxxx&#34; } 2、state文件中获取数据 state文件中需要有output，才能使用 data &#34;terraform_remote_state&#34; &#34;global&#34;</div><div class="post-footer">
-        <a href="/posts/2024-02-25-tf-code/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/tf-code/">tf code</a></div></div>
+        <a href="/posts/2024-04-24-nexus/">Nexus</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-04-24">2024-04-24</time></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div><div class="content">Nexus 参考： https://juejin.cn/post/6844904016762109959 https://cloud.tencent.com/developer/article/1764866 官网：https://help.sonatype.com/repomanager3/ 介绍 生产环境中，一般不会允许所有服务器都能访</div><div class="post-footer">
+        <a href="/posts/2024-04-24-nexus/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/nexus/">nexus</a>,&nbsp;<a href="/tags/repo/">repo</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2024-01-29-ktconnect/">ktconnect</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-01-29">2024-01-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div><div class="content">KtConnect 官方文档：https://alibaba.github.io/kt-connect/#/zh-cn/guide/quickstart 简单示</div><div class="post-footer">
-        <a href="/posts/2024-01-29-ktconnect/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/ktconnect/">ktconnect</a></div></div>
+        <a href="/posts/2024-03-31-publish-terraform-provider/">Publish Provider to Registry</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-03-31">2024-03-31</time></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div><div class="content">Publish Terraform Provider https://registry.terraform.io/ 上的provider只能托管在 github 上 1、Terraform Registry 官网上注册账号 账号使用 github 登录，设置 github 需要对 terraform registry 的授权 2、创建 github projec</div><div class="post-footer">
+        <a href="/posts/2024-03-31-publish-terraform-provider/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/terraform-registry/">terraform-registry</a>,&nbsp;<a href="/tags/hashicorp/">hashicorp</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2024-01-22-alpine-vm/">Alpine vm</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-01-22">2024-01-22</time></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div><div class="content">alpine 虚拟机安装 使用alpine-vm iso 文件进行安装 参考文档： https://www.qunniao.net/1408.html https://wener.me/notes/os/alpine/intro https://blog.xiaohack.org/4674.html https://tonylee.name/Alpine-Linux-4f1cbdb482754c65a61e7f08e9691234 关闭交换分区减小镜像大小： vi /sbin/setup-alpine # 在 setup-disk 增加参数关闭交换分区 setup-disk -s 0 alpine 3.19 镜像可以</div><div class="post-footer">
-        <a href="/posts/2024-01-22-alpine-vm/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/alpine-vm/">alpine-vm</a></div></div>
+        <a href="/posts/2024-03-24-wlan/">wlan</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-03-23">2024-03-23</time></span>&nbsp;<span class="post-category">included in <a href="/categories/network/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Network</a></span></div><div class="content">wlan组网 一、概述 无线局域网(Wireless Local Area Networks； WLAN)利用无线技术在空中传输数据、话音和视频信号。作为传统布线网络</div><div class="post-footer">
+        <a href="/posts/2024-03-24-wlan/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/network/">network</a>,&nbsp;<a href="/tags/ap/">ap</a>,&nbsp;<a href="/tags/ac/">ac</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2024-01-15-python-cert/">Python Cert</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-01-16">2024-01-16</time></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div><div class="content">Python 自签名证书 mozilla 维护者一个公共ca的文件，在使用http客户端使用自签名证书的时候可以把对应的文件合并然后再导入，示例代码： requirements.txt certifi==2023.11.17 urllib3==2.1.0 #!/usr/bin/env python3 # coding=utf-8 # ***********************************************************************</div><div class="post-footer">
-        <a href="/posts/2024-01-15-python-cert/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python-cert/">python-cert</a></div></div>
+        <a href="/posts/2024-03-24-route-switch-base/">Route&Swich 基础</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-03-23">2024-03-23</time></span>&nbsp;<span class="post-category">included in <a href="/categories/network/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Network</a></span></div><div class="content">路由交换基础配置 设备名修改 &lt;Huawei&gt; system-view [Huawei] sysname Server [Server] undo sysname [Huawei] 查看配置 # 查看当前配置 display this # 查看当前所有配置 display current-configuration 禁用ftp功能 &lt;Huawei&gt; system-view [Huawei] ftp server enable [Huawei] undo ftp server 删除port版</div><div class="post-footer">
+        <a href="/posts/2024-03-24-route-switch-base/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/network/">network</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2024-01-14-terraform-registry/">Terraform Registry</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-01-14">2024-01-14</time></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div><div class="content">Terraform Registry 一、Registry 协议 文档地址：https://developer.hashicorp.com/terraform/internals</div><div class="post-footer">
-        <a href="/posts/2024-01-14-terraform-registry/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/terraform-registry/">terraform-registry</a></div></div>
+        <a href="/posts/2024-03-21-openconnect/">OpenConnect</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-03-23">2024-03-23</time></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div><div class="content">OpenConnect 参考文档 https://github.com/huataihuang/cloud-atlas-draft/blob/master/security/vpn/openconnect/deploy_ocserv_vpn_server_on_ubuntu.md https://www.cnblogs.com/grafin/p/17785264.html https://cn.linux-console.net/?p=22087 OpenConnect起源于对Cisco AnyConnect VPN客户端的开源替代方案的需求。Cisco AnyConnect是一款商业VPN解</div><div class="post-footer">
+        <a href="/posts/2024-03-21-openconnect/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/openconnect/">OpenConnect</a>,&nbsp;<a href="/tags/vpn/">vpn</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2024-01-07-vault/">Vault</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-01-07">2024-01-07</time></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div><div class="content">Vault 参考链接：https://thiscute.world/posts/experience-of-vault/#%E4%B8%80vault</div><div class="post-footer">
-        <a href="/posts/2024-01-07-vault/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/vault/">vault</a></div></div>
+        <a href="/posts/2024-03-11-k3s-cert/">k3s-cert</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-03-21">2024-03-21</time></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div><div class="content">K3s 证书 k3s 根CA证书默认10年，签署的证书有效期默认1年，在到期前的90天内需要重启，重启后会自动轮转证书。 参考文档： https://forums.rancher.cn/t/k3s-ca-10/331 https://blog.starudream.cn/2023/07/21/k3s-client-cert-extend/ https://forums.rancher.cn/t/k3s-ca-10/331/37 https://github.com/qkboy/k3s/tree/v1.29.0%2Bk3s1-longcert https://docs.k3s.io/zh/cli/certificate#%E8%BD%AE%E6%8D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%81%E4%B9%A6 https://www.linuxfly.org/post/733/ 一、手动轮转</div><div class="post-footer">
+        <a href="/posts/2024-03-11-k3s-cert/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/k3s-cert/">k3s cert</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -143,7 +143,7 @@
                     <span class="page-link" aria-hidden="true">&hellip;</span>
                 </li><li class="page-item ">
                     <span class="page-link">
-                        <a href="/page/13/">13</a>
+                        <a href="/page/15/">15</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

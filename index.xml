@@ -4,87 +4,87 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 27 May 2024 19:26:27 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 02 Jun 2024 10:38:01 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>lvm</title>
-    <link>https://serialt.github.io/posts/2024-05-27-linux-lvm/</link>
-    <pubDate>Mon, 27 May 2024 19:26:27 &#43;0800</pubDate>
+    <title>Go time</title>
+    <link>https://serialt.github.io/posts/2024-06-02-go-time/</link>
+    <pubDate>Sun, 02 Jun 2024 10:38:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-05-27-linux-lvm/</guid>
-    <description><![CDATA[LVM Logical Volume Management 逻辑卷管理 优势： 在线扩展/缩减存储空间/整合琐碎空间 支持快照 Device Mapper设备映射 lvm组织方式： 真实存储设备 --- pv(物理卷) --- vg]]></description>
+    <guid>https://serialt.github.io/posts/2024-06-02-go-time/</guid>
+    <description><![CDATA[Go time包 参考链接：https://www.liwenzhou.com/posts/Go/go_time/ 时间和日期是我们编程中经常会用到]]></description>
 </item>
 <item>
-    <title>dingbot</title>
-    <link>https://serialt.github.io/posts/2024-05-14-dingbot/</link>
-    <pubDate>Tue, 14 May 2024 19:26:27 &#43;0800</pubDate>
+    <title>Go storm</title>
+    <link>https://serialt.github.io/posts/2024-06-02-go-storm/</link>
+    <pubDate>Sun, 02 Jun 2024 10:36:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-05-14-dingbot/</guid>
-    <description><![CDATA[钉钉机器人发消息 1、签名计算 由于 mac 上的是 BSD 的 date，与 linux 上的 date 不同，在 mac 上使用需要替换为 linux 的 gdate。 #!/usr/bin/env bash ## 需要艾特的人的手机号码，以空]]></description>
+    <guid>https://serialt.github.io/posts/2024-06-02-go-storm/</guid>
+    <description><![CDATA[Go Storm storm是一个使用BoltDB的上层orm框架 https://juejin.cn/post/7031361355856740389 数据查看工具: https://github.com/br0xen/boltbrowser 驱动: https://github.com/asdine/storm 下载boltbrowser go install github.com/br0xen/boltbrowser@latest 使用lib go get github.com/asdine/storm 一、基本使用 初]]></description>
 </item>
 <item>
-    <title>Nexus</title>
-    <link>https://serialt.github.io/posts/2024-04-24-nexus/</link>
-    <pubDate>Wed, 24 Apr 2024 19:26:27 &#43;0800</pubDate>
+    <title>Go slog</title>
+    <link>https://serialt.github.io/posts/2024-06-02-go-slog/</link>
+    <pubDate>Sun, 02 Jun 2024 10:33:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-04-24-nexus/</guid>
-    <description><![CDATA[Nexus 参考： https://juejin.cn/post/6844904016762109959 https://cloud.tencent.com/developer/article/1764866 官网：https://help.sonatype.com/repomanager3/ 介绍 生产环境中，一般不会允许所有服务器都能访]]></description>
+    <guid>https://serialt.github.io/posts/2024-06-02-go-slog/</guid>
+    <description><![CDATA[slog 结构化日志 参考链接：https://betterstack.com/community/guides/logging/logging-in]]></description>
 </item>
 <item>
-    <title>Publish Provider to Registry</title>
-    <link>https://serialt.github.io/posts/2024-03-31-publish-terraform-provider/</link>
-    <pubDate>Sun, 31 Mar 2024 16:16:02 &#43;0800</pubDate>
+    <title>Go shamir</title>
+    <link>https://serialt.github.io/posts/2024-06-02-go-shamir/</link>
+    <pubDate>Sun, 02 Jun 2024 10:32:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-03-31-publish-terraform-provider/</guid>
-    <description><![CDATA[Publish Terraform Provider https://registry.terraform.io/ 上的provider只能托管在 github 上 1、Terraform Registry 官网上注册账号 账号使用 github 登录，设置 github 需要对 terraform registry 的授权 2、创建 github projec]]></description>
+    <guid>https://serialt.github.io/posts/2024-06-02-go-shamir/</guid>
+    <description><![CDATA[Shamir密钥分享算法 参考：https://www.cxyzjd.com/article/shangsongwww/90266455 秘密共]]></description>
 </item>
 <item>
-    <title>wlan</title>
-    <link>https://serialt.github.io/posts/2024-03-24-wlan/</link>
-    <pubDate>Sat, 23 Mar 2024 22:16:02 &#43;0800</pubDate>
+    <title>Go pinyin</title>
+    <link>https://serialt.github.io/posts/2024-06-02-go-pinyin/</link>
+    <pubDate>Sun, 02 Jun 2024 10:31:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-03-24-wlan/</guid>
-    <description><![CDATA[wlan组网 一、概述 无线局域网(Wireless Local Area Networks； WLAN)利用无线技术在空中传输数据、话音和视频信号。作为传统布线网络]]></description>
+    <guid>https://serialt.github.io/posts/2024-06-02-go-pinyin/</guid>
+    <description><![CDATA[Go 汉字转拼音库 汉语拼音转换工具 Go 版。 1、安装 go get -u github.com/mozillazg/go-pinyin 安装cli工具 go get -u github.com/mozillazg/go-pinyin/cmd/pinyin $ pinyin 中国人 zhōng guó rén 2、简单使用 package main import ( &#34;fmt&#34; &#34;github.com/mozillazg/go-pinyin&#34; ) func main() { hans]]></description>
 </item>
 <item>
-    <title>Route&amp;Swich 基础</title>
-    <link>https://serialt.github.io/posts/2024-03-24-route-switch-base/</link>
-    <pubDate>Sat, 23 Mar 2024 21:16:02 &#43;0800</pubDate>
+    <title>Go exec</title>
+    <link>https://serialt.github.io/posts/2024-06-02-go-os-exec/</link>
+    <pubDate>Sun, 02 Jun 2024 10:30:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-03-24-route-switch-base/</guid>
-    <description><![CDATA[路由交换基础配置 设备名修改 &lt;Huawei&gt; system-view [Huawei] sysname Server [Server] undo sysname [Huawei] 查看配置 # 查看当前配置 display this # 查看当前所有配置 display current-configuration 禁用ftp功能 &lt;Huawei&gt; system-view [Huawei] ftp server enable [Huawei] undo ftp server 删除port版]]></description>
+    <guid>https://serialt.github.io/posts/2024-06-02-go-os-exec/</guid>
+    <description><![CDATA[os/exec 系统内执行命令 1、查找命令所在的路径 func findCommandPath(str string) (string, error) { path, err := exec.LookPath(str) if err != nil { return &#34;&#34;, err } return path, nil } 2、CombinedOutput组合输出，标准正确错误输]]></description>
 </item>
 <item>
-    <title>OpenConnect</title>
-    <link>https://serialt.github.io/posts/2024-03-21-openconnect/</link>
-    <pubDate>Sat, 23 Mar 2024 10:37:07 &#43;0800</pubDate>
+    <title>Go gorm</title>
+    <link>https://serialt.github.io/posts/2024-06-02-go-gorm/</link>
+    <pubDate>Sun, 02 Jun 2024 10:29:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-03-21-openconnect/</guid>
-    <description><![CDATA[OpenConnect 参考文档 https://github.com/huataihuang/cloud-atlas-draft/blob/master/security/vpn/openconnect/deploy_ocserv_vpn_server_on_ubuntu.md https://www.cnblogs.com/grafin/p/17785264.html https://cn.linux-console.net/?p=22087 OpenConnect起源于对Cisco AnyConnect VPN客户端的开源替代方案的需求。Cisco AnyConnect是一款商业VPN解]]></description>
+    <guid>https://serialt.github.io/posts/2024-06-02-go-gorm/</guid>
+    <description><![CDATA[Gorm 官网：https://gorm.io/ 特性： 全功能 ORM 关联 (Has One，Has Many，Belongs To，Many To Many，多态，单表继承)]]></description>
 </item>
 <item>
-    <title>k3s-cert</title>
-    <link>https://serialt.github.io/posts/2024-03-11-k3s-cert/</link>
-    <pubDate>Thu, 21 Mar 2024 21:26:27 &#43;0800</pubDate>
+    <title>Go goph</title>
+    <link>https://serialt.github.io/posts/2024-06-02-go-goph/</link>
+    <pubDate>Sun, 02 Jun 2024 10:27:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-03-11-k3s-cert/</guid>
-    <description><![CDATA[K3s 证书 k3s 根CA证书默认10年，签署的证书有效期默认1年，在到期前的90天内需要重启，重启后会自动轮转证书。 参考文档： https://forums.rancher.cn/t/k3s-ca-10/331 https://blog.starudream.cn/2023/07/21/k3s-client-cert-extend/ https://forums.rancher.cn/t/k3s-ca-10/331/37 https://github.com/qkboy/k3s/tree/v1.29.0%2Bk3s1-longcert https://docs.k3s.io/zh/cli/certificate#%E8%BD%AE%E6%8D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%81%E4%B9%A6 https://www.linuxfly.org/post/733/ 一、手动轮转]]></description>
+    <guid>https://serialt.github.io/posts/2024-06-02-go-goph/</guid>
+    <description><![CDATA[Go Goph 模块 github地址：https://github.com/melbahja/goph go开发封装的 ssh client 模块 Features Easy to use and simple API. Supports known hosts by default. Supports connections]]></description>
 </item>
 <item>
-    <title>Terraform Registry Mirror</title>
-    <link>https://serialt.github.io/posts/2024-03-17-tf-mirror-registery/</link>
-    <pubDate>Sun, 17 Mar 2024 16:37:07 &#43;0800</pubDate>
+    <title>Go flag</title>
+    <link>https://serialt.github.io/posts/2024-06-02-go-flag/</link>
+    <pubDate>Sun, 02 Jun 2024 10:26:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-03-17-tf-mirror-registery/</guid>
-    <description><![CDATA[Terraform Registry Mirror terraform 的 provider 托管在海外，使用时候会经常因为网络问题导致下载失败，terraform 官方有 Provider Network Mirror Protocol，支持使用本地文件和 Static Webs]]></description>
+    <guid>https://serialt.github.io/posts/2024-06-02-go-flag/</guid>
+    <description><![CDATA[Go flag模块 参考链接：https://www.liwenzhou.com/posts/Go/go_flag/ Go语言内置的flag包实现了]]></description>
 </item>
 <item>
-    <title>Packer</title>
-    <link>https://serialt.github.io/posts/2024-03-15-packer/</link>
-    <pubDate>Sat, 16 Mar 2024 18:37:07 &#43;0800</pubDate>
+    <title>Go boltdb</title>
+    <link>https://serialt.github.io/posts/2024-06-02-go-boltdb/</link>
+    <pubDate>Sun, 02 Jun 2024 10:25:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-03-15-packer/</guid>
-    <description><![CDATA[Packer 参考链接： https://developer.hashicorp.com/packer/docs?product_intent=packer https://blog.k8s.li/packer-vsphere-example.html https://cloud.tencent.com/developer/article/1474736 https://blog.csdn.net/weixin_45941099/article/details/123838526 https://github.com/serialt/packer-demo https://lonegunmanb.github.io/packer-handbook/ 介绍： Packer是用一个配置文件，在多种云计算平台上创建完全一致镜像的开源工具。Packer是由HashiCorp]]></description>
+    <guid>https://serialt.github.io/posts/2024-06-02-go-boltdb/</guid>
+    <description><![CDATA[GO 文件数据库boltdb github地址: https://github.com/etcd-io/bbolt https://github.com/boltdb/bolt 由于作者个人能力有限，宣布不再维护，建议使用社区维护的bbolt 参考：https://zhua]]></description>
 </item>
 </channel>
 </rss>

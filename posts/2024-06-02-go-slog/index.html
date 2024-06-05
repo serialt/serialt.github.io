@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Go slog - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Go slog" />
+<meta property="og:description" content="slog 结构化日志 参考链接：https://betterstack.com/community/guides/logging/logging-in" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2024-06-02-go-slog/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-06-02T10:33:01+08:00" />
+<meta property="article:modified_time" content="2024-06-02T10:33:01+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go slog"/>
+<meta name="twitter:description" content="slog 结构化日志 参考链接：https://betterstack.com/community/guides/logging/logging-in"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2024-06-02-go-slog/" /><link rel="prev" href="https://serialt.github.io/posts/2024-06-02-go-shamir/" /><link rel="next" href="https://serialt.github.io/posts/2024-06-02-go-storm/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Go slog",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2024-06-02-go-slog\/"
+        },"genre": "posts","keywords": "Go, slog","wordcount":  523 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2024-06-02-go-slog\/","datePublished": "2024-06-02T10:33:01+08:00","dateModified": "2024-06-02T10:33:01+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Go slog</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-02">2024-06-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;523 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#slog-结构化日志">slog 结构化日志</a>
+      <ul>
+        <li><a href="#1下载">1、下载</a></li>
+        <li><a href="#2使用">2、使用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="slog-结构化日志">slog 结构化日志</h2>
+<p>参考链接：https://betterstack.com/community/guides/logging/logging-in-go/#customizing-the-default-logger</p>
+<h3 id="1下载">1、下载</h3>
+<pre tabindex="0"><code>go get golang.org/x/exp/slog@latest
+</code></pre><h3 id="2使用">2、使用</h3>
+<p>1）简单实用</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;errors&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;golang.org/x/exp/slog&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">slog</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;Debug message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">slog</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;Info message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">slog</span><span class="p">.</span><span class="nf">Warn</span><span class="p">(</span><span class="s">&#34;Warning message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">slog</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;Error message&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><blockquote>
+<p>output</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">2023/03/15 12:55:56 INFO Info message
+</span></span><span class="line"><span class="cl">2023/03/15 12:55:56 WARN Warning message
+</span></span><span class="line"><span class="cl">2023/03/15 12:55:56 ERROR Error message
+</span></span></code></pre></div></blockquote>
+<p>2）json格式输出</p>
+<pre tabindex="0"><code>package main
+
+import (
+    &#34;errors&#34;
+    &#34;os&#34;
+
+    &#34;golang.org/x/exp/slog&#34;
+)
+
+func main() {
+    logger := slog.New(slog.NewJSONHandler(os.Stdout))
+    logger.Debug(&#34;Debug message&#34;)
+    logger.Info(&#34;Info message&#34;)
+    logger.Warn(&#34;Warning message&#34;)
+    logger.Error(&#34;Error message&#34;)
+}
+</code></pre><blockquote>
+<p>output</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;time&#34;</span><span class="p">:</span><span class="s2">&#34;2023-03-15T12:59:22.227408691+01:00&#34;</span><span class="p">,</span><span class="nt">&#34;level&#34;</span><span class="p">:</span><span class="s2">&#34;INFO&#34;</span><span class="p">,</span><span class="nt">&#34;msg&#34;</span><span class="p">:</span><span class="s2">&#34;Info message&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;time&#34;</span><span class="p">:</span><span class="s2">&#34;2023-03-15T12:59:22.227468972+01:00&#34;</span><span class="p">,</span><span class="nt">&#34;level&#34;</span><span class="p">:</span><span class="s2">&#34;WARN&#34;</span><span class="p">,</span><span class="nt">&#34;msg&#34;</span><span class="p">:</span><span class="s2">&#34;Warning message&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;time&#34;</span><span class="p">:</span><span class="s2">&#34;2023-03-15T12:59:22.227472149+01:00&#34;</span><span class="p">,</span><span class="nt">&#34;level&#34;</span><span class="p">:</span><span class="s2">&#34;ERROR&#34;</span><span class="p">,</span><span class="nt">&#34;msg&#34;</span><span class="p">:</span><span class="s2">&#34;Error message&#34;</span><span class="p">,</span><span class="nt">&#34;!BADKEY&#34;</span><span class="p">:</span><span class="s2">&#34;an error&#34;</span><span class="p">}</span>
+</span></span></code></pre></div></blockquote>
+<p>3）自己定义</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">sugar</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;os&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;path/filepath&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;golang.org/x/exp/slog&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Log</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Level</span> <span class="kt">string</span> <span class="c1">// 日志级别  string // 日志文件存放路径,如果为空，则输出到控制台
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">Type</span>  <span class="kt">string</span> <span class="c1">// 日志类型，支持 txt 和 json ，默认txt
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">Short</span> <span class="kt">bool</span>   <span class="c1">// 以包/文件:行号 显示短路径，不显示全路径
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">LogOptions</span> <span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">Log</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">WithLevel</span><span class="p">(</span><span class="nx">level</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">LogOptions</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">lg</span> <span class="o">*</span><span class="nx">Log</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">lg</span><span class="p">.</span><span class="nx">Level</span> <span class="p">=</span> <span class="nx">level</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">WithType</span><span class="p">(</span><span class="nx">tp</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">LogOptions</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">lg</span> <span class="o">*</span><span class="nx">Log</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">lg</span><span class="p">.</span><span class="nx">Type</span> <span class="p">=</span> <span class="nx">tp</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">WithShort</span><span class="p">(</span><span class="nx">short</span> <span class="kt">bool</span><span class="p">)</span> <span class="nx">LogOptions</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">lg</span> <span class="o">*</span><span class="nx">Log</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">lg</span><span class="p">.</span><span class="nx">Short</span> <span class="p">=</span> <span class="nx">short</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// LevelToZapLevel  转换日志级别
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">LevelToSlogLevel</span><span class="p">(</span><span class="nx">level</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">Level</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">switch</span> <span class="nx">level</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="s">&#34;debug&#34;</span><span class="p">,</span> <span class="s">&#34;DEBUG&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelDebug</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="s">&#34;info&#34;</span><span class="p">,</span> <span class="s">&#34;INFO&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelInfo</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="s">&#34;warn&#34;</span><span class="p">,</span> <span class="s">&#34;WARN&#34;</span><span class="p">,</span> <span class="s">&#34;WARNING&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelWarn</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="s">&#34;error&#34;</span><span class="p">,</span> <span class="s">&#34;ERROR&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelError</span>
+</span></span><span class="line"><span class="cl">	<span class="k">default</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelInfo</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewSlog</span><span class="p">(</span><span class="nx">lg</span> <span class="o">*</span><span class="nx">Log</span><span class="p">)</span> <span class="o">*</span><span class="nx">slog</span><span class="p">.</span><span class="nx">Logger</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">replace</span> <span class="o">:=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">groups</span> <span class="p">[]</span><span class="kt">string</span><span class="p">,</span> <span class="nx">a</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">Attr</span><span class="p">)</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">Attr</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// Remove the directory from the source&#39;s filename.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Key</span> <span class="o">==</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">SourceKey</span> <span class="o">&amp;&amp;</span> <span class="nx">lg</span><span class="p">.</span><span class="nx">Short</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">a</span><span class="p">.</span><span class="nx">Value</span> <span class="p">=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">StringValue</span><span class="p">(</span><span class="nx">filepath</span><span class="p">.</span><span class="nf">Base</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">Value</span><span class="p">.</span><span class="nf">String</span><span class="p">()))</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">a</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">opts</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">HandlerOptions</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">AddSource</span><span class="p">:</span>   <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Level</span><span class="p">:</span>       <span class="nf">LevelToSlogLevel</span><span class="p">(</span><span class="nx">lg</span><span class="p">.</span><span class="nx">Level</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ReplaceAttr</span><span class="p">:</span> <span class="nx">replace</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">log</span> <span class="o">*</span><span class="nx">slog</span><span class="p">.</span><span class="nx">Logger</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">lg</span><span class="p">.</span><span class="nx">Type</span> <span class="o">==</span> <span class="s">&#34;json&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span> <span class="p">=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nf">NewJSONHandler</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span> <span class="p">=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nf">NewTextHandler</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">log</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">New</span><span class="p">(</span><span class="nx">options</span> <span class="o">...</span><span class="nx">LogOptions</span><span class="p">)</span> <span class="o">*</span><span class="nx">slog</span><span class="p">.</span><span class="nx">Logger</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 默认值的设定
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">lg</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Log</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Level</span><span class="p">:</span> <span class="s">&#34;info&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Type</span><span class="p">:</span>  <span class="s">&#34;txt&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Short</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 遍历可选参数，然后分别调用匿名函数，将连接对象指针传入，进行修改
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">opt</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">options</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 遍历调用函数，进行数据修改
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nf">opt</span><span class="p">(</span><span class="nx">lg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nf">NewSlog</span><span class="p">(</span><span class="nx">lg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-06-02</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/slog/">slog</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2024-06-02-go-shamir/" class="prev" rel="prev" title="Go shamir"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Go shamir</a>
+            <a href="/posts/2024-06-02-go-storm/" class="next" rel="next" title="Go storm">Go storm<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

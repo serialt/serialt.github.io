@@ -4,84 +4,84 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 27 May 2024 19:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
-    <title>linux-lvm</title>
-    <link>https://serialt.github.io/tags/linux-lvm/</link>
-    <pubDate>Mon, 27 May 2024 19:26:27 &#43;0800</pubDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 02 Jun 2024 10:38:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Go</title>
+    <link>https://serialt.github.io/tags/go/</link>
+    <pubDate>Sun, 02 Jun 2024 10:38:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/linux-lvm/</guid>
+    <guid>https://serialt.github.io/tags/go/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>lvm</title>
-    <link>https://serialt.github.io/tags/lvm/</link>
-    <pubDate>Mon, 27 May 2024 19:26:27 &#43;0800</pubDate>
+    <title>time</title>
+    <link>https://serialt.github.io/tags/time/</link>
+    <pubDate>Sun, 02 Jun 2024 10:38:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/lvm/</guid>
+    <guid>https://serialt.github.io/tags/time/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>dingbot</title>
-    <link>https://serialt.github.io/tags/dingbot/</link>
-    <pubDate>Tue, 14 May 2024 19:26:27 &#43;0800</pubDate>
+    <title>boltdb</title>
+    <link>https://serialt.github.io/tags/boltdb/</link>
+    <pubDate>Sun, 02 Jun 2024 10:36:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/dingbot/</guid>
+    <guid>https://serialt.github.io/tags/boltdb/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>nexus</title>
-    <link>https://serialt.github.io/tags/nexus/</link>
-    <pubDate>Wed, 24 Apr 2024 19:26:27 &#43;0800</pubDate>
+    <title>storm</title>
+    <link>https://serialt.github.io/tags/storm/</link>
+    <pubDate>Sun, 02 Jun 2024 10:36:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/nexus/</guid>
+    <guid>https://serialt.github.io/tags/storm/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>repo</title>
-    <link>https://serialt.github.io/tags/repo/</link>
-    <pubDate>Wed, 24 Apr 2024 19:26:27 &#43;0800</pubDate>
+    <title>slog</title>
+    <link>https://serialt.github.io/tags/slog/</link>
+    <pubDate>Sun, 02 Jun 2024 10:33:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/repo/</guid>
+    <guid>https://serialt.github.io/tags/slog/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>hashicorp</title>
-    <link>https://serialt.github.io/tags/hashicorp/</link>
-    <pubDate>Sun, 31 Mar 2024 16:16:02 &#43;0800</pubDate>
+    <title>shamir</title>
+    <link>https://serialt.github.io/tags/shamir/</link>
+    <pubDate>Sun, 02 Jun 2024 10:32:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/hashicorp/</guid>
+    <guid>https://serialt.github.io/tags/shamir/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>terraform-registry</title>
-    <link>https://serialt.github.io/tags/terraform-registry/</link>
-    <pubDate>Sun, 31 Mar 2024 16:16:02 &#43;0800</pubDate>
+    <title>pinyin</title>
+    <link>https://serialt.github.io/tags/pinyin/</link>
+    <pubDate>Sun, 02 Jun 2024 10:31:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/terraform-registry/</guid>
+    <guid>https://serialt.github.io/tags/pinyin/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>ac</title>
-    <link>https://serialt.github.io/tags/ac/</link>
-    <pubDate>Sat, 23 Mar 2024 22:16:02 &#43;0800</pubDate>
+    <title>exec</title>
+    <link>https://serialt.github.io/tags/exec/</link>
+    <pubDate>Sun, 02 Jun 2024 10:30:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/ac/</guid>
+    <guid>https://serialt.github.io/tags/exec/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>ap</title>
-    <link>https://serialt.github.io/tags/ap/</link>
-    <pubDate>Sat, 23 Mar 2024 22:16:02 &#43;0800</pubDate>
+    <title>gorm</title>
+    <link>https://serialt.github.io/tags/gorm/</link>
+    <pubDate>Sun, 02 Jun 2024 10:29:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/ap/</guid>
+    <guid>https://serialt.github.io/tags/gorm/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>network</title>
-    <link>https://serialt.github.io/tags/network/</link>
-    <pubDate>Sat, 23 Mar 2024 22:16:02 &#43;0800</pubDate>
+    <title>goph</title>
+    <link>https://serialt.github.io/tags/goph/</link>
+    <pubDate>Sun, 02 Jun 2024 10:27:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/tags/network/</guid>
+    <guid>https://serialt.github.io/tags/goph/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

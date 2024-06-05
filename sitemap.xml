@@ -2,14 +2,38 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://serialt.github.io/</loc><lastmod>2024-05-27T19:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/</loc><lastmod>2024-05-27T19:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/</loc><lastmod>2024-06-02T10:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/</loc><lastmod>2024-06-02T10:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/go/</loc><lastmod>2024-06-02T10:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-06-02-go-time/</loc><lastmod>2024-06-02T10:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/</loc><lastmod>2024-06-02T10:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/</loc><lastmod>2024-06-02T10:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/</loc><lastmod>2024-06-02T10:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/time/</loc><lastmod>2024-06-02T10:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/boltdb/</loc><lastmod>2024-06-02T10:36:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-06-02-go-storm/</loc><lastmod>2024-06-02T10:36:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/storm/</loc><lastmod>2024-06-02T10:36:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-06-02-go-slog/</loc><lastmod>2024-06-02T10:33:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/slog/</loc><lastmod>2024-06-02T10:33:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-06-02-go-shamir/</loc><lastmod>2024-06-02T10:32:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/shamir/</loc><lastmod>2024-06-02T10:32:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-06-02-go-pinyin/</loc><lastmod>2024-06-02T10:31:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/pinyin/</loc><lastmod>2024-06-02T10:31:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/exec/</loc><lastmod>2024-06-02T10:30:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-06-02-go-os-exec/</loc><lastmod>2024-06-02T10:30:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-06-02-go-gorm/</loc><lastmod>2024-06-02T10:29:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/gorm/</loc><lastmod>2024-06-02T10:29:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-06-02-go-goph/</loc><lastmod>2024-06-02T10:27:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/goph/</loc><lastmod>2024-06-02T10:27:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/ssh/</loc><lastmod>2024-06-02T10:27:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/flag/</loc><lastmod>2024-06-02T10:26:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-06-02-go-flag/</loc><lastmod>2024-06-02T10:26:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/bolt/</loc><lastmod>2024-06-02T10:25:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-06-02-go-boltdb/</loc><lastmod>2024-06-02T10:25:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/categories/linux/</loc><lastmod>2024-05-27T19:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/linux-lvm/</loc><lastmod>2024-05-27T19:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/lvm/</loc><lastmod>2024-05-27T19:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-05-27-linux-lvm/</loc><lastmod>2024-05-27T19:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/posts/</loc><lastmod>2024-05-27T19:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/</loc><lastmod>2024-05-27T19:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/categories/devops/</loc><lastmod>2024-05-14T19:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/dingbot/</loc><lastmod>2024-05-14T19:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-05-14-dingbot/</loc><lastmod>2024-05-14T19:26:27&#43;08:00</lastmod></url><url>
@@ -34,9 +58,7 @@
             <loc>https://serialt.github.io/tags/packer/</loc><lastmod>2024-03-16T18:37:07&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-03-15-packer/</loc><lastmod>2024-03-16T18:37:07&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/embed/</loc><lastmod>2024-03-16T18:25:07&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/go/</loc><lastmod>2024-03-16T18:25:07&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-03-15-go-embed/</loc><lastmod>2024-03-16T18:25:07&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/</loc><lastmod>2024-03-16T18:25:07&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/tf-harbor/</loc><lastmod>2024-03-09T20:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-03-09-tf-harbor/</loc><lastmod>2024-03-09T20:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/tf-code/</loc><lastmod>2024-02-25T20:26:27&#43;08:00</lastmod></url><url>
@@ -69,7 +91,6 @@
             <loc>https://serialt.github.io/posts/2023-12-2-go-channel/</loc><lastmod>2023-12-01T20:22:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/go-channel/</loc><lastmod>2023-12-01T20:22:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/categories/go%E5%9F%BA%E7%A1%80/</loc><lastmod>2023-12-01T20:22:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/gorm/</loc><lastmod>2023-11-28T20:22:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2023-11-28-gorm-gen/</loc><lastmod>2023-11-28T20:22:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/gorm-gen/</loc><lastmod>2023-11-28T20:22:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/case/</loc><lastmod>2023-11-24T20:22:27&#43;08:00</lastmod></url><url>
@@ -181,9 +202,7 @@
             <loc>https://serialt.github.io/tags/cron/</loc><lastmod>2023-11-11T10:20:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2023-11-11-go-cron/</loc><lastmod>2023-11-11T10:20:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/go-goth/</loc><lastmod>2023-11-10T21:20:42&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/goph/</loc><lastmod>2023-11-10T21:20:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/sftp/</loc><lastmod>2023-11-10T21:20:42&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/ssh/</loc><lastmod>2023-11-10T21:20:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/image/</loc><lastmod>2023-11-08T20:26:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/oci-image-sync/</loc><lastmod>2023-11-08T20:26:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/skopeo/</loc><lastmod>2023-11-08T20:26:42&#43;08:00</lastmod></url><url>
