@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>linux-lvm - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/linux-lvm/</link>
+        <description>linux-lvm - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 27 May 2024 19:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/linux-lvm/" rel="self" type="application/rss+xml" /><item>
+    <title>lvm</title>
+    <link>https://serialt.github.io/posts/2024-05-27-linux-lvm/</link>
+    <pubDate>Mon, 27 May 2024 19:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-05-27-linux-lvm/</guid>
+    <description><![CDATA[LVM Logical Volume Management 逻辑卷管理 优势： 在线扩展/缩减存储空间/整合琐碎空间 支持快照 Device Mapper设备映射 lvm组织方式： 真实存储设备 --- pv(物理卷) --- vg]]></description>
+</item>
+</channel>
+</rss>

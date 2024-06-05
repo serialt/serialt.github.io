@@ -4,7 +4,23 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Tue, 14 May 2024 19:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 27 May 2024 19:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>linux-lvm</title>
+    <link>https://serialt.github.io/tags/linux-lvm/</link>
+    <pubDate>Mon, 27 May 2024 19:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/linux-lvm/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>lvm</title>
+    <link>https://serialt.github.io/tags/lvm/</link>
+    <pubDate>Mon, 27 May 2024 19:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/lvm/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>dingbot</title>
     <link>https://serialt.github.io/tags/dingbot/</link>
     <pubDate>Tue, 14 May 2024 19:26:27 &#43;0800</pubDate>
@@ -66,22 +82,6 @@
     <pubDate>Sat, 23 Mar 2024 22:16:02 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/network/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>OpenConnect</title>
-    <link>https://serialt.github.io/tags/openconnect/</link>
-    <pubDate>Sat, 23 Mar 2024 10:37:07 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/openconnect/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>vpn</title>
-    <link>https://serialt.github.io/tags/vpn/</link>
-    <pubDate>Sat, 23 Mar 2024 10:37:07 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/vpn/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

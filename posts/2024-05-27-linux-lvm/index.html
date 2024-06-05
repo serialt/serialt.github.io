@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>lvm - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="lvm" />
+<meta property="og:description" content="LVM Logical Volume Management 逻辑卷管理 优势： 在线扩展/缩减存储空间/整合琐碎空间 支持快照 Device Mapper设备映射 lvm组织方式： 真实存储设备 --- pv(物理卷) --- vg" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2024-05-27-linux-lvm/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-05-27T19:26:27+08:00" />
+<meta property="article:modified_time" content="2024-05-27T19:26:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="lvm"/>
+<meta name="twitter:description" content="LVM Logical Volume Management 逻辑卷管理 优势： 在线扩展/缩减存储空间/整合琐碎空间 支持快照 Device Mapper设备映射 lvm组织方式： 真实存储设备 --- pv(物理卷) --- vg"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2024-05-27-linux-lvm/" /><link rel="prev" href="https://serialt.github.io/posts/2024-05-14-dingbot/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "lvm",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2024-05-27-linux-lvm\/"
+        },"genre": "posts","keywords": "lvm, linux-lvm","wordcount":  791 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2024-05-27-linux-lvm\/","datePublished": "2024-05-27T19:26:27+08:00","dateModified": "2024-05-27T19:26:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">lvm</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/linux/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>linux</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-27">2024-05-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;791 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#lvm">LVM</a>
+      <ul>
+        <li><a href="#相关命令">相关命令</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="lvm">LVM</h2>
+<p>Logical Volume Management 逻辑卷管理</p>
+<p>优势：</p>
+<ul>
+<li>在线扩展/缩减存储空间/整合琐碎空间</li>
+<li>支持快照</li>
+</ul>
+<p>Device Mapper设备映射</p>
+<p>lvm组织方式：</p>
+<pre tabindex="0"><code>真实存储设备 --- pv(物理卷) --- vg(卷组) --- lv(逻辑卷) ---- 创建文件系统 ---  挂载使用
+</code></pre><h3 id="相关命令">相关命令</h3>
+<p>1、pv(物理卷)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">1<span class="o">)</span> 查看物理卷
+</span></span><span class="line"><span class="cl">pvscan 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> 创建物理卷
+</span></span><span class="line"><span class="cl">pvcreate disk/partition
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">3<span class="o">)</span> 删除物理卷
+</span></span><span class="line"><span class="cl">pvremove pv_name
+</span></span></code></pre></div><p>2、vg(卷组)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">1<span class="o">)</span> 查看卷组
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 ~<span class="o">]</span><span class="c1"># vgscan </span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 ~<span class="o">]</span><span class="c1"># vgdisplay vg_name</span>
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> 创建卷组 
+</span></span><span class="line"><span class="cl">vgcreate vg_name pv_name pv_name .... 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">3<span class="o">)</span> 删除卷组
+</span></span><span class="line"><span class="cl">vgremove vg_name 
+</span></span></code></pre></div><p>3、lv(逻辑卷)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">1<span class="o">)</span> 查看逻辑卷
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 ~<span class="o">]</span><span class="c1"># lvscan </span>
+</span></span><span class="line"><span class="cl">	  ACTIVE            <span class="s1">&#39;/dev/centos/swap&#39;</span> <span class="o">[</span>2.00 GiB<span class="o">]</span> inherit
+</span></span><span class="line"><span class="cl">	  ACTIVE            <span class="s1">&#39;/dev/centos/root&#39;</span> <span class="o">[</span>&lt;17.00 GiB<span class="o">]</span> inherit
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@node01 ~<span class="o">]</span><span class="c1"># lvdisplay /dev/centos/swap </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> 创建逻辑卷
+</span></span><span class="line"><span class="cl">lvcreate -L size -n lv_name vg_name 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">lvcreate -L 400G -n lv01 vg01 
+</span></span><span class="line"><span class="cl">			
+</span></span><span class="line"><span class="cl">3<span class="o">)</span> 删除逻辑卷
+</span></span><span class="line"><span class="cl">lvremove /dev/vg01/lv01 
+</span></span></code></pre></div><p>操作过程</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># pv</span>
+</span></span><span class="line"><span class="cl">1.创建pv
+</span></span><span class="line"><span class="cl">pvcreate /dev/sda6
+</span></span><span class="line"><span class="cl">pvcreate /dev/sda7
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2.查询pv
+</span></span><span class="line"><span class="cl">pvs
+</span></span><span class="line"><span class="cl">pvdisplay 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># vg</span>
+</span></span><span class="line"><span class="cl">1.创建vg
+</span></span><span class="line"><span class="cl">vgcreate vg0 /dev/sda6 /dev/sda7
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2.查询vg
+</span></span><span class="line"><span class="cl">vgs
+</span></span><span class="line"><span class="cl">vgdisplay
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># lv</span>
+</span></span><span class="line"><span class="cl">1.创建
+</span></span><span class="line"><span class="cl">lvcreate -L 700M -n lv0 vg0
+</span></span><span class="line"><span class="cl">-L size
+</span></span><span class="line"><span class="cl">-n  name
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2.查询 
+</span></span><span class="line"><span class="cl">lvs
+</span></span><span class="line"><span class="cl">lvdisplay 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">格式化
+</span></span><span class="line"><span class="cl">mkfs.xfs /dev/vg0/lv0
+</span></span><span class="line"><span class="cl">挂载
+</span></span><span class="line"><span class="cl">mount /dev/vg0/lv0 /mnt/
+</span></span></code></pre></div><p>示例：扩容跟分区</p>
+<pre tabindex="0"><code>1、创建物理卷
+[root@localhost ~]# pvcreate /dev/sdb
+  Physical volume &#34;/dev/sdb&#34; successfully created.
+[root@localhost ~]# vgs
+  VG     #PV #LV #SN Attr   VSize  VFree
+  centos   2   2   0 wz--n- 39.49g    0 
+[root@localhost ~]# lvs
+  LV   VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  root centos -wi-ao---- &lt;19.00g                                                    
+  swap centos -wi-ao---- 508.00m       
+  
+2、 扩容卷组                                              
+[root@localhost ~]# vgextend centos /dev/sdb
+  Volume group &#34;centos&#34; successfully extended
+[root@localhost ~]# lvs
+  LV   VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  root centos -wi-ao---- &lt;19.00g                                                    
+  swap centos -wi-ao---- 508.00m                  
+  
+ 3、扩展根逻辑卷                                  
+[root@localhost ~]# lvextend -l +100%FREE /dev/centos/root
+  Size of logical volume centos/root changed from &lt;19.00 GiB (4863 extents) to &lt;39.00 GiB (9983 extents).
+  Logical volume centos/root successfully resized.
+[root@localhost ~]# df -Th
+文件系统                类型      容量  已用  可用 已用% 挂载点
+devtmpfs                devtmpfs  2.0G     0  2.0G    0% /dev
+tmpfs                   tmpfs     2.0G     0  2.0G    0% /dev/shm
+tmpfs                   tmpfs     2.0G   12M  2.0G    1% /run
+tmpfs                   tmpfs     2.0G     0  2.0G    0% /sys/fs/cgroup
+/dev/mapper/centos-root xfs        19G   18G  1.5G   93% /
+/dev/sr0                iso9660   8.1G  8.1G     0  100% /var/ftp/iso
+/dev/sda1               xfs       509M  165M  344M   33% /boot
+tmpfs                   tmpfs     394M     0  394M    0% /run/user/0
+
+
+4、同步
+[root@localhost ~]# xfs_growfs /dev/centos/root
+meta-data=/dev/mapper/centos-root isize=512    agcount=4, agsize=1244928 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=0 spinodes=0
+data     =                       bsize=4096   blocks=4979712, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log      =internal               bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+data blocks changed from 4979712 to 10222592
+[root@localhost ~]# df -Th
+文件系统                类型      容量  已用  可用 已用% 挂载点
+devtmpfs                devtmpfs  2.0G     0  2.0G    0% /dev
+tmpfs                   tmpfs     2.0G     0  2.0G    0% /dev/shm
+tmpfs                   tmpfs     2.0G   12M  2.0G    1% /run
+tmpfs                   tmpfs     2.0G     0  2.0G    0% /sys/fs/cgroup
+/dev/mapper/centos-root xfs        39G   18G   22G   46% /
+/dev/sr0                iso9660   8.1G  8.1G     0  100% /var/ftp/iso
+/dev/sda1               xfs       509M  165M  344M   33% /boot
+tmpfs                   tmpfs     394M     0  394M    0% /run/user/0
+[root@localhost ~]# 
+</code></pre><p>扩容 ext2/ext3/ext4 文件系统</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">resize2fs /dev/vg0/lv0
+</span></span></code></pre></div><p>新建逻辑卷</p>
+<pre tabindex="0"><code>（1）创建一个指定大小的lv，并指定名字为lv_2
+
+lvcreate -L 2G -n lv_2 vg_1
+
+（2）创建一个占全部卷组大小的lv，并指定名字为lv_3（注意前提是vg并没有创建有lv）
+
+lvcreate -l 100%VG -n lv_3 vg_1
+
+（3）创建一个空闲空间80%大小的lv，并指定名字为lv_4(常用)
+
+lvcreate -l 80%Free -n lv_4 vg_1
+</code></pre></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-05-27</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/lvm/">lvm</a>,&nbsp;<a href="/tags/linux-lvm/">linux-lvm</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2024-05-14-dingbot/" class="prev" rel="prev" title="dingbot"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>dingbot</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

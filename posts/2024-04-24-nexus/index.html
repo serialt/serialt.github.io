@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-04-24-nexus\/"
-        },"genre": "posts","keywords": "nexus, repo","wordcount":  2918 ,
+        },"genre": "posts","keywords": "nexus, repo","wordcount":  3212 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-04-24-nexus\/","datePublished": "2024-04-24T19:26:27+08:00","dateModified": "2024-04-24T19:26:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,8 +101,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Nexus</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-24">2024-04-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2918 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-24">2024-04-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3212 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -118,6 +118,8 @@
         <li><a href="#2npm">2、npm</a></li>
         <li><a href="#3pypi">3、pypi</a></li>
         <li><a href="#4maven">4、maven</a></li>
+        <li><a href="#5apt">5、apt</a></li>
+        <li><a href="#6alpine">6、alpine</a></li>
       </ul>
     </li>
     <li><a href="#三数据接入prometheus">三、数据接入prometheus</a></li>
@@ -337,7 +339,7 @@
 </ul>
 <p>group仓库可以包含proxy和hosted类型的仓库，并对外提供统一的服务</p>
 <h3 id="1yum">1、yum</h3>
-<p>1）创建 proxy 类型的 repo</p>
+<p>1）创建 proxy 类型格式为 yum 的 repo</p>
 <p>2）创建group类型的 repo，在 member repository 中增加proxy 类型的repo</p>
 <p>3）yum 源配置 group的地址</p>
 <h3 id="2npm">2、npm</h3>
@@ -409,6 +411,28 @@
 </span></span><span class="line"><span class="cl">        <span class="nt">&lt;/mirror&gt;</span>
 </span></span><span class="line"><span class="cl">    <span class="nt">&lt;/mirrors&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="nt">&lt;/settings&gt;</span>
+</span></span></code></pre></div><h3 id="5apt">5、apt</h3>
+<p>以debian仓库作为示例</p>
+<p>1）创建 proxy 类型格式为 apt 的 repo，APT Settings &mdash;&gt; Distribution 配置为 <code>*</code> ，Proxy &mdash;&gt; Remote storage 配置为debian apt 源的地址</p>
+<p>2）配置 proxy 的地址</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 示例:	</span>
+</span></span><span class="line"><span class="cl">https://mirrors.ustc.edu.cn/debian/   
+</span></span><span class="line"><span class="cl">https://nexus.local.com/repositories/debian/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 修改命令</span>
+</span></span><span class="line"><span class="cl">sed -i <span class="s1">&#39;s+\w*.debian.org+nexus.local.com/repository+g&#39;</span> /etc/apt/sources.list
+</span></span></code></pre></div><h3 id="6alpine">6、alpine</h3>
+<p>目前 nexus 官方暂时不支持配置 alpine proxy，但有社区开发了插件支持 alpine apk 代理</p>
+<p>1）安装插件：到 <a href="https://central.sonatype.com/" target="_blank" rel="noopener noreffer ">https://central.sonatype.com/</a> 中搜索对应插件，并下载对应的 jar 包。下载后把 jar 包复制到nexus目录中的deploy目录里</p>
+<p><a href="https://sonatype-nexus-community.github.io/nexus-development-guides/plugin-install.html" target="_blank" rel="noopener noreffer ">https://sonatype-nexus-community.github.io/nexus-development-guides/plugin-install.html</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># for docker </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">wget https://repo1.maven.org/maven2/org/sonatype/nexus/plugins/nexus-repository-apk/0.0.26/nexus-repository-apk-0.0.26.jar 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker cp nexus-repository-apk-0.0.26.jar nexus3:/opt/sonatype/nexus/deploy
+</span></span></code></pre></div><p>2）创建 proxy 类型格式为 apk 的 repo，</p>
+<p>3）配置 apk 源</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sed -i <span class="s1">&#39;s+https://dl-cdn.alpinelinux.org+http://nexus.local.com/repository+g&#39;</span> /etc/apk/repositories
 </span></span></code></pre></div><h2 id="三数据接入prometheus">三、数据接入prometheus</h2>
 <p>grafana模板：</p>
 <p><code>155563</code> <code> https://grafana.com/grafana/dashboards/16459</code></p>
@@ -450,6 +474,11 @@
 </span></span><span class="line"><span class="cl">rsync --delete -avzP --bwlimit<span class="o">=</span><span class="m">3000</span> --chown<span class="o">=</span>200:200 /data/nexus/  root@172.16.80.234:/data/nexus
 </span></span></code></pre></div><p>备 nexus上的数据在启动服务的时候可能需要修改一下数据权限，具体操作需要观察一下nexus日志</p>
 <h2 id="六terraform">六、Terraform</h2>
+<p>目前 nexus 没有 api 提供去配置 cleanup policy，需要配置 nexus 运行运行 script ，使用groovy脚本进行添加</p>
+<p>开启nexus 允许运行script</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># nexus_dir/etc/nexus.properties</span>
+</span></span><span class="line"><span class="cl">nexus.scripts.allowCreation<span class="o">=</span><span class="nb">true</span>
+</span></span></code></pre></div><p>重启 nexus</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
