@@ -1,0 +1,24 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>contianerd - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/contianerd/</link>
+        <description>contianerd - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Thu, 13 Jun 2024 20:43:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/contianerd/" rel="self" type="application/rss+xml" /><item>
+    <title>contianerd</title>
+    <link>https://serialt.github.io/posts/2024-06-13-containerd/</link>
+    <pubDate>Thu, 13 Jun 2024 20:43:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-13-containerd/</guid>
+    <description><![CDATA[containerd 参考链接： https://www.aneasystone.com/archives/2023/06/containerd-notes.html https://juejin.cn/post/7312330825206693939 containerd 与 Docker 和 Kubernetes 的关系 仔细观察 containerd 架构图的上面部分，可以看出 containerd 通过提供 gRPC API 来供上层应用调用，上层应用可以直接集成 containerd client 来访问它的接口，]]></description>
+</item>
+<item>
+    <title>Podman</title>
+    <link>https://serialt.github.io/posts/2024-06-12-podman/</link>
+    <pubDate>Thu, 13 Jun 2024 20:40:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-12-podman/</guid>
+    <description><![CDATA[Podman 参考连接：http://www.yunweipai.com/40798.html ​ Podman 是一个开源的容器运行时项目，可在大多数 Linux 平台上使用。P]]></description>
+</item>
+</channel>
+</rss>

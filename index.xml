@@ -4,9 +4,41 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 02 Jun 2024 10:38:01 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Thu, 13 Jun 2024 21:00:42 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>To-mirror</title>
+    <link>https://serialt.github.io/posts/2024-06-13-mirror-cn/</link>
+    <pubDate>Thu, 13 Jun 2024 21:00:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-13-mirror-cn/</guid>
+    <description><![CDATA[操作系统或者软件换源加速 1、操作系统 rocky # 8 base sed -e &#39;s|^mirrorlist=|#mirrorlist=|g&#39; \ -e &#39;s|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.ustc.edu.cn/rocky|g&#39; \ -i.bak /etc/yum.repos.d/Rocky*.repo # 8 epel sed -e &#39;s|^metalink=|#metalink=|g&#39; \ -e &#39;s|^#baseurl=https\?://download.fedoraproject.org/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39; \ -e &#39;s|^#baseurl=https\?://download.example/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39; \ -i.bak /etc/yum.repos.d/epel*.repo # 9 base sed -e &#39;s|^mirrorlist=|#mirrorlist=|g&#39; \ -e &#39;s|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.ustc.edu.cn/rocky|g&#39; \ -i.bak /etc/yum.repos.d/rocky*.repo # 9 epel sed -e &#39;s|^metalink=|#metalink=|g&#39; \ -e &#39;s|^#baseurl=https\?://download.fedoraproject.org/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39; \ -e &#39;s|^#baseurl=https\?://download.example/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39;]]></description>
+</item>
+<item>
+    <title>contianerd</title>
+    <link>https://serialt.github.io/posts/2024-06-13-containerd/</link>
+    <pubDate>Thu, 13 Jun 2024 20:43:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-13-containerd/</guid>
+    <description><![CDATA[containerd 参考链接： https://www.aneasystone.com/archives/2023/06/containerd-notes.html https://juejin.cn/post/7312330825206693939 containerd 与 Docker 和 Kubernetes 的关系 仔细观察 containerd 架构图的上面部分，可以看出 containerd 通过提供 gRPC API 来供上层应用调用，上层应用可以直接集成 containerd client 来访问它的接口，]]></description>
+</item>
+<item>
+    <title>Podman</title>
+    <link>https://serialt.github.io/posts/2024-06-12-podman/</link>
+    <pubDate>Thu, 13 Jun 2024 20:40:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-12-podman/</guid>
+    <description><![CDATA[Podman 参考连接：http://www.yunweipai.com/40798.html ​ Podman 是一个开源的容器运行时项目，可在大多数 Linux 平台上使用。P]]></description>
+</item>
+<item>
+    <title>Docker 镜像构建优化</title>
+    <link>https://serialt.github.io/posts/2024-06-12-docker-image/</link>
+    <pubDate>Thu, 13 Jun 2024 20:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-12-docker-image/</guid>
+    <description><![CDATA[Docker 镜像体积优化 参考链接： https://icloudnative.io/posts/docker-images-part1-reducing-image-size/ 1、选择合适的基础镜像 常用的镜像有alpine，debian-slim 他们的体积都比 标准debian、ubuntu]]></description>
+</item>
+<item>
     <title>Go time</title>
     <link>https://serialt.github.io/posts/2024-06-02-go-time/</link>
     <pubDate>Sun, 02 Jun 2024 10:38:01 &#43;0800</pubDate>
@@ -53,38 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-06-02-go-os-exec/</guid>
     <description><![CDATA[os/exec 系统内执行命令 1、查找命令所在的路径 func findCommandPath(str string) (string, error) { path, err := exec.LookPath(str) if err != nil { return &#34;&#34;, err } return path, nil } 2、CombinedOutput组合输出，标准正确错误输]]></description>
-</item>
-<item>
-    <title>Go gorm</title>
-    <link>https://serialt.github.io/posts/2024-06-02-go-gorm/</link>
-    <pubDate>Sun, 02 Jun 2024 10:29:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-02-go-gorm/</guid>
-    <description><![CDATA[Gorm 官网：https://gorm.io/ 特性： 全功能 ORM 关联 (Has One，Has Many，Belongs To，Many To Many，多态，单表继承)]]></description>
-</item>
-<item>
-    <title>Go goph</title>
-    <link>https://serialt.github.io/posts/2024-06-02-go-goph/</link>
-    <pubDate>Sun, 02 Jun 2024 10:27:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-02-go-goph/</guid>
-    <description><![CDATA[Go Goph 模块 github地址：https://github.com/melbahja/goph go开发封装的 ssh client 模块 Features Easy to use and simple API. Supports known hosts by default. Supports connections]]></description>
-</item>
-<item>
-    <title>Go flag</title>
-    <link>https://serialt.github.io/posts/2024-06-02-go-flag/</link>
-    <pubDate>Sun, 02 Jun 2024 10:26:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-02-go-flag/</guid>
-    <description><![CDATA[Go flag模块 参考链接：https://www.liwenzhou.com/posts/Go/go_flag/ Go语言内置的flag包实现了]]></description>
-</item>
-<item>
-    <title>Go boltdb</title>
-    <link>https://serialt.github.io/posts/2024-06-02-go-boltdb/</link>
-    <pubDate>Sun, 02 Jun 2024 10:25:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-02-go-boltdb/</guid>
-    <description><![CDATA[GO 文件数据库boltdb github地址: https://github.com/etcd-io/bbolt https://github.com/boltdb/bolt 由于作者个人能力有限，宣布不再维护，建议使用社区维护的bbolt 参考：https://zhua]]></description>
 </item>
 </channel>
 </rss>

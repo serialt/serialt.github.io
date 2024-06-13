@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Podman - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Podman" />
+<meta property="og:description" content="Podman 参考连接：http://www.yunweipai.com/40798.html ​ Podman 是一个开源的容器运行时项目，可在大多数 Linux 平台上使用。P" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2024-06-12-podman/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-06-13T20:40:01+08:00" />
+<meta property="article:modified_time" content="2024-06-13T20:40:01+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Podman"/>
+<meta name="twitter:description" content="Podman 参考连接：http://www.yunweipai.com/40798.html ​ Podman 是一个开源的容器运行时项目，可在大多数 Linux 平台上使用。P"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2024-06-12-podman/" /><link rel="prev" href="https://serialt.github.io/posts/2024-06-12-docker-image/" /><link rel="next" href="https://serialt.github.io/posts/2024-06-13-containerd/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Podman",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2024-06-12-podman\/"
+        },"genre": "posts","keywords": "podman, contianerd","wordcount":  1788 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2024-06-12-podman\/","datePublished": "2024-06-13T20:40:01+08:00","dateModified": "2024-06-13T20:40:01+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Podman</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/podman/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Podman</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-13">2024-06-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1788 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#podman">Podman</a>
+      <ul>
+        <li><a href="#使用">使用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="podman">Podman</h2>
+<p>参考连接：http://www.yunweipai.com/40798.html</p>
+<p>​		<code>Podman</code> 是一个开源的容器运行时项目，可在大多数 <code>Linux</code> 平台上使用。<code>Podman</code> 提供与 <code>Docker</code> 非常相似的功能。正如前面提到的那样，它不需要在你的系统上运行<code>任何守护进程</code>，并且它也可以在没有 <code>root</code> 权限的情况下运行。</p>
+<p>​		<code>Podman</code> 可以管理和运行任何符合 <code>OCI（Open Container Initiative）</code>规范的容器和容器镜像。<code>Podman</code> 提供了一个与 <code>Docker</code> 兼容的命令行前端来管理 <code>Docker</code> 镜像</p>
+<p><strong>podman是什么</strong></p>
+<p>​		podman系列主要包含三个命令podman、buildah、skopeo，其中podman本身负责运行、停止、管理容器，buildah负责构建容器镜像、skopeo负责与remote  repo交互，拉取或推送镜像。但我们使用时不必这么麻烦，redhat为了方便用户从docker迁移到podman，在podman上几乎实现了大多数docker的常用命令，podman会替你转调buildah和skopeo，你甚至可以直接 alias docker=podman，然后像使用docker一样使用podman。</p>
+<p><strong>Podman</strong></p>
+<p>​		Podman可以替换Docker中了大多数子命令（RUN，PUSH，PULL等）。Podman不需要守护进程，而是使用用户命名空间来模拟容器中的root，无需连接到具有root权限的套接字保证容器的体系安全。Podman专注于维护和修改OCI镜像的所有命令和功能，例如拉动和标记。它还允许我们创建，运行和维护从这些图像创建的容器。</p>
+<p><strong>Buildah</strong></p>
+<p>​		Buildah用来构建OCI图像。虽然Podman也可以用户构建Docker镜像，但是构建速度超慢，并且默认情况下使用vfs存储驱动程序会耗尽大量磁盘空间。 buildah bud（使用Dockerfile构建）则会非常快，并使用覆盖存储驱动程序。Buildah专注于构建OCI镜像。  Buildah的命令复制了Dockerfile中的所有命令。可以使用Dockerfiles构建镜像，并且不需要任何root权限。  Buildah的最终目标是提供更低级别的coreutils界面来构建图像。Buildah也支持非Dockerfiles构建镜像，可以允许将其他脚本语言集成到构建过程中。 Buildah遵循一个简单的fork-exec模型，不以守护进程运行，但它基于golang中的综合API，可以存储到其他工具中。</p>
+<p><strong>Skopeo</strong></p>
+<p>​		Skopeo是一个工具，允许我们通过推、拉和复制镜像来处理Docker和OC镜像。</p>
+<h3 id="使用">使用</h3>
+<p>1）安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># yum -y install podman</span>
+</span></span></code></pre></div><p>2、配置镜像加速</p>
+<p>podman的配置文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 配置镜像像仓库</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># vim /etc/containers/registries.conf</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 取消从默认地址搜索的仓库域名</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#unqualified-search-registries = [&#34;registry.fedoraproject.org&#34;, &#34;registry.access.redhat.com&#34;, &#34;docker.io&#34;, &#34;quay.io&#34;]</span>
+</span></span><span class="line"><span class="cl">unqualified-search-registries <span class="o">=</span> <span class="o">[</span><span class="s2">&#34;docker.io&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 自定义搜索器</span>
+</span></span><span class="line"><span class="cl"><span class="o">[[</span>registry<span class="o">]]</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 仓库前缀</span>
+</span></span><span class="line"><span class="cl"><span class="nv">prefix</span> <span class="o">=</span> <span class="s2">&#34;docker.io&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 加速器地址</span>
+</span></span><span class="line"><span class="cl"><span class="nv">location</span> <span class="o">=</span> <span class="s2">&#34;hub.local.com&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 镜像别名</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost containers<span class="o">]</span><span class="c1"># ls registries.conf.d/</span>
+</span></span><span class="line"><span class="cl">000-shortnames.conf  001-rhel-shortnames.conf  002-rhel-shortnames-overrides.conf
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 配置镜像仓库和运行时目录</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost containers<span class="o">]</span><span class="c1"># vim storage.conf </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>storage<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Default Storage Driver, Must be set for proper operation.</span>
+</span></span><span class="line"><span class="cl"><span class="nv">driver</span> <span class="o">=</span> <span class="s2">&#34;overlay&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># root 用户运行时目录</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Temporary storage location</span>
+</span></span><span class="line"><span class="cl"><span class="nv">runroot</span> <span class="o">=</span> <span class="s2">&#34;/run/containers/storage&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Primary Read/Write location of container storage</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># When changing the graphroot location on an SELINUX system, you must</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ensure  the labeling matches the default locations labels with the</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># following commands:</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># semanage fcontext -a -e /var/lib/containers/storage /NEWSTORAGEPATH</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># restorecon -R -v /NEWSTORAGEPATH</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># root 用户镜像仓库目录</span>
+</span></span><span class="line"><span class="cl"><span class="nv">graphroot</span> <span class="o">=</span> <span class="s2">&#34;/var/lib/containers/storage&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Storage path for rootless users</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># rootless_storage_path = &#34;$HOME/.local/share/containers/storage&#34;</span>
+</span></span></code></pre></div><p>3、podman常用命令</p>
+<p>容器</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">podman run         <span class="c1">#创建并启动容器  </span>
+</span></span><span class="line"><span class="cl">podman start       <span class="c1">#启动容器  </span>
+</span></span><span class="line"><span class="cl">podman ps          <span class="c1">#查看容器  </span>
+</span></span><span class="line"><span class="cl">podman stop        <span class="c1">#终止容器  </span>
+</span></span><span class="line"><span class="cl">podman restart     <span class="c1">#重启容器  </span>
+</span></span><span class="line"><span class="cl">podman attach      <span class="c1">#进入容器  </span>
+</span></span><span class="line"><span class="cl">podman <span class="nb">exec</span>        <span class="c1">#进入容器  </span>
+</span></span><span class="line"><span class="cl">podman <span class="nb">export</span>      <span class="c1">#导出容器  </span>
+</span></span><span class="line"><span class="cl">podman import      <span class="c1">#导入容器快照  </span>
+</span></span><span class="line"><span class="cl">podman rm          <span class="c1">#删除容器  </span>
+</span></span><span class="line"><span class="cl">podman logs        <span class="c1">#查看日志  </span>
+</span></span></code></pre></div><p>镜像</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">podman search             <span class="c1">#检索镜像  </span>
+</span></span><span class="line"><span class="cl">docke pull                <span class="c1">#获取镜像  </span>
+</span></span><span class="line"><span class="cl">podman images             <span class="c1">#列出镜像  </span>
+</span></span><span class="line"><span class="cl">podman image Is           <span class="c1">#列出镜像  </span>
+</span></span><span class="line"><span class="cl">podman rmi                <span class="c1">#删除镜像  </span>
+</span></span><span class="line"><span class="cl">podman image rm           <span class="c1">#删除镜像  </span>
+</span></span><span class="line"><span class="cl">podman save               <span class="c1">#导出镜像  </span>
+</span></span><span class="line"><span class="cl">podman load               <span class="c1">#导入镜像  </span>
+</span></span><span class="line"><span class="cl">podmanfile                <span class="c1">#定制镜像（三个）  </span>
+</span></span><span class="line"><span class="cl">    podman build              <span class="c1">#构建镜像  </span>
+</span></span><span class="line"><span class="cl">    podman run              <span class="c1">#运行镜像  </span>
+</span></span><span class="line"><span class="cl">    podmanfile              <span class="c1">#常用指令（四个）  </span>
+</span></span><span class="line"><span class="cl">        COPY                    <span class="c1">#复制文件  </span>
+</span></span><span class="line"><span class="cl">        ADD                     <span class="c1">#高级复制  </span>
+</span></span><span class="line"><span class="cl">        CMD                     <span class="c1">#容器启动命令  </span>
+</span></span><span class="line"><span class="cl">        ENV                     <span class="c1">#环境变量  </span>
+</span></span><span class="line"><span class="cl">        EXPOSE                  <span class="c1">#暴露端口  </span>
+</span></span></code></pre></div><p>4、使用podman</p>
+<p>使用 Podman 非常的简单，Podman 的指令跟 Docker 大多数都是相同的。下面我们来看几个常用的例子：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># podman run -d --name httpd docker.io/library/httpd  </span>
+</span></span><span class="line"><span class="cl">Trying to pull docker.io/library/httpd...  
+</span></span><span class="line"><span class="cl">Getting image <span class="nb">source</span> signatures  
+</span></span><span class="line"><span class="cl">Copying blob e5ae68f74026 <span class="k">done</span>    
+</span></span><span class="line"><span class="cl">Copying blob d3576f2b6317 <span class="k">done</span>    
+</span></span><span class="line"><span class="cl">Copying blob bc36ee1127ec <span class="k">done</span>    
+</span></span><span class="line"><span class="cl">Copying blob f1aa5f54b226 <span class="k">done</span>    
+</span></span><span class="line"><span class="cl">Copying blob aa379c0cedc2 <span class="k">done</span>    
+</span></span><span class="line"><span class="cl">Copying config ea28e1b82f <span class="k">done</span>    
+</span></span><span class="line"><span class="cl">Writing manifest to image destination  
+</span></span><span class="line"><span class="cl">Storing signatures  
+</span></span><span class="line"><span class="cl">0492e405b9ecb05e6e6be1fec0ac1a8b6ba3ff949df259b45146037b5f355035  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">//查看镜像  
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># podman images  </span>
+</span></span><span class="line"><span class="cl">REPOSITORY                  TAG      IMAGE ID       CREATED       SIZE  
+</span></span><span class="line"><span class="cl">docker.io/library/httpd     latest   ea28e1b82f31   <span class="m">11</span> days ago   <span class="m">148</span> MB  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># podman ps  </span>
+</span></span><span class="line"><span class="cl">CONTAINER ID  IMAGE                             COMMAND           CREATED             STATUS                 PORTS  NAMES  
+</span></span><span class="line"><span class="cl">0492e405b9ec  docker.io/library/httpd:latest    httpd-foreground  About a minute ago  Up About a minute ago         httpd  
+</span></span></code></pre></div><p>查看容器里的进程</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># podman top httpd  </span>
+</span></span><span class="line"><span class="cl">USER       PID   PPID   %CPU    ELAPSED            TTY   TIME   COMMAND  
+</span></span><span class="line"><span class="cl">root       <span class="m">1</span>     <span class="m">0</span>      0.000   15m38.599711321s   ?     0s     httpd -DFOREGROUND   
+</span></span><span class="line"><span class="cl">www-data   <span class="m">7</span>     <span class="m">1</span>      0.000   15m38.599783256s   ?     0s     httpd -DFOREGROUND   
+</span></span><span class="line"><span class="cl">www-data   <span class="m">8</span>     <span class="m">1</span>      0.000   15m38.599845342s   ?     0s     httpd -DFOREGROUND   
+</span></span><span class="line"><span class="cl">www-data   <span class="m">9</span>     <span class="m">1</span>      0.000   15m38.599880444s   ?     0s     httpd -DFOREGROUND  
+</span></span></code></pre></div><p>停止容器，删除</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># podman stop --latest  </span>
+</span></span><span class="line"><span class="cl">2f3edf712621d3a41e03fa8c7f6a5cdba56fbbad43a7a59ede26cc88f31006c4  
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># podman ps  </span>
+</span></span><span class="line"><span class="cl">CONTAINER ID  IMAGE  COMMAND  CREATED  STATUS  PORTS  NAMES  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># podman rm --latest  </span>
+</span></span><span class="line"><span class="cl">2f3edf712621d3a41e03fa8c7f6a5cdba56fbbad43a7a59ede26cc88f31006c4  
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># podman ps -a  </span>
+</span></span><span class="line"><span class="cl">CONTAINER ID  IMAGE  COMMAND  CREATED  STATUS  PORTS  NAMES  
+</span></span></code></pre></div><p>创建systemd服务</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># podman generate systemd nginx &gt; /etc/systemd/system/nginx-docker.service</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># cat /etc/systemd/system/nginx-docker.service</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># container-26ce342439d6ca634e209711b12fd0653537912bdd0351800a293a7900967237.service</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># autogenerated by Podman 4.0.2</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Fri Apr 22 15:44:38 CST 2022</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Unit<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Description</span><span class="o">=</span>Podman container-26ce342439d6ca634e209711b12fd0653537912bdd0351800a293a7900967237.service
+</span></span><span class="line"><span class="cl"><span class="nv">Documentation</span><span class="o">=</span>man:podman-generate-systemd<span class="o">(</span>1<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Wants</span><span class="o">=</span>network-online.target
+</span></span><span class="line"><span class="cl"><span class="nv">After</span><span class="o">=</span>network-online.target
+</span></span><span class="line"><span class="cl"><span class="nv">RequiresMountsFor</span><span class="o">=</span>/run/containers/storage
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Service<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Environment</span><span class="o">=</span><span class="nv">PODMAN_SYSTEMD_UNIT</span><span class="o">=</span>%n
+</span></span><span class="line"><span class="cl"><span class="nv">Restart</span><span class="o">=</span>on-failure
+</span></span><span class="line"><span class="cl"><span class="nv">TimeoutStopSec</span><span class="o">=</span><span class="m">70</span>
+</span></span><span class="line"><span class="cl"><span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/podman start 26ce342439d6ca634e209711b12fd0653537912bdd0351800a293a7900967237
+</span></span><span class="line"><span class="cl"><span class="nv">ExecStop</span><span class="o">=</span>/usr/bin/podman stop -t <span class="m">10</span> 26ce342439d6ca634e209711b12fd0653537912bdd0351800a293a7900967237
+</span></span><span class="line"><span class="cl"><span class="nv">ExecStopPost</span><span class="o">=</span>/usr/bin/podman stop -t <span class="m">10</span> 26ce342439d6ca634e209711b12fd0653537912bdd0351800a293a7900967237
+</span></span><span class="line"><span class="cl"><span class="nv">PIDFile</span><span class="o">=</span>/run/containers/storage/overlay-containers/26ce342439d6ca634e209711b12fd0653537912bdd0351800a293a7900967237/userdata/conmon.pid
+</span></span><span class="line"><span class="cl"><span class="nv">Type</span><span class="o">=</span>forking
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Install<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">WantedBy</span><span class="o">=</span>default.target
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl daemon-reload</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost ~<span class="o">]</span><span class="c1"># systemctl enable nginx-docker</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-06-13</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/podman/">podman</a>,&nbsp;<a href="/tags/contianerd/">contianerd</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2024-06-12-docker-image/" class="prev" rel="prev" title="Docker 镜像构建优化"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Docker 镜像构建优化</a>
+            <a href="/posts/2024-06-13-containerd/" class="next" rel="next" title="contianerd">contianerd<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

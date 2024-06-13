@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Docker - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/docker/</link>
+        <description>Docker - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Thu, 13 Jun 2024 20:38:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/docker/" rel="self" type="application/rss+xml" /><item>
+    <title>Docker 镜像构建优化</title>
+    <link>https://serialt.github.io/posts/2024-06-12-docker-image/</link>
+    <pubDate>Thu, 13 Jun 2024 20:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-12-docker-image/</guid>
+    <description><![CDATA[Docker 镜像体积优化 参考链接： https://icloudnative.io/posts/docker-images-part1-reducing-image-size/ 1、选择合适的基础镜像 常用的镜像有alpine，debian-slim 他们的体积都比 标准debian、ubuntu]]></description>
+</item>
+</channel>
+</rss>
