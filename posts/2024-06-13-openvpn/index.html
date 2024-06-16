@@ -5,18 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title> - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="ccd ip 使用 openvpn配置客户端静态IP 1）在配置文件中添加一个目录 cd /etc/openvpn # server.conf client-config-dir ccd 2）创建目录 mkdir -p /etc/openvpn/ccd 3）创建文件配置客户端IP 这里需要注意，创" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://serialt.github.io/posts/2023-11-11-npm/" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://serialt.github.io/posts/2024-06-13-openvpn/" /><meta property="article:section" content="posts" />
 
 <meta property="og:site_name" content="Log" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content=""/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="ccd ip 使用 openvpn配置客户端静态IP 1）在配置文件中添加一个目录 cd /etc/openvpn # server.conf client-config-dir ccd 2）创建目录 mkdir -p /etc/openvpn/ccd 3）创建文件配置客户端IP 这里需要注意，创"/>
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-11-npm/" /><link rel="prev" href="https://serialt.github.io/posts/2024-06-13-openvpn/" /><link rel="next" href="https://serialt.github.io/posts/2023-11-11-mysql-basic/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2024-06-13-openvpn/" /><link rel="prev" href="https://serialt.github.io/posts/2024-06-14-taskfile/" /><link rel="next" href="https://serialt.github.io/posts/2023-11-11-npm/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -26,9 +26,9 @@
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/serialt.github.io\/posts\/2023-11-11-npm\/"
-        },"genre": "posts","wordcount":  0 ,
-        "url": "https:\/\/serialt.github.io\/posts\/2023-11-11-npm\/","publisher": {
+            "@id": "https:\/\/serialt.github.io\/posts\/2024-06-13-openvpn\/"
+        },"genre": "posts","wordcount":  537 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2024-06-13-openvpn\/","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -101,15 +101,69 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;0 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;0 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;537 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"></div><div class="post-footer" id="post-footer">
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#ccd-ip-使用">ccd ip 使用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="ccd-ip-使用">ccd ip 使用</h3>
+<p>openvpn配置客户端静态IP</p>
+<h4 id="1在配置文件中添加一个目录">1）在配置文件中添加一个目录</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">cd</span> /etc/openvpn
+</span></span><span class="line"><span class="cl"><span class="c1"># server.conf</span>
+</span></span><span class="line"><span class="cl">client-config-dir ccd
+</span></span></code></pre></div><h4 id="2创建目录">2）创建目录</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir -p /etc/openvpn/ccd
+</span></span></code></pre></div><h4 id="3创建文件配置客户端ip">3）创建文件配置客户端IP</h4>
+<p>这里需要注意，创建的这个文件就是用你的用户名，比如这里我的用户名是liao，那么创建的文件也是liao</p>
+<pre tabindex="0"><code>touch /etc/openvpn/ccd/liao
+</code></pre><p>内容写入，ifconfig-push中的每一对IP地址表示虚拟客户端和服务器的IP端点</p>
+<pre tabindex="0"><code>echo “ifconfig-push 10.8.0.5 10.8.0.6” &gt; /etc/openvpn/ccd/liao
+</code></pre><p>注意：这里分配的IP规则如下</p>
+<pre tabindex="0"><code># ifconfig-push中的每一对IP地址表示虚拟客户端和服务器的IP端点
+# 它们必须从连续的/30子网网段中获取(这里是/30表示xxx.xxx.xxx.xxx/30，即子网掩码位数为30)
+# 以便于与Windows客户端和TAP-Windows驱动兼容。明确地说，每个端点的IP地址对的最后8位字节必须取自下面的集合：
+
+[  1,  2]   [  5,  6]   [  9, 10]   [ 13, 14]   [ 17, 18]
+
+[ 21, 22]   [ 25, 26]   [ 29, 30]   [ 33, 34]   [ 37, 38]
+
+[ 41, 42]   [ 45, 46]   [ 49, 50]   [ 53, 54]   [ 57, 58]
+
+[ 61, 62]   [ 65, 66]   [ 69, 70]   [ 73, 74]   [ 77, 78]
+
+[ 81, 82]   [ 85, 86]   [ 89, 90]   [ 93, 94]   [ 97, 98]
+
+[101,102]   [105,106]   [109,110]   [113,114]   [117,118]
+
+[121,122]   [125,126]   [129,130]   [133,134]   [137,138]
+
+[141,142]   [145,146]   [149,150]   [153,154]   [157,158]
+
+[161,162]   [165,166]   [169,170]   [173,174]   [177,178]
+
+[181,182]   [185,186]   [189,190]   [193,194]   [197,198]
+
+[201,202]   [205,206]   [209,210]   [213,214]   [217,218]
+
+[221,222]   [225,226]   [229,230]   [233,234]   [237,238]
+
+[241,242]   [245,246]   [249,250]   [253,254]
+</code></pre><h4 id="4重启生效">4）重启生效</h4>
+<pre tabindex="0"><code>systemctl restart openvpn@server
+</code></pre><p>总结：这里需要注意的是分配静态IP的时候需要参考文章中的注意点，按对应分配否则会出现兼容问题或者连接不上情况</p>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -130,8 +184,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/2024-06-13-openvpn/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
-            <a href="/posts/2023-11-11-mysql-basic/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/posts/2024-06-14-taskfile/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/2023-11-11-npm/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

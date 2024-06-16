@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/posts/</link>
         <description>All Posts | Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Thu, 13 Jun 2024 21:00:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 16 Jun 2024 19:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Nexus</title>
+    <link>https://serialt.github.io/posts/2024-06-16-nexus/</link>
+    <pubDate>Sun, 16 Jun 2024 19:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-16-nexus/</guid>
+    <description><![CDATA[Nexus 参考： https://juejin.cn/post/6844904016762109959 https://cloud.tencent.com/developer/article/1764866 官网：https://help.sonatype.com/repomanager3/ 介绍 生产环境中，一般不会允许所有服务器都能访]]></description>
+</item>
+<item>
     <title>To-mirror</title>
     <link>https://serialt.github.io/posts/2024-06-13-mirror-cn/</link>
     <pubDate>Thu, 13 Jun 2024 21:00:42 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-06-02-go-pinyin/</guid>
     <description><![CDATA[Go 汉字转拼音库 汉语拼音转换工具 Go 版。 1、安装 go get -u github.com/mozillazg/go-pinyin 安装cli工具 go get -u github.com/mozillazg/go-pinyin/cmd/pinyin $ pinyin 中国人 zhōng guó rén 2、简单使用 package main import ( &#34;fmt&#34; &#34;github.com/mozillazg/go-pinyin&#34; ) func main() { hans]]></description>
-</item>
-<item>
-    <title>Go exec</title>
-    <link>https://serialt.github.io/posts/2024-06-02-go-os-exec/</link>
-    <pubDate>Sun, 02 Jun 2024 10:30:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-02-go-os-exec/</guid>
-    <description><![CDATA[os/exec 系统内执行命令 1、查找命令所在的路径 func findCommandPath(str string) (string, error) { path, err := exec.LookPath(str) if err != nil { return &#34;&#34;, err } return path, nil } 2、CombinedOutput组合输出，标准正确错误输]]></description>
 </item>
 </channel>
 </rss>
