@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2023-11-24-shell-handbook\/"
-        },"genre": "posts","keywords": "shell, shell-handbook","wordcount":  2495 ,
+        },"genre": "posts","keywords": "shell, shell-handbook","wordcount":  2528 ,
         "url": "https:\/\/serialt.github.io\/posts\/2023-11-24-shell-handbook\/","datePublished": "2023-11-24T20:22:27+08:00","dateModified": "2023-11-24T20:22:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,8 +101,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Shell handbook</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-24">2023-11-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2495 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-24">2023-11-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2528 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -410,6 +410,8 @@ c \string 	替换指定行的内容
    # sed &#39;$c \End Of File&#39; /1.txt 
    
    # sed &#39;7c \SELINUX=disabled&#39; /etc/sysconfig/selinux 
+   # 当有hello的行，将被替换成hello=world
+   # sed -r &#34;/hello/c \hello=world&#34;  exmaple.txt
 </code></pre><h3 id="awk">awk</h3>
 <pre tabindex="0"><code># awk -F: &#39;/^r/{print $1}&#39; /etc/passwd
 </code></pre></div><div class="post-footer" id="post-footer">
