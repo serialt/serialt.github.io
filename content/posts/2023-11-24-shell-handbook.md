@@ -356,6 +356,8 @@ c \string 	替换指定行的内容
    # sed '$c \End Of File' /1.txt 
    
    # sed '7c \SELINUX=disabled' /etc/sysconfig/selinux 
+   # 当有hello的行，将被替换成hello=world
+   # sed -r "/hello/c \hello=world"  exmaple.txt
 ```
 
 ### awk
