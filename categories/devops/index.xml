@@ -4,7 +4,31 @@
         <link>https://serialt.github.io/categories/devops/</link>
         <description>DevOps - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 16 Jun 2024 19:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 30 Jun 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+    <title>TF-dev</title>
+    <link>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</link>
+    <pubDate>Sun, 30 Jun 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</guid>
+    <description><![CDATA[Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # makefile default: install build: go build -v ./... install: go install -v ./... vscode 调试 terraform provider 1）vscode launch cat .vscode/launch.json {]]></description>
+</item>
+<item>
+    <title>winsw</title>
+    <link>https://serialt.github.io/posts/2024-06-27.winsw/</link>
+    <pubDate>Sun, 30 Jun 2024 15:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-27.winsw/</guid>
+    <description><![CDATA[WinSW 服务管理 ​ ​ 有时候需要将bat、exe等文件作为Windows的服务，可以使用bat、nssm等工具将此类文件设置为Windows服务，但]]></description>
+</item>
+<item>
+    <title>Java</title>
+    <link>https://serialt.github.io/posts/2024-06-27-java/</link>
+    <pubDate>Sun, 30 Jun 2024 15:20:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-27-java/</guid>
+    <description><![CDATA[Java 1、Hello world java 的包名需要和目录一致，类名需要与文件名一致 [sugar@Sugar java]🐳 tree . . └── Hello └── HelloWorld.java 1 directory, 1 file HelloWorld.java package Hello; public class HelloWorld { public static void main(String[] args) { System.out.println(&#34;hello,world&#34;); } } [sugar@Sugar]]></description>
+</item>
+<item>
     <title>Nexus</title>
     <link>https://serialt.github.io/posts/2024-06-16-nexus/</link>
     <pubDate>Sun, 16 Jun 2024 19:26:27 &#43;0800</pubDate>
@@ -59,30 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-03-15-packer/</guid>
     <description><![CDATA[Packer 参考链接： https://developer.hashicorp.com/packer/docs?product_intent=packer https://blog.k8s.li/packer-vsphere-example.html https://cloud.tencent.com/developer/article/1474736 https://blog.csdn.net/weixin_45941099/article/details/123838526 https://github.com/serialt/packer-demo https://lonegunmanb.github.io/packer-handbook/ 介绍： Packer是用一个配置文件，在多种云计算平台上创建完全一致镜像的开源工具。Packer是由HashiCorp]]></description>
-</item>
-<item>
-    <title>TF Harbor</title>
-    <link>https://serialt.github.io/posts/2024-03-09-tf-harbor/</link>
-    <pubDate>Sat, 09 Mar 2024 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-03-09-tf-harbor/</guid>
-    <description><![CDATA[Terraform Harbor 管理 provider.tf terraform { required_providers { harbor = { source = &#34;goharbor/harbor&#34; version = &#34;3.10.9&#34; } } } # set env # HARBOR_USERNAME # HARBOR_PASSWORD provider &#34;harbor&#34; { url = var.harbor.url insecure = var.harbor.insecure } user.tf resource &#34;harbor_user&#34; &#34;upload&#34; { admin = true comment = &#34;用于镜像上传和下载使用&#34; email]]></description>
-</item>
-<item>
-    <title>tf-code</title>
-    <link>https://serialt.github.io/posts/2024-02-25-tf-code/</link>
-    <pubDate>Sun, 25 Feb 2024 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-02-25-tf-code/</guid>
-    <description><![CDATA[Terraform 代码片段 1、变量控制代码是否启用 module &#34;istio&#34; { count = var.istio.enabled ? 1 : 0 source = &#34;xxxxxx&#34; } 2、state文件中获取数据 state文件中需要有output，才能使用 data &#34;terraform_remote_state&#34; &#34;global&#34;]]></description>
-</item>
-<item>
-    <title>ktconnect</title>
-    <link>https://serialt.github.io/posts/2024-01-29-ktconnect/</link>
-    <pubDate>Mon, 29 Jan 2024 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-01-29-ktconnect/</guid>
-    <description><![CDATA[KtConnect 官方文档：https://alibaba.github.io/kt-connect/#/zh-cn/guide/quickstart 简单示]]></description>
 </item>
 </channel>
 </rss>

@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>terraform-dev - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/terraform-dev/</link>
+        <description>terraform-dev - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 30 Jun 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/terraform-dev/" rel="self" type="application/rss+xml" /><item>
+    <title>TF-dev</title>
+    <link>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</link>
+    <pubDate>Sun, 30 Jun 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</guid>
+    <description><![CDATA[Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # makefile default: install build: go build -v ./... install: go install -v ./... vscode 调试 terraform provider 1）vscode launch cat .vscode/launch.json {]]></description>
+</item>
+</channel>
+</rss>

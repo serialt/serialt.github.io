@@ -4,9 +4,33 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 26 Jun 2024 22:29:10 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 30 Jun 2024 20:26:27 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>TF-dev</title>
+    <link>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</link>
+    <pubDate>Sun, 30 Jun 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</guid>
+    <description><![CDATA[Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # makefile default: install build: go build -v ./... install: go install -v ./... vscode 调试 terraform provider 1）vscode launch cat .vscode/launch.json {]]></description>
+</item>
+<item>
+    <title>winsw</title>
+    <link>https://serialt.github.io/posts/2024-06-27.winsw/</link>
+    <pubDate>Sun, 30 Jun 2024 15:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-27.winsw/</guid>
+    <description><![CDATA[WinSW 服务管理 ​ ​ 有时候需要将bat、exe等文件作为Windows的服务，可以使用bat、nssm等工具将此类文件设置为Windows服务，但]]></description>
+</item>
+<item>
+    <title>Java</title>
+    <link>https://serialt.github.io/posts/2024-06-27-java/</link>
+    <pubDate>Sun, 30 Jun 2024 15:20:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-27-java/</guid>
+    <description><![CDATA[Java 1、Hello world java 的包名需要和目录一致，类名需要与文件名一致 [sugar@Sugar java]🐳 tree . . └── Hello └── HelloWorld.java 1 directory, 1 file HelloWorld.java package Hello; public class HelloWorld { public static void main(String[] args) { System.out.println(&#34;hello,world&#34;); } } [sugar@Sugar]]></description>
+</item>
+<item>
     <title>caddy</title>
     <link>https://serialt.github.io/posts/2024-06-26-caddy/</link>
     <pubDate>Wed, 26 Jun 2024 22:29:10 &#43;0800</pubDate>
@@ -61,30 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-06-02-go-time/</guid>
     <description><![CDATA[Go time包 参考链接：https://www.liwenzhou.com/posts/Go/go_time/ 时间和日期是我们编程中经常会用到]]></description>
-</item>
-<item>
-    <title>Go storm</title>
-    <link>https://serialt.github.io/posts/2024-06-02-go-storm/</link>
-    <pubDate>Sun, 02 Jun 2024 10:36:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-02-go-storm/</guid>
-    <description><![CDATA[Go Storm storm是一个使用BoltDB的上层orm框架 https://juejin.cn/post/7031361355856740389 数据查看工具: https://github.com/br0xen/boltbrowser 驱动: https://github.com/asdine/storm 下载boltbrowser go install github.com/br0xen/boltbrowser@latest 使用lib go get github.com/asdine/storm 一、基本使用 初]]></description>
-</item>
-<item>
-    <title>Go slog</title>
-    <link>https://serialt.github.io/posts/2024-06-02-go-slog/</link>
-    <pubDate>Sun, 02 Jun 2024 10:33:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-02-go-slog/</guid>
-    <description><![CDATA[slog 结构化日志 参考链接：https://betterstack.com/community/guides/logging/logging-in]]></description>
-</item>
-<item>
-    <title>Go shamir</title>
-    <link>https://serialt.github.io/posts/2024-06-02-go-shamir/</link>
-    <pubDate>Sun, 02 Jun 2024 10:32:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-02-go-shamir/</guid>
-    <description><![CDATA[Shamir密钥分享算法 参考：https://www.cxyzjd.com/article/shangsongwww/90266455 秘密共]]></description>
 </item>
 </channel>
 </rss>

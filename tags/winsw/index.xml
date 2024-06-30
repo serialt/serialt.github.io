@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>winsw - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/winsw/</link>
+        <description>winsw - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 30 Jun 2024 15:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/winsw/" rel="self" type="application/rss+xml" /><item>
+    <title>winsw</title>
+    <link>https://serialt.github.io/posts/2024-06-27.winsw/</link>
+    <pubDate>Sun, 30 Jun 2024 15:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-27.winsw/</guid>
+    <description><![CDATA[WinSW 服务管理 ​ ​ 有时候需要将bat、exe等文件作为Windows的服务，可以使用bat、nssm等工具将此类文件设置为Windows服务，但]]></description>
+</item>
+</channel>
+</rss>

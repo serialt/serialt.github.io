@@ -4,7 +4,39 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 26 Jun 2024 22:29:10 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 30 Jun 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>terraform-dev</title>
+    <link>https://serialt.github.io/tags/terraform-dev/</link>
+    <pubDate>Sun, 30 Jun 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/terraform-dev/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>tf-dev</title>
+    <link>https://serialt.github.io/tags/tf-dev/</link>
+    <pubDate>Sun, 30 Jun 2024 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/tf-dev/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>winsw</title>
+    <link>https://serialt.github.io/tags/winsw/</link>
+    <pubDate>Sun, 30 Jun 2024 15:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/winsw/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>java</title>
+    <link>https://serialt.github.io/tags/java/</link>
+    <pubDate>Sun, 30 Jun 2024 15:20:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/java/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>caddy</title>
     <link>https://serialt.github.io/tags/caddy/</link>
     <pubDate>Wed, 26 Jun 2024 22:29:10 &#43;0800</pubDate>
@@ -50,38 +82,6 @@
     <pubDate>Thu, 13 Jun 2024 21:00:42 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/mirror/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>mirror-to-cn</title>
-    <link>https://serialt.github.io/tags/mirror-to-cn/</link>
-    <pubDate>Thu, 13 Jun 2024 21:00:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/mirror-to-cn/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>source</title>
-    <link>https://serialt.github.io/tags/source/</link>
-    <pubDate>Thu, 13 Jun 2024 21:00:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/source/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>contianerd</title>
-    <link>https://serialt.github.io/tags/contianerd/</link>
-    <pubDate>Thu, 13 Jun 2024 20:43:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/contianerd/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>podman</title>
-    <link>https://serialt.github.io/tags/podman/</link>
-    <pubDate>Thu, 13 Jun 2024 20:40:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/podman/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>
