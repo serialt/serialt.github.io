@@ -1,10 +1,10 @@
 +++
 
-title = 'Gitlab'
+title = 'TF-dev'
 date = 2024-06-30T20:26:27+08:00
 draft = false
 
-tags = ["terraform-dev"]
+tags = ["terraform-dev","tf-dev"]
 categories = ["DevOps"]
 
 +++
