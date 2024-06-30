@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/posts/</link>
         <description>All Posts | Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 16 Jun 2024 19:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 26 Jun 2024 22:29:10 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>caddy</title>
+    <link>https://serialt.github.io/posts/2024-06-26-caddy/</link>
+    <pubDate>Wed, 26 Jun 2024 22:29:10 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-26-caddy/</guid>
+    <description><![CDATA[Caddy Caddy 是一个 Go 编写的 Web 服务器，类似于 Nginx，Caddy 提供了更加强大的功能，随着 v2 版本发布 Caddy 已经可以作为中小型站点 Web 服务器的另一个选择；相]]></description>
+</item>
+<item>
     <title>Nexus</title>
     <link>https://serialt.github.io/posts/2024-06-16-nexus/</link>
     <pubDate>Sun, 16 Jun 2024 19:26:27 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-06-02-go-shamir/</guid>
     <description><![CDATA[Shamir密钥分享算法 参考：https://www.cxyzjd.com/article/shangsongwww/90266455 秘密共]]></description>
-</item>
-<item>
-    <title>Go pinyin</title>
-    <link>https://serialt.github.io/posts/2024-06-02-go-pinyin/</link>
-    <pubDate>Sun, 02 Jun 2024 10:31:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-02-go-pinyin/</guid>
-    <description><![CDATA[Go 汉字转拼音库 汉语拼音转换工具 Go 版。 1、安装 go get -u github.com/mozillazg/go-pinyin 安装cli工具 go get -u github.com/mozillazg/go-pinyin/cmd/pinyin $ pinyin 中国人 zhōng guó rén 2、简单使用 package main import ( &#34;fmt&#34; &#34;github.com/mozillazg/go-pinyin&#34; ) func main() { hans]]></description>
 </item>
 </channel>
 </rss>

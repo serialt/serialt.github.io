@@ -4,7 +4,31 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 16 Jun 2024 19:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 26 Jun 2024 22:29:10 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>caddy</title>
+    <link>https://serialt.github.io/tags/caddy/</link>
+    <pubDate>Wed, 26 Jun 2024 22:29:10 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/caddy/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>go-web</title>
+    <link>https://serialt.github.io/tags/go-web/</link>
+    <pubDate>Wed, 26 Jun 2024 22:29:10 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/go-web/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>web-server</title>
+    <link>https://serialt.github.io/tags/web-server/</link>
+    <pubDate>Wed, 26 Jun 2024 22:29:10 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/web-server/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>nexus</title>
     <link>https://serialt.github.io/tags/nexus/</link>
     <pubDate>Sun, 16 Jun 2024 19:26:27 &#43;0800</pubDate>
@@ -58,30 +82,6 @@
     <pubDate>Thu, 13 Jun 2024 20:40:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/podman/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Docker</title>
-    <link>https://serialt.github.io/tags/docker/</link>
-    <pubDate>Thu, 13 Jun 2024 20:38:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/docker/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Dockerfile</title>
-    <link>https://serialt.github.io/tags/dockerfile/</link>
-    <pubDate>Thu, 13 Jun 2024 20:38:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/dockerfile/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Go</title>
-    <link>https://serialt.github.io/tags/go/</link>
-    <pubDate>Sun, 02 Jun 2024 10:38:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/go/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>
