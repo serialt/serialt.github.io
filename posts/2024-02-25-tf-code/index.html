@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-02-25-tf-code\/"
-        },"genre": "posts","keywords": "tf code","wordcount":  263 ,
+        },"genre": "posts","keywords": "tf code","wordcount":  393 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-02-25-tf-code\/","datePublished": "2024-02-25T20:26:27+08:00","dateModified": "2024-02-25T20:26:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">tf-code</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-25">2024-02-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;263 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-25">2024-02-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;393 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -116,6 +116,8 @@
         <li><a href="#2state文件中获取数据">2、state文件中获取数据</a></li>
         <li><a href="#3获取terraform当前执行的目录">3、获取terraform当前执行的目录</a></li>
         <li><a href="#4for_each-循环">4、for_each 循环</a></li>
+        <li><a href="#5contains">5、contains</a></li>
+        <li><a href="#6merge">6、merge</a></li>
         <li><a href="#其他">其他</a></li>
       </ul>
     </li>
@@ -135,6 +137,16 @@
 </span></span><span class="line"><span class="cl">    <span class="nv">path</span> <span class="o">=</span> <span class="s2">&#34;../../global/terraform.tfstate&#34;</span>
 </span></span><span class="line"><span class="cl">  <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">data <span class="s2">&#34;terraform_remote_state&#34;</span> <span class="s2">&#34;global&#34;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">backend</span> <span class="o">=</span> <span class="s2">&#34;http&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">config</span> <span class="o">=</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">address</span> <span class="o">=</span> <span class="s2">&#34;http://git.local.com/api/v4/projects/111/terraform/state/xxxstatefile&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">locals <span class="o">{</span>
 </span></span><span class="line"><span class="cl">  <span class="nv">domain</span>           <span class="o">=</span> data.terraform_remote_state.global.outputs.domain
 </span></span><span class="line"><span class="cl">」
@@ -164,6 +176,29 @@
 </span></span><span class="line"><span class="cl">  <span class="nv">record_type</span> <span class="o">=</span> each.value.type
 </span></span><span class="line"><span class="cl">  <span class="nv">value</span>       <span class="o">=</span> each.value.record
 </span></span><span class="line"><span class="cl">  <span class="nv">sub_domain</span>  <span class="o">=</span> each.value.sub_domain
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">resource <span class="s2">&#34;xxxxx&#34;</span> <span class="s2">&#34;xxxx&#34;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">for_each</span> <span class="o">=</span> <span class="o">{</span><span class="k">for</span> k,v in var.ack_nodes: <span class="nv">k</span> <span class="o">=</span>&gt; v <span class="k">if</span> !contains<span class="o">(</span>keys<span class="o">(</span>v<span class="o">)</span>, <span class="s2">&#34;hello&#34;</span><span class="o">)}</span>
+</span></span><span class="line"><span class="cl">  *****
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="5contains">5、contains</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 如果 var.hello.world 有world这个key，就使用对应的值，否则就使用 github 这个默认值</span>
+</span></span><span class="line"><span class="cl">resource <span class="s2">&#34;xxxx&#34;</span> <span class="s2">&#34;xxx&#34;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">name</span> <span class="o">=</span> contains<span class="o">(</span>keys<span class="o">(</span>var.hello<span class="o">)</span>, <span class="s2">&#34;world&#34;</span><span class="o">)</span> ? var.hello.world:<span class="s2">&#34;github&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">age</span> <span class="o">=</span> var.age &gt; <span class="m">50</span> ? var.age : <span class="m">18</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h3 id="6merge">6、merge</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">data <span class="s2">&#34;aliyun_images_image&#34;</span> <span class="s2">&#34;image&#34;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">for_each</span> <span class="o">=</span> merge<span class="o">(</span>var.ack_nodes, var.ecs<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nv">name_regex</span>                <span class="o">=</span> contains<span class="o">(</span>keys<span class="o">(</span>var.ack_nodes<span class="o">)</span>, each.key<span class="o">)</span> ? <span class="s2">&#34;Ubuntu 20.*bit</span>$<span class="s2">&#34;</span>:<span class="s2">&#34;</span><span class="si">${</span><span class="nv">each</span><span class="p">.value.os</span><span class="si">}</span><span class="s2">.*bit</span>$<span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">architecture</span>              <span class="o">=</span> <span class="s2">&#34;x86&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">visibility</span>                <span class="o">=</span> <span class="s2">&#34;public&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">most_recent</span>               <span class="o">=</span> <span class="nb">true</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></div><h3 id="其他">其他</h3>
 <h4 id="减小-terraform-项目目录体积">减小 terraform 项目目录体积</h4>
