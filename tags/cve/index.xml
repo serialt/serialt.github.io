@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/tags/cve/</link>
         <description>cve - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 12 Nov 2023 10:29:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/cve/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 01 Jul 2024 21:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/cve/" rel="self" type="application/rss+xml" /><item>
+    <title>openssh-cve</title>
+    <link>https://serialt.github.io/posts/2024-07-01-cve/</link>
+    <pubDate>Mon, 01 Jul 2024 21:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-07-01-cve/</guid>
+    <description><![CDATA[CVE OpenSSH CVE-2024-6387 该漏洞是 OpenSSH 服务器 （sshd） 中的信号处理程序争用条件，允许在基于 glibc 的 Linux 系统上以 root 身份执行未经身份验证的远程代码执行 （RCE）;这带来了]]></description>
+</item>
+<item>
     <title>security-info</title>
     <link>https://serialt.github.io/posts/2023-11-12-security-info/</link>
     <pubDate>Sun, 12 Nov 2023 10:29:27 &#43;0800</pubDate>

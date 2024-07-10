@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/categories/devops/</link>
         <description>DevOps - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 30 Jun 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 01 Jul 2024 21:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+    <title>openssh-cve</title>
+    <link>https://serialt.github.io/posts/2024-07-01-cve/</link>
+    <pubDate>Mon, 01 Jul 2024 21:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-07-01-cve/</guid>
+    <description><![CDATA[CVE OpenSSH CVE-2024-6387 该漏洞是 OpenSSH 服务器 （sshd） 中的信号处理程序争用条件，允许在基于 glibc 的 Linux 系统上以 root 身份执行未经身份验证的远程代码执行 （RCE）;这带来了]]></description>
+</item>
+<item>
     <title>TF-dev</title>
     <link>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</link>
     <pubDate>Sun, 30 Jun 2024 20:26:27 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-03-17-tf-mirror-registery/</guid>
     <description><![CDATA[Terraform Registry Mirror terraform 的 provider 托管在海外，使用时候会经常因为网络问题导致下载失败，terraform 官方有 Provider Network Mirror Protocol，支持使用本地文件和 Static Webs]]></description>
-</item>
-<item>
-    <title>Packer</title>
-    <link>https://serialt.github.io/posts/2024-03-15-packer/</link>
-    <pubDate>Sat, 16 Mar 2024 18:37:07 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-03-15-packer/</guid>
-    <description><![CDATA[Packer 参考链接： https://developer.hashicorp.com/packer/docs?product_intent=packer https://blog.k8s.li/packer-vsphere-example.html https://cloud.tencent.com/developer/article/1474736 https://blog.csdn.net/weixin_45941099/article/details/123838526 https://github.com/serialt/packer-demo https://lonegunmanb.github.io/packer-handbook/ 介绍： Packer是用一个配置文件，在多种云计算平台上创建完全一致镜像的开源工具。Packer是由HashiCorp]]></description>
 </item>
 </channel>
 </rss>

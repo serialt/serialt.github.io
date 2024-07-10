@@ -4,7 +4,23 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 30 Jun 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 01 Jul 2024 21:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>cve</title>
+    <link>https://serialt.github.io/tags/cve/</link>
+    <pubDate>Mon, 01 Jul 2024 21:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/cve/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>openssh</title>
+    <link>https://serialt.github.io/tags/openssh/</link>
+    <pubDate>Mon, 01 Jul 2024 21:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/openssh/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>terraform-dev</title>
     <link>https://serialt.github.io/tags/terraform-dev/</link>
     <pubDate>Sun, 30 Jun 2024 20:26:27 &#43;0800</pubDate>
@@ -66,22 +82,6 @@
     <pubDate>Sun, 16 Jun 2024 19:26:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/nexus/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>repo</title>
-    <link>https://serialt.github.io/tags/repo/</link>
-    <pubDate>Sun, 16 Jun 2024 19:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/repo/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>mirror</title>
-    <link>https://serialt.github.io/tags/mirror/</link>
-    <pubDate>Thu, 13 Jun 2024 21:00:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/mirror/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

@@ -4,9 +4,17 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 30 Jun 2024 20:26:27 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 01 Jul 2024 21:26:27 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>openssh-cve</title>
+    <link>https://serialt.github.io/posts/2024-07-01-cve/</link>
+    <pubDate>Mon, 01 Jul 2024 21:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-07-01-cve/</guid>
+    <description><![CDATA[CVE OpenSSH CVE-2024-6387 该漏洞是 OpenSSH 服务器 （sshd） 中的信号处理程序争用条件，允许在基于 glibc 的 Linux 系统上以 root 身份执行未经身份验证的远程代码执行 （RCE）;这带来了]]></description>
+</item>
+<item>
     <title>TF-dev</title>
     <link>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</link>
     <pubDate>Sun, 30 Jun 2024 20:26:27 &#43;0800</pubDate>
@@ -77,14 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-06-12-docker-image/</guid>
     <description><![CDATA[Docker 镜像体积优化 参考链接： https://icloudnative.io/posts/docker-images-part1-reducing-image-size/ 1、选择合适的基础镜像 常用的镜像有alpine，debian-slim 他们的体积都比 标准debian、ubuntu]]></description>
-</item>
-<item>
-    <title>Go time</title>
-    <link>https://serialt.github.io/posts/2024-06-02-go-time/</link>
-    <pubDate>Sun, 02 Jun 2024 10:38:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-02-go-time/</guid>
-    <description><![CDATA[Go time包 参考链接：https://www.liwenzhou.com/posts/Go/go_time/ 时间和日期是我们编程中经常会用到]]></description>
 </item>
 </channel>
 </rss>

@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>openssh - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/openssh/</link>
+        <description>openssh - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 01 Jul 2024 21:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/openssh/" rel="self" type="application/rss+xml" /><item>
+    <title>openssh-cve</title>
+    <link>https://serialt.github.io/posts/2024-07-01-cve/</link>
+    <pubDate>Mon, 01 Jul 2024 21:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-07-01-cve/</guid>
+    <description><![CDATA[CVE OpenSSH CVE-2024-6387 该漏洞是 OpenSSH 服务器 （sshd） 中的信号处理程序争用条件，允许在基于 glibc 的 Linux 系统上以 root 身份执行未经身份验证的远程代码执行 （RCE）;这带来了]]></description>
+</item>
+</channel>
+</rss>
