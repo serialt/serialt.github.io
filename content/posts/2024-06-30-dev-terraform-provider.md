@@ -1,7 +1,7 @@
 +++
 
 title = 'TF-dev'
-date = 2024-06-30T20:26:27+08:00
+date = 2024-07-20T09:26:27+08:00
 draft = false
 
 tags = ["terraform-dev","tf-dev"]
@@ -105,6 +105,51 @@ terraform apply
 如果要支持老版本的terraform，建议是使用 terraform-plugin-sdk/v2 开发，否则还是建议使用terraform-plugin-framework开发。
 
 TPF开发示例：https://github.com/hashicorp/terraform-provider-hashicups
+
+
+
+#### 解释说明
+
+插件开发主要涉及的文件分为三种类型：
+
+* provider
+* datasource
+* resource
+
+##### provider
+
+文件中主要是一些 配置文件的读取和对第三分 api 客户端的初始化，主要由五个方法组成：
+
+* Metadata：provider的名字
+* Schema：provider的配置参数
+* Configure：读取配置provider中的值和环境变量的值，初始化调用第三方api的client
+* Resources：定义的resource资源
+* DataSources：定义的datasource资源
+
+##### datasource
+
+通过第三方api的client调用，查询已存在的资源信息：
+
+* Metadata：定义datasource的名字
+* Schema：datasource配置的参数
+* Read：client调用api，读取具体的数据，生成state
+* Configure：从provider中获取传入的调用api的client
+
+##### resource
+
+通过第三方api的client调用，对资源进行增删改查和导入资源对象
+
+* Metadata：定义resource的名字
+
+* Schema：resource配置的参数
+* Configure：从provider中获取传入的调用api的client
+* Create：创建资源
+* Read：查询资源
+* Update：更新资源
+* Delete：删除资源，用于在销毁时删除资源
+* ImportState：导入资源，用terraform管理存量的资源对象。
+
+
 
 
 
