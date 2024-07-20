@@ -1,0 +1,24 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Dev - Category - Blog</title>
+        <link>https://serialt.github.io/categories/dev/</link>
+        <description>Dev - Category - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 20 Jul 2024 09:21:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>Protobuf</title>
+    <link>https://serialt.github.io/posts/2024-07-07-protobuf/</link>
+    <pubDate>Sat, 20 Jul 2024 09:21:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-07-07-protobuf/</guid>
+    <description><![CDATA[Protobuf gRPC推荐使用proto3，这里只介绍常用语法，按照官方文档的结构翻译，英文水平有限，复杂的部分果断放弃，更多高级使用姿势请参考官方文档]]></description>
+</item>
+<item>
+    <title>kratos</title>
+    <link>https://serialt.github.io/posts/2024-07-07-kratos/</link>
+    <pubDate>Sat, 20 Jul 2024 09:20:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-07-07-kratos/</guid>
+    <description><![CDATA[Kratos 目录结构 . ├── Dockerfile ├── LICENSE ├── Makefile ├── README.md ├── api // 下面维护了微服务使用的proto文件以及根据它们所生成的go文件 │ └── helloworld │ └── v1 │]]></description>
+</item>
+</channel>
+</rss>

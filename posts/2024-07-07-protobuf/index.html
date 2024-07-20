@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Protobuf - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Protobuf" />
+<meta property="og:description" content="Protobuf gRPC推荐使用proto3，这里只介绍常用语法，按照官方文档的结构翻译，英文水平有限，复杂的部分果断放弃，更多高级使用姿势请参考官方文档" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2024-07-07-protobuf/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-07-20T09:21:27+08:00" />
+<meta property="article:modified_time" content="2024-07-20T09:21:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Protobuf"/>
+<meta name="twitter:description" content="Protobuf gRPC推荐使用proto3，这里只介绍常用语法，按照官方文档的结构翻译，英文水平有限，复杂的部分果断放弃，更多高级使用姿势请参考官方文档"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2024-07-07-protobuf/" /><link rel="prev" href="https://serialt.github.io/posts/2024-07-07-kratos/" /><link rel="next" href="https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Protobuf",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2024-07-07-protobuf\/"
+        },"genre": "posts","keywords": "Protobuf","wordcount":  1178 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2024-07-07-protobuf\/","datePublished": "2024-07-20T09:21:27+08:00","dateModified": "2024-07-20T09:21:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Protobuf</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Dev</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-20">2024-07-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1178 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#protobuf">Protobuf</a>
+      <ul>
+        <li><a href="#message定义">Message定义</a></li>
+        <li><a href="#分配tags">分配Tags</a></li>
+        <li><a href="#字段规则">字段规则</a></li>
+        <li><a href="#添加注释">添加注释</a></li>
+        <li><a href="#保留字段名与tag">保留字段名与Tag</a></li>
+        <li><a href="#基本数据类型">基本数据类型</a></li>
+        <li><a href="#message嵌套">Message嵌套</a></li>
+        <li><a href="#protobuf-----go">Protobuf &mdash;&gt; Go</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="protobuf">Protobuf</h2>
+<p>gRPC推荐使用proto3，这里只介绍常用语法，按照官方文档的结构翻译，英文水平有限，复杂的部分果断放弃，更多高级使用姿势请参考<a href="https://developers.google.com/protocol-buffers/" target="_blank" rel="noopener noreffer ">官方文档</a></p>
+<h3 id="message定义">Message定义</h3>
+<p>一个<code>message</code>类型定义描述了一个请求或响应的消息格式，可以包含多种类型字段。</p>
+<p>例如定义一个搜索请求的消息格式<code>SearchRequest</code>，每个请求包含查询字符串、页码、每页数目。每个字段声明以分号结尾。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-protobuf" data-lang="protobuf"><span class="line"><span class="cl"><span class="n">syntax</span> <span class="o">=</span> <span class="s">&#34;proto3&#34;</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kd">message</span> <span class="nc">SearchRequest</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">string</span> <span class="n">query</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">int32</span>  <span class="n">page_number</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">int32</span>  <span class="n">result_per_page</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span></code></pre></div><h3 id="分配tags">分配Tags</h3>
+<p>消息的定义中，每个字段都有一个<strong>唯一的数值标签</strong>。这些标签用于标识该字段在消息中的二进制格式，使用中的类型不应该随意改动。其中，[1-15]内的标识在编码时占用一个字节，包含标识和字段类型。[16-2047]之间的标识符占用2个字节。建议为频繁出现的消息元素分配[1-15]间的标签。如果考虑到以后可能或扩展频繁元素，可以预留一些。</p>
+<p>最小的标识符可以从1开始，最大到229 - 1，或536,870,911。不可以使用[19000－19999]之间的标识符， Protobuf协议实现中预留了这些标识符。在.proto文件中使用这些预留标识号，编译时会报错。</p>
+<h3 id="字段规则">字段规则</h3>
+<ul>
+<li>单数形态：一个message内同名单数形态的字段不能超过一个</li>
+<li>repeated：前置<code>repeated</code>关键词，声明该字段为数组类型</li>
+<li><code>proto3</code>不支持<code>proto2</code>中的<code>required</code>和<code>optional</code>关键字</li>
+</ul>
+<h3 id="添加注释">添加注释</h3>
+<p>向<code>.proto</code>文件中添加注释，支持C/C++风格双斜线<code>//</code>单行注释。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-protobuf" data-lang="protobuf"><span class="line"><span class="cl"><span class="n">syntax</span> <span class="o">=</span> <span class="s">&#34;proto3&#34;</span><span class="p">;</span>              <span class="c1">// 协议版本声明
+</span></span></span><span class="line"><span class="cl"><span class="c1">// SearchRequest 搜索请求消息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">message</span> <span class="nc">SearchRequest</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">string</span> <span class="n">query</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>           <span class="c1">// 查询字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int32</span>  <span class="n">page_number</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>     <span class="c1">// 页码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int32</span>  <span class="n">result_per_page</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// 每页条数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="err">
+</span></span></span></code></pre></div><h3 id="保留字段名与tag">保留字段名与Tag</h3>
+<p>可以使用<code>reserved</code>关键字指定保留字段名和标签。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-protobuf" data-lang="protobuf"><span class="line"><span class="cl"><span class="kd">message</span> <span class="nc">Foo</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="n">reserved</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">9</span> <span class="k">to</span> <span class="mi">11</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="n">reserved</span> <span class="s">&#34;foo&#34;</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span></code></pre></div><h3 id="基本数据类型">基本数据类型</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">.proto</th>
+<th style="text-align:left">C++</th>
+<th style="text-align:left">Java</th>
+<th style="text-align:left">Python</th>
+<th style="text-align:left">Go</th>
+<th style="text-align:left">Ruby</th>
+<th style="text-align:left">C#</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">double</td>
+<td style="text-align:left">double</td>
+<td style="text-align:left">double</td>
+<td style="text-align:left">float</td>
+<td style="text-align:left">float64</td>
+<td style="text-align:left">Float</td>
+<td style="text-align:left">double</td>
+</tr>
+<tr>
+<td style="text-align:left">float</td>
+<td style="text-align:left">float</td>
+<td style="text-align:left">float</td>
+<td style="text-align:left">float</td>
+<td style="text-align:left">float32</td>
+<td style="text-align:left">Float</td>
+<td style="text-align:left">float</td>
+</tr>
+<tr>
+<td style="text-align:left">int32</td>
+<td style="text-align:left">int32</td>
+<td style="text-align:left">int</td>
+<td style="text-align:left">int</td>
+<td style="text-align:left">int32</td>
+<td style="text-align:left">Fixnum or Bignum</td>
+<td style="text-align:left">int</td>
+</tr>
+<tr>
+<td style="text-align:left">int64</td>
+<td style="text-align:left">int64</td>
+<td style="text-align:left">long</td>
+<td style="text-align:left">ing/long[3]</td>
+<td style="text-align:left">int64</td>
+<td style="text-align:left">Bignum</td>
+<td style="text-align:left">long</td>
+</tr>
+<tr>
+<td style="text-align:left">uint32</td>
+<td style="text-align:left">uint32</td>
+<td style="text-align:left">int[1]</td>
+<td style="text-align:left">int/long[3]</td>
+<td style="text-align:left">uint32</td>
+<td style="text-align:left">Fixnum or Bignum</td>
+<td style="text-align:left">uint</td>
+</tr>
+<tr>
+<td style="text-align:left">uint64</td>
+<td style="text-align:left">uint64</td>
+<td style="text-align:left">long[1]</td>
+<td style="text-align:left">int/long[3]</td>
+<td style="text-align:left">uint64</td>
+<td style="text-align:left">Bignum</td>
+<td style="text-align:left">ulong</td>
+</tr>
+<tr>
+<td style="text-align:left">sint32</td>
+<td style="text-align:left">int32</td>
+<td style="text-align:left">int</td>
+<td style="text-align:left">intj</td>
+<td style="text-align:left">int32</td>
+<td style="text-align:left">Fixnum or Bignum</td>
+<td style="text-align:left">int</td>
+</tr>
+<tr>
+<td style="text-align:left">sint64</td>
+<td style="text-align:left">int64</td>
+<td style="text-align:left">long</td>
+<td style="text-align:left">int/long[3]</td>
+<td style="text-align:left">int64</td>
+<td style="text-align:left">Bignum</td>
+<td style="text-align:left">long</td>
+</tr>
+<tr>
+<td style="text-align:left">fixed32</td>
+<td style="text-align:left">uint32</td>
+<td style="text-align:left">int[1]</td>
+<td style="text-align:left">int</td>
+<td style="text-align:left">uint32</td>
+<td style="text-align:left">Fixnum or Bignum</td>
+<td style="text-align:left">uint</td>
+</tr>
+<tr>
+<td style="text-align:left">fixed64</td>
+<td style="text-align:left">uint64</td>
+<td style="text-align:left">long[1]</td>
+<td style="text-align:left">int/long[3]</td>
+<td style="text-align:left">uint64</td>
+<td style="text-align:left">Bignum</td>
+<td style="text-align:left">ulong</td>
+</tr>
+<tr>
+<td style="text-align:left">sfixed32</td>
+<td style="text-align:left">int32</td>
+<td style="text-align:left">int</td>
+<td style="text-align:left">int</td>
+<td style="text-align:left">int32</td>
+<td style="text-align:left">Fixnum or Bignum</td>
+<td style="text-align:left">int</td>
+</tr>
+<tr>
+<td style="text-align:left">sfixed64</td>
+<td style="text-align:left">int64</td>
+<td style="text-align:left">long</td>
+<td style="text-align:left">int/long[3]</td>
+<td style="text-align:left">int64</td>
+<td style="text-align:left">Bignum</td>
+<td style="text-align:left">long</td>
+</tr>
+<tr>
+<td style="text-align:left">bool</td>
+<td style="text-align:left">bool</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">bool</td>
+<td style="text-align:left">TrueClass/FalseClass</td>
+<td style="text-align:left">bool</td>
+</tr>
+<tr>
+<td style="text-align:left">string</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">str/unicode[4]</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">String(UTF-8)</td>
+<td style="text-align:left">string</td>
+</tr>
+<tr>
+<td style="text-align:left">bytes</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">ByteString</td>
+<td style="text-align:left">str</td>
+<td style="text-align:left">[]byte</td>
+<td style="text-align:left">String(ASCII-8BIT)</td>
+<td style="text-align:left">ByteString</td>
+</tr>
+</tbody>
+</table>
+<h3 id="message嵌套">Message嵌套</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-protobuf" data-lang="protobuf"><span class="line"><span class="cl"><span class="kd">message</span> <span class="nc">SearchResponse</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kd">message</span> <span class="nc">Result</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="kt">string</span> <span class="n">url</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="kt">string</span> <span class="n">title</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="k">repeated</span> <span class="kt">string</span> <span class="n">snippets</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="k">repeated</span> <span class="n">Result</span> <span class="n">results</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kd">message</span> <span class="nc">Outer</span> <span class="p">{</span>                <span class="c1">// Level 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">message</span> <span class="nc">MiddleAA</span> <span class="p">{</span>         <span class="c1">// Level 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kd">message</span> <span class="nc">Inner</span> <span class="p">{</span>        <span class="c1">// Level 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kt">int64</span> <span class="n">ival</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>            <span class="kt">bool</span>  <span class="n">booly</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kd">message</span> <span class="nc">MiddleBB</span> <span class="p">{</span>         <span class="c1">// Level 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kd">message</span> <span class="nc">Inner</span> <span class="p">{</span>        <span class="c1">// Level 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kt">int32</span> <span class="n">ival</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>            <span class="kt">bool</span>  <span class="n">booly</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span></code></pre></div><h3 id="protobuf-----go">Protobuf &mdash;&gt; Go</h3>
+<p>proto中的<code>message</code>对应go中的<code>struct</code>，全部使用驼峰命名规则。嵌套定义的<code>message</code>，<code>enum</code>转换为go之后，名称变为<code>Parent_Child</code>结构。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-protobuf" data-lang="protobuf"><span class="line"><span class="cl"><span class="c1">// Test 测试
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">message</span> <span class="nc">Test</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">int32</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">int64</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">double</span> <span class="n">money</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">float</span> <span class="n">score</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">string</span> <span class="n">name</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">bool</span> <span class="n">fat</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="kt">bytes</span> <span class="n">char</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="c1">// Status 枚举状态
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">enum</span> <span class="n">Status</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="n">OK</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="n">FAIL</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="n">Status</span> <span class="n">status</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="c1">// Child 子结构
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">message</span> <span class="nc">Child</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>        <span class="kt">string</span> <span class="n">sex</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="n">Child</span> <span class="n">child</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="n">map</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">&gt;</span> <span class="n">dict</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// Status 枚举状态
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">Test_Status</span> <span class="kt">int32</span>
+</span></span><span class="line"><span class="cl"><span class="kd">const</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Test_OK</span>   <span class="nx">Test_Status</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Test_FAIL</span> <span class="nx">Test_Status</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Test 测试
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">Test</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Age</span>    <span class="kt">int32</span>       <span class="s">`protobuf:&#34;varint,1,opt,name=age&#34; json:&#34;age,omitempty&#34;`</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Count</span>  <span class="kt">int64</span>       <span class="s">`protobuf:&#34;varint,2,opt,name=count&#34; json:&#34;count,omitempty&#34;`</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Money</span>  <span class="kt">float64</span>     <span class="s">`protobuf:&#34;fixed64,3,opt,name=money&#34; json:&#34;money,omitempty&#34;`</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Score</span>  <span class="kt">float32</span>     <span class="s">`protobuf:&#34;fixed32,4,opt,name=score&#34; json:&#34;score,omitempty&#34;`</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Name</span>   <span class="kt">string</span>      <span class="s">`protobuf:&#34;bytes,5,opt,name=name&#34; json:&#34;name,omitempty&#34;`</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Fat</span>    <span class="kt">bool</span>        <span class="s">`protobuf:&#34;varint,6,opt,name=fat&#34; json:&#34;fat,omitempty&#34;`</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Char</span>   <span class="p">[]</span><span class="kt">byte</span>      <span class="s">`protobuf:&#34;bytes,7,opt,name=char,proto3&#34; json:&#34;char,omitempty&#34;`</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Status</span> <span class="nx">Test_Status</span> <span class="s">`protobuf:&#34;varint,8,opt,name=status,enum=test.Test_Status&#34; json:&#34;status,omitempty&#34;`</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Child</span>  <span class="o">*</span><span class="nx">Test_Child</span> <span class="s">`protobuf:&#34;bytes,9,opt,name=child&#34; json:&#34;child,omitempty&#34;`</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Dict</span>   <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span> <span class="s">`protobuf:&#34;bytes,10,rep,name=dict&#34; json:&#34;dict,omitempty&#34; protobuf_key:&#34;bytes,1,opt,name=key&#34; protobuf_val:&#34;bytes,2,opt,name=value&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Child 子结构
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">Test_Child</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Sex</span> <span class="kt">string</span> <span class="s">`protobuf:&#34;bytes,1,opt,name=sex&#34; json:&#34;sex,omitempty&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-07-20</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/protobuf/">Protobuf</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2024-07-07-kratos/" class="prev" rel="prev" title="kratos"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>kratos</a>
+            <a href="/posts/2024-06-30-dev-terraform-provider/" class="next" rel="next" title="TF-dev">TF-dev<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

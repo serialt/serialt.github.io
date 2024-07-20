@@ -4,21 +4,37 @@
         <link>https://serialt.github.io/posts/</link>
         <description>All Posts | Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 01 Jul 2024 21:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 20 Jul 2024 09:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>TF-dev</title>
+    <link>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</link>
+    <pubDate>Sat, 20 Jul 2024 09:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</guid>
+    <description><![CDATA[Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # makefile default: install build: go build -v ./... install: go install -v ./... vscode 调试 terraform provider 1）vscode launch cat .vscode/launch.json {]]></description>
+</item>
+<item>
+    <title>Protobuf</title>
+    <link>https://serialt.github.io/posts/2024-07-07-protobuf/</link>
+    <pubDate>Sat, 20 Jul 2024 09:21:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-07-07-protobuf/</guid>
+    <description><![CDATA[Protobuf gRPC推荐使用proto3，这里只介绍常用语法，按照官方文档的结构翻译，英文水平有限，复杂的部分果断放弃，更多高级使用姿势请参考官方文档]]></description>
+</item>
+<item>
+    <title>kratos</title>
+    <link>https://serialt.github.io/posts/2024-07-07-kratos/</link>
+    <pubDate>Sat, 20 Jul 2024 09:20:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-07-07-kratos/</guid>
+    <description><![CDATA[Kratos 目录结构 . ├── Dockerfile ├── LICENSE ├── Makefile ├── README.md ├── api // 下面维护了微服务使用的proto文件以及根据它们所生成的go文件 │ └── helloworld │ └── v1 │]]></description>
+</item>
+<item>
     <title>openssh-cve</title>
     <link>https://serialt.github.io/posts/2024-07-01-cve/</link>
     <pubDate>Mon, 01 Jul 2024 21:26:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-07-01-cve/</guid>
     <description><![CDATA[CVE OpenSSH CVE-2024-6387 该漏洞是 OpenSSH 服务器 （sshd） 中的信号处理程序争用条件，允许在基于 glibc 的 Linux 系统上以 root 身份执行未经身份验证的远程代码执行 （RCE）;这带来了]]></description>
-</item>
-<item>
-    <title>TF-dev</title>
-    <link>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</link>
-    <pubDate>Sun, 30 Jun 2024 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</guid>
-    <description><![CDATA[Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # makefile default: install build: go build -v ./... install: go install -v ./... vscode 调试 terraform provider 1）vscode launch cat .vscode/launch.json {]]></description>
 </item>
 <item>
     <title>winsw</title>
@@ -67,22 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-06-13-containerd/</guid>
     <description><![CDATA[containerd 参考链接： https://www.aneasystone.com/archives/2023/06/containerd-notes.html https://juejin.cn/post/7312330825206693939 containerd 与 Docker 和 Kubernetes 的关系 仔细观察 containerd 架构图的上面部分，可以看出 containerd 通过提供 gRPC API 来供上层应用调用，上层应用可以直接集成 containerd client 来访问它的接口，]]></description>
-</item>
-<item>
-    <title>Podman</title>
-    <link>https://serialt.github.io/posts/2024-06-12-podman/</link>
-    <pubDate>Thu, 13 Jun 2024 20:40:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-12-podman/</guid>
-    <description><![CDATA[Podman 参考连接：http://www.yunweipai.com/40798.html ​ Podman 是一个开源的容器运行时项目，可在大多数 Linux 平台上使用。P]]></description>
-</item>
-<item>
-    <title>Docker 镜像构建优化</title>
-    <link>https://serialt.github.io/posts/2024-06-12-docker-image/</link>
-    <pubDate>Thu, 13 Jun 2024 20:38:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-12-docker-image/</guid>
-    <description><![CDATA[Docker 镜像体积优化 参考链接： https://icloudnative.io/posts/docker-images-part1-reducing-image-size/ 1、选择合适的基础镜像 常用的镜像有alpine，debian-slim 他们的体积都比 标准debian、ubuntu]]></description>
 </item>
 </channel>
 </rss>

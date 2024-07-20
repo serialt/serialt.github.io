@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>kratos - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/kratos/</link>
+        <description>kratos - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 20 Jul 2024 09:20:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/kratos/" rel="self" type="application/rss+xml" /><item>
+    <title>kratos</title>
+    <link>https://serialt.github.io/posts/2024-07-07-kratos/</link>
+    <pubDate>Sat, 20 Jul 2024 09:20:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-07-07-kratos/</guid>
+    <description><![CDATA[Kratos 目录结构 . ├── Dockerfile ├── LICENSE ├── Makefile ├── README.md ├── api // 下面维护了微服务使用的proto文件以及根据它们所生成的go文件 │ └── helloworld │ └── v1 │]]></description>
+</item>
+</channel>
+</rss>
