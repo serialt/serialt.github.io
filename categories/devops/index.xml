@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/categories/devops/</link>
         <description>DevOps - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 20 Jul 2024 09:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 21 Jul 2024 21:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+    <title>TF-lib</title>
+    <link>https://serialt.github.io/posts/2024-07-21-tf-lib/</link>
+    <pubDate>Sun, 21 Jul 2024 21:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-07-21-tf-lib/</guid>
+    <description><![CDATA[Terraform 常用 provider http tls helm kubernetes vault null：hashicorp/null local：hashicorp/local dns：hashicorp/dns rand]]></description>
+</item>
+<item>
     <title>TF-dev</title>
     <link>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</link>
     <pubDate>Sat, 20 Jul 2024 09:26:27 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-03-11-k3s-cert/</guid>
     <description><![CDATA[K3s 证书 k3s 根CA证书默认10年，签署的证书有效期默认1年，在到期前的90天内需要重启，重启后会自动轮转证书。 参考文档： https://forums.rancher.cn/t/k3s-ca-10/331 https://blog.starudream.cn/2023/07/21/k3s-client-cert-extend/ https://forums.rancher.cn/t/k3s-ca-10/331/37 https://github.com/qkboy/k3s/tree/v1.29.0%2Bk3s1-longcert https://docs.k3s.io/zh/cli/certificate#%E8%BD%AE%E6%8D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%81%E4%B9%A6 https://www.linuxfly.org/post/733/ 一、手动轮转]]></description>
-</item>
-<item>
-    <title>Terraform Registry Mirror</title>
-    <link>https://serialt.github.io/posts/2024-03-17-tf-mirror-registery/</link>
-    <pubDate>Sun, 17 Mar 2024 16:37:07 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-03-17-tf-mirror-registery/</guid>
-    <description><![CDATA[Terraform Registry Mirror terraform 的 provider 托管在海外，使用时候会经常因为网络问题导致下载失败，terraform 官方有 Provider Network Mirror Protocol，支持使用本地文件和 Static Webs]]></description>
 </item>
 </channel>
 </rss>

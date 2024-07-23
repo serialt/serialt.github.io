@@ -4,9 +4,17 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 20 Jul 2024 09:26:27 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 21 Jul 2024 21:26:27 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>TF-lib</title>
+    <link>https://serialt.github.io/posts/2024-07-21-tf-lib/</link>
+    <pubDate>Sun, 21 Jul 2024 21:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-07-21-tf-lib/</guid>
+    <description><![CDATA[Terraform 常用 provider http tls helm kubernetes vault null：hashicorp/null local：hashicorp/local dns：hashicorp/dns rand]]></description>
+</item>
+<item>
     <title>TF-dev</title>
     <link>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</link>
     <pubDate>Sat, 20 Jul 2024 09:26:27 &#43;0800</pubDate>
@@ -77,14 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-06-13-mirror-cn/</guid>
     <description><![CDATA[操作系统或者软件换源加速 1、操作系统 rocky # 8 base sed -e &#39;s|^mirrorlist=|#mirrorlist=|g&#39; \ -e &#39;s|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.ustc.edu.cn/rocky|g&#39; \ -i.bak /etc/yum.repos.d/Rocky*.repo # 8 epel sed -e &#39;s|^metalink=|#metalink=|g&#39; \ -e &#39;s|^#baseurl=https\?://download.fedoraproject.org/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39; \ -e &#39;s|^#baseurl=https\?://download.example/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39; \ -i.bak /etc/yum.repos.d/epel*.repo # 9 base sed -e &#39;s|^mirrorlist=|#mirrorlist=|g&#39; \ -e &#39;s|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.ustc.edu.cn/rocky|g&#39; \ -i.bak /etc/yum.repos.d/rocky*.repo # 9 epel sed -e &#39;s|^metalink=|#metalink=|g&#39; \ -e &#39;s|^#baseurl=https\?://download.fedoraproject.org/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39; \ -e &#39;s|^#baseurl=https\?://download.example/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39;]]></description>
-</item>
-<item>
-    <title>contianerd</title>
-    <link>https://serialt.github.io/posts/2024-06-13-containerd/</link>
-    <pubDate>Thu, 13 Jun 2024 20:43:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-13-containerd/</guid>
-    <description><![CDATA[containerd 参考链接： https://www.aneasystone.com/archives/2023/06/containerd-notes.html https://juejin.cn/post/7312330825206693939 containerd 与 Docker 和 Kubernetes 的关系 仔细观察 containerd 架构图的上面部分，可以看出 containerd 通过提供 gRPC API 来供上层应用调用，上层应用可以直接集成 containerd client 来访问它的接口，]]></description>
 </item>
 </channel>
 </rss>

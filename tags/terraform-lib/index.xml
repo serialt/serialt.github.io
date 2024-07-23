@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>terraform-lib - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/terraform-lib/</link>
+        <description>terraform-lib - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 21 Jul 2024 21:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/terraform-lib/" rel="self" type="application/rss+xml" /><item>
+    <title>TF-lib</title>
+    <link>https://serialt.github.io/posts/2024-07-21-tf-lib/</link>
+    <pubDate>Sun, 21 Jul 2024 21:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-07-21-tf-lib/</guid>
+    <description><![CDATA[Terraform 常用 provider http tls helm kubernetes vault null：hashicorp/null local：hashicorp/local dns：hashicorp/dns rand]]></description>
+</item>
+</channel>
+</rss>
