@@ -12,7 +12,7 @@
     <pubDate>Sun, 21 Jul 2024 21:26:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-07-21-tf-lib/</guid>
-    <description><![CDATA[Terraform 常用 provider http tls helm kubernetes vault null：hashicorp/null local：hashicorp/local dns：hashicorp/dns rand]]></description>
+    <description><![CDATA[Terraform 常用 provider http tls helm kubernetes vault null local dns random ad cloud： aws aliyun tencent cloud huaweicloud 第三方库： shell，执行命令，获取返回值：shell gitlab harbor nexus：datadriver]]></description>
 </item>
 <item>
     <title>TF-dev</title>
