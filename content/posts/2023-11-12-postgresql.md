@@ -1,6 +1,6 @@
 +++
 title = 'postgresql'
-date = 2023-11-12T10:30:27+08:00
+date = 2024-08-11T11:30:27+08:00
 draft = false
 
 tags = ["pg","postgresql","db"]
@@ -38,6 +38,54 @@ services:
 CREATE USER db_user WITH CREATEDB ENCRYPTED PASSWORD 'xxxxxxxxxx';
 alter user db_user superuser;
 
+```
+
+mac
+
+```shell
+### install 
+# 安装指定版本需要加@,例如 @14
+brew install postgresql@14
+
+# 查看安装的包
+[localhost@Sugar ~]🐳 brew list
+==> Formulae
+icu4c		openssl@1.1	postgresql@10	readline
+
+# 查看包安装的位置
+[localhost@Sugar ~]🐳 brew list postgresql@14
+/opt/homebrew/Cellar/postgresql@14/14.12/bin/clusterdb
+/opt/homebrew/Cellar/postgresql@14/14.12/bin/createdb
+/opt/homebrew/Cellar/postgresql@14/14.12/bin/createuser
+/opt/homebrew/Cellar/postgresql@14/14.12/bin/dropdb
+/opt/homebrew/Cellar/postgresql@14/14.12/bin/dropuser
+/opt/homebrew/Cellar/postgresql@14/14.12/bin/ecpg
+
+
+# 配置环境变量
+export PG_HOME="/opt/homebrew/opt/postgresql@14"
+export PATH=$PG_HOME/bin:$PATH
+
+# 加载环境变量
+source ~/.bash_profile
+
+
+### 初始化数据库
+# 查看版本
+[localhost@Sugar ~]🐳 pg_ctl -V
+pg_ctl (PostgreSQL) 14.12 (Homebrew)
+
+# 初始化数据库
+initdb --locale=C -E UTF-8 /opt/homebrew/var/postgresql@14
+
+# 启动服务
+brew services start postgresql@14
+
+# 停止服务
+brew services start postgresql@14
+
+# 非后台启动
+/opt/homebrew/opt/postgresql@14/bin/postgres -D /opt/homebrew/var/postgresql@14
 ```
 
 
