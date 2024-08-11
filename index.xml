@@ -4,9 +4,25 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 21 Jul 2024 21:26:27 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 11 Aug 2024 11:30:27 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>postgresql</title>
+    <link>https://serialt.github.io/posts/2023-11-12-postgresql/</link>
+    <pubDate>Sun, 11 Aug 2024 11:30:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-12-postgresql/</guid>
+    <description><![CDATA[PostgreSQL 一、安装 docker 安装 # docker-compose.yaml version: &#34;3&#34; services: postgres10-5432: image: &#34;postgres:10-bullseye&#34; container_name: postgres10-5432 shm_size: &#34;1gb&#34; restart: always ports: - &#34;5432:5432&#34; volumes: - /data/postgresql:/var/lib/postgresql/data - $PWD/init.sql:/docker-entrypoint-initdb.d/init.sql environment: - POSTGRES_PASSWORD=xxxxxxxxxxx # init.sql CREATE USER db_user WITH CREATEDB ENCRYPTED PASSWORD &#39;xxxxxxxxxx&#39;; alter user db_user superuser; mac ### install # 安装指定版本需要加@,例如 @14 brew install postgresql@14 # 查]]></description>
+</item>
+<item>
+    <title>Go basic</title>
+    <link>https://serialt.github.io/posts/2023-11-11-go-basic/</link>
+    <pubDate>Sun, 11 Aug 2024 10:26:09 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-go-basic/</guid>
+    <description><![CDATA[1、变量定义 var name string var isOk bool // 隐式申明 a := 100 str := &#34;sugar&#34; // 批量声明 var ( a string b int c bool d float32 ) // 变量的初始化 var name string = &#34;github&#34; var age int = 10 var name, age = &#34;github&#34;, 11 // 类型推导 var name =]]></description>
+</item>
+<item>
     <title>TF-lib</title>
     <link>https://serialt.github.io/posts/2024-07-21-tf-lib/</link>
     <pubDate>Sun, 21 Jul 2024 21:26:27 &#43;0800</pubDate>
@@ -69,22 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-06-26-caddy/</guid>
     <description><![CDATA[Caddy Caddy 是一个 Go 编写的 Web 服务器，类似于 Nginx，Caddy 提供了更加强大的功能，随着 v2 版本发布 Caddy 已经可以作为中小型站点 Web 服务器的另一个选择；相]]></description>
-</item>
-<item>
-    <title>Nexus</title>
-    <link>https://serialt.github.io/posts/2024-06-16-nexus/</link>
-    <pubDate>Sun, 16 Jun 2024 19:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-16-nexus/</guid>
-    <description><![CDATA[Nexus 参考： https://juejin.cn/post/6844904016762109959 https://cloud.tencent.com/developer/article/1764866 官网：https://help.sonatype.com/repomanager3/ 介绍 生产环境中，一般不会允许所有服务器都能访]]></description>
-</item>
-<item>
-    <title>To-mirror</title>
-    <link>https://serialt.github.io/posts/2024-06-13-mirror-cn/</link>
-    <pubDate>Thu, 13 Jun 2024 21:00:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-13-mirror-cn/</guid>
-    <description><![CDATA[操作系统或者软件换源加速 1、操作系统 rocky # 8 base sed -e &#39;s|^mirrorlist=|#mirrorlist=|g&#39; \ -e &#39;s|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.ustc.edu.cn/rocky|g&#39; \ -i.bak /etc/yum.repos.d/Rocky*.repo # 8 epel sed -e &#39;s|^metalink=|#metalink=|g&#39; \ -e &#39;s|^#baseurl=https\?://download.fedoraproject.org/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39; \ -e &#39;s|^#baseurl=https\?://download.example/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39; \ -i.bak /etc/yum.repos.d/epel*.repo # 9 base sed -e &#39;s|^mirrorlist=|#mirrorlist=|g&#39; \ -e &#39;s|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.ustc.edu.cn/rocky|g&#39; \ -i.bak /etc/yum.repos.d/rocky*.repo # 9 epel sed -e &#39;s|^metalink=|#metalink=|g&#39; \ -e &#39;s|^#baseurl=https\?://download.fedoraproject.org/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39; \ -e &#39;s|^#baseurl=https\?://download.example/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39;]]></description>
 </item>
 </channel>
 </rss>

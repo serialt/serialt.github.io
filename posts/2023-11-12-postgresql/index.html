@@ -5,18 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>postgresql - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="postgresql" />
-<meta property="og:description" content="PostgreSQL 一、安装 docker 安装 # docker-compose.yaml version: &#34;3&#34; services: postgres10-5432: image: &#34;postgres:10-bullseye&#34; container_name: postgres10-5432 shm_size: &#34;1gb&#34; restart: always ports: - &#34;5432:5432&#34; volumes: - /data/postgresql:/var/lib/postgresql/data - $PWD/init.sql:/docker-entrypoint-initdb.d/init.sql environment: - POSTGRES_PASSWORD=xxxxxxxxxxx # init.sql CREATE USER db_user WITH CREATEDB ENCRYPTED PASSWORD &#39;xxxxxxxxxx&#39;; alter user db_user superuser; 二、配置 1、修改数据库时区 postgres=# show timezone; TimeZone ---------- Etc/UTC (1 row) sed -i" />
+<meta property="og:description" content="PostgreSQL 一、安装 docker 安装 # docker-compose.yaml version: &#34;3&#34; services: postgres10-5432: image: &#34;postgres:10-bullseye&#34; container_name: postgres10-5432 shm_size: &#34;1gb&#34; restart: always ports: - &#34;5432:5432&#34; volumes: - /data/postgresql:/var/lib/postgresql/data - $PWD/init.sql:/docker-entrypoint-initdb.d/init.sql environment: - POSTGRES_PASSWORD=xxxxxxxxxxx # init.sql CREATE USER db_user WITH CREATEDB ENCRYPTED PASSWORD &#39;xxxxxxxxxx&#39;; alter user db_user superuser; mac ### install # 安装指定版本需要加@,例如 @14 brew install postgresql@14 # 查" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://serialt.github.io/posts/2023-11-12-postgresql/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-11-12T10:30:27+08:00" />
-<meta property="article:modified_time" content="2023-11-12T10:30:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta property="article:published_time" content="2024-08-11T11:30:27+08:00" />
+<meta property="article:modified_time" content="2024-08-11T11:30:27+08:00" /><meta property="og:site_name" content="Log" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="postgresql"/>
-<meta name="twitter:description" content="PostgreSQL 一、安装 docker 安装 # docker-compose.yaml version: &#34;3&#34; services: postgres10-5432: image: &#34;postgres:10-bullseye&#34; container_name: postgres10-5432 shm_size: &#34;1gb&#34; restart: always ports: - &#34;5432:5432&#34; volumes: - /data/postgresql:/var/lib/postgresql/data - $PWD/init.sql:/docker-entrypoint-initdb.d/init.sql environment: - POSTGRES_PASSWORD=xxxxxxxxxxx # init.sql CREATE USER db_user WITH CREATEDB ENCRYPTED PASSWORD &#39;xxxxxxxxxx&#39;; alter user db_user superuser; 二、配置 1、修改数据库时区 postgres=# show timezone; TimeZone ---------- Etc/UTC (1 row) sed -i"/>
+<meta name="twitter:description" content="PostgreSQL 一、安装 docker 安装 # docker-compose.yaml version: &#34;3&#34; services: postgres10-5432: image: &#34;postgres:10-bullseye&#34; container_name: postgres10-5432 shm_size: &#34;1gb&#34; restart: always ports: - &#34;5432:5432&#34; volumes: - /data/postgresql:/var/lib/postgresql/data - $PWD/init.sql:/docker-entrypoint-initdb.d/init.sql environment: - POSTGRES_PASSWORD=xxxxxxxxxxx # init.sql CREATE USER db_user WITH CREATEDB ENCRYPTED PASSWORD &#39;xxxxxxxxxx&#39;; alter user db_user superuser; mac ### install # 安装指定版本需要加@,例如 @14 brew install postgresql@14 # 查"/>
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-12-postgresql/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-12-security-info/" /><link rel="next" href="https://serialt.github.io/posts/2023-11-18-git/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2023-11-12-postgresql/" /><link rel="prev" href="https://serialt.github.io/posts/2023-11-11-go-basic/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -27,8 +27,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2023-11-12-postgresql\/"
-        },"genre": "posts","keywords": "pg, postgresql, db","wordcount":  2572 ,
-        "url": "https:\/\/serialt.github.io\/posts\/2023-11-12-postgresql\/","datePublished": "2023-11-12T10:30:27+08:00","dateModified": "2023-11-12T10:30:27+08:00","publisher": {
+        },"genre": "posts","keywords": "pg, postgresql, db","wordcount":  2715 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2023-11-12-postgresql\/","datePublished": "2024-08-11T11:30:27+08:00","dateModified": "2024-08-11T11:30:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">postgresql</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/database/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Database</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-12">2023-11-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2572 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-08-11">2024-08-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2715 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -150,7 +150,51 @@
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># init.sql</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span>CREATE USER db_user WITH CREATEDB ENCRYPTED PASSWORD <span class="s1">&#39;xxxxxxxxxx&#39;</span><span class="p">;</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span>alter user db_user superuser<span class="p">;</span><span class="err">
-</span></span></span></code></pre></div><h2 id="二配置">二、配置</h2>
+</span></span></span></code></pre></div><p>mac</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">### install </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装指定版本需要加@,例如 @14</span>
+</span></span><span class="line"><span class="cl">brew install postgresql@14
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看安装的包</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>localhost@Sugar ~<span class="o">]</span>🐳 brew <span class="nv">list</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span>&gt; Formulae
+</span></span><span class="line"><span class="cl">icu4c		openssl@1.1	postgresql@10	readline
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看包安装的位置</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>localhost@Sugar ~<span class="o">]</span>🐳 brew list postgresql@14
+</span></span><span class="line"><span class="cl">/opt/homebrew/Cellar/postgresql@14/14.12/bin/clusterdb
+</span></span><span class="line"><span class="cl">/opt/homebrew/Cellar/postgresql@14/14.12/bin/createdb
+</span></span><span class="line"><span class="cl">/opt/homebrew/Cellar/postgresql@14/14.12/bin/createuser
+</span></span><span class="line"><span class="cl">/opt/homebrew/Cellar/postgresql@14/14.12/bin/dropdb
+</span></span><span class="line"><span class="cl">/opt/homebrew/Cellar/postgresql@14/14.12/bin/dropuser
+</span></span><span class="line"><span class="cl">/opt/homebrew/Cellar/postgresql@14/14.12/bin/ecpg
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 配置环境变量</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PG_HOME</span><span class="o">=</span><span class="s2">&#34;/opt/homebrew/opt/postgresql@14&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PG_HOME</span>/bin:<span class="nv">$PATH</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 加载环境变量</span>
+</span></span><span class="line"><span class="cl"><span class="nb">source</span> ~/.bash_profile
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">### 初始化数据库</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看版本</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>localhost@Sugar ~<span class="o">]</span>🐳 pg_ctl -V
+</span></span><span class="line"><span class="cl">pg_ctl <span class="o">(</span>PostgreSQL<span class="o">)</span> 14.12 <span class="o">(</span>Homebrew<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 初始化数据库</span>
+</span></span><span class="line"><span class="cl">initdb --locale<span class="o">=</span>C -E UTF-8 /opt/homebrew/var/postgresql@14
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 启动服务</span>
+</span></span><span class="line"><span class="cl">brew services start postgresql@14
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 停止服务</span>
+</span></span><span class="line"><span class="cl">brew services start postgresql@14
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 非后台启动</span>
+</span></span><span class="line"><span class="cl">/opt/homebrew/opt/postgresql@14/bin/postgres -D /opt/homebrew/var/postgresql@14
+</span></span></code></pre></div><h2 id="二配置">二、配置</h2>
 <h3 id="1修改数据库时区">1、修改数据库时区</h3>
 <pre tabindex="0"><code>postgres=# show timezone;
  TimeZone 
@@ -428,7 +472,7 @@ postgres=# show timezone;
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-11-12</span>
+                <span>Updated on 2024-08-11</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
@@ -445,8 +489,7 @@ postgres=# show timezone;
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/2023-11-12-security-info/" class="prev" rel="prev" title="security-info"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>security-info</a>
-            <a href="/posts/2023-11-18-git/" class="next" rel="next" title="Git">Git<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/posts/2023-11-11-go-basic/" class="prev" rel="prev" title="Go basic"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Go basic</a></div>
 </div>
 </article></div>
             </main><footer class="footer">

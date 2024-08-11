@@ -4,7 +4,47 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 21 Jul 2024 21:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 11 Aug 2024 11:30:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>db</title>
+    <link>https://serialt.github.io/tags/db/</link>
+    <pubDate>Sun, 11 Aug 2024 11:30:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/db/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>pg</title>
+    <link>https://serialt.github.io/tags/pg/</link>
+    <pubDate>Sun, 11 Aug 2024 11:30:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/pg/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>postgresql</title>
+    <link>https://serialt.github.io/tags/postgresql/</link>
+    <pubDate>Sun, 11 Aug 2024 11:30:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/postgresql/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>basic</title>
+    <link>https://serialt.github.io/tags/basic/</link>
+    <pubDate>Sun, 11 Aug 2024 10:26:09 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/basic/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Go</title>
+    <link>https://serialt.github.io/tags/go/</link>
+    <pubDate>Sun, 11 Aug 2024 10:26:09 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/go/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>terraform-lib</title>
     <link>https://serialt.github.io/tags/terraform-lib/</link>
     <pubDate>Sun, 21 Jul 2024 21:26:27 &#43;0800</pubDate>
@@ -42,46 +82,6 @@
     <pubDate>Sat, 20 Jul 2024 09:21:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/protobuf/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>kratos</title>
-    <link>https://serialt.github.io/tags/kratos/</link>
-    <pubDate>Sat, 20 Jul 2024 09:20:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/kratos/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>cve</title>
-    <link>https://serialt.github.io/tags/cve/</link>
-    <pubDate>Mon, 01 Jul 2024 21:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/cve/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>openssh</title>
-    <link>https://serialt.github.io/tags/openssh/</link>
-    <pubDate>Mon, 01 Jul 2024 21:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/openssh/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>winsw</title>
-    <link>https://serialt.github.io/tags/winsw/</link>
-    <pubDate>Sun, 30 Jun 2024 15:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/winsw/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>java</title>
-    <link>https://serialt.github.io/tags/java/</link>
-    <pubDate>Sun, 30 Jun 2024 15:20:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/java/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

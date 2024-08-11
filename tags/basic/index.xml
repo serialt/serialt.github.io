@@ -4,13 +4,13 @@
         <link>https://serialt.github.io/tags/basic/</link>
         <description>basic - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:26:09 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/basic/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 11 Aug 2024 10:26:09 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/basic/" rel="self" type="application/rss+xml" /><item>
     <title>Go basic</title>
     <link>https://serialt.github.io/posts/2023-11-11-go-basic/</link>
-    <pubDate>Sat, 11 Nov 2023 10:26:09 &#43;0800</pubDate>
+    <pubDate>Sun, 11 Aug 2024 10:26:09 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-11-11-go-basic/</guid>
-    <description><![CDATA[1、变量定义 var name string var isOk bool // 隐式申明 a := 100 str := &#34;serialt&#34; // 批量声明 var ( a string b int c bool d float32 ) // 变量的初始化 var name string = &#34;github&#34; var age int = 10 var name, age = &#34;github&#34;, 11 // 类型推导 var name =]]></description>
+    <description><![CDATA[1、变量定义 var name string var isOk bool // 隐式申明 a := 100 str := &#34;sugar&#34; // 批量声明 var ( a string b int c bool d float32 ) // 变量的初始化 var name string = &#34;github&#34; var age int = 10 var name, age = &#34;github&#34;, 11 // 类型推导 var name =]]></description>
 </item>
 </channel>
 </rss>

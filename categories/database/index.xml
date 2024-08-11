@@ -4,21 +4,21 @@
         <link>https://serialt.github.io/categories/database/</link>
         <description>Database - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 27 Dec 2023 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/database/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 11 Aug 2024 11:30:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/database/" rel="self" type="application/rss+xml" /><item>
+    <title>postgresql</title>
+    <link>https://serialt.github.io/posts/2023-11-12-postgresql/</link>
+    <pubDate>Sun, 11 Aug 2024 11:30:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-12-postgresql/</guid>
+    <description><![CDATA[PostgreSQL 一、安装 docker 安装 # docker-compose.yaml version: &#34;3&#34; services: postgres10-5432: image: &#34;postgres:10-bullseye&#34; container_name: postgres10-5432 shm_size: &#34;1gb&#34; restart: always ports: - &#34;5432:5432&#34; volumes: - /data/postgresql:/var/lib/postgresql/data - $PWD/init.sql:/docker-entrypoint-initdb.d/init.sql environment: - POSTGRES_PASSWORD=xxxxxxxxxxx # init.sql CREATE USER db_user WITH CREATEDB ENCRYPTED PASSWORD &#39;xxxxxxxxxx&#39;; alter user db_user superuser; mac ### install # 安装指定版本需要加@,例如 @14 brew install postgresql@14 # 查]]></description>
+</item>
+<item>
     <title>SQL Server</title>
     <link>https://serialt.github.io/posts/2023-12-27-mssql/</link>
     <pubDate>Wed, 27 Dec 2023 20:26:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-12-27-mssql/</guid>
     <description><![CDATA[SQL Server docker run -e &#34;ACCEPT_EULA=Y&#34; -e &#34;SA_PASSWORD=Y.sa123456&#34; -p 1433:1433 --name mssql2022 -d mcr.microsoft.com/mssql/server:2022-latest 其中 sa123456 为 SQL Server sa 用户的密码，SA_PASSWORD=Y.sa123456 为密码，要求是最少8位的强密码，要有大写字]]></description>
-</item>
-<item>
-    <title>postgresql</title>
-    <link>https://serialt.github.io/posts/2023-11-12-postgresql/</link>
-    <pubDate>Sun, 12 Nov 2023 10:30:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-12-postgresql/</guid>
-    <description><![CDATA[PostgreSQL 一、安装 docker 安装 # docker-compose.yaml version: &#34;3&#34; services: postgres10-5432: image: &#34;postgres:10-bullseye&#34; container_name: postgres10-5432 shm_size: &#34;1gb&#34; restart: always ports: - &#34;5432:5432&#34; volumes: - /data/postgresql:/var/lib/postgresql/data - $PWD/init.sql:/docker-entrypoint-initdb.d/init.sql environment: - POSTGRES_PASSWORD=xxxxxxxxxxx # init.sql CREATE USER db_user WITH CREATEDB ENCRYPTED PASSWORD &#39;xxxxxxxxxx&#39;; alter user db_user superuser; 二、配置 1、修改数据库时区 postgres=# show timezone; TimeZone ---------- Etc/UTC (1 row) sed -i]]></description>
 </item>
 <item>
     <title>sqlite3</title>

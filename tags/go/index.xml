@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/tags/go/</link>
         <description>Go - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 02 Jun 2024 10:38:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/go/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 11 Aug 2024 10:26:09 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/go/" rel="self" type="application/rss+xml" /><item>
+    <title>Go basic</title>
+    <link>https://serialt.github.io/posts/2023-11-11-go-basic/</link>
+    <pubDate>Sun, 11 Aug 2024 10:26:09 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2023-11-11-go-basic/</guid>
+    <description><![CDATA[1、变量定义 var name string var isOk bool // 隐式申明 a := 100 str := &#34;sugar&#34; // 批量声明 var ( a string b int c bool d float32 ) // 变量的初始化 var name string = &#34;github&#34; var age int = 10 var name, age = &#34;github&#34;, 11 // 类型推导 var name =]]></description>
+</item>
+<item>
     <title>Go time</title>
     <link>https://serialt.github.io/posts/2024-06-02-go-time/</link>
     <pubDate>Sun, 02 Jun 2024 10:38:01 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-06-02-go-flag/</guid>
     <description><![CDATA[Go flag模块 参考链接：https://www.liwenzhou.com/posts/Go/go_flag/ Go语言内置的flag包实现了]]></description>
-</item>
-<item>
-    <title>Go boltdb</title>
-    <link>https://serialt.github.io/posts/2024-06-02-go-boltdb/</link>
-    <pubDate>Sun, 02 Jun 2024 10:25:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-02-go-boltdb/</guid>
-    <description><![CDATA[GO 文件数据库boltdb github地址: https://github.com/etcd-io/bbolt https://github.com/boltdb/bolt 由于作者个人能力有限，宣布不再维护，建议使用社区维护的bbolt 参考：https://zhua]]></description>
 </item>
 </channel>
 </rss>
