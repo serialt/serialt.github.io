@@ -4,7 +4,63 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 11 Aug 2024 11:30:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 11 Aug 2024 19:34:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>metallb</title>
+    <link>https://serialt.github.io/tags/metallb/</link>
+    <pubDate>Sun, 11 Aug 2024 19:34:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/metallb/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>kubeadm</title>
+    <link>https://serialt.github.io/tags/kubeadm/</link>
+    <pubDate>Sun, 11 Aug 2024 19:33:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/kubeadm/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>kubeadm-cert</title>
+    <link>https://serialt.github.io/tags/kubeadm-cert/</link>
+    <pubDate>Sun, 11 Aug 2024 19:32:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/kubeadm-cert/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>metallb-istio</title>
+    <link>https://serialt.github.io/tags/metallb-istio/</link>
+    <pubDate>Sun, 11 Aug 2024 19:31:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/metallb-istio/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>k8s-doc</title>
+    <link>https://serialt.github.io/tags/k8s-doc/</link>
+    <pubDate>Sun, 11 Aug 2024 19:30:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/k8s-doc/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>ingress-nginx</title>
+    <link>https://serialt.github.io/tags/ingress-nginx/</link>
+    <pubDate>Sun, 11 Aug 2024 19:27:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/ingress-nginx/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>containerd-exit</title>
+    <link>https://serialt.github.io/tags/containerd-exit/</link>
+    <pubDate>Sun, 11 Aug 2024 19:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/containerd-exit/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>db</title>
     <link>https://serialt.github.io/tags/db/</link>
     <pubDate>Sun, 11 Aug 2024 11:30:27 &#43;0800</pubDate>
@@ -26,62 +82,6 @@
     <pubDate>Sun, 11 Aug 2024 11:30:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/postgresql/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>basic</title>
-    <link>https://serialt.github.io/tags/basic/</link>
-    <pubDate>Sun, 11 Aug 2024 10:26:09 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/basic/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Go</title>
-    <link>https://serialt.github.io/tags/go/</link>
-    <pubDate>Sun, 11 Aug 2024 10:26:09 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/go/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>terraform-lib</title>
-    <link>https://serialt.github.io/tags/terraform-lib/</link>
-    <pubDate>Sun, 21 Jul 2024 21:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/terraform-lib/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>tf-lib</title>
-    <link>https://serialt.github.io/tags/tf-lib/</link>
-    <pubDate>Sun, 21 Jul 2024 21:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/tf-lib/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>terraform-dev</title>
-    <link>https://serialt.github.io/tags/terraform-dev/</link>
-    <pubDate>Sat, 20 Jul 2024 09:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/terraform-dev/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>tf-dev</title>
-    <link>https://serialt.github.io/tags/tf-dev/</link>
-    <pubDate>Sat, 20 Jul 2024 09:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/tf-dev/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Protobuf</title>
-    <link>https://serialt.github.io/tags/protobuf/</link>
-    <pubDate>Sat, 20 Jul 2024 09:21:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/protobuf/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

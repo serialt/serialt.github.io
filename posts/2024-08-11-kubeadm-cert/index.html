@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>kubeadm-cert - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="kubeadm-cert" />
+<meta property="og:description" content="kubeadm-cert 官方的 kubeadm 部署的集群 CA 有效期默认是10年，其他证书有效期默认是1年，1年有效期在真实使用过程中，往往不够，因此需要自行修改 CA 的有效期然后编译" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2024-08-11-kubeadm-cert/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-08-11T19:32:27+08:00" />
+<meta property="article:modified_time" content="2024-08-11T19:32:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="kubeadm-cert"/>
+<meta name="twitter:description" content="kubeadm-cert 官方的 kubeadm 部署的集群 CA 有效期默认是10年，其他证书有效期默认是1年，1年有效期在真实使用过程中，往往不够，因此需要自行修改 CA 的有效期然后编译"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2024-08-11-kubeadm-cert/" /><link rel="prev" href="https://serialt.github.io/posts/2024-08-11-k8s-metallb-istio/" /><link rel="next" href="https://serialt.github.io/posts/2024-08-11-kubeadm/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "kubeadm-cert",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2024-08-11-kubeadm-cert\/"
+        },"genre": "posts","keywords": "kubeadm-cert","wordcount":  3343 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2024-08-11-kubeadm-cert\/","datePublished": "2024-08-11T19:32:27+08:00","dateModified": "2024-08-11T19:32:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">kubeadm-cert</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a>&nbsp;<a href="/categories/k8s/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>k8s</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-08-11">2024-08-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3343 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#kubeadm-cert">kubeadm-cert</a>
+      <ul>
+        <li><a href="#一更新证书">一、更新证书</a></li>
+        <li><a href="#二编译kubeadm">二、编译kubeadm</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="kubeadm-cert">kubeadm-cert</h2>
+<p>官方的 kubeadm 部署的集群 CA 有效期默认是10年，其他证书有效期默认是1年，1年有效期在真实使用过程中，往往不够，因此需要自行修改 CA 的有效期然后编译；对于已经存在的集群，则可以修改 renew 的时间在让证书有效期达到10年。</p>
+<h3 id="一更新证书">一、更新证书</h3>
+<h4 id="1检查证书有效期">1、检查证书有效期</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">kubeadm certs check-expiration
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>check-expiration<span class="o">]</span> Reading configuration from the cluster...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>check-expiration<span class="o">]</span> FYI: You can look at this config file with <span class="s1">&#39;kubectl -n kube-system get cm kubeadm-config -o yaml&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CERTIFICATE                EXPIRES                  RESIDUAL TIME   CERTIFICATE AUTHORITY   EXTERNALLY MANAGED
+</span></span><span class="line"><span class="cl">admin.conf                 Aug 06, <span class="m">2022</span> 19:03 UTC   344d                                    no      
+</span></span><span class="line"><span class="cl">apiserver                  Aug 06, <span class="m">2022</span> 19:03 UTC   344d            ca                      no      
+</span></span><span class="line"><span class="cl">apiserver-etcd-client      Aug 06, <span class="m">2022</span> 19:03 UTC   344d            etcd-ca                 no      
+</span></span><span class="line"><span class="cl">apiserver-kubelet-client   Aug 06, <span class="m">2022</span> 19:03 UTC   344d            ca                      no      
+</span></span><span class="line"><span class="cl">controller-manager.conf    Aug 06, <span class="m">2022</span> 19:03 UTC   344d                                    no      
+</span></span><span class="line"><span class="cl">etcd-healthcheck-client    Aug 06, <span class="m">2022</span> 19:03 UTC   344d            etcd-ca                 no      
+</span></span><span class="line"><span class="cl">etcd-peer                  Aug 06, <span class="m">2022</span> 19:03 UTC   344d            etcd-ca                 no      
+</span></span><span class="line"><span class="cl">etcd-server                Aug 06, <span class="m">2022</span> 19:03 UTC   344d            etcd-ca                 no      
+</span></span><span class="line"><span class="cl">front-proxy-client         Aug 06, <span class="m">2022</span> 19:03 UTC   344d            front-proxy-ca          no      
+</span></span><span class="line"><span class="cl">scheduler.conf             Aug 06, <span class="m">2022</span> 19:03 UTC   344d                                    no      
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CERTIFICATE AUTHORITY   EXPIRES                  RESIDUAL TIME   EXTERNALLY MANAGED
+</span></span><span class="line"><span class="cl">ca                      Aug 04, <span class="m">2031</span> 19:03 UTC   9y              no      
+</span></span><span class="line"><span class="cl">etcd-ca                 Aug 04, <span class="m">2031</span> 19:03 UTC   9y              no      
+</span></span><span class="line"><span class="cl">front-proxy-ca          Aug 04, <span class="m">2031</span> 19:03 UTC   9y              no 
+</span></span></code></pre></div><p>该命令显示 <code>/etc/kubernetes/pki</code> 文件夹中的客户端证书以及 kubeadm（<code>admin.conf</code>,<code>controller-manager.conf</code> 和 <code>scheduler.conf</code>）使用的 KUBECONFIG 文件中嵌入的客户端证书的到期时间 / 剩余时间。</p>
+<p>另外，kubeadm 会显示用户证书是否由外部管理（<code>EXTERNALLY MANAGED</code>）。在这种情况下，用户应该小心的手动 / 使用其他工具来管理证书更新。</p>
+<blockquote>
+<p>**说明：**上面的列表中没有包含 kubelet.conf，因为 kubeadm 将 kubelet 配置为<a href="https://kubernetes.io/docs/tasks/tls/certificate-rotation/" target="_blank" rel="noopener noreffer ">自动更新证书</a>。轮换的证书位于目录 <code>/var/lib/kubelet/pki</code>。要修复过期的 kubelet 客户端证书，请参阅 <a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#kubelet-client-cert" target="_blank" rel="noopener noreffer ">kubelet 客户端证书轮换失败</a>。</p>
+</blockquote>
+<h4 id="2更新证书">2、更新证书</h4>
+<h5 id="1备份集群证书">1）备份集群证书</h5>
+<blockquote>
+<p>**说明：**如果你运行了一个 HA 集群，以下命令需要在所有 Master 节点上执行。</p>
+</blockquote>
+<pre tabindex="0"><code>cp -a /etc/kubernetes/ /etc/kubernetes-`date +%Y%m%d`
+kubectl get cm kubeadm-config -n kube-system -o yaml &gt; /root/kubeadm-config.yaml
+</code></pre><h5 id="2更新证书-1">2）更新证书</h5>
+<p>执行如下命令更新所有证书</p>
+<blockquote>
+<p>**说明：**如果你运行了一个 HA 集群，这个命令需要在所有 Master 节点上执行。</p>
+</blockquote>
+<pre tabindex="0"><code>kubeadm certs renew all
+</code></pre><p>出现类似以下输出说明证书更新完成，并且最后一行 <code>Done renewing certificates. You must restart the kube-apiserver, kube-controller-manager, kube-scheduler and etcd, so that they can use the new certificates.</code> 提示要求要重启 <code>kube-apiserver</code>、<code>kube-controller-manager</code>、<code>kube-scheduler</code> 和 <code>etcd</code> 使其使用新证书。</p>
+<pre tabindex="0"><code>[renew] Reading configuration from the cluster...
+[renew] FYI: You can look at this config file with &#39;kubectl -n kube-system get cm kubeadm-config -o yaml&#39;
+
+certificate embedded in the kubeconfig file for the admin to use and for kubeadm itself renewed
+certificate for serving the Kubernetes API renewed
+certificate the apiserver uses to access etcd renewed
+certificate for the API server to connect to kubelet renewed
+certificate embedded in the kubeconfig file for the controller manager to use renewed
+certificate for liveness probes to healthcheck etcd renewed
+certificate for etcd nodes to communicate with each other renewed
+certificate for serving etcd renewed
+certificate for the front proxy client renewed
+certificate embedded in the kubeconfig file for the scheduler manager to use renewed
+
+Done renewing certificates. You must restart the kube-apiserver, kube-controller-manager, kube-scheduler and etcd, so that they can use the new certificates.
+</code></pre><p>确认证书是否续期成功</p>
+<pre tabindex="0"><code># kubeadm certs check-expiration
+[check-expiration] Reading configuration from the cluster...
+[check-expiration] FYI: You can look at this config file with &#39;kubectl -n kube-system get cm kubeadm-config -o yaml&#39;
+
+CERTIFICATE                EXPIRES                  RESIDUAL TIME   CERTIFICATE AUTHORITY   EXTERNALLY MANAGED
+admin.conf                 Aug 29, 2022 04:20 UTC   364d                                    no      
+apiserver                  Aug 29, 2022 04:20 UTC   364d            ca                      no      
+apiserver-etcd-client      Aug 29, 2022 04:20 UTC   364d            etcd-ca                 no      
+apiserver-kubelet-client   Aug 29, 2022 04:20 UTC   364d            ca                      no      
+controller-manager.conf    Aug 29, 2022 04:20 UTC   364d                                    no      
+etcd-healthcheck-client    Aug 29, 2022 04:20 UTC   364d            etcd-ca                 no      
+etcd-peer                  Aug 29, 2022 04:20 UTC   364d            etcd-ca                 no      
+etcd-server                Aug 29, 2022 04:20 UTC   364d            etcd-ca                 no      
+front-proxy-client         Aug 29, 2022 04:20 UTC   364d            front-proxy-ca          no      
+scheduler.conf             Aug 29, 2022 04:20 UTC   364d                                    no      
+
+CERTIFICATE AUTHORITY   EXPIRES                  RESIDUAL TIME   EXTERNALLY MANAGED
+ca                      Aug 04, 2031 19:03 UTC   9y              no      
+etcd-ca                 Aug 04, 2031 19:03 UTC   9y              no      
+front-proxy-ca          Aug 04, 2031 19:03 UTC   9y              no
+</code></pre><blockquote>
+<p>**说明：**从命令输出可以看到，所有客户端证书的到期时间均发生了变化，不过不是顺延一年， 而是从执行 renew 成功的时间开始续签一年。</p>
+</blockquote>
+<h5 id="3修改kube-controller-manager-续签kubelet证书时间">3）修改kube-controller-manager 续签kubelet证书时间</h5>
+<p>kubelet证书自动更新时间续签是1年，可以修改续签时间或者手动更新kubelet证书</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 查看帮助手册</span>
+</span></span><span class="line"><span class="cl">kubectl <span class="nb">exec</span> -ti kube-controller-manager-master-01 -n kube-system -- kube-controller-manager --help 
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 增加一行     - --cluster-signing-duration=87600h0m0s</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># sed命令</span>
+</span></span><span class="line"><span class="cl">cp /etc/kubernetes/manifests/kube-controller-manager.yaml  /root/kube-controller-manager_bak.yaml  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sed -i <span class="s1">&#39;/- kube-controller-manager/a \    - --cluster-signing-duration=87600h0m0s&#39;</span> /etc/kubernetes/manifests/kube-controller-manager.yaml  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">diff /etc/kubernetes/manifests/kube-controller-manager.yaml   /root/kube-controller-manager_bak.yaml  
+</span></span><span class="line"><span class="cl">14d13
+</span></span><span class="line"><span class="cl">&lt;     - --cluster-signing-duration<span class="o">=</span>87600h0m0s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">vi /etc/kubernetes/manifests/kube-controller-manager.yaml
+</span></span><span class="line"><span class="cl">-------
+</span></span><span class="line"><span class="cl">  name: kube-controller-manager
+</span></span><span class="line"><span class="cl">  namespace: kube-system
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  containers:
+</span></span><span class="line"><span class="cl">  - command:
+</span></span><span class="line"><span class="cl">    - kube-controller-manager
+</span></span><span class="line"><span class="cl">    - --cluster-signing-duration<span class="o">=</span>87600h0m0s
+</span></span><span class="line"><span class="cl">    - --allocate-node-cidrs<span class="o">=</span><span class="nb">true</span>
+</span></span><span class="line"><span class="cl">    - --authentication-kubeconfig<span class="o">=</span>/etc/kubernetes/controller-manager.conf
+</span></span><span class="line"><span class="cl">    - --authorization-kubeconfig<span class="o">=</span>/etc/kubernetes/controller-manager.conf
+</span></span><span class="line"><span class="cl">    - --bind-address<span class="o">=</span>127.0.0.1
+</span></span><span class="line"><span class="cl">    - --client-ca-file<span class="o">=</span>/etc/kubernetes/pki/ca.crt
+</span></span><span class="line"><span class="cl">--------
+</span></span></code></pre></div><h5 id="4启用证书">4）启用证书</h5>
+<p>依次在所有 Master 节点上执行如下命令重启 <code>kube-apiserver</code>、<code>kube-controller-manager</code>、<code>kube-scheduler</code> 和 <code>etcd</code> 使其启用新证书。</p>
+<pre tabindex="0"><code># kubectl delete pod -n kube-system xxxx_pod_name
+
+kubectl delete pod -n kube-system kube-apiserver-cnmesmn1
+kubectl delete pod -n kube-system kube-controller-manager-cnmesmn1
+kubectl delete pod -n kube-system kube-scheduler-cnmesmn1
+kubectl delete pod -n kube-system etcd-cnmesmn1
+</code></pre><pre tabindex="0"><code>docker ps |grep -E &#39;k8s_kube-apiserver|k8s_kube-controller-manager|k8s_kube-scheduler|k8s_etcd&#39; | awk -F &#39; &#39; &#39;{print $1}&#39; |xargs docker restart
+</code></pre><blockquote>
+<p>警告：执行完一台后请务必通过 <code>kubectl get pod -n kube-system</code> 确认对应 Master 节点上的 <code>kube-apiserver</code>、<code>kube-controller-manager</code>、<code>kube-scheduler</code> 和 <code>etcd</code> 服务 Pod 均处于 <code>Running</code> 状态并就绪后再开始操作下一台</p>
+</blockquote>
+<h5 id="5替换-config-文件">5）替换 config 文件</h5>
+<p>执行如下命令替换 config 文件</p>
+<blockquote>
+<p>**说明：**如果你运行了一个 HA 集群，这个命令需要在所有 Master 节点上执行</p>
+</blockquote>
+<pre tabindex="0"><code>cp -a -i /etc/kubernetes/admin.conf /root/.kube/config
+</code></pre><h5 id="6重启所有node节点-kubelet">6）重启所有node节点 kubelet</h5>
+<pre tabindex="0"><code>systemctl restart kubelet
+</code></pre><h5 id="7检查kubelet的证书更新">7）检查kubelet的证书更新</h5>
+<pre tabindex="0"><code>kubectl get csr
+</code></pre><pre tabindex="0"><code> openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -text
+</code></pre><p>修改系统时间测试</p>
+<pre tabindex="0"><code> 
+date -s &#34;03/23/2024 18:15:55&#34;
+</code></pre><h4 id="3手动更新kubelet证书-可选">3、手动更新kubelet证书 [可选]</h4>
+<p><a href="https://kubernetes.io/zh-cn/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/" target="_blank" rel="noopener noreffer ">https://kubernetes.io/zh-cn/docs/tasks/administer-cluster/kubeadm/kubeadm-certs/</a></p>
+<p>1）删除kubelet配置</p>
+<pre tabindex="0"><code>mkdir -p ./kubelet_bak/var_lib
+cp /etc/kubernetes/kubelet.conf ./kubelet_bak/
+cp /var/lib/kubelet/pki/kubelet-client* ./kubelet_bak/var_lib/
+</code></pre><p>2）在master节点生成kubelet证书</p>
+<pre tabindex="0"><code># $NODE 必须设置为集群中需要更新的节点名字
+export NODE=cnmesmn1
+kubeadm kubeconfig user --org system:nodes --client-name system:node:${NODE} --config kubeadm-init.yml &gt; ${NODE}-kubelet.conf
+
+cat ${NODE}-kubelet.conf &gt;   /etc/kubernetes/kubelet.conf 
+</code></pre><pre tabindex="0"><code>export NODE=node-01
+kubeadm kubeconfig user --org system:nodes --client-name system:node:${NODE} --config kubeadm-init.yml &gt; ${NODE}-kubelet.conf
+</code></pre><p>3）将生成的节点证书替换对应的node节点上的证书，作为 <code>/etc/kubernetes/kubelet.conf</code></p>
+<p>4）重启kubelet，等待 <code>/var/lib/kubelet/pki/kubelet-client-current.pem</code> 重新创建</p>
+<pre tabindex="0"><code>rm -rf /var/lib/kubelet/pki/kubelet-client* 
+systemctl restart kubelet
+</code></pre><p>5）手动编辑 <code>kubelet.conf</code> 指向轮换的 kubelet 客户端证书，方法是将 <code>client-certificate-data</code> 和 <code>client-key-data</code> 替换为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sed -i <span class="s2">&#34;/client-certificate/a \    client-certificate: /var/lib/kubelet/pki/kubelet-client-current.pem&#34;</span>  /etc/kubernetes/kubelet.conf
+</span></span><span class="line"><span class="cl">sed -i <span class="s1">&#39;/client-key/a \    client-key: /var/lib/kubelet/pki/kubelet-client-current.pem&#39;</span>  /etc/kubernetes/kubelet.conf
+</span></span><span class="line"><span class="cl">sed -i <span class="s1">&#39;/client-certificate-data/d&#39;</span>  /etc/kubernetes/kubelet.conf
+</span></span><span class="line"><span class="cl">sed -i <span class="s1">&#39;/client-key-data/d&#39;</span>  /etc/kubernetes/kubelet.conf
+</span></span></code></pre></div><p>6）再次重启kubelet，确保节点状况变为 <code>Ready</code></p>
+<pre tabindex="0"><code>systemctl restart kubelet
+</code></pre><p>检查证书有效期：</p>
+<pre tabindex="0"><code>kubeadm certs check-expiration
+
+for item in `find /etc/kubernetes/pki -maxdepth 2 -name &#34;*.crt&#34;`;do echo &#34;==========$item=========&#34;;openssl x509 -in $item -text -noout| grep Not;done
+</code></pre><h3 id="二编译kubeadm">二、编译kubeadm</h3>
+<p>kubeadm 默认证书为一年，一年过期后，会导致 api service 不可用，使用过程中会出现：x509: certificate has expired or is not yet valid，Google 建议通过不停更新版本来自动更新证书，若需要长期有效，建议自己编译kubeadm</p>
+<p>参考文档：https://zhuanlan.zhihu.com/p/444057661</p>
+<p>以下兼容版本：</p>
+<ul>
+<li>1.17.0</li>
+<li>1.18.0</li>
+<li>1.19.0</li>
+<li>1.20.0</li>
+<li>1.21.0</li>
+<li>1.22.0</li>
+<li>1.23.0</li>
+</ul>
+<h4 id="1下载源码">1、下载源码</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>sugar@imau github<span class="o">]</span>$ wget https://github.com/kubernetes/kubernetes/archive/v1.21.14.tar.gz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>sugar@imau github<span class="o">]</span>$ tar -xf v1.21.14.tar.gz 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>sugar@imau kubernetes-1.21.14<span class="o">]</span>$ 
+</span></span></code></pre></div><h4 id="2修改ca有效期">2、修改ca有效期</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">ca证书默认10年</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">sugar</span><span class="err">@</span><span class="nx">imau</span> <span class="nx">kubernetes</span><span class="o">-</span><span class="mf">1.21.14</span><span class="p">]</span><span class="err">$</span> <span class="nx">vim</span> <span class="nx">staging</span><span class="o">/</span><span class="nx">src</span><span class="o">/</span><span class="nx">k8s</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">client</span><span class="o">-</span><span class="k">go</span><span class="o">/</span><span class="nx">util</span><span class="o">/</span><span class="nx">cert</span><span class="o">/</span><span class="nx">cert</span><span class="p">.</span><span class="k">go</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 这个方法里面 NotAfter:              now.Add(duration365d * 10).UTC()
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 默认有效期就是 10 年，改成 100 年
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 输入 /NotAfter 查找，回车定位
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">NewSelfSignedCACert</span><span class="p">(</span><span class="nx">cfg</span> <span class="nx">Config</span><span class="p">,</span> <span class="nx">key</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">Signer</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">x509</span><span class="p">.</span><span class="nx">Certificate</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">now</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">tmpl</span> <span class="o">:=</span> <span class="nx">x509</span><span class="p">.</span><span class="nx">Certificate</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">SerialNumber</span><span class="p">:</span> <span class="nb">new</span><span class="p">(</span><span class="nx">big</span><span class="p">.</span><span class="nx">Int</span><span class="p">).</span><span class="nf">SetInt64</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">Subject</span><span class="p">:</span> <span class="nx">pkix</span><span class="p">.</span><span class="nx">Name</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">CommonName</span><span class="p">:</span>   <span class="nx">cfg</span><span class="p">.</span><span class="nx">CommonName</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">Organization</span><span class="p">:</span> <span class="nx">cfg</span><span class="p">.</span><span class="nx">Organization</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">NotBefore</span><span class="p">:</span>             <span class="nx">now</span><span class="p">.</span><span class="nf">UTC</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// NotAfter:              now.Add(duration365d * 10).UTC(),
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="nx">NotAfter</span><span class="p">:</span>              <span class="nx">now</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="nx">duration365d</span> <span class="o">*</span> <span class="mi">100</span><span class="p">).</span><span class="nf">UTC</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">KeyUsage</span><span class="p">:</span>              <span class="nx">x509</span><span class="p">.</span><span class="nx">KeyUsageKeyEncipherment</span> <span class="p">|</span> <span class="nx">x509</span><span class="p">.</span><span class="nx">KeyUsageDigitalSignature</span> <span class="p">|</span> <span class="nx">x509</span><span class="p">.</span><span class="nx">KeyUsageCertSign</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">BasicConstraintsValid</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">IsCA</span><span class="p">:</span>                  <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">certDERBytes</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">x509</span><span class="p">.</span><span class="nf">CreateCertificate</span><span class="p">(</span><span class="nx">cryptorand</span><span class="p">.</span><span class="nx">Reader</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">tmpl</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">tmpl</span><span class="p">,</span> <span class="nx">key</span><span class="p">.</span><span class="nf">Public</span><span class="p">(),</span> <span class="nx">key</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">x509</span><span class="p">.</span><span class="nf">ParseCertificate</span><span class="p">(</span><span class="nx">certDERBytes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>修改证书有效期为 100 年（默认为 1 年）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">vim</span> <span class="p">.</span><span class="o">/</span><span class="nx">cmd</span><span class="o">/</span><span class="nx">kubeadm</span><span class="o">/</span><span class="nx">app</span><span class="o">/</span><span class="nx">constants</span><span class="o">/</span><span class="nx">constants</span><span class="p">.</span><span class="k">go</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 就是这个常量定义 CertificateValidity，改成 * 100 年
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 输入 /CertificateValidity 查找，回车定位
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">const</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// KubernetesDir is the directory Kubernetes owns for storing various configuration files
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">KubernetesDir</span> <span class="p">=</span> <span class="s">&#34;/etc/kubernetes&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// ManifestsSubDirName defines directory name to store manifests
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">ManifestsSubDirName</span> <span class="p">=</span> <span class="s">&#34;manifests&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// TempDirForKubeadm defines temporary directory for kubeadm
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// should be joined with KubernetesDir.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">TempDirForKubeadm</span> <span class="p">=</span> <span class="s">&#34;tmp&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// CertificateValidity defines the validity for all the signed certificates generated by kubeadm
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// CertificateValidity = time.Hour * 24 * 365
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">CertificateValidity</span> <span class="p">=</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Hour</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">365</span> <span class="o">*</span> <span class="mi">100</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// CACertAndKeyBaseName defines certificate authority base name
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">CACertAndKeyBaseName</span> <span class="p">=</span> <span class="s">&#34;ca&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// CACertName defines certificate name
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">CACertName</span> <span class="p">=</span> <span class="s">&#34;ca.crt&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// CAKeyName defines certificate name
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">CAKeyName</span> <span class="p">=</span> <span class="s">&#34;ca.key&#34;</span>
+</span></span></code></pre></div><p>验证一下已经正确修改：</p>
+<pre tabindex="0"><code>cat ./staging/src/k8s.io/client-go/util/cert/cert.go | grep NotAfter
+cat ./cmd/kubeadm/app/constants/constants.go | grep CertificateValidity
+
+git diff
+</code></pre><h4 id="3编译">3、编译</h4>
+<p>为了不影响机器环境，采用docker 中编译</p>
+<p>1）制作build的基础镜像</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> rockylinux:9</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">LABEL</span> <span class="nv">mantainer</span><span class="o">=</span><span class="s2">&#34;serialt &lt;tserialt@gmail.com&gt; rocky9 image&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># change yum repo to ustc</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span>   sed -e <span class="s1">&#39;s|^mirrorlist=|#mirrorlist=|g&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e <span class="s1">&#39;s|^#baseurl=http://dl.rockylinux.org/$contentdir|baseurl=https://mirrors.ustc.edu.cn/rocky|g&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -i.bak <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    /etc/yum.repos.d/rocky*.repo <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    yum -y install epel-release <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    sed -e <span class="s1">&#39;s|^metalink=|#metalink=|g&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e <span class="s1">&#39;s|^#baseurl=https\?://download.fedoraproject.org/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e <span class="s1">&#39;s|^#baseurl=https\?://download.example/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -i.bak <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    /etc/yum.repos.d/epel*.repo<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># install base software</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span>  yum -y install git vim-enhanced bash-completion wget gcc make golang <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    yum groupinstall <span class="s2">&#34;Development Tools&#34;</span> -y <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    yum -y upgrade  <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    yum clean all<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> LANG zh_CN.UTF-8<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> TZ <span class="s2">&#34;Asia/Shanghai&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /root</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 22 80 443</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">CMD</span> /bin/bash<span class="err">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 编译kubeadm, 这里主要编译 kubeadm 即可</span>
+</span></span><span class="line"><span class="cl">make all <span class="nv">WHAT</span><span class="o">=</span>cmd/kubeadm <span class="nv">GOFLAGS</span><span class="o">=</span>-v
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 编译 kubelet</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># make all WHAT=cmd/kubelet GOFLAGS=-v</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 编译 kubectl</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># make all WHAT=cmd/kubectl GOFLAGS=-v</span>
+</span></span></code></pre></div><p>CentOS：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">yum groupinstall <span class="s2">&#34;Development Tools&#34;</span> -y <span class="c1">#gcc, make etc.</span>
+</span></span><span class="line"><span class="cl">yum install rsync jq -y
+</span></span></code></pre></div><p>Ubuntu：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt install build-essential <span class="c1">#(Following command will install essential commands like gcc, make etc.)</span>
+</span></span><span class="line"><span class="cl">sudo apt install rsync jq -y
+</span></span></code></pre></div><p>GoLang 环境</p>
+<p>查看 kube-cross 的 TAG 版本号</p>
+<pre tabindex="0"><code>[root@51 kubernetes-1.21.14]# cat ./build/build-image/cross/VERSION
+v1.21.0-go1.16.15-buster.0
+</code></pre><ul>
+<li>GitHub：https://github.com/serialt/kubeadm</li>
+</ul>
+<h4 id="4更新证书">4、更新证书</h4>
+<p>如果是使用原版 kubeadm 安装之后，可以手动执行命令更新证书有效期到 100 年，但因为ca有效期是10年，使用kubeadm更新证书的时候并不会更新ca证书，建议修改到9年；或者使用编译的kubeadm 去创建集群</p>
+<p>可以先备份证书，证书在 /etc/kubernetes/pki</p>
+<p>1）检查证书到期时间</p>
+<pre tabindex="0"><code>kubeadm certs check-expiration
+# 早期版本 (1.19 及之前版本) 命令如下
+#kubeadm alpha certs check-expiration
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@master-03 ~<span class="o">]</span><span class="c1"># kubeadm certs check-expiration</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>check-expiration<span class="o">]</span> Reading configuration from the cluster...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>check-expiration<span class="o">]</span> FYI: You can look at this config file with <span class="s1">&#39;kubectl -n kube-system get cm kubeadm-config -o yaml&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CERTIFICATE                EXPIRES                  RESIDUAL TIME   CERTIFICATE AUTHORITY   EXTERNALLY MANAGED
+</span></span><span class="line"><span class="cl">admin.conf                 Nov 13, <span class="m">2023</span> 14:19 UTC   337d            ca                      no      
+</span></span><span class="line"><span class="cl">apiserver                  Nov 13, <span class="m">2023</span> 14:19 UTC   337d            ca                      no      
+</span></span><span class="line"><span class="cl">apiserver-etcd-client      Nov 13, <span class="m">2023</span> 14:19 UTC   337d            etcd-ca                 no      
+</span></span><span class="line"><span class="cl">apiserver-kubelet-client   Nov 13, <span class="m">2023</span> 14:19 UTC   337d            ca                      no      
+</span></span><span class="line"><span class="cl">controller-manager.conf    Nov 13, <span class="m">2023</span> 14:19 UTC   337d            ca                      no      
+</span></span><span class="line"><span class="cl">etcd-healthcheck-client    Nov 13, <span class="m">2023</span> 14:19 UTC   337d            etcd-ca                 no      
+</span></span><span class="line"><span class="cl">etcd-peer                  Nov 13, <span class="m">2023</span> 14:19 UTC   337d            etcd-ca                 no      
+</span></span><span class="line"><span class="cl">etcd-server                Nov 13, <span class="m">2023</span> 14:19 UTC   337d            etcd-ca                 no      
+</span></span><span class="line"><span class="cl">front-proxy-client         Nov 13, <span class="m">2023</span> 14:19 UTC   337d            front-proxy-ca          no      
+</span></span><span class="line"><span class="cl">scheduler.conf             Nov 13, <span class="m">2023</span> 14:19 UTC   337d            ca                      no      
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CERTIFICATE AUTHORITY   EXPIRES                  RESIDUAL TIME   EXTERNALLY MANAGED
+</span></span><span class="line"><span class="cl">ca                      Nov 10, <span class="m">2032</span> 14:19 UTC   9y              no      
+</span></span><span class="line"><span class="cl">etcd-ca                 Nov 10, <span class="m">2032</span> 14:19 UTC   9y              no      
+</span></span><span class="line"><span class="cl">front-proxy-ca          Nov 10, <span class="m">2032</span> 14:19 UTC   9y              no      
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master-03 ~<span class="o">]</span><span class="c1"># </span>
+</span></span></code></pre></div><p>2）续订全部证书</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@master-03 opt<span class="o">]</span><span class="c1"># ./kubeadm-v1.21.14-linux-amd64-100y certs renew all</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>renew<span class="o">]</span> Reading configuration from the cluster...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>renew<span class="o">]</span> FYI: You can look at this config file with <span class="s1">&#39;kubectl -n kube-system get cm kubeadm-config -o yaml&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">certificate embedded in the kubeconfig file <span class="k">for</span> the admin to use and <span class="k">for</span> kubeadm itself renewed
+</span></span><span class="line"><span class="cl">certificate <span class="k">for</span> serving the Kubernetes API renewed
+</span></span><span class="line"><span class="cl">certificate the apiserver uses to access etcd renewed
+</span></span><span class="line"><span class="cl">certificate <span class="k">for</span> the API server to connect to kubelet renewed
+</span></span><span class="line"><span class="cl">certificate embedded in the kubeconfig file <span class="k">for</span> the controller manager to use renewed
+</span></span><span class="line"><span class="cl">certificate <span class="k">for</span> liveness probes to healthcheck etcd renewed
+</span></span><span class="line"><span class="cl">certificate <span class="k">for</span> etcd nodes to communicate with each other renewed
+</span></span><span class="line"><span class="cl">certificate <span class="k">for</span> serving etcd renewed
+</span></span><span class="line"><span class="cl">certificate <span class="k">for</span> the front proxy client renewed
+</span></span><span class="line"><span class="cl">certificate embedded in the kubeconfig file <span class="k">for</span> the scheduler manager to use renewed
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Done renewing certificates. You must restart the kube-apiserver, kube-controller-manager, kube-scheduler and etcd, so that they can use the new certificates.
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master-03 opt<span class="o">]</span><span class="c1"># systemctl restart kubelet</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master-03 opt<span class="o">]</span><span class="c1"># </span>
+</span></span></code></pre></div><p>重启kubelet</p>
+<pre tabindex="0"><code>[root@master-03 opt]# systemctl restart kubelet
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@master-03 opt<span class="o">]</span><span class="c1"># kubeadm certs check-expiration</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>check-expiration<span class="o">]</span> Reading configuration from the cluster...
+</span></span><span class="line"><span class="cl"><span class="o">[</span>check-expiration<span class="o">]</span> FYI: You can look at this config file with <span class="s1">&#39;kubectl -n kube-system get cm kubeadm-config -o yaml&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CERTIFICATE                EXPIRES                  RESIDUAL TIME   CERTIFICATE AUTHORITY   EXTERNALLY MANAGED
+</span></span><span class="line"><span class="cl">admin.conf                 Nov 16, <span class="m">2122</span> 17:06 UTC   99y             ca                      no      
+</span></span><span class="line"><span class="cl">apiserver                  Nov 16, <span class="m">2122</span> 17:06 UTC   99y             ca                      no      
+</span></span><span class="line"><span class="cl">apiserver-etcd-client      Nov 16, <span class="m">2122</span> 17:06 UTC   99y             etcd-ca                 no      
+</span></span><span class="line"><span class="cl">apiserver-kubelet-client   Nov 16, <span class="m">2122</span> 17:06 UTC   99y             ca                      no      
+</span></span><span class="line"><span class="cl">controller-manager.conf    Nov 16, <span class="m">2122</span> 17:06 UTC   99y             ca                      no      
+</span></span><span class="line"><span class="cl">etcd-healthcheck-client    Nov 16, <span class="m">2122</span> 17:06 UTC   99y             etcd-ca                 no      
+</span></span><span class="line"><span class="cl">etcd-peer                  Nov 16, <span class="m">2122</span> 17:06 UTC   99y             etcd-ca                 no      
+</span></span><span class="line"><span class="cl">etcd-server                Nov 16, <span class="m">2122</span> 17:06 UTC   99y             etcd-ca                 no      
+</span></span><span class="line"><span class="cl">front-proxy-client         Nov 16, <span class="m">2122</span> 17:06 UTC   99y             front-proxy-ca          no      
+</span></span><span class="line"><span class="cl">scheduler.conf             Nov 16, <span class="m">2122</span> 17:06 UTC   99y             ca                      no      
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CERTIFICATE AUTHORITY   EXPIRES                  RESIDUAL TIME   EXTERNALLY MANAGED
+</span></span><span class="line"><span class="cl">ca                      Nov 10, <span class="m">2032</span> 14:19 UTC   9y              no      
+</span></span><span class="line"><span class="cl">etcd-ca                 Nov 10, <span class="m">2032</span> 14:19 UTC   9y              no      
+</span></span><span class="line"><span class="cl">front-proxy-ca          Nov 10, <span class="m">2032</span> 14:19 UTC   9y              no      
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master-03 opt<span class="o">]</span><span class="c1"># </span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-08-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/kubeadm-cert/">kubeadm-cert</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2024-08-11-k8s-metallb-istio/" class="prev" rel="prev" title="metallb-istio"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>metallb-istio</a>
+            <a href="/posts/2024-08-11-kubeadm/" class="next" rel="next" title="kubeadm">kubeadm<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>k8s-doc - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="k8s-doc" />
+<meta property="og:description" content="k8s doc 1、节点加入失败 日志信息 ...... [control-plane] Creating static Pod manifest for &#34;kube-controller-manager&#34; W0329 00:01:51.364121 19209 manifests.go:214] the default kube-apiserver authorization-mode is &#34;Node,RBAC&#34;; using &#34;Node,RBAC&#34; [control-plane] Creating static Pod manifest for &#34;kube-scheduler&#34; W0329 00:01:51.373807 19209 manifests.go:214] the default kube-apiserver authorization-mode is &#34;Node,RBAC&#34;; using &#34;Node,RBAC&#34; [check-etcd] Checking that the etcd cluster is healthy error execution phase check-etcd: etcd cluster is not healthy:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2024-08-11-k8s-doc/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-08-11T19:30:27+08:00" />
+<meta property="article:modified_time" content="2024-08-11T19:30:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="k8s-doc"/>
+<meta name="twitter:description" content="k8s doc 1、节点加入失败 日志信息 ...... [control-plane] Creating static Pod manifest for &#34;kube-controller-manager&#34; W0329 00:01:51.364121 19209 manifests.go:214] the default kube-apiserver authorization-mode is &#34;Node,RBAC&#34;; using &#34;Node,RBAC&#34; [control-plane] Creating static Pod manifest for &#34;kube-scheduler&#34; W0329 00:01:51.373807 19209 manifests.go:214] the default kube-apiserver authorization-mode is &#34;Node,RBAC&#34;; using &#34;Node,RBAC&#34; [check-etcd] Checking that the etcd cluster is healthy error execution phase check-etcd: etcd cluster is not healthy:"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2024-08-11-k8s-doc/" /><link rel="prev" href="https://serialt.github.io/posts/2024-08-11-ingress-nginx/" /><link rel="next" href="https://serialt.github.io/posts/2024-08-11-k8s-metallb-istio/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "k8s-doc",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2024-08-11-k8s-doc\/"
+        },"genre": "posts","keywords": "k8s-doc","wordcount":  1278 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2024-08-11-k8s-doc\/","datePublished": "2024-08-11T19:30:27+08:00","dateModified": "2024-08-11T19:30:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">k8s-doc</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a>&nbsp;<a href="/categories/k8s/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>k8s</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-08-11">2024-08-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1278 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#k8s-doc">k8s doc</a>
+      <ul>
+        <li><a href="#1节点加入失败">1、节点加入失败</a></li>
+        <li><a href="#1svc命名问题导致ingress-nginx无法映射端口">1、svc命名问题，导致ingress nginx无法映射端口</a></li>
+        <li><a href="#2deployment创建pod失败">2、deployment创建pod失败</a></li>
+        <li><a href="#3debug-pod">3、debug pod</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="k8s-doc">k8s doc</h2>
+<h3 id="1节点加入失败">1、节点加入失败</h3>
+<p>日志信息</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">......
+</span></span><span class="line"><span class="cl"><span class="o">[</span>control-plane<span class="o">]</span> Creating static Pod manifest <span class="k">for</span> <span class="s2">&#34;kube-controller-manager&#34;</span>
+</span></span><span class="line"><span class="cl">W0329 00:01:51.364121   <span class="m">19209</span> manifests.go:214<span class="o">]</span> the default kube-apiserver authorization-mode is <span class="s2">&#34;Node,RBAC&#34;</span><span class="p">;</span> using <span class="s2">&#34;Node,RBAC&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>control-plane<span class="o">]</span> Creating static Pod manifest <span class="k">for</span> <span class="s2">&#34;kube-scheduler&#34;</span>
+</span></span><span class="line"><span class="cl">W0329 00:01:51.373807   <span class="m">19209</span> manifests.go:214<span class="o">]</span> the default kube-apiserver authorization-mode is <span class="s2">&#34;Node,RBAC&#34;</span><span class="p">;</span> using <span class="s2">&#34;Node,RBAC&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>check-etcd<span class="o">]</span> Checking that the etcd cluster is healthy
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">error execution phase check-etcd: etcd cluster is not healthy: failed to dial endpoint https://10.8.18.105:2379 
+</span></span><span class="line"><span class="cl">with maintenance client: context deadline exceeded
+</span></span><span class="line"><span class="cl">To see the stack trace of this error execute with --v<span class="o">=</span><span class="m">5</span> or higher
+</span></span></code></pre></div><p>根据关键信息 <code>&quot;error execution phase check-etcd&quot;</code> 可知，可能是在执行加入 <code>etcd</code> 时候出现的错误，导致 <code>master</code> 无法加入原先的 <code>kubernetes</code> 集群。</p>
+<p>解决办法：</p>
+<h4 id="1获取-etcd-镜像列表">1）获取 Etcd 镜像列表</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="p">[</span><span class="n">root</span><span class="o">@</span><span class="n">k8s</span><span class="o">-</span><span class="n">master01</span><span class="w"> </span><span class="o">~</span><span class="p">]</span><span class="o">#</span><span class="w"> </span><span class="n">kubectl</span><span class="w"> </span><span class="k">get</span><span class="w"> </span><span class="n">pods</span><span class="w"> </span><span class="o">-</span><span class="n">n</span><span class="w"> </span><span class="n">kube</span><span class="o">-</span><span class="k">system</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">grep</span><span class="w"> </span><span class="n">etcd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">etcd</span><span class="o">-</span><span class="n">k8s</span><span class="o">-</span><span class="n">master01</span><span class="w">                         </span><span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="w">     </span><span class="n">Running</span><span class="w">            </span><span class="mi">4</span><span class="w">          </span><span class="mi">4</span><span class="n">d20h</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">etcd</span><span class="o">-</span><span class="n">k8s</span><span class="o">-</span><span class="n">master03</span><span class="w">                         </span><span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="w">     </span><span class="n">Running</span><span class="w">            </span><span class="mi">1</span><span class="w">          </span><span class="mi">4</span><span class="n">d20h</span><span class="w">
+</span></span></span></code></pre></div><h4 id="2进入-etcd-容器并删除节点信息">2）进入 Etcd 容器并删除节点信息</h4>
+<p>选择上面两个 etcd 中任意一个 pod，通过 kubectl 工具进入 pod 内部</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="o">[</span><span class="nt">root</span><span class="p">@</span><span class="k">k8s-master01</span> <span class="o">~]</span><span class="err">#</span> <span class="nt">kubectl</span> <span class="nt">exec</span> <span class="nt">-it</span> <span class="nt">-n</span> <span class="nt">kube-system</span> <span class="nt">etcd-k8s-master01</span> <span class="nt">sh</span>
+</span></span><span class="line"><span class="cl"><span class="nt">kubectl</span> <span class="nt">exec</span> <span class="o">[</span><span class="nt">POD</span><span class="o">]</span> <span class="o">[</span><span class="nt">COMMAND</span><span class="o">]</span> <span class="nt">is</span> <span class="nt">DEPRECATED</span> <span class="nt">and</span> <span class="nt">will</span> <span class="nt">be</span> <span class="nt">removed</span> <span class="nt">in</span> <span class="nt">a</span> <span class="nt">future</span> <span class="nt">version</span><span class="o">.</span> <span class="nt">Use</span> <span class="nt">kubectl</span> <span class="nt">kubectl</span> <span class="nt">exec</span> <span class="o">[</span><span class="nt">POD</span><span class="o">]</span> <span class="nt">--</span> <span class="o">[</span><span class="nt">COMMAND</span><span class="o">]</span> <span class="nt">instead</span><span class="o">.</span>
+</span></span></code></pre></div><p>进入容器后，按下面步执行</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">## 配置环境</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># export ETCDCTL_API=3</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># alias etcdctl=&#39;etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 查看 etcd 集群成员列表</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># etcdctl member list</span>
+</span></span><span class="line"><span class="cl">a9b6a1341829d62a, started, k8s-master03, https://172.20.5.13:2380, https://172.20.5.13:2379, <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">d1c737a26ea4dd70, started, k8s-master01, https://172.20.5.11:2380, https://172.20.5.11:2379, <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">fe2d4a2a33304913, started, k8s-master02, https://172.20.5.12:2380, https://172.20.5.12:2379, <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 删除 etcd 集群成员 k8s-master02</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># etcdctl member remove fe2d4a2a33304913</span>
+</span></span><span class="line"><span class="cl">Member fe2d4a2a33304913 removed from cluster 36067d1f1ca3f1db
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## 退出容器</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># exit</span>
+</span></span></code></pre></div><h4 id="3再次尝试加入集群">3）再次尝试加入集群</h4>
+<p>通过 <code>kubeadm</code> 命令再次尝试将 <code>k8s-master02</code> 节点加入集群，在执行前首先进入到 <code>k8s-master02</code> 节点服务器，执行 <code>kubeadm</code> 的清除命令：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ kubeadm reset
+</span></span></code></pre></div><p>然后尝试加入 kubernetes 集群：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-vbnet" data-lang="vbnet"><span class="line"><span class="cl"><span class="o">[</span><span class="n">check</span><span class="o">-</span><span class="n">etcd</span><span class="o">]</span> <span class="n">Checking</span> <span class="n">that</span> <span class="n">the</span> <span class="n">etcd</span> <span class="n">cluster</span> <span class="ow">is</span> <span class="n">healthy</span><span class="o">[</span><span class="n">kubelet</span><span class="o">-</span><span class="n">start</span><span class="o">]</span> <span class="n">Downloading</span> <span class="n">configuration</span> <span class="k">for</span> <span class="n">the</span> <span class="n">kubelet</span> <span class="n">from</span> <span class="n">the</span> <span class="s">&#34;kubelet-config-1.18&#34;</span> <span class="n">ConfigMap</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">kube</span><span class="o">-</span><span class="n">system</span> <span class="n">namespace</span><span class="o">[</span><span class="n">kubelet</span><span class="o">-</span><span class="n">start</span><span class="o">]</span> <span class="n">Writing</span> <span class="n">kubelet</span> <span class="n">configuration</span> <span class="k">to</span> <span class="n">file</span> <span class="s">&#34;/var/lib/kubelet/config.yaml&#34;</span><span class="o">[</span><span class="n">kubelet</span><span class="o">-</span><span class="n">start</span><span class="o">]</span> <span class="n">Writing</span> <span class="n">kubelet</span> <span class="n">environment</span> <span class="n">file</span> <span class="k">with</span> <span class="n">flags</span> <span class="k">to</span> <span class="n">file</span> <span class="s">&#34;/var/lib/kubelet/kubeadm-flags.env&#34;</span><span class="o">[</span><span class="n">kubelet</span><span class="o">-</span><span class="n">start</span><span class="o">]</span> <span class="n">Starting</span> <span class="n">the</span> <span class="n">kubelet</span><span class="o">[</span><span class="n">kubelet</span><span class="o">-</span><span class="n">start</span><span class="o">]</span> <span class="n">Waiting</span> <span class="k">for</span> <span class="n">the</span> <span class="n">kubelet</span> <span class="k">to</span> <span class="n">perform</span> <span class="n">the</span> <span class="n">TLS</span> <span class="n">Bootstrap</span><span class="p">...</span><span class="o">[</span><span class="n">etcd</span><span class="o">]</span> <span class="n">Announced</span> <span class="k">new</span> <span class="n">etcd</span> <span class="n">member</span> <span class="n">joining</span> <span class="k">to</span> <span class="n">the</span> <span class="n">existing</span> <span class="n">etcd</span> <span class="n">cluster</span><span class="o">[</span><span class="n">etcd</span><span class="o">]</span> <span class="n">Creating</span> <span class="k">static</span> <span class="n">Pod</span> <span class="n">manifest</span> <span class="k">for</span> <span class="s">&#34;etcd&#34;</span><span class="o">[</span><span class="n">etcd</span><span class="o">]</span> <span class="n">Waiting</span> <span class="k">for</span> <span class="n">the</span> <span class="k">new</span> <span class="n">etcd</span> <span class="n">member</span> <span class="k">to</span> <span class="n">join</span> <span class="n">the</span> <span class="n">cluster</span><span class="p">.</span> <span class="n">This</span> <span class="n">can</span> <span class="n">take</span> <span class="n">up</span> <span class="k">to</span> <span class="n">40s</span><span class="p">{</span><span class="s">&#34;level&#34;</span><span class="p">:</span><span class="s">&#34;warn&#34;</span><span class="p">,</span><span class="s">&#34;ts&#34;</span><span class="p">:</span><span class="s">&#34;2020-12-22T11:26:23.560+0800&#34;</span><span class="p">,</span><span class="s">&#34;caller&#34;</span><span class="p">:</span><span class="s">&#34;clientv3/retry_interceptor.go:61&#34;</span><span class="p">,</span><span class="s">&#34;msg&#34;</span><span class="p">:</span><span class="s">&#34;retrying of unary invoker failed&#34;</span><span class="p">,</span><span class="s">&#34;target&#34;</span><span class="p">:</span><span class="s">&#34;passthrough:///https://172.20.5.12:2379&#34;</span><span class="p">,</span><span class="s">&#34;attempt&#34;</span><span class="p">:</span><span class="n">0</span><span class="p">,</span><span class="s">&#34;error&#34;</span><span class="p">:</span><span class="s">&#34;rpc error: code = DeadlineExceeded desc = context deadline exceeded&#34;</span><span class="p">}</span><span class="o">[</span><span class="n">upload</span><span class="o">-</span><span class="n">config</span><span class="o">]</span> <span class="n">Storing</span> <span class="n">the</span> <span class="n">configuration</span> <span class="n">used</span> <span class="ow">in</span> <span class="n">ConfigMap</span> <span class="s">&#34;kubeadm-config&#34;</span> <span class="ow">in</span> <span class="n">the</span> <span class="s">&#34;kube-system&#34;</span> <span class="n">Namespace</span><span class="o">[</span><span class="n">mark</span><span class="o">-</span><span class="n">control</span><span class="o">-</span><span class="n">plane</span><span class="o">]</span> <span class="n">Marking</span> <span class="n">the</span> <span class="n">node</span> <span class="n">k8s</span><span class="o">-</span><span class="n">master02</span> <span class="ow">as</span> <span class="n">control</span><span class="o">-</span><span class="n">plane</span> <span class="n">by</span> <span class="n">adding</span> <span class="n">the</span> <span class="n">label</span> <span class="s">&#34;node-role.kubernetes.io/master=&#39;&#39;&#34;</span><span class="o">[</span><span class="n">mark</span><span class="o">-</span><span class="n">control</span><span class="o">-</span><span class="n">plane</span><span class="o">]</span> <span class="n">Marking</span> <span class="n">the</span> <span class="n">node</span> <span class="n">k8s</span><span class="o">-</span><span class="n">master02</span> <span class="ow">as</span> <span class="n">control</span><span class="o">-</span><span class="n">plane</span> <span class="n">by</span> <span class="n">adding</span> <span class="n">the</span> <span class="n">taints</span> <span class="o">[</span><span class="n">node</span><span class="o">-</span><span class="n">role</span><span class="p">.</span><span class="n">kubernetes</span><span class="p">.</span><span class="n">io</span><span class="o">/</span><span class="n">master</span><span class="p">:</span><span class="n">NoSchedule</span><span class="o">]</span><span class="n">This</span> <span class="n">node</span> <span class="n">has</span> <span class="n">joined</span> <span class="n">the</span> <span class="n">cluster</span> <span class="ow">and</span> <span class="n">a</span> <span class="k">new</span> <span class="n">control</span> <span class="n">plane</span> <span class="n">instance</span> <span class="n">was</span> <span class="n">created</span><span class="p">:</span><span class="o">*</span> <span class="n">Certificate</span> <span class="n">signing</span> <span class="n">request</span> <span class="n">was</span> <span class="n">sent</span> <span class="k">to</span> <span class="n">apiserver</span> <span class="ow">and</span> <span class="n">approval</span> <span class="n">was</span> <span class="n">received</span><span class="p">.</span><span class="o">*</span> <span class="n">The</span> <span class="n">Kubelet</span> <span class="n">was</span> <span class="n">informed</span> <span class="k">of</span> <span class="n">the</span> <span class="k">new</span> <span class="n">secure</span> <span class="n">connection</span> <span class="n">details</span><span class="p">.</span><span class="o">*</span> <span class="n">Control</span> <span class="n">plane</span> <span class="p">(</span><span class="n">master</span><span class="p">)</span> <span class="n">label</span> <span class="ow">and</span> <span class="n">taint</span> <span class="n">were</span> <span class="n">applied</span> <span class="k">to</span> <span class="n">the</span> <span class="k">new</span> <span class="n">node</span><span class="p">.</span><span class="o">*</span> <span class="n">The</span> <span class="n">Kubernetes</span> <span class="n">control</span> <span class="n">plane</span> <span class="n">instances</span> <span class="n">scaled</span> <span class="n">up</span><span class="p">.</span><span class="o">*</span> <span class="n">A</span> <span class="k">new</span> <span class="n">etcd</span> <span class="n">member</span> <span class="n">was</span> <span class="n">added</span> <span class="k">to</span> <span class="n">the</span> <span class="n">local</span><span class="o">/</span><span class="n">stacked</span> <span class="n">etcd</span> <span class="n">cluster</span><span class="p">.</span><span class="n">To</span> <span class="n">start</span> <span class="n">administering</span> <span class="n">your</span> <span class="n">cluster</span> <span class="n">from</span> <span class="n">this</span> <span class="n">node</span><span class="p">,</span> <span class="n">you</span> <span class="n">need</span> <span class="k">to</span> <span class="n">run</span> <span class="n">the</span> <span class="n">following</span> <span class="ow">as</span> <span class="n">a</span> <span class="n">regular</span> <span class="n">user</span><span class="p">:</span>        <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="err">$</span><span class="n">HOME</span><span class="o">/</span><span class="p">.</span><span class="n">kube</span>        <span class="n">sudo</span> <span class="n">cp</span> <span class="o">-</span><span class="n">i</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">admin</span><span class="p">.</span><span class="n">conf</span> <span class="err">$</span><span class="n">HOME</span><span class="o">/</span><span class="p">.</span><span class="n">kube</span><span class="o">/</span><span class="n">config</span>        <span class="n">sudo</span> <span class="n">chown</span> <span class="err">$</span><span class="p">(</span><span class="n">id</span> <span class="o">-</span><span class="n">u</span><span class="p">):</span><span class="err">$</span><span class="p">(</span><span class="n">id</span> <span class="o">-</span><span class="n">g</span><span class="p">)</span> <span class="err">$</span><span class="n">HOME</span><span class="o">/</span><span class="p">.</span><span class="n">kube</span><span class="o">/</span><span class="n">configRun</span> <span class="c">&#39;kubectl get nodes&#39; to see this node join the cluster.
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span><span class="n">root</span><span class="err">@</span><span class="n">k8s</span><span class="o">-</span><span class="n">master01</span> <span class="err">~</span><span class="o">]</span><span class="p">#</span> <span class="n">kubectl</span> <span class="k">get</span> <span class="n">nodesNAME</span>           <span class="n">STATUS</span>   <span class="n">ROLES</span>    <span class="n">AGE</span>     <span class="n">VERSIONk8s</span><span class="o">-</span><span class="n">master01</span>   <span class="n">Ready</span>    <span class="n">master</span>   <span class="n">4d20h</span>   <span class="n">v1</span><span class="p">.</span><span class="n">18</span><span class="p">.</span><span class="n">2k8s</span><span class="o">-</span><span class="n">master02</span>   <span class="n">Ready</span>    <span class="n">master</span>   <span class="n">7m38s</span>   <span class="n">v1</span><span class="p">.</span><span class="n">18</span><span class="p">.</span><span class="n">2k8s</span><span class="o">-</span><span class="n">master03</span>   <span class="n">Ready</span>    <span class="n">master</span>   <span class="n">4d20h</span>   <span class="n">v1</span><span class="p">.</span><span class="n">18</span><span class="p">.</span><span class="n">2k8s</span><span class="o">-</span><span class="n">node01</span>     <span class="n">Ready</span>    <span class="n">worker</span>   <span class="n">4d18h</span>   <span class="n">v1</span><span class="p">.</span><span class="n">18</span><span class="p">.</span><span class="n">2</span>
+</span></span></code></pre></div><h3 id="1svc命名问题导致ingress-nginx无法映射端口">1、svc命名问题，导致ingress nginx无法映射端口</h3>
+<p>在ingress-nginx的tcp端口映射过程中，只支持xxx-svc，并且，name中，不能使用下划线</p>
+<pre tabindex="0"><code># 错误用法
+metadata:
+  name: imau1_conf 
+  
+# 正确用法  
+metadata:
+  name: imau1-conf  
+</code></pre><h3 id="2deployment创建pod失败">2、deployment创建pod失败</h3>
+<p>参考链接：https://developer.aliyun.com/article/791261</p>
+<p>简介：<code>eployment创建pod失败，通过describe deployment ${DEPLOY_NAME} 没能看到具体原因。最终在“edit deployment ${DEPLOY_NAME}”中看到错误原因。</code></p>
+<h4 id="通过deployment创建pod失败">通过deployment创建pod失败</h4>
+<p>在k8s集群中，deployment启动后没有成功创建pod，通过“kubectl describe deployment  ${DEPLOY_NAME} ”，看到如下日志，只看到“ReplicaFailure   True    FailedCreate”，但是没有failed的原因。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">&gt; kubectl describe deployment <span class="si">${</span><span class="nv">DEPLOY_NAME</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">----------------------------------------------
+</span></span><span class="line"><span class="cl">Conditions:
+</span></span><span class="line"><span class="cl">  Type             Status  Reason
+</span></span><span class="line"><span class="cl">  ----             ------  ------
+</span></span><span class="line"><span class="cl">  Progressing      True    NewReplicaSetCreated
+</span></span><span class="line"><span class="cl">  Available        False   MinimumReplicasUnavailable
+</span></span><span class="line"><span class="cl">  ReplicaFailure   True    FailedCreate
+</span></span><span class="line"><span class="cl">OldReplicaSets:    &lt;none&gt;
+</span></span><span class="line"><span class="cl">NewReplicaSet:     james-mtfnwnbu4z7v5umk-67cc5d6b98 <span class="o">(</span>0/1 replicas created<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Events:
+</span></span><span class="line"><span class="cl">  Type    Reason             Age   From                   Message
+</span></span><span class="line"><span class="cl">  ----    ------             ----  ----                   -------
+</span></span><span class="line"><span class="cl">  Normal  ScalingReplicaSet  40s   deployment-controller  Scaled up replica <span class="nb">set</span> james-mtfnwnbu4z7v5umk-67cc5d6b98 to <span class="m">1</span>
+</span></span></code></pre></div><p>其实原因藏在edit deployment里面。可以通过&quot;edit deploy&quot;来查看。</p>
+<pre tabindex="0"><code>&gt; kubectl edit deployment ${DEPLOY_NAME}
+--------------------------------------------------------------
+&#39;pods &#34;james-mtfnwnbu4z7v5umk-67cc5d6b98&#34; is forbidden: error looking up service account ns-james/davis: serviceaccount &#34;davis&#34; not found&#39;
+</code></pre><p>原因很清楚，这个pod是需要指定的serviceaccount创建，但是集群没有提前创建好sa导致pod启动失败。</p>
+<h4 id="创建serviceaccount">创建serviceaccount</h4>
+<p>ns下默认有一个default的sa，其他sa需要自己创建</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">root@titum:~# kubectl create sa <span class="si">${</span><span class="nv">SA_NAME</span><span class="si">}</span> -n ns-james
+</span></span><span class="line"><span class="cl">serviceaccount/davis created
+</span></span><span class="line"><span class="cl">root@titum:~# kubectl get sa -n <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">NAME      SECRETS   AGE
+</span></span><span class="line"><span class="cl">default   <span class="m">1</span>         94s
+</span></span><span class="line"><span class="cl">davis     <span class="m">1</span>         2s
+</span></span></code></pre></div><p>重新调度服务</p>
+<h3 id="3debug-pod">3、debug pod</h3>
+<pre tabindex="0"><code>kubectl run sugar  --image=serialt/debug --restart=Never
+</code></pre></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-08-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/k8s-doc/">k8s-doc</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2024-08-11-ingress-nginx/" class="prev" rel="prev" title="Ingress-Nginx"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Ingress-Nginx</a>
+            <a href="/posts/2024-08-11-k8s-metallb-istio/" class="next" rel="next" title="metallb-istio">metallb-istio<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -4,7 +4,63 @@
         <link>https://serialt.github.io/categories/devops/</link>
         <description>DevOps - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 21 Jul 2024 21:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 11 Aug 2024 19:34:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+    <title>metallb</title>
+    <link>https://serialt.github.io/posts/2024-08-11-metallb/</link>
+    <pubDate>Sun, 11 Aug 2024 19:34:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-08-11-metallb/</guid>
+    <description><![CDATA[MetalLB 自建k8s的 loadbalancer https://www.lixueduan.com/posts/cloudnative/01-metallb/ https://www.bboy.app/2021/01/11/metallb%E9%83%A8%E7%BD%B2%E4%BD%BF%E7%94%A8/ https://ieevee.com/tech/2019/06/30/metallb.html https://cloud.tencent.com/developer/article/2146391#:~:text=%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85,Metallb%E6%94%AF%E6%8C%81%E9%80%9A%E8%BF%87Kuberntes%E6%B8%85%E5%8D%95%E3%80%81Helm%E5%92%8CKustomize%E6%96%B9%E5%BC%8F%E8%BF%9B%E8%A1%8C%E9%83%A8%E7%BD%B2%EF%BC%8C%E6%9C%AC%E6%96%87%E6%88%91%E4%BB%AC%E5%B0%86%E4%BB%A5Kuberntes%E6%B8%85%E5%8D%95%E4%B8%BA%E4%BE%8B%E4%BB%8B%E7%BB%8D%E4%BA%A7%E5%93%81%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%EF%BC%8C%E9%83%A8%E7%BD%B2%E7%9A%84%E7%89%88%E6%9C%AC%E4%B8%BA%E6%9C%80%E6%96%B0%E7%9A%84v0.13.4%E3%80%82 简介 在Kubernetes部署完成服务后，我们经常需要将服务开放给到外部用户访问 。如果是使用云平台（阿里云、腾讯云、]]></description>
+</item>
+<item>
+    <title>kubeadm</title>
+    <link>https://serialt.github.io/posts/2024-08-11-kubeadm/</link>
+    <pubDate>Sun, 11 Aug 2024 19:33:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-08-11-kubeadm/</guid>
+    <description><![CDATA[Kubeadm 搭建 集群 Version: 1.26 kubeadm是Kubernetes官方提供的用于快速安部署Kubernetes集群的工具，伴随Kubernetes每个版本的]]></description>
+</item>
+<item>
+    <title>kubeadm-cert</title>
+    <link>https://serialt.github.io/posts/2024-08-11-kubeadm-cert/</link>
+    <pubDate>Sun, 11 Aug 2024 19:32:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-08-11-kubeadm-cert/</guid>
+    <description><![CDATA[kubeadm-cert 官方的 kubeadm 部署的集群 CA 有效期默认是10年，其他证书有效期默认是1年，1年有效期在真实使用过程中，往往不够，因此需要自行修改 CA 的有效期然后编译]]></description>
+</item>
+<item>
+    <title>metallb-istio</title>
+    <link>https://serialt.github.io/posts/2024-08-11-k8s-metallb-istio/</link>
+    <pubDate>Sun, 11 Aug 2024 19:31:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-08-11-k8s-metallb-istio/</guid>
+    <description><![CDATA[服务暴露 一、metallb helm repo add metallb https://metallb.github.io/metallb helm install metallb metallb/metallb --version=0.13.7 -n metallb-system --create-namespace helm repo add serialt https://serialt.github.io/helm-charts helm install metallb-config serialt/metallb-config --set &#34;ipPoolRange=192.168.80.40-192.168.80.49&#34; -n metallb-system --version 0.0.1 helm 测试： https://artifacthub.io/packages/helm/bitnami/nginx $ helm repo add bitnami https://charts.bitnami.com/bitnami $ helm install my-release bitnami/nginx [root@localhost k3s]# kubectl get svc NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE kubernetes ClusterIP]]></description>
+</item>
+<item>
+    <title>k8s-doc</title>
+    <link>https://serialt.github.io/posts/2024-08-11-k8s-doc/</link>
+    <pubDate>Sun, 11 Aug 2024 19:30:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-08-11-k8s-doc/</guid>
+    <description><![CDATA[k8s doc 1、节点加入失败 日志信息 ...... [control-plane] Creating static Pod manifest for &#34;kube-controller-manager&#34; W0329 00:01:51.364121 19209 manifests.go:214] the default kube-apiserver authorization-mode is &#34;Node,RBAC&#34;; using &#34;Node,RBAC&#34; [control-plane] Creating static Pod manifest for &#34;kube-scheduler&#34; W0329 00:01:51.373807 19209 manifests.go:214] the default kube-apiserver authorization-mode is &#34;Node,RBAC&#34;; using &#34;Node,RBAC&#34; [check-etcd] Checking that the etcd cluster is healthy error execution phase check-etcd: etcd cluster is not healthy:]]></description>
+</item>
+<item>
+    <title>Ingress-Nginx</title>
+    <link>https://serialt.github.io/posts/2024-08-11-ingress-nginx/</link>
+    <pubDate>Sun, 11 Aug 2024 19:27:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-08-11-ingress-nginx/</guid>
+    <description><![CDATA[Ingress-Nginx kubernetes中暴露服务的三种方式： ClusterIP NodePort LoadBalance ​ 这几种方式都是在service的维度提供的，service的作用体现在两个方面，对集群内]]></description>
+</item>
+<item>
+    <title>containerd-exit-code</title>
+    <link>https://serialt.github.io/posts/2024-08-11-containerd-exit/</link>
+    <pubDate>Sun, 11 Aug 2024 19:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-08-11-containerd-exit/</guid>
+    <description><![CDATA[容器退出状态码 参考链接：https://blog.hdls.me/16581348863966.html 当容器终止时，容器引擎使用退出码来报]]></description>
+</item>
+<item>
     <title>TF-lib</title>
     <link>https://serialt.github.io/posts/2024-07-21-tf-lib/</link>
     <pubDate>Sun, 21 Jul 2024 21:26:27 &#43;0800</pubDate>
@@ -27,62 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-07-01-cve/</guid>
     <description><![CDATA[CVE OpenSSH CVE-2024-6387 该漏洞是 OpenSSH 服务器 （sshd） 中的信号处理程序争用条件，允许在基于 glibc 的 Linux 系统上以 root 身份执行未经身份验证的远程代码执行 （RCE）;这带来了]]></description>
-</item>
-<item>
-    <title>winsw</title>
-    <link>https://serialt.github.io/posts/2024-06-27.winsw/</link>
-    <pubDate>Sun, 30 Jun 2024 15:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-27.winsw/</guid>
-    <description><![CDATA[WinSW 服务管理 ​ ​ 有时候需要将bat、exe等文件作为Windows的服务，可以使用bat、nssm等工具将此类文件设置为Windows服务，但]]></description>
-</item>
-<item>
-    <title>Java</title>
-    <link>https://serialt.github.io/posts/2024-06-27-java/</link>
-    <pubDate>Sun, 30 Jun 2024 15:20:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-27-java/</guid>
-    <description><![CDATA[Java 1、Hello world java 的包名需要和目录一致，类名需要与文件名一致 [sugar@Sugar java]🐳 tree . . └── Hello └── HelloWorld.java 1 directory, 1 file HelloWorld.java package Hello; public class HelloWorld { public static void main(String[] args) { System.out.println(&#34;hello,world&#34;); } } [sugar@Sugar]]></description>
-</item>
-<item>
-    <title>Nexus</title>
-    <link>https://serialt.github.io/posts/2024-06-16-nexus/</link>
-    <pubDate>Sun, 16 Jun 2024 19:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-16-nexus/</guid>
-    <description><![CDATA[Nexus 参考： https://juejin.cn/post/6844904016762109959 https://cloud.tencent.com/developer/article/1764866 官网：https://help.sonatype.com/repomanager3/ 介绍 生产环境中，一般不会允许所有服务器都能访]]></description>
-</item>
-<item>
-    <title>dingbot</title>
-    <link>https://serialt.github.io/posts/2024-05-14-dingbot/</link>
-    <pubDate>Tue, 14 May 2024 19:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-05-14-dingbot/</guid>
-    <description><![CDATA[钉钉机器人发消息 1、签名计算 由于 mac 上的是 BSD 的 date，与 linux 上的 date 不同，在 mac 上使用需要替换为 linux 的 gdate。 #!/usr/bin/env bash ## 需要艾特的人的手机号码，以空]]></description>
-</item>
-<item>
-    <title>Publish Provider to Registry</title>
-    <link>https://serialt.github.io/posts/2024-03-31-publish-terraform-provider/</link>
-    <pubDate>Sun, 31 Mar 2024 16:16:02 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-03-31-publish-terraform-provider/</guid>
-    <description><![CDATA[Publish Terraform Provider https://registry.terraform.io/ 上的provider只能托管在 github 上 1、Terraform Registry 官网上注册账号 账号使用 github 登录，设置 github 需要对 terraform registry 的授权 2、创建 github projec]]></description>
-</item>
-<item>
-    <title>OpenConnect</title>
-    <link>https://serialt.github.io/posts/2024-03-21-openconnect/</link>
-    <pubDate>Sat, 23 Mar 2024 10:37:07 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-03-21-openconnect/</guid>
-    <description><![CDATA[OpenConnect 参考文档 https://github.com/huataihuang/cloud-atlas-draft/blob/master/security/vpn/openconnect/deploy_ocserv_vpn_server_on_ubuntu.md https://www.cnblogs.com/grafin/p/17785264.html https://cn.linux-console.net/?p=22087 OpenConnect起源于对Cisco AnyConnect VPN客户端的开源替代方案的需求。Cisco AnyConnect是一款商业VPN解]]></description>
-</item>
-<item>
-    <title>k3s-cert</title>
-    <link>https://serialt.github.io/posts/2024-03-11-k3s-cert/</link>
-    <pubDate>Thu, 21 Mar 2024 21:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-03-11-k3s-cert/</guid>
-    <description><![CDATA[K3s 证书 k3s 根CA证书默认10年，签署的证书有效期默认1年，在到期前的90天内需要重启，重启后会自动轮转证书。 参考文档： https://forums.rancher.cn/t/k3s-ca-10/331 https://blog.starudream.cn/2023/07/21/k3s-client-cert-extend/ https://forums.rancher.cn/t/k3s-ca-10/331/37 https://github.com/qkboy/k3s/tree/v1.29.0%2Bk3s1-longcert https://docs.k3s.io/zh/cli/certificate#%E8%BD%AE%E6%8D%A2%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%81%E4%B9%A6 https://www.linuxfly.org/post/733/ 一、手动轮转]]></description>
 </item>
 </channel>
 </rss>

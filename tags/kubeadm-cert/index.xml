@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>kubeadm-cert - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/kubeadm-cert/</link>
+        <description>kubeadm-cert - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 11 Aug 2024 19:32:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/kubeadm-cert/" rel="self" type="application/rss+xml" /><item>
+    <title>kubeadm-cert</title>
+    <link>https://serialt.github.io/posts/2024-08-11-kubeadm-cert/</link>
+    <pubDate>Sun, 11 Aug 2024 19:32:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-08-11-kubeadm-cert/</guid>
+    <description><![CDATA[kubeadm-cert 官方的 kubeadm 部署的集群 CA 有效期默认是10年，其他证书有效期默认是1年，1年有效期在真实使用过程中，往往不够，因此需要自行修改 CA 的有效期然后编译]]></description>
+</item>
+</channel>
+</rss>

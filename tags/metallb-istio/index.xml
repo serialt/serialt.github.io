@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>metallb-istio - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/metallb-istio/</link>
+        <description>metallb-istio - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 11 Aug 2024 19:31:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/metallb-istio/" rel="self" type="application/rss+xml" /><item>
+    <title>metallb-istio</title>
+    <link>https://serialt.github.io/posts/2024-08-11-k8s-metallb-istio/</link>
+    <pubDate>Sun, 11 Aug 2024 19:31:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-08-11-k8s-metallb-istio/</guid>
+    <description><![CDATA[服务暴露 一、metallb helm repo add metallb https://metallb.github.io/metallb helm install metallb metallb/metallb --version=0.13.7 -n metallb-system --create-namespace helm repo add serialt https://serialt.github.io/helm-charts helm install metallb-config serialt/metallb-config --set &#34;ipPoolRange=192.168.80.40-192.168.80.49&#34; -n metallb-system --version 0.0.1 helm 测试： https://artifacthub.io/packages/helm/bitnami/nginx $ helm repo add bitnami https://charts.bitnami.com/bitnami $ helm install my-release bitnami/nginx [root@localhost k3s]# kubectl get svc NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE kubernetes ClusterIP]]></description>
+</item>
+</channel>
+</rss>

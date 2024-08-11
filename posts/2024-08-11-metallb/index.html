@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>metallb - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="metallb" />
+<meta property="og:description" content="MetalLB 自建k8s的 loadbalancer https://www.lixueduan.com/posts/cloudnative/01-metallb/ https://www.bboy.app/2021/01/11/metallb%E9%83%A8%E7%BD%B2%E4%BD%BF%E7%94%A8/ https://ieevee.com/tech/2019/06/30/metallb.html https://cloud.tencent.com/developer/article/2146391#:~:text=%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85,Metallb%E6%94%AF%E6%8C%81%E9%80%9A%E8%BF%87Kuberntes%E6%B8%85%E5%8D%95%E3%80%81Helm%E5%92%8CKustomize%E6%96%B9%E5%BC%8F%E8%BF%9B%E8%A1%8C%E9%83%A8%E7%BD%B2%EF%BC%8C%E6%9C%AC%E6%96%87%E6%88%91%E4%BB%AC%E5%B0%86%E4%BB%A5Kuberntes%E6%B8%85%E5%8D%95%E4%B8%BA%E4%BE%8B%E4%BB%8B%E7%BB%8D%E4%BA%A7%E5%93%81%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%EF%BC%8C%E9%83%A8%E7%BD%B2%E7%9A%84%E7%89%88%E6%9C%AC%E4%B8%BA%E6%9C%80%E6%96%B0%E7%9A%84v0.13.4%E3%80%82 简介 在Kubernetes部署完成服务后，我们经常需要将服务开放给到外部用户访问 。如果是使用云平台（阿里云、腾讯云、" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2024-08-11-metallb/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-08-11T19:34:27+08:00" />
+<meta property="article:modified_time" content="2024-08-11T19:34:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="metallb"/>
+<meta name="twitter:description" content="MetalLB 自建k8s的 loadbalancer https://www.lixueduan.com/posts/cloudnative/01-metallb/ https://www.bboy.app/2021/01/11/metallb%E9%83%A8%E7%BD%B2%E4%BD%BF%E7%94%A8/ https://ieevee.com/tech/2019/06/30/metallb.html https://cloud.tencent.com/developer/article/2146391#:~:text=%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85,Metallb%E6%94%AF%E6%8C%81%E9%80%9A%E8%BF%87Kuberntes%E6%B8%85%E5%8D%95%E3%80%81Helm%E5%92%8CKustomize%E6%96%B9%E5%BC%8F%E8%BF%9B%E8%A1%8C%E9%83%A8%E7%BD%B2%EF%BC%8C%E6%9C%AC%E6%96%87%E6%88%91%E4%BB%AC%E5%B0%86%E4%BB%A5Kuberntes%E6%B8%85%E5%8D%95%E4%B8%BA%E4%BE%8B%E4%BB%8B%E7%BB%8D%E4%BA%A7%E5%93%81%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%EF%BC%8C%E9%83%A8%E7%BD%B2%E7%9A%84%E7%89%88%E6%9C%AC%E4%B8%BA%E6%9C%80%E6%96%B0%E7%9A%84v0.13.4%E3%80%82 简介 在Kubernetes部署完成服务后，我们经常需要将服务开放给到外部用户访问 。如果是使用云平台（阿里云、腾讯云、"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2024-08-11-metallb/" /><link rel="prev" href="https://serialt.github.io/posts/2024-08-11-kubeadm/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "metallb",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2024-08-11-metallb\/"
+        },"genre": "posts","keywords": "metallb","wordcount":  7551 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2024-08-11-metallb\/","datePublished": "2024-08-11T19:34:27+08:00","dateModified": "2024-08-11T19:34:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">metallb</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a>&nbsp;<a href="/categories/k8s/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>k8s</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-08-11">2024-08-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7551 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#metallb">MetalLB</a></li>
+        <li><a href="#安装使用">安装使用</a></li>
+        <li><a href="#测试">测试</a></li>
+        <li><a href="#工作流程">工作流程</a></li>
+        <li><a href="#layer2-模式工作原理">Layer2 模式工作原理</a></li>
+        <li><a href="#bgp-模式工作原理">BGP 模式工作原理</a></li>
+      </ul>
+    </li>
+    <li><a href="#istio--metallb">Istio + MetalLB</a>
+      <ul>
+        <li><a href="#一metalb">一、MetaLB</a></li>
+        <li><a href="#一istio">一、Istio</a></li>
+        <li><a href="#测试-1">测试</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="metallb">MetalLB</h3>
+<p>自建k8s的 loadbalancer</p>
+<p><a href="https://www.lixueduan.com/posts/cloudnative/01-metallb/" target="_blank" rel="noopener noreffer ">https://www.lixueduan.com/posts/cloudnative/01-metallb/</a></p>
+<p><a href="https://www.bboy.app/2021/01/11/metallb%E9%83%A8%E7%BD%B2%E4%BD%BF%E7%94%A8/" target="_blank" rel="noopener noreffer ">https://www.bboy.app/2021/01/11/metallb%E9%83%A8%E7%BD%B2%E4%BD%BF%E7%94%A8/</a></p>
+<p><a href="https://ieevee.com/tech/2019/06/30/metallb.html" target="_blank" rel="noopener noreffer ">https://ieevee.com/tech/2019/06/30/metallb.html</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/2146391#:~:text=%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85,Metallb%E6%94%AF%E6%8C%81%E9%80%9A%E8%BF%87Kuberntes%E6%B8%85%E5%8D%95%E3%80%81Helm%E5%92%8CKustomize%E6%96%B9%E5%BC%8F%E8%BF%9B%E8%A1%8C%E9%83%A8%E7%BD%B2%EF%BC%8C%E6%9C%AC%E6%96%87%E6%88%91%E4%BB%AC%E5%B0%86%E4%BB%A5Kuberntes%E6%B8%85%E5%8D%95%E4%B8%BA%E4%BE%8B%E4%BB%8B%E7%BB%8D%E4%BA%A7%E5%93%81%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%EF%BC%8C%E9%83%A8%E7%BD%B2%E7%9A%84%E7%89%88%E6%9C%AC%E4%B8%BA%E6%9C%80%E6%96%B0%E7%9A%84v0.13.4%E3%80%82" target="_blank" rel="noopener noreffer ">https://cloud.tencent.com/developer/article/2146391#:~:text=%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85,Metallb%E6%94%AF%E6%8C%81%E9%80%9A%E8%BF%87Kuberntes%E6%B8%85%E5%8D%95%E3%80%81Helm%E5%92%8CKustomize%E6%96%B9%E5%BC%8F%E8%BF%9B%E8%A1%8C%E9%83%A8%E7%BD%B2%EF%BC%8C%E6%9C%AC%E6%96%87%E6%88%91%E4%BB%AC%E5%B0%86%E4%BB%A5Kuberntes%E6%B8%85%E5%8D%95%E4%B8%BA%E4%BE%8B%E4%BB%8B%E7%BB%8D%E4%BA%A7%E5%93%81%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%EF%BC%8C%E9%83%A8%E7%BD%B2%E7%9A%84%E7%89%88%E6%9C%AC%E4%B8%BA%E6%9C%80%E6%96%B0%E7%9A%84v0.13.4%E3%80%82</a></p>
+<h4 id="简介">简介</h4>
+<p>在Kubernetes部署完成服务后，我们经常需要将服务开放给到外部用户访问 。如果是使用云平台（阿里云、腾讯云、AWS等）的话，这个需求处理起来非常简单，可以通过云平台的LoadBalancer来实现。</p>
+<p>但如果是自建的kubernetes裸机集群，那则要麻烦得多。祼机集群默认不支持<a href="https://cloud.tencent.com/product/clb?from=10680" target="_blank" rel="noopener noreffer ">负载均衡</a>的方式，可用的方案不外乎Ingress、NodePort、ExternalIPs等方式来实现外部访问。可惜这些方案本身并不完美，他们或多或少都存在着一些缺点，这使得裸金属集群成为Kubernetes生态系统中的二等公民。</p>
+<p>而MetalLB 旨在通过提供与标准网络设备集成的LoadBalancer来解决这个痛点，从而使裸机群集上的外部服务也尽可能“正常运行”，减少<a href="https://cloud.tencent.com/solution/operation?from=10680" target="_blank" rel="noopener noreffer ">运维</a>上的管理成本。</p>
+<p>metallb支持两种工作模式,一种是layer 2 mode,也就是工作在2层来负责相应arp请求，对于局域网中的人来说仿佛就是给服务分配了一个ip，但是2层模式不是真正的负载均衡，因为所有的流量会经过集群中的一个节点，当这个节点挂了的话，metallb会迁移ip到另外一个节点上，另外一种是bgp模式，在bgp模式下，集群中每一个节点都会和路由器建立bgp会话，所以bgp模式是高可用的，但是需要你的路由器支持bgp。这边我的路由器是不支持bgp的，所以就采用二层模式</p>
+<p><strong>Layer 2 模式</strong></p>
+<p>Layer 2模式下，每个service会有集群中的一个node来负责。当服务客户端发起ARP解析的时候，对应的node会响应该ARP请求，之后，该service的流量都会指向该node（看上去该node上有多个地址）。</p>
+<p>Layer 2模式并不是真正的负载均衡，因为流量都会先经过1个node后，再通过kube-proxy转给多个end points。如果该node故障，MetalLB会迁移 IP到另一个node，并重新发送免费ARP告知客户端迁移。现代操作系统基本都能正确处理免费ARP，因此failover不会产生太大问题。</p>
+<p>Layer 2模式更为通用，不需要用户有额外的设备；但由于Layer 2模式使用ARP/ND，地址池分配需要跟客户端在同一子网，地址分配略为繁琐。</p>
+<p><strong>BGP模式</strong></p>
+<p>BGP模式下，集群中所有node都会跟上联路由器建立BGP连接，并且会告知路由器应该如何转发service的流量。</p>
+<p>BGP模式是真正的LoadBalancer。</p>
+<p><strong>部署要求</strong></p>
+<p>MetalLB部署需要以下环境才能运行：</p>
+<ul>
+<li>运行Kubernetes 1.13.0或更高版本的群集，尚不具有网络负载平衡功能；</li>
+<li>一些用于MetalLB分配的IPv4地址；</li>
+<li>如果使用BGP模式，需要准备一台或多台支持BGP的路由器；</li>
+<li>如果使用layer 2模式时，集群节点间必须允许7946端口的访问 ，用户代理之间的通信；</li>
+<li>集群的网络类型需要支持MetalLB，详见下图</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">网络类型</th>
+<th style="text-align:left">兼容性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Antrea</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">Calico</td>
+<td style="text-align:left">Mostly</td>
+</tr>
+<tr>
+<td style="text-align:left">Canal</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">Cilium</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">Flannel</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">Kube-ovn</td>
+<td style="text-align:left">Yes</td>
+</tr>
+<tr>
+<td style="text-align:left">Kube-router</td>
+<td style="text-align:left">Mostly</td>
+</tr>
+<tr>
+<td style="text-align:left">Weave Net</td>
+<td style="text-align:left">Mostly</td>
+</tr>
+</tbody>
+</table>
+<h4 id="工作原理">工作原理：</h4>
+<p>Metallb包含两个组件，Controller和Speaker，Controller为Deployment部署方式，而Speaker则采用Daemonset方式部署到集群内部各个Node节点。</p>
+<p>具体的工作原理如下图所示，Controller负责监听Service变化，当Service配置为LoadBalancer模式时，从IP池分配给到相应的IP地址并对该IP的生命周期进行管理。Speaker则会依据选择的协议进行相应的广播或应答，实现IP地址的通信响应。当业务流量通过TCP/UDP协议到达指定的Node时，由Node上面运行的Kube-Proxy组件对流量进行处理，并分发到对应服务的Pod上面。</p>
+<p>MetalLB支持两种模式，一种是Layer2模式，一种是BGP模式。</p>
+<p><strong>Layer2模式</strong></p>
+<p>在2层模式下，Metallb会在Node节点中选出一台作为Leader，与服务IP相关的所有流量都会流向该节点。在该节点上， kube-proxy将接收到的流量传播到对应服务的Pod。当leader节点出现故障时，会由另一个节点接管。从这个角度来看，2层模式更像是高可用，而不是负载均衡，因为同时只能在一个节点负责接收数据。</p>
+<p>在二层模式中会存在以下两种局限性：单节点瓶颈和故障转移慢的情况。</p>
+<p>由于Layer 2 模式会使用单个选举出来的Leader来接收服务IP的所有流量，这就意味着服务的入口带宽被限制为单个节点的带宽，单节点的流量处理能力将成为整个集群的接收外部流量的瓶颈。</p>
+<p>在故障转移方面，目前的机制是MetalLB通过发送2层数据包来通知各个节点，并重新选举Leader，这通常能在几秒内完成。但如果是计划外的事故导致的，此时在有故障的客户端刷新其缓存条目之前，将无法访问服务IP。</p>
+<p><strong>BGP模式</strong></p>
+<p>BGP模式是真正的负载均衡，该模式需要路由器支持BGP协议 ，群集中的每个节点会与网络路由器建议基于BGP的对等会话，并使用该会话来通告负载均衡的IP。MetalLB发布的路由彼此等效，这意味着路由器将使用所有的目标节点，并在它们之间进行负载平衡。数据包到达节点后，kube-proxy负责流量路由的最后一跳，将数据包发送到对应服务的Pod。</p>
+<p>负载平衡的方式取决于您特定的路由器型号和配置，常见的有基于数据包哈希对每个连接进行均衡，这意味着单个TCP或UDP会话的所有数据包都将定向到群集中的单个计算机。</p>
+<p>BGP模式也存在着自身的局限性，该模式通过对数据包头中的某些字段进行哈希处理，并将该哈希值用作后端数组的索引，将给定的数据包分配给特定的下一跳。但路由器中使用的哈希通常不稳定，因此只要后端节点数量发生变化时，现有连接就会被随机地重新哈希，这意味着大多数现有连接将被转发到另一后端，而该后端并不清楚原有的连接状态。为了减少这种麻烦，建议使用更加稳定的BGP算法，如：ECMP散列算法。</p>
+<h3 id="安装使用">安装使用</h3>
+<p>Metallb支持通过Kuberntes清单、Helm和Kustomize方式进行部署，本文我们将以Kuberntes清单为例介绍产品的部署安装，部署的版本为最新的v0.13.7。</p>
+<p>注：由于Metallb从v0.13.0版本开始不再使用configmap而改用自定义资源方式配置，因此本示例与旧版本的配置方式会有所不同</p>
+<h4 id="1确定ipvs集群开启strictarp">1）确定ipvs集群开启strictARP</h4>
+<pre tabindex="0"><code>kubectl edit configmap -n kube-system kube-proxy
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">#设置strictARP值为true</span>
+</span></span><span class="line"><span class="cl">apiVersion: kubeproxy.config.k8s.io/v1alpha1
+</span></span><span class="line"><span class="cl">kind: KubeProxyConfiguration
+</span></span><span class="line"><span class="cl">mode: <span class="s2">&#34;ipvs&#34;</span>
+</span></span><span class="line"><span class="cl">ipvs:
+</span></span><span class="line"><span class="cl">  strictARP: <span class="nb">true</span>
+</span></span></code></pre></div><h4 id="2安装metallb">2）安装metallb</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">wget https://raw.githubusercontent.com/metallb/metallb/v0.13.4/config/manifests/metallb-native.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f metallb-native.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># helm</span>
+</span></span><span class="line"><span class="cl">helm repo add metallb https://metallb.github.io/metallb
+</span></span><span class="line"><span class="cl">helm fetch metallb/metallb --version<span class="o">=</span>0.13.7
+</span></span><span class="line"><span class="cl">helm install metallb metallb/metallb --version<span class="o">=</span>0.13.7
+</span></span></code></pre></div><h4 id="3配置模式">3）配置模式</h4>
+<p><strong>Layer2 模式</strong></p>
+<p>创建IPAddressPool，并指定用于分配的IP池。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="p">[</span><span class="l">root@sugar metallb]# cat &lt;&lt;EOF &gt; IPAdressPool.yaml </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">metallb.io/v1beta1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">IPAddressPool</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">ip-pool</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">metallb-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">addresses</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="m">192.168.214.50-192.168.214.80</span><span class="w">   </span><span class="c">#分配给LB的IP池,注意这里的addresses需要和k8s的节点处于同一个网段</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">EOF</span><span class="w">
+</span></span></span></code></pre></div><p>创建广播声明，此处未指定IP池，则默认会使用所有IP池地址。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">cat &lt;&lt;EOF &gt; L2Advertisement.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">metallb.io/v1beta1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">L2Advertisement</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">l2adver</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">metallb-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">EOF  </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  
+</span></span></span><span class="line"><span class="cl"><span class="w">  
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 也可以指定ip地址池</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">cat &lt;&lt;EOF &gt; L2Advertisement.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">metallb.io/v1beta1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">L2Advertisement</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">example</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">metallb-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ipAddressPools</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">ip-pool</span><span class="w"> </span><span class="c">#上一步创建的 ip 地址池，通过名字进行关联</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">EOF</span><span class="w">
+</span></span></span></code></pre></div><p><strong>BGP模式配置</strong></p>
+<p>对于具有一个BGP路由器和一个IP地址范围的基本配置，您需要4条信息：</p>
+<ul>
+<li>MetalLB应该连接的路由器IP地址，</li>
+<li>路由器的AS号，</li>
+<li>MetalLB应该使用的AS号，</li>
+<li>以CIDR前缀表示的IP地址范围。(分配的LB ip)</li>
+</ul>
+<p>示例：现在分配给MetalLB的AS编号为64500和192.168.10.0/24的IP地址池，并将其连接到AS编号为64501的地址为10.0.0.1的路由器，则配置如下所示：</p>
+<p>创建BGPPeer</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">apiVersion</span><span class="o">:</span> <span class="nx">metallb</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">v1beta2</span>
+</span></span><span class="line"><span class="cl"><span class="nx">kind</span><span class="o">:</span> <span class="nx">BGPPeer</span>
+</span></span><span class="line"><span class="cl"><span class="nx">metadata</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span><span class="o">:</span> <span class="nx">sample</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">namespace</span><span class="o">:</span> <span class="nx">metallb</span><span class="o">-</span><span class="nx">system</span>
+</span></span><span class="line"><span class="cl"><span class="nx">spec</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">myASN</span><span class="o">:</span> <span class="mi">64500</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">peerASN</span><span class="o">:</span> <span class="mi">64501</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">peerAddress</span><span class="o">:</span> <span class="mf">10.0</span><span class="p">.</span><span class="mf">0.1</span>
+</span></span></code></pre></div><p>配置IP地址池</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">apiVersion</span><span class="o">:</span> <span class="nx">metallb</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">v1beta1</span>
+</span></span><span class="line"><span class="cl"><span class="nx">kind</span><span class="o">:</span> <span class="nx">IPAddressPool</span>
+</span></span><span class="line"><span class="cl"><span class="nx">metadata</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span><span class="o">:</span> <span class="nx">first</span><span class="o">-</span><span class="nx">pool</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">namespace</span><span class="o">:</span> <span class="nx">metallb</span><span class="o">-</span><span class="nx">system</span>
+</span></span><span class="line"><span class="cl"><span class="nx">spec</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">addresses</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span> <span class="mf">192.168</span><span class="p">.</span><span class="mf">10.0</span><span class="o">/</span><span class="mi">24</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span> <span class="mf">172.16</span><span class="p">.</span><span class="mf">78.141</span><span class="o">/</span><span class="mi">32</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span>   <span class="o">-</span> <span class="mf">192.168</span><span class="p">.</span><span class="mf">214.50</span><span class="o">-</span><span class="mf">192.168</span><span class="p">.</span><span class="mf">214.80</span>
+</span></span></code></pre></div><p>创建广播声明</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">apiVersion</span><span class="o">:</span> <span class="nx">metallb</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">v1beta1</span>
+</span></span><span class="line"><span class="cl"><span class="nx">kind</span><span class="o">:</span> <span class="nx">BGPAdvertisement</span>
+</span></span><span class="line"><span class="cl"><span class="nx">metadata</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span><span class="o">:</span> <span class="nx">bgpadver</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">namespace</span><span class="o">:</span> <span class="nx">metallb</span><span class="o">-</span><span class="nx">system</span>
+</span></span></code></pre></div><h3 id="测试">测试</h3>
+<p><strong>简单测试：</strong></p>
+<p>1）创建示例yaml文件并执行，包括svc与deployment。</p>
+<pre tabindex="0"><code>apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+spec:
+  selector:
+    app: myapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer    #类型选择LoadBalancer
+ 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  labels:
+    app: myapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+</code></pre><p>2）查看创建的SVC状态，已获取到IP</p>
+<pre tabindex="0"><code>[root@master-01 metalLB]# kubectl get svc
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)        AGE
+kubernetes   ClusterIP      10.96.0.1       &lt;none&gt;          443/TCP        3h47m
+myapp-svc    LoadBalancer   10.99.108.212   172.16.78.141   80:31542/TCP   17m
+</code></pre><p>3）访问测试</p>
+<p><strong>helm 测试：</strong></p>
+<p><a href="https://artifacthub.io/packages/helm/bitnami/nginx" target="_blank" rel="noopener noreffer ">https://artifacthub.io/packages/helm/bitnami/nginx</a></p>
+<pre tabindex="0"><code>$ helm repo add bitnami https://charts.bitnami.com/bitnami
+$ helm install my-release bitnami/nginx
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@sugar metallb<span class="o">]</span><span class="c1"># kubectl get svc </span>
+</span></span><span class="line"><span class="cl">NAME               TYPE           CLUSTER-IP       EXTERNAL-IP    PORT<span class="o">(</span>S<span class="o">)</span>        AGE
+</span></span><span class="line"><span class="cl">kubernetes         ClusterIP      10.96.0.1        &lt;none&gt;         443/TCP        36m
+</span></span><span class="line"><span class="cl">my-release-nginx   LoadBalancer   10.110.219.132   172.16.5.48   80:32026/TCP   27m
+</span></span><span class="line"><span class="cl">mysql              ClusterIP      10.109.126.5     &lt;none&gt;         3306/TCP       14m
+</span></span><span class="line"><span class="cl">mysql-headless     ClusterIP      None             &lt;none&gt;         3306/TCP       14m
+</span></span><span class="line"><span class="cl">nginx-svc          LoadBalancer   10.103.199.38    172.16.5.47   80:32559/TCP   31m
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@ftp ~<span class="o">]</span><span class="c1"># curl 172.16.5.48</span>
+</span></span><span class="line"><span class="cl">&lt;!DOCTYPE html&gt;
+</span></span><span class="line"><span class="cl">&lt;html&gt;
+</span></span><span class="line"><span class="cl">&lt;head&gt;
+</span></span><span class="line"><span class="cl">&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+</span></span><span class="line"><span class="cl">&lt;style&gt;
+</span></span><span class="line"><span class="cl">html <span class="o">{</span> color-scheme: light dark<span class="p">;</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl">body <span class="o">{</span> width: 35em<span class="p">;</span> margin: <span class="m">0</span> auto<span class="p">;</span>
+</span></span><span class="line"><span class="cl">font-family: Tahoma, Verdana, Arial, sans-serif<span class="p">;</span> <span class="o">}</span>
+</span></span><span class="line"><span class="cl">&lt;/style&gt;
+</span></span><span class="line"><span class="cl">&lt;/head&gt;
+</span></span><span class="line"><span class="cl">&lt;body&gt;
+</span></span><span class="line"><span class="cl">&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
+</span></span><span class="line"><span class="cl">&lt;p&gt;If you see this page, the nginx web server is successfully installed and
+</span></span><span class="line"><span class="cl">working. Further configuration is required.&lt;/p&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;p&gt;For online documentation and support please refer to
+</span></span><span class="line"><span class="cl">&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&#34;http://nginx.org/&#34;</span>&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
+</span></span><span class="line"><span class="cl">Commercial support is available at
+</span></span><span class="line"><span class="cl">&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&#34;http://nginx.com/&#34;</span>&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;p&gt;&lt;em&gt;Thank you <span class="k">for</span> using nginx.&lt;/em&gt;&lt;/p&gt;
+</span></span><span class="line"><span class="cl">&lt;/body&gt;
+</span></span><span class="line"><span class="cl">&lt;/html&gt;
+</span></span></code></pre></div><h3 id="工作流程">工作流程</h3>
+<p>MetalLB 做的工作可以分为两个部分：</p>
+<ul>
+<li>1）<strong>地址分配</strong>：当创建 <em>LoadBalancer</em> Service 时，MetalLB 会为其分配 IP 地址。这个 IP 地址是从<strong>预先配置的 IP 地址库</strong>获取的。同样，当 Service 删除后，已分配的 IP 地址会重新回到地址库。</li>
+<li>2）对外广播：分配了 IP 地址之后，需要让集群外的网络知道这个地址的存在。MetalLB 使用了标准路由协议实现：ARP、NDP 或者 BGP。
+<ul>
+<li>在 Layer 2 模式，使用 ARP（ipv4）/NDP（ipv6） 协议；</li>
+<li>在 BPG 模式，自然是使用 BGP 协议。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><em><strong>ARP（Address Resolution Protocol）</strong></em>：是根据IP地址获取物理地址的一个TCP/IP协议。</p>
+<p><em><strong>NDP（neighbor Discovery protocol）</strong></em>：是ICMPv6的子协议是IPV6协议体系中一个重要的基础协议，邻居发现协议替代了IPV4的ARP，ICMP路由器发现。它定义了使用ICMPv6报文实现地址解析，跟踪邻居状态，重复地址检测，路由器发现，以及重定向等功能。</p>
+</blockquote>
+<p>同时 MetalLB 分别使用两个组件来实现了上述两个功能：</p>
+<ul>
+<li><strong>Controller</strong>：实现地址分配，以 <em>Deployment</em> 方式运行，用于监听 Service 的变更，分配/回收 IP 地址。</li>
+<li><strong>Speaker</strong>：实现地址对外广播，以 <em>DaemonSet</em> 方式运行，对外广播 Service 的 IP 地址。</li>
+</ul>
+<p>具体的工作流如下：</p>
+<ul>
+<li>
+<p>Controller 负责监听 Service 变化并分配或回收 IP</p>
+<p>，当 Service 配置为 LoadBalancer 模式时，从 IP 池分配给到相应的 IP 地址并对该 IP 的生命周期进行管理。</p>
+<ul>
+<li>创建 Service 时（或者从非 LoadBalancer 类型修改为 LoadBalancer 类型）时从 IP 池选择一个 IP 并分配，</li>
+<li>删除 Service （或者从 LoadBalancer 类型修改为非 LoadBalancer 类型）时回收该 IP 到 IP 池</li>
+</ul>
+</li>
+<li>
+<p>Speaker 则会依据选择的协议进行相应的广播或应答，实现 IP 地址的通信响应</p>
+<p>。当业务流量通过 TCP/UDP 协议到达指定的 Node 时，由 Node 上面运行的 Kube-Proxy 组件对流量进行处理，并分发到对应服务的 Pod 上面。</p>
+<ul>
+<li>如果是 Layer2 模式 Speaker 就会响应 ARP（ipv4）/NDP（ipv6）请求</li>
+<li>如果是 BGP 模式 Speaker 则发送 BGP 广播，将路由规则同步给 peer。</li>
+</ul>
+</li>
+</ul>
+<h3 id="layer2-模式工作原理">Layer2 模式工作原理</h3>
+<blockquote>
+<p><a href="https://metallb.universe.tf/concepts/layer2/" target="_blank" rel="noopener noreffer ">METALLB IN LAYER 2 MODE</a></p>
+</blockquote>
+<h4 id="大致原理">大致原理</h4>
+<p>Layer 2 中的 Speaker 工作负载是 DeamonSet 类型，在每个节点上都调度一个 Pod，首先，几个 Pod 会先进行选举，选举出 Leader。</p>
+<p>由 Leader Pod 获取所有 LoadBalancer 类型的 Service，并将已分配的 IP 地址绑定到当前主机到网卡上。同时该  Leader 会响应对 ExternalIP 的 ARP（ipv4）/NDP（ipv6） 请求，因此从局域网层面来看，speaker  所在的机器是有多个 IP 地址的，当前其中也包含 ExternalIP。</p>
+<blockquote>
+<p>从网络的角度来看，计算机的网络接口分配了多个IP地址,因为对不同 ip 地址的 arp 请求返回的都是这个节点的 mac 地址。</p>
+</blockquote>
+<p>因此与 ExternalIP 相关的所有流量都会流向该节点。在该节点上， kube-proxy 将接收到的流量传播到对应 Service 的后端 Pod。</p>
+<blockquote>
+<p><strong>也就是说，所有 LoadBalancer 类型的 Service 的 IP 同一时间都是绑定在同一台节点的网卡上。</strong></p>
+</blockquote>
+<h4 id="局限性">局限性</h4>
+<p>在 Layer2 模式中会存在以下两种局限性：<strong>单节点瓶颈</strong>和<strong>故障转移慢</strong>。</p>
+<h5 id="单节点瓶颈">单节点瓶颈</h5>
+<p>由于 Layer 2 模式会使用单个选举出来的 Leader 来接收 ExternalIP 的所有流量，这就意味着服务的入口带宽被限制为单个节点的带宽，单节点的流量处理能力将成为整个集群的接收外部流量的瓶颈。</p>
+<blockquote>
+<p>从这个角度来看，Layer2 模式更像是实现了<strong>故障转移</strong>，而不是负载均衡，因为同时只能在一个节点负责接收数据。</p>
+</blockquote>
+<h5 id="故障转移慢">故障转移慢</h5>
+<p>在故障转移方面，MetalLB 也实现了<strong>自动故障转移</strong>。目前的机制是通过 <a href="https://github.com/hashicorp/memberlist" target="_blank" rel="noopener noreffer ">memberlist</a> 这个基于 gossip 协议的成员和故障检测的库，其他节点检测到 Leader 故障后自动重新选举出新 Leader，新的 Leader  自动接管所有 ExternalIP 并发送大量 二层数据包来通知客户端(也就是区域网中的其他节点) ExternalIP 的 MAC 地址变化。</p>
+<blockquote>
+<p>大部分操作系统都能处理这部分 二层数据包并更新 <strong>neighbor caches</strong>，但是也有极少部分系统不能正确处理这个数据包，从而无法及时更新缓存，还会继续请求旧的 Leader 节点，这种情况下可以让旧 Leader 多存活几分钟，用于处理这部分客户端的请求。</p>
+</blockquote>
+<p>根据官网文档描述<strong>故障转移正常情况下会在几秒内完成</strong>，一般不会超过 10 秒。但是在更新完成前 ExternalIP 会无法访问。</p>
+<blockquote>
+<p>即：会出现几秒钟的服务中断</p>
+<p>这个 10s 只是官方说的，可能经常测试或者是一个大概值，和这段 <a href="https://github.com/metallb/metallb/blob/main/internal/layer2/announcer.go#L51" target="_blank" rel="noopener noreffer ">代码#announcer.go#L51</a> 里的10s 的循环不是一回事</p>
+</blockquote>
+<h3 id="bgp-模式工作原理">BGP 模式工作原理</h3>
+<blockquote>
+<p><a href="https://metallb.universe.tf/concepts/bgp/" target="_blank" rel="noopener noreffer ">METALLB IN BGP MODE</a></p>
+</blockquote>
+<h4 id="大致原理-1">大致原理</h4>
+<p>在 BGP 模式下每个节点（ 上的 Speaker Pod）都会和路由器建立一个 BGP peer session，并且通过这些 peer session 来告知外部网络 ExternalIPs 的存在。</p>
+<p>BGP模式是以集群中的主机与对等体进行共享路由信息，从而实现集群外部的服务能够访问到集群内部的服务。</p>
+<p>和 Layer2 模式不同，<strong>BGP模式真正的实现了负载均衡</strong>，不过具体的负载均衡行为和路由器以及配置有关系。一般默认的行为是根据数据包中的某些<strong>关键字段</strong>进行 hash，并更新 hash 值分配给其中某一个连接。</p>
+<blockquote>
+<p>原文：but the common behavior is to balance <em>per-connection</em>, based on a <em>packet hash</em>.</p>
+</blockquote>
+<p>关键字段常见选择为 <strong>三元组（协议、源IP、目的IP）</strong> 或者<strong>五元组（协议、源IP、目的IP、源端口、目的端口）</strong></p>
+<p>也就是说默认情况下一个连接里的所有数据包都会发送到固定的节点，这样能拥有更好的性能。</p>
+<h4 id="局限性-1">局限性</h4>
+<p>BGP 模式最大的弊端就是<strong>不能优雅的处理节点下线</strong>。当集群中某个节点下线时，所有客户端对这个节点的连接都会被主动断开。</p>
+<blockquote>
+<p>客户端一般会出现一个 Connection reset by peer 错误</p>
+</blockquote>
+<p>同时由于是<strong>对每个数据包基于 hash 值进行负载均衡</strong>，因此<strong>对后端节点数是非常敏感</strong>的，这也是 BGP 的一个优点，<strong>故障转移非常快。</strong></p>
+<p><strong>正因为</strong> <strong>BGP</strong> <strong>故障转移很快，反而引发了一个 BGP 模式的最大缺点</strong>：由于 BGP 会对每个数据包做负载均衡，在主机发生故障时会快速切换到新的主机上，从而引发节点变动时<strong>同一连接的不同数据包可能会发送到不同主机上导致网络导致的网络重排问题</strong>。</p>
+<blockquote>
+<p>比如第一个包转发到节点 A，然后处理第二个包时添加或故障了一个节点，按照新的节点数进行负载均衡计算，可能第二个数据包就被分到节点 B 了，节点 B 很明显是不能正确处理这个数据包的。</p>
+<p>对客户端来说就是这次请求直接失败了。</p>
+</blockquote>
+<p>解决该弊端的方法没有太理想的解决办法，只能尽量采取一些优化手段：</p>
+<ul>
+<li>1）路由器配置更加稳定的 hash 算法，比如 “resilient ECMP” 或者 “resilient LAG”。使用这样的算法极大地减少了 后端节点更改时受影响的连接。</li>
+<li>2）尽量少的增删节点</li>
+<li>3）在流量少时变更节点，以降低影响</li>
+<li>4）使用 ingress 来对外暴露服务等等</li>
+</ul>
+<p><strong>二者实现原理</strong></p>
+<p>MetalLB 包括 Layer2 模式和 BGP 模式，主要区别在于 IP 通告部分的实现不一样：</p>
+<ul>
+<li>Layer2 模式通过响应对 ExternalIP 的 ARP（ipv4）/NDP（ipv6） 请求来告知其他节点某个 IP 在这台机器上
+<ul>
+<li>arp 请求是在 二层的，这可能就是该模式为什么叫做 Layer2</li>
+</ul>
+</li>
+<li>BGP 模式则通过于路由器建立 BGP peer session，从而进行数据同步，让路由器知道某个 IP 在这台机器上</li>
+</ul>
+<p><strong>二者优缺点</strong></p>
+<p>Layer2 模式</p>
+<ul>
+<li>优点：<strong>通用性好</strong>，适用于任何网络环境，不需要特殊的硬件，甚至不需要花哨的路由器。</li>
+<li>缺点：单节点瓶颈和故障转移慢</li>
+</ul>
+<p><strong>Layer2 模式是一种基础、通用的实现</strong>，能用，而且易于使用，没有任何限制，但是局限性比较大。</p>
+<p>BGP 模式：</p>
+<ul>
+<li>优点：使用 BGP 可以在多节点间负载均衡，没有单节点瓶颈，同时故障转移很快。</li>
+<li>缺点： 需要支持 BGP 路由协议的软路由或者硬件路由器设备。
+<ul>
+<li>其实不能算缺点了，想要功能总得付出代价。</li>
+</ul>
+</li>
+</ul>
+<p><strong>使用建议</strong></p>
+<p><strong>BGP</strong> <strong>模式则是比较理想的实现</strong>，除了依赖支持 BGP 的路由之外，其他方面则没有任何限制，并且没有可用性的问题</p>
+<p><strong>一句话总结</strong>：如果说 Layer2 模式为基础实现，那么 BGP 模式则是 LoadBalance 的终极实现，能用 BGP 模式就尽量用 BGP 模式，否则的话就只能用 Layer2 模式了，如果不知道用什么模式的话直接用 Layer2 模式即可。</p>
+<h2 id="istio--metallb">Istio + MetalLB</h2>
+<p>基于helm</p>
+<p>参考链接：https://www.jianshu.com/p/fe6e0911b71c</p>
+<h3 id="一metalb">一、MetaLB</h3>
+<p><code>Kubernetes</code> 不为<strong>裸机集群</strong>提供网络负载均衡器的实现（<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fkubernetes.io%2Fdocs%2Ftasks%2Faccess-application-cluster%2Fcreate-external-load-balancer%2F" target="_blank" rel="noopener noreffer ">LoadBalancer 类型的服务</a>)。 <code>Kubernetes</code> 附带的 <code>Network LB</code> 的实现都是调用各种 <code>IaaS</code> 平台（GCP，AWS，Azure 等）的粘合代码。 如果你未在受支持的 <code>IaaS</code> 平台（GCP，AWS，Azure 等）上运行，则 <code>LoadBalancers</code> 在创建后将无限期保持 <code>“pending”</code> 状态。</p>
+<p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fmetallb.universe.tf%2F" target="_blank" rel="noopener noreffer ">MetalLB</a> 可以解决 <strong>istio ingress gateway</strong> <code>EXTERNAL-IP</code> <code>“pending”</code> 的问题.</p>
+<p>安装：</p>
+<h4 id="1确定ipvs集群开启strictarp-1">1）确定ipvs集群开启strictARP</h4>
+<pre tabindex="0"><code>kubectl edit configmap -n kube-system kube-proxy
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">#设置strictARP值为true</span>
+</span></span><span class="line"><span class="cl">apiVersion: kubeproxy.config.k8s.io/v1alpha1
+</span></span><span class="line"><span class="cl">kind: KubeProxyConfiguration
+</span></span><span class="line"><span class="cl">mode: <span class="s2">&#34;ipvs&#34;</span>
+</span></span><span class="line"><span class="cl">ipvs:
+</span></span><span class="line"><span class="cl">  strictARP: <span class="nb">true</span>
+</span></span></code></pre></div><h4 id="2安装metallb-1">2）安装metallb</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@master-01 ~<span class="o">]</span><span class="c1"># kubectl create ns metallb-system</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master-01 ~<span class="o">]</span><span class="c1"># helm repo add metallb https://metallb.github.io/metallb</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 有需要可以下载chart</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master-01 ~<span class="o">]</span><span class="c1"># helm fetch metallb/metallb --version=0.13.7</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master-01 ~<span class="o">]</span><span class="c1"># helm install metallb metallb/metallb --version=0.13.7 -n metallb-system</span>
+</span></span></code></pre></div><h4 id="3配置模式-1">3）配置模式</h4>
+<p><strong>Layer2 模式</strong></p>
+<p>创建IPAddressPool，并指定用于分配的IP池。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@master-01 ~<span class="o">]</span><span class="c1"># cat ip-pool.yaml </span>
+</span></span><span class="line"><span class="cl">apiVersion: metallb.io/v1beta1
+</span></span><span class="line"><span class="cl">kind: IPAddressPool
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: ip-pool
+</span></span><span class="line"><span class="cl">  namespace: metallb-system
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  addresses:
+</span></span><span class="line"><span class="cl">  - 192.168.214.50-192.168.214.80   <span class="c1">#分配给LB的IP池,注意这里的addresses需要和k8s的节点处于同一个网段</span>
+</span></span><span class="line"><span class="cl">  autoAssign: <span class="nb">false</span> <span class="c1"># 不自动分配ip，默认为ture，若部署服务的LoadBalancer要指定ip的话需要设置为false</span>
+</span></span></code></pre></div><p>创建广播声明，此处未指定IP池，则默认会使用所有IP池地址。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">metallb.io/v1beta1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">L2Advertisement</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">l2adver</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">metallb-system</span><span class="w">
+</span></span></span></code></pre></div><p>使用helm配置layer2</p>
+<pre tabindex="0"><code>helm repo add serialt https://serialt.github.io/helm-charts
+helm install metallb-config serialt/metallb-config --set &#34;ipPoolRange=172.16.1.40-172.16.1.49&#34; -n metallb-system  --version 0.0.1
+</code></pre><p><strong>BGP模式配置</strong></p>
+<p>对于具有一个BGP路由器和一个IP地址范围的基本配置，您需要4条信息：</p>
+<ul>
+<li>MetalLB应该连接的路由器IP地址，</li>
+<li>路由器的AS号，</li>
+<li>MetalLB应该使用的AS号，</li>
+<li>以CIDR前缀表示的IP地址范围。(分配的LB ip)</li>
+</ul>
+<p>示例：现在分配给MetalLB的AS编号为64500和192.168.10.0/24的IP地址池，并将其连接到AS编号为64501的地址为10.0.0.1的路由器，则配置如下所示：</p>
+<p>创建BGPPeer</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">apiVersion</span><span class="o">:</span> <span class="nx">metallb</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">v1beta2</span>
+</span></span><span class="line"><span class="cl"><span class="nx">kind</span><span class="o">:</span> <span class="nx">BGPPeer</span>
+</span></span><span class="line"><span class="cl"><span class="nx">metadata</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span><span class="o">:</span> <span class="nx">sample</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">namespace</span><span class="o">:</span> <span class="nx">metallb</span><span class="o">-</span><span class="nx">system</span>
+</span></span><span class="line"><span class="cl"><span class="nx">spec</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">myASN</span><span class="o">:</span> <span class="mi">64500</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">peerASN</span><span class="o">:</span> <span class="mi">64501</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">peerAddress</span><span class="o">:</span> <span class="mf">10.0</span><span class="p">.</span><span class="mf">0.1</span>
+</span></span></code></pre></div><p>配置IP地址池</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">apiVersion</span><span class="o">:</span> <span class="nx">metallb</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">v1beta1</span>
+</span></span><span class="line"><span class="cl"><span class="nx">kind</span><span class="o">:</span> <span class="nx">IPAddressPool</span>
+</span></span><span class="line"><span class="cl"><span class="nx">metadata</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span><span class="o">:</span> <span class="nx">first</span><span class="o">-</span><span class="nx">pool</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">namespace</span><span class="o">:</span> <span class="nx">metallb</span><span class="o">-</span><span class="nx">system</span>
+</span></span><span class="line"><span class="cl"><span class="nx">spec</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">addresses</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span> <span class="mf">192.168</span><span class="p">.</span><span class="mf">10.0</span><span class="o">/</span><span class="mi">24</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span> <span class="mf">172.16</span><span class="p">.</span><span class="mf">78.141</span><span class="o">/</span><span class="mi">32</span>
+</span></span><span class="line"><span class="cl">  <span class="err">#</span>   <span class="o">-</span> <span class="mf">192.168</span><span class="p">.</span><span class="mf">214.50</span><span class="o">-</span><span class="mf">192.168</span><span class="p">.</span><span class="mf">214.80</span>
+</span></span></code></pre></div><p>创建广播声明</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">apiVersion</span><span class="o">:</span> <span class="nx">metallb</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">v1beta1</span>
+</span></span><span class="line"><span class="cl"><span class="nx">kind</span><span class="o">:</span> <span class="nx">BGPAdvertisement</span>
+</span></span><span class="line"><span class="cl"><span class="nx">metadata</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span><span class="o">:</span> <span class="nx">bgpadver</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">namespace</span><span class="o">:</span> <span class="nx">metallb</span><span class="o">-</span><span class="nx">system</span>
+</span></span></code></pre></div><h3 id="一istio">一、Istio</h3>
+<h4 id="1增加helm-repo">1）增加helm repo</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@master-01 ~<span class="o">]</span><span class="c1"># helm repo add istio https://istio-release.storage.googleapis.com/charts</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 有需求可以下载chart</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master-01 ~<span class="o">]</span><span class="c1"># helm fetch istio/base --version 1.13.6</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master-01 ~<span class="o">]</span><span class="c1"># helm fetch istio/istiod --version 1.13.6</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master-01 ~<span class="o">]</span><span class="c1"># helm fetch istio/gateway --version 1.13.6</span>
+</span></span></code></pre></div><h4 id="2部署istio组件">2）部署istio组件</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@master-01 ~<span class="o">]</span><span class="c1"># kubectl create namespace istio-system</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master-01 ~<span class="o">]</span><span class="c1"># helm install istio-base istio/base -n istio-system --version 1.13.6</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@master-01 ~<span class="o">]</span><span class="c1"># helm install istiod istio/istiod -n istio-system --wait --version 1.13.6</span>
+</span></span></code></pre></div><p>若关闭了自动分配ip，这需要配置一下 gateway 的 annotations</p>
+<p>参考链接：</p>
+<ul>
+<li>
+<p>弃用<a href="https://github.com/kubernetes/kubernetes/pull/107235#top" target="_blank" rel="noopener noreffer ">Service.Spec.LoadBalancerIP</a></p>
+</li>
+<li>
+<p>metallb 分配https://metallb.universe.tf/usage/</p>
+</li>
+</ul>
+<p>annotations里指定IP</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># istio-values.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">service</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metallb.universe.tf/loadBalancerIPs</span><span class="p">:</span><span class="w"> </span><span class="m">172.16.78.143</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">autoscaling</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">minReplicas</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@master-01 ~<span class="o">]</span><span class="c1"># helm install istio-ingressgateway istio/gateway  -n istio-system  --version 1.13.6  --set replicaCount=3  --set autoscaling.enabled=false </span>
+</span></span></code></pre></div><p>使用以下命令确认所有 <code>Pod</code> 都在运行。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ kubectl get pod -n istio-system -w
+</span></span><span class="line"><span class="cl">NAME                                    READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">istio-ingressgateway-7cc49dcd99-c4mtf   1/1     Running   <span class="m">0</span>          94s
+</span></span><span class="line"><span class="cl">istiod-687f965684-n8rkv                 1/1     Running   <span class="m">0</span>          3m26s
+</span></span></code></pre></div><h4 id="3安装多个istio-gateway">3）安装多个istio gateway</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@master-01 ~<span class="o">]</span><span class="c1"># helm install istio-ingressgateway-mgt istio/gateway  -n istio-system  --version 1.13.6  --set replicaCount=3   --set autoscaling.enabled=false </span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">apiVersion: networking.istio.io/v1beta1
+</span></span><span class="line"><span class="cl">kind: Gateway
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  name: local-gateway-mgt
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  selector:
+</span></span><span class="line"><span class="cl">    istio: ingressgateway-mgt <span class="c1"># use istio ingressgateway-mgt</span>
+</span></span><span class="line"><span class="cl">  servers:
+</span></span><span class="line"><span class="cl">    - port:
+</span></span><span class="line"><span class="cl">        number: <span class="m">80</span>
+</span></span><span class="line"><span class="cl">        name: http
+</span></span><span class="line"><span class="cl">        protocol: HTTP
+</span></span><span class="line"><span class="cl">      hosts:
+</span></span><span class="line"><span class="cl">        - <span class="s2">&#34;*.local.local.com&#34;</span>
+</span></span><span class="line"><span class="cl">    - hosts:
+</span></span><span class="line"><span class="cl">        - <span class="s1">&#39;*.local.imau.cc&#39;</span>
+</span></span><span class="line"><span class="cl">      port:
+</span></span><span class="line"><span class="cl">        name: https
+</span></span><span class="line"><span class="cl">        number: <span class="m">443</span>
+</span></span><span class="line"><span class="cl">        protocol: HTTPS
+</span></span><span class="line"><span class="cl">      tls:
+</span></span><span class="line"><span class="cl">        mode: PASSTHROUGH  
+</span></span></code></pre></div><h3 id="测试-1">测试</h3>
+<pre tabindex="0"><code>apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: myapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  labels:
+    app: myapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: nginx
+        image: nginx 
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi    
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: myapp-vs
+spec:
+  gateways:
+  - local-gateway
+  hosts:
+  - myapp.local.com
+  http:
+  - route:
+    - destination:
+        host: myapp-svc
+        port:
+          number: 80
+          
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: local-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - &#34;*.local.com&#34;
+    # tls:
+    #   httpsRedirect: true # sends 301 redirect for http requests
+
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: local-credential # must be the same as secret
+    hosts:
+    - &#34;*.local.com&#34;
+</code></pre></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-08-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/metallb/">metallb</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2024-08-11-kubeadm/" class="prev" rel="prev" title="kubeadm"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>kubeadm</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>k8s-doc - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/k8s-doc/</link>
+        <description>k8s-doc - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 11 Aug 2024 19:30:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/k8s-doc/" rel="self" type="application/rss+xml" /><item>
+    <title>k8s-doc</title>
+    <link>https://serialt.github.io/posts/2024-08-11-k8s-doc/</link>
+    <pubDate>Sun, 11 Aug 2024 19:30:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-08-11-k8s-doc/</guid>
+    <description><![CDATA[k8s doc 1、节点加入失败 日志信息 ...... [control-plane] Creating static Pod manifest for &#34;kube-controller-manager&#34; W0329 00:01:51.364121 19209 manifests.go:214] the default kube-apiserver authorization-mode is &#34;Node,RBAC&#34;; using &#34;Node,RBAC&#34; [control-plane] Creating static Pod manifest for &#34;kube-scheduler&#34; W0329 00:01:51.373807 19209 manifests.go:214] the default kube-apiserver authorization-mode is &#34;Node,RBAC&#34;; using &#34;Node,RBAC&#34; [check-etcd] Checking that the etcd cluster is healthy error execution phase check-etcd: etcd cluster is not healthy:]]></description>
+</item>
+</channel>
+</rss>
