@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/posts/</link>
         <description>All Posts | Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 11 Aug 2024 19:34:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 19 Aug 2024 20:26:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Skopeo</title>
+    <link>https://serialt.github.io/posts/skopeo/</link>
+    <pubDate>Mon, 19 Aug 2024 20:26:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/skopeo/</guid>
+    <description><![CDATA[镜像同步 参考链接： https://lework.github.io/2020/04/13/skopeo/ https://blog.k8s.li/skopeo.html 日常工作中，需要将各种镜像搬到对应的仓库中，docker 适合于构建镜像，将镜像推送于仓库中。镜像被推送到仓库中后，如果]]></description>
+</item>
+<item>
     <title>metallb</title>
     <link>https://serialt.github.io/posts/2024-08-11-metallb/</link>
     <pubDate>Sun, 11 Aug 2024 19:34:27 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-11-11-go-basic/</guid>
     <description><![CDATA[1、变量定义 var name string var isOk bool // 隐式申明 a := 100 str := &#34;sugar&#34; // 批量声明 var ( a string b int c bool d float32 ) // 变量的初始化 var name string = &#34;github&#34; var age int = 10 var name, age = &#34;github&#34;, 11 // 类型推导 var name =]]></description>
-</item>
-<item>
-    <title>TF-lib</title>
-    <link>https://serialt.github.io/posts/2024-07-21-tf-lib/</link>
-    <pubDate>Sun, 21 Jul 2024 21:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-07-21-tf-lib/</guid>
-    <description><![CDATA[Terraform 常用 provider http tls helm kubernetes vault null local dns random ad cloud： aws aliyun tencent cloud huaweicloud 第三方库： shell，执行命令，获取返回值：shell gitlab harbor nexus：datadriver]]></description>
 </item>
 </channel>
 </rss>

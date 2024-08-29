@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-06-16-nexus\/"
-        },"genre": "posts","keywords": "nexus, repo","wordcount":  4979 ,
+        },"genre": "posts","keywords": "nexus, repo","wordcount":  5057 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-06-16-nexus\/","datePublished": "2024-06-16T19:26:27+08:00","dateModified": "2024-06-16T19:26:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,8 +101,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Nexus</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-16">2024-06-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4979 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-16">2024-06-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5057 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -231,18 +231,17 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">server <span class="o">{</span>
 </span></span><span class="line"><span class="cl">    listen 80<span class="p">;</span>
-</span></span><span class="line"><span class="cl">    server_name mirrors.local.com<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    server_name nexus.local.com<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    client_max_body_size       1024m<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    client_body_buffer_size    128k<span class="p">;</span>
 </span></span><span class="line"><span class="cl">    location / <span class="o">{</span>
 </span></span><span class="line"><span class="cl">        proxy_set_header Host <span class="nv">$host</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        proxy_set_header X-Forwarded-For <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        proxy_set_header X-Real-IP <span class="nv">$remote_addr</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">#proxy_set_header X-Forwarded-Proto &#34;https&#34;;</span>
+</span></span><span class="line"><span class="cl">        proxy_set_header X-Forwarded-Proto <span class="nv">$scheme</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        proxy_max_temp_file_size 0<span class="p">;</span>
 </span></span><span class="line"><span class="cl">        proxy_pass http://nexus-server<span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="c1"># This is the maximum upload size</span>
-</span></span><span class="line"><span class="cl">        client_max_body_size       1024m<span class="p">;</span>
-</span></span><span class="line"><span class="cl">        client_body_buffer_size    128k<span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">   	    proxy_connect_timeout      90<span class="p">;</span>
 </span></span><span class="line"><span class="cl">        proxy_send_timeout         90<span class="p">;</span>
@@ -259,6 +258,23 @@
 </span></span><span class="line"><span class="cl">    <span class="c1">#ssl_certificate cert/xx.pem;</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">#ssl_certificate_key cert/xx.key;</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">server <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    listen 80<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    server_name  mirrors.local.com <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    client_max_body_size       1024m<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    client_body_buffer_size    128k<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    charset utf-8<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    location / <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        proxy_pass http://nexus.local.com/repository/<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        proxy_set_header Host nexus.local.com<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        proxy_set_header X-Real-IP <span class="nv">$remote_addr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        proxy_set_header X-Forwarded-For <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        proxy_set_header X-Forwarded-Proto <span class="nv">$scheme</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    access_log /var/log/nginx/mirrors.log<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    error_log /var/log/nginx/mirrors-error.log<span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></div><p>docker nginx</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># compose.yaml</span><span class="w">
@@ -298,14 +314,13 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">listen 80;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">server_name  nexus.local.com ;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">charset utf-8;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">client_max_body_size       100m;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">client_body_buffer_size    12800k;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">location / {</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">client_max_body_size       100m;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">client_body_buffer_size    12800k;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">proxy_set_header Host $host;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">proxy_set_header X-Real-IP $remote_addr;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">proxy_set_header X-Forwarded-Proto &#34;http&#34;;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">proxy_set_header X-Forwarded-Proto $scheme;    </span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">proxy_pass http://nexus-local;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>}<span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">access_log /var/log/nginx/nexus.log;</span><span class="w">
@@ -316,14 +331,13 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">listen 443 ssl;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">server_name  nexus.local.com ;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">charset utf-8;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">client_max_body_size       100m;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">client_body_buffer_size    12800k;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">location / {</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">client_max_body_size       100m;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">client_body_buffer_size    12800k;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">proxy_set_header Host $host;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">proxy_set_header X-Real-IP $remote_addr;</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">proxy_set_header X-Forwarded-Proto &#34;http&#34;;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">proxy_set_header X-Forwarded-Proto $scheme; </span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="l">proxy_pass http://nexus-local;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span>}<span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="l">ssl_certificate /etc/nginx/cert_files/local.com.crt;</span><span class="w">
@@ -362,7 +376,11 @@
 </span></span><span class="line"><span class="cl">https://repo.nju.edu.cn/repository/npm/
 </span></span></code></pre></div><p>2）创建group类型的 repo，在 member repository 中增加proxy 类型的repo</p>
 <p>3） npm 配置 group的地址</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">npm config <span class="nb">set</span> registry http://nexus.local.com/repository/npm
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 配置 npm默认源</span>
+</span></span><span class="line"><span class="cl">npm config <span class="nb">set</span> registry http://nexus.local.com/repository/npm
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 或者直接使用npm命令</span>
+</span></span><span class="line"><span class="cl">npm install -y --registry<span class="o">=</span>http://nexus.local.com/repository/npm/
 </span></span></code></pre></div><h3 id="3pypi">3、pypi</h3>
 <p>1）创建 proxy 类型的 repo</p>
 <p>​	创建proxy类型的repo，可以创建多个</p>
@@ -387,6 +405,9 @@
 </span></span><span class="line"><span class="cl">index-url <span class="o">=</span> http://nexus.local.com/repository/pypi/simple
 </span></span><span class="line"><span class="cl">trusted-host <span class="o">=</span> nexus.local.com
 </span></span><span class="line"><span class="cl"><span class="nv">timeout</span> <span class="o">=</span> <span class="m">120</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 不配置pip.conf直接使用</span>
+</span></span><span class="line"><span class="cl">pip3 install redis   -i http://mirrors.local.com/pypi/simple --truste
+</span></span><span class="line"><span class="cl">d-host mirrors.local.com
 </span></span></code></pre></div><h3 id="4maven">4、maven</h3>
 <p>1）创建 proxy 类型的 repo</p>
 <p>​	创建proxy类型的repo，可以创建多个</p>

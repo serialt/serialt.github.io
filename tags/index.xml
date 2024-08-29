@@ -4,7 +4,31 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 11 Aug 2024 19:34:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 19 Aug 2024 20:26:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>image</title>
+    <link>https://serialt.github.io/tags/image/</link>
+    <pubDate>Mon, 19 Aug 2024 20:26:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/image/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>oci-image-sync</title>
+    <link>https://serialt.github.io/tags/oci-image-sync/</link>
+    <pubDate>Mon, 19 Aug 2024 20:26:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/oci-image-sync/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>skopeo</title>
+    <link>https://serialt.github.io/tags/skopeo/</link>
+    <pubDate>Mon, 19 Aug 2024 20:26:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/skopeo/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>metallb</title>
     <link>https://serialt.github.io/tags/metallb/</link>
     <pubDate>Sun, 11 Aug 2024 19:34:27 &#43;0800</pubDate>
@@ -58,30 +82,6 @@
     <pubDate>Sun, 11 Aug 2024 19:26:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/containerd-exit/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>db</title>
-    <link>https://serialt.github.io/tags/db/</link>
-    <pubDate>Sun, 11 Aug 2024 11:30:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/db/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>pg</title>
-    <link>https://serialt.github.io/tags/pg/</link>
-    <pubDate>Sun, 11 Aug 2024 11:30:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/pg/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>postgresql</title>
-    <link>https://serialt.github.io/tags/postgresql/</link>
-    <pubDate>Sun, 11 Aug 2024 11:30:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/postgresql/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

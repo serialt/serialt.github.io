@@ -8,15 +8,15 @@
 <meta property="og:description" content="镜像同步 参考链接： https://lework.github.io/2020/04/13/skopeo/ https://blog.k8s.li/skopeo.html 日常工作中，需要将各种镜像搬到对应的仓库中，docker 适合于构建镜像，将镜像推送于仓库中。镜像被推送到仓库中后，如果" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://serialt.github.io/posts/skopeo/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-11-08T20:26:42+08:00" />
-<meta property="article:modified_time" content="2023-11-08T20:26:42+08:00" /><meta property="og:site_name" content="Log" />
+<meta property="article:published_time" content="2024-08-19T20:26:42+08:00" />
+<meta property="article:modified_time" content="2024-08-19T20:26:42+08:00" /><meta property="og:site_name" content="Log" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Skopeo"/>
 <meta name="twitter:description" content="镜像同步 参考链接： https://lework.github.io/2020/04/13/skopeo/ https://blog.k8s.li/skopeo.html 日常工作中，需要将各种镜像搬到对应的仓库中，docker 适合于构建镜像，将镜像推送于仓库中。镜像被推送到仓库中后，如果"/>
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/skopeo/" /><link rel="prev" href="https://serialt.github.io/posts/morse-code/" /><link rel="next" href="https://serialt.github.io/posts/go-goth/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/skopeo/" /><link rel="prev" href="https://serialt.github.io/posts/2024-08-11-metallb/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -27,8 +27,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/skopeo\/"
-        },"genre": "posts","keywords": "skopeo, image, oci-image-sync","wordcount":  2515 ,
-        "url": "https:\/\/serialt.github.io\/posts\/skopeo\/","datePublished": "2023-11-08T20:26:42+08:00","dateModified": "2023-11-08T20:26:42+08:00","publisher": {
+        },"genre": "posts","keywords": "skopeo, image, oci-image-sync","wordcount":  2534 ,
+        "url": "https:\/\/serialt.github.io\/posts\/skopeo\/","datePublished": "2024-08-19T20:26:42+08:00","dateModified": "2024-08-19T20:26:42+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Skopeo</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-08">2023-11-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2515 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-08-19">2024-08-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2534 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -124,6 +124,7 @@
         <li><a href="#删除镜像">删除镜像</a></li>
         <li><a href="#认证文件">认证文件</a></li>
         <li><a href="#sync-在-oci-间同步镜像">sync 在 OCI 间同步镜像</a></li>
+        <li><a href="#查看镜像所有tag">查看镜像所有tag</a></li>
       </ul>
     </li>
     <li><a href="#三同步镜像">三、同步镜像</a>
@@ -404,6 +405,12 @@
 </span></span><span class="line"><span class="cl">    - <span class="s1">&#39;5.5.2&#39;</span>
 </span></span></code></pre></div><p>同步镜像</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">skopeo --insecure-policy sync -a --src yaml --dest docker sync.yaml repo.local.com/serialt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">skopeo --insecure-policy  copy docker://docker.io/library/nginx:latest docker://registry.cn-hangzhou.aliyuncs.com/serialt/nginx:latest 
+</span></span></code></pre></div><h3 id="查看镜像所有tag">查看镜像所有tag</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@tc ~<span class="o">]</span><span class="c1"># skopeo list-tags docker://registry.cn-hangzhou.aliyuncs.com/serialt/go</span>
 </span></span></code></pre></div><h2 id="三同步镜像">三、同步镜像</h2>
 <p>目前，常用的 OCI 仓库有：<code>docker.io</code>，<code>quay.io</code>，<code>gcr.io</code>，<code>registry.k8s.io</code>，<code>ghcr.io</code> 等。众所周知，因为某些原因，这些 OCI 仓库在国内无法访问，而一些项目又严重依赖于存储在这些 OCI 仓库的镜像，虽然有热心的大佬们会把 gcr 和 ghcr 上存储的镜像同步到 docker hub 中，但因为这些被推送到 docker hub 中的镜像不是官方维护的，可能会存在比较大的镜像的同步时间差，某些需要的镜像无法在 docker hub 上找到，同时也容易引起容器镜像的供应链安全问题。因此，可以使用 github action 使用 skopeo 进行同步镜像。</p>
 <p>项目地址：<a href="https://github.com/serialt/sync-image" target="_blank" rel="noopener noreffer ">sync-image</a></p>
@@ -602,7 +609,7 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-11-08</span>
+                <span>Updated on 2024-08-19</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
@@ -619,8 +626,7 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/morse-code/" class="prev" rel="prev" title="Morse Code"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Morse Code</a>
-            <a href="/posts/go-goth/" class="next" rel="next" title="Go goph">Go goph<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/posts/2024-08-11-metallb/" class="prev" rel="prev" title="metallb"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>metallb</a></div>
 </div>
 </article></div>
             </main><footer class="footer">

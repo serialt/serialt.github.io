@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/categories/devops/</link>
         <description>DevOps - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 11 Aug 2024 19:34:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 19 Aug 2024 20:26:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+    <title>Skopeo</title>
+    <link>https://serialt.github.io/posts/skopeo/</link>
+    <pubDate>Mon, 19 Aug 2024 20:26:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/skopeo/</guid>
+    <description><![CDATA[镜像同步 参考链接： https://lework.github.io/2020/04/13/skopeo/ https://blog.k8s.li/skopeo.html 日常工作中，需要将各种镜像搬到对应的仓库中，docker 适合于构建镜像，将镜像推送于仓库中。镜像被推送到仓库中后，如果]]></description>
+</item>
+<item>
     <title>metallb</title>
     <link>https://serialt.github.io/posts/2024-08-11-metallb/</link>
     <pubDate>Sun, 11 Aug 2024 19:34:27 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</guid>
     <description><![CDATA[Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # makefile default: install build: go build -v ./... install: go install -v ./... vscode 调试 terraform provider 1）vscode launch cat .vscode/launch.json {]]></description>
-</item>
-<item>
-    <title>openssh-cve</title>
-    <link>https://serialt.github.io/posts/2024-07-01-cve/</link>
-    <pubDate>Mon, 01 Jul 2024 21:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-07-01-cve/</guid>
-    <description><![CDATA[CVE OpenSSH CVE-2024-6387 该漏洞是 OpenSSH 服务器 （sshd） 中的信号处理程序争用条件，允许在基于 glibc 的 Linux 系统上以 root 身份执行未经身份验证的远程代码执行 （RCE）;这带来了]]></description>
 </item>
 </channel>
 </rss>
