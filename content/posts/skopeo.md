@@ -1,10 +1,11 @@
 +++
 title = 'Skopeo'
-date = 2023-11-08T20:26:42+08:00
+date = 2024-08-19T20:26:42+08:00
 draft = false
 
 tags = ["skopeo","image","oci-image-sync"]
 categories = ["DevOps"]
+
 +++
 
 
@@ -353,7 +354,21 @@ ghcr.io:
 
 ```shell
 skopeo --insecure-policy sync -a --src yaml --dest docker sync.yaml repo.local.com/serialt
+
+
+
+skopeo --insecure-policy  copy docker://docker.io/library/nginx:latest docker://registry.cn-hangzhou.aliyuncs.com/serialt/nginx:latest 
 ```
+
+
+
+### 查看镜像所有tag
+
+```shell
+[root@tc ~]# skopeo list-tags docker://registry.cn-hangzhou.aliyuncs.com/serialt/go
+```
+
+
 
 
 
