@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>handbook - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/handbook/</link>
+        <description>handbook - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 11 Aug 2024 19:39:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/handbook/" rel="self" type="application/rss+xml" /><item>
+    <title>手册</title>
+    <link>https://serialt.github.io/posts/2024-08-29-other/</link>
+    <pubDate>Sun, 11 Aug 2024 19:39:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-08-29-other/</guid>
+    <description><![CDATA[腾讯云轻量优化 #!/bin/bash #fuck tx process rm -rf /usr/local/sa rm -rf /usr/local/agenttools rm -rf /usr/local/qcloud process=(sap100 secu-tcs-agent sgagent64 barad_agent agent agentPlugInD pvdriver ) for i in ${process[@]} do for A in $(ps aux |grep $i |grep -v grep |awk &#39;{print $2}&#39;) do kill -9 $A done done chkconfig --level 35 postfix off service postfix stop echo &#39;&#39;&gt;/var/spool/cron/root echo &#39;#!/bin/bash&#39; &gt;/etc/rc.local git-code https://github.com/4x99/code6 RHE]]></description>
+</item>
+</channel>
+</rss>

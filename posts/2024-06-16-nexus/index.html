@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-06-16-nexus\/"
-        },"genre": "posts","keywords": "nexus, repo","wordcount":  5057 ,
+        },"genre": "posts","keywords": "nexus, repo","wordcount":  5159 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-06-16-nexus\/","datePublished": "2024-06-16T19:26:27+08:00","dateModified": "2024-06-16T19:26:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Nexus</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-16">2024-06-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5057 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-16">2024-06-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5159 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -686,7 +686,41 @@ docker.io/build/alpine:3.20
 </span></span><span class="line"><span class="cl"><span class="c1"># 限速 3MB/s</span>
 </span></span><span class="line"><span class="cl">rsync --delete -avzP --bwlimit<span class="o">=</span><span class="m">3000</span> --chown<span class="o">=</span>200:200 /data/nexus/  root@172.16.80.234:/data/nexus
 </span></span></code></pre></div><p>备 nexus上的数据在启动服务的时候可能需要修改一下数据权限，具体操作需要观察一下nexus日志</p>
-<h2 id="六terraform">六、Terraform</h2>
+<p>chart数据同步</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="cp">#!/usr/bin/env bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nv">src_repo</span><span class="o">=</span>http://nexus.local.local.cc/repository/helm   
+</span></span><span class="line"><span class="cl"><span class="nv">src_repo_name</span><span class="o">=</span><span class="nb">local</span>
+</span></span><span class="line"><span class="cl"><span class="nv">dst_repo</span><span class="o">=</span>http://nexus.local.cc/repository/helm   
+</span></span><span class="line"><span class="cl"><span class="nv">dst_repo_name</span><span class="o">=</span>newlocal
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># add repo for helm </span>
+</span></span><span class="line"><span class="cl"><span class="c1">#helm repo add ${src_repo_name} ${src_repo}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#helm repo add ${dst_repo_name} ${dst_repo}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#helm repo update</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">befor_time</span><span class="o">=</span><span class="s2">&#34;20221104160208&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">end_time</span><span class="o">=</span><span class="s2">&#34;20230328093331&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">user</span><span class="o">=</span>ccccc
+</span></span><span class="line"><span class="cl"><span class="nv">password</span><span class="o">=</span>dddddd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">project_list</span><span class="o">=</span><span class="k">$(</span>helm search repo <span class="si">${</span><span class="nv">src_repo_name</span><span class="si">}</span> <span class="p">|</span>  awk <span class="s1">&#39;{print $1}&#39;</span> <span class="p">|</span> grep -v NAME <span class="p">|</span> awk -F <span class="s1">&#39;/&#39;</span> <span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> project in <span class="si">${</span><span class="nv">project_list</span><span class="si">}</span> <span class="p">;</span><span class="k">do</span> 
+</span></span><span class="line"><span class="cl">    <span class="nv">version_list</span><span class="o">=</span><span class="k">$(</span>helm search repo <span class="si">${</span><span class="nv">src_repo_name</span><span class="si">}</span>/<span class="si">${</span><span class="nv">project</span><span class="si">}</span> -l  <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> version in <span class="si">${</span><span class="nv">version_list</span><span class="si">}</span><span class="p">;</span><span class="k">do</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">[[</span> <span class="si">${</span><span class="nv">version</span><span class="si">}</span> -gt <span class="si">${</span><span class="nv">befor_time</span><span class="si">}</span> <span class="o">]]</span><span class="p">;</span><span class="k">then</span> 
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="o">[[</span> <span class="si">${</span><span class="nv">version</span><span class="si">}</span> -lt <span class="si">${</span><span class="nv">end_time</span><span class="si">}</span> <span class="o">]]</span><span class="p">;</span><span class="k">then</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                helm fetch <span class="si">${</span><span class="nv">src_repo_name</span><span class="si">}</span>/<span class="si">${</span><span class="nv">project</span><span class="si">}</span> --version <span class="si">${</span><span class="nv">version</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">                helm nexus-push <span class="si">${</span><span class="nv">dst_repo_name</span><span class="si">}</span>  <span class="si">${</span><span class="nv">project</span><span class="si">}</span>-<span class="si">${</span><span class="nv">version</span><span class="si">}</span>.tgz  -u <span class="si">${</span><span class="nv">user</span><span class="si">}</span> -p <span class="si">${</span><span class="nv">password</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">fi</span>
+</span></span><span class="line"><span class="cl">        <span class="k">fi</span>    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">done</span> 
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></div><h2 id="六terraform">六、Terraform</h2>
 <p>目前 nexus 没有 api 提供去配置 cleanup policy，需要配置 nexus 运行运行 script ，使用groovy脚本进行添加</p>
 <p>开启nexus 允许运行script</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># nexus_dir/etc/nexus.properties</span>

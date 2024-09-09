@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>kvm - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/kvm/</link>
+        <description>kvm - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Thu, 29 Aug 2024 19:35:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/kvm/" rel="self" type="application/rss+xml" /><item>
+    <title>kvm</title>
+    <link>https://serialt.github.io/posts/2024-08-29-kvm.md/</link>
+    <pubDate>Thu, 29 Aug 2024 19:35:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-08-29-kvm.md/</guid>
+    <description><![CDATA[KVM virt-install 安装虚拟机 virt-install 示例 virt-install \ --name=pc01 \ --graphics vnc,listen=0.0.0.0,port=5901,keymap=en_us \ --ram=1024 \ --vcpus=1 \ --disk path=/var/lib/libvirt/images/pc01.img,size=9,format=qcow2 \ --bridge=virbr0 \ --location=ftp://172.16.8.100/rhel6.6 \ --extra-args=&#34;ks=ftp://172.16.8.100/rhel6.4.ks&#34; virt-install \ --name=pc02 \ --graphics vnc,listten=0.0.0.0,port=5920,keymap=en_us \ --noautoconsole \ --ram=1024 \ --vcpus=1 \ --disk path=/var/lib/libvirt/images/pc02.img,size=9,format=qcow2 \ --bridge=virbr0 \ --location=ftp://172.16.8.100/rhel6.4 \ --extra-args=&#34;ks=ftp://172.16.8.100/rhel6.4.ks&#34; virt-install \ --name=pc03 \ --nographics \ --ram=1024 \ --vcpus=1 \ --disk path=/var/lib/libvirt/images/pc03.img,size=9,format=qcow2 \ --bridg=virbr0 --location=ftp://172.16.8.100/rhel6.4 \ --extra-args=&#34;ks=ftp://172.16.8.100/rhel6.4.ks console=tty0 console=ttyS0&#34; #]]></description>
+</item>
+</channel>
+</rss>

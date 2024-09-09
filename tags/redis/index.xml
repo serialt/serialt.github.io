@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>redis - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/redis/</link>
+        <description>redis - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 11 Aug 2024 19:45:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/redis/" rel="self" type="application/rss+xml" /><item>
+    <title>redis</title>
+    <link>https://serialt.github.io/posts/2024-08-31-redis/</link>
+    <pubDate>Sun, 11 Aug 2024 19:45:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-08-31-redis/</guid>
+    <description><![CDATA[Redis Redis 特点 开源数据库 配置简单 支持内存存储数据 支持持久化存储数据 datafile 数据文件 *.rdb aof(append only file)文件，日志文件 支持多实例部署 支持主从复制、集群 支持事务]]></description>
+</item>
+</channel>
+</rss>

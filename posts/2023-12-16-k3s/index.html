@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2023-12-16-k3s\/"
-        },"genre": "posts","keywords": "k3s, k8s","wordcount":  6854 ,
+        },"genre": "posts","keywords": "k3s, k8s","wordcount":  6855 ,
         "url": "https:\/\/serialt.github.io\/posts\/2023-12-16-k3s\/","datePublished": "2023-12-16T20:26:27+08:00","dateModified": "2023-12-16T20:26:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">k3s</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-16">2023-12-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6854 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-16">2023-12-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6855 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -240,7 +240,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># set images</span>
-</span></span><span class="line"><span class="cl">tar -xf k3s-airgap-images-<span class="nv">$ARCH</span>.tar.gz
+</span></span><span class="line"><span class="cl">gzip -d k3s-airgap-images-<span class="nv">$ARCH</span>.tar.gz
 </span></span><span class="line"><span class="cl">mkdir -p /var/lib/rancher/k3s/agent/images/
 </span></span><span class="line"><span class="cl">cp ./k3s-airgap-images-<span class="nv">$ARCH</span>.tar /var/lib/rancher/k3s/agent/images/
 </span></span><span class="line"><span class="cl">
@@ -254,7 +254,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># install k3s</span>
-</span></span><span class="line"><span class="cl"><span class="nv">INSTALL_K3S_SKIP_DOWNLOAD</span><span class="o">=</span><span class="nb">true</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn  <span class="nv">INSTALL_K3S_SELINUX_WARN</span><span class="o">=</span><span class="nb">true</span> <span class="nv">INSTALL_K3S_SKIP_SELINUX_RPM</span><span class="o">=</span><span class="nb">true</span> <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&#34;--write-kubeconfig ~/.kube/config  --write-kubeconfig-mode 644 &#34;</span>  ./install.sh
+</span></span><span class="line"><span class="cl"><span class="nv">INSTALL_K3S_SKIP_DOWNLOAD</span><span class="o">=</span><span class="nb">true</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn  <span class="nv">INSTALL_K3S_SELINUX_WARN</span><span class="o">=</span><span class="nb">true</span> <span class="nv">INSTALL_K3S_SKIP_SELINUX_RPM</span><span class="o">=</span><span class="nb">true</span> <span class="nv">INSTALL_K3S_EXEC</span><span class="o">=</span><span class="s2">&#34;--write-kubeconfig ~/.kube/config  --write-kubeconfig-mode 644 --docker &#34;</span>  ./install.sh
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">

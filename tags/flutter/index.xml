@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>flutter - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/flutter/</link>
+        <description>flutter - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Thu, 29 Aug 2024 19:34:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/flutter/" rel="self" type="application/rss+xml" /><item>
+    <title>flutter</title>
+    <link>https://serialt.github.io/posts/2024-08-29-flutter/</link>
+    <pubDate>Thu, 29 Aug 2024 19:34:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-08-29-flutter/</guid>
+    <description><![CDATA[一、flutter 安装 https://flutter.cn/docs/get-started/install 安装源国内地址： export PUB_HOSTED_URL=https://pub.flutter-io.cn export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn flutter docker镜像打包 1、flutter FROM --platform=linux/amd64 debian:bullseye ARG FLUTTER_VERSION=2.2.3 ENV LANG=C.UTF-8 ENV PUB_HOSTED_URL=https://pub.flutter-io.cn ENV FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn ENV TZ=Asia/Shanghai ENV DEBIAN_FRONTEND=noninteractive RUN sed -i &#39;s/\w*.debian.org/mirrors.ustc.edu.cn/g&#39; /etc/apt/sources.list RUN apt-get update &amp;&amp; apt-get upgrade]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>redis - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="redis" />
+<meta property="og:description" content="Redis Redis 特点 开源数据库 配置简单 支持内存存储数据 支持持久化存储数据 datafile 数据文件 *.rdb aof(append only file)文件，日志文件 支持多实例部署 支持主从复制、集群 支持事务" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2024-08-31-redis/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-08-11T19:45:27+08:00" />
+<meta property="article:modified_time" content="2024-08-11T19:45:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="redis"/>
+<meta name="twitter:description" content="Redis Redis 特点 开源数据库 配置简单 支持内存存储数据 支持持久化存储数据 datafile 数据文件 *.rdb aof(append only file)文件，日志文件 支持多实例部署 支持主从复制、集群 支持事务"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2024-08-31-redis/" /><link rel="prev" href="https://serialt.github.io/posts/2024-08-29-other/" /><link rel="next" href="https://serialt.github.io/posts/skopeo/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "redis",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2024-08-31-redis\/"
+        },"genre": "posts","keywords": "redis","wordcount":  5396 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2024-08-31-redis\/","datePublished": "2024-08-11T19:45:27+08:00","dateModified": "2024-08-11T19:45:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">redis</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-08-11">2024-08-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5396 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;11 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#redis">Redis</a>
+      <ul>
+        <li><a href="#redis-特点">Redis 特点</a></li>
+        <li><a href="#安装">安装</a></li>
+        <li><a href="#redis-操作">Redis 操作</a></li>
+        <li><a href="#redis-事物">Redis 事物</a></li>
+        <li><a href="#redis-别名">Redis 别名</a></li>
+        <li><a href="#redis持久化存储与备份">Redis持久化存储与备份</a></li>
+        <li><a href="#自动间隔性保存">自动间隔性保存</a></li>
+        <li><a href="#二者优缺点">二者优缺点</a></li>
+      </ul>
+    </li>
+    <li><a href="#redis-集群">redis 集群</a>
+      <ul>
+        <li><a href="#主从复制">主从复制</a></li>
+        <li><a href="#哨兵模式">哨兵模式</a></li>
+        <li><a href="#cluster模式">Cluster模式</a></li>
+        <li><a href="#模式选择">模式选择</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="redis">Redis</h2>
+<h3 id="redis-特点">Redis 特点</h3>
+<ul>
+<li>
+<p>开源数据库</p>
+</li>
+<li>
+<p>配置简单</p>
+</li>
+<li>
+<p>支持内存存储数据</p>
+</li>
+<li>
+<p>支持持久化存储数据</p>
+<p>datafile 数据文件   *.rdb</p>
+<p>aof(append only file)文件，日志文件</p>
+</li>
+<li>
+<p>支持多实例部署</p>
+</li>
+<li>
+<p>支持主从复制、集群</p>
+</li>
+<li>
+<p>支持事务transaction</p>
+</li>
+<li>
+<p>以key-value键值对的方式存储</p>
+</li>
+<li>
+<p>value类型：string字符串、list列表、set集合、sorted_set有序集合、hash值</p>
+</li>
+</ul>
+<h3 id="安装">安装</h3>
+<p>docker</p>
+<p>使用 bitnami镜像 <a href="https://hub.docker.com/r/bitnami/redis" target="_blank" rel="noopener noreffer ">https://hub.docker.com/r/bitnami/redis</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">redis</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">bitnami/redis:6.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;6379:6379&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/data/redis:/data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">REDIS_PASSWORD=Password123</span><span class="w">
+</span></span></span></code></pre></div><p>redis 命令解释</p>
+<ul>
+<li>redis-server：启动redis服务</li>
+<li>redis-cli：redis客户端工具</li>
+<li>redis-benchmark：redis性能测试</li>
+<li>redis-check-rdb：检测rdb文件</li>
+<li>redis-check-aof：检测aof日志文件</li>
+</ul>
+<h3 id="redis-操作">Redis 操作</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@redis01 ~<span class="o">]</span><span class="c1"># redis-cli </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; <span class="nb">set</span> age <span class="m">16</span>
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; get age
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;16&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; <span class="nb">set</span> name martin
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; get name
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;martin&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; 
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; keys *
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;age&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;name&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; del age
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; get age
+</span></span><span class="line"><span class="cl"><span class="o">(</span>nil<span class="o">)</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; <span class="nb">set</span> name martin
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; get name
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;martin&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; mset name tom age <span class="m">15</span> sex male
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; mget name age sex
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;tom&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;15&#34;</span>
+</span></span><span class="line"><span class="cl">3<span class="o">)</span> <span class="s2">&#34;male&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; strlen name
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; <span class="nb">set</span> count <span class="m">1</span>
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; incr count
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; incr count
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; incr count
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; get count
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;4&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; decr count
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; get count
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;3&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; 
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; <span class="nb">set</span> count <span class="m">1</span>
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; incrby count <span class="m">3</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">4</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; get count
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;4&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; decrby count <span class="m">2</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; get count
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;2&#34;</span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; 
+</span></span></code></pre></div><p>密码连接redis</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 方法1</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@redis01 ~<span class="o">]</span><span class="c1"># redis-cli </span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; 
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; AUTH redhat
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 方法2</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@redis01 ~<span class="o">]</span><span class="c1"># redis-cli -a redhat </span>
+</span></span><span class="line"><span class="cl">127.0.0.1:6379&gt; <span class="nb">set</span> age <span class="m">10</span>
+</span></span><span class="line"><span class="cl">OK
+</span></span></code></pre></div><h3 id="redis-事物">Redis 事物</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">192.168.122.102:6379&gt; <span class="nb">set</span> count <span class="m">1</span>
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">192.168.122.102:6379&gt; multi
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">192.168.122.102:6379&gt; incr count
+</span></span><span class="line"><span class="cl">QUEUED
+</span></span><span class="line"><span class="cl">192.168.122.102:6379&gt; incr count
+</span></span><span class="line"><span class="cl">QUEUED
+</span></span><span class="line"><span class="cl">192.168.122.102:6379&gt; <span class="nb">exec</span>
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="o">(</span>integer<span class="o">)</span> <span class="m">3</span>
+</span></span><span class="line"><span class="cl">192.168.122.102:6379&gt; 
+</span></span><span class="line"><span class="cl">192.168.122.102:6379&gt; get count
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;3&#34;</span>
+</span></span><span class="line"><span class="cl">192.168.122.102:6379&gt; 
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">192.168.122.102:6379&gt; <span class="nb">set</span> number <span class="m">1</span>
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">192.168.122.102:6379&gt; MULTI
+</span></span><span class="line"><span class="cl">OK
+</span></span><span class="line"><span class="cl">192.168.122.102:6379&gt; incr number
+</span></span><span class="line"><span class="cl">QUEUED
+</span></span><span class="line"><span class="cl">192.168.122.102:6379&gt; <span class="nb">exec</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>error<span class="o">)</span> EXECABORT Transaction discarded because of previous errors.
+</span></span><span class="line"><span class="cl">192.168.122.102:6379&gt; 
+</span></span><span class="line"><span class="cl">192.168.122.102:6379&gt; 
+</span></span><span class="line"><span class="cl">192.168.122.102:6379&gt; 
+</span></span><span class="line"><span class="cl">192.168.122.102:6379&gt; get number
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">192.168.122.102:6379&gt; 
+</span></span></code></pre></div><h3 id="redis-别名">Redis 别名</h3>
+<pre tabindex="0"><code>[root@redis01 ~]# grep &#34;^rename&#34; /usr/local/redis/conf/redis.conf 
+rename-command set uplooking
+[root@redis01 ~]# 
+
+
+[root@redis01 ~]# redis-cli -a redhat 
+127.0.0.1:6379&gt; 
+127.0.0.1:6379&gt; 
+127.0.0.1:6379&gt; set age 10
+(error) ERR unknown command &#39;set&#39;
+127.0.0.1:6379&gt; 
+127.0.0.1:6379&gt; uplooking age 10
+OK
+127.0.0.1:6379&gt; get age
+&#34;10&#34;
+127.0.0.1:6379&gt; 
+</code></pre><p>别名可以用于规避危险命令</p>
+<pre tabindex="0"><code>rename-command FLUSHALL &#34;&#34;
+rename-command FLUSHDB  &#34;&#34;
+rename-command CONFIG   &#34;&#34;
+rename-command KEYS     &#34;&#34;
+</code></pre><p>如果想要保留命令，但是不能轻易使用，可以重命名命令来设定，设置随机字符代替：</p>
+<pre tabindex="0"><code>rename-command FLUSHALL joYAPNXRPmcarcR4ZDgC81TbdkSmLAzRPmcarcR
+rename-command FLUSHDB  qf69aZbLAX3cf3ednHM3SOlbpH71yEXLAX3cf3e
+rename-command CONFIG   FRaqbC8wSA1XvpFVjCRGryWtIIZS2TRvpFVjCRG
+rename-command KEYS     eIiGXix4A2DreBBsQwY6YHkidcDjoYA2DreBBsQ
+</code></pre><h3 id="redis持久化存储与备份">Redis持久化存储与备份</h3>
+<h4 id="rdb持久化">RDB持久化</h4>
+<p>将Redis在内存中的数据定时<code>dump</code>到磁盘上，实际操作过程是<code>fork</code>一个子进程，先将数据写入临时文件，写入成功后，再替换之前的文件，用二进制压缩存储</p>
+<h4 id="aof持久化">AOF持久化</h4>
+<p>AOF持久化：将Redis的操作日志以文件追加的方式写入文件，只记录写、删除操作，查询操作不会记录（类似于MySQL的Binlog日志）</p>
+<h3 id="自动间隔性保存">自动间隔性保存</h3>
+<p>因为BGSAVE命令可以在不阻塞服务器进程的情况下执行，所以Redis允许用户通过设置服务器配置的save选项，让服务器每隔一段时间自动执行一次BGSAVE命令</p>
+<p>用户可以通过save选项设置多个保存条件，但只要其中任意一个条件被满足，服务器就会执行BGSAVE命令 举个例子，如果我们向服务器提供以下配置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># redis</span>
+</span></span><span class="line"><span class="cl">save <span class="m">900</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">save <span class="m">300</span> <span class="m">10</span>
+</span></span><span class="line"><span class="cl">save <span class="m">60</span> <span class="m">10000</span>
+</span></span></code></pre></div><p>那么只要满足以下三个条件中的任意一个，BGSAVE命令就会被执行 服务器在900秒之内，对数据库进行了至少1次修改</p>
+<p>服务器在300秒之内，对数据库进行了至少10次修改</p>
+<p>服务器在60秒之内，对数据库进行了至少10000次修改。</p>
+<h4 id="rdb持久化实现">RDB持久化实现</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># redis.conf</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 默认redis会开启RDB持久化</span>
+</span></span><span class="line"><span class="cl">备份文件的名称
+</span></span><span class="line"><span class="cl">dbfilename dump.rdb
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">备份文件存放路径
+</span></span><span class="line"><span class="cl">dir /var/lib/redis   
+</span></span></code></pre></div><p>Redis的<code>SAVE</code>命令和<code>BGSAVE</code>命令用于将当前数据库备份</p>
+<pre tabindex="0"><code>127.0.0.1:6379&gt; save  #数据量大的话cpu会爆炸
+OK
+
+127.0.0.1:6379&gt; bgsave    #建议使用这个
+Background saving started
+</code></pre><p><strong>SAVE和BGSAVE命令的区别在于：</strong><code>SAVE</code>命令是阻塞主进程，save操作完成之后，主进程才开始工作，客户端可以连接；<code>BGSAVE</code>命令是fork一个专门save的子进程，此操作不会影响主进程</p>
+<p>注：<code>SAVE</code>只是将当前的数据库备份，备份文件名默认为<code>dump.rdb</code>,可通过配置文件修改备份文件名 <code>dbfilename xxx.rdb</code>（发现一个问题：如果要对多个数据库进行备份，那么最终只能备份最后一个数据库，因为<code>dump.rdb</code>文件会相互覆盖）</p>
+<h5 id="恢复">恢复</h5>
+<p>将备份的RDB文件，<code>cp</code>到要恢复的redis指定目录，重启Redis即可自动读取持久化文件，自动恢复数据</p>
+<ul>
+<li><strong>备份的RDB文件：</strong> 通过命令<code>redis 127.0.0.1:6379&gt; CONFIG GET dir</code>查看执行<code>SAVE</code>命令之后，redis默认存放备份文件的目录；通过命令<code>redis 127.0.0.1:6379&gt; CONFIG GET dbfilename</code>查看备份RDB文件的文件名称；</li>
+</ul>
+<pre tabindex="0"><code>root@pa6:~# redis-cli
+127.0.0.1:6379&gt; CONFIG GET dir
+1) &#34;dir&#34;
+2) &#34;/var/lib/redis&#34;
+127.0.0.1:6379&gt; CONFIG GET dbfilename
+1) &#34;dbfilename&#34;
+2) &#34;dump.rdb&#34;
+</code></pre><h4 id="aof持久化实现">AOF持久化实现</h4>
+<h5 id="备份过程分以下三个阶段">备份过程分以下三个阶段</h5>
+<ul>
+<li><strong>命令传播：</strong> Redis将执行完的命令、命令参数等信息发送到AOF程序</li>
+<li><strong>缓存追加：</strong> AOF程序将接收到的命令内容追加到服务器的AOF缓存中</li>
+<li><strong>文件写入和保存：</strong> AOF缓存中的内容被写入到AOF文件末尾，如果满足AOF保存条件，写入的内容会真正保存到磁盘中</li>
+</ul>
+<h5 id="进行aof备份">进行AOF备份</h5>
+<ul>
+<li><strong>首先开启AOF功能</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">#此选项为aof功能的开关，默认为“no”，通过“yes”来开启aof功能</span>
+</span></span><span class="line"><span class="cl">appendonly yes  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#指定aof文件名称</span>
+</span></span><span class="line"><span class="cl">appendfilename appendonly.aof
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#备份文件存放路径（此参数同样适用于指定RDB备份文件存放路径）</span>
+</span></span><span class="line"><span class="cl">dir /var/lib/redis
+</span></span></code></pre></div><h3 id="二者优缺点">二者优缺点</h3>
+<h4 id="rdb持久化-1">RDB持久化</h4>
+<p>优点：</p>
+<ul>
+<li>RDB方式备份，整个Redis数据库最终备份成一个文件，这对于文件备份而言是完美的（方便管理、还原、压缩、转储）</li>
+<li>对服务进程影响最小，唯一需要做的是<code>fork</code>出子进程，之后所有的持久化工作交由子进程处理</li>
+<li>相比于<code>AOF</code>机制，如果数据量比较大，RDB的启动效率会更高（记录的是源数据，而非数据操作）</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>数据的可用性得不到太大的保障，如果在定时持久化之前出现宕机现象，此前没来得及写入磁盘的数据都将丢失</li>
+<li>如果数据量较大，<code>fork</code>子进程的操作可能会使服务短暂停止（通常是几百毫秒）</li>
+</ul>
+<h4 id="aof持久化-1">AOF持久化</h4>
+<p>优点：</p>
+<ul>
+<li>拥有更高的数据可用性，数据持久化最完整</li>
+<li>日志文件采用<code>append</code>模式，即使在写入过程中出现宕机现象，也不会破坏日志文件之前已经存在的内容</li>
+<li>提供<code>rewrite</code>机制，当日志过大时，Redis以<code>append</code>模式不断将修改的日志写入老的磁盘文件，同时Redis还会创建一个新的文件用于记录此期间有哪些命令被执行</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>对于相同数量的数据，AOF文件通常大于RDB文件，RDB文件在恢复大数据集的速度比AOF恢复的更快（RDB省去了执行的步骤，直接导入源数据）</li>
+</ul>
+<h4 id="总结">总结</h4>
+<p>RDB持久化，性能更好（所有操作均由子进程处理，主进程不进行任何IO操作），数据一致性一般。</p>
+<p>AOF持久化，数据一致性更好，性能一般（记录操作日志，写入日志和执行日志恢复数据的时间都比RDB更长）。</p>
+<h4 id="redis-恢复的机制">Redis 恢复的机制</h4>
+<ul>
+<li>如果只配置 AOF ，重启时加载 AOF 文件恢复数据；</li>
+<li>如果同时配置了 RDB 和 AOF ，启动是只加载 AOF 文件恢复数据；</li>
+<li>如果只配置 RDB，启动是将加载 dump 文件恢复数据。</li>
+</ul>
+<pre tabindex="0"><code>#!/bin/bash
+# 避免造成雪崩
+set -e
+# bak 目录
+BACKUPDIR=/data/redis/backup
+#PASSWD=&#39;redis密码&#39;
+#DATADIR=`/usr/local/bin/redis-cli -p 端口 -a &#34;$PASSWD&#34; config get dir|grep -Ev &#39;dir|grep&#39;`
+# 获取redis-cli 二进制文件
+REDIS_CMD=$(which redis-cli)
+DATADIR=`$REDIS_CMD  config get dir|grep -Ev &#39;dir|grep&#39;`
+DATE=`date +&#39;%Y-%m-%d-%H-%M&#39;`
+BACKUPDIR_DATE=$BACKUPDIR_$DATE
+
+if [ ! -d $BACKUPDIR ];then
+        mkdir -p $BACKUPDIR \
+        || echo &#34;can&#39;t make dir !!!&#34; \
+        &amp;&amp; exit 1
+fi
+#以日期分类
+mkdir -p $BACKUPDIR/$BACKUPDIR_DATE
+$REDIS_CMD  bgsave
+sleep 3
+cp -rf $DATADIR/* $BACKUPDIR/$BACKUPDIR_DATE
+</code></pre><h2 id="redis-集群">redis 集群</h2>
+<ul>
+<li>
+<p><strong>高可用性</strong>：Redis集群可以在某个节点发生故障时，自动进行故障转移，保证服务的持续可用。</p>
+</li>
+<li>
+<p><strong>负载均衡</strong>：Redis集群可以将客户端请求分发到不同的节点上，有效地分摊节点的压力，提高系统的整体性能。</p>
+</li>
+<li>
+<p><strong>容灾恢复</strong>：通过主从复制或哨兵模式，Redis集群可以在主节点出现故障时，快速切换到从节点，实现业务的无缝切换。</p>
+</li>
+<li>
+<p><strong>数据分片</strong>：在Cluster模式下，Redis集群可以将数据分散在不同的节点上，从而突破单节点内存限制，实现更大规模的数据存储。</p>
+</li>
+<li>
+<p><strong>易于扩展</strong>：Redis集群可以根据业务需求和系统负载，动态地添加或移除节点，实现水平扩展。</p>
+</li>
+</ul>
+<p>模式：</p>
+<ul>
+<li>主从</li>
+<li>哨兵</li>
+<li>cluster</li>
+</ul>
+<h3 id="主从复制">主从复制</h3>
+<p>主从复制是Redis的一种基本集群模式，它通过将一个Redis节点（主节点）的数据复制到一个或多个其他Redis节点（从节点）来实现数据的冗余和备份。</p>
+<p>主节点负责处理客户端的写操作，同时从节点会实时同步主节点的数据。客户端可以从从节点读取数据，实现读写分离，提高系统性能。</p>
+<p>一个主节点可以有多个从节点，一个redis可以即是主又是从，类似树状结构</p>
+<h4 id="配置">配置：</h4>
+<p>1）<strong>配置主节点</strong>：在主节点的redis.conf配置文件中，无需进行特殊配置，主节点默认监听所有客户端请求。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 主节点默认端口号6379</span>
+</span></span><span class="line"><span class="cl">port <span class="m">6379</span>
+</span></span></code></pre></div><p>2）<strong>配置从节点</strong>：在从节点的redis.conf配置文件中，添加如下配置，指定主节点的地址和端口：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 从节点设置端口号6380</span>
+</span></span><span class="line"><span class="cl">port <span class="m">6380</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># replicaof 主节点IP 主节点端口</span>
+</span></span><span class="line"><span class="cl">replicaof 127.0.0.1 <span class="m">6379</span>
+</span></span></code></pre></div><p>或者，通过Redis命令行在从节点上执行如下命令：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">redis&gt; replicaof 127.0.0.1 <span class="m">6379</span>
+</span></span></code></pre></div><p>3）<strong>验证主从复制</strong>：在主节点上执行写操作，然后在从节点上进行读操作，检查数据是否一致。</p>
+<h4 id="主从复制的优缺点"><strong>主从复制的优缺点</strong></h4>
+<p><strong>优点</strong>：</p>
+<ol>
+<li>配置简单，易于实现。</li>
+<li>实现数据冗余，提高数据可靠性。</li>
+<li>读写分离，提高系统性能。</li>
+</ol>
+<p><strong>缺点</strong>：</p>
+<ol>
+<li>主节点故障时，需要手动切换到从节点，故障恢复时间较长。</li>
+<li>主节点承担所有写操作，可能成为性能瓶颈。</li>
+<li>无法实现数据分片，受单节点内存限制。</li>
+</ol>
+<h4 id="主从复制场景应用"><strong>主从复制场景应用</strong></h4>
+<p>主从复制模式适用于以下场景：</p>
+<ol>
+<li>数据备份和容灾恢复：通过从节点备份主节点的数据，实现数据冗余。</li>
+<li>读写分离：将读操作分发到从节点，减轻主节点压力，提高系统性能。</li>
+<li>在线升级和扩展：在不影响主节点的情况下，通过增加从节点来扩展系统的读取能力。</li>
+</ol>
+<p>总结：主从复制模式适合数据备份、读写分离和在线升级等场景，但在主节点故障时需要手动切换，不能自动实现故障转移。如果对高可用性要求较高，可以考虑使用哨兵模式或Cluster模式。</p>
+<h3 id="哨兵模式">哨兵模式</h3>
+<p>Sentinel</p>
+<p>哨兵模式是在主从复制基础上加入了哨兵节点，实现了自动故障转移。哨兵节点是一种特殊的Redis节点，它会监控主节点和从节点的运行状态。当主节点发生故障时，哨兵节点会自动从从节点中选举出一个新的主节点，并通知其他从节点和客户端，实现故障转移。</p>
+<h4 id="哨兵模式配置和实现"><strong>哨兵模式配置和实现</strong></h4>
+<ol>
+<li>
+<p><strong>配置主从复制</strong>：首先按照主从复制模式的配置方法，搭建一个主从复制集群（上面已经讲过）。</p>
+</li>
+<li>
+<p><strong>配置哨兵节点</strong>：在哨兵节点上创建一个新的哨兵配置文件（如：sentinel.conf），并添加如下配置：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># sentinel节点端口号</span>
+</span></span><span class="line"><span class="cl">port <span class="m">26379</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># sentinel monitor 被监控主节点名称 主节点IP 主节点端口 quorum</span>
+</span></span><span class="line"><span class="cl">sentinel monitor mymaster 127.0.0.1 <span class="m">6379</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># sentinel down-after-milliseconds 被监控主节点名称 毫秒数</span>
+</span></span><span class="line"><span class="cl">sentinel down-after-milliseconds mymaster <span class="m">60000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># sentinel failover-timeout 被监控主节点名称 毫秒数</span>
+</span></span><span class="line"><span class="cl">sentinel failover-timeout mymaster <span class="m">180000</span>
+</span></span></code></pre></div><p>其中，<code>quorum</code>是指触发故障转移所需的最小哨兵节点数。<code>down-after-milliseconds</code>表示主节点被判断为失效的时间。<code>failover-timeout</code>是故障转移超时时间。</p>
+<blockquote>
+<p>为什么只配置了sentinel监控主节点，没有配置监控从节点？
+因为通过主节点，就可以找到从节点。</p>
+</blockquote>
+</li>
+<li>
+<p><strong>启动哨兵节点</strong>：使用如下命令启动哨兵节点：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">redis&gt; redis-sentinel /path/to/sentinel.conf
+</span></span></code></pre></div></li>
+<li>
+<p><strong>验证哨兵模式</strong>：手动停止主节点，观察哨兵节点是否自动选举出新的主节点，并通知其他从节点和客户端。</p>
+</li>
+</ol>
+<h4 id="哨兵模式的优缺点"><strong>哨兵模式的优缺点</strong></h4>
+<p><strong>优点</strong>：</p>
+<ol>
+<li>自动故障转移，提高系统的高可用性。</li>
+<li>具有主从复制模式的所有优点，如数据冗余和读写分离。</li>
+</ol>
+<p><strong>缺点</strong>：</p>
+<ol>
+<li>配置和管理相对复杂。</li>
+<li>依然无法实现数据分片，受单节点内存限制。</li>
+</ol>
+<h4 id="哨兵模式场景应用"><strong>哨兵模式场景应用</strong></h4>
+<p>哨兵模式适用于以下场景：</p>
+<ol>
+<li>高可用性要求较高的场景：通过自动故障转移，确保服务的持续可用。</li>
+<li>数据备份和容灾恢复：在主从复制的基础上，提供自动故障转移功能。</li>
+</ol>
+<p>总结：哨兵模式在主从复制模式的基础上实现了自动故障转移，提高了系统的高可用性。然而，它仍然无法实现数据分片。如果需要实现数据分片和负载均衡，可以考虑使用Cluster模式。</p>
+<h3 id="cluster模式">Cluster模式</h3>
+<p><strong>Cluster模式原理</strong></p>
+<p>Cluster模式是Redis的一种高级集群模式，它通过数据分片和分布式存储实现了负载均衡和高可用性。在Cluster模式下，Redis将所有的键值对数据分散在多个节点上。每个节点负责一部分数据，称为槽位。通过对数据的分片，Cluster模式可以突破单节点的内存限制，实现更大规模的数据存储。</p>
+<h4 id="数据分片与槽位">数据分片与槽位</h4>
+<p>Redis Cluster将数据分为16384个槽位，每个节点负责管理一部分槽位。当客户端向Redis Cluster发送请求时，Cluster会根据键的哈希值将请求路由到相应的节点。具体来说，Redis Cluster使用CRC16算法计算键的哈希值，然后对16384取模，得到槽位编号。</p>
+<h4 id="cluster模式配置和实现">Cluster模式配置和实现</h4>
+<ol>
+<li>
+<p><strong>配置Redis节点</strong>：为每个节点创建一个redis.conf配置文件，并添加如下配置：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># cluster节点端口号</span>
+</span></span><span class="line"><span class="cl">port <span class="m">7001</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 开启集群模式</span>
+</span></span><span class="line"><span class="cl">cluster-enabled yes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 节点超时时间</span>
+</span></span><span class="line"><span class="cl">cluster-node-timeout <span class="m">15000</span>
+</span></span></code></pre></div></li>
+</ol>
+<p>像这样的配置，一共需要创建6个，我们做一个三主三从的集群。</p>
+<ol>
+<li>
+<p><strong>启动Redis节点</strong>：使用如下命令启动6个节点：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">redis&gt; redis-server redis_7001.conf
+</span></span></code></pre></div></li>
+<li>
+<p><strong>创建Redis Cluster</strong>：使用Redis命令行工具执行如下命令创建Cluster：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">redis&gt; redis-cli --cluster create 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005 127.0.0.1:7006 --cluster-replicas <span class="m">1</span>
+</span></span></code></pre></div><p><strong>cluster-replicas</strong> 表示从节点的数量，1代表每个主节点都有一个从节点。</p>
+</li>
+<li>
+<p><strong>验证Cluster模式</strong>：向Cluster发送请求，观察请求是否正确路由到相应的节点。</p>
+</li>
+</ol>
+<h4 id="cluster模式的优缺点"><strong>Cluster模式的优缺点</strong></h4>
+<p><strong>优点</strong>：</p>
+<ol>
+<li>数据分片，实现大规模数据存储。</li>
+<li>负载均衡，提高系统性能。</li>
+<li>自动故障转移，提高高可用性。</li>
+</ol>
+<p><strong>缺点</strong>：</p>
+<ol>
+<li>配置和管理较复杂。</li>
+<li>一些复杂的多键操作可能受到限制。</li>
+</ol>
+<h4 id="cluster模式场景应用"><strong>Cluster模式场景应用</strong></h4>
+<p>Cluster模式适用于以下场景：</p>
+<ol>
+<li>大规模数据存储：通过数据分片，突破单节点内存限制。</li>
+<li>高性能要求场景：通过负载均衡，提高系统性能。</li>
+<li>高可用性要求场景：通过自动故障转移，确保服务的持续可用。</li>
+</ol>
+<p>总结：Cluster模式在提供高可用性的同时，实现了数据分片和负载均衡，适用于大规模数据存储和高性能要求的场景。然而，它的配置和管理相对复杂，且某些复杂的多键操作可能受到限制。</p>
+<h3 id="模式选择">模式选择</h3>
+<ol>
+<li><strong>主从复制模式</strong>：适用于数据备份和读写分离场景，配置简单，但在主节点故障时需要手动切换。</li>
+<li><strong>哨兵模式</strong>：在主从复制的基础上实现自动故障转移，提高高可用性，适用于高可用性要求较高的场景。</li>
+<li><strong>Cluster模式</strong>：通过数据分片和负载均衡实现大规模数据存储和高性能，适用于大规模数据存储和高性能要求场景。</li>
+</ol>
+<p>在实际应用中，可以根据系统的需求和特点选择合适的Redis集群模式，以实现高可用性、高性能和大规模数据存储</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-08-11</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/redis/">redis</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2024-08-29-other/" class="prev" rel="prev" title="手册"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>手册</a>
+            <a href="/posts/skopeo/" class="next" rel="next" title="Skopeo">Skopeo<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

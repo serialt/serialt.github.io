@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>debug - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/debug/</link>
+        <description>debug - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 08 Sep 2024 20:09:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/debug/" rel="self" type="application/rss+xml" /><item>
+    <title>Debug in VSCode</title>
+    <link>https://serialt.github.io/posts/2024-09-08-vscode-debug/</link>
+    <pubDate>Sun, 08 Sep 2024 20:09:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-09-08-vscode-debug/</guid>
+    <description><![CDATA[Debug In VSCode 一、GO 1、安装插件： golang.go r3inbowari.gomodexplorer 安装go debug相关组件 command + shift + p &ndash;&gt; go install &ndash;&gt; 勾选所有进行安装 2、lanuch.json { // 使用 IntelliSense 了解相关属性]]></description>
+</item>
+</channel>
+</rss>

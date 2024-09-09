@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2023-12-4-gitlab\/"
-        },"genre": "posts","keywords": "gitlab, git","wordcount":  6719 ,
+        },"genre": "posts","keywords": "gitlab, git","wordcount":  7104 ,
         "url": "https:\/\/serialt.github.io\/posts\/2023-12-4-gitlab\/","datePublished": "2023-12-04T20:26:27+08:00","dateModified": "2023-12-04T20:26:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,8 +101,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Gitlab</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-04">2023-12-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6719 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-04">2023-12-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7104 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -140,6 +140,11 @@
         <li><a href="#数据备份">数据备份</a></li>
         <li><a href="#迁移">迁移</a></li>
         <li><a href="#可能出现的问题">可能出现的问题：</a></li>
+      </ul>
+    </li>
+    <li><a href="#五用户密码管理">五、用户密码管理</a>
+      <ul>
+        <li></li>
       </ul>
     </li>
   </ul>
@@ -243,7 +248,20 @@ GitLab 企业版基于社区版：使用了同样的内核，但是添加了额�
 </span></span><span class="line"><span class="cl"> <span class="m">13</span>     host: 192.168.100.103    <span class="c1">#gitlab登陆后访问的路径</span>
 </span></span><span class="line"><span class="cl"> <span class="m">14</span>     port: <span class="m">80</span>
 </span></span><span class="line"><span class="cl"> <span class="m">15</span>     https: <span class="nb">false</span>
-</span></span></code></pre></div><h2 id="三gitlab-runner">三、gitlab-runner</h2>
+</span></span></code></pre></div><p>3）邮箱配置</p>
+<p>官方邮箱配置示例：https://docs.gitlab.com/omnibus/settings/smtp.html</p>
+<p>停止服务</p>
+<pre tabindex="0"><code>[root@gitlab1 ~]# gitlab-ctl stop
+</code></pre><p>重新配置</p>
+<pre tabindex="0"><code>[root@gitlab1 ~]# gitlab-ctl reconfigure
+</code></pre><p>重启服务</p>
+<pre tabindex="0"><code>[root@gitlab1 ~]# gitlab-ctl restart 
+</code></pre><p>测试邮件发送</p>
+<pre tabindex="0"><code>[root@gitlab1 ~]# gitlab-rails console
+
+Notify.test_email(&#39;t@local.com&#39;,&#39;gitlab&#39;,&#39;this is test&#39;).deliver_now
+                                  邮箱               主题      内容
+</code></pre><h2 id="三gitlab-runner">三、gitlab-runner</h2>
 <h3 id="1包安装">1、包安装</h3>
 <p>1）下载和安装</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@gitlab1 ~<span class="o">]</span><span class="c1"># yum -y install  https://mirror.nju.edu.cn/gitlab-runner/yum/el8-x86_64/gitlab-runner-14.8.3-1.x86_64.rpm</span>
@@ -1322,6 +1340,7 @@ GitLab 企业版基于社区版：使用了同样的内核，但是添加了额�
 </code></pre><p>启动服务</p>
 <pre tabindex="0"><code>[root@gitlab1 ~]# gitlab-ctl restart 
 </code></pre><h2 id="五升级">五、升级</h2>
+<p>注意：由于升级不能跨越大版本号，因此只能升级到当前大版本号到最高版本，方可升级到下一个大版本号。</p>
 <p>gitlab的跨版本升级需要升级中间多个小版本，为了方便升级，可以基于docker升级。</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
@@ -1389,7 +1408,37 @@ sudo docker exec -t gitlab gitlab-rake gitlab:backup:create
 </span></span></code></pre></div><h3 id="可能出现的问题">可能出现的问题：</h3>
 <p>公钥不受信任，要么按提示需要输入yes，要么把config也进行迁移</p>
 <pre tabindex="0"><code>ssh -T git@local.com
-</code></pre></div><div class="post-footer" id="post-footer">
+</code></pre><h4 id="网页访问502">网页访问502</h4>
+<p>在重启gitlab后访问出现502
+原因是nginx用户无法访问gitlab用户的socket文件。 重启gitlab需要重新授权</p>
+<pre tabindex="0"><code>[root@gitlab1 ~]# chmod -R o+x /var/opt/gitlab/gitlab-rails
+</code></pre><p>关闭浏览器再重新访问</p>
+<h2 id="五用户密码管理">五、用户密码管理</h2>
+<h4 id="重置管理员密码">重置管理员密码</h4>
+<p>1）gitlab-rails console</p>
+<p>2）user = User.where(@root).first</p>
+<p>3）user.password=&lsquo;imaus&rsquo;</p>
+<p>4）user.save!</p>
+<pre tabindex="0"><code>root@9e2af9b54092:/# gitlab-rails console
+--------------------------------------------------------------------------------
+ GitLab:       15.1.6 (f1452cd5cf4) FOSS
+ GitLab Shell: 14.7.4
+ PostgreSQL:   13.6
+------------------------------------------------------------[ booted in 31.01s ]
+Loading production environment (Rails 6.1.4.7)
+irb(main):001:0&gt; User.all
+=&gt; #&lt;ActiveRecord::Relation [#&lt;User id:1 @root&gt;]&gt;
+irb(main):002:0&gt; user=User.where(id:1).first
+=&gt; #&lt;User id:1 @root&gt;
+irb(main):006:0&gt; user.password=&#39;sugar123456&#39;
+=&gt; &#34;sugar123456&#34;
+irb(main):007:0&gt; user.password_confirmation=&#39;sugar123456&#39;
+=&gt; &#34;sugar123456&#34;
+irb(main):008:0&gt; user.save!
+=&gt; true
+</code></pre><h4 id="关闭用户注册">关闭用户注册</h4>
+<p>Admin Area &mdash;&gt;Settings&mdash;&gt;General&mdash;&gt;Sign-up restrictions</p>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

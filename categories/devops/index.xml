@@ -4,13 +4,53 @@
         <link>https://serialt.github.io/categories/devops/</link>
         <description>DevOps - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 19 Aug 2024 20:26:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 08 Sep 2024 20:09:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+    <title>Debug in VSCode</title>
+    <link>https://serialt.github.io/posts/2024-09-08-vscode-debug/</link>
+    <pubDate>Sun, 08 Sep 2024 20:09:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-09-08-vscode-debug/</guid>
+    <description><![CDATA[Debug In VSCode 一、GO 1、安装插件： golang.go r3inbowari.gomodexplorer 安装go debug相关组件 command + shift + p &ndash;&gt; go install &ndash;&gt; 勾选所有进行安装 2、lanuch.json { // 使用 IntelliSense 了解相关属性]]></description>
+</item>
+<item>
+    <title>kvm</title>
+    <link>https://serialt.github.io/posts/2024-08-29-kvm.md/</link>
+    <pubDate>Thu, 29 Aug 2024 19:35:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-08-29-kvm.md/</guid>
+    <description><![CDATA[KVM virt-install 安装虚拟机 virt-install 示例 virt-install \ --name=pc01 \ --graphics vnc,listen=0.0.0.0,port=5901,keymap=en_us \ --ram=1024 \ --vcpus=1 \ --disk path=/var/lib/libvirt/images/pc01.img,size=9,format=qcow2 \ --bridge=virbr0 \ --location=ftp://172.16.8.100/rhel6.6 \ --extra-args=&#34;ks=ftp://172.16.8.100/rhel6.4.ks&#34; virt-install \ --name=pc02 \ --graphics vnc,listten=0.0.0.0,port=5920,keymap=en_us \ --noautoconsole \ --ram=1024 \ --vcpus=1 \ --disk path=/var/lib/libvirt/images/pc02.img,size=9,format=qcow2 \ --bridge=virbr0 \ --location=ftp://172.16.8.100/rhel6.4 \ --extra-args=&#34;ks=ftp://172.16.8.100/rhel6.4.ks&#34; virt-install \ --name=pc03 \ --nographics \ --ram=1024 \ --vcpus=1 \ --disk path=/var/lib/libvirt/images/pc03.img,size=9,format=qcow2 \ --bridg=virbr0 --location=ftp://172.16.8.100/rhel6.4 \ --extra-args=&#34;ks=ftp://172.16.8.100/rhel6.4.ks console=tty0 console=ttyS0&#34; #]]></description>
+</item>
+<item>
+    <title>flutter</title>
+    <link>https://serialt.github.io/posts/2024-08-29-flutter/</link>
+    <pubDate>Thu, 29 Aug 2024 19:34:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-08-29-flutter/</guid>
+    <description><![CDATA[一、flutter 安装 https://flutter.cn/docs/get-started/install 安装源国内地址： export PUB_HOSTED_URL=https://pub.flutter-io.cn export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn flutter docker镜像打包 1、flutter FROM --platform=linux/amd64 debian:bullseye ARG FLUTTER_VERSION=2.2.3 ENV LANG=C.UTF-8 ENV PUB_HOSTED_URL=https://pub.flutter-io.cn ENV FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn ENV TZ=Asia/Shanghai ENV DEBIAN_FRONTEND=noninteractive RUN sed -i &#39;s/\w*.debian.org/mirrors.ustc.edu.cn/g&#39; /etc/apt/sources.list RUN apt-get update &amp;&amp; apt-get upgrade]]></description>
+</item>
+<item>
     <title>Skopeo</title>
     <link>https://serialt.github.io/posts/skopeo/</link>
     <pubDate>Mon, 19 Aug 2024 20:26:42 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/skopeo/</guid>
     <description><![CDATA[镜像同步 参考链接： https://lework.github.io/2020/04/13/skopeo/ https://blog.k8s.li/skopeo.html 日常工作中，需要将各种镜像搬到对应的仓库中，docker 适合于构建镜像，将镜像推送于仓库中。镜像被推送到仓库中后，如果]]></description>
+</item>
+<item>
+    <title>redis</title>
+    <link>https://serialt.github.io/posts/2024-08-31-redis/</link>
+    <pubDate>Sun, 11 Aug 2024 19:45:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-08-31-redis/</guid>
+    <description><![CDATA[Redis Redis 特点 开源数据库 配置简单 支持内存存储数据 支持持久化存储数据 datafile 数据文件 *.rdb aof(append only file)文件，日志文件 支持多实例部署 支持主从复制、集群 支持事务]]></description>
+</item>
+<item>
+    <title>手册</title>
+    <link>https://serialt.github.io/posts/2024-08-29-other/</link>
+    <pubDate>Sun, 11 Aug 2024 19:39:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-08-29-other/</guid>
+    <description><![CDATA[腾讯云轻量优化 #!/bin/bash #fuck tx process rm -rf /usr/local/sa rm -rf /usr/local/agenttools rm -rf /usr/local/qcloud process=(sap100 secu-tcs-agent sgagent64 barad_agent agent agentPlugInD pvdriver ) for i in ${process[@]} do for A in $(ps aux |grep $i |grep -v grep |awk &#39;{print $2}&#39;) do kill -9 $A done done chkconfig --level 35 postfix off service postfix stop echo &#39;&#39;&gt;/var/spool/cron/root echo &#39;#!/bin/bash&#39; &gt;/etc/rc.local git-code https://github.com/4x99/code6 RHE]]></description>
 </item>
 <item>
     <title>metallb</title>
@@ -43,46 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-08-11-k8s-metallb-istio/</guid>
     <description><![CDATA[服务暴露 一、metallb helm repo add metallb https://metallb.github.io/metallb helm install metallb metallb/metallb --version=0.13.7 -n metallb-system --create-namespace helm repo add serialt https://serialt.github.io/helm-charts helm install metallb-config serialt/metallb-config --set &#34;ipPoolRange=192.168.80.40-192.168.80.49&#34; -n metallb-system --version 0.0.1 helm 测试： https://artifacthub.io/packages/helm/bitnami/nginx $ helm repo add bitnami https://charts.bitnami.com/bitnami $ helm install my-release bitnami/nginx [root@localhost k3s]# kubectl get svc NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE kubernetes ClusterIP]]></description>
-</item>
-<item>
-    <title>k8s-doc</title>
-    <link>https://serialt.github.io/posts/2024-08-11-k8s-doc/</link>
-    <pubDate>Sun, 11 Aug 2024 19:30:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-08-11-k8s-doc/</guid>
-    <description><![CDATA[k8s doc 1、节点加入失败 日志信息 ...... [control-plane] Creating static Pod manifest for &#34;kube-controller-manager&#34; W0329 00:01:51.364121 19209 manifests.go:214] the default kube-apiserver authorization-mode is &#34;Node,RBAC&#34;; using &#34;Node,RBAC&#34; [control-plane] Creating static Pod manifest for &#34;kube-scheduler&#34; W0329 00:01:51.373807 19209 manifests.go:214] the default kube-apiserver authorization-mode is &#34;Node,RBAC&#34;; using &#34;Node,RBAC&#34; [check-etcd] Checking that the etcd cluster is healthy error execution phase check-etcd: etcd cluster is not healthy:]]></description>
-</item>
-<item>
-    <title>Ingress-Nginx</title>
-    <link>https://serialt.github.io/posts/2024-08-11-ingress-nginx/</link>
-    <pubDate>Sun, 11 Aug 2024 19:27:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-08-11-ingress-nginx/</guid>
-    <description><![CDATA[Ingress-Nginx kubernetes中暴露服务的三种方式： ClusterIP NodePort LoadBalance ​ 这几种方式都是在service的维度提供的，service的作用体现在两个方面，对集群内]]></description>
-</item>
-<item>
-    <title>containerd-exit-code</title>
-    <link>https://serialt.github.io/posts/2024-08-11-containerd-exit/</link>
-    <pubDate>Sun, 11 Aug 2024 19:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-08-11-containerd-exit/</guid>
-    <description><![CDATA[容器退出状态码 参考链接：https://blog.hdls.me/16581348863966.html 当容器终止时，容器引擎使用退出码来报]]></description>
-</item>
-<item>
-    <title>TF-lib</title>
-    <link>https://serialt.github.io/posts/2024-07-21-tf-lib/</link>
-    <pubDate>Sun, 21 Jul 2024 21:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-07-21-tf-lib/</guid>
-    <description><![CDATA[Terraform 常用 provider http tls helm kubernetes vault null local dns random ad cloud： aws aliyun tencent cloud huaweicloud 第三方库： shell，执行命令，获取返回值：shell gitlab harbor nexus：datadriver]]></description>
-</item>
-<item>
-    <title>TF-dev</title>
-    <link>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</link>
-    <pubDate>Sat, 20 Jul 2024 09:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</guid>
-    <description><![CDATA[Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # makefile default: install build: go build -v ./... install: go install -v ./... vscode 调试 terraform provider 1）vscode launch cat .vscode/launch.json {]]></description>
 </item>
 </channel>
 </rss>

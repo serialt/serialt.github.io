@@ -12,13 +12,5 @@
     <guid>https://serialt.github.io/posts/2023-11-24-shell-handbook/</guid>
     <description><![CDATA[Shell handbok 一、特殊符号 参考链接: https://blog.csdn.net/jiezi2016/article/details/79649382 https://blog.csdn.net/wangzhaotongalex/article/details/73321766 介绍下Shell中的${}、##和%%使用范例，本文给出了不同情况下得到的结果。 假设定义了一个变量为： 代码如下]]></description>
 </item>
-<item>
-    <title>Debug Shell in VSCode</title>
-    <link>https://serialt.github.io/posts/debug-shell-in-vscode/</link>
-    <pubDate>Sun, 24 Sep 2023 18:09:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/debug-shell-in-vscode/</guid>
-    <description><![CDATA[Debug shell 1、安装插件 安装bashdb插件 rogalmic.bash-debug 2、增加一个vscode launch.json配置文件 Select Debug -&gt; Add Configuration to add custom debug configuration 示例： { &#34;configurations&#34;: [ { &#34;type&#34;: &#34;bashdb&#34;, &#34;request&#34;: &#34;launch&#34;, &#34;name&#34;: &#34;Bash-Debug&#34;, &#34;cwd&#34;:]]></description>
-</item>
 </channel>
 </rss>
