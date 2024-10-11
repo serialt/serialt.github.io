@@ -65,21 +65,16 @@ command + shift + p --> go install --> 勾选所有进行安装
 
 * ms-python.python
 
-* ```
-  ms-python.debugpy
-  ```
+* ms-python.debugpy
+  
 
-* ```
-  ms-python.python
-  ```
+* donjayamanne.python-environment-manager
 
-donjayamanne.python-environment-manager
+* mgesbert.python-path
 
-mgesbert.python-path
+* wolfieshorizon.python-auto-venv
 
-wolfieshorizon.python-auto-venv
-
-ms-python.autopep8
+* ms-python.autopep8
 
 
 
@@ -91,9 +86,8 @@ launch.json
     "configurations": [
         {
             "name": "Python",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
-            "stopOnEntry": false,
             "pythonPath": "/root/py3/bin/python3",
             "program": "${file}",
             "cwd": "${workspaceRoot}",
@@ -181,4 +175,14 @@ Select **Debug -> Add Configuration** to add custom debug configuration
 ```
 
 就可以像debug其他语言一样进行调试shell脚本
+
+
+
+五、环境变量
+
+```
+${userHome}
+${workspaceFolder} 
+${file} 
+```
 

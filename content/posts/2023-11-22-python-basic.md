@@ -695,6 +695,17 @@ support.print_func("sugar")
 
 Python 的 from 语句让你从模块中导入一个指定的部分到当前命名空间中。语法如下：
 
+```
+import module_a #导入整个模块功能
+module_a.xxx #调用
+
+from module import xx # 导入某个模块下的某个方法 or 子模块
+from module.xx.xx import xx as rename #导入后一个方法后重命令
+from module.xx.xx import * #导入一个模块下的所有方法，不建议使用
+```
+
+
+
 
 
 ### 八、面向对象

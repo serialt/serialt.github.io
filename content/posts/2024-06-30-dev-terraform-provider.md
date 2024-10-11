@@ -519,6 +519,28 @@ func getboolfromstring(stringbool string) bool {
 
 
 
+#### resource/schema 介绍，以schema.StringAttribute为例
+
+```shell
+CustomType  允许使用自定义属性类型来代替
+Required   resource config 必填项
+Optional resource config 可选项
+Computed  resource config 只读
+Sensitive  resource  config 敏感数据不输出
+Description
+MarkdownDescription 
+DeprecationMessage   resource  config 弃用说明
+Validators
+PlanModifiers
+Default
+```
+
+
+
+
+
+
+
 
 
 
