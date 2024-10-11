@@ -2,13 +2,21 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://serialt.github.io/</loc><lastmod>2024-09-08T20:09:42&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/</loc><lastmod>2024-09-08T20:09:42&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/</loc><lastmod>2024-10-11T20:45:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/</loc><lastmod>2024-10-11T20:45:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-10-11-cloudbeaver/</loc><lastmod>2024-10-11T20:45:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/devops/</loc><lastmod>2024-10-11T20:45:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/</loc><lastmod>2024-10-11T20:45:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/redis/</loc><lastmod>2024-10-11T20:45:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/</loc><lastmod>2024-10-11T20:45:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/dev/</loc><lastmod>2024-09-17T19:45:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-09-17-sanic/</loc><lastmod>2024-09-17T19:45:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/sanic/</loc><lastmod>2024-09-17T19:45:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/gorm/</loc><lastmod>2024-09-09T20:09:42&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/gorm/</loc><lastmod>2024-09-09T20:09:42&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-09-09-gorm-gen/</loc><lastmod>2024-09-09T20:09:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/debug/</loc><lastmod>2024-09-08T20:09:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-09-08-vscode-debug/</loc><lastmod>2024-09-08T20:09:42&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/devops/</loc><lastmod>2024-09-08T20:09:42&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/posts/</loc><lastmod>2024-09-08T20:09:42&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/</loc><lastmod>2024-09-08T20:09:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/categories/vscode/</loc><lastmod>2024-09-08T20:09:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/cve/</loc><lastmod>2024-08-29T20:29:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/security/</loc><lastmod>2024-08-29T20:29:27&#43;08:00</lastmod></url><url>
@@ -22,7 +30,6 @@
             <loc>https://serialt.github.io/tags/oci-image-sync/</loc><lastmod>2024-08-19T20:26:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/skopeo/</loc><lastmod>2024-08-19T20:26:42&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/skopeo/</loc><lastmod>2024-08-19T20:26:42&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/redis/</loc><lastmod>2024-08-11T19:45:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-08-31-redis/</loc><lastmod>2024-08-11T19:45:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/handbook/</loc><lastmod>2024-08-11T19:39:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-08-29-other/</loc><lastmod>2024-08-11T19:39:27&#43;08:00</lastmod></url><url>
@@ -56,7 +63,6 @@
             <loc>https://serialt.github.io/tags/terraform-dev/</loc><lastmod>2024-07-20T09:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/tf-dev/</loc><lastmod>2024-07-20T09:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</loc><lastmod>2024-07-20T09:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/dev/</loc><lastmod>2024-07-20T09:21:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/protobuf/</loc><lastmod>2024-07-20T09:21:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-07-07-protobuf/</loc><lastmod>2024-07-20T09:21:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/kratos/</loc><lastmod>2024-07-20T09:20:27&#43;08:00</lastmod></url><url>
@@ -105,7 +111,6 @@
             <loc>https://serialt.github.io/tags/exec/</loc><lastmod>2024-06-02T10:30:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-06-02-go-os-exec/</loc><lastmod>2024-06-02T10:30:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-06-02-go-gorm/</loc><lastmod>2024-06-02T10:29:01&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/gorm/</loc><lastmod>2024-06-02T10:29:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-06-02-go-goph/</loc><lastmod>2024-06-02T10:27:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/goph/</loc><lastmod>2024-06-02T10:27:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/ssh/</loc><lastmod>2024-06-02T10:27:01&#43;08:00</lastmod></url><url>

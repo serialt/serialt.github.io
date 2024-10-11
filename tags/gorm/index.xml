@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/tags/gorm/</link>
         <description>gorm - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 02 Jun 2024 10:29:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/gorm/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 09 Sep 2024 20:09:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/gorm/" rel="self" type="application/rss+xml" /><item>
+    <title>Gorm Gen</title>
+    <link>https://serialt.github.io/posts/2024-09-09-gorm-gen/</link>
+    <pubDate>Mon, 09 Sep 2024 20:09:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-09-09-gorm-gen/</guid>
+    <description><![CDATA[Gorm Gen 参考链接：https://www.liwenzhou.com/posts/Go/gen/ Gen是一个基于GORM的安全ORM框架，其主要]]></description>
+</item>
+<item>
     <title>Go gorm</title>
     <link>https://serialt.github.io/posts/2024-06-02-go-gorm/</link>
     <pubDate>Sun, 02 Jun 2024 10:29:01 &#43;0800</pubDate>

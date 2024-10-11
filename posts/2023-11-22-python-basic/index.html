@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2023-11-22-python-basic\/"
-        },"genre": "posts","keywords": "python, python-basic","wordcount":  3112 ,
+        },"genre": "posts","keywords": "python, python-basic","wordcount":  3189 ,
         "url": "https:\/\/serialt.github.io\/posts\/2023-11-22-python-basic\/","datePublished": "2023-11-22T21:22:27+08:00","dateModified": "2023-11-22T21:22:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Python basic</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-22">2023-11-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3112 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-22">2023-11-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3189 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -661,7 +661,13 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># 现在可以调用模块里包含的函数了</span>
 </span></span><span class="line"><span class="cl"><span class="n">support</span><span class="o">.</span><span class="n">print_func</span><span class="p">(</span><span class="s2">&#34;sugar&#34;</span><span class="p">)</span>
 </span></span></code></pre></div><p>Python 的 from 语句让你从模块中导入一个指定的部分到当前命名空间中。语法如下：</p>
-<h3 id="八面向对象">八、面向对象</h3>
+<pre tabindex="0"><code>import module_a #导入整个模块功能
+module_a.xxx #调用
+
+from module import xx # 导入某个模块下的某个方法 or 子模块
+from module.xx.xx import xx as rename #导入后一个方法后重命令
+from module.xx.xx import * #导入一个模块下的所有方法，不建议使用
+</code></pre><h3 id="八面向对象">八、面向对象</h3>
 <p>定义类与实例化</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Ren</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">

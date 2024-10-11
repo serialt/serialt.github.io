@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/tags/redis/</link>
         <description>redis - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 11 Aug 2024 19:45:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/redis/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Fri, 11 Oct 2024 20:45:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/redis/" rel="self" type="application/rss+xml" /><item>
+    <title>CloudBeaver</title>
+    <link>https://serialt.github.io/posts/2024-10-11-cloudbeaver/</link>
+    <pubDate>Fri, 11 Oct 2024 20:45:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-10-11-cloudbeaver/</guid>
+    <description><![CDATA[CloudBeaver web 版 DBeaver docker-compose 安装 version: &#34;3&#34; services: cloudbeaver: image: dbeaver/cloudbeaver:24 container_name: cloudbeaver restart: always ports: - &#34;8978:8978&#34; volumes: - &#34;/data/cloudbeaver:/opt/cloudbeaver/workspace&#34; networks: - app networks: app: # 使用外部共享等网卡 external: true terraform kubernetes https://github.com/serialt/terraform-module-cloudbeaver]]></description>
+</item>
+<item>
     <title>redis</title>
     <link>https://serialt.github.io/posts/2024-08-31-redis/</link>
     <pubDate>Sun, 11 Aug 2024 19:45:27 &#43;0800</pubDate>

@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-06-13-mirror-cn\/"
-        },"genre": "posts","keywords": "mirror, source, mirror-to-cn","wordcount":  537 ,
+        },"genre": "posts","keywords": "mirror, source, mirror-to-cn","wordcount":  549 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-06-13-mirror-cn\/","datePublished": "2024-06-13T21:00:42+08:00","dateModified": "2024-06-13T21:00:42+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">To-mirror</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%B3%BB%E7%BB%9F%E6%88%96%E8%BD%AF%E4%BB%B6%E6%8D%A2%E6%BA%90/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>系统或软件换源</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-13">2024-06-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;537 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-13">2024-06-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;549 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -113,6 +113,7 @@
     <li><a href="#1操作系统">1、操作系统</a>
       <ul>
         <li><a href="#rocky">rocky</a></li>
+        <li><a href="#almalinux">almalinux</a></li>
         <li><a href="#ubuntu">ubuntu</a></li>
         <li><a href="#debian">debian</a></li>
         <li><a href="#alpine">alpine</a></li>
@@ -147,6 +148,11 @@
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e <span class="s1">&#39;s|^#baseurl=https\?://download.fedoraproject.org/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39;</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    -e <span class="s1">&#39;s|^#baseurl=https\?://download.example/pub/epel/|baseurl=https://mirrors.ustc.edu.cn/epel/|g&#39;</span> <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    -i.bak /etc/yum.repos.d/epel*.repo
+</span></span></code></pre></div><h3 id="almalinux">almalinux</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sed -e <span class="s1">&#39;s|^mirrorlist=|#mirrorlist=|g&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      -e <span class="s1">&#39;s|^# baseurl=https://repo.almalinux.org|baseurl=https://mirrors.aliyun.com|g&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      -i.bak <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>      /etc/yum.repos.d/almalinux*.repo
 </span></span></code></pre></div><h3 id="ubuntu">ubuntu</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># http</span>
 </span></span><span class="line"><span class="cl">sed -e <span class="s2">&#34;s@http://.*archive.ubuntu.com@http://mirrors.aliyun.com@g&#34;</span> <span class="se">\

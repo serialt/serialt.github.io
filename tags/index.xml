@@ -4,7 +4,31 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 08 Sep 2024 20:09:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Fri, 11 Oct 2024 20:45:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>redis</title>
+    <link>https://serialt.github.io/tags/redis/</link>
+    <pubDate>Fri, 11 Oct 2024 20:45:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/redis/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Sanic</title>
+    <link>https://serialt.github.io/tags/sanic/</link>
+    <pubDate>Tue, 17 Sep 2024 19:45:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/sanic/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>gorm</title>
+    <link>https://serialt.github.io/tags/gorm/</link>
+    <pubDate>Mon, 09 Sep 2024 20:09:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/gorm/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>debug</title>
     <link>https://serialt.github.io/tags/debug/</link>
     <pubDate>Sun, 08 Sep 2024 20:09:42 &#43;0800</pubDate>
@@ -58,30 +82,6 @@
     <pubDate>Mon, 19 Aug 2024 20:26:42 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/oci-image-sync/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>skopeo</title>
-    <link>https://serialt.github.io/tags/skopeo/</link>
-    <pubDate>Mon, 19 Aug 2024 20:26:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/skopeo/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>redis</title>
-    <link>https://serialt.github.io/tags/redis/</link>
-    <pubDate>Sun, 11 Aug 2024 19:45:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/redis/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>handbook</title>
-    <link>https://serialt.github.io/tags/handbook/</link>
-    <pubDate>Sun, 11 Aug 2024 19:39:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/handbook/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

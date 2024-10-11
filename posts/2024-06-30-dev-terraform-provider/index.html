@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-06-30-dev-terraform-provider\/"
-        },"genre": "posts","keywords": "terraform-dev, tf-dev","wordcount":  1683 ,
+        },"genre": "posts","keywords": "terraform-dev, tf-dev","wordcount":  1766 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-06-30-dev-terraform-provider\/","datePublished": "2024-07-20T09:26:27+08:00","dateModified": "2024-07-20T09:26:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">TF-dev</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-20">2024-07-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1683 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-20">2024-07-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1766 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -583,6 +583,18 @@ terraform apply
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">boolbool</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="resourceschema-介绍以schemastringattribute为例">resource/schema 介绍，以schema.StringAttribute为例</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">CustomType  允许使用自定义属性类型来代替
+</span></span><span class="line"><span class="cl">Required   resource config 必填项
+</span></span><span class="line"><span class="cl">Optional resource config 可选项
+</span></span><span class="line"><span class="cl">Computed  resource config 只读
+</span></span><span class="line"><span class="cl">Sensitive  resource  config 敏感数据不输出
+</span></span><span class="line"><span class="cl">Description
+</span></span><span class="line"><span class="cl">MarkdownDescription 
+</span></span><span class="line"><span class="cl">DeprecationMessage   resource  config 弃用说明
+</span></span><span class="line"><span class="cl">Validators
+</span></span><span class="line"><span class="cl">PlanModifiers
+</span></span><span class="line"><span class="cl">Default
 </span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

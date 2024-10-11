@@ -4,7 +4,23 @@
         <link>https://serialt.github.io/categories/devops/</link>
         <description>DevOps - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 08 Sep 2024 20:09:42 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Fri, 11 Oct 2024 20:45:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+    <title>CloudBeaver</title>
+    <link>https://serialt.github.io/posts/2024-10-11-cloudbeaver/</link>
+    <pubDate>Fri, 11 Oct 2024 20:45:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-10-11-cloudbeaver/</guid>
+    <description><![CDATA[CloudBeaver web 版 DBeaver docker-compose 安装 version: &#34;3&#34; services: cloudbeaver: image: dbeaver/cloudbeaver:24 container_name: cloudbeaver restart: always ports: - &#34;8978:8978&#34; volumes: - &#34;/data/cloudbeaver:/opt/cloudbeaver/workspace&#34; networks: - app networks: app: # 使用外部共享等网卡 external: true terraform kubernetes https://github.com/serialt/terraform-module-cloudbeaver]]></description>
+</item>
+<item>
+    <title>Gorm Gen</title>
+    <link>https://serialt.github.io/posts/2024-09-09-gorm-gen/</link>
+    <pubDate>Mon, 09 Sep 2024 20:09:42 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-09-09-gorm-gen/</guid>
+    <description><![CDATA[Gorm Gen 参考链接：https://www.liwenzhou.com/posts/Go/gen/ Gen是一个基于GORM的安全ORM框架，其主要]]></description>
+</item>
+<item>
     <title>Debug in VSCode</title>
     <link>https://serialt.github.io/posts/2024-09-08-vscode-debug/</link>
     <pubDate>Sun, 08 Sep 2024 20:09:42 &#43;0800</pubDate>
@@ -67,22 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-08-11-kubeadm/</guid>
     <description><![CDATA[Kubeadm 搭建 集群 Version: 1.26 kubeadm是Kubernetes官方提供的用于快速安部署Kubernetes集群的工具，伴随Kubernetes每个版本的]]></description>
-</item>
-<item>
-    <title>kubeadm-cert</title>
-    <link>https://serialt.github.io/posts/2024-08-11-kubeadm-cert/</link>
-    <pubDate>Sun, 11 Aug 2024 19:32:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-08-11-kubeadm-cert/</guid>
-    <description><![CDATA[kubeadm-cert 官方的 kubeadm 部署的集群 CA 有效期默认是10年，其他证书有效期默认是1年，1年有效期在真实使用过程中，往往不够，因此需要自行修改 CA 的有效期然后编译]]></description>
-</item>
-<item>
-    <title>metallb-istio</title>
-    <link>https://serialt.github.io/posts/2024-08-11-k8s-metallb-istio/</link>
-    <pubDate>Sun, 11 Aug 2024 19:31:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-08-11-k8s-metallb-istio/</guid>
-    <description><![CDATA[服务暴露 一、metallb helm repo add metallb https://metallb.github.io/metallb helm install metallb metallb/metallb --version=0.13.7 -n metallb-system --create-namespace helm repo add serialt https://serialt.github.io/helm-charts helm install metallb-config serialt/metallb-config --set &#34;ipPoolRange=192.168.80.40-192.168.80.49&#34; -n metallb-system --version 0.0.1 helm 测试： https://artifacthub.io/packages/helm/bitnami/nginx $ helm repo add bitnami https://charts.bitnami.com/bitnami $ helm install my-release bitnami/nginx [root@localhost k3s]# kubectl get svc NAME TYPE CLUSTER-IP EXTERNAL-IP PORT(S) AGE kubernetes ClusterIP]]></description>
 </item>
 </channel>
 </rss>
