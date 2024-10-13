@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/posts/</link>
         <description>All Posts | Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Fri, 11 Oct 2024 20:45:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 13 Oct 2024 09:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>TF-dev</title>
+    <link>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</link>
+    <pubDate>Sun, 13 Oct 2024 09:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</guid>
+    <description><![CDATA[Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # makefile default: install build: go build -v ./... install: go install -v ./... vscode 调试 terraform provider 1）vscode launch cat .vscode/launch.json {]]></description>
+</item>
+<item>
     <title>CloudBeaver</title>
     <link>https://serialt.github.io/posts/2024-10-11-cloudbeaver/</link>
     <pubDate>Fri, 11 Oct 2024 20:45:27 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-08-31-redis/</guid>
     <description><![CDATA[Redis Redis 特点 开源数据库 配置简单 支持内存存储数据 支持持久化存储数据 datafile 数据文件 *.rdb aof(append only file)文件，日志文件 支持多实例部署 支持主从复制、集群 支持事务]]></description>
-</item>
-<item>
-    <title>手册</title>
-    <link>https://serialt.github.io/posts/2024-08-29-other/</link>
-    <pubDate>Sun, 11 Aug 2024 19:39:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-08-29-other/</guid>
-    <description><![CDATA[腾讯云轻量优化 #!/bin/bash #fuck tx process rm -rf /usr/local/sa rm -rf /usr/local/agenttools rm -rf /usr/local/qcloud process=(sap100 secu-tcs-agent sgagent64 barad_agent agent agentPlugInD pvdriver ) for i in ${process[@]} do for A in $(ps aux |grep $i |grep -v grep |awk &#39;{print $2}&#39;) do kill -9 $A done done chkconfig --level 35 postfix off service postfix stop echo &#39;&#39;&gt;/var/spool/cron/root echo &#39;#!/bin/bash&#39; &gt;/etc/rc.local git-code https://github.com/4x99/code6 RHE]]></description>
 </item>
 </channel>
 </rss>

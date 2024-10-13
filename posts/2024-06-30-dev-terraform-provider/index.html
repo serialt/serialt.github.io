@@ -8,15 +8,15 @@
 <meta property="og:description" content="Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # makefile default: install build: go build -v ./... install: go install -v ./... vscode 调试 terraform provider 1）vscode launch cat .vscode/launch.json {" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-07-20T09:26:27+08:00" />
-<meta property="article:modified_time" content="2024-07-20T09:26:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta property="article:published_time" content="2024-10-13T09:26:27+08:00" />
+<meta property="article:modified_time" content="2024-10-13T09:26:27+08:00" /><meta property="og:site_name" content="Log" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="TF-dev"/>
 <meta name="twitter:description" content="Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # makefile default: install build: go build -v ./... install: go install -v ./... vscode 调试 terraform provider 1）vscode launch cat .vscode/launch.json {"/>
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/" /><link rel="prev" href="https://serialt.github.io/posts/2024-07-07-protobuf/" /><link rel="next" href="https://serialt.github.io/posts/2024-07-21-tf-lib/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/" /><link rel="prev" href="https://serialt.github.io/posts/2024-10-11-cloudbeaver/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -27,8 +27,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-06-30-dev-terraform-provider\/"
-        },"genre": "posts","keywords": "terraform-dev, tf-dev","wordcount":  1766 ,
-        "url": "https:\/\/serialt.github.io\/posts\/2024-06-30-dev-terraform-provider\/","datePublished": "2024-07-20T09:26:27+08:00","dateModified": "2024-07-20T09:26:27+08:00","publisher": {
+        },"genre": "posts","keywords": "terraform-dev, tf-dev","wordcount":  1958 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2024-06-30-dev-terraform-provider\/","datePublished": "2024-10-13T09:26:27+08:00","dateModified": "2024-10-13T09:26:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">TF-dev</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-20">2024-07-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1766 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-10-13">2024-10-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1958 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -114,6 +114,7 @@
       <ul>
         <li><a href="#一调试-provider">一、调试 provider</a></li>
         <li><a href="#二tpf框架">二、TPF框架</a></li>
+        <li><a href="#三terraform-apply说明">三、Terraform apply说明</a></li>
       </ul>
     </li>
   </ul>
@@ -595,11 +596,16 @@ terraform apply
 </span></span><span class="line"><span class="cl">Validators
 </span></span><span class="line"><span class="cl">PlanModifiers
 </span></span><span class="line"><span class="cl">Default
-</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+</span></span></code></pre></div><h3 id="三terraform-apply说明">三、Terraform apply说明</h3>
+<p>1、apply，如果state文件中没有对应的资源则会触发create，create后会写入state文件</p>
+<p>2、删除资源会先触发read，yes后触发删除操作</p>
+<p>3、resource中定义的有改动导致资源某些配置会被replace，先触发read，yes 后会触发更新</p>
+<p>4、create、update、read 最后都会获取资源状态数据并更新到state文件中</p>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-07-20</span>
+                <span>Updated on 2024-10-13</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
@@ -616,8 +622,7 @@ terraform apply
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/2024-07-07-protobuf/" class="prev" rel="prev" title="Protobuf"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Protobuf</a>
-            <a href="/posts/2024-07-21-tf-lib/" class="next" rel="next" title="TF-lib">TF-lib<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/posts/2024-10-11-cloudbeaver/" class="prev" rel="prev" title="CloudBeaver"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>CloudBeaver</a></div>
 </div>
 </article></div>
             </main><footer class="footer">
