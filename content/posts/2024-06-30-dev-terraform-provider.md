@@ -1,7 +1,7 @@
 +++
 
 title = 'TF-dev'
-date = 2024-07-20T09:26:27+08:00
+date = 2024-10-13T09:26:27+08:00
 draft = false
 
 tags = ["terraform-dev","tf-dev"]
@@ -536,6 +536,16 @@ Default
 ```
 
 
+
+### 三、Terraform apply说明
+
+1、apply，如果state文件中没有对应的资源则会触发create，create后会写入state文件
+
+2、删除资源会先触发read，yes后触发删除操作
+
+3、resource中定义的有改动导致资源某些配置会被replace，先触发read，yes 后会触发更新
+
+4、create、update、read 最后都会获取资源状态数据并更新到state文件中
 
 
 
