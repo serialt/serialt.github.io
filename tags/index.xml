@@ -4,7 +4,23 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 13 Oct 2024 09:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 20 Oct 2024 19:38:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>conc</title>
+    <link>https://serialt.github.io/tags/conc/</link>
+    <pubDate>Sun, 20 Oct 2024 19:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/conc/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Go</title>
+    <link>https://serialt.github.io/tags/go/</link>
+    <pubDate>Sun, 20 Oct 2024 19:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/go/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>terraform-dev</title>
     <link>https://serialt.github.io/tags/terraform-dev/</link>
     <pubDate>Sun, 13 Oct 2024 09:26:27 &#43;0800</pubDate>
@@ -66,22 +82,6 @@
     <pubDate>Thu, 29 Aug 2024 20:29:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/security/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>kvm</title>
-    <link>https://serialt.github.io/tags/kvm/</link>
-    <pubDate>Thu, 29 Aug 2024 19:35:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/kvm/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>flutter</title>
-    <link>https://serialt.github.io/tags/flutter/</link>
-    <pubDate>Thu, 29 Aug 2024 19:34:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/flutter/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

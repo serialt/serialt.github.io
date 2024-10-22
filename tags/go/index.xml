@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/tags/go/</link>
         <description>Go - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 11 Aug 2024 10:26:09 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/go/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 20 Oct 2024 19:38:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/go/" rel="self" type="application/rss+xml" /><item>
+    <title>Go conc</title>
+    <link>https://serialt.github.io/posts/2024-10-20.go-conc/</link>
+    <pubDate>Sun, 20 Oct 2024 19:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-10-20.go-conc/</guid>
+    <description><![CDATA[Go conc 参考链接 https://www.liwenzhou.com/posts/Go/conc/ go package main import ( &#34;fmt&#34; &#34;time&#34; ) func main() { for i := 0; i &lt; 5; i++ { go func(num int) { fmt.Println(num) }(i) } time.Sleep(5 * time.Second) } sync.WaitGroup 控制并发 package main import ( &#34;fmt&#34; &#34;sync&#34; ) var wg sync.WaitGroup func hello(i int) { defer wg.Done() fmt.Println(&#34;Hello Goroutine!&#34;, i) } func main() { for i := 0;]]></description>
+</item>
+<item>
     <title>Go basic</title>
     <link>https://serialt.github.io/posts/2023-11-11-go-basic/</link>
     <pubDate>Sun, 11 Aug 2024 10:26:09 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-06-02-go-goph/</guid>
     <description><![CDATA[Go Goph 模块 github地址：https://github.com/melbahja/goph go开发封装的 ssh client 模块 Features Easy to use and simple API. Supports known hosts by default. Supports connections]]></description>
-</item>
-<item>
-    <title>Go flag</title>
-    <link>https://serialt.github.io/posts/2024-06-02-go-flag/</link>
-    <pubDate>Sun, 02 Jun 2024 10:26:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-02-go-flag/</guid>
-    <description><![CDATA[Go flag模块 参考链接：https://www.liwenzhou.com/posts/Go/go_flag/ Go语言内置的flag包实现了]]></description>
 </item>
 </channel>
 </rss>

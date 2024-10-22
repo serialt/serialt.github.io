@@ -4,9 +4,17 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 13 Oct 2024 09:26:27 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 20 Oct 2024 19:38:01 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Go conc</title>
+    <link>https://serialt.github.io/posts/2024-10-20.go-conc/</link>
+    <pubDate>Sun, 20 Oct 2024 19:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-10-20.go-conc/</guid>
+    <description><![CDATA[Go conc 参考链接 https://www.liwenzhou.com/posts/Go/conc/ go package main import ( &#34;fmt&#34; &#34;time&#34; ) func main() { for i := 0; i &lt; 5; i++ { go func(num int) { fmt.Println(num) }(i) } time.Sleep(5 * time.Second) } sync.WaitGroup 控制并发 package main import ( &#34;fmt&#34; &#34;sync&#34; ) var wg sync.WaitGroup func hello(i int) { defer wg.Done() fmt.Println(&#34;Hello Goroutine!&#34;, i) } func main() { for i := 0;]]></description>
+</item>
+<item>
     <title>TF-dev</title>
     <link>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</link>
     <pubDate>Sun, 13 Oct 2024 09:26:27 &#43;0800</pubDate>
@@ -77,14 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/skopeo/</guid>
     <description><![CDATA[镜像同步 参考链接： https://lework.github.io/2020/04/13/skopeo/ https://blog.k8s.li/skopeo.html 日常工作中，需要将各种镜像搬到对应的仓库中，docker 适合于构建镜像，将镜像推送于仓库中。镜像被推送到仓库中后，如果]]></description>
-</item>
-<item>
-    <title>redis</title>
-    <link>https://serialt.github.io/posts/2024-08-31-redis/</link>
-    <pubDate>Sun, 11 Aug 2024 19:45:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-08-31-redis/</guid>
-    <description><![CDATA[Redis Redis 特点 开源数据库 配置简单 支持内存存储数据 支持持久化存储数据 datafile 数据文件 *.rdb aof(append only file)文件，日志文件 支持多实例部署 支持主从复制、集群 支持事务]]></description>
 </item>
 </channel>
 </rss>
