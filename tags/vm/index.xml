@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/tags/vm/</link>
         <description>vm - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 11 Nov 2023 10:28:11 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/vm/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 26 Oct 2024 14:38:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/vm/" rel="self" type="application/rss+xml" /><item>
+    <title>Ubuntu cloud-init</title>
+    <link>https://serialt.github.io/posts/2024-10-26.ubuntu-cloud-init/</link>
+    <pubDate>Sat, 26 Oct 2024 14:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-10-26.ubuntu-cloud-init/</guid>
+    <description><![CDATA[cloud-init https://hmli.ustc.edu.cn/doc/linux/ubuntu-autoinstall/ubuntu-autoinstall.html ubuntu 安装后获取当前的user-data: /var/log/installer/autoinstall-user-data 示例： #cloud-config autoinstall: version: 1 apt: disable_components: [] fallback: offline-install geoip: true mirror-selection: primary: - uri: http://mirrors.ustc.edu.cn/ubuntu-ports - country-mirror - arches: &amp;id001 - amd64 - i386 uri: http://mirrors.ustc.edu.cn/ubuntu/ - arches: &amp;id002 - s390x - arm64 - armhf - powerpc - ppc64el - riscv64 uri: http://mirrors.ustc.edu.cn/ubuntu-ports preserve_sources_list:]]></description>
+</item>
+<item>
     <title>multipass</title>
     <link>https://serialt.github.io/posts/2023-11-11-multipass/</link>
     <pubDate>Sat, 11 Nov 2023 10:28:11 &#43;0800</pubDate>

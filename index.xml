@@ -4,9 +4,17 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 20 Oct 2024 19:38:01 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 26 Oct 2024 14:38:01 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Ubuntu cloud-init</title>
+    <link>https://serialt.github.io/posts/2024-10-26.ubuntu-cloud-init/</link>
+    <pubDate>Sat, 26 Oct 2024 14:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-10-26.ubuntu-cloud-init/</guid>
+    <description><![CDATA[cloud-init https://hmli.ustc.edu.cn/doc/linux/ubuntu-autoinstall/ubuntu-autoinstall.html ubuntu 安装后获取当前的user-data: /var/log/installer/autoinstall-user-data 示例： #cloud-config autoinstall: version: 1 apt: disable_components: [] fallback: offline-install geoip: true mirror-selection: primary: - uri: http://mirrors.ustc.edu.cn/ubuntu-ports - country-mirror - arches: &amp;id001 - amd64 - i386 uri: http://mirrors.ustc.edu.cn/ubuntu/ - arches: &amp;id002 - s390x - arm64 - armhf - powerpc - ppc64el - riscv64 uri: http://mirrors.ustc.edu.cn/ubuntu-ports preserve_sources_list:]]></description>
+</item>
+<item>
     <title>Go conc</title>
     <link>https://serialt.github.io/posts/2024-10-20.go-conc/</link>
     <pubDate>Sun, 20 Oct 2024 19:38:01 &#43;0800</pubDate>
@@ -77,14 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-08-29-flutter/</guid>
     <description><![CDATA[一、flutter 安装 https://flutter.cn/docs/get-started/install 安装源国内地址： export PUB_HOSTED_URL=https://pub.flutter-io.cn export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn flutter docker镜像打包 1、flutter FROM --platform=linux/amd64 debian:bullseye ARG FLUTTER_VERSION=2.2.3 ENV LANG=C.UTF-8 ENV PUB_HOSTED_URL=https://pub.flutter-io.cn ENV FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn ENV TZ=Asia/Shanghai ENV DEBIAN_FRONTEND=noninteractive RUN sed -i &#39;s/\w*.debian.org/mirrors.ustc.edu.cn/g&#39; /etc/apt/sources.list RUN apt-get update &amp;&amp; apt-get upgrade]]></description>
-</item>
-<item>
-    <title>Skopeo</title>
-    <link>https://serialt.github.io/posts/skopeo/</link>
-    <pubDate>Mon, 19 Aug 2024 20:26:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/skopeo/</guid>
-    <description><![CDATA[镜像同步 参考链接： https://lework.github.io/2020/04/13/skopeo/ https://blog.k8s.li/skopeo.html 日常工作中，需要将各种镜像搬到对应的仓库中，docker 适合于构建镜像，将镜像推送于仓库中。镜像被推送到仓库中后，如果]]></description>
 </item>
 </channel>
 </rss>
