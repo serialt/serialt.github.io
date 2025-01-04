@@ -4,12 +4,28 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 25 Nov 2024 19:38:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 04 Jan 2025 14:40:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
     <title>Go</title>
     <link>https://serialt.github.io/tags/go/</link>
-    <pubDate>Mon, 25 Nov 2024 19:38:01 &#43;0800</pubDate>
+    <pubDate>Sat, 04 Jan 2025 14:40:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/go/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>lo</title>
+    <link>https://serialt.github.io/tags/lo/</link>
+    <pubDate>Sat, 04 Jan 2025 14:40:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/lo/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>set</title>
+    <link>https://serialt.github.io/tags/set/</link>
+    <pubDate>Sat, 04 Jan 2025 14:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/set/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
@@ -66,22 +82,6 @@
     <pubDate>Sun, 13 Oct 2024 09:26:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/tf-dev/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>redis</title>
-    <link>https://serialt.github.io/tags/redis/</link>
-    <pubDate>Fri, 11 Oct 2024 20:45:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/redis/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Sanic</title>
-    <link>https://serialt.github.io/tags/sanic/</link>
-    <pubDate>Tue, 17 Sep 2024 19:45:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/sanic/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

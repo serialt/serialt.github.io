@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>lo - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/lo/</link>
+        <description>lo - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 04 Jan 2025 14:40:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/lo/" rel="self" type="application/rss+xml" /><item>
+    <title>Go lo</title>
+    <link>https://serialt.github.io/posts/2025-01-04-lo/</link>
+    <pubDate>Sat, 04 Jan 2025 14:40:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-01-04-lo/</guid>
+    <description><![CDATA[Go lo 使用 go get github.com/samber/lo 使用 // 将切片中的重复元素去掉，只保留第一个出现的元素。 names := lo.Uniq([]string{&#34;Samuel&#34;, &#34;John&#34;, &#34;Samuel&#34;}) // []string{&#34;Samuel&#34;, &#34;John&#34;} // 生成map // 将切片或数组转换为map，key是call]]></description>
+</item>
+</channel>
+</rss>

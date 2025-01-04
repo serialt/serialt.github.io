@@ -90,35 +90,35 @@
     </div><main class="main">
                 <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/https://github.com/serialt" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2024-11-25.goose/">Go goose</a>
+        <a href="/posts/2025-01-04-lo/">Go lo</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-01-04">2025-01-04</time></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div><div class="content">Go lo 使用 go get github.com/samber/lo 使用 // 将切片中的重复元素去掉，只保留第一个出现的元素。 names := lo.Uniq([]string{&#34;Samuel&#34;, &#34;John&#34;, &#34;Samuel&#34;}) // []string{&#34;Samuel&#34;, &#34;John&#34;} // 生成map // 将切片或数组转换为map，key是call</div><div class="post-footer">
+        <a href="/posts/2025-01-04-lo/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/lo/">lo</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/2025-01-04-goset/">Go set</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2025-01-04">2025-01-04</time></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div><div class="content">Go Set 集合 Github地址：https://github.com/deckarep/golang-set 使用： go get github.com/deckarep/golang-set/v2 集合里的元素不会重复 示例：</div><div class="post-footer">
+        <a href="/posts/2025-01-04-goset/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/set/">set</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/2024-11-25-goose/">Go goose</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-11-25">2024-11-25</time></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div><div class="content">Goose 数据库版本管理 集成 package main import ( &#34;context&#34; &#34;flag&#34; &#34;log&#34; &#34;os&#34; &#34;github.com/pressly/goose/v3&#34; _ &#34;modernc.org/sqlite&#34; ) var ( flags = flag.NewFlagSet(&#34;goose&#34;, flag.ExitOnError) dir = flags.String(&#34;dir&#34;, &#34;.&#34;, &#34;directory with migration files&#34;) ) func main() { flags.Parse(os.Args[1:]) args := flags.Args() if len(args) &lt; 3 { flags.Usage() return } dbstring, command := args[1], args[2] db, err := goose.OpenDBWithDriver(&#34;sqlite&#34;, dbstring) if err != nil { log.Fatalf(&#34;goose: failed to</div><div class="post-footer">
-        <a href="/posts/2024-11-25.goose/">Read More</a><div class="post-tags">
+        <a href="/posts/2024-11-25-goose/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/goose/">goose</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2024-10-26.java/">Java Basic</a>
+        <a href="/posts/2024-10-26-java/">Java Basic</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-10-26">2024-10-26</time></span>&nbsp;<span class="post-category">included in <a href="/categories/java-%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Java 基础</a></span></div><div class="content">Java 一、基础 1、helloworld public class Hello { public static void main(String[] args) { System.out.println(&#34;Hello, world!&#34;); } } [root@Sugar j1]🐳 java Hello.java Hello, world! 2、变量定义 int n = 100; n = 200; // 变量n赋值为200 int i2 = -2147483648; int i3 =</div><div class="post-footer">
-        <a href="/posts/2024-10-26.java/">Read More</a><div class="post-tags">
+        <a href="/posts/2024-10-26-java/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/java/">java</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2024-10-26.ubuntu-cloud-init/">Ubuntu cloud-init</a>
+        <a href="/posts/2024-10-26-ubuntu-cloud-init/">Ubuntu cloud-init</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-10-26">2024-10-26</time></span>&nbsp;<span class="post-category">included in <a href="/categories/ubuntu-%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Ubuntu 自动安装</a></span></div><div class="content">cloud-init https://hmli.ustc.edu.cn/doc/linux/ubuntu-autoinstall/ubuntu-autoinstall.html ubuntu 安装后获取当前的user-data: /var/log/installer/autoinstall-user-data 示例： #cloud-config autoinstall: version: 1 apt: disable_components: [] fallback: offline-install geoip: true mirror-selection: primary: - uri: http://mirrors.ustc.edu.cn/ubuntu-ports - country-mirror - arches: &amp;id001 - amd64 - i386 uri: http://mirrors.ustc.edu.cn/ubuntu/ - arches: &amp;id002 - s390x - arm64 - armhf - powerpc - ppc64el - riscv64 uri: http://mirrors.ustc.edu.cn/ubuntu-ports preserve_sources_list:</div><div class="post-footer">
-        <a href="/posts/2024-10-26.ubuntu-cloud-init/">Read More</a><div class="post-tags">
+        <a href="/posts/2024-10-26-ubuntu-cloud-init/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/vm/">vm</a>,&nbsp;<a href="/tags/ubuntu/">ubuntu</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2024-10-20.go-conc/">Go conc</a>
+        <a href="/posts/2024-10-20-go-conc/">Go conc</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-10-20">2024-10-20</time></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div><div class="content">Go conc 参考链接 https://www.liwenzhou.com/posts/Go/conc/ go package main import ( &#34;fmt&#34; &#34;time&#34; ) func main() { for i := 0; i &lt; 5; i++ { go func(num int) { fmt.Println(num) }(i) } time.Sleep(5 * time.Second) } sync.WaitGroup 控制并发 package main import ( &#34;fmt&#34; &#34;sync&#34; ) var wg sync.WaitGroup func hello(i int) { defer wg.Done() fmt.Println(&#34;Hello Goroutine!&#34;, i) } func main() { for i := 0;</div><div class="post-footer">
-        <a href="/posts/2024-10-20.go-conc/">Read More</a><div class="post-tags">
+        <a href="/posts/2024-10-20-go-conc/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/conc/">conc</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2024-06-30-dev-terraform-provider/">TF-dev</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-10-13">2024-10-13</time></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div><div class="content">Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # makefile default: install build: go build -v ./... install: go install -v ./... vscode 调试 terraform provider 1）vscode launch cat .vscode/launch.json {</div><div class="post-footer">
-        <a href="/posts/2024-06-30-dev-terraform-provider/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/terraform-dev/">terraform-dev</a>,&nbsp;<a href="/tags/tf-dev/">tf-dev</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/2024-10-11-cloudbeaver/">CloudBeaver</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="2024-10-11">2024-10-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div><div class="content">CloudBeaver web 版 DBeaver docker-compose 安装 version: &#34;3&#34; services: cloudbeaver: image: dbeaver/cloudbeaver:24 container_name: cloudbeaver restart: always ports: - &#34;8978:8978&#34; volumes: - &#34;/data/cloudbeaver:/opt/cloudbeaver/workspace&#34; networks: - app networks: app: # 使用外部共享等网卡 external: true terraform kubernetes https://github.com/serialt/terraform-module-cloudbeaver</div><div class="post-footer">
-        <a href="/posts/2024-10-11-cloudbeaver/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/redis/">redis</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -135,7 +135,7 @@
                     <span class="page-link" aria-hidden="true">&hellip;</span>
                 </li><li class="page-item ">
                     <span class="page-link">
-                        <a href="/page/19/">19</a>
+                        <a href="/page/20/">20</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

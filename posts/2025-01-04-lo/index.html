@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Go lo - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Go lo" />
+<meta property="og:description" content="Go lo 使用 go get github.com/samber/lo 使用 // 将切片中的重复元素去掉，只保留第一个出现的元素。 names := lo.Uniq([]string{&#34;Samuel&#34;, &#34;John&#34;, &#34;Samuel&#34;}) // []string{&#34;Samuel&#34;, &#34;John&#34;} // 生成map // 将切片或数组转换为map，key是call" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2025-01-04-lo/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-01-04T14:40:01+08:00" />
+<meta property="article:modified_time" content="2025-01-04T14:40:01+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go lo"/>
+<meta name="twitter:description" content="Go lo 使用 go get github.com/samber/lo 使用 // 将切片中的重复元素去掉，只保留第一个出现的元素。 names := lo.Uniq([]string{&#34;Samuel&#34;, &#34;John&#34;, &#34;Samuel&#34;}) // []string{&#34;Samuel&#34;, &#34;John&#34;} // 生成map // 将切片或数组转换为map，key是call"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2025-01-04-lo/" /><link rel="prev" href="https://serialt.github.io/posts/2025-01-04-goset/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Go lo",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2025-01-04-lo\/"
+        },"genre": "posts","keywords": "Go, lo","wordcount":  1482 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2025-01-04-lo\/","datePublished": "2025-01-04T14:40:01+08:00","dateModified": "2025-01-04T14:40:01+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Go lo</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-01-04">2025-01-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1482 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>Go lo</p>
+<p>使用</p>
+<pre tabindex="0"><code>go get github.com/samber/lo
+</code></pre><p>使用</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 将切片中的重复元素去掉，只保留第一个出现的元素。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">names</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Uniq</span><span class="p">([]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;Samuel&#34;</span><span class="p">,</span> <span class="s">&#34;John&#34;</span><span class="p">,</span> <span class="s">&#34;Samuel&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []string{&#34;Samuel&#34;, &#34;John&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 生成map
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 将切片或数组转换为map，key是callback函数的返回值，value是对应的元素。 当key相同时，后面的元素会覆盖前面的元素。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">abc</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">A</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">aa</span> <span class="o">:=</span> <span class="p">[]</span><span class="o">*</span><span class="nx">abc</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">lo</span><span class="p">.</span><span class="nf">KeyBy</span><span class="p">(</span><span class="nx">aa</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">item</span> <span class="o">*</span><span class="nx">abc</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">item</span><span class="p">.</span><span class="nx">A</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Associate (alias: SliceToMap)
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 对切片遍历生成一个Map，key和value由callback函数生成。key是第一个返回值，value是第二个返回值。如果key相同，后面的元素会覆盖前面的元素。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">in</span> <span class="o">:=</span> <span class="p">[]</span><span class="o">*</span><span class="nx">foo</span><span class="p">{{</span><span class="nx">baz</span><span class="p">:</span> <span class="s">&#34;apple&#34;</span><span class="p">,</span> <span class="nx">bar</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="nx">baz</span><span class="p">:</span> <span class="s">&#34;banana&#34;</span><span class="p">,</span> <span class="nx">bar</span><span class="p">:</span> <span class="mi">2</span><span class="p">}}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">aMap</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Associate</span><span class="p">(</span><span class="nx">in</span><span class="p">,</span> <span class="kd">func</span> <span class="p">(</span><span class="nx">f</span> <span class="o">*</span><span class="nx">foo</span><span class="p">)</span> <span class="p">(</span><span class="kt">string</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">f</span><span class="p">.</span><span class="nx">baz</span><span class="p">,</span> <span class="nx">f</span><span class="p">.</span><span class="nx">bar</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// map[string][int]{ &#34;apple&#34;:1, &#34;banana&#34;:2 }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Drop
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 去掉切片的前n个元素。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">l</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Drop</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []int{2, 3, 4, 5}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// DropRight
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 去掉切片的后n个元素。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">l</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">DropRight</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []int{0, 1, 2, 3}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// DropWhile
+</span></span></span><span class="line"><span class="cl"><span class="c1">// DropWhile 会一直删除元素，直到predicate返回false。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">l</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">DropWhile</span><span class="p">([]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;a&#34;</span><span class="p">,</span> <span class="s">&#34;aa&#34;</span><span class="p">,</span> <span class="s">&#34;aaa&#34;</span><span class="p">,</span> <span class="s">&#34;aa&#34;</span><span class="p">,</span> <span class="s">&#34;aa&#34;</span><span class="p">},</span> <span class="kd">func</span><span class="p">(</span><span class="nx">val</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []string{&#34;aaa&#34;, &#34;aa&#34;, &#34;aa&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 计算切片中和value相等的元素的个数。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">count</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Count</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 计算切片中满足predicate函数的元素的个数。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">count</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">CountBy</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="kd">func</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// CountValues
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 计算切片中每个元素的个数。其中key是元素，value是个数。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">lo</span><span class="p">.</span><span class="nf">CountValues</span><span class="p">([]</span><span class="kt">int</span><span class="p">{})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// map[int]int{}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">lo</span><span class="p">.</span><span class="nf">CountValues</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// map[int]int{1: 1, 2: 1}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">lo</span><span class="p">.</span><span class="nf">CountValues</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// map[int]int{1: 1, 2: 2}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Subset
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 返回切片中从offset开始的length个元素。但是不会因为越界而panic。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">in</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">sub</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Subset</span><span class="p">(</span><span class="nx">in</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []int{2, 3, 4}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Slice
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 返回一个切片的副本，从start到end，但是不包括end。不会因为越界而panic。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">in</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">slice</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Slice</span><span class="p">(</span><span class="nx">in</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []int{0, 1, 2, 3, 4}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">slice</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Slice</span><span class="p">(</span><span class="nx">in</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []int{2}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Compact
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 去掉所有零值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">in</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;foo&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">slice</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nx">Compact</span><span class="p">[</span><span class="kt">string</span><span class="p">](</span><span class="nx">in</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []string{&#34;foo&#34;, &#34;bar&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 切片类型转换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">lo</span><span class="p">.</span><span class="nf">Map</span><span class="p">([]</span><span class="kt">int64</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">},</span> <span class="kd">func</span><span class="p">(</span><span class="nx">x</span> <span class="kt">int64</span><span class="p">,</span> <span class="nx">index</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">strconv</span><span class="p">.</span><span class="nf">FormatInt</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []string{&#34;1&#34;, &#34;2&#34;, &#34;3&#34;, &#34;4&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 对某一个函数调用n次，返回结果的切片。i为索引， 从0开始。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">lo</span><span class="p">.</span><span class="nf">Times</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">strconv</span><span class="p">.</span><span class="nf">FormatInt</span><span class="p">(</span><span class="nb">int64</span><span class="p">(</span><span class="nx">i</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []string{&#34;0&#34;, &#34;1&#34;, &#34;2&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// chunk 分片
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">lo</span><span class="p">.</span><span class="nf">Chunk</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 展开二维切片
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">flat</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Flatten</span><span class="p">([][]</span><span class="kt">int</span><span class="p">{{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []int{0, 1, 2, 3, 4, 5}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 洗牌
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 返回一个打乱顺序的切片， 使用Fisher-Yates shuffle Fisher-Yates shuffle
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">randomOrder</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Shuffle</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []int{1, 4, 0, 3, 5, 2}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 反转
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 反转切片，第一个元素变成最后一个，第二个元素变成倒数第二个，以此类推。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">reverseOrder</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Reverse</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Repeat
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 生成一个切片，包含N个相同的元素。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">slice</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Repeat</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nx">foo</span><span class="p">{</span><span class="s">&#34;a&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []foo{foo{&#34;a&#34;}, foo{&#34;a&#34;}}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Splice 指定索引插入切片
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">result</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Splice</span><span class="p">([]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;a&#34;</span><span class="p">,</span> <span class="s">&#34;b&#34;</span><span class="p">},</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">,</span> <span class="s">&#34;2&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []string{&#34;a&#34;, &#34;1&#34;, &#34;2&#34;, &#34;b&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取map的key
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">keys</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Keys</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="s">&#34;foo&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []string{&#34;foo&#34;, &#34;bar&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 判断key是否存在
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">exists</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">HasKey</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="s">&#34;foo&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="s">&#34;foo&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取map的值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">values</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Values</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="s">&#34;foo&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []int{1, 2}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取map的值并去重
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">values</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">UniqValues</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="s">&#34;foo&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []int{1, 2}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 求和
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">list</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">sum</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Sum</span><span class="p">(</span><span class="nx">list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 15
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 计算平均值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">mean</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Mean</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 3
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 随机字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">str</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">RandomString</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="nx">lo</span><span class="p">.</span><span class="nx">LettersCharset</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// example: &#34;eIGbt&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取子串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">sub</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Substring</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;llo&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 驼峰
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">str</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">PascalCase</span><span class="p">(</span><span class="s">&#34;hello_world&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// HelloWorld
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">str</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">CamelCase</span><span class="p">(</span><span class="s">&#34;hello_world&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// helloWorld
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">str</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">KebabCase</span><span class="p">(</span><span class="s">&#34;helloWorld&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// hello-world
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 蛇型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">str</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">SnakeCase</span><span class="p">(</span><span class="s">&#34;HelloWorld&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// hello_world
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 依据大写拆分单词
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">str</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Words</span><span class="p">(</span><span class="s">&#34;helloWorld&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []string{&#34;hello&#34;, &#34;world&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 首字母大写
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">str</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Capitalize</span><span class="p">(</span><span class="s">&#34;heLLO&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Hello
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取job执行的时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">duration</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Duration</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// very long job
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 3s
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 判断元素是否包含
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ok</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Every</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ok</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Every</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 判断切片不同，left是第二个切片缺少的，right是第一个切片缺少的
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">left</span><span class="p">,</span> <span class="nx">right</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Difference</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []int{1, 3, 4, 5}, []int{6}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 删除元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">subset</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Without</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">},</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []int{0, 10}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">subset</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Without</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">},</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []int{10}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取元素下标
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">found</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">IndexOf</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">},</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">notFound</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">IndexOf</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">},</span> <span class="mi">6</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// -1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 查找元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">str</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Find</span><span class="p">([]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;a&#34;</span><span class="p">,</span> <span class="s">&#34;b&#34;</span><span class="p">,</span> <span class="s">&#34;c&#34;</span><span class="p">,</span> <span class="s">&#34;d&#34;</span><span class="p">},</span> <span class="kd">func</span><span class="p">(</span><span class="nx">i</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">i</span> <span class="o">==</span> <span class="s">&#34;b&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;b&#34;, true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取较小的时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">earliest</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Earliest</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">(),</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="p">{})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 0001-01-01 00:00:00 +0000 UTC
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取较晚的时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">latest</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Latest</span><span class="p">([]</span><span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="p">{</span><span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">(),</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="p">{}})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 2023-04-01 01:02:03 +0000 UTC
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取第一个元素，没有则给定默认值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">first</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">FirstOr</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">},</span> <span class="mi">245</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">first</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">FirstOr</span><span class="p">([]</span><span class="kt">int</span><span class="p">{},</span> <span class="mi">31</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 31
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取最后一个元素，没有则给定默认值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">last</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">LastOr</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">},</span> <span class="mi">245</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 3
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// swich 语法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">result</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Switch</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Case</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#34;1&#34;</span><span class="p">).</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Case</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&#34;2&#34;</span><span class="p">).</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Default</span><span class="p">(</span><span class="s">&#34;3&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;1&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">result</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Switch</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">CaseF</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}).</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">CaseF</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s">&#34;2&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}).</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">DefaultF</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s">&#34;3&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;1&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 判断是否为空
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">x</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="nx">lo</span><span class="p">.</span><span class="nf">IsNil</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">k</span> <span class="kd">struct</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">lo</span><span class="p">.</span><span class="nf">IsNil</span><span class="p">(</span><span class="nx">k</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">i</span> <span class="o">*</span><span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="nx">lo</span><span class="p">.</span><span class="nf">IsNil</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取指针数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ptr</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">ToPtr</span><span class="p">(</span><span class="s">&#34;hello world&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// *string{&#34;hello world&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 返回一个空指针数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ptr</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nx">Nil</span><span class="p">[</span><span class="kt">float64</span><span class="p">]()</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// nil
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取指针的值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">str</span> <span class="o">:=</span> <span class="s">&#34;hello world&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">value</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">FromPtr</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">str</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;hello world&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">value</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">FromPtr</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取指针的值，设置默认值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">str</span> <span class="o">:=</span> <span class="s">&#34;hello world&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">value</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">FromPtrOr</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">str</span><span class="p">,</span> <span class="s">&#34;empty&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;hello world&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">value</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">FromPtrOr</span><span class="p">(</span><span class="kc">nil</span><span class="p">,</span> <span class="s">&#34;empty&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;empty&#34;
+</span></span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-01-04</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/go/">Go</a>,&nbsp;<a href="/tags/lo/">lo</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2025-01-04-goset/" class="prev" rel="prev" title="Go set"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Go set</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

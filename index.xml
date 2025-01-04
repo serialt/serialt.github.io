@@ -4,38 +4,54 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 25 Nov 2024 19:38:01 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 04 Jan 2025 14:40:01 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Go lo</title>
+    <link>https://serialt.github.io/posts/2025-01-04-lo/</link>
+    <pubDate>Sat, 04 Jan 2025 14:40:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-01-04-lo/</guid>
+    <description><![CDATA[Go lo 使用 go get github.com/samber/lo 使用 // 将切片中的重复元素去掉，只保留第一个出现的元素。 names := lo.Uniq([]string{&#34;Samuel&#34;, &#34;John&#34;, &#34;Samuel&#34;}) // []string{&#34;Samuel&#34;, &#34;John&#34;} // 生成map // 将切片或数组转换为map，key是call]]></description>
+</item>
+<item>
+    <title>Go set</title>
+    <link>https://serialt.github.io/posts/2025-01-04-goset/</link>
+    <pubDate>Sat, 04 Jan 2025 14:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-01-04-goset/</guid>
+    <description><![CDATA[Go Set 集合 Github地址：https://github.com/deckarep/golang-set 使用： go get github.com/deckarep/golang-set/v2 集合里的元素不会重复 示例：]]></description>
+</item>
+<item>
     <title>Go goose</title>
-    <link>https://serialt.github.io/posts/2024-11-25.goose/</link>
+    <link>https://serialt.github.io/posts/2024-11-25-goose/</link>
     <pubDate>Mon, 25 Nov 2024 19:38:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-11-25.goose/</guid>
+    <guid>https://serialt.github.io/posts/2024-11-25-goose/</guid>
     <description><![CDATA[Goose 数据库版本管理 集成 package main import ( &#34;context&#34; &#34;flag&#34; &#34;log&#34; &#34;os&#34; &#34;github.com/pressly/goose/v3&#34; _ &#34;modernc.org/sqlite&#34; ) var ( flags = flag.NewFlagSet(&#34;goose&#34;, flag.ExitOnError) dir = flags.String(&#34;dir&#34;, &#34;.&#34;, &#34;directory with migration files&#34;) ) func main() { flags.Parse(os.Args[1:]) args := flags.Args() if len(args) &lt; 3 { flags.Usage() return } dbstring, command := args[1], args[2] db, err := goose.OpenDBWithDriver(&#34;sqlite&#34;, dbstring) if err != nil { log.Fatalf(&#34;goose: failed to]]></description>
 </item>
 <item>
     <title>Java Basic</title>
-    <link>https://serialt.github.io/posts/2024-10-26.java/</link>
+    <link>https://serialt.github.io/posts/2024-10-26-java/</link>
     <pubDate>Sat, 26 Oct 2024 19:38:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-10-26.java/</guid>
+    <guid>https://serialt.github.io/posts/2024-10-26-java/</guid>
     <description><![CDATA[Java 一、基础 1、helloworld public class Hello { public static void main(String[] args) { System.out.println(&#34;Hello, world!&#34;); } } [root@Sugar j1]🐳 java Hello.java Hello, world! 2、变量定义 int n = 100; n = 200; // 变量n赋值为200 int i2 = -2147483648; int i3 =]]></description>
 </item>
 <item>
     <title>Ubuntu cloud-init</title>
-    <link>https://serialt.github.io/posts/2024-10-26.ubuntu-cloud-init/</link>
+    <link>https://serialt.github.io/posts/2024-10-26-ubuntu-cloud-init/</link>
     <pubDate>Sat, 26 Oct 2024 14:38:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-10-26.ubuntu-cloud-init/</guid>
+    <guid>https://serialt.github.io/posts/2024-10-26-ubuntu-cloud-init/</guid>
     <description><![CDATA[cloud-init https://hmli.ustc.edu.cn/doc/linux/ubuntu-autoinstall/ubuntu-autoinstall.html ubuntu 安装后获取当前的user-data: /var/log/installer/autoinstall-user-data 示例： #cloud-config autoinstall: version: 1 apt: disable_components: [] fallback: offline-install geoip: true mirror-selection: primary: - uri: http://mirrors.ustc.edu.cn/ubuntu-ports - country-mirror - arches: &amp;id001 - amd64 - i386 uri: http://mirrors.ustc.edu.cn/ubuntu/ - arches: &amp;id002 - s390x - arm64 - armhf - powerpc - ppc64el - riscv64 uri: http://mirrors.ustc.edu.cn/ubuntu-ports preserve_sources_list:]]></description>
 </item>
 <item>
     <title>Go conc</title>
-    <link>https://serialt.github.io/posts/2024-10-20.go-conc/</link>
+    <link>https://serialt.github.io/posts/2024-10-20-go-conc/</link>
     <pubDate>Sun, 20 Oct 2024 19:38:01 &#43;0800</pubDate>
     <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-10-20.go-conc/</guid>
+    <guid>https://serialt.github.io/posts/2024-10-20-go-conc/</guid>
     <description><![CDATA[Go conc 参考链接 https://www.liwenzhou.com/posts/Go/conc/ go package main import ( &#34;fmt&#34; &#34;time&#34; ) func main() { for i := 0; i &lt; 5; i++ { go func(num int) { fmt.Println(num) }(i) } time.Sleep(5 * time.Second) } sync.WaitGroup 控制并发 package main import ( &#34;fmt&#34; &#34;sync&#34; ) var wg sync.WaitGroup func hello(i int) { defer wg.Done() fmt.Println(&#34;Hello Goroutine!&#34;, i) } func main() { for i := 0;]]></description>
 </item>
 <item>
@@ -69,22 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-09-09-gorm-gen/</guid>
     <description><![CDATA[Gorm Gen 参考链接：https://www.liwenzhou.com/posts/Go/gen/ Gen是一个基于GORM的安全ORM框架，其主要]]></description>
-</item>
-<item>
-    <title>Debug in VSCode</title>
-    <link>https://serialt.github.io/posts/2024-09-08-vscode-debug/</link>
-    <pubDate>Sun, 08 Sep 2024 20:09:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-09-08-vscode-debug/</guid>
-    <description><![CDATA[Debug In VSCode 一、GO 1、安装插件： golang.go r3inbowari.gomodexplorer 安装go debug相关组件 command + shift + p &ndash;&gt; go install &ndash;&gt; 勾选所有进行安装 2、lanuch.json { // 使用 IntelliSense 了解相关属性]]></description>
-</item>
-<item>
-    <title>security-info</title>
-    <link>https://serialt.github.io/posts/2023-11-12-security-info/</link>
-    <pubDate>Thu, 29 Aug 2024 20:29:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2023-11-12-security-info/</guid>
-    <description><![CDATA[漏洞信息 云服务商安全服务公告 云服务商 链接 cve官网 https://cve.mitre.org/ 阿里云 https://help.aliyun.com/noticelist/9213612.html?spm=a2c4g.789004748.n2.3.cddb4c07NBt9Rl 华为云 https://www.huaweicloud.com/notice.securecenter.html 腾讯云 https://cloud.tencent.com/announce?categorys=21&page=1 阿里云漏洞数据库 https://avd.aliyun.com/ 国家信息漏洞库 http://www.cnnvd.org.cn/ 常用软件官方安全公告链接 名称 链]]></description>
 </item>
 </channel>
 </rss>
