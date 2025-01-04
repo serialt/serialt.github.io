@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-09-09-gorm-gen\/"
-        },"genre": "posts","keywords": "gorm","wordcount":  700 ,
+        },"genre": "posts","keywords": "gorm","wordcount":  812 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-09-09-gorm-gen\/","datePublished": "2024-09-09T20:09:42+08:00","dateModified": "2024-09-09T20:09:42+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Gorm Gen</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/gorm/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Gorm</a>&nbsp;<a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-09-09">2024-09-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;700 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-09-09">2024-09-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;812 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -164,6 +164,43 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">	<span class="c1">// 执行并生成代码
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">g</span><span class="p">.</span><span class="nf">Execute</span><span class="p">()</span>
+</span></span></code></pre></div><p>表关联</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// foreignKey:  action 表中的字段,action表中的id
+</span></span></span><span class="line"><span class="cl"><span class="c1">// references: user表中的字段，user表中的 action_id
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">action</span> <span class="o">:=</span> <span class="nx">g</span><span class="p">.</span><span class="nf">GenerateModel</span><span class="p">(</span><span class="s">&#34;action&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">user</span> <span class="o">:=</span> <span class="nx">g</span><span class="p">.</span><span class="nf">GenerateModel</span><span class="p">(</span><span class="s">&#34;user&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">gen</span><span class="p">.</span><span class="nf">FieldRelate</span><span class="p">(</span><span class="nx">field</span><span class="p">.</span><span class="nx">HasMany</span><span class="p">,</span> <span class="s">&#34;actions&#34;</span><span class="p">,</span> <span class="nx">action</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="o">&amp;</span><span class="nx">field</span><span class="p">.</span><span class="nx">RelateConfig</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">RelateSlicePointer</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">GORMTag</span><span class="p">:</span> <span class="nx">field</span><span class="p">.</span><span class="nx">GormTag</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="s">&#34;foreignKey&#34;</span><span class="p">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">						<span class="s">&#34;ID&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">					<span class="p">},</span>
+</span></span><span class="line"><span class="cl">					<span class="s">&#34;references&#34;</span><span class="p">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">						<span class="s">&#34;ActionID&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">					<span class="p">},</span>
+</span></span><span class="line"><span class="cl">				<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">),</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span></code></pre></div><p>基于索引的情况下批量更新或者新增</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl">	<span class="nx">err</span> <span class="p">=</span> <span class="nx">pa</span><span class="p">.</span><span class="nf">WithContext</span><span class="p">(</span><span class="nx">ctx</span><span class="p">).</span><span class="nf">Clauses</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">clause</span><span class="p">.</span><span class="nx">OnConflict</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Columns</span><span class="p">:</span> <span class="p">[]</span><span class="nx">clause</span><span class="p">.</span><span class="nx">Column</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">Code</span><span class="p">.</span><span class="nf">ColumnName</span><span class="p">().</span><span class="nf">String</span><span class="p">()},</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">TargetWhere</span><span class="p">:</span> <span class="nx">clause</span><span class="p">.</span><span class="nx">Where</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Exprs</span><span class="p">:</span> <span class="p">[]</span><span class="nx">clause</span><span class="p">.</span><span class="nx">Expression</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">clause</span><span class="p">.</span><span class="nx">Expr</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">						<span class="nx">SQL</span><span class="p">:</span> <span class="s">&#34;deleted_at = 0&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">					<span class="p">},</span>
+</span></span><span class="line"><span class="cl">				<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">DoUpdates</span><span class="p">:</span> <span class="nx">clause</span><span class="p">.</span><span class="nf">AssignmentColumns</span><span class="p">(</span><span class="nx">cols</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">).</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">CreateInBatches</span><span class="p">(</span><span class="nx">items</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
 </span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

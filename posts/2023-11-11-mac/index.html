@@ -5,14 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>mac - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="mac" />
-<meta property="og:description" content="Mac 优化 1、mac终端增加颜色，参考centos7 eval &#34;$(/opt/homebrew/bin/brew shellenv)&#34; # Setting PATH for Python 3.9 # The original version is saved in .bash_profile.pysave PATH=&#34;/Library/Frameworks/Python.framework/Versions/3.9/bin:${PATH}&#34; export PG_HOME=/opt/homebrew/Cellar/postgresql@10/10.17 export PATH export GOPROXY=https://goproxy.cn,direct export GOPATH=/Users/sugar/go export GO111MODULE=&#34;on&#34; export GOBIN=$GOPATH/bin export PATH=$PATH:$GOROOT/bin:$GOBIN:$PG_HOME/bin # 参考RHEL console export PS1=&#34;[\u@\h \W]\\$ &#34; export CLICOLOR=1" />
+<meta property="og:description" content="Mac 优化 修改默认的shell # shells 记录了可设置的shell，需要/opt/homebrew/bin/bash加到文件中 cat /etc/shells # List of acceptable shells for chpass(1). # Ftpd will not" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://serialt.github.io/posts/2023-11-11-mac/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-11-11T10:26:09+08:00" />
 <meta property="article:modified_time" content="2023-11-11T10:26:09+08:00" /><meta property="og:site_name" content="Log" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="mac"/>
-<meta name="twitter:description" content="Mac 优化 1、mac终端增加颜色，参考centos7 eval &#34;$(/opt/homebrew/bin/brew shellenv)&#34; # Setting PATH for Python 3.9 # The original version is saved in .bash_profile.pysave PATH=&#34;/Library/Frameworks/Python.framework/Versions/3.9/bin:${PATH}&#34; export PG_HOME=/opt/homebrew/Cellar/postgresql@10/10.17 export PATH export GOPROXY=https://goproxy.cn,direct export GOPATH=/Users/sugar/go export GO111MODULE=&#34;on&#34; export GOBIN=$GOPATH/bin export PATH=$PATH:$GOROOT/bin:$GOBIN:$PG_HOME/bin # 参考RHEL console export PS1=&#34;[\u@\h \W]\\$ &#34; export CLICOLOR=1"/>
+<meta name="twitter:description" content="Mac 优化 修改默认的shell # shells 记录了可设置的shell，需要/opt/homebrew/bin/bash加到文件中 cat /etc/shells # List of acceptable shells for chpass(1). # Ftpd will not"/>
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2023-11-11-mac\/"
-        },"genre": "posts","keywords": "mac","wordcount":  862 ,
+        },"genre": "posts","keywords": "mac","wordcount":  962 ,
         "url": "https:\/\/serialt.github.io\/posts\/2023-11-11-mac\/","datePublished": "2023-11-11T10:26:09+08:00","dateModified": "2023-11-11T10:26:09+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">mac</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/mac/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>mac</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-11">2023-11-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;862 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-11">2023-11-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;962 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -110,13 +110,38 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#1mac终端增加颜色参考centos7">1、mac终端增加颜色，参考centos7</a></li>
-    <li><a href="#2安装homebrew">2、安装homebrew</a></li>
-    <li><a href="#4环境变量">4、环境变量</a></li>
+    <li>
+      <ul>
+        <li><a href="#修改默认的shell">修改默认的shell</a></li>
+      </ul>
+    </li>
+    <li><a href="#mac终端增加颜色参考centos7">mac终端增加颜色，参考centos7</a></li>
+    <li><a href="#安装homebrew">安装homebrew</a></li>
+    <li><a href="#环境变量">环境变量</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="mac-优化">Mac 优化</h1>
-<h2 id="1mac终端增加颜色参考centos7">1、mac终端增加颜色，参考centos7</h2>
+<h3 id="修改默认的shell">修改默认的shell</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># shells 记录了可设置的shell，需要/opt/homebrew/bin/bash加到文件中</span>
+</span></span><span class="line"><span class="cl">cat /etc/shells 
+</span></span><span class="line"><span class="cl"><span class="c1"># List of acceptable shells for chpass(1).</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Ftpd will not allow users to connect who are not using</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># one of these shells.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/bin/bash
+</span></span><span class="line"><span class="cl">/bin/csh
+</span></span><span class="line"><span class="cl">/bin/dash
+</span></span><span class="line"><span class="cl">/bin/ksh
+</span></span><span class="line"><span class="cl">/bin/sh
+</span></span><span class="line"><span class="cl">/bin/tcsh
+</span></span><span class="line"><span class="cl">/bin/zsh
+</span></span><span class="line"><span class="cl">/opt/homebrew/bin/bash
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 切换shell</span>
+</span></span><span class="line"><span class="cl">chsh -s /opt/homebrew/bin/bash
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 退出重新登录</span>
+</span></span></code></pre></div><h2 id="mac终端增加颜色参考centos7">mac终端增加颜色，参考centos7</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">eval</span> <span class="s2">&#34;</span><span class="k">$(</span>/opt/homebrew/bin/brew shellenv<span class="k">)</span><span class="s2">&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># Setting PATH for Python 3.9</span>
@@ -137,7 +162,7 @@
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">LSCOLORS</span><span class="o">=</span>ExGxFxdaCxDaDahbadeche
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">LC_ALL</span><span class="o">=</span>en_US.UTF-8
 </span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
-</span></span></code></pre></div><h2 id="2安装homebrew">2、安装homebrew</h2>
+</span></span></code></pre></div><h2 id="安装homebrew">安装homebrew</h2>
 <p>参考：http://mirrors.ustc.edu.cn/help/brew.git.html</p>
 <p><code>配置环境变量</code></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>sugar@localhost ~<span class="o">]</span>$ cat ~/.bash_profile
@@ -160,7 +185,7 @@
 </code></pre><p>3）删除磁盘上的 .DS_Store,删除当前目录及其子目录下的所有.DS_Store 文件:</p>
 <pre tabindex="0"><code>sudo find . -name &#39;*.DS_Store&#39; -type f -delete
 </code></pre><p>最后重启电脑即可生效！</p>
-<h2 id="4环境变量">4、环境变量</h2>
+<h2 id="环境变量">环境变量</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">eval</span> <span class="s2">&#34;</span><span class="k">$(</span>/opt/homebrew/bin/brew shellenv<span class="k">)</span><span class="s2">&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">

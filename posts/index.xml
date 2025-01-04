@@ -4,7 +4,23 @@
         <link>https://serialt.github.io/posts/</link>
         <description>All Posts | Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 26 Oct 2024 14:38:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 25 Nov 2024 19:38:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Go goose</title>
+    <link>https://serialt.github.io/posts/2024-11-25.goose/</link>
+    <pubDate>Mon, 25 Nov 2024 19:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-11-25.goose/</guid>
+    <description><![CDATA[Goose 数据库版本管理 集成 package main import ( &#34;context&#34; &#34;flag&#34; &#34;log&#34; &#34;os&#34; &#34;github.com/pressly/goose/v3&#34; _ &#34;modernc.org/sqlite&#34; ) var ( flags = flag.NewFlagSet(&#34;goose&#34;, flag.ExitOnError) dir = flags.String(&#34;dir&#34;, &#34;.&#34;, &#34;directory with migration files&#34;) ) func main() { flags.Parse(os.Args[1:]) args := flags.Args() if len(args) &lt; 3 { flags.Usage() return } dbstring, command := args[1], args[2] db, err := goose.OpenDBWithDriver(&#34;sqlite&#34;, dbstring) if err != nil { log.Fatalf(&#34;goose: failed to]]></description>
+</item>
+<item>
+    <title>Java Basic</title>
+    <link>https://serialt.github.io/posts/2024-10-26.java/</link>
+    <pubDate>Sat, 26 Oct 2024 19:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-10-26.java/</guid>
+    <description><![CDATA[Java 一、基础 1、helloworld public class Hello { public static void main(String[] args) { System.out.println(&#34;Hello, world!&#34;); } } [root@Sugar j1]🐳 java Hello.java Hello, world! 2、变量定义 int n = 100; n = 200; // 变量n赋值为200 int i2 = -2147483648; int i3 =]]></description>
+</item>
+<item>
     <title>Ubuntu cloud-init</title>
     <link>https://serialt.github.io/posts/2024-10-26.ubuntu-cloud-init/</link>
     <pubDate>Sat, 26 Oct 2024 14:38:01 &#43;0800</pubDate>
@@ -67,22 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2023-11-12-security-info/</guid>
     <description><![CDATA[漏洞信息 云服务商安全服务公告 云服务商 链接 cve官网 https://cve.mitre.org/ 阿里云 https://help.aliyun.com/noticelist/9213612.html?spm=a2c4g.789004748.n2.3.cddb4c07NBt9Rl 华为云 https://www.huaweicloud.com/notice.securecenter.html 腾讯云 https://cloud.tencent.com/announce?categorys=21&page=1 阿里云漏洞数据库 https://avd.aliyun.com/ 国家信息漏洞库 http://www.cnnvd.org.cn/ 常用软件官方安全公告链接 名称 链]]></description>
-</item>
-<item>
-    <title>kvm</title>
-    <link>https://serialt.github.io/posts/2024-08-29-kvm.md/</link>
-    <pubDate>Thu, 29 Aug 2024 19:35:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-08-29-kvm.md/</guid>
-    <description><![CDATA[KVM virt-install 安装虚拟机 virt-install 示例 virt-install \ --name=pc01 \ --graphics vnc,listen=0.0.0.0,port=5901,keymap=en_us \ --ram=1024 \ --vcpus=1 \ --disk path=/var/lib/libvirt/images/pc01.img,size=9,format=qcow2 \ --bridge=virbr0 \ --location=ftp://172.16.8.100/rhel6.6 \ --extra-args=&#34;ks=ftp://172.16.8.100/rhel6.4.ks&#34; virt-install \ --name=pc02 \ --graphics vnc,listten=0.0.0.0,port=5920,keymap=en_us \ --noautoconsole \ --ram=1024 \ --vcpus=1 \ --disk path=/var/lib/libvirt/images/pc02.img,size=9,format=qcow2 \ --bridge=virbr0 \ --location=ftp://172.16.8.100/rhel6.4 \ --extra-args=&#34;ks=ftp://172.16.8.100/rhel6.4.ks&#34; virt-install \ --name=pc03 \ --nographics \ --ram=1024 \ --vcpus=1 \ --disk path=/var/lib/libvirt/images/pc03.img,size=9,format=qcow2 \ --bridg=virbr0 --location=ftp://172.16.8.100/rhel6.4 \ --extra-args=&#34;ks=ftp://172.16.8.100/rhel6.4.ks console=tty0 console=ttyS0&#34; #]]></description>
-</item>
-<item>
-    <title>flutter</title>
-    <link>https://serialt.github.io/posts/2024-08-29-flutter/</link>
-    <pubDate>Thu, 29 Aug 2024 19:34:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-08-29-flutter/</guid>
-    <description><![CDATA[一、flutter 安装 https://flutter.cn/docs/get-started/install 安装源国内地址： export PUB_HOSTED_URL=https://pub.flutter-io.cn export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn flutter docker镜像打包 1、flutter FROM --platform=linux/amd64 debian:bullseye ARG FLUTTER_VERSION=2.2.3 ENV LANG=C.UTF-8 ENV PUB_HOSTED_URL=https://pub.flutter-io.cn ENV FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn ENV TZ=Asia/Shanghai ENV DEBIAN_FRONTEND=noninteractive RUN sed -i &#39;s/\w*.debian.org/mirrors.ustc.edu.cn/g&#39; /etc/apt/sources.list RUN apt-get update &amp;&amp; apt-get upgrade]]></description>
 </item>
 </channel>
 </rss>

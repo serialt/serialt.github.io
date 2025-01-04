@@ -2,18 +2,23 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://serialt.github.io/</loc><lastmod>2024-10-26T14:38:01&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/</loc><lastmod>2024-10-26T14:38:01&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/posts/</loc><lastmod>2024-10-26T14:38:01&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/</loc><lastmod>2024-10-26T14:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/</loc><lastmod>2024-11-25T19:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/</loc><lastmod>2024-11-25T19:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/go/</loc><lastmod>2024-11-25T19:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-11-25.goose/</loc><lastmod>2024-11-25T19:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/</loc><lastmod>2024-11-25T19:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/goose/</loc><lastmod>2024-11-25T19:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/</loc><lastmod>2024-11-25T19:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/</loc><lastmod>2024-11-25T19:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/java/</loc><lastmod>2024-10-26T19:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2024-10-26.java/</loc><lastmod>2024-10-26T19:38:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/java-%E5%9F%BA%E7%A1%80/</loc><lastmod>2024-10-26T19:38:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/ubuntu/</loc><lastmod>2024-10-26T14:38:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-10-26.ubuntu-cloud-init/</loc><lastmod>2024-10-26T14:38:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/categories/ubuntu-%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85/</loc><lastmod>2024-10-26T14:38:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/vm/</loc><lastmod>2024-10-26T14:38:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/conc/</loc><lastmod>2024-10-20T19:38:01&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/go/</loc><lastmod>2024-10-20T19:38:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-10-20.go-conc/</loc><lastmod>2024-10-20T19:38:01&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/</loc><lastmod>2024-10-20T19:38:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/categories/devops/</loc><lastmod>2024-10-13T09:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/terraform-dev/</loc><lastmod>2024-10-13T09:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/tf-dev/</loc><lastmod>2024-10-13T09:26:27&#43;08:00</lastmod></url><url>
@@ -78,7 +83,6 @@
             <loc>https://serialt.github.io/posts/2024-07-01-cve/</loc><lastmod>2024-07-01T21:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/winsw/</loc><lastmod>2024-06-30T15:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-06-27.winsw/</loc><lastmod>2024-06-30T15:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/java/</loc><lastmod>2024-06-30T15:20:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-06-27-java/</loc><lastmod>2024-06-30T15:20:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/caddy/</loc><lastmod>2024-06-26T22:29:10&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2024-06-26-caddy/</loc><lastmod>2024-06-26T22:29:10&#43;08:00</lastmod></url><url>

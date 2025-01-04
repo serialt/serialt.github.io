@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/tags/go/</link>
         <description>Go - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 20 Oct 2024 19:38:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/go/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Mon, 25 Nov 2024 19:38:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/go/" rel="self" type="application/rss+xml" /><item>
+    <title>Go goose</title>
+    <link>https://serialt.github.io/posts/2024-11-25.goose/</link>
+    <pubDate>Mon, 25 Nov 2024 19:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2024-11-25.goose/</guid>
+    <description><![CDATA[Goose 数据库版本管理 集成 package main import ( &#34;context&#34; &#34;flag&#34; &#34;log&#34; &#34;os&#34; &#34;github.com/pressly/goose/v3&#34; _ &#34;modernc.org/sqlite&#34; ) var ( flags = flag.NewFlagSet(&#34;goose&#34;, flag.ExitOnError) dir = flags.String(&#34;dir&#34;, &#34;.&#34;, &#34;directory with migration files&#34;) ) func main() { flags.Parse(os.Args[1:]) args := flags.Args() if len(args) &lt; 3 { flags.Usage() return } dbstring, command := args[1], args[2] db, err := goose.OpenDBWithDriver(&#34;sqlite&#34;, dbstring) if err != nil { log.Fatalf(&#34;goose: failed to]]></description>
+</item>
+<item>
     <title>Go conc</title>
     <link>https://serialt.github.io/posts/2024-10-20.go-conc/</link>
     <pubDate>Sun, 20 Oct 2024 19:38:01 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-06-02-go-gorm/</guid>
     <description><![CDATA[Gorm 官网：https://gorm.io/ 特性： 全功能 ORM 关联 (Has One，Has Many，Belongs To，Many To Many，多态，单表继承)]]></description>
-</item>
-<item>
-    <title>Go goph</title>
-    <link>https://serialt.github.io/posts/2024-06-02-go-goph/</link>
-    <pubDate>Sun, 02 Jun 2024 10:27:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-02-go-goph/</guid>
-    <description><![CDATA[Go Goph 模块 github地址：https://github.com/melbahja/goph go开发封装的 ssh client 模块 Features Easy to use and simple API. Supports known hosts by default. Supports connections]]></description>
 </item>
 </channel>
 </rss>
