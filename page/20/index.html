@@ -97,6 +97,10 @@
         <a href="/posts/2024-06-14-taskfile/"></a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="0001-01-01">0001-01-01</time></span></div><div class="content">Task 是一个任务运行器/构建工具，旨在比 GNU Make 等更简单易用。 由于它是用 Go 编写的，Task 只是一个二进制文件，没有其他依赖项，这意味着您不需要为了使</div><div class="post-footer">
         <a href="/posts/2024-06-14-taskfile/">Read More</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/2025-04-27.go-code/"></a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-publish">published on <time datetime="0001-01-01">0001-01-01</time></span></div><div class="content">Go 代码片段 go goroutines pool package main import ( &#34;fmt&#34; &#34;github.com/sourcegraph/conc/pool&#34; ) func main() { p := pool.New().WithMaxGoroutines(3) for i := 1; i &lt;= 5; i++ { p.Go(func() { fmt.Println(i) }) } p.Wait() } 带ctx 的go goroutines pool package main import ( &#34;context&#34; &#34;errors&#34; &#34;fmt&#34; &#34;github.com/sourcegraph/conc/pool&#34; ) func main() { p := pool.New(). WithMaxGoroutines(4). WithContext(context.Background()). WithCancelOnError() for i := 0; i &lt;</div><div class="post-footer">
+        <a href="/posts/2025-04-27.go-code/">Read More</a></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>

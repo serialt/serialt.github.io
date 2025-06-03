@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2023-11-22-python-basic\/"
-        },"genre": "posts","keywords": "python, python-basic","wordcount":  3189 ,
+        },"genre": "posts","keywords": "python, python-basic","wordcount":  3384 ,
         "url": "https:\/\/serialt.github.io\/posts\/2023-11-22-python-basic\/","datePublished": "2023-11-22T21:22:27+08:00","dateModified": "2023-11-22T21:22:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Python basic</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-22">2023-11-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3189 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-22">2023-11-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3384 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -122,6 +122,7 @@
         <li><a href="#八面向对象">八、面向对象</a></li>
       </ul>
     </li>
+    <li><a href="#补充">补充</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="python-基础">Python 基础</h1>
@@ -741,6 +742,37 @@ from module.xx.xx import * #导入一个模块下的所有方法，不建议使�
 </span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="n">c</span> <span class="o">=</span> <span class="n">Child</span><span class="p">()</span>          <span class="c1"># 子类实例</span>
 </span></span><span class="line"><span class="cl"><span class="n">c</span><span class="o">.</span><span class="n">myMethod</span><span class="p">()</span>         <span class="c1"># 子类调用重写方法</span>
+</span></span></code></pre></div><h2 id="补充">补充</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 格式化字符串，两种方式</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">year</span><span class="o">=</span><span class="mi">2019</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">month</span><span class="o">=</span><span class="mi">6</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">day</span><span class="o">=</span><span class="mi">18</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="sa">f</span><span class="s2">&#34;Today is </span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">month</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">day</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;Today is 2019 6 18&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="s2">&#34;a</span><span class="si">{}{}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&#34;b&#34;</span><span class="p">,</span><span class="s2">&#34;c&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;abc&#39;</span>
+</span></span></code></pre></div><p>python 本地包导入</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">#filepath</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># addons/book/book.py</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># python的包是以目录+文件名+文件名里的对象形式使用</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">addons.book.book</span> <span class="kn">import</span> <span class="n">book_bp</span>
+</span></span><span class="line"><span class="cl">     
+</span></span></code></pre></div><p><strong>装饰器</strong></p>
+<p>装饰器是一种用于修改函数或方法行为的高级功能。装饰器本质上是一个接受函数作为参数的函数，并返回一个新的函数或方法。它们通常用于日志记录、访问控制、缓存结果、计时函数执行等场景。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">my_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">action</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Something is happening before the function is called.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">func</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Something is happening after the function is called.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">action</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@my_decorator</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">say_hello</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Hello!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">say_hello</span><span class="p">()</span>
 </span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

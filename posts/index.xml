@@ -26,7 +26,7 @@
     <pubDate>Mon, 25 Nov 2024 19:38:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-11-25-goose/</guid>
-    <description><![CDATA[Goose 数据库版本管理 集成 package main import ( &#34;context&#34; &#34;flag&#34; &#34;log&#34; &#34;os&#34; &#34;github.com/pressly/goose/v3&#34; _ &#34;modernc.org/sqlite&#34; ) var ( flags = flag.NewFlagSet(&#34;goose&#34;, flag.ExitOnError) dir = flags.String(&#34;dir&#34;, &#34;.&#34;, &#34;directory with migration files&#34;) ) func main() { flags.Parse(os.Args[1:]) args := flags.Args() if len(args) &lt; 3 { flags.Usage() return } dbstring, command := args[1], args[2] db, err := goose.OpenDBWithDriver(&#34;sqlite&#34;, dbstring) if err != nil { log.Fatalf(&#34;goose: failed to]]></description>
+    <description><![CDATA[Goose 数据库版本管理 Goose 是一个用于管理数据库迁移的工具，类似于 Flyway 和 Liquibase。它可以方便地管理数据库模式的版本，并应用相应的 SQL 脚本。你提到]]></description>
 </item>
 <item>
     <title>Java Basic</title>

@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-07-07-protobuf\/"
-        },"genre": "posts","keywords": "Protobuf","wordcount":  1178 ,
+        },"genre": "posts","keywords": "Protobuf","wordcount":  1285 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-07-07-protobuf\/","datePublished": "2024-07-20T09:21:27+08:00","dateModified": "2024-07-20T09:21:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Protobuf</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Dev</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-20">2024-07-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1178 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-07-20">2024-07-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1285 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -382,7 +382,20 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">Test_Child</span> <span class="kd">struct</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nx">Sex</span> <span class="kt">string</span> <span class="s">`protobuf:&#34;bytes,1,opt,name=sex&#34; json:&#34;sex,omitempty&#34;`</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+</span></span></code></pre></div><p>问题处理</p>
+<p>GRPC proto go 里面，定义了int64，生成的swagger文档中类型回被变成string 类型，可以用以下方法处理，这样生成的swagger文档中就不回出现数字变成字符串的问题</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-protobuf" data-lang="protobuf"><span class="line"><span class="cl"><span class="k">import</span> <span class="s">&#34;protoc-gen-openapiv2/options/openapiv2.proto&#34;</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kd">message</span> <span class="nc">List</span><span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span> <span class="kt">int64</span> <span class="n">date</span><span class="o">=</span><span class="mi">17</span> <span class="p">[</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="p">(</span><span class="n">grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field</span><span class="p">)</span> <span class="o">=</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>      <span class="n">type</span><span class="o">:</span> <span class="n">INTEGER</span><span class="p">,</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>      <span class="n">format</span><span class="o">:</span> <span class="s">&#34;int64&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>    <span class="p">}</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="p">];</span> <span class="c1">// 时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="err">
+</span></span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

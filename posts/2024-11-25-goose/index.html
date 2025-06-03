@@ -5,14 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>Go goose - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Go goose" />
-<meta property="og:description" content="Goose 数据库版本管理 集成 package main import ( &#34;context&#34; &#34;flag&#34; &#34;log&#34; &#34;os&#34; &#34;github.com/pressly/goose/v3&#34; _ &#34;modernc.org/sqlite&#34; ) var ( flags = flag.NewFlagSet(&#34;goose&#34;, flag.ExitOnError) dir = flags.String(&#34;dir&#34;, &#34;.&#34;, &#34;directory with migration files&#34;) ) func main() { flags.Parse(os.Args[1:]) args := flags.Args() if len(args) &lt; 3 { flags.Usage() return } dbstring, command := args[1], args[2] db, err := goose.OpenDBWithDriver(&#34;sqlite&#34;, dbstring) if err != nil { log.Fatalf(&#34;goose: failed to" />
+<meta property="og:description" content="Goose 数据库版本管理 Goose 是一个用于管理数据库迁移的工具，类似于 Flyway 和 Liquibase。它可以方便地管理数据库模式的版本，并应用相应的 SQL 脚本。你提到" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://serialt.github.io/posts/2024-11-25-goose/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-11-25T19:38:01+08:00" />
 <meta property="article:modified_time" content="2024-11-25T19:38:01+08:00" /><meta property="og:site_name" content="Log" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Go goose"/>
-<meta name="twitter:description" content="Goose 数据库版本管理 集成 package main import ( &#34;context&#34; &#34;flag&#34; &#34;log&#34; &#34;os&#34; &#34;github.com/pressly/goose/v3&#34; _ &#34;modernc.org/sqlite&#34; ) var ( flags = flag.NewFlagSet(&#34;goose&#34;, flag.ExitOnError) dir = flags.String(&#34;dir&#34;, &#34;.&#34;, &#34;directory with migration files&#34;) ) func main() { flags.Parse(os.Args[1:]) args := flags.Args() if len(args) &lt; 3 { flags.Usage() return } dbstring, command := args[1], args[2] db, err := goose.OpenDBWithDriver(&#34;sqlite&#34;, dbstring) if err != nil { log.Fatalf(&#34;goose: failed to"/>
+<meta name="twitter:description" content="Goose 数据库版本管理 Goose 是一个用于管理数据库迁移的工具，类似于 Flyway 和 Liquibase。它可以方便地管理数据库模式的版本，并应用相应的 SQL 脚本。你提到"/>
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-11-25-goose\/"
-        },"genre": "posts","keywords": "Go, goose","wordcount":  289 ,
+        },"genre": "posts","keywords": "Go, goose","wordcount":  791 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-11-25-goose\/","datePublished": "2024-11-25T19:38:01+08:00","dateModified": "2024-11-25T19:38:01+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,17 +101,93 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Go goose</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-11-25">2024-11-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;289 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-11-25">2024-11-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;791 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#一基本使用">一、基本使用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
             </div><div class="content" id="content"><p>Goose</p>
 <p>数据库版本管理</p>
-<p>集成</p>
+<p>Goose 是一个用于管理数据库迁移的工具，类似于 Flyway 和 Liquibase。它可以方便地管理数据库模式的版本，并应用相应的 SQL 脚本。你提到在 db/migrations/ 目录下有多个 SQL 文件，这些文件通常是用来管理数据库迁移的。</p>
+<h3 id="一基本使用">一、基本使用</h3>
+<h4 id="1安装">1、安装</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">go install github.com/pressly/goose/v3/cmd/goose@latest
+</span></span></code></pre></div><p>对于不希望安装与数据库连接相关命令的轻量版，可以使用独有的构建标签：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">go build -tags<span class="o">=</span><span class="s1">&#39;no_postgres no_mysql no_sqlite3 no_ydb&#39;</span> -o goose ./cmd/goose
+</span></span></code></pre></div><h4 id="2使用方法">2、使用方法</h4>
+<p>以下表格说明了 <code>Goose</code> 工具的基本用法：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>up</code></td>
+<td>将数据库迁移到最新的版本</td>
+</tr>
+<tr>
+<td><code>up-to</code></td>
+<td>迁移到特定版本</td>
+</tr>
+<tr>
+<td><code>up-by-one</code></td>
+<td>从当前版本向上迁移一个版本</td>
+</tr>
+<tr>
+<td><code>down</code></td>
+<td>回滚当前版本的前一个版本</td>
+</tr>
+<tr>
+<td><code>down-to</code></td>
+<td>回滚到特定版本</td>
+</tr>
+<tr>
+<td><code>redo</code></td>
+<td>回滚最新应用的迁移然后重新应用</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>输出当前数据库的迁移状态</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>输出数据库当前的版本</td>
+</tr>
+<tr>
+<td><code>create</code></td>
+<td>创建新的迁移文件，可以选择 <code>sql</code> 或 <code>go</code> 格式</td>
+</tr>
+<tr>
+<td><code>fix</code></td>
+<td>应用序列编号到迁移</td>
+</tr>
+<tr>
+<td><code>validate</code></td>
+<td>检查迁移文件，而不实际运行</td>
+</tr>
+</tbody>
+</table>
+<p>你可以设置环境变量 <code>GOOSE_DRIVER</code>, <code>GOOSE_DBSTRING</code>, 和 <code>GOOSE_MIGRATION_DIR</code> 来定制 <code>Goose</code> 的行为。</p>
+<p>Goose支持的数据库类型</p>
+<ul>
+<li><code>mssql</code>,<code>sqlserver</code>,<code>mysql</code>,<code>tidb</code>,<code>sqlite3</code>,<code>clickhouse</code>等</li>
+</ul>
+<p>具体看 <code>goose.OpenDBWithDriver()</code> 方法</p>
+<p>二、集成</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
@@ -178,7 +254,33 @@
 2024/11/24 15:32:08 OK   20241124142616_v24_2_1_add_some_column.sql (2.77ms)
 2024/11/24 15:32:08 goose: successfully migrated database to version: 20241124142616
 [root@Sugar goose]🐳 
-</code></pre></div><div class="post-footer" id="post-footer">
+</code></pre><p>sql 文件打包到二进制中</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//go:embed docs/sql/*.sql
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">Migrations</span> <span class="nx">embed</span><span class="p">.</span><span class="nx">FS</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">GenTable</span><span class="p">(</span><span class="nx">migrations</span> <span class="nx">embed</span><span class="p">.</span><span class="nx">FS</span><span class="p">,</span> <span class="nx">gooseArgs</span> <span class="p">[]</span><span class="kt">string</span><span class="p">,</span> <span class="nx">dir</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">goose</span><span class="p">.</span><span class="nf">SetBaseFS</span><span class="p">(</span><span class="nx">migrations</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">command</span> <span class="o">:=</span> <span class="nx">gooseArgs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">gooseDB</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">goose</span><span class="p">.</span><span class="nf">OpenDBWithDriver</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">Cfg</span><span class="p">.</span><span class="nx">Database</span><span class="p">.</span><span class="nx">Type</span><span class="p">,</span> <span class="nx">config</span><span class="p">.</span><span class="nx">Cfg</span><span class="p">.</span><span class="nx">Database</span><span class="p">.</span><span class="nx">DBname</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">slog</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;goose: failed to open DB&#34;</span><span class="p">,</span> <span class="s">&#34;err&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">gooseDB</span><span class="p">.</span><span class="nf">Close</span><span class="p">();</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">slog</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;goose: failed to close DB&#34;</span><span class="p">,</span> <span class="s">&#34;err&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">arguments</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">gooseArgs</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">arguments</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">arguments</span><span class="p">,</span> <span class="nx">gooseArgs</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">...</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">goose</span><span class="p">.</span><span class="nf">RunContext</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">(),</span> <span class="nx">command</span><span class="p">,</span> <span class="nx">gooseDB</span><span class="p">,</span> <span class="nx">dir</span><span class="p">,</span> <span class="nx">arguments</span><span class="o">...</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">slog</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;goose: failed to run cmd&#34;</span><span class="p">,</span> <span class="s">&#34;cmd&#34;</span><span class="p">,</span> <span class="nx">command</span><span class="p">,</span> <span class="s">&#34;err&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2025-01-04-lo\/"
-        },"genre": "posts","keywords": "Go, lo","wordcount":  1482 ,
+        },"genre": "posts","keywords": "Go, lo","wordcount":  1580 ,
         "url": "https:\/\/serialt.github.io\/posts\/2025-01-04-lo\/","datePublished": "2025-01-04T14:40:01+08:00","dateModified": "2025-01-04T14:40:01+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,8 +101,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Go lo</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-01-04">2025-01-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1482 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-01-04">2025-01-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1580 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -125,6 +125,23 @@
 </span></span><span class="line"><span class="cl"><span class="nx">aa</span> <span class="o">:=</span> <span class="p">[]</span><span class="o">*</span><span class="nx">abc</span><span class="p">{}</span>
 </span></span><span class="line"><span class="cl"><span class="nx">lo</span><span class="p">.</span><span class="nf">KeyBy</span><span class="p">(</span><span class="nx">aa</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">item</span> <span class="o">*</span><span class="nx">abc</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">item</span><span class="p">.</span><span class="nx">A</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 生成 map  map[string][]*abc{}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">lo</span><span class="p">.</span><span class="nf">GroupBy</span><span class="p">(</span><span class="nx">aa</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">item</span> <span class="o">*</span><span class="nx">abc</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">item</span><span class="p">.</span><span class="nx">A</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 根据条件过滤切片里的元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">even</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Filter</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">},</span> <span class="kd">func</span><span class="p">(</span><span class="nx">x</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">index</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">x</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []int{2, 4}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//  for 循环
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">lo</span><span class="p">.</span><span class="nf">ForEach</span><span class="p">([]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;hello&#34;</span><span class="p">,</span> <span class="s">&#34;world&#34;</span><span class="p">},</span> <span class="kd">func</span><span class="p">(</span><span class="nx">x</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">_</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">println</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">})</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
@@ -251,6 +268,10 @@
 </span></span><span class="line"><span class="cl"><span class="c1">// 获取map的key
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">keys</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Keys</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="s">&#34;foo&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// []string{&#34;foo&#34;, &#34;bar&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取多个map的key的唯一值，组成唯一的slice
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">keys</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">UniqKeys</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="s">&#34;foo&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="s">&#34;baz&#34;</span><span class="p">:</span> <span class="mi">3</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []string{&#34;foo&#34;, &#34;bar&#34;, &#34;baz&#34;}
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 判断key是否存在
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">exists</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">HasKey</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="s">&#34;foo&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="s">&#34;foo&#34;</span><span class="p">)</span>
