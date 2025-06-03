@@ -52,7 +52,26 @@ command + shift + p --> go install --> 勾选所有进行安装
                 "-c",
                 "config.yaml"
             ]
-        }
+        },
+        {
+            "name": "Launch test function",
+            "type": "go",
+            "request": "launch",
+            "mode": "test",
+            "program": "${fileDirname}",
+            "showLog": true,
+            "args": [
+                "-test.run",
+                "Test_f1"
+            ],
+            "dlvLoadConfig": {
+                "followPointers": true,
+                "maxVariableRecurse": 1,
+                "maxStringLen": 512,
+                "maxArrayValues": 64,
+                "maxStructFields": -1
+            }
+        },
     ]
 }
 ```
@@ -67,7 +86,6 @@ command + shift + p --> go install --> 勾选所有进行安装
 
 * ms-python.debugpy
   
-
 * donjayamanne.python-environment-manager
 
 * mgesbert.python-path

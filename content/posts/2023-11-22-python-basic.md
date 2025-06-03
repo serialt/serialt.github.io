@@ -804,3 +804,53 @@ c = Child()          # 子类实例
 c.myMethod()         # 子类调用重写方法
 ```
 
+
+
+
+
+## 补充
+
+```python
+# 格式化字符串，两种方式
+
+>>> year=2019
+>>> month=6
+>>> day=18
+>>> f"Today is {year} {month} {day}"
+'Today is 2019 6 18'
+
+>>> "a{}{}".format("b","c")
+'abc'
+```
+
+python 本地包导入
+
+```python
+#filepath
+# addons/book/book.py
+# python的包是以目录+文件名+文件名里的对象形式使用
+from addons.book.book import book_bp
+     
+```
+
+
+
+**装饰器**
+
+装饰器是一种用于修改函数或方法行为的高级功能。装饰器本质上是一个接受函数作为参数的函数，并返回一个新的函数或方法。它们通常用于日志记录、访问控制、缓存结果、计时函数执行等场景。
+
+```python
+def my_decorator(func):
+    def action():
+        print("Something is happening before the function is called.")
+        func()
+        print("Something is happening after the function is called.")
+    return action
+
+@my_decorator
+def say_hello():
+    print("Hello!")
+
+say_hello()
+```
+
