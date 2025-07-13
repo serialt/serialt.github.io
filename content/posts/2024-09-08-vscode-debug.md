@@ -111,6 +111,7 @@ launch.json
             "cwd": "${workspaceRoot}",
             "env": {},
             "envFile": "${workspaceRoot}/.env",
+            "console": "internalConsole",
             "debugOptions": [
                 "WaitOnAbnormalExit",
                 "WaitOnNormalExit",
@@ -143,9 +144,6 @@ launch.json
 
 ```
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
@@ -153,7 +151,8 @@ launch.json
             "name": "DemoApplication",
             "request": "launch",
             "mainClass": "io.local.demo.DemoApplication",
-            "projectName": "demo"
+            "projectName": "demo",
+            "console": "internalConsole"
         }
     ]
 }
@@ -202,5 +201,45 @@ Select **Debug -> Add Configuration** to add custom debug configuration
 ${userHome}
 ${workspaceFolder} 
 ${file} 
+```
+
+
+
+六、task 显示在状态栏
+
+插件：quzhen.tasks-button
+
+配置文件：`.vscode/tasks.json `
+
+```json
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "「mvn install」",
+            "type": "shell",
+            "icon": {
+                "id": "debug-console",
+                "tooltip": "Run mvn install"
+            },
+            "command": "mvn install",
+            "args": []
+        }
+    ]
+}
+```
+
+7、配置idea 风格的blame
+
+安装插件：lkqm.gitblame-annotations
+
+settings.json配置
+
+```json
+{ 
+  "gitlens.blame.format": "${date} ${author|11-}",
+  "gitlens.blame.dateFormat": "YYYY/MM/DD",
+  "gitlens.blame.compact": false,
+ }
 ```
 

@@ -806,6 +806,114 @@ c.myMethod()         # 子类调用重写方法
 
 
 
+### 进阶
+
+1、`*args` 和`*kwargs`
+
+`*args` 和 `**kwargs` 主要用于函数定义。 你可以将不定数量的参数传递给一个函数。使用的场景不同，`*args` 是用来发送一个非键值对的可变数量的参数列表给一个函数，`**kwargs`   允许你将不定长度的键值对作为参数传递给一个函数。
+
+```python
+# *args
+def test_var_args(f_arg, *argv):
+    print("first normal arg:", f_arg)
+    for arg in argv:
+        print("another arg through *argv:", arg)
+test_var_args('yasoob', 'python', 'eggs', 'test')
+```
+
+```
+first normal arg: yasoob
+another arg through *argv: python
+another arg through *argv: eggs
+another arg through *argv: test
+```
+
+```python
+# *kwargs
+def greet_me(**kwargs):
+    for key, value in kwargs.items():
+        print("{0} == {1}".format(key, value))
+>>> greet_me(name="yasoob")
+name == yasoob
+```
+
+
+
+2、filter 
+
+`filter`过滤列表中的元素，并且返回一个由所有符合要求的元素所构成的列表
+
+```python
+number_list = range(-5, 5)
+less_than_zero = filter(lambda x: x < 0, number_list)
+print(list(less_than_zero))  
+# 译者注：上面print时，加了list转换，是为了python2/3的兼容性
+#        在python2中filter直接返回列表，但在python3中返回迭代器
+#        因此为了兼容python3, 需要list转换一下
+# Output: [-5, -4, -3, -2, -1]
+```
+
+
+
+3、集合
+
+```python
+some_list = ['a', 'b', 'c', 'b', 'd', 'm', 'n', 'n']
+duplicates = set([x for x in some_list if some_list.count(x) > 1])
+print(duplicates)
+### 输出: set(['b', 'n'])
+
+
+# 取交集
+valid = set(['yellow', 'red', 'blue', 'green', 'black'])
+input_set = set(['red', 'brown'])
+print(input_set.intersection(valid))
+### 输出: set(['red'])
+
+
+# 差集
+valid = set(['yellow', 'red', 'blue', 'green', 'black'])
+input_set = set(['red', 'brown'])
+print(input_set.difference(valid))
+### 输出: set(['brown'])
+
+
+#也可以用{}符号来创建集合，如：
+a_set = {'red', 'blue', 'green'}
+print(type(a_set))
+### 输出: <type 'set'>
+```
+
+4、三元运算
+
+```python
+#如果条件为真，返回真 否则返回假
+condition_is_true if condition else condition_is_false
+
+is_fat = True
+state = "fat" if is_fat else "not fat"
+```
+
+5、异常处理
+
+```python
+def cccc():
+    pass
+
+	
+# 获取所有类型的异常信息    
+try:
+    cccc
+    print("成功")
+except Exception as e:
+    print(e)
+    print("异常")
+```
+
+
+
+
+
 
 
 ## 补充
