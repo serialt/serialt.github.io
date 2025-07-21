@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Jellyfin - Category - Blog</title>
+        <link>https://serialt.github.io/categories/jellyfin/</link>
+        <description>Jellyfin - Category - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 18 May 2025 20:38:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/jellyfin/" rel="self" type="application/rss+xml" /><item>
+    <title>Jellyfin</title>
+    <link>https://serialt.github.io/posts/2025-05-18.jellyfin/</link>
+    <pubDate>Sun, 18 May 2025 20:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-05-18.jellyfin/</guid>
+    <description><![CDATA[Jellyfin 家庭影院 docker 安装 docker pull jellyfin/jellyfin docker run -d --name=Jellyfin -p 8096:8096 \ # --name=Jellyfin 将容器名定义为 Jellyfin -p 8920:8920 -p 7359:7359/udp -p 1900:1900/udp #这三个端口为可选项 \ -v `pwd`/config:/config -v `pwd`/cache:/cache -v /media:/media \ -e TZ=Asia/Shanghai -e PUID=0 -e PGID=0 --device=/dev/dri:/dev/dri --add-host=api.themoviedb.org:13.224.161.90 \ #为容器增加 host 指向]]></description>
+</item>
+</channel>
+</rss>

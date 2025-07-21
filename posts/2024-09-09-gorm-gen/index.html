@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-09-09-gorm-gen\/"
-        },"genre": "posts","keywords": "gorm","wordcount":  867 ,
+        },"genre": "posts","keywords": "gorm","wordcount":  1158 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-09-09-gorm-gen\/","datePublished": "2024-09-09T20:09:42+08:00","dateModified": "2024-09-09T20:09:42+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,8 +101,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Gorm Gen</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/gorm/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Gorm</a>&nbsp;<a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-09-09">2024-09-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;867 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-09-09">2024-09-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1158 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -110,13 +110,32 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#gorm-gen">Gorm Gen</a></li>
+    <li><a href="#gorm-gen">Gorm Gen</a>
+      <ul>
+        <li><a href="#介绍">介绍</a></li>
+        <li><a href="#使用">使用</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="gorm-gen">Gorm Gen</h2>
 <p>参考链接：https://www.liwenzhou.com/posts/Go/gen/</p>
 <p>Gen是一个基于GORM的安全ORM框架，其主要通过代码生成方式实现GORM代码封装。使用Gen框架能够自动生成Model结构体和类型安全的CRUD代码，极大提升CRUD效率。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">const</span> <span class="nx">DSN</span> <span class="p">=</span> <span class="s">&#34;postgres://user:password@127.0.0.1:5432/hello?sslmode=disable&amp;TimeZone=Asia/Shanghai&amp;search_path=public&#34;</span>
+<h3 id="介绍">介绍</h3>
+<p><a href="https://github.com/go-gorm/gen" target="_blank" rel="noopener noreffer ">Gen</a>是由字节跳动无恒实验室与GORM作者联合研发的一个基于GORM的安全ORM框架，主要通过代码生成方式实现GORM代码封装。</p>
+<p>Gen框架在GORM框架的基础上提供了以下能力：</p>
+<ul>
+<li>基于原始SQL语句生成可重用的CRUD API</li>
+<li>生成不使用<code>interface{}</code>的100%安全的DAO API</li>
+<li>依据数据库生成遵循GORM约定的结构体Model</li>
+<li>支持GORM的所有特性</li>
+</ul>
+<p>简单来说，使用Gen框架后我们无需手动定义结构体Model，同时Gen框架也能帮我们生成类型安全的CRUD代码。</p>
+<p>更多详细介绍请查看<a href="https://gorm.io/gen/" target="_blank" rel="noopener noreffer ">Gen官方文档</a>。</p>
+<p>此外，Facebook开源的<a href="https://github.com/ent/ent" target="_blank" rel="noopener noreffer ">ent</a>也是社区中常用的类似框架，大家可按需选择使用。</p>
+<h3 id="使用">使用</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">go get grom.io/gen
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">const</span> <span class="nx">DSN</span> <span class="p">=</span> <span class="s">&#34;postgres://user:password@127.0.0.1:5432/hello?sslmode=disable&amp;TimeZone=Asia/Shanghai&amp;search_path=public&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">connectDB</span><span class="p">(</span><span class="nx">dsn</span> <span class="kt">string</span><span class="p">)</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="nx">db</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">gorm</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="nx">postgres</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="nx">dsn</span><span class="p">))</span>

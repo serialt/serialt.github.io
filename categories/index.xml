@@ -4,7 +4,47 @@
         <link>https://serialt.github.io/categories/</link>
         <description>Categories - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 04 Jan 2025 14:40:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>Go exporter</title>
+    <link>https://serialt.github.io/categories/go-exporter/</link>
+    <pubDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/go-exporter/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Go gin</title>
+    <link>https://serialt.github.io/categories/go-gin/</link>
+    <pubDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/go-gin/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Go Wire</title>
+    <link>https://serialt.github.io/categories/go-wire/</link>
+    <pubDate>Sat, 28 Jun 2025 20:40:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/go-wire/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Jellyfin</title>
+    <link>https://serialt.github.io/categories/jellyfin/</link>
+    <pubDate>Sun, 18 May 2025 20:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/jellyfin/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Go 代码片段</title>
+    <link>https://serialt.github.io/categories/go-%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/</link>
+    <pubDate>Sun, 27 Apr 2025 20:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/go-%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Go 库文档</title>
     <link>https://serialt.github.io/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/</link>
     <pubDate>Sat, 04 Jan 2025 14:40:01 &#43;0800</pubDate>
@@ -42,46 +82,6 @@
     <pubDate>Tue, 17 Sep 2024 19:45:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/categories/dev/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Gorm</title>
-    <link>https://serialt.github.io/categories/gorm/</link>
-    <pubDate>Mon, 09 Sep 2024 20:09:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/categories/gorm/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>vscode</title>
-    <link>https://serialt.github.io/categories/vscode/</link>
-    <pubDate>Sun, 08 Sep 2024 20:09:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/categories/vscode/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>安全信息</title>
-    <link>https://serialt.github.io/categories/%E5%AE%89%E5%85%A8%E4%BF%A1%E6%81%AF/</link>
-    <pubDate>Thu, 29 Aug 2024 20:29:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/categories/%E5%AE%89%E5%85%A8%E4%BF%A1%E6%81%AF/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>k8s</title>
-    <link>https://serialt.github.io/categories/k8s/</link>
-    <pubDate>Sun, 11 Aug 2024 19:34:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/categories/k8s/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Database</title>
-    <link>https://serialt.github.io/categories/database/</link>
-    <pubDate>Sun, 11 Aug 2024 11:30:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/categories/database/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

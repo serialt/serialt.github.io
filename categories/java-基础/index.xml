@@ -10,7 +10,7 @@
     <pubDate>Sat, 26 Oct 2024 19:38:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-10-26-java/</guid>
-    <description><![CDATA[Java 一、基础 1、helloworld public class Hello { public static void main(String[] args) { System.out.println(&#34;Hello, world!&#34;); } } [root@Sugar j1]🐳 java Hello.java Hello, world! 2、变量定义 int n = 100; n = 200; // 变量n赋值为200 int i2 = -2147483648; int i3 =]]></description>
+    <description><![CDATA[Java 配置settings 默认读取位置 ~/.m2 curl -O https://repo1.maven.org/maven2/archetype-catalog.xml &lt;settings xmlns=&#34;http://maven.apache.org/SETTINGS/1.0.0&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34; xsi:schemaLocation=&#34;http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd&#34;&gt; &lt;localRepository&gt;/home/sugar/.m2/repository&lt;/localRepository&gt; &lt;mirrors&gt; &lt;mirror&gt; &lt;id&gt;alimaven&lt;/id&gt; &lt;mirrorOf&gt;central&lt;/mirrorOf&gt; &lt;name&gt;aliyun maven&lt;/name&gt; &lt;url&gt;https://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt; &lt;/mirror&gt; &lt;/mirrors&gt; &lt;profiles&gt; &lt;profile&gt; &lt;id&gt;archetype-catalog&lt;/id&gt; &lt;activation&gt; &lt;activeByDefault&gt;true&lt;/activeByDefault&gt; &lt;/activation&gt; &lt;properties&gt; &lt;archetypeCatalog&gt;file:///Users/sugar/.m2/archetype-catalog.xml&lt;/archetypeCatalog&gt; &lt;/properties&gt; &lt;/profile&gt; &lt;/profiles&gt; &lt;/settings&gt; # 手动下载依赖 mvn -B -f pom.xml -s /usr/share/maven/ref/settings.xml dependency:resolve # 打包 mvn package 一、基]]></description>
 </item>
 </channel>
 </rss>

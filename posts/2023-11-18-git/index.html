@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2023-11-18-git\/"
-        },"genre": "posts","keywords": "git, vcs, dev","wordcount":  8361 ,
+        },"genre": "posts","keywords": "git, vcs, dev","wordcount":  8547 ,
         "url": "https:\/\/serialt.github.io\/posts\/2023-11-18-git\/","datePublished": "2023-11-18T10:26:27+08:00","dateModified": "2023-11-18T10:26:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,8 +101,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Git</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-18">2023-11-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;8361 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;17 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-18">2023-11-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;8547 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;18 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -156,6 +156,7 @@
     </li>
     <li><a href="#八git-gc">八、Git GC</a></li>
     <li><a href="#九git-gpg签名">九、Git gpg签名</a></li>
+    <li><a href="#十配置http">十、配置http</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h1 id="git">Git</h1>
@@ -838,6 +839,27 @@ test &#34;&#34; = &#34;$(grep &#39;^Signed-off-by: &#39; &#34;$1&#34; |
 </span></span><span class="line"><span class="cl">解决办法：export <span class="nv">GPG_TTY</span><span class="o">=</span><span class="k">$(</span>tty<span class="k">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">在环境变量里增加一项GPG_TTY
+</span></span></code></pre></div><h2 id="十配置http">十、配置http</h2>
+<p>git 拉取代码使用的协议是ssh，但也可以使用http</p>
+<p>配置：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@Krab ~<span class="o">]</span>🐳 git config --global credential.helper store
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 配置后~/.gitconfig 文件会增加配置</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>credential<span class="o">]</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">helper</span> <span class="o">=</span> store
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 在第一次访问git服务的时候，密钥会被记录在 ~/.git-credentials 文件中</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 配置历史项目改成使用http(此方法适用http转ssh或者ssh转http，或者更换指定git服务器)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>url <span class="s2">&#34;http://local.io/&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">insteadOf</span> <span class="o">=</span> git@local.io:
+</span></span></code></pre></div><p>配置github ssh 走代理</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@Krab ~<span class="o">]</span>🐳 cat ~/.ssh/config 
+</span></span><span class="line"><span class="cl">Host github.com
+</span></span><span class="line"><span class="cl">  User git
+</span></span><span class="line"><span class="cl">  ProxyCommand nc -v -x 127.0.0.1:5888 %h %p
 </span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

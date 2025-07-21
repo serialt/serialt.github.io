@@ -4,9 +4,49 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 04 Jan 2025 14:40:01 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Go Wire</title>
+    <link>https://serialt.github.io/posts/2025-07-13-exporter/</link>
+    <pubDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-07-13-exporter/</guid>
+    <description><![CDATA[Exporter 开发 Prometheus Exporter是一个用来收集和暴露指标数据的工具，通过与Prometheus监控系统一起使用。它的结构包括两个组件：Collect]]></description>
+</item>
+<item>
+    <title>Simple-Gin</title>
+    <link>https://serialt.github.io/posts/2025-07-13-gin/</link>
+    <pubDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-07-13-gin/</guid>
+    <description><![CDATA[Simple Gin package main import ( &#34;fmt&#34; &#34;log/slog&#34; &#34;net/http&#34; &#34;time&#34; &#34;github.com/gin-gonic/gin&#34; &#34;github.com/prometheus/client_golang/prometheus&#34; &#34;github.com/prometheus/client_golang/prometheus/promhttp&#34; ) type msg struct { Count int64 `json:&#34;count&#34;` } var pingCounter = prometheus.NewCounter( prometheus.CounterOpts{ Name: &#34;ping_request_count&#34;, Help: &#34;No of request handled by Ping handler&#34;, }, ) var httpReqs = prometheus.NewCounterVec( prometheus.CounterOpts{ Name: &#34;http_requests_total&#34;, Help: &#34;How many HTTP requests processed, partitioned by status code and HTTP method.&#34;, }, []string{&#34;code&#34;, &#34;method&#34;}, ) func PromHandler(handler http.Handler) gin.HandlerFunc { return func(c]]></description>
+</item>
+<item>
+    <title>Go Wire</title>
+    <link>https://serialt.github.io/posts/2025-06-28.go-wire/</link>
+    <pubDate>Sat, 28 Jun 2025 20:40:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-06-28.go-wire/</guid>
+    <description><![CDATA[Go Wire wire是 Google 开源的一个依赖注入工具。它是一个代码生成器，并不是一个框架。我们只需要在一个特殊的go文件中告诉wire类型之间的依赖关系，]]></description>
+</item>
+<item>
+    <title>Jellyfin</title>
+    <link>https://serialt.github.io/posts/2025-05-18.jellyfin/</link>
+    <pubDate>Sun, 18 May 2025 20:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-05-18.jellyfin/</guid>
+    <description><![CDATA[Jellyfin 家庭影院 docker 安装 docker pull jellyfin/jellyfin docker run -d --name=Jellyfin -p 8096:8096 \ # --name=Jellyfin 将容器名定义为 Jellyfin -p 8920:8920 -p 7359:7359/udp -p 1900:1900/udp #这三个端口为可选项 \ -v `pwd`/config:/config -v `pwd`/cache:/cache -v /media:/media \ -e TZ=Asia/Shanghai -e PUID=0 -e PGID=0 --device=/dev/dri:/dev/dri --add-host=api.themoviedb.org:13.224.161.90 \ #为容器增加 host 指向]]></description>
+</item>
+<item>
+    <title>Go code</title>
+    <link>https://serialt.github.io/posts/2025-04-27.go-code/</link>
+    <pubDate>Sun, 27 Apr 2025 20:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-04-27.go-code/</guid>
+    <description><![CDATA[Go 代码片段 go goroutines pool package main import ( &#34;fmt&#34; &#34;github.com/sourcegraph/conc/pool&#34; ) func main() { p := pool.New().WithMaxGoroutines(3) for i := 1; i &lt;= 5; i++ { p.Go(func() { fmt.Println(i) }) } p.Wait() } 带ctx 的go goroutines pool package main import ( &#34;context&#34; &#34;errors&#34; &#34;fmt&#34; &#34;github.com/sourcegraph/conc/pool&#34; ) func main() { p := pool.New(). WithMaxGoroutines(4). WithContext(context.Background()). WithCancelOnError() for i := 0; i &lt;]]></description>
+</item>
+<item>
     <title>Go lo</title>
     <link>https://serialt.github.io/posts/2025-01-04-lo/</link>
     <pubDate>Sat, 04 Jan 2025 14:40:01 &#43;0800</pubDate>
@@ -36,7 +76,7 @@
     <pubDate>Sat, 26 Oct 2024 19:38:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-10-26-java/</guid>
-    <description><![CDATA[Java 一、基础 1、helloworld public class Hello { public static void main(String[] args) { System.out.println(&#34;Hello, world!&#34;); } } [root@Sugar j1]🐳 java Hello.java Hello, world! 2、变量定义 int n = 100; n = 200; // 变量n赋值为200 int i2 = -2147483648; int i3 =]]></description>
+    <description><![CDATA[Java 配置settings 默认读取位置 ~/.m2 curl -O https://repo1.maven.org/maven2/archetype-catalog.xml &lt;settings xmlns=&#34;http://maven.apache.org/SETTINGS/1.0.0&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34; xsi:schemaLocation=&#34;http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd&#34;&gt; &lt;localRepository&gt;/home/sugar/.m2/repository&lt;/localRepository&gt; &lt;mirrors&gt; &lt;mirror&gt; &lt;id&gt;alimaven&lt;/id&gt; &lt;mirrorOf&gt;central&lt;/mirrorOf&gt; &lt;name&gt;aliyun maven&lt;/name&gt; &lt;url&gt;https://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt; &lt;/mirror&gt; &lt;/mirrors&gt; &lt;profiles&gt; &lt;profile&gt; &lt;id&gt;archetype-catalog&lt;/id&gt; &lt;activation&gt; &lt;activeByDefault&gt;true&lt;/activeByDefault&gt; &lt;/activation&gt; &lt;properties&gt; &lt;archetypeCatalog&gt;file:///Users/sugar/.m2/archetype-catalog.xml&lt;/archetypeCatalog&gt; &lt;/properties&gt; &lt;/profile&gt; &lt;/profiles&gt; &lt;/settings&gt; # 手动下载依赖 mvn -B -f pom.xml -s /usr/share/maven/ref/settings.xml dependency:resolve # 打包 mvn package 一、基]]></description>
 </item>
 <item>
     <title>Ubuntu cloud-init</title>
@@ -45,46 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-10-26-ubuntu-cloud-init/</guid>
     <description><![CDATA[cloud-init https://hmli.ustc.edu.cn/doc/linux/ubuntu-autoinstall/ubuntu-autoinstall.html ubuntu 安装后获取当前的user-data: /var/log/installer/autoinstall-user-data 示例： #cloud-config autoinstall: version: 1 apt: disable_components: [] fallback: offline-install geoip: true mirror-selection: primary: - uri: http://mirrors.ustc.edu.cn/ubuntu-ports - country-mirror - arches: &amp;id001 - amd64 - i386 uri: http://mirrors.ustc.edu.cn/ubuntu/ - arches: &amp;id002 - s390x - arm64 - armhf - powerpc - ppc64el - riscv64 uri: http://mirrors.ustc.edu.cn/ubuntu-ports preserve_sources_list:]]></description>
-</item>
-<item>
-    <title>Go conc</title>
-    <link>https://serialt.github.io/posts/2024-10-20-go-conc/</link>
-    <pubDate>Sun, 20 Oct 2024 19:38:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-10-20-go-conc/</guid>
-    <description><![CDATA[Go conc 参考链接 https://www.liwenzhou.com/posts/Go/conc/ go package main import ( &#34;fmt&#34; &#34;time&#34; ) func main() { for i := 0; i &lt; 5; i++ { go func(num int) { fmt.Println(num) }(i) } time.Sleep(5 * time.Second) } sync.WaitGroup 控制并发 package main import ( &#34;fmt&#34; &#34;sync&#34; ) var wg sync.WaitGroup func hello(i int) { defer wg.Done() fmt.Println(&#34;Hello Goroutine!&#34;, i) } func main() { for i := 0;]]></description>
-</item>
-<item>
-    <title>TF-dev</title>
-    <link>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</link>
-    <pubDate>Sun, 13 Oct 2024 09:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/</guid>
-    <description><![CDATA[Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # makefile default: install build: go build -v ./... install: go install -v ./... vscode 调试 terraform provider 1）vscode launch cat .vscode/launch.json {]]></description>
-</item>
-<item>
-    <title>CloudBeaver</title>
-    <link>https://serialt.github.io/posts/2024-10-11-cloudbeaver/</link>
-    <pubDate>Fri, 11 Oct 2024 20:45:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-10-11-cloudbeaver/</guid>
-    <description><![CDATA[CloudBeaver web 版 DBeaver docker-compose 安装 version: &#34;3&#34; services: cloudbeaver: image: dbeaver/cloudbeaver:24 container_name: cloudbeaver restart: always ports: - &#34;8978:8978&#34; volumes: - &#34;/data/cloudbeaver:/opt/cloudbeaver/workspace&#34; networks: - app networks: app: # 使用外部共享等网卡 external: true terraform kubernetes https://github.com/serialt/terraform-module-cloudbeaver]]></description>
-</item>
-<item>
-    <title>sanic</title>
-    <link>https://serialt.github.io/posts/2024-09-17-sanic/</link>
-    <pubDate>Tue, 17 Sep 2024 19:45:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-09-17-sanic/</guid>
-    <description><![CDATA[sanic 安装 python3 -m venv venv . venv/bin/activate pip3 install sanic helloworld from sanic import Sanic from sanic import text app = Sanic(&#34;Myapp&#34;) @app.get(&#34;/&#34;) async def test(request): return text(&#34;hello world&#34;) if __name__ == &#34;__main__&#34;: app.run(host=&#34;0.0.0.0&#34;, port=8090, workers=4) vscode debug { &#34;version&#34;: &#34;0.2.0&#34;, &#34;configurations&#34;: [ { &#34;name&#34;: &#34;Python Debugger: Current File&#34;, &#34;type&#34;: &#34;debugpy&#34;, &#34;request&#34;: &#34;launch&#34;, &#34;python&#34;: &#34;${workspaceFolder}/venv/bin/python3&#34;, &#34;program&#34;: &#34;main.py&#34;, // &#34;console&#34;: &#34;integratedTerminal&#34;, } ] }]]></description>
-</item>
-<item>
-    <title>Gorm Gen</title>
-    <link>https://serialt.github.io/posts/2024-09-09-gorm-gen/</link>
-    <pubDate>Mon, 09 Sep 2024 20:09:42 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-09-09-gorm-gen/</guid>
-    <description><![CDATA[Gorm Gen 参考链接：https://www.liwenzhou.com/posts/Go/gen/ Gen是一个基于GORM的安全ORM框架，其主要]]></description>
 </item>
 </channel>
 </rss>

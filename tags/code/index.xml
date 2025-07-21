@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>code - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/code/</link>
+        <description>code - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 27 Apr 2025 20:38:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/code/" rel="self" type="application/rss+xml" /><item>
+    <title>Go code</title>
+    <link>https://serialt.github.io/posts/2025-04-27.go-code/</link>
+    <pubDate>Sun, 27 Apr 2025 20:38:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-04-27.go-code/</guid>
+    <description><![CDATA[Go 代码片段 go goroutines pool package main import ( &#34;fmt&#34; &#34;github.com/sourcegraph/conc/pool&#34; ) func main() { p := pool.New().WithMaxGoroutines(3) for i := 1; i &lt;= 5; i++ { p.Go(func() { fmt.Println(i) }) } p.Wait() } 带ctx 的go goroutines pool package main import ( &#34;context&#34; &#34;errors&#34; &#34;fmt&#34; &#34;github.com/sourcegraph/conc/pool&#34; ) func main() { p := pool.New(). WithMaxGoroutines(4). WithContext(context.Background()). WithCancelOnError() for i := 0; i &lt;]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>exporter - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/exporter/</link>
+        <description>exporter - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/exporter/" rel="self" type="application/rss+xml" /><item>
+    <title>Go Wire</title>
+    <link>https://serialt.github.io/posts/2025-07-13-exporter/</link>
+    <pubDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-07-13-exporter/</guid>
+    <description><![CDATA[Exporter 开发 Prometheus Exporter是一个用来收集和暴露指标数据的工具，通过与Prometheus监控系统一起使用。它的结构包括两个组件：Collect]]></description>
+</item>
+</channel>
+</rss>

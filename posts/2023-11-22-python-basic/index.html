@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2023-11-22-python-basic\/"
-        },"genre": "posts","keywords": "python, python-basic","wordcount":  3384 ,
+        },"genre": "posts","keywords": "python, python-basic","wordcount":  3936 ,
         "url": "https:\/\/serialt.github.io\/posts\/2023-11-22-python-basic\/","datePublished": "2023-11-22T21:22:27+08:00","dateModified": "2023-11-22T21:22:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,8 +101,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Python basic</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-22">2023-11-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3384 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-22">2023-11-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3936 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -120,6 +120,7 @@
         <li><a href="#六函数">六、函数</a></li>
         <li><a href="#七模块">七、模块</a></li>
         <li><a href="#八面向对象">八、面向对象</a></li>
+        <li><a href="#进阶">进阶</a></li>
       </ul>
     </li>
     <li><a href="#补充">补充</a></li>
@@ -742,6 +743,77 @@ from module.xx.xx import * #导入一个模块下的所有方法，不建议使�
 </span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="n">c</span> <span class="o">=</span> <span class="n">Child</span><span class="p">()</span>          <span class="c1"># 子类实例</span>
 </span></span><span class="line"><span class="cl"><span class="n">c</span><span class="o">.</span><span class="n">myMethod</span><span class="p">()</span>         <span class="c1"># 子类调用重写方法</span>
+</span></span></code></pre></div><h3 id="进阶">进阶</h3>
+<p>1、<code>*args</code> 和<code>*kwargs</code></p>
+<p><code>*args</code> 和 <code>**kwargs</code> 主要用于函数定义。 你可以将不定数量的参数传递给一个函数。使用的场景不同，<code>*args</code> 是用来发送一个非键值对的可变数量的参数列表给一个函数，<code>**kwargs</code>   允许你将不定长度的键值对作为参数传递给一个函数。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># *args</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test_var_args</span><span class="p">(</span><span class="n">f_arg</span><span class="p">,</span> <span class="o">*</span><span class="n">argv</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;first normal arg:&#34;</span><span class="p">,</span> <span class="n">f_arg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">argv</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;another arg through *argv:&#34;</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">test_var_args</span><span class="p">(</span><span class="s1">&#39;yasoob&#39;</span><span class="p">,</span> <span class="s1">&#39;python&#39;</span><span class="p">,</span> <span class="s1">&#39;eggs&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><pre tabindex="0"><code>first normal arg: yasoob
+another arg through *argv: python
+another arg through *argv: eggs
+another arg through *argv: test
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># *kwargs</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">greet_me</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">{0}</span><span class="s2"> == </span><span class="si">{1}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">greet_me</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;yasoob&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">name</span> <span class="o">==</span> <span class="n">yasoob</span>
+</span></span></code></pre></div><p>2、filter</p>
+<p><code>filter</code>过滤列表中的元素，并且返回一个由所有符合要求的元素所构成的列表</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">number_list</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">less_than_zero</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">number_list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">less_than_zero</span><span class="p">))</span>  
+</span></span><span class="line"><span class="cl"><span class="c1"># 译者注：上面print时，加了list转换，是为了python2/3的兼容性</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#        在python2中filter直接返回列表，但在python3中返回迭代器</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#        因此为了兼容python3, 需要list转换一下</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Output: [-5, -4, -3, -2, -1]</span>
+</span></span></code></pre></div><p>3、集合</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">some_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">duplicates</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">some_list</span> <span class="k">if</span> <span class="n">some_list</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">duplicates</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">### 输出: set([&#39;b&#39;, &#39;n&#39;])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 取交集</span>
+</span></span><span class="line"><span class="cl"><span class="n">valid</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">input_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;brown&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">input_set</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">valid</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">### 输出: set([&#39;red&#39;])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 差集</span>
+</span></span><span class="line"><span class="cl"><span class="n">valid</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">input_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;brown&#39;</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">input_set</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">valid</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">### 输出: set([&#39;brown&#39;])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#也可以用{}符号来创建集合，如：</span>
+</span></span><span class="line"><span class="cl"><span class="n">a_set</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a_set</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">### 输出: &lt;type &#39;set&#39;&gt;</span>
+</span></span></code></pre></div><p>4、三元运算</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">#如果条件为真，返回真 否则返回假</span>
+</span></span><span class="line"><span class="cl"><span class="n">condition_is_true</span> <span class="k">if</span> <span class="n">condition</span> <span class="k">else</span> <span class="n">condition_is_false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">is_fat</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl"><span class="n">state</span> <span class="o">=</span> <span class="s2">&#34;fat&#34;</span> <span class="k">if</span> <span class="n">is_fat</span> <span class="k">else</span> <span class="s2">&#34;not fat&#34;</span>
+</span></span></code></pre></div><p>5、异常处理</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">cccc</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">pass</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl"><span class="c1"># 获取所有类型的异常信息    </span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cccc</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;成功&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;异常&#34;</span><span class="p">)</span>
 </span></span></code></pre></div><h2 id="补充">补充</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 格式化字符串，两种方式</span>
 </span></span><span class="line"><span class="cl">

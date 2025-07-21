@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>gin - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/gin/</link>
+        <description>gin - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/gin/" rel="self" type="application/rss+xml" /><item>
+    <title>Simple-Gin</title>
+    <link>https://serialt.github.io/posts/2025-07-13-gin/</link>
+    <pubDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-07-13-gin/</guid>
+    <description><![CDATA[Simple Gin package main import ( &#34;fmt&#34; &#34;log/slog&#34; &#34;net/http&#34; &#34;time&#34; &#34;github.com/gin-gonic/gin&#34; &#34;github.com/prometheus/client_golang/prometheus&#34; &#34;github.com/prometheus/client_golang/prometheus/promhttp&#34; ) type msg struct { Count int64 `json:&#34;count&#34;` } var pingCounter = prometheus.NewCounter( prometheus.CounterOpts{ Name: &#34;ping_request_count&#34;, Help: &#34;No of request handled by Ping handler&#34;, }, ) var httpReqs = prometheus.NewCounterVec( prometheus.CounterOpts{ Name: &#34;http_requests_total&#34;, Help: &#34;How many HTTP requests processed, partitioned by status code and HTTP method.&#34;, }, []string{&#34;code&#34;, &#34;method&#34;}, ) func PromHandler(handler http.Handler) gin.HandlerFunc { return func(c]]></description>
+</item>
+</channel>
+</rss>

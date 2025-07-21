@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Go Wire - Category - Blog</title>
+        <link>https://serialt.github.io/categories/go-wire/</link>
+        <description>Go Wire - Category - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 28 Jun 2025 20:40:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/go-wire/" rel="self" type="application/rss+xml" /><item>
+    <title>Go Wire</title>
+    <link>https://serialt.github.io/posts/2025-06-28.go-wire/</link>
+    <pubDate>Sat, 28 Jun 2025 20:40:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-06-28.go-wire/</guid>
+    <description><![CDATA[Go Wire wire是 Google 开源的一个依赖注入工具。它是一个代码生成器，并不是一个框架。我们只需要在一个特殊的go文件中告诉wire类型之间的依赖关系，]]></description>
+</item>
+</channel>
+</rss>

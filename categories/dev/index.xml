@@ -10,7 +10,7 @@
     <pubDate>Tue, 17 Sep 2024 19:45:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-09-17-sanic/</guid>
-    <description><![CDATA[sanic 安装 python3 -m venv venv . venv/bin/activate pip3 install sanic helloworld from sanic import Sanic from sanic import text app = Sanic(&#34;Myapp&#34;) @app.get(&#34;/&#34;) async def test(request): return text(&#34;hello world&#34;) if __name__ == &#34;__main__&#34;: app.run(host=&#34;0.0.0.0&#34;, port=8090, workers=4) vscode debug { &#34;version&#34;: &#34;0.2.0&#34;, &#34;configurations&#34;: [ { &#34;name&#34;: &#34;Python Debugger: Current File&#34;, &#34;type&#34;: &#34;debugpy&#34;, &#34;request&#34;: &#34;launch&#34;, &#34;python&#34;: &#34;${workspaceFolder}/venv/bin/python3&#34;, &#34;program&#34;: &#34;main.py&#34;, // &#34;console&#34;: &#34;integratedTerminal&#34;, } ] }]]></description>
+    <description><![CDATA[一、Helloworld sanic 安装 python3 -m venv venv . venv/bin/activate pip3 install sanic helloworld from sanic import Sanic from sanic import text app = Sanic(&#34;Myapp&#34;) @app.route(&#34;/&#34;) async def test(request): return response.text(&#39;Hello World&#39;) if __name__ == &#39;__main__&#39;: app.run(host=&#34;0.0.0.0&#34;, port=7777) vscode debug { &#34;version&#34;: &#34;0.2.0&#34;, &#34;configurations&#34;: [ { &#34;name&#34;: &#34;Python Debugger: Current File&#34;, &#34;type&#34;: &#34;debugpy&#34;, &#34;request&#34;: &#34;launch&#34;, &#34;python&#34;: &#34;${workspaceFolder}/venv/bin/python3&#34;, &#34;program&#34;: &#34;main.py&#34;,]]></description>
 </item>
 <item>
     <title>Protobuf</title>
