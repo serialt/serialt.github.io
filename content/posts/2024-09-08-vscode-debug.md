@@ -61,6 +61,7 @@ command + shift + p --> go install --> 勾选所有进行安装
             "program": "${fileDirname}",
             "showLog": true,
             "args": [
+                "-test.v",
                 "-test.run",
                 "Test_f1"
             ],
