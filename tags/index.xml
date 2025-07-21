@@ -4,18 +4,10 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
-    <title>exporter</title>
-    <link>https://serialt.github.io/tags/exporter/</link>
-    <pubDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/exporter/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 13 Jul 2025 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
     <title>gin</title>
     <link>https://serialt.github.io/tags/gin/</link>
-    <pubDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</pubDate>
+    <pubDate>Sun, 13 Jul 2025 21:50:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/gin/</guid>
     <description><![CDATA[]]></description>
@@ -23,9 +15,17 @@
 <item>
     <title>Go</title>
     <link>https://serialt.github.io/tags/go/</link>
-    <pubDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</pubDate>
+    <pubDate>Sun, 13 Jul 2025 21:50:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/go/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>exporter</title>
+    <link>https://serialt.github.io/tags/exporter/</link>
+    <pubDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/exporter/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>

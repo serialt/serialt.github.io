@@ -2,17 +2,17 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://serialt.github.io/</loc><lastmod>2025-07-13T20:50:01&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/</loc><lastmod>2025-07-13T20:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/</loc><lastmod>2025-07-13T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/</loc><lastmod>2025-07-13T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/gin/</loc><lastmod>2025-07-13T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/go/</loc><lastmod>2025-07-13T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/go-gin/</loc><lastmod>2025-07-13T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/</loc><lastmod>2025-07-13T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2025-07-13-gin/</loc><lastmod>2025-07-13T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/</loc><lastmod>2025-07-13T21:50:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/exporter/</loc><lastmod>2025-07-13T20:50:01&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/gin/</loc><lastmod>2025-07-13T20:50:01&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/go/</loc><lastmod>2025-07-13T20:50:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/categories/go-exporter/</loc><lastmod>2025-07-13T20:50:01&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/go-gin/</loc><lastmod>2025-07-13T20:50:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2025-07-13-exporter/</loc><lastmod>2025-07-13T20:50:01&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/posts/</loc><lastmod>2025-07-13T20:50:01&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/posts/2025-07-13-gin/</loc><lastmod>2025-07-13T20:50:01&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/</loc><lastmod>2025-07-13T20:50:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/categories/go-wire/</loc><lastmod>2025-06-28T20:40:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2025-06-28.go-wire/</loc><lastmod>2025-06-28T20:40:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/wire/</loc><lastmod>2025-06-28T20:40:01&#43;08:00</lastmod></url><url>

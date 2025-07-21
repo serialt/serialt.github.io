@@ -4,20 +4,20 @@
         <link>https://serialt.github.io/categories/</link>
         <description>Categories - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 13 Jul 2025 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>Go gin</title>
+    <link>https://serialt.github.io/categories/go-gin/</link>
+    <pubDate>Sun, 13 Jul 2025 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/go-gin/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Go exporter</title>
     <link>https://serialt.github.io/categories/go-exporter/</link>
     <pubDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/categories/go-exporter/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Go gin</title>
-    <link>https://serialt.github.io/categories/go-gin/</link>
-    <pubDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/categories/go-gin/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
