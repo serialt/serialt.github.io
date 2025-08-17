@@ -4,9 +4,25 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 13 Jul 2025 21:50:01 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 17 Aug 2025 20:45:01 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>VSCode Extension Pack</title>
+    <link>https://serialt.github.io/posts/2025-08-17-vscode-extension-pack/</link>
+    <pubDate>Sun, 17 Aug 2025 20:45:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-08-17-vscode-extension-pack/</guid>
+    <description><![CDATA[VSCode Extension Pack vscode扩展包 在使用vscode的时候，需要安装各种各类的插件来满足不同的功能，在新安装vscode或者切换其他机器的时候，会因为]]></description>
+</item>
+<item>
+    <title>Go Plugin</title>
+    <link>https://serialt.github.io/posts/2025-08-17-go-plugin/</link>
+    <pubDate>Sun, 17 Aug 2025 20:40:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-08-17-go-plugin/</guid>
+    <description><![CDATA[go plugin [serialt@Krab plugin]🐳 tree . . ├── go.mod ├── kk │ ├── kk.go │ └── kk.so ├── ks └── main.go // kk.go package main import &#34;fmt&#34; func Greet(name string) { fmt.Println(&#34;Hello&#34;, name) } func main() {} // main.go package main import ( &#34;log&#34; &#34;plugin&#34; ) func main() { p, err]]></description>
+</item>
+<item>
     <title>Simple-Gin</title>
     <link>https://serialt.github.io/posts/2025-07-13-gin/</link>
     <pubDate>Sun, 13 Jul 2025 21:50:01 &#43;0800</pubDate>
@@ -69,22 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-11-25-goose/</guid>
     <description><![CDATA[Goose 数据库版本管理 Goose 是一个用于管理数据库迁移的工具，类似于 Flyway 和 Liquibase。它可以方便地管理数据库模式的版本，并应用相应的 SQL 脚本。你提到]]></description>
-</item>
-<item>
-    <title>Java Basic</title>
-    <link>https://serialt.github.io/posts/2024-10-26-java/</link>
-    <pubDate>Sat, 26 Oct 2024 19:38:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-10-26-java/</guid>
-    <description><![CDATA[Java 配置settings 默认读取位置 ~/.m2 curl -O https://repo1.maven.org/maven2/archetype-catalog.xml &lt;settings xmlns=&#34;http://maven.apache.org/SETTINGS/1.0.0&#34; xmlns:xsi=&#34;http://www.w3.org/2001/XMLSchema-instance&#34; xsi:schemaLocation=&#34;http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd&#34;&gt; &lt;localRepository&gt;/home/sugar/.m2/repository&lt;/localRepository&gt; &lt;mirrors&gt; &lt;mirror&gt; &lt;id&gt;alimaven&lt;/id&gt; &lt;mirrorOf&gt;central&lt;/mirrorOf&gt; &lt;name&gt;aliyun maven&lt;/name&gt; &lt;url&gt;https://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt; &lt;/mirror&gt; &lt;/mirrors&gt; &lt;profiles&gt; &lt;profile&gt; &lt;id&gt;archetype-catalog&lt;/id&gt; &lt;activation&gt; &lt;activeByDefault&gt;true&lt;/activeByDefault&gt; &lt;/activation&gt; &lt;properties&gt; &lt;archetypeCatalog&gt;file:///Users/sugar/.m2/archetype-catalog.xml&lt;/archetypeCatalog&gt; &lt;/properties&gt; &lt;/profile&gt; &lt;/profiles&gt; &lt;/settings&gt; # 手动下载依赖 mvn -B -f pom.xml -s /usr/share/maven/ref/settings.xml dependency:resolve # 打包 mvn package 一、基]]></description>
-</item>
-<item>
-    <title>Ubuntu cloud-init</title>
-    <link>https://serialt.github.io/posts/2024-10-26-ubuntu-cloud-init/</link>
-    <pubDate>Sat, 26 Oct 2024 14:38:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-10-26-ubuntu-cloud-init/</guid>
-    <description><![CDATA[cloud-init https://hmli.ustc.edu.cn/doc/linux/ubuntu-autoinstall/ubuntu-autoinstall.html ubuntu 安装后获取当前的user-data: /var/log/installer/autoinstall-user-data 示例： #cloud-config autoinstall: version: 1 apt: disable_components: [] fallback: offline-install geoip: true mirror-selection: primary: - uri: http://mirrors.ustc.edu.cn/ubuntu-ports - country-mirror - arches: &amp;id001 - amd64 - i386 uri: http://mirrors.ustc.edu.cn/ubuntu/ - arches: &amp;id002 - s390x - arm64 - armhf - powerpc - ppc64el - riscv64 uri: http://mirrors.ustc.edu.cn/ubuntu-ports preserve_sources_list:]]></description>
 </item>
 </channel>
 </rss>

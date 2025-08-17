@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>VSCode Extension Pack - Category - Blog</title>
+        <link>https://serialt.github.io/categories/vscode-extension-pack/</link>
+        <description>VSCode Extension Pack - Category - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 17 Aug 2025 20:45:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/vscode-extension-pack/" rel="self" type="application/rss+xml" /><item>
+    <title>VSCode Extension Pack</title>
+    <link>https://serialt.github.io/posts/2025-08-17-vscode-extension-pack/</link>
+    <pubDate>Sun, 17 Aug 2025 20:45:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-08-17-vscode-extension-pack/</guid>
+    <description><![CDATA[VSCode Extension Pack vscode扩展包 在使用vscode的时候，需要安装各种各类的插件来满足不同的功能，在新安装vscode或者切换其他机器的时候，会因为]]></description>
+</item>
+</channel>
+</rss>

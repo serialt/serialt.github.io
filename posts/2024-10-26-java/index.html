@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-10-26-java\/"
-        },"genre": "posts","keywords": "Java","wordcount":  2751 ,
+        },"genre": "posts","keywords": "Java","wordcount":  2991 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-10-26-java\/","datePublished": "2024-10-26T19:38:01+08:00","dateModified": "2024-10-26T19:38:01+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Java Basic</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/java-%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Java 基础</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-10-26">2024-10-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2751 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-10-26">2024-10-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2991 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -622,6 +622,8 @@
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
 </span></span><span class="line"><span class="cl">    <span class="o">}</span>
 </span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">forEach</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
 </span></span></code></pre></div><p>map 使用</p>
 <ul>
 <li>
@@ -672,7 +674,16 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 删除元素
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">map</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="s">&#34;banana&#34;</span><span class="o">);</span>  <span class="c1">// 删除 banana 对应的键值对
-</span></span></span></code></pre></div><p>set</p>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">List</span> <span class="o">&lt;</span><span class="n">ccDTO</span><span class="o">&gt;</span> <span class="n">ccDTOList</span>  <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl"><span class="n">ccMap</span><span class="o">.</span><span class="na">forEach</span><span class="o">((</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">)-&gt;{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ccDTO</span> <span class="n">ccDTO</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ccDTO</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ccDTO</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="n">K</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ccDTO</span><span class="o">.</span><span class="na">setList</span><span class="o">(</span><span class="n">V</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ccDTOList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">ccDTO</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">});</span>
+</span></span></code></pre></div><p>set</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;();</span>
 </span></span><span class="line"><span class="cl"><span class="n">set</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;apple&#34;</span><span class="o">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">set</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">&#34;banana&#34;</span><span class="o">);</span>
@@ -698,6 +709,91 @@
 </span></span><span class="line"><span class="cl"><span class="o">}</span><span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">           <span class="k">throw</span> <span class="n">e</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span></code></pre></div><p>代码片段</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="c1">// list 转 map
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 示例1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">DataDTO</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl"><span class="n">Map</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">,</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="n">list</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">                <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toMap</span><span class="o">(</span><span class="n">DataDTO</span><span class="o">::</span><span class="n">getId</span><span class="o">,</span> <span class="n">DataDTO</span><span class="o">::</span><span class="n">getQty</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">   
+</span></span><span class="line"><span class="cl"><span class="c1">// 示例2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">SinfoDTO</span><span class="o">&gt;</span> <span class="n">pList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>
+</span></span><span class="line"><span class="cl"><span class="n">Map</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">,</span> <span class="n">SinfoDTO</span><span class="o">&gt;</span> <span class="n">itemMap</span> <span class="o">=</span> <span class="n">pList</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toMap</span><span class="o">(</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">SinfoDTO</span><span class="o">::</span><span class="n">getId</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">item</span> <span class="o">-&gt;</span> <span class="n">item</span> 
+</span></span><span class="line"><span class="cl">                    <span class="o">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 列表的遍历
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">list</span><span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="n">item</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">     <span class="k">if</span> <span class="o">(</span><span class="n">item</span><span class="o">.</span><span class="na">getId</span><span class="o">()==</span><span class="n">0</span><span class="o">){</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">/// xxxxx
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 对象克隆
+</span></span></span><span class="line"><span class="cl"><span class="c1">// import cn.hutool.core.util.ObjectUtil;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">LambdaQueryWrapper</span><span class="o">&lt;</span><span class="n">ItemPlan</span><span class="o">&gt;</span> <span class="n">allStatusQw</span> <span class="o">=</span> <span class="n">ObjectUtil</span><span class="o">.</span><span class="na">clone</span><span class="o">(</span><span class="n">qw</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 分页
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Page</span><span class="o">&lt;</span><span class="n">StyleLib</span><span class="o">&gt;</span> <span class="n">pageModel</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Page</span><span class="o">&lt;&gt;(</span><span class="n">req</span><span class="o">.</span><span class="na">getPage</span><span class="o">(),</span> <span class="n">req</span><span class="o">.</span><span class="na">getLimit</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">Page</span><span class="o">&lt;</span><span class="n">StyleLib</span><span class="o">&gt;</span> <span class="n">dataPage</span> <span class="o">=</span>  <span class="k">this</span><span class="o">.</span><span class="na">page</span><span class="o">(</span><span class="n">pageModel</span><span class="o">,</span><span class="n">qw</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 拼接条件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">qw</span><span class="o">.</span><span class="na">and</span><span class="o">(</span><span class="n">wrapper</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-&gt;</span> <span class="n">wrapper</span><span class="o">.</span><span class="na">like</span><span class="o">(</span><span class="n">ItemPlan</span><span class="o">::</span><span class="n">getName</span><span class="o">,</span> <span class="n">name</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">or</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">eq</span><span class="o">(</span><span class="n">ItemPlan</span><span class="o">::</span><span class="n">getName</span><span class="o">,</span> <span class="n">name</span><span class="o">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">mainQw</span><span class="o">.</span><span class="na">and</span><span class="o">(</span><span class="n">wrapper</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">req</span><span class="o">.</span><span class="na">getExtraName</span><span class="o">().</span><span class="na">forEach</span><span class="o">(</span><span class="n">item</span> <span class="o">-&gt;</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span><span class="n">StringUtils</span><span class="o">.</span><span class="na">isNotBlank</span><span class="o">(</span><span class="n">item</span><span class="o">))</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">wrapper</span><span class="o">.</span><span class="na">or</span><span class="o">().</span><span class="na">like</span><span class="o">(</span><span class="n">MallSample</span><span class="o">::</span><span class="n">getExtraName</span><span class="o">,</span> <span class="n">item</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">});</span>
+</span></span><span class="line"><span class="cl"><span class="o">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">LambdaQueryWrapper</span><span class="o">&lt;</span><span class="n">ItemPlan</span><span class="o">&gt;</span> <span class="n">qw</span> <span class="o">=</span> <span class="n">SqlUtils</span>
+</span></span><span class="line"><span class="cl">                <span class="o">.</span><span class="na">getLambdaQueryWrapper</span><span class="o">(</span><span class="n">ItemPlan</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">                <span class="o">.</span><span class="na">in</span><span class="o">((</span><span class="n">CollectionUtils</span><span class="o">.</span><span class="na">isNotEmpty</span><span class="o">(</span><span class="n">req</span><span class="o">.</span><span class="na">getIds</span><span class="o">())),</span> <span class="n">ItemPlan</span><span class="o">::</span><span class="n">getId</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">req</span><span class="o">.</span><span class="na">getIds</span><span class="o">())</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl"><span class="c1">// 不为空则查询            
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">LambdaQueryWrapper</span><span class="o">&lt;</span><span class="n">ItemPlan</span><span class="o">&gt;</span> <span class="n">qw</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SqlUtils</span><span class="o">.</span><span class="na">getLambdaQueryWrapper</span><span class="o">(</span><span class="n">ItemPlan</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="o">.</span><span class="na">in</span><span class="o">((</span><span class="n">CollectionUtils</span><span class="o">.</span><span class="na">isNotEmpty</span><span class="o">(</span><span class="n">req</span><span class="o">.</span><span class="na">getIds</span><span class="o">())),</span> <span class="n">ItemPlan</span><span class="o">::</span><span class="n">getId</span><span class="o">,</span> <span class="n">req</span><span class="o">.</span><span class="na">getIds</span><span class="o">());</span>            
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// copy对象
+</span></span></span><span class="line"><span class="cl"><span class="c1">// import cn.hutool.core.bean.BeanUtil;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">BeanUtil</span><span class="o">.</span><span class="na">copyProperties</span><span class="o">(</span><span class="n">data</span><span class="o">,</span> <span class="n">res</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// list过滤数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">1</span><span class="o">,</span> <span class="n">2</span><span class="o">,</span> <span class="n">3</span><span class="o">,</span> <span class="n">4</span><span class="o">,</span> <span class="n">5</span><span class="o">,</span> <span class="n">6</span><span class="o">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">evenNumbers</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">                                   <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">%</span> <span class="n">2</span> <span class="o">==</span> <span class="n">0</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">                                   <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// int 转 string 的list
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">stringNumbers</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+</span></span><span class="line"><span class="cl">                                    <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">String</span><span class="o">::</span><span class="n">valueOf</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">                                    <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 求和
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">mapToInt</span><span class="o">(</span><span class="n">Integer</span><span class="o">::</span><span class="n">intValue</span><span class="o">).</span><span class="na">sum</span><span class="o">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 去重
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">distinct</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">distinct</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 排序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">sorted</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">sorted</span><span class="o">().</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl"><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">sortedDesc</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">sorted</span><span class="o">(</span><span class="n">Collections</span><span class="o">.</span><span class="na">reverseOrder</span><span class="o">()).</span><span class="na">collect</span><span class="o">(</span><span class="n">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// map 操作
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">aaaMap</span><span class="o">.</span><span class="na">forEach</span><span class="o">((</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="o">)-&gt;</span> <span class="o">{</span> 
+</span></span><span class="line"><span class="cl">	<span class="c1">// xxxx
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">});</span>
 </span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

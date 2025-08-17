@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/tags/vscode/</link>
         <description>vscode - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Tue, 26 Sep 2023 19:16:02 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/vscode/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 17 Aug 2025 20:45:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/vscode/" rel="self" type="application/rss+xml" /><item>
+    <title>VSCode Extension Pack</title>
+    <link>https://serialt.github.io/posts/2025-08-17-vscode-extension-pack/</link>
+    <pubDate>Sun, 17 Aug 2025 20:45:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-08-17-vscode-extension-pack/</guid>
+    <description><![CDATA[VSCode Extension Pack vscode扩展包 在使用vscode的时候，需要安装各种各类的插件来满足不同的功能，在新安装vscode或者切换其他机器的时候，会因为]]></description>
+</item>
+<item>
     <title>Okteto</title>
     <link>https://serialt.github.io/posts/okteto/</link>
     <pubDate>Tue, 26 Sep 2023 19:16:02 &#43;0800</pubDate>
