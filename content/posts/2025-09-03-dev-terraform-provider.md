@@ -1,7 +1,7 @@
 +++
 
 title = 'TF-dev'
-date = 2024-10-13T09:26:27+08:00
+date = 2025-09-03T21:26:27+08:00
 draft = false
 
 tags = ["terraform-dev","tf-dev"]
@@ -43,24 +43,37 @@ vscode 调试 terraform provider
 
 ##### 1）vscode launch
 
-```
+```json
 cat .vscode/launch.json 
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Debug Terraform Provider",
-            "type": "go",
-            "request": "launch",
-            "mode": "debug",
-            // this assumes your workspace is the root of the repo
-            "program": "${workspaceFolder}",
-            "env": {},
-            "args": [
-                "-debug",
-            ]
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Terraform Provider",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      // this assumes your workspace is the root of the repo
+      "program": "${workspaceFolder}",
+      "env": {},
+      "args": [
+        "-debug",
+      ]
+    },
+    {
+      "name": "Launch test function",
+      "type": "go",
+      "request": "launch",
+      "mode": "test",
+      "program": "${fileDirname}",
+      "showLog": true,
+      "args": [
+        "-test.v",
+        "-test.run",
+        "TestDatasource_RepositoryDockerHosted"
+      ]
+    }
+  ]
 }
 ```
 
@@ -333,6 +346,11 @@ func (p *HarborProvider) DataSources(ctx context.Context) []func() datasource.Da
 	}
 }
 
+func (p *HarborProvider) Functions(ctx context.Context) []func() function.Function {
+	return []func() function.Function{
+		// NewExampleFunction,
+	}
+}
 ```
 
 data_project.go
@@ -517,6 +535,10 @@ func getboolfromstring(stringbool string) bool {
 
 ```
 
+data_source、resource、function 需要注册有才能使用
+
+编写代码时，主要工作难点是 Schema 和接收schema的model
+
 
 
 #### resource/schema 介绍，以schema.StringAttribute为例
@@ -550,6 +572,128 @@ Default
 
 
 
+
+### 四、代码片段
+
+```go
+// schema
+	DataSourceID = schema.StringAttribute{
+		Description:         "Used to identify data source at nexus",
+		MarkdownDescription: "Used to identify data source at nexus",
+		Computed:            true,
+	}
+
+// 定义
+// block
+	resp.Schema = schema.Schema{
+		Description:         "Use this data source .",
+		MarkdownDescription: "Use this data source .",
+		Blocks: map[string]schema.Block{
+			"group":   tschema.DSGroup,
+		},
+		Attributes: map[string]schema.Attribute{
+			"id":     tschema.DataSourceID,
+			"name":   tschema.DataSourceName,
+		},
+	}
+
+	DSGroup = schema.SingleNestedBlock{
+		Description:         "The group configuration of the repository",
+		MarkdownDescription: "The group configuration of the repository",
+		Attributes: map[string]schema.Attribute{
+			"member_names": schema.ListAttribute{
+				Description:         "Member repositories names",
+				MarkdownDescription: "Member repositories names",
+				ElementType:         types.StringType,
+				Required:            true,
+				Validators:          []validator.List{listvalidator.SizeAtLeast(1)},
+			},
+		},
+	}
+
+
+// 定义list
+// model 里面
+type CleanupModel struct {
+	PolicyNames types.List `tfsdk:"policy_names"`
+}
+
+// schema
+	DSCleanUp = schema.SingleNestedBlock{
+		MarkdownDescription: "Cleanup policies",
+		Description:         "Cleanup policies",
+		Attributes: map[string]schema.Attribute{
+			"policy_names": schema.ListAttribute{
+				Description:         "List of policy names",
+				MarkdownDescription: "List of policy names",
+				Computed:            true,
+				ElementType:         types.StringType,
+			},
+		},
+	}
+
+// List 转 types.List 
+	if repo.Cleanup != nil {
+		policyNames := []attr.Value{}
+		for _, item := range repo.Cleanup.PolicyNames {
+			policyNames = append(policyNames, types.StringValue(item))
+		}
+		policyNamesTfsdk, _ := types.ListValue(types.StringType, policyNames)
+		data.Cleanup = &model.CleanupModel{
+			PolicyNames: policyNamesTfsdk,
+		}
+	}
+
+// model 转 types.List
+	actions := []string{}
+	_ = plan.Actions.ElementsAs(ctx, actions, true)
+
+// resource 设置了默认值后需要设置 Computed 为 true
+			"v1_enabled": schema.BoolAttribute{
+				Description:         "Whether to allow clients to use",
+				MarkdownDescription: "Whether to allow clients to use",
+				Computed:            true,
+				Default:             booldefault.StaticBool(false),
+			},
+```
+
+测试代码
+
+```go
+package nexus
+
+import (
+	"testing"
+
+	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
+	// "github.com/hashicorp/terraform-plugin-testing/knownvalue"
+	// "github.com/hashicorp/terraform-plugin-testing/statecheck"
+	// "github.com/hashicorp/terraform-plugin-testing/tfjsonpath"
+)
+
+func TestDatasource_RepositoryDockerHosted(t *testing.T) {
+	resource.Test(t, resource.TestCase{
+		PreCheck:                 func() { testAccPreCheck(t) },
+		ProtoV6ProviderFactories: TestNexusProtoV6ProviderFactories,
+		Steps: []resource.TestStep{
+			{
+				Config: testDatasourceDockerHostConfig,
+				Check: resource.ComposeTestCheckFunc(
+					resource.TestCheckResourceAttr("data.nexus_repository_docker_hosted.docker-local", "name", "docker-local"),
+				),
+			},
+		},
+	})
+}
+
+const testDatasourceDockerHostConfig = `
+
+data "nexus_repository_docker_hosted" "docker-local" {
+  name = "docker-local"
+}
+`
+
+```
 
 
 
