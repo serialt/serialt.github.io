@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/posts/</link>
         <description>All Posts | Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 17 Aug 2025 20:45:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 03 Sep 2025 21:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>TF-dev</title>
+    <link>https://serialt.github.io/posts/2025-09-03-dev-terraform-provider/</link>
+    <pubDate>Wed, 03 Sep 2025 21:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-09-03-dev-terraform-provider/</guid>
+    <description><![CDATA[Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # makefile default: install build: go build -v ./... install: go install -v ./... vscode 调试 terraform provider 1）vscode launch cat .vscode/launch.json {]]></description>
+</item>
+<item>
     <title>VSCode Extension Pack</title>
     <link>https://serialt.github.io/posts/2025-08-17-vscode-extension-pack/</link>
     <pubDate>Sun, 17 Aug 2025 20:45:01 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2025-01-04-goset/</guid>
     <description><![CDATA[Go Set 集合 Github地址：https://github.com/deckarep/golang-set 使用： go get github.com/deckarep/golang-set/v2 集合里的元素不会重复 示例：]]></description>
-</item>
-<item>
-    <title>Go goose</title>
-    <link>https://serialt.github.io/posts/2024-11-25-goose/</link>
-    <pubDate>Mon, 25 Nov 2024 19:38:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-11-25-goose/</guid>
-    <description><![CDATA[Goose 数据库版本管理 Goose 是一个用于管理数据库迁移的工具，类似于 Flyway 和 Liquibase。它可以方便地管理数据库模式的版本，并应用相应的 SQL 脚本。你提到]]></description>
 </item>
 </channel>
 </rss>

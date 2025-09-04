@@ -7,16 +7,16 @@
         <title>TF-dev - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="TF-dev" />
 <meta property="og:description" content="Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # makefile default: install build: go build -v ./... install: go install -v ./... vscode 调试 terraform provider 1）vscode launch cat .vscode/launch.json {" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-10-13T09:26:27+08:00" />
-<meta property="article:modified_time" content="2024-10-13T09:26:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta property="og:url" content="https://serialt.github.io/posts/2025-09-03-dev-terraform-provider/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-09-03T21:26:27+08:00" />
+<meta property="article:modified_time" content="2025-09-03T21:26:27+08:00" /><meta property="og:site_name" content="Log" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="TF-dev"/>
 <meta name="twitter:description" content="Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # makefile default: install build: go build -v ./... install: go install -v ./... vscode 调试 terraform provider 1）vscode launch cat .vscode/launch.json {"/>
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2024-06-30-dev-terraform-provider/" /><link rel="prev" href="https://serialt.github.io/posts/2024-10-11-cloudbeaver/" /><link rel="next" href="https://serialt.github.io/posts/2024-10-20-go-conc/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2025-09-03-dev-terraform-provider/" /><link rel="prev" href="https://serialt.github.io/posts/2025-08-17-vscode-extension-pack/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -26,9 +26,9 @@
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/serialt.github.io\/posts\/2024-06-30-dev-terraform-provider\/"
-        },"genre": "posts","keywords": "terraform-dev, tf-dev","wordcount":  1958 ,
-        "url": "https:\/\/serialt.github.io\/posts\/2024-06-30-dev-terraform-provider\/","datePublished": "2024-10-13T09:26:27+08:00","dateModified": "2024-10-13T09:26:27+08:00","publisher": {
+            "@id": "https:\/\/serialt.github.io\/posts\/2025-09-03-dev-terraform-provider\/"
+        },"genre": "posts","keywords": "terraform-dev, tf-dev","wordcount":  2357 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2025-09-03-dev-terraform-provider\/","datePublished": "2025-09-03T21:26:27+08:00","dateModified": "2025-09-03T21:26:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -101,8 +101,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">TF-dev</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-10-13">2024-10-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1958 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-09-03">2025-09-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2357 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -115,6 +115,7 @@
         <li><a href="#一调试-provider">一、调试 provider</a></li>
         <li><a href="#二tpf框架">二、TPF框架</a></li>
         <li><a href="#三terraform-apply说明">三、Terraform apply说明</a></li>
+        <li><a href="#四代码片段">四、代码片段</a></li>
       </ul>
     </li>
   </ul>
@@ -142,25 +143,38 @@ install:
         go install -v ./...
 </code></pre><p>vscode 调试 terraform provider</p>
 <h5 id="1vscode-launch">1）vscode launch</h5>
-<pre tabindex="0"><code>cat .vscode/launch.json 
-{
-    &#34;version&#34;: &#34;0.2.0&#34;,
-    &#34;configurations&#34;: [
-        {
-            &#34;name&#34;: &#34;Debug Terraform Provider&#34;,
-            &#34;type&#34;: &#34;go&#34;,
-            &#34;request&#34;: &#34;launch&#34;,
-            &#34;mode&#34;: &#34;debug&#34;,
-            // this assumes your workspace is the root of the repo
-            &#34;program&#34;: &#34;${workspaceFolder}&#34;,
-            &#34;env&#34;: {},
-            &#34;args&#34;: [
-                &#34;-debug&#34;,
-            ]
-        }
-    ]
-}
-</code></pre><p>run debug</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">cat</span> <span class="err">.vscode/launch.json</span> 
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="s2">&#34;0.2.0&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;configurations&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Debug Terraform Provider&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;go&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;request&#34;</span><span class="p">:</span> <span class="s2">&#34;launch&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;mode&#34;</span><span class="p">:</span> <span class="s2">&#34;debug&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// this assumes your workspace is the root of the repo
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nt">&#34;program&#34;</span><span class="p">:</span> <span class="s2">&#34;${workspaceFolder}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;env&#34;</span><span class="p">:</span> <span class="p">{},</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;-debug&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Launch test function&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;go&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;request&#34;</span><span class="p">:</span> <span class="s2">&#34;launch&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;mode&#34;</span><span class="p">:</span> <span class="s2">&#34;test&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;program&#34;</span><span class="p">:</span> <span class="s2">&#34;${fileDirname}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;showLog&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;-test.v&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;-test.run&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;TestDatasource_RepositoryDockerHosted&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>run debug</p>
 <h5 id="2ready-terraform-code">2）ready terraform code</h5>
 <h5 id="3run-terraform">3）run terraform</h5>
 <pre tabindex="0"><code>TF_REATTACH_PROVIDERS=&#39;{&#34;registry.terraform.io/serialt/message&#34;:{&#34;Protocol&#34;:&#34;grpc&#34;,&#34;ProtocolVersion&#34;:5,&#34;Pid&#34;:50972,&#34;Test&#34;:true,&#34;Addr&#34;:{&#34;Network&#34;:&#34;unix&#34;,&#34;String&#34;:&#34;/var/folders/vm/zlhwbdyj2031f088_w9q3f8w0000gn/T/plugin3117659601&#34;}}}&#39; terraform apply
@@ -407,6 +421,12 @@ terraform apply
 </span></span><span class="line"><span class="cl">		<span class="nx">NewProjectDataSource</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">HarborProvider</span><span class="p">)</span> <span class="nf">Functions</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">[]</span><span class="kd">func</span><span class="p">()</span> <span class="nx">function</span><span class="p">.</span><span class="nx">Function</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="p">[]</span><span class="kd">func</span><span class="p">()</span> <span class="nx">function</span><span class="p">.</span><span class="nx">Function</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// NewExampleFunction,
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>data_project.go</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">provider</span>
 </span></span><span class="line"><span class="cl">
@@ -584,7 +604,9 @@ terraform apply
 </span></span><span class="line"><span class="cl">	<span class="p">}</span>
 </span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">boolbool</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><h4 id="resourceschema-介绍以schemastringattribute为例">resource/schema 介绍，以schema.StringAttribute为例</h4>
+</span></span></code></pre></div><p>data_source、resource、function 需要注册有才能使用</p>
+<p>编写代码时，主要工作难点是 Schema 和接收schema的model</p>
+<h4 id="resourceschema-介绍以schemastringattribute为例">resource/schema 介绍，以schema.StringAttribute为例</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">CustomType  允许使用自定义属性类型来代替
 </span></span><span class="line"><span class="cl">Required   resource config 必填项
 </span></span><span class="line"><span class="cl">Optional resource config 可选项
@@ -601,11 +623,124 @@ terraform apply
 <p>2、删除资源会先触发read，yes后触发删除操作</p>
 <p>3、resource中定义的有改动导致资源某些配置会被replace，先触发read，yes 后会触发更新</p>
 <p>4、create、update、read 最后都会获取资源状态数据并更新到state文件中</p>
-</div><div class="post-footer" id="post-footer">
+<h3 id="四代码片段">四、代码片段</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// schema
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">DataSourceID</span> <span class="p">=</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Description</span><span class="p">:</span>         <span class="s">&#34;Used to identify data source at nexus&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">MarkdownDescription</span><span class="p">:</span> <span class="s">&#34;Used to identify data source at nexus&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Computed</span><span class="p">:</span>            <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 定义
+</span></span></span><span class="line"><span class="cl"><span class="c1">// block
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">resp</span><span class="p">.</span><span class="nx">Schema</span> <span class="p">=</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Description</span><span class="p">:</span>         <span class="s">&#34;Use this data source .&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">MarkdownDescription</span><span class="p">:</span> <span class="s">&#34;Use this data source .&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Blocks</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">schema</span><span class="p">.</span><span class="nx">Block</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;group&#34;</span><span class="p">:</span>   <span class="nx">tschema</span><span class="p">.</span><span class="nx">DSGroup</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Attributes</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">schema</span><span class="p">.</span><span class="nx">Attribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;id&#34;</span><span class="p">:</span>     <span class="nx">tschema</span><span class="p">.</span><span class="nx">DataSourceID</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;name&#34;</span><span class="p">:</span>   <span class="nx">tschema</span><span class="p">.</span><span class="nx">DataSourceName</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">DSGroup</span> <span class="p">=</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">SingleNestedBlock</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Description</span><span class="p">:</span>         <span class="s">&#34;The group configuration of the repository&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">MarkdownDescription</span><span class="p">:</span> <span class="s">&#34;The group configuration of the repository&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Attributes</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">schema</span><span class="p">.</span><span class="nx">Attribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;member_names&#34;</span><span class="p">:</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">ListAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Description</span><span class="p">:</span>         <span class="s">&#34;Member repositories names&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">MarkdownDescription</span><span class="p">:</span> <span class="s">&#34;Member repositories names&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">ElementType</span><span class="p">:</span>         <span class="nx">types</span><span class="p">.</span><span class="nx">StringType</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Required</span><span class="p">:</span>            <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Validators</span><span class="p">:</span>          <span class="p">[]</span><span class="nx">validator</span><span class="p">.</span><span class="nx">List</span><span class="p">{</span><span class="nx">listvalidator</span><span class="p">.</span><span class="nf">SizeAtLeast</span><span class="p">(</span><span class="mi">1</span><span class="p">)},</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 定义list
+</span></span></span><span class="line"><span class="cl"><span class="c1">// model 里面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">CleanupModel</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">PolicyNames</span> <span class="nx">types</span><span class="p">.</span><span class="nx">List</span> <span class="s">`tfsdk:&#34;policy_names&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// schema
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">DSCleanUp</span> <span class="p">=</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">SingleNestedBlock</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">MarkdownDescription</span><span class="p">:</span> <span class="s">&#34;Cleanup policies&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Description</span><span class="p">:</span>         <span class="s">&#34;Cleanup policies&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Attributes</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">schema</span><span class="p">.</span><span class="nx">Attribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;policy_names&#34;</span><span class="p">:</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">ListAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Description</span><span class="p">:</span>         <span class="s">&#34;List of policy names&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">MarkdownDescription</span><span class="p">:</span> <span class="s">&#34;List of policy names&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Computed</span><span class="p">:</span>            <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">ElementType</span><span class="p">:</span>         <span class="nx">types</span><span class="p">.</span><span class="nx">StringType</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// List 转 types.List 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">repo</span><span class="p">.</span><span class="nx">Cleanup</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">policyNames</span> <span class="o">:=</span> <span class="p">[]</span><span class="nx">attr</span><span class="p">.</span><span class="nx">Value</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">item</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">repo</span><span class="p">.</span><span class="nx">Cleanup</span><span class="p">.</span><span class="nx">PolicyNames</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">policyNames</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">policyNames</span><span class="p">,</span> <span class="nx">types</span><span class="p">.</span><span class="nf">StringValue</span><span class="p">(</span><span class="nx">item</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">policyNamesTfsdk</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">types</span><span class="p">.</span><span class="nf">ListValue</span><span class="p">(</span><span class="nx">types</span><span class="p">.</span><span class="nx">StringType</span><span class="p">,</span> <span class="nx">policyNames</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">data</span><span class="p">.</span><span class="nx">Cleanup</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">model</span><span class="p">.</span><span class="nx">CleanupModel</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">PolicyNames</span><span class="p">:</span> <span class="nx">policyNamesTfsdk</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// model 转 types.List
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">actions</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span> <span class="p">=</span> <span class="nx">plan</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nf">ElementsAs</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">actions</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// resource 设置了默认值后需要设置 Computed 为 true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="s">&#34;v1_enabled&#34;</span><span class="p">:</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">BoolAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Description</span><span class="p">:</span>         <span class="s">&#34;Whether to allow clients to use&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">MarkdownDescription</span><span class="p">:</span> <span class="s">&#34;Whether to allow clients to use&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Computed</span><span class="p">:</span>            <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Default</span><span class="p">:</span>             <span class="nx">booldefault</span><span class="p">.</span><span class="nf">StaticBool</span><span class="p">(</span><span class="kc">false</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span></code></pre></div><p>测试代码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">nexus</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;testing&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/hashicorp/terraform-plugin-testing/helper/resource&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// &#34;github.com/hashicorp/terraform-plugin-testing/knownvalue&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// &#34;github.com/hashicorp/terraform-plugin-testing/statecheck&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// &#34;github.com/hashicorp/terraform-plugin-testing/tfjsonpath&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestDatasource_RepositoryDockerHosted</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resource</span><span class="p">.</span><span class="nf">Test</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">resource</span><span class="p">.</span><span class="nx">TestCase</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">PreCheck</span><span class="p">:</span>                 <span class="kd">func</span><span class="p">()</span> <span class="p">{</span> <span class="nf">testAccPreCheck</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ProtoV6ProviderFactories</span><span class="p">:</span> <span class="nx">TestNexusProtoV6ProviderFactories</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Steps</span><span class="p">:</span> <span class="p">[]</span><span class="nx">resource</span><span class="p">.</span><span class="nx">TestStep</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Config</span><span class="p">:</span> <span class="nx">testDatasourceDockerHostConfig</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Check</span><span class="p">:</span> <span class="nx">resource</span><span class="p">.</span><span class="nf">ComposeTestCheckFunc</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">resource</span><span class="p">.</span><span class="nf">TestCheckResourceAttr</span><span class="p">(</span><span class="s">&#34;data.nexus_repository_docker_hosted.docker-local&#34;</span><span class="p">,</span> <span class="s">&#34;name&#34;</span><span class="p">,</span> <span class="s">&#34;docker-local&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">				<span class="p">),</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">const</span> <span class="nx">testDatasourceDockerHostConfig</span> <span class="p">=</span> <span class="s">`
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">data &#34;nexus_repository_docker_hosted&#34; &#34;docker-local&#34; {
+</span></span></span><span class="line"><span class="cl"><span class="s">  name = &#34;docker-local&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">}
+</span></span></span><span class="line"><span class="cl"><span class="s">`</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-10-13</span>
+                <span>Updated on 2025-09-03</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
@@ -622,8 +757,7 @@ terraform apply
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/2024-10-11-cloudbeaver/" class="prev" rel="prev" title="CloudBeaver"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>CloudBeaver</a>
-            <a href="/posts/2024-10-20-go-conc/" class="next" rel="next" title="Go conc">Go conc<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/posts/2025-08-17-vscode-extension-pack/" class="prev" rel="prev" title="VSCode Extension Pack"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>VSCode Extension Pack</a></div>
 </div>
 </article></div>
             </main><footer class="footer">

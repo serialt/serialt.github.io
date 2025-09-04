@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/categories/</link>
         <description>Categories - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 17 Aug 2025 20:45:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 03 Sep 2025 21:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>DevOps</title>
+    <link>https://serialt.github.io/categories/devops/</link>
+    <pubDate>Wed, 03 Sep 2025 21:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/categories/devops/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>VSCode Extension Pack</title>
     <link>https://serialt.github.io/categories/vscode-extension-pack/</link>
     <pubDate>Sun, 17 Aug 2025 20:45:01 &#43;0800</pubDate>
@@ -74,14 +82,6 @@
     <pubDate>Sat, 26 Oct 2024 19:38:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/categories/java-%E5%9F%BA%E7%A1%80/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Ubuntu 自动安装</title>
-    <link>https://serialt.github.io/categories/ubuntu-%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85/</link>
-    <pubDate>Sat, 26 Oct 2024 14:38:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/categories/ubuntu-%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

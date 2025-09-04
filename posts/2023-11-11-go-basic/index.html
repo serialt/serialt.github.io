@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2023-11-11-go-basic\/"
-        },"genre": "posts","keywords": "Go, basic","wordcount":  2066 ,
+        },"genre": "posts","keywords": "Go, basic","wordcount":  2059 ,
         "url": "https:\/\/serialt.github.io\/posts\/2023-11-11-go-basic\/","datePublished": "2024-08-11T10:26:09+08:00","dateModified": "2024-08-11T10:26:09+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Go basic</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 基础</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-08-11">2024-08-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2066 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-08-11">2024-08-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2059 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -305,71 +305,77 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">go env -w <span class="nv">GOINSECURE</span><span class="o">=</span>git.local.com
 </span></span></code></pre></div><h2 id="7makefile">7、makefile</h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nv">PROJECT_NAME</span><span class="o">=</span> cli
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="c"># ========================
+</span></span></span><span class="line"><span class="cl"><span class="c"># Project Info
+</span></span></span><span class="line"><span class="cl"><span class="c"># ========================
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nv">PROJECT_NAME</span> <span class="o">:=</span> sync-image
+</span></span><span class="line"><span class="cl"><span class="nv">APP_NAME</span>     <span class="o">:=</span> <span class="k">$(</span>PROJECT_NAME<span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">DIST_DIR</span>     <span class="o">:=</span> dist
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">GOBASE</span>      <span class="o">:=</span> <span class="k">$(</span>shell <span class="nb">pwd</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GOFILES</span>     <span class="o">:=</span> <span class="k">$(</span>wildcard *.go<span class="k">)</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">GOBASE</span><span class="o">=</span><span class="k">$(</span>shell <span class="nb">pwd</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl"><span class="nv">GOFILES</span><span class="o">=</span><span class="k">$(</span>wildcard *.go<span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="c"># ========================
+</span></span></span><span class="line"><span class="cl"><span class="c"># Version &amp; Build Info
+</span></span></span><span class="line"><span class="cl"><span class="c"># ========================
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nv">BRANCH</span>      <span class="o">:=</span> <span class="k">$(</span>shell git rev-parse --abbrev-ref HEAD 2&gt;/dev/null <span class="o">||</span> <span class="nb">echo</span> <span class="s2">&#34;unknown&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">BUILD_TIME</span>  <span class="o">:=</span> <span class="k">$(</span>shell date -u <span class="s1">&#39;+%Y-%m-%d %H:%M:%S UTC&#39;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GIT_HASH</span>    <span class="o">:=</span> <span class="k">$(</span>shell git rev-parse --short HEAD 2&gt;/dev/null <span class="o">||</span> <span class="nb">echo</span> <span class="s2">&#34;unknown&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">GO_VERSION</span>  <span class="o">:=</span> <span class="k">$(</span>shell go version <span class="p">|</span> awk <span class="s1">&#39;{print $$3}&#39;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">KEY</span>         <span class="o">:=</span> wzFdVccccccccccccccc
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">LDFLAGS</span> <span class="o">:=</span> -s -w <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>	-X <span class="s1">&#39;main.APPVersion=$(BRANCH)&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>	-X <span class="s1">&#39;main.GoVersion=$(GO_VERSION)&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>	-X <span class="s1">&#39;main.BuildTime=$(BUILD_TIME)&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>	-X <span class="s1">&#39;main.GitCommit=$(GIT_HASH)&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>	-X <span class="s1">&#39;main.AesKey=$(KEY)&#39;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">BRANCH</span> <span class="o">:=</span> <span class="k">$(</span>shell git symbolic-ref HEAD 2&gt;/dev/null <span class="p">|</span> cut -d<span class="s2">&#34;/&#34;</span> -f 3<span class="k">)</span>
-</span></span><span class="line"><span class="cl"><span class="c"># BRANCH := `git fetch --tags &amp;&amp; git tag | sort -V | tail -1`
-</span></span></span><span class="line"><span class="cl"><span class="c"># BUILD := $(shell git rev-parse --short HEAD)
-</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nv">BUILD_DIR</span> <span class="o">:=</span> <span class="k">$(</span>GOBASE<span class="k">)</span>/dist
-</span></span><span class="line"><span class="cl"><span class="nv">VERSION</span> <span class="o">=</span> <span class="k">$(</span>BRANCH<span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">PLATFORMS</span> <span class="o">:=</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>	linux/amd64 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>	linux/arm64 
+</span></span><span class="line"><span class="cl"><span class="c"># 	linux/riscv64 \
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>	darwin/amd64 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>	darwin/arm64 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>	windows/amd64 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>	windows/arm64
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">BuildTime</span> <span class="o">:=</span> <span class="k">$(</span>shell date -u  <span class="s1">&#39;+%Y-%m-%d %H:%M:%S %Z&#39;</span><span class="k">)</span>
-</span></span><span class="line"><span class="cl"><span class="nv">GitHash</span> <span class="o">:=</span> <span class="k">$(</span>shell git rev-parse HEAD<span class="k">)</span>
-</span></span><span class="line"><span class="cl"><span class="nv">GoVersion</span> <span class="o">=</span> <span class="k">$(</span>shell go version <span class="p">|</span> cut -d <span class="s2">&#34; &#34;</span> -f <span class="m">3</span> <span class="k">)</span>
-</span></span><span class="line"><span class="cl"><span class="nv">Maintainer</span> <span class="o">:=</span> cccc@gmail.com 
-</span></span><span class="line"><span class="cl"><span class="nv">KEY</span> <span class="o">:=</span> wzFdVccccccccccccccc
+</span></span><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">all</span>
+</span></span><span class="line"><span class="cl"><span class="nf">all</span><span class="o">:</span> <span class="n">build</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">PKGFLAGS</span> <span class="o">:=</span> <span class="s2">&#34; -s -w -X &#39;main.APPVersion=</span><span class="k">$(</span>VERSION<span class="k">)</span><span class="s2">&#39; -X &#39;main.GoVersion=</span><span class="k">$(</span>GoVersion<span class="k">)</span><span class="s2">&#39;  -X &#39;main.BuildTime=</span><span class="k">$(</span>BuildTime<span class="k">)</span><span class="s2">&#39; -X &#39;main.GitCommit=</span><span class="k">$(</span>GitHash<span class="k">)</span><span class="s2">&#39; -X &#39;main.AesKey=</span><span class="k">$(</span>KEY<span class="k">)</span><span class="s2">&#39;  &#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">APP_NAME</span> <span class="o">=</span> <span class="k">$(</span>PROJECT_NAME<span class="k">)</span>
-</span></span><span class="line"><span class="cl"><span class="c"># go-pkg.v0.1.1-linux-amd64
-</span></span></span><span class="line"><span class="cl"><span class="c"></span>
 </span></span><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">clean</span>
 </span></span><span class="line"><span class="cl"><span class="nf">clean</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">	@-rm -rf dist/<span class="k">$(</span>PROJECT_NAME<span class="k">)</span>* 
+</span></span><span class="line"><span class="cl">	@echo <span class="s2">&#34;Cleaning...&#34;</span>
+</span></span><span class="line"><span class="cl">	@rm -rf <span class="k">$(</span>DIST_DIR<span class="k">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">serve</span>
 </span></span><span class="line"><span class="cl"><span class="nf">serve</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	@echo <span class="s2">&#34;Running locally...&#34;</span>
 </span></span><span class="line"><span class="cl">	go run .
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">build</span>
 </span></span><span class="line"><span class="cl"><span class="nf">build</span><span class="o">:</span> <span class="n">clean</span>
-</span></span><span class="line"><span class="cl">	@go build -trimpath -ldflags <span class="k">$(</span>PKGFLAGS<span class="k">)</span> -o <span class="s2">&#34;dist/</span><span class="k">$(</span>APP_NAME<span class="k">)</span><span class="s2">&#34;</span> 
-</span></span><span class="line"><span class="cl">	@echo <span class="s2">&#34;\n******************************&#34;</span>
-</span></span><span class="line"><span class="cl">	@echo <span class="s2">&#34;         build succeed &#34;</span>
-</span></span><span class="line"><span class="cl">	@echo <span class="s2">&#34;******************************\n&#34;</span>
-</span></span><span class="line"><span class="cl">	@ls -la dist/<span class="k">$(</span>PROJECT_NAME<span class="k">)</span>*
-</span></span><span class="line"><span class="cl">	@echo
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">build</span>-<span class="n">linux</span>
-</span></span><span class="line"><span class="cl"><span class="nf">build-linux</span><span class="o">:</span> <span class="n">clean</span>
-</span></span><span class="line"><span class="cl">	@go mod tidy
-</span></span><span class="line"><span class="cl">	@GOOS<span class="o">=</span><span class="s2">&#34;linux&#34;</span>   <span class="nv">GOARCH</span><span class="o">=</span><span class="s2">&#34;amd64&#34;</span> go build -trimpath -ldflags <span class="k">$(</span>PKGFLAGS<span class="k">)</span> -v -o <span class="s2">&#34;dist/</span><span class="k">$(</span>APP_NAME<span class="k">)</span><span class="s2">-linux-amd64&#34;</span>       
-</span></span><span class="line"><span class="cl">	@GOOS<span class="o">=</span><span class="s2">&#34;linux&#34;</span>   <span class="nv">GOARCH</span><span class="o">=</span><span class="s2">&#34;arm64&#34;</span> go build -trimpath -ldflags <span class="k">$(</span>PKGFLAGS<span class="k">)</span> -v -o <span class="s2">&#34;dist/</span><span class="k">$(</span>APP_NAME<span class="k">)</span><span class="s2">-linux-arm64&#34;</span>    
-</span></span><span class="line"><span class="cl">	@echo <span class="s2">&#34;\n******************************&#34;</span>
-</span></span><span class="line"><span class="cl">	@echo <span class="s2">&#34;      build linux succeed &#34;</span>
-</span></span><span class="line"><span class="cl">	@echo <span class="s2">&#34;******************************\n&#34;</span>
-</span></span><span class="line"><span class="cl">	@ls -la dist/<span class="k">$(</span>PROJECT_NAME<span class="k">)</span>*
-</span></span><span class="line"><span class="cl">	@echo
+</span></span><span class="line"><span class="cl">	@mkdir -p <span class="k">$(</span>DIST_DIR<span class="k">)</span>
+</span></span><span class="line"><span class="cl">	@echo <span class="s2">&#34;Building </span><span class="k">$(</span>APP_NAME<span class="k">)</span><span class="s2"> for local OS...&#34;</span>
+</span></span><span class="line"><span class="cl">	@go build -trimpath -ldflags <span class="s2">&#34;</span><span class="k">$(</span>LDFLAGS<span class="k">)</span><span class="s2">&#34;</span> -o <span class="k">$(</span>DIST_DIR<span class="k">)</span>/<span class="k">$(</span>APP_NAME<span class="k">)</span>
+</span></span><span class="line"><span class="cl">	@echo <span class="s2">&#34;\n✅ Build succeeded:&#34;</span>
+</span></span><span class="line"><span class="cl">	@ls -lh <span class="k">$(</span>DIST_DIR<span class="k">)</span>/<span class="k">$(</span>APP_NAME<span class="k">)</span>*
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">release</span>
 </span></span><span class="line"><span class="cl"><span class="nf">release</span><span class="o">:</span> <span class="n">clean</span>
+</span></span><span class="line"><span class="cl">	@mkdir -p <span class="k">$(</span>DIST_DIR<span class="k">)</span>
 </span></span><span class="line"><span class="cl">	@go mod tidy
-</span></span><span class="line"><span class="cl">	@GOOS<span class="o">=</span><span class="s2">&#34;windows&#34;</span> <span class="nv">GOARCH</span><span class="o">=</span><span class="s2">&#34;amd64&#34;</span> go build -trimpath -ldflags <span class="k">$(</span>PKGFLAGS<span class="k">)</span> -v -o <span class="s2">&#34;dist/</span><span class="k">$(</span>APP_NAME<span class="k">)</span><span class="s2">-windows-amd64.exe&#34;</span> 
-</span></span><span class="line"><span class="cl">	@GOOS<span class="o">=</span><span class="s2">&#34;linux&#34;</span>   <span class="nv">GOARCH</span><span class="o">=</span><span class="s2">&#34;amd64&#34;</span> go build -trimpath -ldflags <span class="k">$(</span>PKGFLAGS<span class="k">)</span> -v -o <span class="s2">&#34;dist/</span><span class="k">$(</span>APP_NAME<span class="k">)</span><span class="s2">-linux-amd64&#34;</span>       
-</span></span><span class="line"><span class="cl">	@GOOS<span class="o">=</span><span class="s2">&#34;linux&#34;</span>   <span class="nv">GOARCH</span><span class="o">=</span><span class="s2">&#34;arm64&#34;</span> go build -trimpath -ldflags <span class="k">$(</span>PKGFLAGS<span class="k">)</span> -v -o <span class="s2">&#34;dist/</span><span class="k">$(</span>APP_NAME<span class="k">)</span><span class="s2">-linux-arm64&#34;</span>       
-</span></span><span class="line"><span class="cl">	@GOOS<span class="o">=</span><span class="s2">&#34;darwin&#34;</span>  <span class="nv">GOARCH</span><span class="o">=</span><span class="s2">&#34;amd64&#34;</span> go build -trimpath -ldflags <span class="k">$(</span>PKGFLAGS<span class="k">)</span> -v -o <span class="s2">&#34;dist/</span><span class="k">$(</span>APP_NAME<span class="k">)</span><span class="s2">-darwin-amd64&#34;</span>      
-</span></span><span class="line"><span class="cl">	@GOOS<span class="o">=</span><span class="s2">&#34;darwin&#34;</span>  <span class="nv">GOARCH</span><span class="o">=</span><span class="s2">&#34;arm64&#34;</span> go build -trimpath -ldflags <span class="k">$(</span>PKGFLAGS<span class="k">)</span> -v -o <span class="s2">&#34;dist/</span><span class="k">$(</span>APP_NAME<span class="k">)</span><span class="s2">-darwin-arm64&#34;</span>      
-</span></span><span class="line"><span class="cl">	@echo <span class="s2">&#34;\n******************************&#34;</span>
-</span></span><span class="line"><span class="cl">	@echo <span class="s2">&#34;        release succeed &#34;</span>
-</span></span><span class="line"><span class="cl">	@echo <span class="s2">&#34;******************************\n&#34;</span>
-</span></span><span class="line"><span class="cl">	@ls -la dist/<span class="k">$(</span>PROJECT_NAME<span class="k">)</span>*
-</span></span><span class="line"><span class="cl">	@echo
+</span></span><span class="line"><span class="cl">	@set -e<span class="p">;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>	<span class="k">for</span> plat in <span class="k">$(</span>PLATFORMS<span class="k">)</span><span class="p">;</span> <span class="k">do</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>		<span class="nv">OS</span><span class="o">=</span><span class="nv">$$</span><span class="o">{</span>plat%/*<span class="o">}</span><span class="p">;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>		<span class="nv">ARCH</span><span class="o">=</span><span class="nv">$$</span><span class="o">{</span>plat#*/<span class="o">}</span><span class="p">;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>		<span class="nv">EXE</span><span class="o">=</span><span class="nv">$$</span><span class="o">(</span> <span class="o">[</span> <span class="s2">&#34;</span><span class="nv">$$</span><span class="s2">OS&#34;</span> <span class="o">=</span> <span class="s2">&#34;windows&#34;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&#34;.exe&#34;</span> <span class="o">||</span> <span class="nb">echo</span> <span class="s2">&#34;&#34;</span> <span class="o">)</span><span class="p">;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>		<span class="nv">OUT</span><span class="o">=</span><span class="k">$(</span>DIST_DIR<span class="k">)</span>/<span class="k">$(</span>APP_NAME<span class="k">)</span>-<span class="nv">$$</span>OS-<span class="nv">$$</span>ARCH<span class="nv">$$</span>EXE<span class="p">;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>		<span class="nb">echo</span> <span class="s2">&#34;🚀 Building </span><span class="nv">$$</span><span class="s2">OUT&#34;</span><span class="p">;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>		<span class="nv">GOOS</span><span class="o">=</span><span class="nv">$$</span>OS <span class="nv">GOARCH</span><span class="o">=</span><span class="nv">$$</span>ARCH go build -trimpath -ldflags <span class="s2">&#34;</span><span class="k">$(</span>LDFLAGS<span class="k">)</span><span class="s2">&#34;</span> -o <span class="nv">$$</span>OUT .<span class="p">;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>	<span class="k">done</span>
+</span></span><span class="line"><span class="cl">	@echo <span class="s2">&#34;\n✅ Release build succeeded:&#34;</span>
+</span></span><span class="line"><span class="cl">	@ls -lh <span class="k">$(</span>DIST_DIR<span class="k">)</span>/
 </span></span></code></pre></div><h2 id="8go-work">8、go work</h2>
 <p>参考链接：https://cloud.tencent.com/developer/article/1970405</p>
 <p>go 1.18 新增加 workspace的开发模式，</p>
