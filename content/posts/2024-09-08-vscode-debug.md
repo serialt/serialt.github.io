@@ -65,6 +65,9 @@ command + shift + p --> go install --> 勾选所有进行安装
                 "-test.run",
                 "Test_f1"
             ],
+            "dlvFlags": [
+                "--check-go-version=false"
+            ],
             "dlvLoadConfig": {
                 "followPointers": true,
                 "maxVariableRecurse": 1,
@@ -107,7 +110,7 @@ launch.json
             "name": "Python",
             "type": "debugpy",
             "request": "launch",
-            "pythonPath": "/root/py3/bin/python3",
+            "python": "${workspaceFolder}/venv/bin/python3",
             "program": "${file}",
             "cwd": "${workspaceRoot}",
             "env": {},
