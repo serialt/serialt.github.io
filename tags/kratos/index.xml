@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/tags/kratos/</link>
         <description>kratos - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 20 Jul 2024 09:20:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/kratos/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 22 Nov 2025 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/kratos/" rel="self" type="application/rss+xml" /><item>
+    <title>kratos</title>
+    <link>https://serialt.github.io/posts/2025-11-22-kratos/</link>
+    <pubDate>Sat, 22 Nov 2025 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-11-22-kratos/</guid>
+    <description><![CDATA[Go Kratos测试 1、测试repo层方法 glogger &#34;gorm.io/gorm/logger&#34; var ( ctx = context.Background() db *gorm.DB p = NewSugarRepo(log.DefaultLogger) bc conf.Bootstrap ) func init() { bcInit() var err error var dns = bc.Data.Database.Source db, err = gorm.Open(postgres.Open(dns), &amp;gorm.Config{ Logger: glogger.Default.LogMode(glogger.Info), }) if err != nil { panic(err) } } func bcInit() { c := config.New( config.WithSource( file.NewSource(&#34;../../../../configs&#34;),]]></description>
+</item>
+<item>
     <title>kratos</title>
     <link>https://serialt.github.io/posts/2024-07-07-kratos/</link>
     <pubDate>Sat, 20 Jul 2024 09:20:27 &#43;0800</pubDate>

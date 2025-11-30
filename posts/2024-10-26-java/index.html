@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-10-26-java\/"
-        },"genre": "posts","keywords": "Java","wordcount":  3032 ,
+        },"genre": "posts","keywords": "Java","wordcount":  3058 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-10-26-java\/","datePublished": "2024-10-26T19:38:01+08:00","dateModified": "2024-10-26T19:38:01+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Java Basic</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/java-%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Java 基础</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-10-26">2024-10-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3032 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-10-26">2024-10-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3058 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -806,7 +806,15 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 具体使用
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">OptionDto</span> <span class="n">cc</span> <span class="o">=</span> <span class="n">OptionDto</span><span class="o">.</span><span class="na">builder</span><span class="o">().</span><span class="na">code</span><span class="o">(</span><span class="s">&#34;code&#34;</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
-</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+</span></span></code></pre></div><p>变量使用，需要加final</p>
+<pre tabindex="0"><code>Map&lt;Long,Integer&gt; finalQtyMap;
+
+if (xxxx){
+	finalQtyMap = xxxxx;
+}else {
+	finalQtyMap = xxxxbbbb;
+}
+</code></pre></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

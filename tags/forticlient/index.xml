@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>forticlient - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/forticlient/</link>
+        <description>forticlient - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 12 Oct 2025 22:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/forticlient/" rel="self" type="application/rss+xml" /><item>
+    <title>un-forticlient</title>
+    <link>https://serialt.github.io/posts/2025-10-12-fuck-forticlient/</link>
+    <pubDate>Sun, 12 Oct 2025 22:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-10-12-fuck-forticlient/</guid>
+    <description><![CDATA[卸载forticlient /bin/ls -dleO@ /Applications/FortiClient.app sudo /usr/bin/chflags -R noschg /Applications/FortiClient.app 然后就可以删除]]></description>
+</item>
+</channel>
+</rss>

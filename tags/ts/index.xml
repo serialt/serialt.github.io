@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>ts - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/ts/</link>
+        <description>ts - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Fri, 19 Sep 2025 21:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/ts/" rel="self" type="application/rss+xml" /><item>
+    <title>TS</title>
+    <link>https://serialt.github.io/posts/2025-09-19-ts/</link>
+    <pubDate>Fri, 19 Sep 2025 21:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-09-19-ts/</guid>
+    <description><![CDATA[TypeScript 1、基础语法 // 定义变量 let age: number = 25 let username: string = &#34;Alice&#34; let isAdmin: boolean = true // 数组与对象 let numbers: number[] = [1, 2, 3] let user: { id: number; name: string } = { id: 1, name: &#34;Tom&#34; } //接口 interface User { id: number name: string age?: number // 可]]></description>
+</item>
+</channel>
+</rss>

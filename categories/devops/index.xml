@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/categories/devops/</link>
         <description>DevOps - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 03 Sep 2025 21:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 12 Oct 2025 21:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/devops/" rel="self" type="application/rss+xml" /><item>
+    <title>ArgoCD</title>
+    <link>https://serialt.github.io/posts/2025-10-12-argocd/</link>
+    <pubDate>Sun, 12 Oct 2025 21:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-10-12-argocd/</guid>
+    <description><![CDATA[ArgoCD ArgoCD 是一个基于 GitOps 的持续交付（CD）工具，专门用于 Kubernetes 环境。它通过使用 Git 仓库作为应用程序的 &ldquo;源代码真相&rdquo;，自动化应用的部]]></description>
+</item>
+<item>
     <title>TF-dev</title>
     <link>https://serialt.github.io/posts/2025-09-03-dev-terraform-provider/</link>
     <pubDate>Wed, 03 Sep 2025 21:26:27 &#43;0800</pubDate>
@@ -75,14 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2024-08-29-other/</guid>
     <description><![CDATA[腾讯云轻量优化 #!/bin/bash #fuck tx process rm -rf /usr/local/sa rm -rf /usr/local/agenttools rm -rf /usr/local/qcloud process=(sap100 secu-tcs-agent sgagent64 barad_agent agent agentPlugInD pvdriver ) for i in ${process[@]} do for A in $(ps aux |grep $i |grep -v grep |awk &#39;{print $2}&#39;) do kill -9 $A done done chkconfig --level 35 postfix off service postfix stop echo &#39;&#39;&gt;/var/spool/cron/root echo &#39;#!/bin/bash&#39; &gt;/etc/rc.local git-code https://github.com/4x99/code6 RHE]]></description>
-</item>
-<item>
-    <title>metallb</title>
-    <link>https://serialt.github.io/posts/2024-08-11-metallb/</link>
-    <pubDate>Sun, 11 Aug 2024 19:34:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-08-11-metallb/</guid>
-    <description><![CDATA[MetalLB 自建k8s的 loadbalancer https://www.lixueduan.com/posts/cloudnative/01-metallb/ https://www.bboy.app/2021/01/11/metallb%E9%83%A8%E7%BD%B2%E4%BD%BF%E7%94%A8/ https://ieevee.com/tech/2019/06/30/metallb.html https://cloud.tencent.com/developer/article/2146391#:~:text=%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85,Metallb%E6%94%AF%E6%8C%81%E9%80%9A%E8%BF%87Kuberntes%E6%B8%85%E5%8D%95%E3%80%81Helm%E5%92%8CKustomize%E6%96%B9%E5%BC%8F%E8%BF%9B%E8%A1%8C%E9%83%A8%E7%BD%B2%EF%BC%8C%E6%9C%AC%E6%96%87%E6%88%91%E4%BB%AC%E5%B0%86%E4%BB%A5Kuberntes%E6%B8%85%E5%8D%95%E4%B8%BA%E4%BE%8B%E4%BB%8B%E7%BB%8D%E4%BA%A7%E5%93%81%E7%9A%84%E9%83%A8%E7%BD%B2%E5%AE%89%E8%A3%85%EF%BC%8C%E9%83%A8%E7%BD%B2%E7%9A%84%E7%89%88%E6%9C%AC%E4%B8%BA%E6%9C%80%E6%96%B0%E7%9A%84v0.13.4%E3%80%82 简介 在Kubernetes部署完成服务后，我们经常需要将服务开放给到外部用户访问 。如果是使用云平台（阿里云、腾讯云、]]></description>
 </item>
 </channel>
 </rss>

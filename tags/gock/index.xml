@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>gock - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/gock/</link>
+        <description>gock - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 02 Nov 2025 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/gock/" rel="self" type="application/rss+xml" /><item>
+    <title>Gock</title>
+    <link>https://serialt.github.io/posts/2025-11-2-go-mock/</link>
+    <pubDate>Sun, 02 Nov 2025 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-11-2-go-mock/</guid>
+    <description><![CDATA[Gock: ​ 开发项目的过程中总会遇到要调用依赖方接口的情况，如果依赖方的API接口还没有开发好，通常我们会先约定好API接口的请求参数、响应结构和各]]></description>
+</item>
+</channel>
+</rss>

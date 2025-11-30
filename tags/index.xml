@@ -4,7 +4,63 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 03 Sep 2025 21:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 22 Nov 2025 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>kratos</title>
+    <link>https://serialt.github.io/tags/kratos/</link>
+    <pubDate>Sat, 22 Nov 2025 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/kratos/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>test</title>
+    <link>https://serialt.github.io/tags/test/</link>
+    <pubDate>Sat, 22 Nov 2025 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/test/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>gock</title>
+    <link>https://serialt.github.io/tags/gock/</link>
+    <pubDate>Sun, 02 Nov 2025 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/gock/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>mock</title>
+    <link>https://serialt.github.io/tags/mock/</link>
+    <pubDate>Sun, 02 Nov 2025 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/mock/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>forticlient</title>
+    <link>https://serialt.github.io/tags/forticlient/</link>
+    <pubDate>Sun, 12 Oct 2025 22:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/forticlient/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>argocd</title>
+    <link>https://serialt.github.io/tags/argocd/</link>
+    <pubDate>Sun, 12 Oct 2025 21:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/argocd/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>ts</title>
+    <link>https://serialt.github.io/tags/ts/</link>
+    <pubDate>Fri, 19 Sep 2025 21:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/ts/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>terraform-dev</title>
     <link>https://serialt.github.io/tags/terraform-dev/</link>
     <pubDate>Wed, 03 Sep 2025 21:26:27 &#43;0800</pubDate>
@@ -26,62 +82,6 @@
     <pubDate>Sun, 17 Aug 2025 20:45:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/extension-pack/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>vscode</title>
-    <link>https://serialt.github.io/tags/vscode/</link>
-    <pubDate>Sun, 17 Aug 2025 20:45:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/vscode/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Go</title>
-    <link>https://serialt.github.io/tags/go/</link>
-    <pubDate>Sun, 17 Aug 2025 20:40:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/go/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>plugin</title>
-    <link>https://serialt.github.io/tags/plugin/</link>
-    <pubDate>Sun, 17 Aug 2025 20:40:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/plugin/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>gin</title>
-    <link>https://serialt.github.io/tags/gin/</link>
-    <pubDate>Sun, 13 Jul 2025 21:50:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/gin/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>exporter</title>
-    <link>https://serialt.github.io/tags/exporter/</link>
-    <pubDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/exporter/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Wire</title>
-    <link>https://serialt.github.io/tags/wire/</link>
-    <pubDate>Sat, 28 Jun 2025 20:40:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/wire/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Jellyfin</title>
-    <link>https://serialt.github.io/tags/jellyfin/</link>
-    <pubDate>Sun, 18 May 2025 20:38:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/jellyfin/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>
