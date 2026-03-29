@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/tags/redis/</link>
         <description>redis - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Fri, 11 Oct 2024 20:45:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/redis/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 17 Dec 2025 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/redis/" rel="self" type="application/rss+xml" /><item>
+    <title>go redis</title>
+    <link>https://serialt.github.io/posts/2025-12-17-go-redis/</link>
+    <pubDate>Wed, 17 Dec 2025 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-12-17-go-redis/</guid>
+    <description><![CDATA[Go Redis 使用 一、Redis数据结构和一些特性介绍 1、基本数据类型 字符串 string 列表 list 哈希 hash 集合 set 有序集合 sorted set 2、其他比较高级的数据结构 HyperLogLog 基数统计算法 Geospatial]]></description>
+</item>
+<item>
     <title>CloudBeaver</title>
     <link>https://serialt.github.io/posts/2024-10-11-cloudbeaver/</link>
     <pubDate>Fri, 11 Oct 2024 20:45:27 &#43;0800</pubDate>

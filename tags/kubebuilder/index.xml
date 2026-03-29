@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>kubebuilder - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/kubebuilder/</link>
+        <description>kubebuilder - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Fri, 12 Dec 2025 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/kubebuilder/" rel="self" type="application/rss+xml" /><item>
+    <title>kube-operator</title>
+    <link>https://serialt.github.io/posts/2025-12-12-kube-op/</link>
+    <pubDate>Fri, 12 Dec 2025 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-12-12-kube-op/</guid>
+    <description><![CDATA[kube-operator开发示例 使用 Kubebuilder 开发 Kubernetes Operator 是目前 Go 语言生态中最主流、最高效的方式。它是 Kubernetes 官方推荐的 SDK，基于 controller-runtime 和 controller-tools 构建，能自动生成 boilerplate]]></description>
+</item>
+</channel>
+</rss>

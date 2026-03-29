@@ -4,13 +4,61 @@
         <link>https://serialt.github.io/categories/go/</link>
         <description>Go - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 22 Nov 2025 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/go/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 08 Mar 2026 21:57:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/go/" rel="self" type="application/rss+xml" /><item>
+    <title>k8s hpa</title>
+    <link>https://serialt.github.io/posts/2026-03-08-hpa/</link>
+    <pubDate>Sun, 08 Mar 2026 21:57:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-03-08-hpa/</guid>
+    <description><![CDATA[HPA pod数扩容和缩减可以使用kubectl scale进行操作，这个是完全手动操作的，k8s提供一个自动scale，Horizontal Pod Au]]></description>
+</item>
+<item>
+    <title>gRPC</title>
+    <link>https://serialt.github.io/posts/2026-03-08-grpc/</link>
+    <pubDate>Sun, 08 Mar 2026 21:55:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-03-08-grpc/</guid>
+    <description><![CDATA[gRPC gRPC是Google开发的一种高性能的远程 procedure call（RPC）框架，它使用HTTP/2作为传输协议，Protocol Buffers（pr]]></description>
+</item>
+<item>
+    <title>go sync</title>
+    <link>https://serialt.github.io/posts/2026-03-08-go-sync/</link>
+    <pubDate>Sun, 08 Mar 2026 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-03-08-go-sync/</guid>
+    <description><![CDATA[go sync 包 1、sync.WaitGroup（等待组） 用途：等待一组 Goroutine 全部执行完成。常用于主程序等待后台任务结束，或者在批量处理任务时确保所有子任]]></description>
+</item>
+<item>
+    <title>BufBuild</title>
+    <link>https://serialt.github.io/posts/2026-03-07-bufbuild/</link>
+    <pubDate>Sat, 07 Mar 2026 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-03-07-bufbuild/</guid>
+    <description><![CDATA[BufBuild https://buf.build/docs/cli/installation/#homebrew syntax = &#34;proto3&#34;; package example; import &#34;google/api/annotations.proto&#34;; import &#34;google/protobuf/empty.proto&#34;; message GetUserRequest { string id = 1; } message User { string id = 1; string name = 2; } service UserService { // 定义 HTTP 映射: GET /v1/users/{id} rpc GetUser(GetUserRequest) returns (User) { option (google.api.http) = { get: &#34;/v1/users/{id}&#34; }; // 用于 Swagger 文档的描述 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = { summary: &]]></description>
+</item>
+<item>
+    <title>go redis</title>
+    <link>https://serialt.github.io/posts/2025-12-17-go-redis/</link>
+    <pubDate>Wed, 17 Dec 2025 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-12-17-go-redis/</guid>
+    <description><![CDATA[Go Redis 使用 一、Redis数据结构和一些特性介绍 1、基本数据类型 字符串 string 列表 list 哈希 hash 集合 set 有序集合 sorted set 2、其他比较高级的数据结构 HyperLogLog 基数统计算法 Geospatial]]></description>
+</item>
+<item>
+    <title>kube-operator</title>
+    <link>https://serialt.github.io/posts/2025-12-12-kube-op/</link>
+    <pubDate>Fri, 12 Dec 2025 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-12-12-kube-op/</guid>
+    <description><![CDATA[kube-operator开发示例 使用 Kubebuilder 开发 Kubernetes Operator 是目前 Go 语言生态中最主流、最高效的方式。它是 Kubernetes 官方推荐的 SDK，基于 controller-runtime 和 controller-tools 构建，能自动生成 boilerplate]]></description>
+</item>
+<item>
     <title>kratos</title>
     <link>https://serialt.github.io/posts/2025-11-22-kratos/</link>
     <pubDate>Sat, 22 Nov 2025 21:50:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2025-11-22-kratos/</guid>
-    <description><![CDATA[Go Kratos测试 1、测试repo层方法 glogger &#34;gorm.io/gorm/logger&#34; var ( ctx = context.Background() db *gorm.DB p = NewSugarRepo(log.DefaultLogger) bc conf.Bootstrap ) func init() { bcInit() var err error var dns = bc.Data.Database.Source db, err = gorm.Open(postgres.Open(dns), &amp;gorm.Config{ Logger: glogger.Default.LogMode(glogger.Info), }) if err != nil { panic(err) } } func bcInit() { c := config.New( config.WithSource( file.NewSource(&#34;../../../../configs&#34;),]]></description>
+    <description><![CDATA[Go Kratos测试 1、测试repo层方法 glogger &#34;gorm.io/gorm/logger&#34; &#34;github.com/go-kratos/kratos/v2/log&#34; var ( msg = &#34;hello&#34; ctx = context.Context db *gorm.DB p = NewSugarRepo(log.DefaultLogger) bc conf.Bootstrap ) func init() { bcInit() var err error var dns = bc.Data.Database.Source db, err = gorm.Open(postgres.Open(dns), &amp;gorm.Config{ Logger: glogger.Default.LogMode(glogger.Info), }) if err != nil { panic(err) } md := metadata.New(map[string]string{ &#34;message&#34;: msg,]]></description>
 </item>
 <item>
     <title>Gock</title>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>kube-operator - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="kube-operator" />
+<meta property="og:description" content="kube-operator开发示例 使用 Kubebuilder 开发 Kubernetes Operator 是目前 Go 语言生态中最主流、最高效的方式。它是 Kubernetes 官方推荐的 SDK，基于 controller-runtime 和 controller-tools 构建，能自动生成 boilerplate" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2025-12-12-kube-op/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-12-12T21:50:01+08:00" />
+<meta property="article:modified_time" content="2025-12-12T21:50:01+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="kube-operator"/>
+<meta name="twitter:description" content="kube-operator开发示例 使用 Kubebuilder 开发 Kubernetes Operator 是目前 Go 语言生态中最主流、最高效的方式。它是 Kubernetes 官方推荐的 SDK，基于 controller-runtime 和 controller-tools 构建，能自动生成 boilerplate"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2025-12-12-kube-op/" /><link rel="prev" href="https://serialt.github.io/posts/2025-11-22-kratos/" /><link rel="next" href="https://serialt.github.io/posts/2025-12-17-go-redis/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "kube-operator",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2025-12-12-kube-op\/"
+        },"genre": "posts","keywords": "kube-operator, kubebuilder","wordcount":  953 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2025-12-12-kube-op\/","datePublished": "2025-12-12T21:50:01+08:00","dateModified": "2025-12-12T21:50:01+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">kube-operator</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-12-12">2025-12-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;953 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1核心概念">1、核心概念</a></li>
+        <li><a href="#生产集成测试">生产/集成测试</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>kube-operator开发示例</p>
+<p>使用 <strong>Kubebuilder</strong> 开发 Kubernetes Operator 是目前 Go 语言生态中最主流、最高效的方式。它是 Kubernetes 官方推荐的 SDK，基于 <code>controller-runtime</code> 和 <code>controller-tools</code> 构建，能自动生成 boilerplate 代码，让专注于业务逻辑。</p>
+<h3 id="1核心概念">1、核心概念</h3>
+<ol>
+<li><strong>CRD (Custom Resource Definition)</strong>: 定义自定义资源（如 <code>MyApp</code>），扩展 Kubernetes API。</li>
+<li><strong>Controller (控制器)</strong>: 一个运行在集群内的循环进程，不断对比 <strong>期望状态 (Spec)</strong> 和 <strong>实际状态 (Status)</strong>，并执行操作使两者一致（Reconcile）。</li>
+<li><strong>Operator</strong>: CRD + Controller 的组合，用于自动化运维复杂应用。</li>
+</ol>
+<p>使用kubebuilder开发</p>
+<p>1、初始化项目</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 创建项目目录</span>
+</span></span><span class="line"><span class="cl">mkdir web-op <span class="o">&amp;&amp;</span> <span class="nb">cd</span> web-op
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#初始化</span>
+</span></span><span class="line"><span class="cl">kubebuilder init --domain<span class="o">=</span>web.imau.cc  --repo<span class="o">=</span>github.com/serialt/web-operator  --owner<span class="o">=</span>serialt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#创建api</span>
+</span></span><span class="line"><span class="cl">kubebuilder create api --group webapp --version v1 --kind Guestbook
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c1"># 下载依赖</span>
+</span></span><span class="line"><span class="cl">go mod tidy
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装CRD资源到集群内</span>
+</span></span><span class="line"><span class="cl">make install
+</span></span><span class="line"><span class="cl"><span class="o">[</span>serialt@Krab redis-operator<span class="o">]</span>🐳 make install
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;/Users/serialt/github/kube-op/redis-operator/bin/controller-gen&#34;</span> rbac:roleName<span class="o">=</span>manager-role crd webhook <span class="nv">paths</span><span class="o">=</span><span class="s2">&#34;./...&#34;</span> output:crd:artifacts:config<span class="o">=</span>config/crd/bases
+</span></span><span class="line"><span class="cl">Downloading sigs.k8s.io/kustomize/kustomize/v5@v5.7.1
+</span></span><span class="line"><span class="cl">customresourcedefinition.apiextensions.k8s.io/redis.myapp.redis.imau.cc created
+</span></span><span class="line"><span class="cl"><span class="o">[</span>serialt@Krab redis-operator<span class="o">]</span>🐳 k get crd
+</span></span><span class="line"><span class="cl">NAME                                       CREATED AT
+</span></span><span class="line"><span class="cl">redis.myapp.redis.imau.cc                  2025-12-15T10:20:58Z
+</span></span></code></pre></div><p>2、自定义CRD</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// api/v1/guestbook_types.go
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">GuestbookSpec</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Replicas</span> <span class="kt">int32</span>  <span class="s">`json:&#34;replicas&#34;`</span> <span class="c1">// 对应 YAML 的 `spec.replicas`
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">Image</span>    <span class="kt">string</span> <span class="s">`json:&#34;image&#34;`</span>    <span class="c1">// 对应 YAML 的 `spec.image`
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">Port</span>     <span class="kt">int32</span>  <span class="s">`json:&#34;port&#34;`</span>     <span class="c1">// 应用监听的端口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">GuestbookStatus</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// +listType=map
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// +listMapKey=type
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// +optional
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">Conditions</span>        <span class="p">[]</span><span class="nx">metav1</span><span class="p">.</span><span class="nx">Condition</span> <span class="s">`json:&#34;conditions,omitempty&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">AvailableReplicas</span> <span class="kt">int32</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>生成文件</p>
+<pre tabindex="0"><code>[serialt@Krab web-op]🐳 make
+</code></pre><p>3、实现业务逻辑</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">appsv1</span> <span class="s">&#34;k8s.io/api/apps/v1&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">corev1</span> <span class="s">&#34;k8s.io/api/core/v1&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">apierrors</span> <span class="s">&#34;k8s.io/apimachinery/pkg/api/errors&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">metav1</span> <span class="s">&#34;k8s.io/apimachinery/pkg/apis/meta/v1&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;k8s.io/apimachinery/pkg/runtime&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctrl</span> <span class="s">&#34;sigs.k8s.io/controller-runtime&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;sigs.k8s.io/controller-runtime/pkg/client&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;sigs.k8s.io/controller-runtime/pkg/controller/controllerutil&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">logf</span> <span class="s">&#34;sigs.k8s.io/controller-runtime/pkg/log&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">webappv1</span> <span class="s">&#34;github.com/serialt/web-operator/api/v1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">GuestbookReconciler</span><span class="p">)</span> <span class="nf">Reconcile</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">req</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">(</span><span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">logger</span> <span class="o">:=</span> <span class="nx">log</span><span class="p">.</span><span class="nf">FromContext</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 获取 CR 实例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">guestbook</span> <span class="o">:=</span> <span class="nx">webappv1</span><span class="p">.</span><span class="nx">Guestbook</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">NamespacedName</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">guestbook</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">apierrors</span><span class="p">.</span><span class="nf">IsNotFound</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 资源已被物理删除，无需处理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="k">return</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">{},</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">{},</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">labels</span> <span class="o">:=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="s">&#34;app&#34;</span><span class="p">:</span> <span class="nx">guestbook</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">deployment</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">appsv1</span><span class="p">.</span><span class="nx">Deployment</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ObjectMeta</span><span class="p">:</span> <span class="nx">metav1</span><span class="p">.</span><span class="nx">ObjectMeta</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Name</span><span class="p">:</span>      <span class="nx">guestbook</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Namespace</span><span class="p">:</span> <span class="nx">guestbook</span><span class="p">.</span><span class="nx">Namespace</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">controllerutil</span><span class="p">.</span><span class="nf">SetControllerReference</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">guestbook</span><span class="p">,</span> <span class="nx">deployment</span><span class="p">,</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Scheme</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">{},</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">    <span class="c1">// 关键操作 ：CreateOrUpdate
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 如果 Deployment 不存在则创建，存在则更新到最新状态
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">result</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">controllerutil</span><span class="p">.</span><span class="nf">CreateOrUpdate</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Client</span><span class="p">,</span> <span class="nx">deployment</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 示例：创建或更新一个 Deployment
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 在此函数中更新 Deployment 的期望状态
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">deployment</span><span class="p">.</span><span class="nx">Spec</span> <span class="p">=</span> <span class="nx">appsv1</span><span class="p">.</span><span class="nx">DeploymentSpec</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Replicas</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">guestbook</span><span class="p">.</span><span class="nx">Spec</span><span class="p">.</span><span class="nx">Replicas</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Selector</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">metav1</span><span class="p">.</span><span class="nx">LabelSelector</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">MatchLabels</span><span class="p">:</span> <span class="nx">labels</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Template</span><span class="p">:</span> <span class="nx">corev1</span><span class="p">.</span><span class="nx">PodTemplateSpec</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">ObjectMeta</span><span class="p">:</span> <span class="nx">metav1</span><span class="p">.</span><span class="nx">ObjectMeta</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">Labels</span><span class="p">:</span> <span class="nx">labels</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="p">},</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Spec</span><span class="p">:</span> <span class="nx">corev1</span><span class="p">.</span><span class="nx">PodSpec</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">Containers</span><span class="p">:</span> <span class="p">[]</span><span class="nx">corev1</span><span class="p">.</span><span class="nx">Container</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">						<span class="p">{</span>
+</span></span><span class="line"><span class="cl">							<span class="nx">Name</span><span class="p">:</span>  <span class="nx">guestbook</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">							<span class="nx">Image</span><span class="p">:</span> <span class="nx">guestbook</span><span class="p">.</span><span class="nx">Spec</span><span class="p">.</span><span class="nx">Image</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">							<span class="nx">Ports</span><span class="p">:</span> <span class="p">[]</span><span class="nx">corev1</span><span class="p">.</span><span class="nx">ContainerPort</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">								<span class="p">{</span>
+</span></span><span class="line"><span class="cl">									<span class="nx">ContainerPort</span><span class="p">:</span> <span class="nx">guestbook</span><span class="p">.</span><span class="nx">Spec</span><span class="p">.</span><span class="nx">Port</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">								<span class="p">},</span>
+</span></span><span class="line"><span class="cl">							<span class="p">},</span>
+</span></span><span class="line"><span class="cl">						<span class="p">},</span>
+</span></span><span class="line"><span class="cl">					<span class="p">},</span>
+</span></span><span class="line"><span class="cl">				<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">        <span class="c1">// 关键操作：设置 OwnerReference
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    	<span class="c1">// 确保删除 Guestbook CR 时，自动清理关联的 Deployment
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">controllerutil</span><span class="p">.</span><span class="nf">SetControllerReference</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">guestbook</span><span class="p">,</span> <span class="nx">deployment</span><span class="p">,</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Scheme</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">logger</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;Failed to create or update Deployment&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">guestbook</span><span class="p">.</span><span class="nx">Status</span><span class="p">.</span><span class="nx">AvailableReplicas</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">{},</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">logger</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;Deployment操作结果&#34;</span><span class="p">,</span> <span class="s">&#34;result&#34;</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">{},</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>4、部署本地测试</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 生成CRD YAML</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>serialt@Krab web-op<span class="o">]</span>🐳 make manifests
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 部署本地集群</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>serialt@Krab web-op<span class="o">]</span>🐳 make install
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;/Users/serialt/github/kube-op/web-op/bin/controller-gen&#34;</span> rbac:roleName<span class="o">=</span>manager-role crd webhook <span class="nv">paths</span><span class="o">=</span><span class="s2">&#34;./...&#34;</span> output:crd:artifacts:config<span class="o">=</span>config/crd/bases
+</span></span><span class="line"><span class="cl">Downloading sigs.k8s.io/kustomize/kustomize/v5@v5.7.1
+</span></span><span class="line"><span class="cl">customresourcedefinition.apiextensions.k8s.io/guestbooks.webapp.web.imau.cc created
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 本地</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>serialt@Krab web-op<span class="o">]</span>🐳 make install
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 测试的yaml</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># config/samples/webapp_v1_guestbook.yaml</span>
+</span></span><span class="line"><span class="cl">apiVersion: webapp.web.imau.cc/v1
+</span></span><span class="line"><span class="cl">kind: Guestbook
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  labels:
+</span></span><span class="line"><span class="cl">    app.kubernetes.io/name: web-op
+</span></span><span class="line"><span class="cl">    app.kubernetes.io/managed-by: kustomize
+</span></span><span class="line"><span class="cl">  name: guestbook-sample
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  <span class="c1"># TODO(user): Add fields here</span>
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">3</span>
+</span></span><span class="line"><span class="cl">  image: registry.cn-hangzhou.aliyuncs.com/serialt/nginx:1.28-alpine
+</span></span><span class="line"><span class="cl">  port: <span class="m">8080</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># 执行后可以看到3个pod</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>serialt@Krab web-op<span class="o">]</span>🐳 kubectl apply -f   config/samples/webapp_v1_guestbook.yaml
+</span></span></code></pre></div><h3 id="生产集成测试">生产/集成测试</h3>
+<p>将控制器打包成镜像部署到集群。</p>
+<p>1、构建并推送镜像：</p>
+<pre tabindex="0"><code># 设置镜像仓库
+# export IMG=registry.cn-hangzhou.aliyuncs.com/serialt/web-op 
+
+# 当前系统与节点系统相同
+make docker-build docker-push IMG=registry.cn-hangzhou.aliyuncs.com/serialt/web-op 
+
+
+# 构建多架构镜像
+make docker-buildx PLATFORMS=linux/amd64 IMG=registry.cn-hangzhou.aliyuncs.com/serialt/web-op 
+</code></pre><p>2、部署到集群：</p>
+<pre tabindex="0"><code>make deploy IMG=registry.cn-hangzhou.aliyuncs.com/serialt/web-op 
+</code></pre></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-12-12</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/kube-operator/">kube-operator</a>,&nbsp;<a href="/tags/kubebuilder/">kubebuilder</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2025-11-22-kratos/" class="prev" rel="prev" title="kratos"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>kratos</a>
+            <a href="/posts/2025-12-17-go-redis/" class="next" rel="next" title="go redis">go redis<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

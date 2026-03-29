@@ -4,13 +4,61 @@
         <link>https://serialt.github.io/posts/</link>
         <description>All Posts | Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 22 Nov 2025 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 08 Mar 2026 21:57:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>k8s hpa</title>
+    <link>https://serialt.github.io/posts/2026-03-08-hpa/</link>
+    <pubDate>Sun, 08 Mar 2026 21:57:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-03-08-hpa/</guid>
+    <description><![CDATA[HPA pod数扩容和缩减可以使用kubectl scale进行操作，这个是完全手动操作的，k8s提供一个自动scale，Horizontal Pod Au]]></description>
+</item>
+<item>
+    <title>gRPC</title>
+    <link>https://serialt.github.io/posts/2026-03-08-grpc/</link>
+    <pubDate>Sun, 08 Mar 2026 21:55:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-03-08-grpc/</guid>
+    <description><![CDATA[gRPC gRPC是Google开发的一种高性能的远程 procedure call（RPC）框架，它使用HTTP/2作为传输协议，Protocol Buffers（pr]]></description>
+</item>
+<item>
+    <title>go sync</title>
+    <link>https://serialt.github.io/posts/2026-03-08-go-sync/</link>
+    <pubDate>Sun, 08 Mar 2026 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-03-08-go-sync/</guid>
+    <description><![CDATA[go sync 包 1、sync.WaitGroup（等待组） 用途：等待一组 Goroutine 全部执行完成。常用于主程序等待后台任务结束，或者在批量处理任务时确保所有子任]]></description>
+</item>
+<item>
+    <title>BufBuild</title>
+    <link>https://serialt.github.io/posts/2026-03-07-bufbuild/</link>
+    <pubDate>Sat, 07 Mar 2026 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-03-07-bufbuild/</guid>
+    <description><![CDATA[BufBuild https://buf.build/docs/cli/installation/#homebrew syntax = &#34;proto3&#34;; package example; import &#34;google/api/annotations.proto&#34;; import &#34;google/protobuf/empty.proto&#34;; message GetUserRequest { string id = 1; } message User { string id = 1; string name = 2; } service UserService { // 定义 HTTP 映射: GET /v1/users/{id} rpc GetUser(GetUserRequest) returns (User) { option (google.api.http) = { get: &#34;/v1/users/{id}&#34; }; // 用于 Swagger 文档的描述 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = { summary: &]]></description>
+</item>
+<item>
+    <title>go redis</title>
+    <link>https://serialt.github.io/posts/2025-12-17-go-redis/</link>
+    <pubDate>Wed, 17 Dec 2025 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-12-17-go-redis/</guid>
+    <description><![CDATA[Go Redis 使用 一、Redis数据结构和一些特性介绍 1、基本数据类型 字符串 string 列表 list 哈希 hash 集合 set 有序集合 sorted set 2、其他比较高级的数据结构 HyperLogLog 基数统计算法 Geospatial]]></description>
+</item>
+<item>
+    <title>kube-operator</title>
+    <link>https://serialt.github.io/posts/2025-12-12-kube-op/</link>
+    <pubDate>Fri, 12 Dec 2025 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-12-12-kube-op/</guid>
+    <description><![CDATA[kube-operator开发示例 使用 Kubebuilder 开发 Kubernetes Operator 是目前 Go 语言生态中最主流、最高效的方式。它是 Kubernetes 官方推荐的 SDK，基于 controller-runtime 和 controller-tools 构建，能自动生成 boilerplate]]></description>
+</item>
+<item>
     <title>kratos</title>
     <link>https://serialt.github.io/posts/2025-11-22-kratos/</link>
     <pubDate>Sat, 22 Nov 2025 21:50:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2025-11-22-kratos/</guid>
-    <description><![CDATA[Go Kratos测试 1、测试repo层方法 glogger &#34;gorm.io/gorm/logger&#34; var ( ctx = context.Background() db *gorm.DB p = NewSugarRepo(log.DefaultLogger) bc conf.Bootstrap ) func init() { bcInit() var err error var dns = bc.Data.Database.Source db, err = gorm.Open(postgres.Open(dns), &amp;gorm.Config{ Logger: glogger.Default.LogMode(glogger.Info), }) if err != nil { panic(err) } } func bcInit() { c := config.New( config.WithSource( file.NewSource(&#34;../../../../configs&#34;),]]></description>
+    <description><![CDATA[Go Kratos测试 1、测试repo层方法 glogger &#34;gorm.io/gorm/logger&#34; &#34;github.com/go-kratos/kratos/v2/log&#34; var ( msg = &#34;hello&#34; ctx = context.Context db *gorm.DB p = NewSugarRepo(log.DefaultLogger) bc conf.Bootstrap ) func init() { bcInit() var err error var dns = bc.Data.Database.Source db, err = gorm.Open(postgres.Open(dns), &amp;gorm.Config{ Logger: glogger.Default.LogMode(glogger.Info), }) if err != nil { panic(err) } md := metadata.New(map[string]string{ &#34;message&#34;: msg,]]></description>
 </item>
 <item>
     <title>Gock</title>
@@ -34,55 +82,7 @@
     <pubDate>Sun, 12 Oct 2025 21:26:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2025-10-12-argocd/</guid>
-    <description><![CDATA[ArgoCD ArgoCD 是一个基于 GitOps 的持续交付（CD）工具，专门用于 Kubernetes 环境。它通过使用 Git 仓库作为应用程序的 &ldquo;源代码真相&rdquo;，自动化应用的部]]></description>
-</item>
-<item>
-    <title>TS</title>
-    <link>https://serialt.github.io/posts/2025-09-19-ts/</link>
-    <pubDate>Fri, 19 Sep 2025 21:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2025-09-19-ts/</guid>
-    <description><![CDATA[TypeScript 1、基础语法 // 定义变量 let age: number = 25 let username: string = &#34;Alice&#34; let isAdmin: boolean = true // 数组与对象 let numbers: number[] = [1, 2, 3] let user: { id: number; name: string } = { id: 1, name: &#34;Tom&#34; } //接口 interface User { id: number name: string age?: number // 可]]></description>
-</item>
-<item>
-    <title>TF-dev</title>
-    <link>https://serialt.github.io/posts/2025-09-03-dev-terraform-provider/</link>
-    <pubDate>Wed, 03 Sep 2025 21:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2025-09-03-dev-terraform-provider/</guid>
-    <description><![CDATA[Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # makefile default: install build: go build -v ./... install: go install -v ./... vscode 调试 terraform provider 1）vscode launch cat .vscode/launch.json {]]></description>
-</item>
-<item>
-    <title>VSCode Extension Pack</title>
-    <link>https://serialt.github.io/posts/2025-08-17-vscode-extension-pack/</link>
-    <pubDate>Sun, 17 Aug 2025 20:45:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2025-08-17-vscode-extension-pack/</guid>
-    <description><![CDATA[VSCode Extension Pack vscode扩展包 在使用vscode的时候，需要安装各种各类的插件来满足不同的功能，在新安装vscode或者切换其他机器的时候，会因为]]></description>
-</item>
-<item>
-    <title>Go Plugin</title>
-    <link>https://serialt.github.io/posts/2025-08-17-go-plugin/</link>
-    <pubDate>Sun, 17 Aug 2025 20:40:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2025-08-17-go-plugin/</guid>
-    <description><![CDATA[go plugin [serialt@Krab plugin]🐳 tree . . ├── go.mod ├── kk │ ├── kk.go │ └── kk.so ├── ks └── main.go // kk.go package main import &#34;fmt&#34; func Greet(name string) { fmt.Println(&#34;Hello&#34;, name) } func main() {} // main.go package main import ( &#34;log&#34; &#34;plugin&#34; ) func main() { p, err]]></description>
-</item>
-<item>
-    <title>Simple-Gin</title>
-    <link>https://serialt.github.io/posts/2025-07-13-gin/</link>
-    <pubDate>Sun, 13 Jul 2025 21:50:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2025-07-13-gin/</guid>
-    <description><![CDATA[Simple Gin package main import ( &#34;fmt&#34; &#34;log/slog&#34; &#34;net/http&#34; &#34;time&#34; &#34;github.com/gin-gonic/gin&#34; &#34;github.com/prometheus/client_golang/prometheus&#34; &#34;github.com/prometheus/client_golang/prometheus/promhttp&#34; ) type msg struct { Count int64 `json:&#34;count&#34;` } var pingCounter = prometheus.NewCounter( prometheus.CounterOpts{ Name: &#34;ping_request_count&#34;, Help: &#34;No of request handled by Ping handler&#34;, }, ) var httpReqs = prometheus.NewCounterVec( prometheus.CounterOpts{ Name: &#34;http_requests_total&#34;, Help: &#34;How many HTTP requests processed, partitioned by status code and HTTP method.&#34;, }, []string{&#34;code&#34;, &#34;method&#34;}, ) func PromHandler(handler http.Handler) gin.HandlerFunc { return func(c]]></description>
-</item>
-<item>
-    <title>Go exporter</title>
-    <link>https://serialt.github.io/posts/2025-07-13-exporter/</link>
-    <pubDate>Sun, 13 Jul 2025 20:50:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2025-07-13-exporter/</guid>
-    <description><![CDATA[Exporter 开发 Prometheus Exporter是一个用来收集和暴露指标数据的工具，通过与Prometheus监控系统一起使用。它的结构包括两个组件：Collect]]></description>
+    <description><![CDATA[ArgoCD https://www.cnblogs.com/evescn/p/17606149.html 一、ArgoCD介绍 Argo CD 是一个为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。Argo CD 可在 Git 存储库更改时自动同步和部署应用程序 工作原理： Argo]]></description>
 </item>
 </channel>
 </rss>

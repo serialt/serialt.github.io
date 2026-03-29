@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>go-sync - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/go-sync/</link>
+        <description>go-sync - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 08 Mar 2026 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/go-sync/" rel="self" type="application/rss+xml" /><item>
+    <title>go sync</title>
+    <link>https://serialt.github.io/posts/2026-03-08-go-sync/</link>
+    <pubDate>Sun, 08 Mar 2026 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-03-08-go-sync/</guid>
+    <description><![CDATA[go sync 包 1、sync.WaitGroup（等待组） 用途：等待一组 Goroutine 全部执行完成。常用于主程序等待后台任务结束，或者在批量处理任务时确保所有子任]]></description>
+</item>
+</channel>
+</rss>

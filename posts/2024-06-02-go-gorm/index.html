@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-06-02-go-gorm\/"
-        },"genre": "posts","keywords": "Go, gorm","wordcount":  2247 ,
+        },"genre": "posts","keywords": "Go, gorm","wordcount":  2287 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-06-02-go-gorm\/","datePublished": "2024-06-02T10:29:01+08:00","dateModified": "2024-06-02T10:29:01+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Go gorm</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-02">2024-06-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2247 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-02">2024-06-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2287 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -397,7 +397,18 @@ go get -u github.com/glebarez/sqlite
 		err = s.repo.CreateUser(ctx, tx, []*model.User{user})
 		return
 	})
-</code></pre></div><div class="post-footer" id="post-footer">
+</code></pre><p>配置开发模式打印sql</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl">    <span class="c1">// 	gormlogger &#34;gorm.io/gorm/logger&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">source</span> <span class="o">:=</span> <span class="s">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">envName</span> <span class="o">:=</span> <span class="s">&#34;dev&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">logLevel</span> <span class="o">:=</span> <span class="nx">gormlogger</span><span class="p">.</span><span class="nx">Warn</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">slices</span><span class="p">.</span><span class="nf">Contains</span><span class="p">([]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;local&#34;</span><span class="p">,</span> <span class="s">&#34;dev&#34;</span><span class="p">},</span> <span class="nx">envName</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">logLevel</span> <span class="p">=</span> <span class="nx">gormlogger</span><span class="p">.</span><span class="nx">Info</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">gormdb</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">gorm</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="nx">postgres</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="nx">source</span><span class="p">),</span> <span class="o">&amp;</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Logger</span><span class="p">:</span> <span class="nx">gormlogger</span><span class="p">.</span><span class="nx">Default</span><span class="p">.</span><span class="nf">LogMode</span><span class="p">(</span><span class="nx">logLevel</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

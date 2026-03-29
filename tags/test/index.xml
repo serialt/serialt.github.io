@@ -10,7 +10,7 @@
     <pubDate>Sat, 22 Nov 2025 21:50:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2025-11-22-kratos/</guid>
-    <description><![CDATA[Go Kratos测试 1、测试repo层方法 glogger &#34;gorm.io/gorm/logger&#34; var ( ctx = context.Background() db *gorm.DB p = NewSugarRepo(log.DefaultLogger) bc conf.Bootstrap ) func init() { bcInit() var err error var dns = bc.Data.Database.Source db, err = gorm.Open(postgres.Open(dns), &amp;gorm.Config{ Logger: glogger.Default.LogMode(glogger.Info), }) if err != nil { panic(err) } } func bcInit() { c := config.New( config.WithSource( file.NewSource(&#34;../../../../configs&#34;),]]></description>
+    <description><![CDATA[Go Kratos测试 1、测试repo层方法 glogger &#34;gorm.io/gorm/logger&#34; &#34;github.com/go-kratos/kratos/v2/log&#34; var ( msg = &#34;hello&#34; ctx = context.Context db *gorm.DB p = NewSugarRepo(log.DefaultLogger) bc conf.Bootstrap ) func init() { bcInit() var err error var dns = bc.Data.Database.Source db, err = gorm.Open(postgres.Open(dns), &amp;gorm.Config{ Logger: glogger.Default.LogMode(glogger.Info), }) if err != nil { panic(err) } md := metadata.New(map[string]string{ &#34;message&#34;: msg,]]></description>
 </item>
 </channel>
 </rss>

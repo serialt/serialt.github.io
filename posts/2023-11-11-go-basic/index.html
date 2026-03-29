@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2023-11-11-go-basic\/"
-        },"genre": "posts","keywords": "Go, basic","wordcount":  2059 ,
+        },"genre": "posts","keywords": "Go, basic","wordcount":  2167 ,
         "url": "https:\/\/serialt.github.io\/posts\/2023-11-11-go-basic\/","datePublished": "2024-08-11T10:26:09+08:00","dateModified": "2024-08-11T10:26:09+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Go basic</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%9F%BA%E7%A1%80/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 基础</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-08-11">2024-08-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2059 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-08-11">2024-08-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2167 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -304,6 +304,12 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># go get/install 默认是走https的，默认go get发起请求使用的是HTTPS，如果自己的私有服务是HTTP的，则需要配置下。</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">go env -w <span class="nv">GOINSECURE</span><span class="o">=</span>git.local.com
+</span></span></code></pre></div><p>gitlab：go官方不支持Gitlab的subgroup模式，gitlab需要配置<code>~/.netrc</code>才能正常下载依赖</p>
+<p><a href="https://gitlab.com/gitlab-org/gitlab/-/issues/36354" target="_blank" rel="noopener noreffer ">Gitlab Subgroup Bug</a></p>
+<p><a href="https://zhangguanzhang.github.io/2025/06/17/golang-gitlab-subgroup/" target="_blank" rel="noopener noreffer ">subgroup bug</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 替换掉jerry和jerryPassword为实际的用户名和密码</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@Krab ~<span class="o">]</span>🐳 cat ~/.netrc 
+</span></span><span class="line"><span class="cl">machine gitlab.local.com login jerry password jerryPassword
 </span></span></code></pre></div><h2 id="7makefile">7、makefile</h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="c"># ========================
 </span></span></span><span class="line"><span class="cl"><span class="c"># Project Info

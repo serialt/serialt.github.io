@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>go redis - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="go redis" />
+<meta property="og:description" content="Go Redis 使用 一、Redis数据结构和一些特性介绍 1、基本数据类型 字符串 string 列表 list 哈希 hash 集合 set 有序集合 sorted set 2、其他比较高级的数据结构 HyperLogLog 基数统计算法 Geospatial" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2025-12-17-go-redis/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-12-17T21:50:01+08:00" />
+<meta property="article:modified_time" content="2025-12-17T21:50:01+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="go redis"/>
+<meta name="twitter:description" content="Go Redis 使用 一、Redis数据结构和一些特性介绍 1、基本数据类型 字符串 string 列表 list 哈希 hash 集合 set 有序集合 sorted set 2、其他比较高级的数据结构 HyperLogLog 基数统计算法 Geospatial"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2025-12-17-go-redis/" /><link rel="prev" href="https://serialt.github.io/posts/2025-12-12-kube-op/" /><link rel="next" href="https://serialt.github.io/posts/2026-03-07-bufbuild/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "go redis",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2025-12-17-go-redis\/"
+        },"genre": "posts","keywords": "redis","wordcount":  4413 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2025-12-17-go-redis\/","datePublished": "2025-12-17T21:50:01+08:00","dateModified": "2025-12-17T21:50:01+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">go redis</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-12-17">2025-12-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4413 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一redis数据结构和一些特性介绍">一、Redis数据结构和一些特性介绍</a>
+      <ul>
+        <li><a href="#1基本数据类型">1、基本数据类型</a></li>
+        <li><a href="#2其他比较高级的数据结构">2、其他比较高级的数据结构</a></li>
+        <li><a href="#3特殊功能">3、特殊功能</a></li>
+        <li><a href="#4最基本的setget操作">4、最基本的Set/Get操作</a></li>
+        <li><a href="#5五种基本数据类型">5、五种基本数据类型</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="go-redis-使用">Go Redis 使用</h1>
+<h2 id="一redis数据结构和一些特性介绍">一、Redis数据结构和一些特性介绍</h2>
+<h3 id="1基本数据类型">1、基本数据类型</h3>
+<ul>
+<li>字符串 string</li>
+<li>列表 list</li>
+<li>哈希 hash</li>
+<li>集合 set</li>
+<li>有序集合 sorted set</li>
+</ul>
+<h3 id="2其他比较高级的数据结构">2、其他比较高级的数据结构</h3>
+<ul>
+<li>HyperLogLog 基数统计算法</li>
+<li>Geospatial index 地理空间索引</li>
+<li>Stream 流</li>
+<li>Bitmap 位图</li>
+</ul>
+<h3 id="3特殊功能">3、特殊功能</h3>
+<ul>
+<li>pub/sub</li>
+<li>transaction</li>
+<li>Lua Scripts</li>
+<li>pipeline</li>
+</ul>
+<h3 id="4最基本的setget操作">4、最基本的Set/Get操作</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;time&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/go-redis/redis/v8&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">rdb</span> <span class="o">:=</span> <span class="nx">redis</span><span class="p">.</span><span class="nf">NewClient</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Options</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Addr</span><span class="p">:</span>        <span class="s">&#34;localhost:6379&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Password</span><span class="p">:</span>    <span class="s">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">DB</span><span class="p">:</span>          <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">IdleTimeout</span><span class="p">:</span> <span class="mi">350</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">PoolSize</span><span class="p">:</span>    <span class="mi">50</span><span class="p">,</span> <span class="c1">// 连接池连接数量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span><span class="p">,</span> <span class="nx">cancel</span> <span class="o">:=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">WithTimeout</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">(),</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nf">cancel</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">Ping</span><span class="p">(</span><span class="nx">ctx</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span> <span class="c1">// 检查连接redis是否成功
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Connect Failed: %v \n&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="p">=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 设置 key 的值，0 表示永不过期
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">err</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey-1&#34;</span><span class="p">,</span> <span class="s">&#34;value-1&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">).</span><span class="nf">Err</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 设置 key 的值的过期时间为 30 秒
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">err</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey-2&#34;</span><span class="p">,</span> <span class="s">&#34;value-2&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="o">*</span><span class="mi">30</span><span class="p">).</span><span class="nf">Err</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 获取key的值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">val</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey-1&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">==</span> <span class="nx">redis</span><span class="p">.</span><span class="nx">Nil</span> <span class="p">{</span> <span class="c1">// 如果返回 redis.Nil 说明key不存在
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;key not exixt&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Get Val error: &#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Get Val: &#34;</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">val</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey-2&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Get Val setkey-2: &#34;</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="5五种基本数据类型">5、五种基本数据类型</h3>
+<h4 id="string">string</h4>
+<blockquote>
+<p>1.SET/GET：设置获取值。</p>
+<p>2.SETNX/EXISTS：SETNX设置并指定过期时间仅key不存在，EXISTS 检查某个 key 是否存在。</p>
+<p>3.MSET/MGET：批量设置获取值。</p>
+<p>4.DEL：删除值。</p>
+<p>5.INCR/INCRBY - DECR/DECRBY：INCR 原子加1，INCRBY 加具体数值。DECR/DECRBY 刚好相反。</p>
+<p>6.GetRange：字符串截取，返回字符串的总长度。</p>
+<p>7.Expire/ExpireAt/TTL：设置值的过期时间端/点。TTL 获取过期的时间。</p>
+<p>8.StrLen：获取key的值长度</p>
+</blockquote>
+<h4 id="list">list</h4>
+<p>list 列表是一个字符串列表，可以从头部或尾部插入元素。</p>
+<blockquote>
+<p>1.1.LPUSH：list头部(左边)插入值，最后的值在最前面。LPUSHX 仅当列表值存在时才插入值</p>
+<p>2.LPOP：移除列表的头部值并返回这个值</p>
+<p>3.RPUSH：list尾部(右边)插入值。RPUSHX 仅当列表值存在才插入值</p>
+<p>4.RPOP：移除列表的尾部值并返回这个值</p>
+<p>5.LRANGE：返回key列表指定区间的值</p>
+<p>6.BLPOP: 语法 <code>BLPOP key [key ...] timeout</code>，从 key 列表头部弹出一个值，没有就阻塞 timeout 秒，如果 timeout=0 则一直阻塞</p>
+<p>7.BRPOP：与上面 BLPOP 用法相似，只不过 BRPOP 是从尾部弹出一个值</p>
+<p>8.LLEN：返回列表的长度</p>
+<p>9.LINSERT：在指定位置插入数据</p>
+<p>10.LREM：删除列表中的数据</p>
+<p>11.LINDEX：根据索引查询列表中的值</p>
+<p>12.LSET：根据索引设置列表中的某个值</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;time&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/go-redis/redis/v8&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">rdb</span> <span class="o">:=</span> <span class="nx">redis</span><span class="p">.</span><span class="nf">NewClient</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Options</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Addr</span><span class="p">:</span>        <span class="s">&#34;localhost:6379&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Password</span><span class="p">:</span>    <span class="s">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">DB</span><span class="p">:</span>          <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">IdleTimeout</span><span class="p">:</span> <span class="mi">350</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">PoolSize</span><span class="p">:</span>    <span class="mi">50</span><span class="p">,</span> <span class="c1">// 连接池连接数量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span><span class="p">,</span> <span class="nx">cancel</span> <span class="o">:=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">WithTimeout</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">(),</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nf">cancel</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">Ping</span><span class="p">(</span><span class="nx">ctx</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span> <span class="c1">// 检查连接redis是否成功
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Connect Failed: %v \n&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="p">=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// LPUSH 从头部(左边)插入数据，最后的值在最前面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">count</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">LPush</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;listkeyone&#34;</span><span class="p">,</span> <span class="s">&#34;one&#34;</span><span class="p">,</span> <span class="s">&#34;two&#34;</span><span class="p">,</span> <span class="s">&#34;three&#34;</span><span class="p">,</span> <span class="s">&#34;four&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;lpush err：&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;lpush count: &#34;</span><span class="p">,</span> <span class="nx">count</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// LRANGE 返回列表范围数据。例子中返回 0 到 -1，就是返回所有数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">rangeval</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">LRange</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;listkeyone&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;LRange values: &#34;</span><span class="p">,</span> <span class="nx">rangeval</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// LLen 返回列表数据大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">len</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">LLen</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;listkeyone&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;llen: &#34;</span><span class="p">,</span> <span class="nx">len</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// LInsert 在指定位置插入数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">err</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">LInsert</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;listkeyone&#34;</span><span class="p">,</span> <span class="s">&#34;before&#34;</span><span class="p">,</span> <span class="s">&#34;two&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">).</span><span class="nf">Err</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">vals</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">LRange</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;listkeyone&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;LInsert val: &#34;</span><span class="p">,</span> <span class="nx">vals</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// RPUSH 在 list 尾部插入值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">count</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">RPush</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;listkeyone&#34;</span><span class="p">,</span> <span class="s">&#34;six&#34;</span><span class="p">,</span> <span class="s">&#34;five&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;RPush count: &#34;</span><span class="p">,</span> <span class="nx">count</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// RPOP 删除list列表尾部(右边)值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">val</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">RPop</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;listkeyone&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;rpop val: &#34;</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">vals</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">LRange</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;listkeyone&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;(rpop)lrange val: &#34;</span><span class="p">,</span> <span class="nx">vals</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// LPOP 删除list列表头部(左边)值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">val</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">LPop</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;listkeyone&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;rpop val: &#34;</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// LIndex 根据索引查询值，索引是从0开始
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">val1</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">LIndex</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;listkeyone&#34;</span><span class="p">,</span> <span class="mi">3</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;LIndex val: &#34;</span><span class="p">,</span> <span class="nx">val1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// LSET 根据索引设置某个值，索引从0开始
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">val2</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">LSet</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;listkeyone&#34;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&#34;han&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;lset: &#34;</span><span class="p">,</span> <span class="nx">val2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// LREM 删除列表中的数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">del</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">LRem</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;listkeyone&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="c1">// 从列表左边开始删除值 5，出现重复元素只删除一次
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;del : &#34;</span><span class="p">,</span> <span class="nx">del</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">rdb</span><span class="p">.</span><span class="nf">LRem</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;listkeyone&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="c1">// 从列表头部(左边)开始删除值 5，如果存在多个值 5，则删除 2 个 5
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="nx">rdb</span><span class="p">.</span><span class="nf">LRem</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;listkeyone&#34;</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="c1">// 从列表尾部(右边)开始删除值 6，如果存在多个值 6， 则删除 3 个 6
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="hash">hash</h4>
+<blockquote>
+<p>1.HSET 单个设置值。</p>
+<p>2.HGET 单个获取值。</p>
+<p>3.HMSET 批量设置。</p>
+<p>4.HMGET 批量获取值。</p>
+<p>5.HGETALL 获取所有值。</p>
+<p>6.HDEL 删除字段，支持删除多个字段。</p>
+<p>7.HLEN 获取hash表中key的值数量。</p>
+<p>8.HEXISTS 判断元素是否存在。</p>
+<p>9.HINCRBY 根据key的field字段的整数值加减一个数值。</p>
+<p>10.HSETNX 如果某个字段不存在则设置该字段值。</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;time&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/go-redis/redis/v8&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">rdb</span> <span class="o">:=</span> <span class="nx">redis</span><span class="p">.</span><span class="nf">NewClient</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Options</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Addr</span><span class="p">:</span>        <span class="s">&#34;localhost:6379&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Password</span><span class="p">:</span>    <span class="s">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">DB</span><span class="p">:</span>          <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">IdleTimeout</span><span class="p">:</span> <span class="mi">350</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">PoolSize</span><span class="p">:</span>    <span class="mi">50</span><span class="p">,</span> <span class="c1">// 连接池连接数量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span><span class="p">,</span> <span class="nx">cancel</span> <span class="o">:=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">WithTimeout</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">(),</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nf">cancel</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">Ping</span><span class="p">(</span><span class="nx">ctx</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span> <span class="c1">// 检查连接redis是否成功
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Connect Failed: %v \n&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="p">=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// HSET，根据key设置field字段值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">err</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">HSet</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;hashkey&#34;</span><span class="p">,</span> <span class="s">&#34;field-val&#34;</span><span class="p">,</span> <span class="s">&#34;value-one&#34;</span><span class="p">).</span><span class="nf">Err</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">HSet</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;hashkey&#34;</span><span class="p">,</span> <span class="s">&#34;field1&#34;</span><span class="p">,</span> <span class="s">&#34;value1&#34;</span><span class="p">,</span> <span class="s">&#34;field2&#34;</span><span class="p">,</span> <span class="s">&#34;value2&#34;</span><span class="p">).</span><span class="nf">Err</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">HSet</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;hashkey&#34;</span><span class="p">,</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{}{</span><span class="s">&#34;field3&#34;</span><span class="p">:</span> <span class="s">&#34;value3&#34;</span><span class="p">,</span> <span class="s">&#34;field4&#34;</span><span class="p">:</span> <span class="s">&#34;value4&#34;</span><span class="p">}).</span><span class="nf">Err</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">HSet</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;hashkey-two&#34;</span><span class="p">,</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;field0&#34;</span><span class="p">,</span> <span class="s">&#34;value0&#34;</span><span class="p">,</span> <span class="s">&#34;field1&#34;</span><span class="p">,</span> <span class="s">&#34;value1&#34;</span><span class="p">}).</span><span class="nf">Err</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// HSETNX，如果某个字段不存在则设置值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">ok</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">HSetNX</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;hashkey&#34;</span><span class="p">,</span> <span class="s">&#34;field1&#34;</span><span class="p">,</span> <span class="s">&#34;oneval&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span> <span class="c1">// 字段 field1 已存在，所以返回ok值为false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;HSetNX bool: &#34;</span><span class="p">,</span> <span class="nx">ok</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// HGET，根据key和field查询值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">val</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">HGet</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;hashkey&#34;</span><span class="p">,</span> <span class="s">&#34;field-val&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;HGet: &#34;</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">val</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">HGet</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;hashkey-two&#34;</span><span class="p">,</span> <span class="s">&#34;field0&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;HGet hashkey-two: &#34;</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// HGETALL，获取key的所有field-val值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">fieldvals</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">HGetAll</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;hashkey&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;HGetAll: &#34;</span><span class="p">,</span> <span class="nx">fieldvals</span><span class="p">)</span> <span class="c1">// 返回 map 类型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// HMSET，根据hash key设置多个字段值，与上面的 HSet 设置多个值很像
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">fieldvalues</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{})</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fieldvalues</span><span class="p">[</span><span class="s">&#34;age&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="mi">23</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fieldvalues</span><span class="p">[</span><span class="s">&#34;firstname&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="s">&#34;Chare&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fieldvalues</span><span class="p">[</span><span class="s">&#34;lastname&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="s">&#34;Jimmy&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">err</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">HMSet</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;hmsetkey&#34;</span><span class="p">,</span> <span class="nx">fieldvalues</span><span class="p">).</span><span class="nf">Err</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/*//也可以像上面HSet直接设置map值
+</span></span></span><span class="line"><span class="cl"><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">	rdb.HMSet(ctx, &#34;hmsetkey&#34;, map[string]interface{}{&#34;age&#34;:23,&#34;firstname&#34;:&#34;Chare&#34;,&#34;LastName&#34;:&#34;Jimmy&#34;}).Err()
+</span></span></span><span class="line"><span class="cl"><span class="cm">	*/</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// HMGET, 根据hash key和多个字段获取值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">vals</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">HMGet</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;hmsetkey&#34;</span><span class="p">,</span> <span class="s">&#34;age&#34;</span><span class="p">,</span> <span class="s">&#34;lastname&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;HMGET vals: &#34;</span><span class="p">,</span> <span class="nx">vals</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// HEXISTX，某个hashkey中字段field否存在
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">ok</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">HExists</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;hmsetkey&#34;</span><span class="p">,</span> <span class="s">&#34;lastname&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;HExists: &#34;</span><span class="p">,</span> <span class="nx">ok</span><span class="p">)</span> <span class="c1">// HExists: true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// HLen，获取hashkey的字段多少
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">len</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">HLen</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;hashkey&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;HLen hashkey： &#34;</span><span class="p">,</span> <span class="nx">len</span><span class="p">)</span> <span class="c1">// HLen hashkey: 5
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// HIncrBy，根据key的field字段的整数值加减一个数值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">age</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">HIncrBy</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;hmsetkey&#34;</span><span class="p">,</span> <span class="s">&#34;age&#34;</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;HIncrBy : &#34;</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="c1">// HIncrBy :  20
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// HDel，删除字段，支持删除多个字段
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">rdb</span><span class="p">.</span><span class="nf">HSet</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;hashkeydel&#34;</span><span class="p">,</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">interface</span><span class="p">{}{</span><span class="s">&#34;field10&#34;</span><span class="p">:</span> <span class="s">&#34;value10&#34;</span><span class="p">,</span> <span class="s">&#34;field11&#34;</span><span class="p">:</span> <span class="s">&#34;value11&#34;</span><span class="p">,</span> <span class="s">&#34;field12&#34;</span><span class="p">:</span> <span class="s">&#34;value12&#34;</span><span class="p">,</span> <span class="s">&#34;field13&#34;</span><span class="p">:</span> <span class="s">&#34;value13&#34;</span><span class="p">}).</span><span class="nf">Err</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">rdb</span><span class="p">.</span><span class="nf">HDel</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;hashkeydel&#34;</span><span class="p">,</span> <span class="s">&#34;field10&#34;</span><span class="p">,</span> <span class="s">&#34;field12&#34;</span><span class="p">)</span> <span class="c1">//删除多个字段
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="nx">delvals</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">HGetAll</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;hashkeydel&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;HGetAll hashkeydel: &#34;</span><span class="p">,</span> <span class="nx">delvals</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">HSetNX bool:  false
+</span></span></span><span class="line"><span class="cl"><span class="cm">HGet:  value-one
+</span></span></span><span class="line"><span class="cl"><span class="cm">HGet hashkey-two:  value0
+</span></span></span><span class="line"><span class="cl"><span class="cm">HGetAll:  map[field-val:value-one field1:value1 field2:value2 field3:value3 field4:value4]
+</span></span></span><span class="line"><span class="cl"><span class="cm">HMGET vals:  [23 Jimmy]
+</span></span></span><span class="line"><span class="cl"><span class="cm">HExists:  true
+</span></span></span><span class="line"><span class="cl"><span class="cm">HLen hashkey：  5
+</span></span></span><span class="line"><span class="cl"><span class="cm">HIncrBy :  20
+</span></span></span><span class="line"><span class="cl"><span class="cm">HGetAll hashkeydel:  map[field11:value11 field13:value13]
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * */</span>
+</span></span></code></pre></div><h4 id="set">set</h4>
+<p>无序集合，元素唯一</p>
+<blockquote>
+<ol>
+<li>SADD：SADD key member [member&hellip;]，将一个或多个元素数据添加到集合 key 中</li>
+<li>SISMEMBER: SISMEMBER key member，判断 member 是否是集合 key 的成员</li>
+<li>SMEMBERS: SMEMBERS key，获取 key 中的所有元素数据</li>
+<li>SREM：SREM key member [member &hellip;]，删除 key 中的一个或多个数据</li>
+<li>SPOP：SPOP key，随机移除集合中的一个数据并返回</li>
+<li>SCARD：SCARD key，获取集合 key 中元素的数量</li>
+<li>SDIFF：SDIFF key [key&hellip;]，计算多个集合的差集</li>
+<li>SUNION：SUNION key [key&hellip;]，计算多个集合的并集</li>
+<li>SINTER：SINTER key [key&hellip;]，计算多个集合的交集</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;time&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/go-redis/redis/v8&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">rdb</span> <span class="o">:=</span> <span class="nx">redis</span><span class="p">.</span><span class="nf">NewClient</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Options</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Addr</span><span class="p">:</span>        <span class="s">&#34;localhost:6379&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Password</span><span class="p">:</span>    <span class="s">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">DB</span><span class="p">:</span>          <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">IdleTimeout</span><span class="p">:</span> <span class="mi">350</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">PoolSize</span><span class="p">:</span>    <span class="mi">50</span><span class="p">,</span> <span class="c1">// 连接池连接数量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span><span class="p">,</span> <span class="nx">cancel</span> <span class="o">:=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">WithTimeout</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">(),</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nf">cancel</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">Ping</span><span class="p">(</span><span class="nx">ctx</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span> <span class="c1">// 检查连接redis是否成功
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Connect Failed: %v \n&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="p">=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// SADD，将一个或多个元素数据添加到集合中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">err</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">SAdd</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey:1&#34;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="s">&#34;dog&#34;</span><span class="p">).</span><span class="nf">Err</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">rdb</span><span class="p">.</span><span class="nf">SAdd</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey:1&#34;</span><span class="p">,</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;hanmeimei&#34;</span><span class="p">,</span> <span class="s">&#34;lilei&#34;</span><span class="p">,</span> <span class="s">&#34;tom&#34;</span><span class="p">,</span> <span class="s">&#34;dog&#34;</span><span class="p">,</span> <span class="s">&#34;one&#34;</span><span class="p">})</span> <span class="c1">// 切片增加数据，dog只有一个数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">rdb</span><span class="p">.</span><span class="nf">SAdd</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey:2&#34;</span><span class="p">,</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;jimmy&#34;</span><span class="p">,</span> <span class="s">&#34;pig&#34;</span><span class="p">,</span> <span class="s">&#34;dog&#34;</span><span class="p">,</span> <span class="s">&#34;lilei&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// SMEMBERS，获取集合中的所有元素数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">smembers</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">SMembers</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey:1&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;SMembers，setkey:1: &#34;</span><span class="p">,</span> <span class="nx">smembers</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// SCARD，获取集合中的元素数量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">scards</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">SCard</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey:2&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;SCard,setkey:2: &#34;</span><span class="p">,</span> <span class="nx">scards</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// SPOP，随机移除一个数据并返回这个数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">rdb</span><span class="p">.</span><span class="nf">SAdd</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey:3&#34;</span><span class="p">,</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;one&#34;</span><span class="p">,</span> <span class="s">&#34;two&#34;</span><span class="p">,</span> <span class="s">&#34;three&#34;</span><span class="p">,</span> <span class="s">&#34;four&#34;</span><span class="p">,</span> <span class="s">&#34;six&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">spop</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">SPop</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey:3&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">res</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">SMembers</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey:3&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;spop: &#34;</span><span class="p">,</span> <span class="nx">spop</span><span class="p">,</span> <span class="s">&#34;, SMembers: &#34;</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// SPOPN，随机移除多个元素并返回
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">spopn</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">SPopN</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey:3&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">res</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">SMembers</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey:3&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;spopn: &#34;</span><span class="p">,</span> <span class="nx">spopn</span><span class="p">,</span> <span class="s">&#34;, SMembers: &#34;</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// SISMEMBER，判断元素是否在集合中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">ok</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">SIsMember</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey:3&#34;</span><span class="p">,</span> <span class="s">&#34;two&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;SIsMember, two : &#34;</span><span class="p">,</span> <span class="nx">ok</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// SDIFF,差集，SDIFF key1,key2 与 SDIFF key1,key2 差集是不同，看下面的例子
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">diff</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">SDiff</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey:1&#34;</span><span class="p">,</span> <span class="s">&#34;setkey:2&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;sdiff: &#34;</span><span class="p">,</span> <span class="nx">diff</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">diff2</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">SDiff</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey:2&#34;</span><span class="p">,</span> <span class="s">&#34;setkey:1&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;sdiff2: &#34;</span><span class="p">,</span> <span class="nx">diff2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// SUNION,并集
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">union</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">SUnion</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey:1&#34;</span><span class="p">,</span> <span class="s">&#34;setkey:2&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;union: &#34;</span><span class="p">,</span> <span class="nx">union</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// SINTER,交集
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">inter</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">SInter</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey:1&#34;</span><span class="p">,</span> <span class="s">&#34;setkey:2&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;inter: &#34;</span><span class="p">,</span> <span class="nx">inter</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// SREM , 删除值，返回删除元素个数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">rdb</span><span class="p">.</span><span class="nf">SAdd</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey:4&#34;</span><span class="p">,</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;one&#34;</span><span class="p">,</span> <span class="s">&#34;two&#34;</span><span class="p">,</span> <span class="s">&#34;three&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">count</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">SRem</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;setkey:4&#34;</span><span class="p">,</span> <span class="s">&#34;one&#34;</span><span class="p">,</span> <span class="s">&#34;three&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;SRem: &#34;</span><span class="p">,</span> <span class="nx">count</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">SMembers，setkey:1:  [20 hanmeimei one lilei tom dog]
+</span></span></span><span class="line"><span class="cl"><span class="cm">SCard,setkey:2:  4
+</span></span></span><span class="line"><span class="cl"><span class="cm">spop:  six , SMembers:  [four three one two]
+</span></span></span><span class="line"><span class="cl"><span class="cm">spopn:  [one two] , SMembers:  [four three]
+</span></span></span><span class="line"><span class="cl"><span class="cm">SIsMember, two :  false
+</span></span></span><span class="line"><span class="cl"><span class="cm">sdiff:  [tom 20 hanmeimei one]
+</span></span></span><span class="line"><span class="cl"><span class="cm">sdiff2:  [jimmy pig]
+</span></span></span><span class="line"><span class="cl"><span class="cm">union:  [hanmeimei one jimmy lilei tom dog 20 pig]
+</span></span></span><span class="line"><span class="cl"><span class="cm">inter:  [lilei dog]
+</span></span></span><span class="line"><span class="cl"><span class="cm">SRem:  2
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></div><h4 id="zset">zset</h4>
+<p>有序集合类型</p>
+<blockquote>
+<ol>
+<li>ZADD：ZADD key score member [[score member] [score member] …]，将一个或多个member元素以及score加入到有序集合key中</li>
+<li>ZSCORE：ZSCORE key member，返回集合 key 中 member 成员的分数</li>
+<li>ZRANGE：ZRANGE key start stop [WITHSCORES]，返回集合 key 中指定区间的元素，score 从小到大排序，start 和 stop 都是 0 开始。</li>
+<li>ZREVRANGE：ZREVRANGE key start stop [WITHSCORES]，与 zrange 相反，返回集合 key 中指定区间元素，score 从大到小排序。</li>
+<li>ZRANGEBYSCORE：ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]，返回结果的数量区间，score 从小到大排序，LIMIT 参数指定返回结果集的数量和区间，后面可选的 [limit offset count] 像 SQL 中的 select &hellip; limit offset,count。</li>
+<li>ZREVRANGEBYSCORE：与上面 ZRANGEBYSCORE 几乎相同，不同是 score 是从大到小排序</li>
+<li>ZREVRANGEBYSCOREWITHSCORES：和 ZRANGEBYSCORE 一样，区别是它不仅返回集合元素，也返回元素对应分数</li>
+<li>ZREM：删除元素</li>
+<li>ZREMRANGEBYRank：根据索引范围删除</li>
+<li>ZREMRANGEBYSCORE：根据分数区间删除</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;time&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/go-redis/redis/v8&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">rdb</span> <span class="o">:=</span> <span class="nx">redis</span><span class="p">.</span><span class="nf">NewClient</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Options</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Addr</span><span class="p">:</span>        <span class="s">&#34;localhost:6379&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Password</span><span class="p">:</span>    <span class="s">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">DB</span><span class="p">:</span>          <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">IdleTimeout</span><span class="p">:</span> <span class="mi">350</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">PoolSize</span><span class="p">:</span>    <span class="mi">50</span><span class="p">,</span> <span class="c1">// 连接池连接数量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span><span class="p">,</span> <span class="nx">cancel</span> <span class="o">:=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">WithTimeout</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">(),</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nf">cancel</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">Ping</span><span class="p">(</span><span class="nx">ctx</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span> <span class="c1">// 检查连接redis是否成功
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Connect Failed: %v \n&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="p">=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// ZADD，添加一个或多个数据到集合中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">//* 添加一个*/
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">n</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">ZAdd</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;zsetkey&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span><span class="mf">23.0</span><span class="p">,</span> <span class="s">&#34;tom&#34;</span><span class="p">}).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="cm">/* 或把字段写上
+</span></span></span><span class="line"><span class="cl"><span class="cm">	member := &amp;redis.Z{
+</span></span></span><span class="line"><span class="cl"><span class="cm">		Score:  23.0,
+</span></span></span><span class="line"><span class="cl"><span class="cm">		Member: &#34;tom&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="cm">	}
+</span></span></span><span class="line"><span class="cl"><span class="cm">
+</span></span></span><span class="line"><span class="cl"><span class="cm">	n, err := rdb.ZAdd(ctx, &#34;zsetkey&#34;, member).Result()
+</span></span></span><span class="line"><span class="cl"><span class="cm">	if err != nil {
+</span></span></span><span class="line"><span class="cl"><span class="cm">		panic(err)
+</span></span></span><span class="line"><span class="cl"><span class="cm">	}
+</span></span></span><span class="line"><span class="cl"><span class="cm">	*/</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;zadd: &#34;</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">val</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">ZRange</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;zsetkey&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;ZRange, zsetkey: &#34;</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//* ZADD批量增加*/
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">fruits_price_z</span> <span class="o">:=</span> <span class="p">[]</span><span class="o">*</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span><span class="nx">Score</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span> <span class="nx">Member</span><span class="p">:</span> <span class="s">&#34;apple&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span><span class="nx">Score</span><span class="p">:</span> <span class="mf">3.5</span><span class="p">,</span> <span class="nx">Member</span><span class="p">:</span> <span class="s">&#34;orange&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span><span class="nx">Score</span><span class="p">:</span> <span class="mf">6.0</span><span class="p">,</span> <span class="nx">Member</span><span class="p">:</span> <span class="s">&#34;banana&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span><span class="nx">Score</span><span class="p">:</span> <span class="mf">9.1</span><span class="p">,</span> <span class="nx">Member</span><span class="p">:</span> <span class="s">&#34;peach&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span><span class="nx">Score</span><span class="p">:</span> <span class="mf">19.0</span><span class="p">,</span> <span class="nx">Member</span><span class="p">:</span> <span class="s">&#34;cherry&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">num</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">ZAdd</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;fruits_price&#34;</span><span class="p">,</span> <span class="nx">fruits_price_z</span><span class="o">...</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;zadd : &#34;</span><span class="p">,</span> <span class="nx">num</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// ZRANGE，索引范围返回元素，分数从小到大， 0 到 -1 就是所有元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">vals</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">ZRange</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;fruits_price&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;ZRange,fruits_price: &#34;</span><span class="p">,</span> <span class="nx">vals</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// ZREVRANGE，分数从大到小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">vals</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">ZRevRange</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;fruits_price&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;ZRevRange,fruits_price: &#34;</span><span class="p">,</span> <span class="nx">vals</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// ZRANGEBYSCORE ， offset 和 count 可用于分页
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">rangbyscore</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">ZRangeBy</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Min</span><span class="p">:</span>    <span class="s">&#34;3&#34;</span><span class="p">,</span> <span class="c1">// 最小分数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">Max</span><span class="p">:</span>    <span class="s">&#34;7&#34;</span><span class="p">,</span> <span class="c1">// 最大分数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">Offset</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>   <span class="c1">// 开始偏移量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">Count</span><span class="p">:</span>  <span class="mi">4</span><span class="p">,</span>   <span class="c1">// 一次返回多少数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">vals</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">ZRangeByScore</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;fruits_price&#34;</span><span class="p">,</span> <span class="nx">rangbyscore</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;ZRangeByScore: &#34;</span><span class="p">,</span> <span class="nx">vals</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// ZCOUNT ，统计某个分数内的元素个数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">count</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">ZCount</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;fruits_price&#34;</span><span class="p">,</span> <span class="s">&#34;3&#34;</span><span class="p">,</span> <span class="s">&#34;7&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;ZCount: &#34;</span><span class="p">,</span> <span class="nx">count</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// ZREVRANGEBYSCOREWITHSCORES, 和 ZRANGEBYSCORE 一样，区别是它不仅返回集合元素，也返回元素对应分数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">rangbyscorewithscores</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">ZRangeBy</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Min</span><span class="p">:</span>    <span class="s">&#34;3&#34;</span><span class="p">,</span> <span class="c1">// 最小分数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">Max</span><span class="p">:</span>    <span class="s">&#34;7&#34;</span><span class="p">,</span> <span class="c1">// 最大分数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">Offset</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>   <span class="c1">// 开始偏移量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">Count</span><span class="p">:</span>  <span class="mi">4</span><span class="p">,</span>   <span class="c1">// 一次返回多少数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">keyvals</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">ZRangeByScoreWithScores</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;fruits_price&#34;</span><span class="p">,</span> <span class="nx">rangbyscorewithscores</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;ZRangeByScoreWithScores: &#34;</span><span class="p">,</span> <span class="nx">keyvals</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// ZCRORE, 查询集合中元素的分数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">score</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">ZScore</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;fruits_price&#34;</span><span class="p">,</span> <span class="s">&#34;peach&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;ZScore: &#34;</span><span class="p">,</span> <span class="nx">score</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// ZRANK 根据元素查询在集合中的排名，分数从小到大排序查询
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">rank</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">ZRank</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;fruits_price&#34;</span><span class="p">,</span> <span class="s">&#34;peach&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;ZRank: &#34;</span><span class="p">,</span> <span class="nx">rank</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// ZREM，根据Member删除值，一次可以删除一个或多个
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">age_z</span> <span class="o">:=</span> <span class="p">[]</span><span class="o">*</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span><span class="nx">Score</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="nx">Member</span><span class="p">:</span> <span class="s">&#34;tom&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span><span class="nx">Score</span><span class="p">:</span> <span class="mi">34</span><span class="p">,</span> <span class="nx">Member</span><span class="p">:</span> <span class="s">&#34;jim&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span><span class="nx">Score</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span> <span class="nx">Member</span><span class="p">:</span> <span class="s">&#34;lilei&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span><span class="nx">Score</span><span class="p">:</span> <span class="mi">43</span><span class="p">,</span> <span class="nx">Member</span><span class="p">:</span> <span class="s">&#34;hanxu&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span><span class="nx">Score</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="nx">Member</span><span class="p">:</span> <span class="s">&#34;jimmy&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span><span class="nx">Score</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span> <span class="nx">Member</span><span class="p">:</span> <span class="s">&#34;MA&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span><span class="nx">Score</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="nx">Member</span><span class="p">:</span> <span class="s">&#34;MB&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span><span class="nx">Score</span><span class="p">:</span> <span class="mi">52</span><span class="p">,</span> <span class="nx">Member</span><span class="p">:</span> <span class="s">&#34;MC&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span><span class="nx">Score</span><span class="p">:</span> <span class="mi">54</span><span class="p">,</span> <span class="nx">Member</span><span class="p">:</span> <span class="s">&#34;MD&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span><span class="nx">Score</span><span class="p">:</span> <span class="mi">59</span><span class="p">,</span> <span class="nx">Member</span><span class="p">:</span> <span class="s">&#34;ME&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span><span class="nx">Score</span><span class="p">:</span> <span class="mi">70</span><span class="p">,</span> <span class="nx">Member</span><span class="p">:</span> <span class="s">&#34;MF&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Z</span><span class="p">{</span><span class="nx">Score</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span> <span class="nx">Member</span><span class="p">:</span> <span class="s">&#34;MG&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">rdb</span><span class="p">.</span><span class="nf">ZAdd</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;people_age&#34;</span><span class="p">,</span> <span class="nx">age_z</span><span class="o">...</span><span class="p">).</span><span class="nf">Err</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">rdb</span><span class="p">.</span><span class="nf">ZRem</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;people_age&#34;</span><span class="p">,</span> <span class="s">&#34;jim&#34;</span><span class="p">).</span><span class="nf">Err</span><span class="p">()</span> <span class="c1">// 删除一个
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// rdb.ZRem(ctx, &#34;people_age&#34;, &#34;jim&#34;, &#34;jimmy&#34;).Err() // 删除多个
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">agevals</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">ZRange</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;people_age&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;ZRem, ZRange age: &#34;</span><span class="p">,</span> <span class="nx">agevals</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//ZREMRANGEBYSCORE， 根据分数区间删除
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// rdb.ZRemRangeByScore(&#34;people_age&#34;, &#34;20&#34;, &#34;30&#34;).Err()  // 删除 20&lt;=分数&lt;=30
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">rdb</span><span class="p">.</span><span class="nf">ZRemRangeByScore</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;people_age&#34;</span><span class="p">,</span> <span class="s">&#34;20&#34;</span><span class="p">,</span> <span class="s">&#34;(30&#34;</span><span class="p">).</span><span class="nf">Err</span><span class="p">()</span> <span class="c1">// 删除 20&lt;=分数&lt;30
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="nx">agevals</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">ZRange</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;people_age&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;ZRemRangeByScore, ZRange age: &#34;</span><span class="p">,</span> <span class="nx">agevals</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// ZREMRANGEBYRANK，根据分数排名删除
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// 从低分到高分进行排序，然后按照索引删除
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">rdb</span><span class="p">.</span><span class="nf">ZRemRangeByRank</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;people_age&#34;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="c1">// 低分到高分排序，删除第6个元素到第7个元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">agevals</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">ZRange</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;people_age&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;ZRemRangeByRank, ZRange age: &#34;</span><span class="p">,</span> <span class="nx">agevals</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 如果写成负数，那么从高分开始删除
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// rdb.ZRemRangeByRank(ctx, &#34;people_age&#34;, -6, -7)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// ZIncrBy, 增加分数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">rdb</span><span class="p">.</span><span class="nf">ZIncrBy</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;people_age&#34;</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s">&#34;MG&#34;</span><span class="p">).</span><span class="nf">Err</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">score</span><span class="p">,</span> <span class="nx">_</span> <span class="p">=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">ZScore</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;people_age&#34;</span><span class="p">,</span> <span class="s">&#34;MG&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;ZScore: &#34;</span><span class="p">,</span> <span class="nx">score</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">zadd:  0
+</span></span></span><span class="line"><span class="cl"><span class="cm">ZRange, zsetkey:  [tom]
+</span></span></span><span class="line"><span class="cl"><span class="cm">zadd :  0
+</span></span></span><span class="line"><span class="cl"><span class="cm">ZRange,fruits_price:  [orange apple banana peach cherry]
+</span></span></span><span class="line"><span class="cl"><span class="cm">ZRevRange,fruits_price:  [cherry peach banana apple orange]
+</span></span></span><span class="line"><span class="cl"><span class="cm">ZRangeByScore:  [orange apple banana]
+</span></span></span><span class="line"><span class="cl"><span class="cm">ZCount:  3
+</span></span></span><span class="line"><span class="cl"><span class="cm">ZRangeByScoreWithScores:  [{3.5 orange} {5 apple} {6 banana}]
+</span></span></span><span class="line"><span class="cl"><span class="cm">ZScore:  9.1
+</span></span></span><span class="line"><span class="cl"><span class="cm">ZRank:  3
+</span></span></span><span class="line"><span class="cl"><span class="cm">ZRem, ZRange age:  [tom lilei jimmy hanxu MB MC MD MA ME MF MG]
+</span></span></span><span class="line"><span class="cl"><span class="cm">ZRemRangeByScore, ZRange age:  [jimmy hanxu MB MC MD MA ME MF MG]
+</span></span></span><span class="line"><span class="cl"><span class="cm">ZRemRangeByRank, ZRange age:  [jimmy hanxu MB MC MD MA MG]
+</span></span></span><span class="line"><span class="cl"><span class="cm">ZScore:  87
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2025-12-17</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/redis/">redis</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2025-12-12-kube-op/" class="prev" rel="prev" title="kube-operator"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>kube-operator</a>
+            <a href="/posts/2026-03-07-bufbuild/" class="next" rel="next" title="BufBuild">BufBuild<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

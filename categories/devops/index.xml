@@ -10,7 +10,7 @@
     <pubDate>Sun, 12 Oct 2025 21:26:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2025-10-12-argocd/</guid>
-    <description><![CDATA[ArgoCD ArgoCD 是一个基于 GitOps 的持续交付（CD）工具，专门用于 Kubernetes 环境。它通过使用 Git 仓库作为应用程序的 &ldquo;源代码真相&rdquo;，自动化应用的部]]></description>
+    <description><![CDATA[ArgoCD https://www.cnblogs.com/evescn/p/17606149.html 一、ArgoCD介绍 Argo CD 是一个为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。Argo CD 可在 Git 存储库更改时自动同步和部署应用程序 工作原理： Argo]]></description>
 </item>
 <item>
     <title>TF-dev</title>
