@@ -31,6 +31,22 @@
     <description><![CDATA[go sync 包 1、sync.WaitGroup（等待组） 用途：等待一组 Goroutine 全部执行完成。常用于主程序等待后台任务结束，或者在批量处理任务时确保所有子任]]></description>
 </item>
 <item>
+    <title>mqtt</title>
+    <link>https://serialt.github.io/posts/2026-03-28-mqtt/</link>
+    <pubDate>Sun, 08 Mar 2026 20:10:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-03-28-mqtt/</guid>
+    <description><![CDATA[MQTT 一、MQTT简述 MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一种基于发布/订阅（publish/subscr]]></description>
+</item>
+<item>
+    <title>casbin</title>
+    <link>https://serialt.github.io/posts/2026-03-28-casbin/</link>
+    <pubDate>Sun, 08 Mar 2026 20:01:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-03-28-casbin/</guid>
+    <description><![CDATA[Casbin 一、介绍 Casbin是一个强大的、高效的开源访问控制框架，其权限管理机制支持多种访问控制模型，Casbin只负责访问控制。 其功能有： 支持自]]></description>
+</item>
+<item>
     <title>BufBuild</title>
     <link>https://serialt.github.io/posts/2026-03-07-bufbuild/</link>
     <pubDate>Sat, 07 Mar 2026 21:50:01 &#43;0800</pubDate>
@@ -69,22 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2025-11-2-go-mock/</guid>
     <description><![CDATA[Gock: ​ 开发项目的过程中总会遇到要调用依赖方接口的情况，如果依赖方的API接口还没有开发好，通常我们会先约定好API接口的请求参数、响应结构和各]]></description>
-</item>
-<item>
-    <title>un-forticlient</title>
-    <link>https://serialt.github.io/posts/2025-10-12-fuck-forticlient/</link>
-    <pubDate>Sun, 12 Oct 2025 22:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2025-10-12-fuck-forticlient/</guid>
-    <description><![CDATA[卸载forticlient /bin/ls -dleO@ /Applications/FortiClient.app sudo /usr/bin/chflags -R noschg /Applications/FortiClient.app 然后就可以删除]]></description>
-</item>
-<item>
-    <title>ArgoCD</title>
-    <link>https://serialt.github.io/posts/2025-10-12-argocd/</link>
-    <pubDate>Sun, 12 Oct 2025 21:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2025-10-12-argocd/</guid>
-    <description><![CDATA[ArgoCD https://www.cnblogs.com/evescn/p/17606149.html 一、ArgoCD介绍 Argo CD 是一个为 Kubernetes 而生的，遵循声明式 GitOps 理念的持续部署工具。Argo CD 可在 Git 存储库更改时自动同步和部署应用程序 工作原理： Argo]]></description>
 </item>
 </channel>
 </rss>

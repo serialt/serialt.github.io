@@ -29,6 +29,22 @@
     <description><![CDATA[]]></description>
 </item>
 <item>
+    <title>auth</title>
+    <link>https://serialt.github.io/tags/auth/</link>
+    <pubDate>Sun, 08 Mar 2026 20:10:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/auth/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>casbin</title>
+    <link>https://serialt.github.io/tags/casbin/</link>
+    <pubDate>Sun, 08 Mar 2026 20:10:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/casbin/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>BufBuild</title>
     <link>https://serialt.github.io/tags/bufbuild/</link>
     <pubDate>Sat, 07 Mar 2026 21:50:01 &#43;0800</pubDate>
@@ -66,22 +82,6 @@
     <pubDate>Sat, 22 Nov 2025 21:50:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/kratos/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>test</title>
-    <link>https://serialt.github.io/tags/test/</link>
-    <pubDate>Sat, 22 Nov 2025 21:50:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/test/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>gock</title>
-    <link>https://serialt.github.io/tags/gock/</link>
-    <pubDate>Sun, 02 Nov 2025 21:50:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/gock/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

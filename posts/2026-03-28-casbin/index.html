@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>casbin - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="casbin" />
+<meta property="og:description" content="Casbin 一、介绍 Casbin是一个强大的、高效的开源访问控制框架，其权限管理机制支持多种访问控制模型，Casbin只负责访问控制。 其功能有： 支持自" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2026-03-28-casbin/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2026-03-08T20:01:01+08:00" />
+<meta property="article:modified_time" content="2026-03-08T20:01:01+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="casbin"/>
+<meta name="twitter:description" content="Casbin 一、介绍 Casbin是一个强大的、高效的开源访问控制框架，其权限管理机制支持多种访问控制模型，Casbin只负责访问控制。 其功能有： 支持自"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2026-03-28-casbin/" /><link rel="prev" href="https://serialt.github.io/posts/2026-03-07-bufbuild/" /><link rel="next" href="https://serialt.github.io/posts/2026-03-28-mqtt/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "casbin",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2026-03-28-casbin\/"
+        },"genre": "posts","keywords": "casbin, auth","wordcount":  1714 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2026-03-28-casbin\/","datePublished": "2026-03-08T20:01:01+08:00","dateModified": "2026-03-08T20:01:01+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">casbin</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-03-08">2026-03-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1714 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#casbin">Casbin</a>
+      <ul>
+        <li><a href="#一介绍">一、介绍</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="casbin">Casbin</h2>
+<h3 id="一介绍">一、介绍</h3>
+<p>Casbin是一个强大的、高效的开源访问控制框架，其权限管理机制支持多种访问控制模型，Casbin只负责访问控制。</p>
+<p>其功能有：</p>
+<ul>
+<li>支持自定义请求的格式，默认的请求格式为<code>{subject, object, action}</code>。</li>
+<li>具有访问控制模型model和策略policy两个核心概念。</li>
+<li>支持RBAC中的多层角色继承，不止主体可以有角色，资源也可以具有角色。</li>
+<li>支持内置的超级用户 例如：<code>root</code>或<code>administrator</code>。超级用户可以执行任何操作而无需显式的权限声明。</li>
+<li>支持多种内置的操作符，如 <code>keyMatch</code>，方便对路径式的资源进行管理，如 <code>/foo/bar</code> 可以映射到 <code>/foo*</code></li>
+</ul>
+<h4 id="1casbin的工作原理">1、Casbin的工作原理</h4>
+<p>在 Casbin 中, 访问控制模型被抽象为基于 <code>**PERM **</code>(Policy, Effect, Request, Matcher) [策略，效果，请求，匹配器]的一个文件。</p>
+<ul>
+<li>Policy：定义权限的规则</li>
+<li>Effect：定义组合了多个Policy之后的结果</li>
+<li>Request：访问请求</li>
+<li>Matcher：判断Request是否满足Policy</li>
+</ul>
+<p>首先会定义一堆Policy，让后通过Matcher来判断Request和Policy是否匹配，然后通过Effect来判断匹配结果是Allow还是Deny。</p>
+<h4 id="2核心概念">2、核心概念</h4>
+<h5 id="model">Model</h5>
+<p>Model是Casbin的具体访问模型，其主要以文件的形式出现，该文件常常以<code>.conf</code>最为后缀。</p>
+<ul>
+<li>Model CONF 至少应包含四个部分: <code>[request_definition]</code>, <code>[policy_definition]</code>, <code>[policy_effect]</code>, <code>[matchers]</code>。</li>
+<li>如果 model 使用 RBAC, 还需要添加<code>[role_definition]</code>部分。</li>
+<li>Model CONF 文件可以包含注释。注释以 # 开头， # 会注释该行剩余部分。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="c"># Request定义</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">request_definition</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">r</span> <span class="p">=</span> <span class="nx">sub</span><span class="p">,</span> <span class="nx">obj</span><span class="p">,</span> <span class="nx">act</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 策略定义</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">policy_definition</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">p</span> <span class="p">=</span> <span class="nx">sub</span><span class="p">,</span> <span class="nx">obj</span><span class="p">,</span> <span class="nx">act</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 角色定义</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">role_definition</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">g</span> <span class="p">=</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">_</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">policy_effect</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">e</span> <span class="p">=</span> <span class="nx">some</span><span class="err">(</span><span class="nx">where</span> <span class="err">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">eft</span> <span class="p">==</span> <span class="nx">allow</span><span class="err">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># 匹配器定义</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">matchers</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">m</span> <span class="p">=</span> <span class="nx">g</span><span class="err">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">sub</span><span class="p">,</span> <span class="nx">p</span><span class="p">.</span><span class="nx">sub</span><span class="err">)</span> <span class="err">&amp;&amp;</span> <span class="nx">r</span><span class="p">.</span><span class="nx">obj</span> <span class="p">==</span> <span class="nx">p</span><span class="p">.</span><span class="nx">obj</span> <span class="err">&amp;&amp;</span> <span class="nx">r</span><span class="p">.</span><span class="nx">act</span> <span class="p">==</span> <span class="nx">p</span><span class="p">.</span><span class="nx">act</span>
+</span></span></code></pre></div><ul>
+<li>request_definition：用于request的定义，它明确了e.Enforce(&hellip;)函数中参数的定义，<code>sub, obj, act</code> 表示经典三元组: 访问实体 (Subject)，访问资源 (Object) 和访问方法 (Action)。</li>
+<li>policy_definition：用于policy的定义，每条规则通常以形如<code>p</code>的<code>policy type</code>开头，比如<code>p,joker,data1,read</code>就是一条joker具有data1读权限的规则。</li>
+<li>role_definition：是RBAC角色继承关系的定义。<code>g</code> 是一个 RBAC系统，<code>_, _</code>表示角色继承关系的前项和后项，即前项继承后项角色的权限。</li>
+<li>policy_effect：是对policy生效范围的定义，它对request的决策结果进行统一的决策，比如<code>e = some(where (p.eft == allow))</code>就表示如果存在任意一个决策结果为<code>allow</code>的匹配规则，则最终决策结果为<code>allow</code>。<code>p.eft</code> 表示策略规则的决策结果，可以为<code>allow</code> 或者<code>deny</code>，当不指定规则的决策结果时,取默认值<code>allow</code> 。</li>
+<li>matchers：定义了策略匹配者。匹配者是一组表达式，它定义了如何根据请求来匹配策略规则</li>
+</ul>
+<h5 id="policy">Policy</h5>
+<p>Policy主要表示访问控制关于角色、资源、行为的具体映射关系。</p>
+<pre tabindex="0"><code>p, alice, data1, read
+p, bob, data2, write
+p, data2_admin, data2, read
+p, data2_admin, data2, write
+g, alice, data2_admin
+</code></pre><p>它的关系规则很简单，主要是选择什么方式来存储规则，目前官方提供<code>csv文件存储</code>和通过<code>adapter适配器</code>从其他存储系统中加载配置文件，比如MySQL, PostgreSQL, SQL Server, SQLite3,MongoDB,Redis,Cassandra DB等。</p>
+<h4 id="3使用">3、使用</h4>
+<p>postgresql 建表语句</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">casbin_rule</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="n">serial4</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">ptype</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">v0</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">v1</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">v2</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">v3</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">v4</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">v5</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">casbin_rule_pkey</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_casbin_rule_composite</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">public</span><span class="p">.</span><span class="n">casbin_rule</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">btree</span><span class="w"> </span><span class="p">(</span><span class="n">v0</span><span class="p">,</span><span class="w"> </span><span class="n">v1</span><span class="p">,</span><span class="w"> </span><span class="n">v2</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_casbin_rule_ptype</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">public</span><span class="p">.</span><span class="n">casbin_rule</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">btree</span><span class="w"> </span><span class="p">(</span><span class="n">ptype</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_casbin_rule_v0</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">public</span><span class="p">.</span><span class="n">casbin_rule</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">btree</span><span class="w"> </span><span class="p">(</span><span class="n">v0</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_casbin_rule_v1</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">public</span><span class="p">.</span><span class="n">casbin_rule</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">btree</span><span class="w"> </span><span class="p">(</span><span class="n">v1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_casbin_rule_v2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">public</span><span class="p">.</span><span class="n">casbin_rule</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">btree</span><span class="w"> </span><span class="p">(</span><span class="n">v2</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>测试数据</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">casbin_rule</span><span class="w"> </span><span class="p">(</span><span class="n">ptype</span><span class="p">,</span><span class="w"> </span><span class="n">v0</span><span class="p">,</span><span class="w"> </span><span class="n">v1</span><span class="p">,</span><span class="w"> </span><span class="n">v2</span><span class="p">,</span><span class="w"> </span><span class="n">v3</span><span class="p">,</span><span class="w"> </span><span class="n">v4</span><span class="p">,</span><span class="w"> </span><span class="n">v5</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;admin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/api/v1/user/list-option&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;alice&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;admin&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;bob&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>说明：</p>
+<p>声明了两个角色，admin和user，admin可以对任意接口和方法请求，user只能post请求一个，这两个角色分别绑定了一个用户</p>
+<p>接入中间间</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">middleware</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;log/slog&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;net/http&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;strings&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fox/internal/pkg/utils&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/casbin/casbin/v2&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/gin-gonic/gin&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// AuthMiddleware jwt验证中间件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">AuthMiddleware</span><span class="p">(</span><span class="nx">e</span> <span class="o">*</span><span class="nx">casbin</span><span class="p">.</span><span class="nx">Enforcer</span><span class="p">,</span> <span class="nx">whitelistMap</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">)</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">HandlerFunc</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">whitelistMap</span><span class="p">[</span><span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">Path</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">c</span><span class="p">.</span><span class="nf">Next</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// 从 Header 取出 token
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">jwtToken</span> <span class="o">:=</span> <span class="s">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">header</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">SplitN</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nf">GetHeader</span><span class="p">(</span><span class="s">&#34;Authorization&#34;</span><span class="p">),</span> <span class="s">&#34; &#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">header</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="o">||</span> <span class="p">!</span><span class="nx">strings</span><span class="p">.</span><span class="nf">EqualFold</span><span class="p">(</span><span class="nx">header</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s">&#34;Bearer&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">jwtToken</span> <span class="p">=</span> <span class="nx">c</span><span class="p">.</span><span class="nf">Query</span><span class="p">(</span><span class="s">&#34;token&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">jwtToken</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnauthorized</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;code&#34;</span><span class="p">:</span> <span class="s">&#34;7000&#34;</span><span class="p">,</span> <span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="s">&#34;invalid token&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">c</span><span class="p">.</span><span class="nf">Abort</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">jwtToken</span> <span class="p">=</span> <span class="nx">header</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nx">claims</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">utils</span><span class="p">.</span><span class="nf">ParseToken</span><span class="p">(</span><span class="nx">jwtToken</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">c</span><span class="p">.</span><span class="nf">JSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusUnauthorized</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;code&#34;</span><span class="p">:</span> <span class="s">&#34;7000&#34;</span><span class="p">,</span> <span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="s">&#34;invalid token&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">c</span><span class="p">.</span><span class="nf">Abort</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// casbin 鉴权
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">sub</span> <span class="o">:=</span> <span class="nx">claims</span><span class="p">.</span><span class="nx">Username</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">obj</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">Path</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">act</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">Request</span><span class="p">.</span><span class="nx">Method</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nx">allowed</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">e</span><span class="p">.</span><span class="nf">Enforce</span><span class="p">(</span><span class="nx">sub</span><span class="p">,</span> <span class="nx">obj</span><span class="p">,</span> <span class="nx">act</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">slog</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;casbin enforce error&#34;</span><span class="p">,</span> <span class="s">&#34;err&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">c</span><span class="p">.</span><span class="nf">AbortWithStatusJSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusInternalServerError</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;code&#34;</span><span class="p">:</span> <span class="s">&#34;6000&#34;</span><span class="p">,</span> <span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="s">&#34;authorization error&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">!</span><span class="nx">allowed</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">c</span><span class="p">.</span><span class="nf">AbortWithStatusJSON</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">StatusForbidden</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span><span class="s">&#34;code&#34;</span><span class="p">:</span> <span class="s">&#34;5000&#34;</span><span class="p">,</span> <span class="s">&#34;error&#34;</span><span class="p">:</span> <span class="s">&#34;no permissions&#34;</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 把解析后的用户信息存入 Context
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">c</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="s">&#34;username&#34;</span><span class="p">,</span> <span class="nx">claims</span><span class="p">.</span><span class="nx">Username</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">c</span><span class="p">.</span><span class="nf">Next</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">RegisterMiddleware</span><span class="p">(</span><span class="nx">app</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Engine</span><span class="p">,</span> <span class="nx">cfg</span> <span class="o">*</span><span class="nx">config</span><span class="p">.</span><span class="nx">Config</span><span class="p">,</span> <span class="nx">e</span> <span class="o">*</span><span class="nx">casbin</span><span class="p">.</span><span class="nx">Enforcer</span><span class="p">,</span> <span class="nx">whitelistMap</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// app.Use(
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// 	ginzap.Ginzap(pkg.Log, time.RFC3339, true),
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// 	ginzap.RecoveryWithZap(pkg.Log, true),
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// 	cors.Default())
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">app</span><span class="p">.</span><span class="nf">Use</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">timeoutMiddleware</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">AuthMiddleware</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">whitelistMap</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">cors</span><span class="p">.</span><span class="nf">Default</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">slog</span><span class="p">.</span><span class="nf">SetLogger</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">gin</span><span class="p">.</span><span class="nf">Recovery</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">cfg</span><span class="p">.</span><span class="nx">ENV</span> <span class="o">!=</span> <span class="s">&#34;local&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// app.Use(CasbinMiddleware(whitelist))
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2026-03-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/casbin/">casbin</a>,&nbsp;<a href="/tags/auth/">auth</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2026-03-07-bufbuild/" class="prev" rel="prev" title="BufBuild"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>BufBuild</a>
+            <a href="/posts/2026-03-28-mqtt/" class="next" rel="next" title="mqtt">mqtt<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
