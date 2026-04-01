@@ -4,7 +4,23 @@
         <link>https://serialt.github.io/categories/go/</link>
         <description>Go - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 08 Mar 2026 21:57:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/go/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 28 Mar 2026 20:10:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/go/" rel="self" type="application/rss+xml" /><item>
+    <title>mqtt</title>
+    <link>https://serialt.github.io/posts/2026-03-28-mqtt/</link>
+    <pubDate>Sat, 28 Mar 2026 20:10:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-03-28-mqtt/</guid>
+    <description><![CDATA[MQTT 一、MQTT简述 MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一种基于发布/订阅（publish/subscr]]></description>
+</item>
+<item>
+    <title>casbin</title>
+    <link>https://serialt.github.io/posts/2026-03-28-casbin/</link>
+    <pubDate>Sat, 28 Mar 2026 20:01:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-03-28-casbin/</guid>
+    <description><![CDATA[Casbin 一、介绍 Casbin是一个强大的、高效的开源访问控制框架，其权限管理机制支持多种访问控制模型，Casbin只负责访问控制。 其功能有： 支持自]]></description>
+</item>
+<item>
     <title>k8s hpa</title>
     <link>https://serialt.github.io/posts/2026-03-08-hpa/</link>
     <pubDate>Sun, 08 Mar 2026 21:57:01 &#43;0800</pubDate>
@@ -27,22 +43,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2026-03-08-go-sync/</guid>
     <description><![CDATA[go sync 包 1、sync.WaitGroup（等待组） 用途：等待一组 Goroutine 全部执行完成。常用于主程序等待后台任务结束，或者在批量处理任务时确保所有子任]]></description>
-</item>
-<item>
-    <title>mqtt</title>
-    <link>https://serialt.github.io/posts/2026-03-28-mqtt/</link>
-    <pubDate>Sun, 08 Mar 2026 20:10:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2026-03-28-mqtt/</guid>
-    <description><![CDATA[MQTT 一、MQTT简述 MQTT（Message Queuing Telemetry Transport，消息队列遥测传输协议），是一种基于发布/订阅（publish/subscr]]></description>
-</item>
-<item>
-    <title>casbin</title>
-    <link>https://serialt.github.io/posts/2026-03-28-casbin/</link>
-    <pubDate>Sun, 08 Mar 2026 20:01:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2026-03-28-casbin/</guid>
-    <description><![CDATA[Casbin 一、介绍 Casbin是一个强大的、高效的开源访问控制框架，其权限管理机制支持多种访问控制模型，Casbin只负责访问控制。 其功能有： 支持自]]></description>
 </item>
 <item>
     <title>BufBuild</title>

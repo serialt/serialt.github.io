@@ -4,7 +4,23 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 08 Mar 2026 21:57:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 28 Mar 2026 20:10:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>auth</title>
+    <link>https://serialt.github.io/tags/auth/</link>
+    <pubDate>Sat, 28 Mar 2026 20:10:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/auth/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>casbin</title>
+    <link>https://serialt.github.io/tags/casbin/</link>
+    <pubDate>Sat, 28 Mar 2026 20:10:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/casbin/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>hpa</title>
     <link>https://serialt.github.io/tags/hpa/</link>
     <pubDate>Sun, 08 Mar 2026 21:57:01 &#43;0800</pubDate>
@@ -26,22 +42,6 @@
     <pubDate>Sun, 08 Mar 2026 21:50:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/go-sync/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>auth</title>
-    <link>https://serialt.github.io/tags/auth/</link>
-    <pubDate>Sun, 08 Mar 2026 20:10:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/auth/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>casbin</title>
-    <link>https://serialt.github.io/tags/casbin/</link>
-    <pubDate>Sun, 08 Mar 2026 20:10:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/casbin/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
