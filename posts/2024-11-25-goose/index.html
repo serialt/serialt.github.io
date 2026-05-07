@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-11-25-goose\/"
-        },"genre": "posts","keywords": "Go, goose","wordcount":  791 ,
+        },"genre": "posts","keywords": "Go, goose","wordcount":  811 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-11-25-goose\/","datePublished": "2024-11-25T19:38:01+08:00","dateModified": "2024-11-25T19:38:01+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Go goose</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E5%BA%93%E6%96%87%E6%A1%A3/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 库文档</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-11-25">2024-11-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;791 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-11-25">2024-11-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;811 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -187,7 +187,9 @@
 <li><code>mssql</code>,<code>sqlserver</code>,<code>mysql</code>,<code>tidb</code>,<code>sqlite3</code>,<code>clickhouse</code>等</li>
 </ul>
 <p>具体看 <code>goose.OpenDBWithDriver()</code> 方法</p>
-<p>二、集成</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>serialt@Krab goose<span class="o">]</span>🐳 goose create -dir dbFile  v26.2.1_add sql
+</span></span><span class="line"><span class="cl">2026/04/30 20:24:31 Created new file: dbFile/20260430122431_v26_2_1_add.sql
+</span></span></code></pre></div><p>二、集成</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>

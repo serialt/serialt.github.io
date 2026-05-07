@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2025-04-27.go-code\/"
-        },"genre": "posts","keywords": "Go, code","wordcount":  1058 ,
+        },"genre": "posts","keywords": "Go, code","wordcount":  2705 ,
         "url": "https:\/\/serialt.github.io\/posts\/2025-04-27.go-code\/","datePublished": "2025-04-27T20:38:01+08:00","dateModified": "2025-04-27T20:38:01+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,8 +101,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Go code</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go-%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go 代码片段</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-04-27">2025-04-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1058 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-04-27">2025-04-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2705 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -398,77 +398,556 @@
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>随机数</p>
-<pre tabindex="0"><code>//start 10，end 20，将获得这之间的随机数
-func RandomSum(start int, end int) int {
-  // 以当前时间戳作为种子，确保每次生成的随机数都不同
-  rand.Seed(time.Now().Unix())
-  // 生成一个指定范围之间的随机整数
-
-  randomInt := rand.Intn(end-start+1) + start
-  return randomInt
-}
-</code></pre><p>生成随机字符串</p>
-<pre tabindex="0"><code>const (
-  letterBytes  = &#34;abcdefghijklmnopqrstuvwxyz&#34;
-  capitalBytes = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;
-  numberBytes  = &#34;0123456789&#34;
-  symbolBytes  = &#34;!@#$%^&amp;*()&#34;
-)
-
-func RandStringBytes(n int, randomString string) string {
-  rand.Seed(time.Now().Unix())
-  b := make([]byte, n)
-  for i := range b {
-    b[i] = randomString[rand.Intn(len(randomString))]
-  }
-  return string(b)
-}
-
-func main() {
-//传入随机字符串的长度，以及需要随机那些字符串
-  randomString := RandStringBytes(10, letterBytes+numberBytes)
-  fmt.Println(randomString)
-}
-</code></pre><p>url 解析</p>
-<pre tabindex="0"><code>func main() {
-  // 要解析的 URL 字符串
-  urlString := &#34;https://www.example.com/path/to/resource?key1=value1&amp;key2=value2#fragment&#34;
-
-  // 解析 URL 字符串
-  parsedUrl, err := url.Parse(urlString)
-  if err != nil {
-    panic(err)
-  }
-
-  // 输出解析后的 URL 的各个部分
-  fmt.Println(&#34;Scheme:&#34;, parsedUrl.Scheme)
-  fmt.Println(&#34;Host:&#34;, parsedUrl.Host)
-  fmt.Println(&#34;Path:&#34;, parsedUrl.Path)
-  fmt.Println(&#34;RawQuery:&#34;, parsedUrl.RawQuery)
-  fmt.Println(&#34;Fragment:&#34;, parsedUrl.Fragment)
-
-  // 解析 URL 的查询参数
-  query := parsedUrl.Query()
-  fmt.Println(&#34;key1:&#34;, query.Get(&#34;key1&#34;))
-  fmt.Println(&#34;key2:&#34;, query.Get(&#34;key2&#34;))
-}
-</code></pre><p>执行系统命令</p>
-<pre tabindex="0"><code>func main() {
-  //cmd := exec.Command(&#34;calc.exe&#34;)
-  cmd := exec.Command(&#34;ls&#34;, &#34;-la&#34;)
-  output, err := cmd.Output()
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  fmt.Println(string(output))
-}
-</code></pre><p>web 文件服务</p>
-<pre tabindex="0"><code>func main() {
-  http.Handle(&#34;/&#34;, http.FileServer(http.Dir(&#34;.&#34;)))
-  http.ListenAndServe(&#34;:8082&#34;, nil)
-}
-</code></pre></div><div class="post-footer" id="post-footer">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//start 10，end 20，将获得这之间的随机数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">RandomSum</span><span class="p">(</span><span class="nx">start</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">end</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 以当前时间戳作为种子，确保每次生成的随机数都不同
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">rand</span><span class="p">.</span><span class="nf">Seed</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 生成一个指定范围之间的随机整数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="nx">randomInt</span> <span class="o">:=</span> <span class="nx">rand</span><span class="p">.</span><span class="nf">Intn</span><span class="p">(</span><span class="nx">end</span><span class="o">-</span><span class="nx">start</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nx">start</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">randomInt</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>生成随机字符串</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">const</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">letterBytes</span>  <span class="p">=</span> <span class="s">&#34;abcdefghijklmnopqrstuvwxyz&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">capitalBytes</span> <span class="p">=</span> <span class="s">&#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">numberBytes</span>  <span class="p">=</span> <span class="s">&#34;0123456789&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">symbolBytes</span>  <span class="p">=</span> <span class="s">&#34;!@#$%^&amp;*()&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">RandStringBytes</span><span class="p">(</span><span class="nx">n</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">randomString</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">rand</span><span class="p">.</span><span class="nf">Seed</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Unix</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">b</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">b</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">b</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span> <span class="nx">randomString</span><span class="p">[</span><span class="nx">rand</span><span class="p">.</span><span class="nf">Intn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nx">randomString</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nb">string</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//传入随机字符串的长度，以及需要随机那些字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">randomString</span> <span class="o">:=</span> <span class="nf">RandStringBytes</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="nx">letterBytes</span><span class="o">+</span><span class="nx">numberBytes</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">randomString</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>url 解析</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 要解析的 URL 字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">urlString</span> <span class="o">:=</span> <span class="s">&#34;https://www.example.com/path/to/resource?key1=value1&amp;key2=value2#fragment&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 解析 URL 字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">parsedUrl</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">url</span><span class="p">.</span><span class="nf">Parse</span><span class="p">(</span><span class="nx">urlString</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 输出解析后的 URL 的各个部分
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Scheme:&#34;</span><span class="p">,</span> <span class="nx">parsedUrl</span><span class="p">.</span><span class="nx">Scheme</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Host:&#34;</span><span class="p">,</span> <span class="nx">parsedUrl</span><span class="p">.</span><span class="nx">Host</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Path:&#34;</span><span class="p">,</span> <span class="nx">parsedUrl</span><span class="p">.</span><span class="nx">Path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;RawQuery:&#34;</span><span class="p">,</span> <span class="nx">parsedUrl</span><span class="p">.</span><span class="nx">RawQuery</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Fragment:&#34;</span><span class="p">,</span> <span class="nx">parsedUrl</span><span class="p">.</span><span class="nx">Fragment</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 解析 URL 的查询参数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">query</span> <span class="o">:=</span> <span class="nx">parsedUrl</span><span class="p">.</span><span class="nf">Query</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;key1:&#34;</span><span class="p">,</span> <span class="nx">query</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;key1&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;key2:&#34;</span><span class="p">,</span> <span class="nx">query</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="s">&#34;key2&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>执行系统命令</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// RunCMD 标准正确错误输出到标准正确输出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">RunCMD</span><span class="p">(</span><span class="nx">str</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">workDir</span> <span class="o">...</span><span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="kt">string</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">cmd</span> <span class="o">:=</span> <span class="nx">exec</span><span class="p">.</span><span class="nf">Command</span><span class="p">(</span><span class="s">&#34;/bin/bash&#34;</span><span class="p">,</span> <span class="s">&#34;-c&#34;</span><span class="p">,</span> <span class="nx">str</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">workDir</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">cmd</span><span class="p">.</span><span class="nx">Dir</span> <span class="p">=</span> <span class="nx">workDir</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">result</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">cmd</span><span class="p">.</span><span class="nf">CombinedOutput</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nb">string</span><span class="p">(</span><span class="nx">result</span><span class="p">),</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nb">string</span><span class="p">(</span><span class="nx">result</span><span class="p">),</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>web 文件服务</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">http</span><span class="p">.</span><span class="nf">Handle</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span> <span class="nx">http</span><span class="p">.</span><span class="nf">FileServer</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nf">Dir</span><span class="p">(</span><span class="s">&#34;.&#34;</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">http</span><span class="p">.</span><span class="nf">ListenAndServe</span><span class="p">(</span><span class="s">&#34;:8082&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>排序</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl">	<span class="nx">people</span> <span class="o">:=</span> <span class="p">[]</span><span class="nx">Person</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span><span class="s">&#34;Alice&#34;</span><span class="p">,</span> <span class="mi">30</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span><span class="s">&#34;Bob&#34;</span><span class="p">,</span> <span class="mi">25</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span><span class="s">&#34;Charlie&#34;</span><span class="p">,</span> <span class="mi">35</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 排序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">sort</span><span class="p">.</span><span class="nf">Slice</span><span class="p">(</span><span class="nx">people</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">j</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">people</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">Age</span> <span class="p">&lt;</span> <span class="nx">people</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">Age</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 按多个字段排序,先年龄后name
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">sort</span><span class="p">.</span><span class="nf">Slice</span><span class="p">(</span><span class="nx">people</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">j</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">people</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">Age</span> <span class="o">==</span> <span class="nx">people</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">Age</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">people</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">Name</span> <span class="p">&lt;</span> <span class="nx">people</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">Name</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">people</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">Age</span> <span class="p">&lt;</span> <span class="nx">people</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">Age</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 保持相同元素的原始顺序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">sort</span><span class="p">.</span><span class="nf">SliceStable</span><span class="p">(</span><span class="nx">people</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">j</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">people</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">Age</span> <span class="p">&lt;</span> <span class="nx">people</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">Age</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// slices.SortFunc 排序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">slices</span><span class="p">.</span><span class="nf">SortFunc</span><span class="p">(</span><span class="nx">people</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="nx">Person</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Age</span> <span class="o">!=</span> <span class="nx">b</span><span class="p">.</span><span class="nx">Age</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Age</span> <span class="o">-</span> <span class="nx">b</span><span class="p">.</span><span class="nx">Age</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Name</span> <span class="p">&lt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">Name</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Name</span> <span class="p">&gt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">Name</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 按另一个list排序
+</span></span></span><span class="line"><span class="cl"><span class="c1">// SortByOrder 根据 orderList 的顺序对 data 进行排序。
+</span></span></span><span class="line"><span class="cl"><span class="c1">// keyFn 用于从元素中提取用于匹配的键。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nx">SortByOrder</span><span class="p">[</span><span class="nx">T</span> <span class="nx">any</span><span class="p">,</span> <span class="nx">K</span> <span class="nx">comparable</span><span class="p">](</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">data</span> <span class="p">[]</span><span class="nx">T</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">orderList</span> <span class="p">[]</span><span class="nx">K</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">keyFn</span> <span class="kd">func</span><span class="p">(</span><span class="nx">T</span><span class="p">)</span> <span class="nx">K</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 构建顺序映射表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">orderMap</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span><span class="kt">int</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">orderList</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">orderList</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">orderMap</span><span class="p">[</span><span class="nx">v</span><span class="p">]</span> <span class="p">=</span> <span class="nx">i</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 排序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">sort</span><span class="p">.</span><span class="nf">SliceStable</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">j</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ki</span> <span class="o">:=</span> <span class="nf">keyFn</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">kj</span> <span class="o">:=</span> <span class="nf">keyFn</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="nx">j</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nx">oi</span><span class="p">,</span> <span class="nx">okI</span> <span class="o">:=</span> <span class="nx">orderMap</span><span class="p">[</span><span class="nx">ki</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">oj</span><span class="p">,</span> <span class="nx">okJ</span> <span class="o">:=</span> <span class="nx">orderMap</span><span class="p">[</span><span class="nx">kj</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">switch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="nx">okI</span> <span class="o">&amp;&amp;</span> <span class="nx">okJ</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">oi</span> <span class="p">&lt;</span> <span class="nx">oj</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="nx">okI</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="nx">okJ</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">		<span class="k">default</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="kc">false</span> <span class="c1">// 保持原始顺序（稳定排序）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">data</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">order</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">SortByOrder</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">order</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">v</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">v</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">utils</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;slices&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nx">SortByOrderFunc</span><span class="p">[</span><span class="nx">T</span> <span class="nx">any</span><span class="p">,</span> <span class="nx">K</span> <span class="nx">comparable</span><span class="p">](</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">data</span> <span class="p">[]</span><span class="nx">T</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">orderList</span> <span class="p">[]</span><span class="nx">K</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">keyFn</span> <span class="kd">func</span><span class="p">(</span><span class="nx">T</span><span class="p">)</span> <span class="nx">K</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">orderMap</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span><span class="kt">int</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">orderList</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">orderList</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">orderMap</span><span class="p">[</span><span class="nx">v</span><span class="p">]</span> <span class="p">=</span> <span class="nx">i</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">slices</span><span class="p">.</span><span class="nf">SortStableFunc</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="nx">T</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ka</span> <span class="o">:=</span> <span class="nf">keyFn</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">kb</span> <span class="o">:=</span> <span class="nf">keyFn</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nx">oa</span><span class="p">,</span> <span class="nx">okA</span> <span class="o">:=</span> <span class="nx">orderMap</span><span class="p">[</span><span class="nx">ka</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ob</span><span class="p">,</span> <span class="nx">okB</span> <span class="o">:=</span> <span class="nx">orderMap</span><span class="p">[</span><span class="nx">kb</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">switch</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="nx">okA</span> <span class="o">&amp;&amp;</span> <span class="nx">okB</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">oa</span> <span class="o">-</span> <span class="nx">ob</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="nx">okA</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="nx">okB</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">		<span class="k">default</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>list 生成map</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">abc</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">A</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">aa</span> <span class="o">:=</span> <span class="p">[]</span><span class="o">*</span><span class="nx">abc</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">lo</span><span class="p">.</span><span class="nf">KeyBy</span><span class="p">(</span><span class="nx">aa</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">item</span> <span class="o">*</span><span class="nx">abc</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">item</span><span class="p">.</span><span class="nx">A</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>list 生成map，value为list</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 生成 map  map[string][]*abc{}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">lo</span><span class="p">.</span><span class="nf">GroupBy</span><span class="p">(</span><span class="nx">aa</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">item</span> <span class="o">*</span><span class="nx">abc</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">item</span><span class="p">.</span><span class="nx">A</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>根据条件过滤list</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">even</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Filter</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">},</span> <span class="kd">func</span><span class="p">(</span><span class="nx">x</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">index</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">x</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []int{2, 4}
+</span></span></span></code></pre></div><p>for 循环</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">lo</span><span class="p">.</span><span class="nf">ForEach</span><span class="p">([]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;hello&#34;</span><span class="p">,</span> <span class="s">&#34;world&#34;</span><span class="p">},</span> <span class="kd">func</span><span class="p">(</span><span class="nx">x</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">_</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>统计list里某个元素个数</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">count</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Count</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 2
+</span></span></span></code></pre></div><p>统计满足条件的元素个数</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">count</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">CountBy</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="kd">func</span><span class="p">(</span><span class="nx">i</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>统计元素个数，生成map</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">lo</span><span class="p">.</span><span class="nf">CountValues</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// map[int]int{1: 1, 2: 1}
+</span></span></span></code></pre></div><p>获取map的key</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 获取map的key
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">keys</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Keys</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="s">&#34;foo&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []string{&#34;foo&#34;, &#34;bar&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取多个map的key的唯一值，组成唯一的slice
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">keys</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">UniqKeys</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="s">&#34;foo&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="s">&#34;baz&#34;</span><span class="p">:</span> <span class="mi">3</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []string{&#34;foo&#34;, &#34;bar&#34;, &#34;baz&#34;}
+</span></span></span></code></pre></div><p>获取map的value</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 获取map的值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">values</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Values</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="s">&#34;foo&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []int{1, 2}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取map的值并去重
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">values</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">UniqValues</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">int</span><span class="p">{</span><span class="s">&#34;foo&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []int{1, 2}
+</span></span></span></code></pre></div><p>list 转换</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 切片类型转换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">lo</span><span class="p">.</span><span class="nf">Map</span><span class="p">([]</span><span class="kt">int64</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">},</span> <span class="kd">func</span><span class="p">(</span><span class="nx">x</span> <span class="kt">int64</span><span class="p">,</span> <span class="nx">index</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">strconv</span><span class="p">.</span><span class="nf">FormatInt</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>list交集</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">lo</span><span class="p">.</span><span class="nf">Intersect</span><span class="p">([]</span><span class="kt">int64</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">},[]</span><span class="kt">int64</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">})</span>
+</span></span></code></pre></div><p>list差集</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">left</span><span class="p">,</span> <span class="nx">right</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Difference</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []int{1, 3, 4, 5}, []int{6}
+</span></span></span></code></pre></div><p>并集</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">union</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Union</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">},</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// []int{0, 1, 2, 3, 4, 5, 10}
+</span></span></span></code></pre></div><p>try语法</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 基本用法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ok</span> <span class="o">:=</span> <span class="nx">lo</span><span class="p">.</span><span class="nf">Try</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// true
+</span></span></span></code></pre></div><p>json转字符串</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Marshal</span><span class="p">(</span><span class="nx">data</span> <span class="nx">any</span><span class="p">)</span> <span class="p">(</span><span class="nx">str</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">bt</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">Marshal</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nb">string</span><span class="p">(</span><span class="nx">bt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">MarshalIndent</span><span class="p">(</span><span class="nx">data</span> <span class="nx">any</span><span class="p">)</span> <span class="p">(</span><span class="nx">str</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">bt</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nf">MarshalIndent</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="s">&#34;  &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nb">string</span><span class="p">(</span><span class="nx">bt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>多选参数</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">DataBaseConfig</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">IP</span>       <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Port</span>     <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Db</span>       <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">UserName</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">PassWord</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">const</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">PassWord</span> <span class="p">=</span> <span class="s">&#34;asd@123&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">UserName</span> <span class="p">=</span> <span class="s">&#34;test&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Db</span>       <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">DatabaseOptions</span> <span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">DataBaseConfig</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 添加数据库DB
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">WithDb</span><span class="p">(</span><span class="nx">db</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">DatabaseOptions</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">con</span> <span class="o">*</span><span class="nx">DataBaseConfig</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">con</span><span class="p">.</span><span class="nx">Db</span> <span class="p">=</span> <span class="nx">db</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 添加用户名和密码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">WithUserNamePassWord</span><span class="p">(</span><span class="nx">userName</span><span class="p">,</span> <span class="nx">passWord</span> <span class="kt">string</span><span class="p">)</span> <span class="nx">DatabaseOptions</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kd">func</span><span class="p">(</span><span class="nx">con</span> <span class="o">*</span><span class="nx">DataBaseConfig</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">con</span><span class="p">.</span><span class="nx">UserName</span> <span class="p">=</span> <span class="nx">userName</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">con</span><span class="p">.</span><span class="nx">PassWord</span> <span class="p">=</span> <span class="nx">passWord</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 可以设置默认参数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">DefaultDatabaseConfig</span><span class="p">(</span><span class="nx">con</span> <span class="o">*</span><span class="nx">DataBaseConfig</span><span class="p">)</span> <span class="o">*</span><span class="nx">DataBaseConfig</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">con</span><span class="p">.</span><span class="nx">PassWord</span> <span class="p">=</span> <span class="nx">PassWord</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">con</span><span class="p">.</span><span class="nx">UserName</span> <span class="p">=</span> <span class="nx">UserName</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">con</span><span class="p">.</span><span class="nx">Db</span> <span class="p">=</span> <span class="nx">Db</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">con</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewDataBaseConnect</span><span class="p">(</span><span class="nx">IP</span><span class="p">,</span> <span class="nx">Port</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">options</span> <span class="o">...</span><span class="nx">DatabaseOptions</span><span class="p">)</span> <span class="o">*</span><span class="nx">DataBaseConfig</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 本初始化方案，要自己填IP，其他参数可填可不填，也可以使用默认参数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">con</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">DataBaseConfig</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">IP</span><span class="p">:</span>   <span class="nx">IP</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Port</span><span class="p">:</span> <span class="nx">Port</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 默认值的设定
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">con</span> <span class="p">=</span> <span class="nf">DefaultDatabaseConfig</span><span class="p">(</span><span class="nx">con</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 遍历可选参数，然后分别调用匿名函数，将连接对象指针传入，进行修改
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">op</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">options</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// 遍历调用函数，进行数据修改
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nf">op</span><span class="p">(</span><span class="nx">con</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">con</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 传入自定义参数测试可选参数的输入
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kd">var</span> <span class="nx">options</span> <span class="p">=</span> <span class="p">[]</span><span class="nx">DatabaseOptions</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">WithDb</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">WithUserNamePassWord</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">,</span> <span class="s">&#34;passWord&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">con1</span> <span class="o">:=</span> <span class="nf">NewDataBaseConnect</span><span class="p">(</span><span class="s">&#34;127.0.0.1&#34;</span><span class="p">,</span> <span class="s">&#34;27017&#34;</span><span class="p">,</span> <span class="nx">options</span><span class="o">...</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%#v&#34;</span><span class="p">,</span> <span class="nx">con1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 不输入可选参数的测试
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">con</span> <span class="o">:=</span> <span class="nf">NewDataBaseConnect</span><span class="p">(</span><span class="s">&#34;127.0.0.1&#34;</span><span class="p">,</span> <span class="s">&#34;27017&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;%#v&#34;</span><span class="p">,</span> <span class="nx">con</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>接口</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 定义接口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">Speaker</span> <span class="kd">interface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">Speak</span><span class="p">()</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 定义结构体并实现接口方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">Person</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Name</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="nx">Person</span><span class="p">)</span> <span class="nf">Speak</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="s">&#34;Hello, my name is &#34;</span> <span class="o">+</span> <span class="nx">p</span><span class="p">.</span><span class="nx">Name</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Dog</span> <span class="kd">struct</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="nx">Dog</span><span class="p">)</span> <span class="nf">Speak</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="s">&#34;Woof!&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 使用接口类型的变量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">saySomething</span><span class="p">(</span><span class="nx">s</span> <span class="nx">Speaker</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">s</span><span class="p">.</span><span class="nf">Speak</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">person</span> <span class="o">:=</span> <span class="nx">Person</span><span class="p">{</span><span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;John&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">dog</span> <span class="o">:=</span> <span class="nx">Dog</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">saySomething</span><span class="p">(</span><span class="nx">person</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">saySomething</span><span class="p">(</span><span class="nx">dog</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>并发安全map</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;sync&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 进程阻塞
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">m</span> <span class="nx">sync</span><span class="p">.</span><span class="nx">Map</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">m</span><span class="p">.</span><span class="nf">Store</span><span class="p">(</span><span class="s">&#34;userId&#34;</span><span class="p">,</span> <span class="mi">1001</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">m</span><span class="p">.</span><span class="nf">Store</span><span class="p">(</span><span class="s">&#34;vvvv&#34;</span><span class="p">,</span> <span class="s">&#34;hello&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">val</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">m</span><span class="p">.</span><span class="nf">Load</span><span class="p">(</span><span class="s">&#34;userId&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>生成tree</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nx">BuildTreePtr</span><span class="p">[</span><span class="nx">T</span> <span class="nx">any</span><span class="p">,</span> <span class="nx">K</span> <span class="nx">comparable</span><span class="p">](</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">list</span> <span class="p">[]</span><span class="nx">T</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">getID</span> <span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">T</span><span class="p">)</span> <span class="nx">K</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">getParentID</span> <span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">T</span><span class="p">)</span> <span class="nx">K</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">getChildren</span> <span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">T</span><span class="p">)</span> <span class="p">[]</span><span class="o">*</span><span class="nx">T</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">setChildren</span> <span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">T</span><span class="p">,</span> <span class="p">[]</span><span class="o">*</span><span class="nx">T</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">rootID</span> <span class="nx">K</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">[]</span><span class="o">*</span><span class="nx">T</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">nodeMap</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span><span class="o">*</span><span class="nx">T</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">result</span> <span class="p">[]</span><span class="o">*</span><span class="nx">T</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 1. 建立 map
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">list</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">node</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">nodeMap</span><span class="p">[</span><span class="nf">getID</span><span class="p">(</span><span class="nx">node</span><span class="p">)]</span> <span class="p">=</span> <span class="nx">node</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 2. 构建树
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">node</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">nodeMap</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">pid</span> <span class="o">:=</span> <span class="nf">getParentID</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">pid</span> <span class="o">==</span> <span class="nx">rootID</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">parent</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">nodeMap</span><span class="p">[</span><span class="nx">pid</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">currentChildren</span> <span class="o">:=</span> <span class="nf">getChildren</span><span class="p">(</span><span class="nx">parent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">				<span class="nf">setChildren</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nb">append</span><span class="p">(</span><span class="nx">currentChildren</span><span class="p">,</span> <span class="nx">node</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">result</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// tree验证代码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Category</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ID</span>       <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ParentID</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Name</span>     <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Children</span> <span class="p">[]</span><span class="o">*</span><span class="nx">Category</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">list</span> <span class="o">:=</span> <span class="p">[]</span><span class="nx">Category</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">ParentID</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;根&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">ParentID</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;A&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">ParentID</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;B&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span><span class="nx">ID</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="nx">ParentID</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">Name</span><span class="p">:</span> <span class="s">&#34;A-1&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">tree</span> <span class="o">:=</span> <span class="nf">BuildTreePtr</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">list</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Category</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">c</span><span class="p">.</span><span class="nx">ID</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Category</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">c</span><span class="p">.</span><span class="nx">ParentID</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Category</span><span class="p">)</span> <span class="p">[]</span><span class="o">*</span><span class="nx">Category</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">c</span><span class="p">.</span><span class="nx">Children</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Category</span><span class="p">,</span> <span class="nx">children</span> <span class="p">[]</span><span class="o">*</span><span class="nx">Category</span><span class="p">)</span> <span class="p">{</span> <span class="nx">c</span><span class="p">.</span><span class="nx">Children</span> <span class="p">=</span> <span class="nx">children</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nb">println</span><span class="p">(</span><span class="nx">tree</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>带深度版树</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nx">BuildTreePtrWithDepth</span><span class="p">[</span><span class="nx">T</span> <span class="nx">any</span><span class="p">,</span> <span class="nx">K</span> <span class="nx">comparable</span><span class="p">](</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">list</span> <span class="p">[]</span><span class="nx">T</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">getID</span> <span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">T</span><span class="p">)</span> <span class="nx">K</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">getParentID</span> <span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">T</span><span class="p">)</span> <span class="nx">K</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">getChildren</span> <span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">T</span><span class="p">)</span> <span class="p">[]</span><span class="o">*</span><span class="nx">T</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">setChildren</span> <span class="kd">func</span><span class="p">(</span><span class="o">*</span><span class="nx">T</span><span class="p">,</span> <span class="p">[]</span><span class="o">*</span><span class="nx">T</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">rootID</span> <span class="nx">K</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">maxDepth</span> <span class="kt">int</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">[]</span><span class="o">*</span><span class="nx">T</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">nodeMap</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span><span class="o">*</span><span class="nx">T</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">depthMap</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">result</span> <span class="p">[]</span><span class="o">*</span><span class="nx">T</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 1. 建立 map
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">list</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">node</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">list</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">nodeMap</span><span class="p">[</span><span class="nf">getID</span><span class="p">(</span><span class="nx">node</span><span class="p">)]</span> <span class="p">=</span> <span class="nx">node</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 2. 构建树
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">node</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">nodeMap</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">pid</span> <span class="o">:=</span> <span class="nf">getParentID</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">pid</span> <span class="o">==</span> <span class="nx">rootID</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">result</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">depthMap</span><span class="p">[</span><span class="nf">getID</span><span class="p">(</span><span class="nx">node</span><span class="p">)]</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">parent</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">nodeMap</span><span class="p">[</span><span class="nx">pid</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">parentDepth</span><span class="p">,</span> <span class="nx">hasDepth</span> <span class="o">:=</span> <span class="nx">depthMap</span><span class="p">[</span><span class="nf">getID</span><span class="p">(</span><span class="nx">parent</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">				<span class="k">if</span> <span class="nx">hasDepth</span> <span class="o">&amp;&amp;</span> <span class="nx">parentDepth</span> <span class="p">&lt;</span> <span class="nx">maxDepth</span><span class="o">-</span><span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">currentChildren</span> <span class="o">:=</span> <span class="nf">getChildren</span><span class="p">(</span><span class="nx">parent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">					<span class="nf">setChildren</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nb">append</span><span class="p">(</span><span class="nx">currentChildren</span><span class="p">,</span> <span class="nx">node</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">depthMap</span><span class="p">[</span><span class="nf">getID</span><span class="p">(</span><span class="nx">node</span><span class="p">)]</span> <span class="p">=</span> <span class="nx">parentDepth</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">result</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>slog 日志封装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;log/slog&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;os&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;path/filepath&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">logLevel</span> <span class="o">:=</span> <span class="s">&#34;info&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">klog</span> <span class="o">:=</span> <span class="nx">slog</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">slog</span><span class="p">.</span><span class="nf">NewTextHandler</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stdout</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">slog</span><span class="p">.</span><span class="nx">HandlerOptions</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">AddSource</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">ReplaceAttr</span><span class="p">:</span> <span class="kd">func</span><span class="p">(</span><span class="nx">groups</span> <span class="p">[]</span><span class="kt">string</span><span class="p">,</span> <span class="nx">a</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">Attr</span><span class="p">)</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">Attr</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">if</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Key</span> <span class="o">==</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">SourceKey</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                                <span class="nx">source</span> <span class="o">:=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Value</span><span class="p">.</span><span class="nf">Any</span><span class="p">().(</span><span class="o">*</span><span class="nx">slog</span><span class="p">.</span><span class="nx">Source</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                                <span class="nx">source</span><span class="p">.</span><span class="nx">File</span> <span class="p">=</span> <span class="nx">filepath</span><span class="p">.</span><span class="nf">Base</span><span class="p">(</span><span class="nx">source</span><span class="p">.</span><span class="nx">File</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                                <span class="k">return</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">Attr</span><span class="p">{</span><span class="nx">Key</span><span class="p">:</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Key</span><span class="p">,</span> <span class="nx">Value</span><span class="p">:</span> <span class="nx">a</span><span class="p">.</span><span class="nx">Value</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">return</span> <span class="nx">a</span>
+</span></span><span class="line"><span class="cl">                <span class="p">},</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">Level</span><span class="p">:</span> <span class="kd">func</span><span class="p">()</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">Level</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">switch</span> <span class="nx">logLevel</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">case</span> <span class="s">&#34;debug&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                                <span class="k">return</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelDebug</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">case</span> <span class="s">&#34;info&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                                <span class="k">return</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelInfo</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">case</span> <span class="s">&#34;warn&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                                <span class="k">return</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelWarn</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">case</span> <span class="s">&#34;error&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                                <span class="k">return</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelError</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">default</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                                <span class="k">return</span> <span class="nx">slog</span><span class="p">.</span><span class="nx">LevelInfo</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}(),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">klog</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="s">&#34;Error log&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">klog</span><span class="p">.</span><span class="nf">Warn</span><span class="p">(</span><span class="s">&#34;Warn log&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">klog</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;Hello, World!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">klog</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="s">&#34;Debug log&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

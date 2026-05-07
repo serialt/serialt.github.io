@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="RabbitMQ 一、rabbitmq 概念理解 1、概念 MQ（Message Queue，消息队列）是一种用于在分布式系统中实现消息传递和异步通信的技术。它充当" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2026-03-28-rabbitmq/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="RabbitMQ 一、rabbitmq 概念理解 1、概念 MQ（Message Queue，消息队列）是一种用于在分布式系统中实现消息传递和异步通信的技术。它充当"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2026-03-28-rabbitmq/" /><link rel="prev" href="https://serialt.github.io/posts/2026-04-05-kafka/" /><link rel="next" href="https://serialt.github.io/posts/2025-01-05-android/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2026-03-28-rabbitmq\/"
+        },"genre": "posts","wordcount":  3387 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2026-03-28-rabbitmq\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3387 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一rabbitmq-概念理解">一、rabbitmq 概念理解</a>
+      <ul>
+        <li><a href="#1概念">1、概念</a></li>
+        <li><a href="#2mq工作原理">2、MQ工作原理</a></li>
+        <li><a href="#3应用场景">3、应用场景</a></li>
+        <li><a href="#4介绍">4、介绍</a></li>
+      </ul>
+    </li>
+    <li><a href="#二实战">二、实战</a>
+      <ul>
+        <li><a href="#1rabbitmq安装">1、rabbitmq安装</a></li>
+        <li><a href="#2工作模式">2、工作模式</a></li>
+        <li><a href="#3消息持久化">3、消息持久化</a></li>
+        <li><a href="#4消费端">4、消费端：</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>RabbitMQ</p>
+<h2 id="一rabbitmq-概念理解">一、rabbitmq 概念理解</h2>
+<h3 id="1概念">1、概念</h3>
+<p>MQ（Message Queue，消息队列）是一种用于在<strong>分布式</strong>系统中实现<strong>消息传递</strong>和<strong>异步通信</strong>的技术。它充当了<strong>发送方</strong>和<strong>接收方</strong>之间的中间人，用于在应用程序或服务之间<strong>传递消息</strong>。MQ 允许系统中的不同组件彼此独立运行，而无需直接通信或相互依赖，从而提高系统的可扩展性、可靠性和灵活性。</p>
+<p><strong>概念剖析：</strong></p>
+<ul>
+<li>**消息：**消息是应用程序之间传递的数据单元，可以是文本、JSON、XML 或其他格式。</li>
+<li>**队列：**队列是一个用于存储消息的容器，消息按照先进先出（FIFO）的顺序存储。</li>
+<li>**生产者：**生产者是发送消息到消息队列的应用程序或服务。它生成并推送消息到队列中。</li>
+<li>**消费者：**消费者是从消息队列中接收和处理消息的应用程序或服务。它会从队列中取出消息并执行相应的操作。</li>
+<li>**中间件：**消息队列通常由消息中间件实现，如 RabbitMQ、Kafka、ActiveMQ、Redis等。中间件负责管理消息的存储、传递和路由。</li>
+</ul>
+<h3 id="2mq工作原理">2、MQ工作原理</h3>
+<p>MQ的工作方式通常包含以下步骤：</p>
+<ul>
+<li>**消息生产：**生产者将消息发送到消息队列。</li>
+<li>**消息存储：**消息队列中间件接收并存储消息，直到有消费者来取走它们。</li>
+<li>**消息消费：**消费者从队列中取出消息并处理。</li>
+<li>**消息确认：**消费者处理完消息后，通常会向队列发送确认，通知中间件消息已成功处理，可以将其删除或标记为已处理。</li>
+</ul>
+<h3 id="3应用场景">3、应用场景</h3>
+<ul>
+<li>异步处理</li>
+<li>应用解耦</li>
+<li>流量削峰</li>
+</ul>
+<h3 id="4介绍">4、介绍</h3>
+<p><code>RabbitMQ</code>是由<code>erlang</code>语言开发，基于<code>AMQP</code>（Advanced Message Queue 高级消息队列协议）协议实现的消息队列，它是一种应用程序之间的通信方法，消息队列在分布式系统开发中应用非常广泛。</p>
+<p><strong>特点：</strong></p>
+<ul>
+<li><strong>基于<code>AMQP</code>协议来实现</strong>。主要特征是面向消息、队列、路由（包括点对点和发布/订阅）、可靠性、安全。<code>AMQP</code>协议更多用在企业系统内，对数据一致性、稳定性和可靠性要求很高的场景，对性能和吞吐量的要求还在其次。</li>
+<li><strong>可靠性</strong>：采用一系列机制来确保消息的可靠性，如持久化、传输确认和发布确认等方法。能够保证百分之百的不丢失。</li>
+<li><strong>高可用性</strong>：队列可以在集群的多台机器上进行镜像设置，即使其中的某些节点出现故障，队列仍然可用。</li>
+<li>**可扩展性：**RabbitMQ支持构建集群，多个节点可以组成一个集群。</li>
+<li>**灵活的路由：**消息在进入队列之前会通过交换器进行路由，使得消息能够按照特定的规则进行分发。</li>
+</ul>
+<h4 id="常用概念理解">常用概念理解：</h4>
+<ul>
+<li>
+<p><strong>Producer：</strong>
+生产者是消息的发送者。它将消息发送到 RabbitMQ 中，消息被发送到一个 Exchange（交换器）中。生产者并不知道消息将被发送到哪个队列（Queue），只负责将消息发送到指定的交换器。</p>
+</li>
+<li>
+<p><strong>Exchange：</strong>
+交换器是用来接收生产者发送的消息并根据一定的规则（Binding）将消息路由到一个或多个队列中。交换器有不同的类型，每种类型的路由行为不同：</p>
+</li>
+<li>
+<ul>
+<li><strong>Direct Exchange</strong>：根据消息的 Routing Key（路由键）精确地将消息路由到指定的队列中。</li>
+<li><strong>Topic Exchange</strong>：根据 Routing Key 的模式匹配，将消息路由到符合条件的队列中，支持模糊匹配。</li>
+<li><strong>Fanout Exchange</strong>：将消息广播到所有绑定到该交换器的队列中，忽略 Routing Key。</li>
+<li><strong>Headers Exchange</strong>：根据消息的 Headers 属性进行路由。</li>
+</ul>
+</li>
+<li>
+<p><strong>Queue：</strong>
+队列是 RabbitMQ 中存储消息的容器。消息进入队列后，会被消费者（Consumer）从中取出并处理。一个队列可以绑定到多个交换器上，且一个队列可以有多个消费者，但每条消息只能被一个消费者消费。</p>
+</li>
+<li>
+<p><strong>Consumer：</strong>
+消费者是从队列中接收消息并处理的应用程序或服务。消费者可以主动拉取消息，也可以通过订阅的方式被动接收消息。</p>
+</li>
+<li>
+<p><strong>Message：</strong>
+消息是生产者发送给 RabbitMQ 的数据载体，通常包括两个部分：</p>
+</li>
+<li>
+<ul>
+<li><strong>Payload</strong>：消息的实际数据。</li>
+<li><strong>Attributes</strong>：消息的元数据，比如 Routing Key、Headers、优先级等。</li>
+</ul>
+</li>
+<li>
+<p><strong>Ack：</strong>
+消费者处理完消息后，可以发送确认（ACK）给 RabbitMQ，以表示消息已成功处理。未确认的消息会被重新投递。</p>
+</li>
+<li>
+<p><strong>Routing Key：</strong>
+路由键是生产者发送消息时指定的，用于匹配交换器和队列的绑定规则。不同类型的交换器对路由键的处理方式不同。</p>
+</li>
+</ul>
+<h2 id="二实战">二、实战</h2>
+<h3 id="1rabbitmq安装">1、rabbitmq安装</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rabbitmq</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">registry.cn-hangzhou.aliyuncs.com/serialt/rabbitmq:3.13.7</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">rabbitmq</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;15672:15672&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;5672:5672&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/data/rabbitmq:/data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">RABBITMQ_USERNAME=serialt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">RABBITMQ_PASSWORD=msg.pass</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">RABBITMQ_VHOST=*</span><span class="w">
+</span></span></span></code></pre></div><h3 id="2工作模式">2、工作模式</h3>
+<h4 id="1simple-模式">1）Simple 模式</h4>
+<blockquote>
+<p>单发单收，消息的消费者监听消息队列，如果队列中有消息，就消费掉，消息被拿走后，自动从队列中删除</p>
+</blockquote>
+<h4 id="2工作队列-work-queue">2）工作队列 Work Queue</h4>
+<blockquote>
+<p>让多个消费者绑定到一个队列，共同消费队列中的消息。队列中的消息一旦消费，就会消失，因此任务是不会被重复执行的。</p>
+</blockquote>
+<h4 id="3发布订阅pubsub模式">3）发布订阅Pub/Sub模式</h4>
+<blockquote>
+<p>在这种模型中，多了一个 Exchange 角色，而且过程略有变化：
+P：生产者,也就是要发送消息的程序，但是不再发送到队列中，而是发给X (交换机)。
+C：消费者，消息的接收者，会一直等待消息到来。
+Queue：消息队列，接收消息、缓存消息。
+Exchange：交换机(X) ，一方面，接收生产者发送的消息。另一方面，如何处理消息，递交给某个特别队列、递交给所有队列、或是将消息丢弃。到底如何操作，取决于Exchange的类型。</p>
+</blockquote>
+<p><strong>Exchange类型：</strong></p>
+<ul>
+<li>Fanout：广播，将消息交给所有绑定到交换机的队列。</li>
+<li>Direct：全值匹配，把消息交给符合指定<code>routing key</code>的队列。</li>
+<li>Topic：通配符，与Direct类型类似，但Direct类型要求<code>routing key</code>完全相等，而Topic类型是对<code>routing key</code>进行模糊匹配，比Direct灵活。</li>
+<li>Headers：根据Message的一些头部信息来分发过滤Message，用的比较少。</li>
+</ul>
+<h3 id="3消息持久化">3、消息持久化</h3>
+<p>1）<strong>队列持久化</strong>：在声明队列时，将 <code>durable</code> 参数设置为 <code>true</code>，使得队列在 RabbitMQ 重启后仍然存在。</p>
+<p>2）<strong>消息持久化</strong>：在发送消息时，将 <code>delivery_mode</code> 设置为 <code>2</code>，这样消息会被写入磁盘，即使 RabbitMQ 崩溃或重启，消息也不会丢失。</p>
+<h3 id="4消费端">4、消费端：</h3>
+<p>消息从Queue发送到消费端之后，消费端会发送一个确认消息：<code>Consumer Ack</code>，有两种确认方式：自动确认和手动确认。</p>
+<p>**自动确认：**当消息一旦被Consumer接收到，则自动确认收到，并将相应 message 从 RabbitMQ 的消息缓存中移除。</p>
+<p>**手动确认：**在实际业务处理中，很可能消息接收到，业务处理出现异常，那么该消息就会丢失。如果设置了手动确认方式，则需要在业务处理成功后，调用<code>ch.Ack(false)</code>，手动确认，如果出现异常，则调用<code>d.Reject(true)</code>让其自动重新发送消息。</p>
+<p>示例代码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;log&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;os&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;time&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;github.com/streadway/amqp&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">const</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 注意：根据你的环境修改此 URL
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">rabbitMQURL</span>  <span class="p">=</span> <span class="s">&#34;amqp://guest:guest@localhost:5661/&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">queueName</span>    <span class="p">=</span> <span class="s">&#34;q1&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">exchangeName</span> <span class="p">=</span> <span class="s">&#34;e1&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">exchangeType</span> <span class="p">=</span> <span class="s">&#34;direct&#34;</span> <span class="c1">// 可根据实际需求改为 &#34;topic&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">failOnError</span><span class="p">(</span><span class="nx">err</span> <span class="kt">error</span><span class="p">,</span> <span class="nx">msg</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;%s: %s&#34;</span><span class="p">,</span> <span class="nx">msg</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">connectToRabbitMQ</span><span class="p">()</span> <span class="p">(</span><span class="o">*</span><span class="nx">amqp</span><span class="p">.</span><span class="nx">Connection</span><span class="p">,</span> <span class="o">*</span><span class="nx">amqp</span><span class="p">.</span><span class="nx">Channel</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">conn</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">amqp</span><span class="p">.</span><span class="nf">Dial</span><span class="p">(</span><span class="nx">rabbitMQURL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;无法连接到 RabbitMQ: %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">ch</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">conn</span><span class="p">.</span><span class="nf">Channel</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">conn</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;无法打开通道: %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">conn</span><span class="p">,</span> <span class="nx">ch</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 声明交换机（durable=false 以匹配可能已存在的配置）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">declareExchange</span><span class="p">(</span><span class="nx">ch</span> <span class="o">*</span><span class="nx">amqp</span><span class="p">.</span><span class="nx">Channel</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">ch</span><span class="p">.</span><span class="nf">ExchangeDeclare</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">exchangeName</span><span class="p">,</span> <span class="c1">// name
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="nx">exchangeType</span><span class="p">,</span> <span class="c1">// type
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kc">true</span><span class="p">,</span>         <span class="c1">// durable ← 关键：设为 false 避免冲突
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kc">false</span><span class="p">,</span>        <span class="c1">// delete when unused
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kc">false</span><span class="p">,</span>        <span class="c1">// internal
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kc">false</span><span class="p">,</span>        <span class="c1">// no-wait
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kc">nil</span><span class="p">,</span>          <span class="c1">// arguments
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 声明队列（durable=false，与已有队列一致）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">declareQueue</span><span class="p">(</span><span class="nx">ch</span> <span class="o">*</span><span class="nx">amqp</span><span class="p">.</span><span class="nx">Channel</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ch</span><span class="p">.</span><span class="nf">QueueDeclare</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">queueName</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="kc">false</span><span class="p">,</span> <span class="c1">// durable ← 必须为 false，否则报 406 错误
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kc">false</span><span class="p">,</span> <span class="c1">// auto-delete
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kc">false</span><span class="p">,</span> <span class="c1">// exclusive
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kc">false</span><span class="p">,</span> <span class="c1">// no-wait
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kc">nil</span><span class="p">,</span>   <span class="c1">// arguments
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 绑定队列到交换机
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">bindQueue</span><span class="p">(</span><span class="nx">ch</span> <span class="o">*</span><span class="nx">amqp</span><span class="p">.</span><span class="nx">Channel</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">ch</span><span class="p">.</span><span class="nf">QueueBind</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">queueName</span><span class="p">,</span>    <span class="c1">// queue
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="nx">queueName</span><span class="p">,</span>    <span class="c1">// routing key（你当前用队列名作为 routing key）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="nx">exchangeName</span><span class="p">,</span> <span class="c1">// exchange
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kc">false</span><span class="p">,</span>        <span class="c1">// no-wait
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kc">nil</span><span class="p">,</span>          <span class="c1">// arguments
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Producer：发送消息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">Producer</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">conn</span><span class="p">,</span> <span class="nx">ch</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">connectToRabbitMQ</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">failOnError</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;连接失败&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">defer</span> <span class="nx">conn</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">defer</span> <span class="nx">ch</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// err = declareExchange(ch)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// failOnError(err, &#34;声明交换机失败&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// err = declareQueue(ch)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// failOnError(err, &#34;声明队列失败&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// err = bindQueue(ch)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// failOnError(err, &#34;绑定队列失败&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="nx">body</span> <span class="o">:=</span> <span class="s">&#34;data hellocccc! &#34;</span> <span class="o">+</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">Format</span><span class="p">(</span><span class="s">&#34;2006-01-02 15:04:05&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">err</span> <span class="p">=</span> <span class="nx">ch</span><span class="p">.</span><span class="nf">Publish</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">exchangeName</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">queueName</span><span class="p">,</span> <span class="c1">// routing key
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">amqp</span><span class="p">.</span><span class="nx">Publishing</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">ContentType</span><span class="p">:</span> <span class="s">&#34;text/plain&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">Body</span><span class="p">:</span>        <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">body</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="p">})</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">failOnError</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;发布消息失败&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34; [x] 已发送消息: %s&#34;</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Consumer：接收消息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">Consumer</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">conn</span><span class="p">,</span> <span class="nx">ch</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">connectToRabbitMQ</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">failOnError</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;连接失败&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">defer</span> <span class="nx">conn</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 不关闭 channel，因为消费者长期运行
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="nx">err</span> <span class="p">=</span> <span class="nf">declareExchange</span><span class="p">(</span><span class="nx">ch</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">failOnError</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;声明交换机失败&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">err</span> <span class="p">=</span> <span class="nf">declareQueue</span><span class="p">(</span><span class="nx">ch</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">failOnError</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;声明队列失败&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">err</span> <span class="p">=</span> <span class="nf">bindQueue</span><span class="p">(</span><span class="nx">ch</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">failOnError</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;绑定队列失败&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">msgs</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ch</span><span class="p">.</span><span class="nf">Consume</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">queueName</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s">&#34;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="kc">true</span><span class="p">,</span>  <span class="c1">// auto-ack
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kc">false</span><span class="p">,</span> <span class="c1">// exclusive
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kc">false</span><span class="p">,</span> <span class="c1">// no-local
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kc">false</span><span class="p">,</span> <span class="c1">// no-wait
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kc">nil</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">failOnError</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;注册消费者失败&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34; [*] 等待消息... (按 CTRL+C 退出)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nx">forever</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">bool</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="nx">d</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">msgs</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34; [x] 收到消息: %s&#34;</span><span class="p">,</span> <span class="nb">string</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">Body</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span> <span class="c1">// 模拟处理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;-</span><span class="nx">forever</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Args</span><span class="p">)</span> <span class="p">&lt;</span> <span class="mi">2</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stderr</span><span class="p">,</span> <span class="s">&#34;用法: %s [producer|consumer]\n&#34;</span><span class="p">,</span> <span class="nx">os</span><span class="p">.</span><span class="nx">Args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">os</span><span class="p">.</span><span class="nf">Exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">switch</span> <span class="nx">os</span><span class="p">.</span><span class="nx">Args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="s">&#34;p&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nf">Producer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="s">&#34;c&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nf">Consumer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">default</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stderr</span><span class="p">,</span> <span class="s">&#34;未知命令: %s\n&#34;</span><span class="p">,</span> <span class="nx">os</span><span class="p">.</span><span class="nx">Args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Stderr</span><span class="p">,</span> <span class="s">&#34;用法: %s [producer|consumer]\n&#34;</span><span class="p">,</span> <span class="nx">os</span><span class="p">.</span><span class="nx">Args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">os</span><span class="p">.</span><span class="nf">Exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2026-04-05-kafka/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/posts/2025-01-05-android/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
