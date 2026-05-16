@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-06-13-mirror-cn\/"
-        },"genre": "posts","keywords": "mirror, source, mirror-to-cn","wordcount":  549 ,
+        },"genre": "posts","keywords": "mirror, source, mirror-to-cn","wordcount":  600 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-06-13-mirror-cn\/","datePublished": "2024-06-13T21:00:42+08:00","dateModified": "2024-06-13T21:00:42+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">To-mirror</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%B3%BB%E7%BB%9F%E6%88%96%E8%BD%AF%E4%BB%B6%E6%8D%A2%E6%BA%90/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>系统或软件换源</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-13">2024-06-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;549 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-06-13">2024-06-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;600 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -316,6 +316,75 @@ quay.dockerproxy.com
 </span></span><span class="line"><span class="cl">k8s.dockerproxy.com
 </span></span></code></pre></div><p>Microsoft Artifact Registry</p>
 <pre tabindex="0"><code>mcr.dockerproxy.com
+</code></pre><p>daocloud</p>
+<table>
+<thead>
+<tr>
+<th>源站</th>
+<th>替换为</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>docker.elastic.co</td>
+<td>elastic.m.daocloud.io</td>
+<td></td>
+</tr>
+<tr>
+<td>docker.io</td>
+<td>docker.m.daocloud.io</td>
+<td></td>
+</tr>
+<tr>
+<td>dhi.io</td>
+<td>dhi.m.daocloud.io</td>
+<td></td>
+</tr>
+<tr>
+<td>gcr.io</td>
+<td>gcr.m.daocloud.io</td>
+<td></td>
+</tr>
+<tr>
+<td>ghcr.io</td>
+<td>ghcr.m.daocloud.io</td>
+<td></td>
+</tr>
+<tr>
+<td>k8s.gcr.io</td>
+<td>k8s-gcr.m.daocloud.io</td>
+<td>k8s.gcr.io 已被迁移到 registry.k8s.io</td>
+</tr>
+<tr>
+<td>registry.k8s.io</td>
+<td>k8s.m.daocloud.io</td>
+<td></td>
+</tr>
+<tr>
+<td>mcr.microsoft.com</td>
+<td>mcr.m.daocloud.io</td>
+<td></td>
+</tr>
+<tr>
+<td>nvcr.io</td>
+<td>nvcr.m.daocloud.io</td>
+<td></td>
+</tr>
+<tr>
+<td>quay.io</td>
+<td>quay.m.daocloud.io</td>
+<td></td>
+</tr>
+<tr>
+<td>registry.ollama.ai</td>
+<td>ollama.m.daocloud.io</td>
+<td>实验内测中，<a href="https://github.com/DaoCloud/public-image-mirror#%e5%8a%a0%e9%80%9f-ollama--deepseek" target="_blank" rel="noopener noreffer ">使用方法</a></td>
+</tr>
+</tbody>
+</table>
+<p>chart 镜像</p>
+<pre tabindex="0"><code>https://quay.io/user/serialt/
 </code></pre><p>同步镜像脚本</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/usr/bin/env bash
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
