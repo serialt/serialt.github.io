@@ -845,9 +845,7 @@ jobs:
 
 推送项目到github
 
-
-
-### 5、Terraform Registry上配置公钥和发布provider
+#### 5、Terraform Registry 发布provider
 
 1）导入公钥 https://app.terraform.io/app/serialt/registry/public-namespaces/serialt/settings
 
