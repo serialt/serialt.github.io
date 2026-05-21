@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2025-09-03-dev-terraform-provider\/"
-        },"genre": "posts","keywords": "terraform-dev, tf-dev","wordcount":  4666 ,
+        },"genre": "posts","keywords": "terraform-dev, tf-dev","wordcount":  4653 ,
         "url": "https:\/\/serialt.github.io\/posts\/2025-09-03-dev-terraform-provider\/","datePublished": "2026-05-21T20:26:27+08:00","dateModified": "2026-05-21T20:26:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">TF-dev</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-05-21">2026-05-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4666 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-05-21">2026-05-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4653 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -117,7 +117,6 @@
         <li><a href="#三terraform-apply说明">三、Terraform apply说明</a></li>
         <li><a href="#四代码片段">四、代码片段</a></li>
         <li><a href="#五发布provider">五、发布provider</a></li>
-        <li><a href="#5terraform-registry上配置公钥和发布provider">5、Terraform Registry上配置公钥和发布provider</a></li>
         <li><a href="#六registry-mirror">六、Registry Mirror</a></li>
       </ul>
     </li>
@@ -845,7 +844,7 @@ terraform apply
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">GITHUB_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.TOKEN }}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">GPG_FINGERPRINT</span><span class="p">:</span><span class="w"> </span><span class="l">${{ steps.import_gpg.outputs.fingerprint }}</span><span class="w">
 </span></span></span></code></pre></div><p>推送项目到github</p>
-<h3 id="5terraform-registry上配置公钥和发布provider">5、Terraform Registry上配置公钥和发布provider</h3>
+<h4 id="5terraform-registry-发布provider">5、Terraform Registry 发布provider</h4>
 <p>1）导入公钥 <a href="https://app.terraform.io/app/serialt/registry/public-namespaces/serialt/settings" target="_blank" rel="noopener noreffer ">https://app.terraform.io/app/serialt/registry/public-namespaces/serialt/settings</a></p>
 <p>2）发布provider <a href="https://app.terraform.io/app/serialt/registry/public-namespaces/serialt/providers" target="_blank" rel="noopener noreffer ">https://app.terraform.io/app/serialt/registry/public-namespaces/serialt/providers</a></p>
 <p>选中对应的provider，<code>Resync provider</code></p>
