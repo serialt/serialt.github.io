@@ -1,7 +1,7 @@
 +++
 
 title = 'TF-dev'
-date = 2026-05-21T21:26:27+08:00
+date = 2026-05-21T20:26:27+08:00
 draft = false
 
 tags = ["terraform-dev","tf-dev"]
