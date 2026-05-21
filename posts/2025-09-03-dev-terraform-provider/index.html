@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>TF-dev - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="TF-dev" />
+<meta property="og:description" content="Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo https://github.com/serialt/terraform-provider-dnshe 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # Makefile default: fmt lint install generate build: go build -v ./... install: build go install -v ./... lint: golangci-lint run generate: cd tools; go generate ./... fmt: gofmt -s" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2025-09-03-dev-terraform-provider/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2026-05-21T20:26:27+08:00" />
+<meta property="article:modified_time" content="2026-05-21T20:26:27+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="TF-dev"/>
+<meta name="twitter:description" content="Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo https://github.com/serialt/terraform-provider-dnshe 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # Makefile default: fmt lint install generate build: go build -v ./... install: build go install -v ./... lint: golangci-lint run generate: cd tools; go generate ./... fmt: gofmt -s"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2025-09-03-dev-terraform-provider/" /><link rel="prev" href="https://serialt.github.io/posts/2026-03-28-mqtt/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "TF-dev",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2025-09-03-dev-terraform-provider\/"
+        },"genre": "posts","keywords": "terraform-dev, tf-dev","wordcount":  4666 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2025-09-03-dev-terraform-provider\/","datePublished": "2026-05-21T20:26:27+08:00","dateModified": "2026-05-21T20:26:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">TF-dev</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-05-21">2026-05-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4666 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#一调试-provider">一、调试 provider</a></li>
+        <li><a href="#二tpf框架">二、TPF框架</a></li>
+        <li><a href="#三terraform-apply说明">三、Terraform apply说明</a></li>
+        <li><a href="#四代码片段">四、代码片段</a></li>
+        <li><a href="#五发布provider">五、发布provider</a></li>
+        <li><a href="#5terraform-registry上配置公钥和发布provider">5、Terraform Registry上配置公钥和发布provider</a></li>
+        <li><a href="#六registry-mirror">六、Registry Mirror</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="dev-terraform-provider">Dev terraform provider</h1>
+<p>基于新框架tpf开发</p>
+<p>开发示例：</p>
+<ul>
+<li><a href="https://github.com/hashicorp/terraform-provider-scaffolding-framework" target="_blank" rel="noopener noreffer ">https://github.com/hashicorp/terraform-provider-scaffolding-framework</a></li>
+<li><a href="https://github.com/serialt/terraform-provider-demo" target="_blank" rel="noopener noreffer ">https://github.com/serialt/terraform-provider-demo</a></li>
+<li><a href="https://github.com/serialt/terraform-provider-dnshe" target="_blank" rel="noopener noreffer ">https://github.com/serialt/terraform-provider-dnshe</a></li>
+</ul>
+<p>参考示例：</p>
+<ul>
+<li><a href="https://github.com/hashicorp/terraform-provider-hashicups" target="_blank" rel="noopener noreffer ">https://github.com/hashicorp/terraform-provider-hashicups</a></li>
+</ul>
+<h3 id="一调试-provider">一、调试 provider</h3>
+<h4 id="1debug-terraform">1、debug terraform</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="c"># Makefile
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nf">default</span><span class="o">:</span> <span class="n">fmt</span> <span class="n">lint</span> <span class="n">install</span> <span class="n">generate</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">build</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	go build -v ./...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">install</span><span class="o">:</span> <span class="n">build</span>
+</span></span><span class="line"><span class="cl">	go install -v ./...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">lint</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	golangci-lint run
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">generate</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	<span class="nb">cd</span> tools<span class="p">;</span> go generate ./...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">fmt</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	gofmt -s -w -e .
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">test</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	go <span class="nb">test</span> -v -cover -timeout<span class="o">=</span>120s -parallel<span class="o">=</span><span class="m">10</span> ./...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">testacc</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">TF_ACC</span><span class="o">=</span><span class="m">1</span> go <span class="nb">test</span> -v -cover -timeout 120m ./...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">fmt</span> <span class="n">lint</span> <span class="n">test</span> <span class="n">testacc</span> <span class="n">build</span> <span class="n">install</span> <span class="n">generate</span>
+</span></span></code></pre></div><p>vscode 调试 terraform provider</p>
+<h5 id="1vscode-launch">1）vscode launch</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">cat</span> <span class="err">.vscode/launch.json</span> 
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="s2">&#34;0.2.0&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;configurations&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Debug Terraform Provider&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;go&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;request&#34;</span><span class="p">:</span> <span class="s2">&#34;launch&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;mode&#34;</span><span class="p">:</span> <span class="s2">&#34;debug&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// this assumes your workspace is the root of the repo
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nt">&#34;program&#34;</span><span class="p">:</span> <span class="s2">&#34;${workspaceFolder}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;env&#34;</span><span class="p">:</span> <span class="p">{},</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;-debug&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Launch test function&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;go&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;request&#34;</span><span class="p">:</span> <span class="s2">&#34;launch&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;mode&#34;</span><span class="p">:</span> <span class="s2">&#34;test&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;program&#34;</span><span class="p">:</span> <span class="s2">&#34;${fileDirname}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;showLog&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;-test.v&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;-test.run&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;TestDatasource_RepositoryDockerHosted&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>run debug</p>
+<h5 id="2ready-terraform-code">2）ready terraform code</h5>
+<h5 id="3run-terraform">3）run terraform</h5>
+<pre tabindex="0"><code>TF_REATTACH_PROVIDERS=&#39;{&#34;registry.terraform.io/serialt/message&#34;:{&#34;Protocol&#34;:&#34;grpc&#34;,&#34;ProtocolVersion&#34;:5,&#34;Pid&#34;:50972,&#34;Test&#34;:true,&#34;Addr&#34;:{&#34;Network&#34;:&#34;unix&#34;,&#34;String&#34;:&#34;/var/folders/vm/zlhwbdyj2031f088_w9q3f8w0000gn/T/plugin3117659601&#34;}}}&#39; terraform apply
+</code></pre><h5 id="4点击测试方法调试debug">4）点击测试方法调试debug</h5>
+<p>设置环境变量</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat .vscode/launch.json 
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;go.toolsEnvVars&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;TF_LOG&#34;</span>: <span class="s2">&#34;DEBUG&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;TF_ACC&#34;</span>: <span class="s2">&#34;1&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;DNSHE_API_KEY&#34;</span>: <span class="s2">&#34;cfxxxxx&#34;</span>,
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;DNSHE_API_SECRET&#34;</span>: <span class="s2">&#34;e3axxxxxx&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>,
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><h5 id="5-dev模式覆盖">5) dev模式覆盖</h5>
+<p>方便本地执行terraform init</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cat ~/.terraformrc
+</span></span><span class="line"><span class="cl">provider_installation <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    dev_overrides <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;serialt/message&#34;</span> <span class="o">=</span> <span class="s2">&#34;/Users/krab/go/bin&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;serialt/dnshe&#34;</span> <span class="o">=</span> <span class="s2">&#34;/Users/krab/go/bin&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    direct <span class="o">{}</span>
+</span></span><span class="line"><span class="cl">    // network_mirror <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    // 	<span class="nv">url</span> <span class="o">=</span> <span class="s2">&#34;https://mirrors.local.io/public/mirror/&#34;</span>
+</span></span><span class="line"><span class="cl">    // <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span></code></pre></div><pre tabindex="0"><code># TF_LOG=TRACE terraform apply
+terraform apply
+</code></pre><h5 id="6生成文档">6)生成文档</h5>
+<p>引入tfplugindocs</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>krab@Krab terraform-provider-dnshe<span class="o">]</span>🐳 tree tools/
+</span></span><span class="line"><span class="cl">tools/
+</span></span><span class="line"><span class="cl">├── go.mod
+</span></span><span class="line"><span class="cl">├── go.sum
+</span></span><span class="line"><span class="cl">└── tools.go
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">1</span> directory, <span class="m">3</span> files
+</span></span></code></pre></div><p><code>tools.go</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">//go:build generate
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">tools</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span> <span class="s">&#34;github.com/hashicorp/copywrite&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span> <span class="s">&#34;github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Format Terraform code for use in documentation.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// If you do not have Terraform installed, you can remove the formatting command, but it is suggested
+</span></span></span><span class="line"><span class="cl"><span class="c1">// to ensure the documentation is formatted properly.
+</span></span></span><span class="line"><span class="cl"><span class="c1">//go:generate terraform fmt -recursive ../examples/
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Generate documentation.
+</span></span></span><span class="line"><span class="cl"><span class="c1">//go:generate go run github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs generate --provider-dir .. -provider-name dnshe
+</span></span></span></code></pre></div><p>生成文档</p>
+<blockquote>
+<p>特殊说明： 以下示例结构代码会被填充到doc中</p>
+<p>examples/data-sources/dnshe_dns_quota/data-source.tf</p>
+<p>examples/resources/dnshe_dns_record/resource.tf</p>
+<p>examples/provider/provider.tf</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># </span>
+</span></span><span class="line"><span class="cl">make generate
+</span></span></code></pre></div><h3 id="二tpf框架">二、TPF框架</h3>
+<p>目前官方在维护的开发 provider sdk 有两个版本：</p>
+<ul>
+<li>terraform-plugin-sdk/v2</li>
+<li>terraform-plugin-framework</li>
+</ul>
+<p>如果要支持老版本的terraform，建议是使用 terraform-plugin-sdk/v2 开发，否则还是建议使用terraform-plugin-framework开发。</p>
+<p>TPF开发示例：https://github.com/hashicorp/terraform-provider-hashicups</p>
+<h4 id="解释说明">解释说明</h4>
+<p>插件开发主要涉及的文件分为三种类型：</p>
+<ul>
+<li>provider</li>
+<li>datasource</li>
+<li>resource</li>
+</ul>
+<h5 id="provider">provider</h5>
+<p>文件中主要是一些 配置文件的读取和对第三分 api 客户端的初始化，主要由五个方法组成：</p>
+<ul>
+<li>Metadata：provider的名字</li>
+<li>Schema：provider的配置参数</li>
+<li>Configure：读取配置provider中的值和环境变量的值，初始化调用第三方api的client</li>
+<li>Resources：定义的resource资源</li>
+<li>DataSources：定义的datasource资源</li>
+</ul>
+<h5 id="datasource">datasource</h5>
+<p>通过第三方api的client调用，查询已存在的资源信息：</p>
+<ul>
+<li>Metadata：定义datasource的名字</li>
+<li>Schema：datasource配置的参数</li>
+<li>Read：client调用api，读取具体的数据，生成state</li>
+<li>Configure：从provider中获取传入的调用api的client</li>
+</ul>
+<h5 id="resource">resource</h5>
+<p>通过第三方api的client调用，对资源进行增删改查和导入资源对象</p>
+<ul>
+<li>
+<p>Metadata：定义resource的名字</p>
+</li>
+<li>
+<p>Schema：resource配置的参数</p>
+</li>
+<li>
+<p>Configure：从provider中获取传入的调用api的client</p>
+</li>
+<li>
+<p>Create：创建资源</p>
+</li>
+<li>
+<p>Read：查询资源</p>
+</li>
+<li>
+<p>Update：更新资源</p>
+</li>
+<li>
+<p>Delete：删除资源，用于在销毁时删除资源</p>
+</li>
+<li>
+<p>ImportState：导入资源，用terraform管理存量的资源对象。</p>
+</li>
+</ul>
+<p>main.go</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;flag&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;log&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/hashicorp/terraform-plugin-framework/providerserver&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/serialt/terraform-provider-dnshe/internal/provider&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">version</span> <span class="kt">string</span> <span class="p">=</span> <span class="s">&#34;dev&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">debug</span> <span class="kt">bool</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">flag</span><span class="p">.</span><span class="nf">BoolVar</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">debug</span><span class="p">,</span> <span class="s">&#34;debug&#34;</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="s">&#34;set to true to run the provider with support for debuggers like delve&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">flag</span><span class="p">.</span><span class="nf">Parse</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">opts</span> <span class="o">:=</span> <span class="nx">providerserver</span><span class="p">.</span><span class="nx">ServeOpts</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Address</span><span class="p">:</span> <span class="s">&#34;registry.terraform.io/serialt/dnshe&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Debug</span><span class="p">:</span>   <span class="nx">debug</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">providerserver</span><span class="p">.</span><span class="nf">Serve</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">(),</span> <span class="nx">provider</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">version</span><span class="p">),</span> <span class="nx">opts</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>provider.go</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">provider</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;os&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/hashicorp/terraform-plugin-framework/datasource&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/hashicorp/terraform-plugin-framework/function&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/hashicorp/terraform-plugin-framework/provider&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/hashicorp/terraform-plugin-framework/provider/schema&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/hashicorp/terraform-plugin-framework/resource&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/hashicorp/terraform-plugin-framework/types&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/serialt/terraform-provider-dnshe/dnshe&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">_</span> <span class="nx">provider</span><span class="p">.</span><span class="nx">Provider</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">DNSHEProvider</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">_</span> <span class="nx">provider</span><span class="p">.</span><span class="nx">ProviderWithFunctions</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">DNSHEProvider</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">DNSHEProvider</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">version</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">DNSHEProviderModel</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">BaseURL</span>   <span class="nx">types</span><span class="p">.</span><span class="nx">String</span> <span class="s">`tfsdk:&#34;base_url&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ApiKey</span>    <span class="nx">types</span><span class="p">.</span><span class="nx">String</span> <span class="s">`tfsdk:&#34;api_key&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ApiSecret</span> <span class="nx">types</span><span class="p">.</span><span class="nx">String</span> <span class="s">`tfsdk:&#34;api_secret&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">DNSHEProvider</span><span class="p">)</span> <span class="nf">Metadata</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">req</span> <span class="nx">provider</span><span class="p">.</span><span class="nx">MetadataRequest</span><span class="p">,</span> <span class="nx">resp</span> <span class="o">*</span><span class="nx">provider</span><span class="p">.</span><span class="nx">MetadataResponse</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">TypeName</span> <span class="p">=</span> <span class="s">&#34;dnshe&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">Version</span> <span class="p">=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">version</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">DNSHEProvider</span><span class="p">)</span> <span class="nf">Schema</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">req</span> <span class="nx">provider</span><span class="p">.</span><span class="nx">SchemaRequest</span><span class="p">,</span> <span class="nx">resp</span> <span class="o">*</span><span class="nx">provider</span><span class="p">.</span><span class="nx">SchemaResponse</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">Schema</span> <span class="p">=</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">MarkdownDescription</span><span class="p">:</span> <span class="s">&#34;DNSHE Terraform Provider，用于全自动化管理自定义二级域名及 DNS 解析记录。&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Attributes</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">schema</span><span class="p">.</span><span class="nx">Attribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;base_url&#34;</span><span class="p">:</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">MarkdownDescription</span><span class="p">:</span> <span class="s">&#34;base_url&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Optional</span><span class="p">:</span>            <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;api_key&#34;</span><span class="p">:</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">MarkdownDescription</span><span class="p">:</span> <span class="s">&#34;api_key&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Optional</span><span class="p">:</span>            <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;api_secret&#34;</span><span class="p">:</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">MarkdownDescription</span><span class="p">:</span> <span class="s">&#34;api_secret&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Optional</span><span class="p">:</span>            <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Sensitive</span><span class="p">:</span>           <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">DNSHEProvider</span><span class="p">)</span> <span class="nf">Configure</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">req</span> <span class="nx">provider</span><span class="p">.</span><span class="nx">ConfigureRequest</span><span class="p">,</span> <span class="nx">resp</span> <span class="o">*</span><span class="nx">provider</span><span class="p">.</span><span class="nx">ConfigureResponse</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">data</span> <span class="nx">DNSHEProviderModel</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">Append</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">Config</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">data</span><span class="p">)</span><span class="o">...</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">HasError</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">apiKey</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Getenv</span><span class="p">(</span><span class="s">&#34;DNSHE_API_KEY&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">apiSecret</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Getenv</span><span class="p">(</span><span class="s">&#34;DNSHE_API_SECRET&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">baseURL</span> <span class="o">:=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">BaseURL</span><span class="p">.</span><span class="nf">ValueString</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">!</span><span class="nx">data</span><span class="p">.</span><span class="nx">ApiKey</span><span class="p">.</span><span class="nf">IsNull</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">apiKey</span> <span class="p">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">ApiKey</span><span class="p">.</span><span class="nf">ValueString</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">!</span><span class="nx">data</span><span class="p">.</span><span class="nx">ApiSecret</span><span class="p">.</span><span class="nf">IsNull</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">apiSecret</span> <span class="p">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">ApiSecret</span><span class="p">.</span><span class="nf">ValueString</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">apiKey</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="o">||</span> <span class="nx">apiSecret</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">AddError</span><span class="p">(</span><span class="s">&#34;凭证缺失&#34;</span><span class="p">,</span> <span class="s">&#34;必须配置 api_key 和 api_secret (或设置对应的环境变量)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">client</span> <span class="o">:=</span> <span class="nx">dnshe</span><span class="p">.</span><span class="nf">NewClient</span><span class="p">(</span><span class="nx">baseURL</span><span class="p">,</span> <span class="nx">apiKey</span><span class="p">,</span> <span class="nx">apiSecret</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">DataSourceData</span> <span class="p">=</span> <span class="nx">client</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">ResourceData</span> <span class="p">=</span> <span class="nx">client</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">DNSHEProvider</span><span class="p">)</span> <span class="nf">Resources</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">[]</span><span class="kd">func</span><span class="p">()</span> <span class="nx">resource</span><span class="p">.</span><span class="nx">Resource</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="p">[]</span><span class="kd">func</span><span class="p">()</span> <span class="nx">resource</span><span class="p">.</span><span class="nx">Resource</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">NewDNSRecordResource</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">NewSubdomainResource</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">DNSHEProvider</span><span class="p">)</span> <span class="nf">DataSources</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">[]</span><span class="kd">func</span><span class="p">()</span> <span class="nx">datasource</span><span class="p">.</span><span class="nx">DataSource</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="p">[]</span><span class="kd">func</span><span class="p">()</span> <span class="nx">datasource</span><span class="p">.</span><span class="nx">DataSource</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">NewDNSRecordsDataSource</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">NewQuotaDataSource</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">NewSubdomainDataSource</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">NewSubdomainsDataSource</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">DNSHEProvider</span><span class="p">)</span> <span class="nf">Functions</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">[]</span><span class="kd">func</span><span class="p">()</span> <span class="nx">function</span><span class="p">.</span><span class="nx">Function</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="p">[]</span><span class="kd">func</span><span class="p">()</span> <span class="nx">function</span><span class="p">.</span><span class="nx">Function</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">New</span><span class="p">(</span><span class="nx">version</span> <span class="kt">string</span><span class="p">)</span> <span class="kd">func</span><span class="p">()</span> <span class="nx">provider</span><span class="p">.</span><span class="nx">Provider</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kd">func</span><span class="p">()</span> <span class="nx">provider</span><span class="p">.</span><span class="nx">Provider</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">&amp;</span><span class="nx">DNSHEProvider</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">version</span><span class="p">:</span> <span class="nx">version</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>data_source.go</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">provider</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/hashicorp/terraform-plugin-framework/datasource&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/hashicorp/terraform-plugin-framework/datasource/schema&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/hashicorp/terraform-plugin-framework/types&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/serialt/terraform-provider-dnshe/dnshe&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ==========================================
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 4. 账号配额数据源 (dnshe_quota)
+</span></span></span><span class="line"><span class="cl"><span class="c1">// ==========================================
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">quotaDataSource</span> <span class="kd">struct</span><span class="p">{</span> <span class="nx">client</span> <span class="o">*</span><span class="nx">dnshe</span><span class="p">.</span><span class="nx">Client</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">quotaDSModel</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ID</span>          <span class="nx">types</span><span class="p">.</span><span class="nx">String</span> <span class="s">`tfsdk:&#34;id&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Used</span>        <span class="nx">types</span><span class="p">.</span><span class="nx">Int64</span>  <span class="s">`tfsdk:&#34;used&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Base</span>        <span class="nx">types</span><span class="p">.</span><span class="nx">Int64</span>  <span class="s">`tfsdk:&#34;base&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">InviteBonus</span> <span class="nx">types</span><span class="p">.</span><span class="nx">Int64</span>  <span class="s">`tfsdk:&#34;invite_bonus&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Total</span>       <span class="nx">types</span><span class="p">.</span><span class="nx">Int64</span>  <span class="s">`tfsdk:&#34;total&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Available</span>   <span class="nx">types</span><span class="p">.</span><span class="nx">Int64</span>  <span class="s">`tfsdk:&#34;available&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewQuotaDataSource</span><span class="p">()</span> <span class="nx">datasource</span><span class="p">.</span><span class="nx">DataSource</span> <span class="p">{</span> <span class="k">return</span> <span class="o">&amp;</span><span class="nx">quotaDataSource</span><span class="p">{}</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">quotaDataSource</span><span class="p">)</span> <span class="nf">Metadata</span><span class="p">(</span><span class="nx">_</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">req</span> <span class="nx">datasource</span><span class="p">.</span><span class="nx">MetadataRequest</span><span class="p">,</span> <span class="nx">resp</span> <span class="o">*</span><span class="nx">datasource</span><span class="p">.</span><span class="nx">MetadataResponse</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">TypeName</span> <span class="p">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">ProviderTypeName</span> <span class="o">+</span> <span class="s">&#34;_dns_quota&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">quotaDataSource</span><span class="p">)</span> <span class="nf">Configure</span><span class="p">(</span><span class="nx">_</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">req</span> <span class="nx">datasource</span><span class="p">.</span><span class="nx">ConfigureRequest</span><span class="p">,</span> <span class="nx">resp</span> <span class="o">*</span><span class="nx">datasource</span><span class="p">.</span><span class="nx">ConfigureResponse</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">req</span><span class="p">.</span><span class="nx">ProviderData</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">d</span><span class="p">.</span><span class="nx">client</span> <span class="p">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">ProviderData</span><span class="p">.(</span><span class="o">*</span><span class="nx">dnshe</span><span class="p">.</span><span class="nx">Client</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">quotaDataSource</span><span class="p">)</span> <span class="nf">Schema</span><span class="p">(</span><span class="nx">_</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">_</span> <span class="nx">datasource</span><span class="p">.</span><span class="nx">SchemaRequest</span><span class="p">,</span> <span class="nx">resp</span> <span class="o">*</span><span class="nx">datasource</span><span class="p">.</span><span class="nx">SchemaResponse</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">Schema</span> <span class="p">=</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Attributes</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">schema</span><span class="p">.</span><span class="nx">Attribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;id&#34;</span><span class="p">:</span>           <span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span><span class="nx">Computed</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;used&#34;</span><span class="p">:</span>         <span class="nx">schema</span><span class="p">.</span><span class="nx">Int64Attribute</span><span class="p">{</span><span class="nx">Computed</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;base&#34;</span><span class="p">:</span>         <span class="nx">schema</span><span class="p">.</span><span class="nx">Int64Attribute</span><span class="p">{</span><span class="nx">Computed</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;invite_bonus&#34;</span><span class="p">:</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">Int64Attribute</span><span class="p">{</span><span class="nx">Computed</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;total&#34;</span><span class="p">:</span>        <span class="nx">schema</span><span class="p">.</span><span class="nx">Int64Attribute</span><span class="p">{</span><span class="nx">Computed</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;available&#34;</span><span class="p">:</span>    <span class="nx">schema</span><span class="p">.</span><span class="nx">Int64Attribute</span><span class="p">{</span><span class="nx">Computed</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">d</span> <span class="o">*</span><span class="nx">quotaDataSource</span><span class="p">)</span> <span class="nf">Read</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">req</span> <span class="nx">datasource</span><span class="p">.</span><span class="nx">ReadRequest</span><span class="p">,</span> <span class="nx">resp</span> <span class="o">*</span><span class="nx">datasource</span><span class="p">.</span><span class="nx">ReadResponse</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">data</span> <span class="nx">quotaDSModel</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">res</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">client</span><span class="p">.</span><span class="nf">GetQuota</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">AddError</span><span class="p">(</span><span class="s">&#34;API错误&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">data</span><span class="p">.</span><span class="nx">ID</span> <span class="p">=</span> <span class="nx">types</span><span class="p">.</span><span class="nf">StringValue</span><span class="p">(</span><span class="s">&#34;quota&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">data</span><span class="p">.</span><span class="nx">Used</span> <span class="p">=</span> <span class="nx">types</span><span class="p">.</span><span class="nf">Int64Value</span><span class="p">(</span><span class="nb">int64</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">Quota</span><span class="p">.</span><span class="nx">Used</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">data</span><span class="p">.</span><span class="nx">Base</span> <span class="p">=</span> <span class="nx">types</span><span class="p">.</span><span class="nf">Int64Value</span><span class="p">(</span><span class="nb">int64</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">Quota</span><span class="p">.</span><span class="nx">Base</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">data</span><span class="p">.</span><span class="nx">InviteBonus</span> <span class="p">=</span> <span class="nx">types</span><span class="p">.</span><span class="nf">Int64Value</span><span class="p">(</span><span class="nb">int64</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">Quota</span><span class="p">.</span><span class="nx">InviteBonus</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">data</span><span class="p">.</span><span class="nx">Total</span> <span class="p">=</span> <span class="nx">types</span><span class="p">.</span><span class="nf">Int64Value</span><span class="p">(</span><span class="nb">int64</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">Quota</span><span class="p">.</span><span class="nx">Total</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">data</span><span class="p">.</span><span class="nx">Available</span> <span class="p">=</span> <span class="nx">types</span><span class="p">.</span><span class="nf">Int64Value</span><span class="p">(</span><span class="nb">int64</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">Quota</span><span class="p">.</span><span class="nx">Available</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">Append</span><span class="p">(</span><span class="nx">resp</span><span class="p">.</span><span class="nx">State</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">data</span><span class="p">)</span><span class="o">...</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>data_source、resource、function 需要注册有才能使用</p>
+<p>编写代码时，主要工作难点是 Schema 和接收schema的model</p>
+<h4 id="resourceschema-介绍以schemastringattribute为例">resource/schema 介绍，以schema.StringAttribute为例</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">CustomType  允许使用自定义属性类型来代替
+</span></span><span class="line"><span class="cl">Required   resource config 必填项
+</span></span><span class="line"><span class="cl">Optional resource config 可选项
+</span></span><span class="line"><span class="cl">Computed  resource config 只读
+</span></span><span class="line"><span class="cl">Sensitive  resource  config 敏感数据不输出
+</span></span><span class="line"><span class="cl">Description
+</span></span><span class="line"><span class="cl">MarkdownDescription 
+</span></span><span class="line"><span class="cl">DeprecationMessage   resource  config 弃用说明
+</span></span><span class="line"><span class="cl">Validators
+</span></span><span class="line"><span class="cl">PlanModifiers
+</span></span><span class="line"><span class="cl">Default
+</span></span></code></pre></div><h3 id="三terraform-apply说明">三、Terraform apply说明</h3>
+<p>1、apply，如果state文件中没有对应的资源则会触发create，create后会写入state文件</p>
+<p>2、删除资源会先触发read，yes后触发删除操作</p>
+<p>3、resource中定义的有改动导致资源某些配置会被replace，先触发read，yes 后会触发更新</p>
+<p>4、create、update、read 最后都会获取资源状态数据并更新到state文件中</p>
+<h3 id="四代码片段">四、代码片段</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// schema
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">DataSourceID</span> <span class="p">=</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Description</span><span class="p">:</span>         <span class="s">&#34;Used to identify data source at nexus&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">MarkdownDescription</span><span class="p">:</span> <span class="s">&#34;Used to identify data source at nexus&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Computed</span><span class="p">:</span>            <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 定义
+</span></span></span><span class="line"><span class="cl"><span class="c1">// block
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">resp</span><span class="p">.</span><span class="nx">Schema</span> <span class="p">=</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Description</span><span class="p">:</span>         <span class="s">&#34;Use this data source .&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">MarkdownDescription</span><span class="p">:</span> <span class="s">&#34;Use this data source .&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Blocks</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">schema</span><span class="p">.</span><span class="nx">Block</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;group&#34;</span><span class="p">:</span>   <span class="nx">tschema</span><span class="p">.</span><span class="nx">DSGroup</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Attributes</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">schema</span><span class="p">.</span><span class="nx">Attribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;id&#34;</span><span class="p">:</span>     <span class="nx">tschema</span><span class="p">.</span><span class="nx">DataSourceID</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;name&#34;</span><span class="p">:</span>   <span class="nx">tschema</span><span class="p">.</span><span class="nx">DataSourceName</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">DSGroup</span> <span class="p">=</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">SingleNestedBlock</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Description</span><span class="p">:</span>         <span class="s">&#34;The group configuration of the repository&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">MarkdownDescription</span><span class="p">:</span> <span class="s">&#34;The group configuration of the repository&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Attributes</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">schema</span><span class="p">.</span><span class="nx">Attribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;member_names&#34;</span><span class="p">:</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">ListAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Description</span><span class="p">:</span>         <span class="s">&#34;Member repositories names&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">MarkdownDescription</span><span class="p">:</span> <span class="s">&#34;Member repositories names&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">ElementType</span><span class="p">:</span>         <span class="nx">types</span><span class="p">.</span><span class="nx">StringType</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Required</span><span class="p">:</span>            <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Validators</span><span class="p">:</span>          <span class="p">[]</span><span class="nx">validator</span><span class="p">.</span><span class="nx">List</span><span class="p">{</span><span class="nx">listvalidator</span><span class="p">.</span><span class="nf">SizeAtLeast</span><span class="p">(</span><span class="mi">1</span><span class="p">)},</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 定义list
+</span></span></span><span class="line"><span class="cl"><span class="c1">// model 里面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">CleanupModel</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">PolicyNames</span> <span class="nx">types</span><span class="p">.</span><span class="nx">List</span> <span class="s">`tfsdk:&#34;policy_names&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// schema
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">DSCleanUp</span> <span class="p">=</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">SingleNestedBlock</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">MarkdownDescription</span><span class="p">:</span> <span class="s">&#34;Cleanup policies&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Description</span><span class="p">:</span>         <span class="s">&#34;Cleanup policies&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Attributes</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">schema</span><span class="p">.</span><span class="nx">Attribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;policy_names&#34;</span><span class="p">:</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">ListAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Description</span><span class="p">:</span>         <span class="s">&#34;List of policy names&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">MarkdownDescription</span><span class="p">:</span> <span class="s">&#34;List of policy names&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Computed</span><span class="p">:</span>            <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">ElementType</span><span class="p">:</span>         <span class="nx">types</span><span class="p">.</span><span class="nx">StringType</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// List 转 types.List 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">repo</span><span class="p">.</span><span class="nx">Cleanup</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">policyNames</span> <span class="o">:=</span> <span class="p">[]</span><span class="nx">attr</span><span class="p">.</span><span class="nx">Value</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">item</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">repo</span><span class="p">.</span><span class="nx">Cleanup</span><span class="p">.</span><span class="nx">PolicyNames</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">policyNames</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">policyNames</span><span class="p">,</span> <span class="nx">types</span><span class="p">.</span><span class="nf">StringValue</span><span class="p">(</span><span class="nx">item</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">policyNamesTfsdk</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">types</span><span class="p">.</span><span class="nf">ListValue</span><span class="p">(</span><span class="nx">types</span><span class="p">.</span><span class="nx">StringType</span><span class="p">,</span> <span class="nx">policyNames</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">data</span><span class="p">.</span><span class="nx">Cleanup</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">model</span><span class="p">.</span><span class="nx">CleanupModel</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">PolicyNames</span><span class="p">:</span> <span class="nx">policyNamesTfsdk</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// model 转 types.List
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">actions</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">_</span> <span class="p">=</span> <span class="nx">plan</span><span class="p">.</span><span class="nx">Actions</span><span class="p">.</span><span class="nf">ElementsAs</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">actions</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// resource 设置了默认值后需要设置 Computed 为 true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="s">&#34;v1_enabled&#34;</span><span class="p">:</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">BoolAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Description</span><span class="p">:</span>         <span class="s">&#34;Whether to allow clients to use&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">MarkdownDescription</span><span class="p">:</span> <span class="s">&#34;Whether to allow clients to use&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Computed</span><span class="p">:</span>            <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Default</span><span class="p">:</span>             <span class="nx">booldefault</span><span class="p">.</span><span class="nf">StaticBool</span><span class="p">(</span><span class="kc">false</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 默认值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">dnsRecordResource</span><span class="p">)</span> <span class="nf">Schema</span><span class="p">(</span><span class="nx">_</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">_</span> <span class="nx">resource</span><span class="p">.</span><span class="nx">SchemaRequest</span><span class="p">,</span> <span class="nx">resp</span> <span class="o">*</span><span class="nx">resource</span><span class="p">.</span><span class="nx">SchemaResponse</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">Schema</span> <span class="p">=</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Attributes</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">schema</span><span class="p">.</span><span class="nx">Attribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;id&#34;</span><span class="p">:</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Computed</span><span class="p">:</span>      <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">PlanModifiers</span><span class="p">:</span> <span class="p">[]</span><span class="nx">planmodifier</span><span class="p">.</span><span class="nx">String</span><span class="p">{</span><span class="nx">stringplanmodifier</span><span class="p">.</span><span class="nf">UseStateForUnknown</span><span class="p">()},</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;subdomain_id&#34;</span><span class="p">:</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">Int64Attribute</span><span class="p">{</span><span class="nx">Required</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;type&#34;</span><span class="p">:</span>         <span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span><span class="nx">Required</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;name&#34;</span><span class="p">:</span>         <span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span><span class="nx">Optional</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">Computed</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;content&#34;</span><span class="p">:</span>      <span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span><span class="nx">Required</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;ttl&#34;</span><span class="p">:</span>          <span class="nx">schema</span><span class="p">.</span><span class="nx">Int64Attribute</span><span class="p">{</span><span class="nx">Optional</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">Computed</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">Default</span><span class="p">:</span> <span class="nx">int64default</span><span class="p">.</span><span class="nf">StaticInt64</span><span class="p">(</span><span class="mi">600</span><span class="p">)},</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;priority&#34;</span><span class="p">:</span>     <span class="nx">schema</span><span class="p">.</span><span class="nx">Int64Attribute</span><span class="p">{</span><span class="nx">Optional</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;line&#34;</span><span class="p">:</span>         <span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span><span class="nx">Optional</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">Computed</span><span class="p">:</span> <span class="kc">true</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>测试代码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">provider</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;testing&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/hashicorp/terraform-plugin-testing/helper/resource&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestAccDataSourceDNSQuota</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resource</span><span class="p">.</span><span class="nf">Test</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">resource</span><span class="p">.</span><span class="nx">TestCase</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">PreCheck</span><span class="p">:</span>                 <span class="kd">func</span><span class="p">()</span> <span class="p">{</span> <span class="nf">testAccPreCheck</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ProtoV6ProviderFactories</span><span class="p">:</span> <span class="nx">testAccProtoV6ProviderFactories</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Steps</span><span class="p">:</span> <span class="p">[]</span><span class="nx">resource</span><span class="p">.</span><span class="nx">TestStep</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Config</span><span class="p">:</span> <span class="nx">testAccDataSourceDNSQuotaConfig</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Check</span><span class="p">:</span> <span class="nx">resource</span><span class="p">.</span><span class="nf">ComposeAggregateTestCheckFunc</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">					<span class="c1">// resource.TestCheckResourceAttr(&#34;data.dnshe_subdomain.test_domain&#34;, &#34;subdomain&#34;, &#34;krab&#34;),
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>					<span class="c1">// resource.TestCheckResourceAttrSet(&#34;data.dnshe_subdomain.test_domain&#34;, &#34;id&#34;),
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>					<span class="nx">resource</span><span class="p">.</span><span class="nf">TestCheckResourceAttrWith</span><span class="p">(</span><span class="s">&#34;data.dnshe_dns_quota.test_quota&#34;</span><span class="p">,</span> <span class="s">&#34;total&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">value</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">						<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;\n======================= 🔍 DNSHE quota 🔍 =======================\n&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">						<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;  total 值为 : %s&#34;</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">						<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">					<span class="p">}),</span>
+</span></span><span class="line"><span class="cl">				<span class="p">),</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">const</span> <span class="nx">testAccDataSourceDNSQuotaConfig</span> <span class="p">=</span> <span class="s">`
+</span></span></span><span class="line"><span class="cl"><span class="s">data &#34;dnshe_dns_quota&#34; &#34;test_quota&#34; {
+</span></span></span><span class="line"><span class="cl"><span class="s">}
+</span></span></span><span class="line"><span class="cl"><span class="s">`</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// testAccProtoV6ProviderFactories are used to instantiate a provider during
+</span></span></span><span class="line"><span class="cl"><span class="c1">// acceptance testing. The factory function will be invoked for every Terraform
+</span></span></span><span class="line"><span class="cl"><span class="c1">// CLI command executed to create a provider server to which the CLI can
+</span></span></span><span class="line"><span class="cl"><span class="c1">// reattach.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">testAccProtoV6ProviderFactories</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">func</span><span class="p">()</span> <span class="p">(</span><span class="nx">tfprotov6</span><span class="p">.</span><span class="nx">ProviderServer</span><span class="p">,</span> <span class="kt">error</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;dnshe&#34;</span><span class="p">:</span> <span class="nx">providerserver</span><span class="p">.</span><span class="nf">NewProtocol6WithError</span><span class="p">(</span><span class="nf">New</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">)()),</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">testAccPreCheck</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// You can add code here to run prior to any test case execution, for example assertions
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// about the appropriate environment variables being set are common to see in a pre-check
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// function.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Getenv</span><span class="p">(</span><span class="s">&#34;DNSHE_API_KEY&#34;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;环境缺失: 必须设置环境变量 DNSHE_API_KEY 才能运行集成测试&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Getenv</span><span class="p">(</span><span class="s">&#34;DNSHE_API_SECRET&#34;</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">t</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;环境缺失: 必须设置环境变量 DNSHE_API_SECRET 才能运行集成测试&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="五发布provider">五、发布provider</h3>
+<p><a href="https://registry.terraform.io/" target="_blank" rel="noopener noreffer ">https://registry.terraform.io/</a> 上的provider目前只能托管在 github 上</p>
+<h4 id="1terraform-registry-官网上注册账号">1、Terraform Registry 官网上注册账号</h4>
+<p>账号使用 github 登录，设置 github 需要对 terraform registry 的授权</p>
+<h4 id="2创建-github-project配置-github-action">2、创建 github project，配置 github action</h4>
+<p>名字需要符合 terraform-provider-xxxxx，例如 terraform-provider-message，</p>
+<h4 id="3生成-gpg-key用于-provider-签名和验签">3、生成 GPG key，用于 provider 签名和验签</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@dev ~<span class="o">]</span><span class="c1"># gpg --full-generate-key</span>
+</span></span><span class="line"><span class="cl">gpg <span class="o">(</span>GnuPG<span class="o">)</span> 2.2.20<span class="p">;</span> Copyright <span class="o">(</span>C<span class="o">)</span> <span class="m">2020</span> Free Software Foundation, Inc.
+</span></span><span class="line"><span class="cl">This is free software: you are free to change and redistribute it.
+</span></span><span class="line"><span class="cl">There is NO WARRANTY, to the extent permitted by law.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Please <span class="k">select</span> what kind of key you want:
+</span></span><span class="line"><span class="cl">   <span class="o">(</span>1<span class="o">)</span> RSA and RSA <span class="o">(</span>default<span class="o">)</span>
+</span></span><span class="line"><span class="cl">   <span class="o">(</span>2<span class="o">)</span> DSA and Elgamal
+</span></span><span class="line"><span class="cl">   <span class="o">(</span>3<span class="o">)</span> DSA <span class="o">(</span>sign only<span class="o">)</span>
+</span></span><span class="line"><span class="cl">   <span class="o">(</span>4<span class="o">)</span> RSA <span class="o">(</span>sign only<span class="o">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">(</span>14<span class="o">)</span> Existing key from card
+</span></span><span class="line"><span class="cl">Your selection? <span class="m">1</span>   <span class="c1"># 选择RSA</span>
+</span></span><span class="line"><span class="cl">RSA keys may be between <span class="m">1024</span> and <span class="m">4096</span> bits long.
+</span></span><span class="line"><span class="cl">What keysize <span class="k">do</span> you want? <span class="o">(</span>2048<span class="o">)</span> <span class="m">4096</span>   <span class="c1"># 输入加密密钥的长度，4096</span>
+</span></span><span class="line"><span class="cl">Requested keysize is <span class="m">4096</span> bits
+</span></span><span class="line"><span class="cl">Please specify how long the key should be valid.
+</span></span><span class="line"><span class="cl">         <span class="nv">0</span> <span class="o">=</span> key does not expire
+</span></span><span class="line"><span class="cl">      &lt;n&gt;  <span class="o">=</span> key expires in n days
+</span></span><span class="line"><span class="cl">      &lt;n&gt;w <span class="o">=</span> key expires in n weeks
+</span></span><span class="line"><span class="cl">      &lt;n&gt;m <span class="o">=</span> key expires in n months
+</span></span><span class="line"><span class="cl">      &lt;n&gt;y <span class="o">=</span> key expires in n years
+</span></span><span class="line"><span class="cl">Key is valid <span class="k">for</span>? <span class="o">(</span>0<span class="o">)</span> <span class="m">0</span>    <span class="c1"># 设置密码有效期</span>
+</span></span><span class="line"><span class="cl">Key does not expire at all
+</span></span><span class="line"><span class="cl">Is this correct? <span class="o">(</span>y/N<span class="o">)</span> y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">GnuPG needs to construct a user ID to identify your key.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Real name: serialt        <span class="c1"># 设置密钥的消息</span>
+</span></span><span class="line"><span class="cl">Email address: t@local.com
+</span></span><span class="line"><span class="cl">Comment: msg
+</span></span><span class="line"><span class="cl">You selected this USER-ID:
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;serialt (msg) &lt;t@local.com&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Change <span class="o">(</span>N<span class="o">)</span>ame, <span class="o">(</span>C<span class="o">)</span>omment, <span class="o">(</span>E<span class="o">)</span>mail or <span class="o">(</span>O<span class="o">)</span>kay/<span class="o">(</span>Q<span class="o">)</span>uit? o
+</span></span><span class="line"><span class="cl">We need to generate a lot of random bytes. It is a good idea to perform
+</span></span><span class="line"><span class="cl">some other action <span class="o">(</span><span class="nb">type</span> on the keyboard, move the mouse, utilize the
+</span></span><span class="line"><span class="cl">disks<span class="o">)</span> during the prime generation<span class="p">;</span> this gives the random number
+</span></span><span class="line"><span class="cl">generator a better chance to gain enough entropy.
+</span></span><span class="line"><span class="cl">We need to generate a lot of random bytes. It is a good idea to perform
+</span></span><span class="line"><span class="cl">some other action <span class="o">(</span><span class="nb">type</span> on the keyboard, move the mouse, utilize the
+</span></span><span class="line"><span class="cl">disks<span class="o">)</span> during the prime generation<span class="p">;</span> this gives the random number
+</span></span><span class="line"><span class="cl">generator a better chance to gain enough entropy.
+</span></span><span class="line"><span class="cl">gpg: key A02032881C9460CE marked as ultimately trusted
+</span></span><span class="line"><span class="cl">gpg: revocation certificate stored as <span class="s1">&#39;/root/.gnupg/openpgp-revocs.d/16630E5129BFAB582DDFBF71A02032881C9460CE.rev&#39;</span>
+</span></span><span class="line"><span class="cl">public and secret key created and signed.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">pub   rsa4096 2021-08-23 <span class="o">[</span>SC<span class="o">]</span>
+</span></span><span class="line"><span class="cl">      16630E5129BFAB582DDFBF71A02032881C9460CE
+</span></span><span class="line"><span class="cl">uid                      serialt <span class="o">(</span>msg<span class="o">)</span> &lt;t@local.com&gt;
+</span></span><span class="line"><span class="cl">sub   rsa4096 2021-08-23 <span class="o">[</span>E<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        ┌──────────────────────────────────────────────────────┐
+</span></span><span class="line"><span class="cl">        │ Please enter the passphrase to                       │
+</span></span><span class="line"><span class="cl">        │ protect your new key                                 │
+</span></span><span class="line"><span class="cl">        │                                                      │
+</span></span><span class="line"><span class="cl">        │ Passphrase: ________________________________________ │
+</span></span><span class="line"><span class="cl">        │                                                      │
+</span></span><span class="line"><span class="cl">        │       &lt;OK&gt;                              &lt;Cancel&gt;     │
+</span></span><span class="line"><span class="cl">        └──────────────────────────────────────────────────────┘
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">         ┌──────────────────────────────────────────────────────┐
+</span></span><span class="line"><span class="cl">         │ Please re-enter this passphrase                      │
+</span></span><span class="line"><span class="cl">         │                                                      │
+</span></span><span class="line"><span class="cl">         │ Passphrase: ________________________________________ │
+</span></span><span class="line"><span class="cl">         │                                                      │
+</span></span><span class="line"><span class="cl">         │       &lt;OK&gt;                              &lt;Cancel&gt;     │
+</span></span><span class="line"><span class="cl">         └──────────────────────────────────────────────────────┘
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看所有密钥</span>
+</span></span><span class="line"><span class="cl">gpg -k
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 导出密钥</span>
+</span></span><span class="line"><span class="cl">gpg --output public_key.gpg --armor --export 375xxxxx
+</span></span><span class="line"><span class="cl">gpg --output private_key.gpg --armor --export-secret-key 375xxxxx
+</span></span></code></pre></div><h4 id="4github-action">4、github action</h4>
+<p>需要配置一下 secret</p>
+<ul>
+<li>TOKEN</li>
+<li>GPG_PRIVATE_KEY</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># Terraform Provider release workflow.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Release</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># This GitHub action creates a release when a tag that matches the pattern</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># &#34;v*&#34; (e.g. v0.1.0) is created.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tags</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s1">&#39;v*&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Releases need permissions to read and write the repository contents.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># GitHub considers creating releases and uploading assets as writing contents.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">permissions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">contents</span><span class="p">:</span><span class="w"> </span><span class="l">write</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">goreleaser</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11</span><span class="w"> </span><span class="c"># v4.1.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="c"># Allow goreleaser to access older tag information.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">fetch-depth</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/setup-go@0c52d547c9bc32b1aa3301fd7a9cb496313a4491</span><span class="w"> </span><span class="c"># v5.0.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">go-version-file</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;go.mod&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">cache</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Import GPG key</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">crazy-max/ghaction-import-gpg@01dd5d3ca463c7f10f7f4f7b4f177225ac661ee4</span><span class="w"> </span><span class="c"># v6.1.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l">import_gpg</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">gpg_private_key</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.GPG_PRIVATE_KEY }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="c">#passphrase: ${{ secrets.GPG_PRIVATE_PASSPHRASE }}      </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Run GoReleaser</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">goreleaser/goreleaser-action@7ec5c2b0c6cdda6e8bbb49444bc797dd33d74dd8</span><span class="w"> </span><span class="c"># v5.0.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="l">release --clean</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="c"># GitHub sets the GITHUB_TOKEN secret automatically.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">GITHUB_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.TOKEN }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">GPG_FINGERPRINT</span><span class="p">:</span><span class="w"> </span><span class="l">${{ steps.import_gpg.outputs.fingerprint }}</span><span class="w">
+</span></span></span></code></pre></div><p>推送项目到github</p>
+<h3 id="5terraform-registry上配置公钥和发布provider">5、Terraform Registry上配置公钥和发布provider</h3>
+<p>1）导入公钥 <a href="https://app.terraform.io/app/serialt/registry/public-namespaces/serialt/settings" target="_blank" rel="noopener noreffer ">https://app.terraform.io/app/serialt/registry/public-namespaces/serialt/settings</a></p>
+<p>2）发布provider <a href="https://app.terraform.io/app/serialt/registry/public-namespaces/serialt/providers" target="_blank" rel="noopener noreffer ">https://app.terraform.io/app/serialt/registry/public-namespaces/serialt/providers</a></p>
+<p>选中对应的provider，<code>Resync provider</code></p>
+<h3 id="六registry-mirror">六、Registry Mirror</h3>
+<p>terraform 的 provider 托管在海外，使用时候会经常因为网络问题导致下载失败，terraform 官方有 Provider Network Mirror Protocol，支持使用本地文件和 Static Website，制作方法都依赖于<code>terraform providers mirror </code>命令获取到的资源。</p>
+<h4 id="1制作离线-provider-资源">1、制作离线 provider 资源</h4>
+<h5 id="在当前目录下生成-providertf-文件">在当前目录下生成 provider.tf 文件</h5>
+<pre tabindex="0"><code>terraform {
+  required_providers {
+    docker = {
+      source  = &#34;kreuzwerker/docker&#34;
+      version = &#34;2.20.3&#34;
+    }
+  }
+
+}
+</code></pre><h5 id="创建存储的目录并下载-provider">创建存储的目录，并下载 provider</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 下载当前版 terraform 架构的 provider 到 provider 目录，可以用 -platform=OS_ARCH 指定架构</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>serialt@Sugar tf-demo<span class="o">]</span>🐳 mkdir providers
+</span></span><span class="line"><span class="cl">terraform providers mirror providers 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 下载 darwin_arm64 linux_amd64 </span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>serialt@Sugar tf-demo<span class="o">]</span>🐳 terraform providers mirror -platform<span class="o">=</span>linux_amd64 providers 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>serialt@Sugar tf-demo<span class="o">]</span>🐳 terraform providers mirror -platform<span class="o">=</span>darwin_arm64 providers 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>serialt@Sugar tf-demo<span class="o">]</span>🐳 tree providers
+</span></span><span class="line"><span class="cl">providers
+</span></span><span class="line"><span class="cl">└── registry.terraform.io
+</span></span><span class="line"><span class="cl">    └── kreuzwerker
+</span></span><span class="line"><span class="cl">        └── docker
+</span></span><span class="line"><span class="cl">            ├── 2.20.3.json
+</span></span><span class="line"><span class="cl">            ├── index.json
+</span></span><span class="line"><span class="cl">            ├── terraform-provider-docker_2.20.3_darwin_arm64.zip
+</span></span><span class="line"><span class="cl">            └── terraform-provider-docker_2.20.3_linux_amd64.zip
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">3</span> directories, <span class="m">4</span> files
+</span></span></code></pre></div><h4 id="2本地文件镜像">2、本地文件镜像</h4>
+<p>配置插件缓存目录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">TF_PLUGIN_CACHE_DIR</span><span class="o">=</span>/home/user/.terraform.d/plugin-cache
+</span></span></code></pre></div><p>配置<code> ~/.terraformrc</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">provider_installation <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  filesystem_mirror <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">path</span>    <span class="o">=</span> <span class="s2">&#34;/home/user/tf-demo/providers&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">include</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&#34;*/*/*&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  direct <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">exclude</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&#34;*/*/*&#34;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>serialt@Sugar tf-ccc<span class="o">]</span>🐳 terraform init
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Initializing the backend...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Initializing provider plugins...
+</span></span><span class="line"><span class="cl">- Finding kreuzwerker/docker versions matching <span class="s2">&#34;2.20.3&#34;</span>...
+</span></span><span class="line"><span class="cl">- Installing kreuzwerker/docker v2.20.3...
+</span></span><span class="line"><span class="cl">- Installed kreuzwerker/docker v2.20.3 <span class="o">(</span>unauthenticated<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform has created a lock file .terraform.lock.hcl to record the provider
+</span></span><span class="line"><span class="cl">selections it made above. Include this file in your version control repository
+</span></span><span class="line"><span class="cl">so that Terraform can guarantee to make the same selections by default when
+</span></span><span class="line"><span class="cl">you run <span class="s2">&#34;terraform init&#34;</span> in the future.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">╷
+</span></span><span class="line"><span class="cl">│ Warning: Incomplete lock file information <span class="k">for</span> providers
+</span></span><span class="line"><span class="cl">│ 
+</span></span><span class="line"><span class="cl">│ Due to your customized provider installation methods, Terraform was forced to
+</span></span><span class="line"><span class="cl">│ calculate lock file checksums locally <span class="k">for</span> the following providers:
+</span></span><span class="line"><span class="cl">│   - kreuzwerker/docker
+</span></span><span class="line"><span class="cl">│ 
+</span></span><span class="line"><span class="cl">│ The current .terraform.lock.hcl file only includes checksums <span class="k">for</span>
+</span></span><span class="line"><span class="cl">│ darwin_arm64, so Terraform running on another platform will fail to install
+</span></span><span class="line"><span class="cl">│ these providers.
+</span></span><span class="line"><span class="cl">│ 
+</span></span><span class="line"><span class="cl">│ To calculate additional checksums <span class="k">for</span> another platform, run:
+</span></span><span class="line"><span class="cl">│   terraform providers lock -platform<span class="o">=</span>linux_amd64
+</span></span><span class="line"><span class="cl">│ <span class="o">(</span>where linux_amd64 is the platform to generate<span class="o">)</span>
+</span></span><span class="line"><span class="cl">╵
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform has been successfully initialized!
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">You may now begin working with Terraform. Try running <span class="s2">&#34;terraform plan&#34;</span> to see
+</span></span><span class="line"><span class="cl">any changes that are required <span class="k">for</span> your infrastructure. All Terraform commands
+</span></span><span class="line"><span class="cl">should now work.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">If you ever <span class="nb">set</span> or change modules or backend configuration <span class="k">for</span> Terraform,
+</span></span><span class="line"><span class="cl">rerun this <span class="nb">command</span> to reinitialize your working directory. If you forget, other
+</span></span><span class="line"><span class="cl">commands will detect it and remind you to <span class="k">do</span> so <span class="k">if</span> necessary.
+</span></span></code></pre></div><h4 id="3网络镜像">3、网络镜像</h4>
+<h5 id="nginx配置文件">nginx配置文件</h5>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nginx" data-lang="nginx"><span class="line"><span class="cl"><span class="k">server</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">server_name</span> <span class="s">tf-mirror.local.com</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">listen</span> <span class="mi">80</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kn">return</span> <span class="mi">301</span> <span class="s">https://</span><span class="nv">$server_name$request_uri</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">server{</span>
+</span></span><span class="line"><span class="cl">        <span class="s">server_name</span> <span class="s">tf-mirror.local.com</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">listen</span> <span class="mi">443</span> <span class="s">ssl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">charset</span> <span class="s">utf-8</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">gzip</span> <span class="no">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">gzip_min_length</span> <span class="s">1K</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">gzip_comp_level</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">gzip_buffers</span> <span class="mi">32</span> <span class="s">4K</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">gzip_types</span> <span class="s">text/plain</span> <span class="s">application/javascript</span> <span class="s">application/x-javascript</span> <span class="s">text/css</span> <span class="s">application/xml</span> <span class="s">text/javascript</span> <span class="s">application/x-httpd-php</span> <span class="s">image/jpeg</span> <span class="s">image/gif</span> <span class="s">image/png</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">gzip_vary</span> <span class="no">on</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">add_header</span> <span class="s">Strict-Transport-Security</span> <span class="s">&#34;max-age=31536000</span><span class="p">;</span> <span class="k">includeSubDomians</span><span class="p">;</span><span class="k">proload&#34;</span> <span class="s">always</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">root</span> <span class="s">/data/terraform-mirror/</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">index</span> <span class="s">index.html</span> <span class="s">index.htm</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try_files</span> <span class="nv">$uri</span> <span class="nv">$uri/</span> <span class="s">/index.html</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">client_max_body_size</span>  <span class="mi">20m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">access_log</span> <span class="s">/var/log/nginx/tf-mirror.local.com.log</span> <span class="s">main</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">error_log</span> <span class="s">/var/log/nginx/tf-mirror.local.com-err.log</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">ssl_certificate</span> <span class="s">/etc/nginx/cert_files/local.com.crt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">ssl_certificate_key</span> <span class="s">/etc/nginx/cert_files/local.com.key</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">}</span>
+</span></span></code></pre></div><h5 id="上传下载的-provider-资源到-web-根目录">上传下载的 provider 资源到 web 根目录</h5>
+<p>例如：<code>/data/terraform-mirror/</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>serialt@Sugar tf-ccc<span class="o">]</span>🐳 scp -r ./providers  local.com:/data/terraform-mirror/
+</span></span></code></pre></div><p>启动nginx服务</p>
+<p>配置<code>~/.terraformrc</code>文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">provider_installation <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  network_mirror <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">url</span> <span class="o">=</span> <span class="s2">&#34;https://tf-mirror.local.com/providers/&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>serialt@Sugar tf-ccc<span class="o">]</span>🐳 terraform init
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Initializing the backend...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Initializing provider plugins...
+</span></span><span class="line"><span class="cl">- Finding latest version of hashicorp/random...
+</span></span><span class="line"><span class="cl">- Installing hashicorp/random v3.6.0...
+</span></span><span class="line"><span class="cl">- Installed hashicorp/random v3.6.0 <span class="o">(</span>verified checksum<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform has created a lock file .terraform.lock.hcl to record the provider
+</span></span><span class="line"><span class="cl">selections it made above. Include this file in your version control repository
+</span></span><span class="line"><span class="cl">so that Terraform can guarantee to make the same selections by default when
+</span></span><span class="line"><span class="cl">you run <span class="s2">&#34;terraform init&#34;</span> in the future.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Terraform has been successfully initialized!
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">You may now begin working with Terraform. Try running <span class="s2">&#34;terraform plan&#34;</span> to see
+</span></span><span class="line"><span class="cl">any changes that are required <span class="k">for</span> your infrastructure. All Terraform commands
+</span></span><span class="line"><span class="cl">should now work.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">If you ever <span class="nb">set</span> or change modules or backend configuration <span class="k">for</span> Terraform,
+</span></span><span class="line"><span class="cl">rerun this <span class="nb">command</span> to reinitialize your working directory. If you forget, other
+</span></span><span class="line"><span class="cl">commands will detect it and remind you to <span class="k">do</span> so <span class="k">if</span> necessary.
+</span></span></code></pre></div><h4 id="4基于脚本下载-provider-离线资源">4、基于脚本下载 provider 离线资源</h4>
+<ul>
+<li><a href="https://github.com/serialt/terraform-registry-mirror" target="_blank" rel="noopener noreffer ">https://github.com/serialt/terraform-registry-mirror</a></li>
+</ul>
+<p>要求：</p>
+<ul>
+<li>terraform</li>
+<li>jq</li>
+</ul>
+<p>1）修改下载的平台和架构</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sed -ri <span class="nv">PLATFORMS</span><span class="o">=</span><span class="s2">&#34;linux_amd64 darwin_amd64 darwin_arm64&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sed -ri <span class="s1">&#39;/^PLATFORMS=/cPLATFORMS=&#34;linux_amd64 darwin_amd64 darwin_arm64&#34;&#39;</span> bin/mirror.sh
+</span></span><span class="line"><span class="cl">sed -ri <span class="s1">&#39;/^PLATFORMS=/cPLATFORMS=&#34;linux_amd64 darwin_amd64 darwin_arm64&#34;&#39;</span> bin/core.sh
+</span></span></code></pre></div><p>2）下载 terraform</p>
+<pre tabindex="0"><code>bin/core.sh terraform.json
+</code></pre><p>3）下载 provider</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 下载单个</span>
+</span></span><span class="line"><span class="cl">bin/core.sh ./providers/aws.json
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 下载多个</span>
+</span></span><span class="line"><span class="cl">mirror<span class="o">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">action</span><span class="o">=</span><span class="nv">$1</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">providers</span><span class="o">=</span><span class="sb">`</span>ls ./providers<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> i in <span class="si">${</span><span class="nv">providers</span><span class="si">}</span><span class="p">;</span><span class="k">do</span> 
+</span></span><span class="line"><span class="cl">        bash ./bin/<span class="si">${</span><span class="nv">action</span><span class="si">}</span> ./providers/<span class="si">${</span><span class="nv">i</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">done</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mirror mirror.sh
+</span></span><span class="line"><span class="cl"><span class="c1"># mirror updater.sh</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2026-05-21</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/terraform-dev/">terraform-dev</a>,&nbsp;<a href="/tags/tf-dev/">tf-dev</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2026-03-28-mqtt/" class="prev" rel="prev" title="mqtt"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>mqtt</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

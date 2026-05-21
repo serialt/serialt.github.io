@@ -4,7 +4,23 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 28 Mar 2026 20:10:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Thu, 21 May 2026 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>terraform-dev</title>
+    <link>https://serialt.github.io/tags/terraform-dev/</link>
+    <pubDate>Thu, 21 May 2026 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/terraform-dev/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>tf-dev</title>
+    <link>https://serialt.github.io/tags/tf-dev/</link>
+    <pubDate>Thu, 21 May 2026 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/tf-dev/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>auth</title>
     <link>https://serialt.github.io/tags/auth/</link>
     <pubDate>Sat, 28 Mar 2026 20:10:01 &#43;0800</pubDate>
@@ -66,22 +82,6 @@
     <pubDate>Fri, 12 Dec 2025 21:50:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/kube-operator/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>kubebuilder</title>
-    <link>https://serialt.github.io/tags/kubebuilder/</link>
-    <pubDate>Fri, 12 Dec 2025 21:50:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/kubebuilder/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>kratos</title>
-    <link>https://serialt.github.io/tags/kratos/</link>
-    <pubDate>Sat, 22 Nov 2025 21:50:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/kratos/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

@@ -4,9 +4,17 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 28 Mar 2026 20:10:01 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Thu, 21 May 2026 20:26:27 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>TF-dev</title>
+    <link>https://serialt.github.io/posts/2025-09-03-dev-terraform-provider/</link>
+    <pubDate>Thu, 21 May 2026 20:26:27 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-09-03-dev-terraform-provider/</guid>
+    <description><![CDATA[Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo https://github.com/serialt/terraform-provider-dnshe 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # Makefile default: fmt lint install generate build: go build -v ./... install: build go install -v ./... lint: golangci-lint run generate: cd tools; go generate ./... fmt: gofmt -s]]></description>
+</item>
+<item>
     <title>mqtt</title>
     <link>https://serialt.github.io/posts/2026-03-28-mqtt/</link>
     <pubDate>Sat, 28 Mar 2026 20:10:01 &#43;0800</pubDate>
@@ -77,14 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2025-11-22-kratos/</guid>
     <description><![CDATA[Go Kratos测试 1、测试repo层方法 glogger &#34;gorm.io/gorm/logger&#34; &#34;github.com/go-kratos/kratos/v2/log&#34; var ( msg = &#34;hello&#34; ctx = context.Context db *gorm.DB p = NewSugarRepo(log.DefaultLogger) bc conf.Bootstrap ) func init() { bcInit() var err error var dns = bc.Data.Database.Source db, err = gorm.Open(postgres.Open(dns), &amp;gorm.Config{ Logger: glogger.Default.LogMode(glogger.Info), }) if err != nil { panic(err) } md := metadata.New(map[string]string{ &#34;message&#34;: msg,]]></description>
-</item>
-<item>
-    <title>Gock</title>
-    <link>https://serialt.github.io/posts/2025-11-2-go-mock/</link>
-    <pubDate>Sun, 02 Nov 2025 21:50:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2025-11-2-go-mock/</guid>
-    <description><![CDATA[Gock: ​ 开发项目的过程中总会遇到要调用依赖方接口的情况，如果依赖方的API接口还没有开发好，通常我们会先约定好API接口的请求参数、响应结构和各]]></description>
 </item>
 </channel>
 </rss>
