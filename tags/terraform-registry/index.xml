@@ -4,23 +4,7 @@
         <link>https://serialt.github.io/tags/terraform-registry/</link>
         <description>terraform-registry - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 31 Mar 2024 16:16:02 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/terraform-registry/" rel="self" type="application/rss+xml" /><item>
-    <title>Publish Provider to Registry</title>
-    <link>https://serialt.github.io/posts/2024-03-31-publish-terraform-provider/</link>
-    <pubDate>Sun, 31 Mar 2024 16:16:02 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-03-31-publish-terraform-provider/</guid>
-    <description><![CDATA[Publish Terraform Provider https://registry.terraform.io/ 上的provider只能托管在 github 上 1、Terraform Registry 官网上注册账号 账号使用 github 登录，设置 github 需要对 terraform registry 的授权 2、创建 github projec]]></description>
-</item>
-<item>
-    <title>Terraform Registry Mirror</title>
-    <link>https://serialt.github.io/posts/2024-03-17-tf-mirror-registery/</link>
-    <pubDate>Sun, 17 Mar 2024 16:37:07 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2024-03-17-tf-mirror-registery/</guid>
-    <description><![CDATA[Terraform Registry Mirror terraform 的 provider 托管在海外，使用时候会经常因为网络问题导致下载失败，terraform 官方有 Provider Network Mirror Protocol，支持使用本地文件和 Static Webs]]></description>
-</item>
-<item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 14 Jan 2024 20:26:27 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/terraform-registry/" rel="self" type="application/rss+xml" /><item>
     <title>Terraform Registry</title>
     <link>https://serialt.github.io/posts/2024-01-14-terraform-registry/</link>
     <pubDate>Sun, 14 Jan 2024 20:26:27 &#43;0800</pubDate>
