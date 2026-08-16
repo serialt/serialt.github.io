@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2024-09-09-gorm-gen\/"
-        },"genre": "posts","keywords": "gorm","wordcount":  1475 ,
+        },"genre": "posts","keywords": "gorm","wordcount":  1698 ,
         "url": "https:\/\/serialt.github.io\/posts\/2024-09-09-gorm-gen\/","datePublished": "2024-09-09T20:09:42+08:00","dateModified": "2024-09-09T20:09:42+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,8 +101,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Gorm Gen</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/gorm/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Gorm</a>&nbsp;<a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-09-09">2024-09-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1475 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-09-09">2024-09-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1698 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -211,6 +211,56 @@
 </span></span><span class="line"><span class="cl">				<span class="nx">GORMTag</span><span class="p">:</span>       <span class="s">&#34;references:TypeID;foreignKey:ID&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">			<span class="p">},</span>
 </span></span><span class="line"><span class="cl">		<span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// many2many 使用中间表直接关联 user 和 role 表 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">IF</span> <span class="nx">NOT</span> <span class="nx">EXISTS</span> <span class="s">&#34;role&#34;</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;id&#34;</span> <span class="nx">BIGINT</span> <span class="nx">GENERATED</span> <span class="nx">BY</span> <span class="nx">DEFAULT</span> <span class="nx">AS</span> <span class="nx">IDENTITY</span> <span class="nx">PRIMARY</span> <span class="nx">KEY</span><span class="p">,</span> <span class="o">--</span> <span class="nx">优化1</span><span class="p">:</span> <span class="nx">使用现代自增语法</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;code&#34;</span> <span class="nf">VARCHAR</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span> <span class="nx">NOT</span> <span class="nx">NULL</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;name&#34;</span> <span class="nf">VARCHAR</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span> <span class="nx">NOT</span> <span class="nx">NULL</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;description&#34;</span> <span class="nf">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;created_at&#34;</span> <span class="nx">TIMESTAMPTZ</span> <span class="nx">NOT</span> <span class="nx">NULL</span> <span class="nx">DEFAULT</span> <span class="nx">CURRENT_TIMESTAMP</span><span class="p">,</span> <span class="o">--</span> <span class="nx">优化2</span><span class="p">:</span> <span class="nx">设置默认值且非空</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;updated_at&#34;</span> <span class="nx">TIMESTAMPTZ</span> <span class="nx">NOT</span> <span class="nx">NULL</span> <span class="nx">DEFAULT</span> <span class="nx">CURRENT_TIMESTAMP</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;deleted_at&#34;</span> <span class="nx">TIMESTAMPTZ</span><span class="p">,</span> <span class="o">--</span> <span class="nx">软删除字段</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">CONSTRAINT</span> <span class="nx">uq_role_code</span> <span class="nf">UNIQUE</span> <span class="p">(</span><span class="s">&#34;code&#34;</span><span class="p">)</span> <span class="o">--</span> <span class="nx">优化3</span><span class="p">:</span> <span class="nx">直接在表内定义唯一约束</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">--</span> <span class="mf">2.</span> <span class="nx">用户表优化</span>
+</span></span><span class="line"><span class="cl"><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">IF</span> <span class="nx">NOT</span> <span class="nx">EXISTS</span> <span class="s">&#34;user&#34;</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;id&#34;</span> <span class="nx">BIGINT</span> <span class="nx">GENERATED</span> <span class="nx">BY</span> <span class="nx">DEFAULT</span> <span class="nx">AS</span> <span class="nx">IDENTITY</span> <span class="nx">PRIMARY</span> <span class="nx">KEY</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;username&#34;</span> <span class="nf">VARCHAR</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span> <span class="nx">NOT</span> <span class="nx">NULL</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;password_hash&#34;</span> <span class="nf">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="nx">NOT</span> <span class="nx">NULL</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;nickname&#34;</span> <span class="nf">VARCHAR</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span> <span class="nx">NOT</span> <span class="nx">NULL</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;status&#34;</span> <span class="nx">BOOLEAN</span> <span class="nx">NOT</span> <span class="nx">NULL</span> <span class="nx">DEFAULT</span> <span class="nx">TRUE</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;created_at&#34;</span> <span class="nx">TIMESTAMPTZ</span> <span class="nx">NOT</span> <span class="nx">NULL</span> <span class="nx">DEFAULT</span> <span class="nx">CURRENT_TIMESTAMP</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;updated_at&#34;</span> <span class="nx">TIMESTAMPTZ</span> <span class="nx">NOT</span> <span class="nx">NULL</span> <span class="nx">DEFAULT</span> <span class="nx">CURRENT_TIMESTAMP</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;deleted_at&#34;</span> <span class="nx">TIMESTAMPTZ</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">CONSTRAINT</span> <span class="nx">uq_user_username</span> <span class="nf">UNIQUE</span> <span class="p">(</span><span class="s">&#34;username&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">--</span> <span class="mf">3.</span> <span class="nx">用户角色关联表优化</span>
+</span></span><span class="line"><span class="cl"><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">IF</span> <span class="nx">NOT</span> <span class="nx">EXISTS</span> <span class="s">&#34;user_role&#34;</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;user_id&#34;</span> <span class="nx">BIGINT</span> <span class="nx">NOT</span> <span class="nx">NULL</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;role_id&#34;</span> <span class="nx">BIGINT</span> <span class="nx">NOT</span> <span class="nx">NULL</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">PRIMARY</span> <span class="nf">KEY</span> <span class="p">(</span><span class="s">&#34;user_id&#34;</span><span class="p">,</span> <span class="s">&#34;role_id&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">role</span> <span class="o">:=</span> <span class="nx">g</span><span class="p">.</span><span class="nf">GenerateModel</span><span class="p">(</span><span class="s">&#34;role&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">userRole</span> <span class="o">:=</span> <span class="nx">g</span><span class="p">.</span><span class="nf">GenerateModel</span><span class="p">(</span><span class="s">&#34;user_role&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">user</span> <span class="o">:=</span> <span class="nx">g</span><span class="p">.</span><span class="nf">GenerateModel</span><span class="p">(</span><span class="s">&#34;user&#34;</span><span class="p">,</span> <span class="nx">gen</span><span class="p">.</span><span class="nf">FieldRelate</span><span class="p">(</span><span class="nx">field</span><span class="p">.</span><span class="nx">HasMany</span><span class="p">,</span> <span class="s">&#34;Roles&#34;</span><span class="p">,</span> <span class="nx">role</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">field</span><span class="p">.</span><span class="nx">RelateConfig</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">RelateSlicePointer</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">GORMTag</span><span class="p">:</span> <span class="nx">field</span><span class="p">.</span><span class="nx">GormTag</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="s">&#34;many2many&#34;</span><span class="p">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="s">&#34;user_role&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">))</span>
 </span></span></code></pre></div><p>基于索引的情况下批量更新或者新增</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl">	<span class="nx">err</span> <span class="p">=</span> <span class="nx">user</span><span class="p">.</span><span class="nf">WithContext</span><span class="p">(</span><span class="nx">ctx</span><span class="p">).</span><span class="nf">Clauses</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">		<span class="nx">clause</span><span class="p">.</span><span class="nx">OnConflict</span><span class="p">{</span>
