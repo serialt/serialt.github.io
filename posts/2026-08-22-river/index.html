@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title> - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
+<meta property="og:description" content="title = &lsquo;river&rsquo; date = 2026-08-22T21:50:01&#43;08:00 draft = false tags = [&ldquo;river&rdquo;] categories = [&ldquo;Go&rdquo;] River 简单来说，River 是一个专为 Go 设计的作业队列库，但它不是那种「又一个轮子」的存在。它最大的特点是什么？把队" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2026-08-22-river/" /><meta property="article:section" content="posts" />
+
+<meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="title = &lsquo;river&rsquo; date = 2026-08-22T21:50:01&#43;08:00 draft = false tags = [&ldquo;river&rdquo;] categories = [&ldquo;Go&rdquo;] River 简单来说，River 是一个专为 Go 设计的作业队列库，但它不是那种「又一个轮子」的存在。它最大的特点是什么？把队"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2026-08-22-river/" /><link rel="next" href="https://serialt.github.io/posts/2026-05-26-operator-sdk/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2026-08-22-river\/"
+        },"genre": "posts","wordcount":  2038 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2026-08-22-river\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2038 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#river">River</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>title = &lsquo;river&rsquo;
+date = 2026-08-22T21:50:01+08:00
+draft = false</p>
+<p>tags = [&ldquo;river&rdquo;]
+categories = [&ldquo;Go&rdquo;]</p>
+<h2 id="river">River</h2>
+<p>简单来说，River 是一个专为 Go 设计的作业队列库，但它不是那种「又一个轮子」的存在。它最大的特点是什么？把队列和 PostgreSQL深度绑定。</p>
+<p>传统方案里，我们通常会用 Redis、RabbitMQ 这些专门的消息中间件来做队列。这没问题，但也带来了一个老大难问题：分布式事物</p>
+<p>想象一个场景：你在处理订单支付，需要先更新数据库的订单状态，再往队列里扔一个「发送支付成功短信」的任务。如果数据库更新成功了，但往队列里塞任务失败了呢？或者反过来？这就是分布式事务的经典困境。</p>
+<p>River 的解决方案很直接：<strong>既然都用 PostgreSQL 存数据，那队列也放 PostgreSQL 里不就完了？</strong> 一个事务搞定所有事情，要么全成功，要么全回滚。是不是有种「大道至简」的感觉？</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;database/sql&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;errors&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;log&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;os&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;os/signal&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;syscall&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;time&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/riverqueue/river&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/riverqueue/river/riverdriver/riverdatabasesql&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/riverqueue/river/rivermigrate&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;gorm.io/driver/postgres&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;gorm.io/gorm&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;gorm.io/gorm/logger&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">const</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">OrderStatusPending</span>    <span class="p">=</span> <span class="s">&#34;pending&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">OrderStatusProcessing</span> <span class="p">=</span> <span class="s">&#34;processing&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">OrderStatusCompleted</span>  <span class="p">=</span> <span class="s">&#34;completed&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">OrderQueue</span> <span class="p">=</span> <span class="s">&#34;order&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Order 是业务表，由 GORM 管理。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">Order</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ID</span>        <span class="kt">int64</span>     <span class="s">`gorm:&#34;primaryKey;autoIncrement&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">OrderNo</span>   <span class="kt">string</span>    <span class="s">`gorm:&#34;size:64;not null;uniqueIndex&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Product</span>   <span class="kt">string</span>    <span class="s">`gorm:&#34;size:128;not null&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Quantity</span>  <span class="kt">int</span>       <span class="s">`gorm:&#34;not null&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Status</span>    <span class="kt">string</span>    <span class="s">`gorm:&#34;size:32;not null;index&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">CreatedAt</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span> <span class="s">`gorm:&#34;not null&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">UpdatedAt</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span> <span class="s">`gorm:&#34;not null&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">Order</span><span class="p">)</span> <span class="nf">TableName</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="s">&#34;orders&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ProcessOrderArgs 是 River 任务参数。
+</span></span></span><span class="line"><span class="cl"><span class="c1">// River 会将其序列化成 JSON 存入 river_job 表。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">ProcessOrderArgs</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">OrderID</span> <span class="kt">int64</span> <span class="s">`json:&#34;order_id&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Kind 必须保持稳定，不能随意修改。
+</span></span></span><span class="line"><span class="cl"><span class="c1">// River 根据 Kind 找到对应的 Worker。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">ProcessOrderArgs</span><span class="p">)</span> <span class="nf">Kind</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="s">&#34;process_order&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// InsertOpts 设置任务默认参数。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">ProcessOrderArgs</span><span class="p">)</span> <span class="nf">InsertOpts</span><span class="p">()</span> <span class="nx">river</span><span class="p">.</span><span class="nx">InsertOpts</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">river</span><span class="p">.</span><span class="nx">InsertOpts</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Queue</span><span class="p">:</span>       <span class="nx">OrderQueue</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">MaxAttempts</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ProcessOrderWorker 负责处理订单任务。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">ProcessOrderWorker</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">river</span><span class="p">.</span><span class="nx">WorkerDefaults</span><span class="p">[</span><span class="nx">ProcessOrderArgs</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">db</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewProcessOrderWorker</span><span class="p">(</span><span class="nx">db</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span> <span class="o">*</span><span class="nx">ProcessOrderWorker</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">ProcessOrderWorker</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">db</span><span class="p">:</span> <span class="nx">db</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Work 执行具体任务。
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 返回 nil 表示任务成功；返回 error 表示任务失败并触发重试。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">w</span> <span class="o">*</span><span class="nx">ProcessOrderWorker</span><span class="p">)</span> <span class="nf">Work</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">job</span> <span class="o">*</span><span class="nx">river</span><span class="p">.</span><span class="nx">Job</span><span class="p">[</span><span class="nx">ProcessOrderArgs</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">orderID</span> <span class="o">:=</span> <span class="nx">job</span><span class="p">.</span><span class="nx">Args</span><span class="p">.</span><span class="nx">OrderID</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="s">&#34;开始处理订单任务: job_id=%d order_id=%d attempt=%d&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">job</span><span class="p">.</span><span class="nx">ID</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">orderID</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">job</span><span class="p">.</span><span class="nx">Attempt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">order</span> <span class="nx">Order</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">w</span><span class="p">.</span><span class="nx">db</span><span class="p">.</span><span class="nf">WithContext</span><span class="p">(</span><span class="nx">ctx</span><span class="p">).</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">First</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">order</span><span class="p">,</span> <span class="nx">orderID</span><span class="p">).</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Error</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">errors</span><span class="p">.</span><span class="nf">Is</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">gorm</span><span class="p">.</span><span class="nx">ErrRecordNotFound</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">// 订单已经不存在，继续重试通常没有意义。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="c1">// 返回 nil，将任务标记为完成。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;订单不存在，忽略任务: order_id=%d&#34;</span><span class="p">,</span> <span class="nx">orderID</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;查询订单失败: %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// Worker 必须尽量保证幂等。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// River 任务可能因为进程退出、网络异常等原因被再次执行。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">order</span><span class="p">.</span><span class="nx">Status</span> <span class="o">==</span> <span class="nx">OrderStatusCompleted</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;订单已经完成，跳过重复处理: order_id=%d&#34;</span><span class="p">,</span> <span class="nx">orderID</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">result</span> <span class="o">:=</span> <span class="nx">w</span><span class="p">.</span><span class="nx">db</span><span class="p">.</span><span class="nf">WithContext</span><span class="p">(</span><span class="nx">ctx</span><span class="p">).</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">Model</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">Order</span><span class="p">{}).</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">Where</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;id = ? AND status != ?&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">orderID</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">OrderStatusCompleted</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="p">).</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">Update</span><span class="p">(</span><span class="s">&#34;status&#34;</span><span class="p">,</span> <span class="nx">OrderStatusProcessing</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">result</span><span class="p">.</span><span class="nx">Error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;更新订单为处理中失败: %w&#34;</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">Error</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 模拟耗时业务，并响应任务取消。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">select</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="o">&lt;-</span><span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="o">&lt;-</span><span class="nx">ctx</span><span class="p">.</span><span class="nf">Done</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">ctx</span><span class="p">.</span><span class="nf">Err</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">result</span> <span class="p">=</span> <span class="nx">w</span><span class="p">.</span><span class="nx">db</span><span class="p">.</span><span class="nf">WithContext</span><span class="p">(</span><span class="nx">ctx</span><span class="p">).</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">Model</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">Order</span><span class="p">{}).</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">Where</span><span class="p">(</span><span class="s">&#34;id = ?&#34;</span><span class="p">,</span> <span class="nx">orderID</span><span class="p">).</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">Update</span><span class="p">(</span><span class="s">&#34;status&#34;</span><span class="p">,</span> <span class="nx">OrderStatusCompleted</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">result</span><span class="p">.</span><span class="nx">Error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;更新订单为已完成失败: %w&#34;</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">Error</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="s">&#34;订单处理完成: job_id=%d order_id=%d&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">job</span><span class="p">.</span><span class="nx">ID</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">orderID</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// CreateOrderAndEnqueue 在同一个事务中：
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 1. 使用 GORM 创建订单；
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 2. 使用 River 创建异步任务；
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 3. 一起提交或一起回滚。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">CreateOrderAndEnqueue</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">db</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">riverClient</span> <span class="o">*</span><span class="nx">river</span><span class="p">.</span><span class="nx">Client</span><span class="p">[</span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">Tx</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">product</span> <span class="kt">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">quantity</span> <span class="kt">int</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">Order</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">tx</span> <span class="o">:=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">WithContext</span><span class="p">(</span><span class="nx">ctx</span><span class="p">).</span><span class="nf">Begin</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">Error</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;开启事务失败: %w&#34;</span><span class="p">,</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">Error</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">committed</span> <span class="o">:=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">!</span><span class="nx">committed</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">_</span> <span class="p">=</span> <span class="nx">tx</span><span class="p">.</span><span class="nf">Rollback</span><span class="p">().</span><span class="nx">Error</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">order</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Order</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">OrderNo</span><span class="p">:</span>  <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;ORD-%d&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">UnixNano</span><span class="p">()),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Product</span><span class="p">:</span>  <span class="nx">product</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Quantity</span><span class="p">:</span> <span class="nx">quantity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Status</span><span class="p">:</span>   <span class="nx">OrderStatusPending</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">tx</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="nx">order</span><span class="p">).</span><span class="nx">Error</span><span class="p">;</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;创建订单失败: %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// GORM 开启事务后，底层连接是 *sql.Tx。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// 将同一个 *sql.Tx 交给 River，实现事务性投递任务。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">sqlTx</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">Statement</span><span class="p">.</span><span class="nx">ConnPool</span><span class="p">.(</span><span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">Tx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">errors</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="s">&#34;无法从 GORM 事务获取 *sql.Tx&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">insertResult</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">riverClient</span><span class="p">.</span><span class="nf">InsertTx</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ctx</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">sqlTx</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ProcessOrderArgs</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">OrderID</span><span class="p">:</span> <span class="nx">order</span><span class="p">.</span><span class="nx">ID</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="kc">nil</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;创建 River 任务失败: %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">tx</span><span class="p">.</span><span class="nf">Commit</span><span class="p">().</span><span class="nx">Error</span><span class="p">;</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;提交事务失败: %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">committed</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="s">&#34;订单及任务创建成功: order_id=%d job_id=%d&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">order</span><span class="p">.</span><span class="nx">ID</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">insertResult</span><span class="p">.</span><span class="nx">Job</span><span class="p">.</span><span class="nx">ID</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">order</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">migrateRiver</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">sqlDB</span> <span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">migrator</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rivermigrate</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">riverdatabasesql</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">sqlDB</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="kc">nil</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;创建 River Migrator 失败: %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">result</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">migrator</span><span class="p">.</span><span class="nf">Migrate</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ctx</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">rivermigrate</span><span class="p">.</span><span class="nx">DirectionUp</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="kc">nil</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;执行 River 数据库迁移失败: %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">Versions</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;River 数据库结构已经是最新版本&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">version</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">result</span><span class="p">.</span><span class="nx">Versions</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;River 数据库迁移完成: version=%d name=%s duration=%s&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">version</span><span class="p">.</span><span class="nx">Version</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">version</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">version</span><span class="p">.</span><span class="nx">Duration</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">openDatabase</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">databaseURL</span> <span class="kt">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">(</span><span class="nx">sqlDB</span> <span class="o">*</span><span class="nx">sql</span><span class="p">.</span><span class="nx">DB</span><span class="p">,</span> <span class="nx">gormDB</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span><span class="p">,</span> <span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// sqlDB.SetMaxOpenConns(30)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// sqlDB.SetMaxIdleConns(10)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// sqlDB.SetConnMaxLifetime(30 * time.Minute)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// sqlDB.SetConnMaxIdleTime(10 * time.Minute)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// if err := sqlDB.PingContext(ctx); err != nil {
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// 	_ = sqlDB.Close()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// 	return nil, nil, fmt.Errorf(&#34;连接数据库失败: %w&#34;, err)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="nx">gormDB</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">gorm</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">postgres</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="nx">databaseURL</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Logger</span><span class="p">:</span> <span class="nx">logger</span><span class="p">.</span><span class="nx">Default</span><span class="p">.</span><span class="nf">LogMode</span><span class="p">(</span><span class="nx">logger</span><span class="p">.</span><span class="nx">Info</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">sqlDB</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">gormDB</span><span class="p">.</span><span class="nf">DB</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">sqlDB</span><span class="p">.</span><span class="nf">SetMaxIdleConns</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">sqlDB</span><span class="p">.</span><span class="nf">SetMaxOpenConns</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">sqlDB</span><span class="p">.</span><span class="nf">SetConnMaxLifetime</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Hour</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">sqlDB</span><span class="p">.</span><span class="nf">PingContext</span><span class="p">(</span><span class="nx">ctx</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">_</span> <span class="p">=</span> <span class="nx">sqlDB</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Errorf</span><span class="p">(</span><span class="s">&#34;连接数据库失败: %w&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">sqlDB</span><span class="p">,</span> <span class="nx">gormDB</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">databaseURL</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Getenv</span><span class="p">(</span><span class="s">&#34;DATABASE_URL&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">databaseURL</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">databaseURL</span> <span class="p">=</span> <span class="s">&#34;postgres://kk:kkm@localhost:5432/river_demo?sslmode=disable&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span><span class="p">,</span> <span class="nx">cancel</span> <span class="o">:=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">WithCancel</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nf">cancel</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">sqlDB</span><span class="p">,</span> <span class="nx">gormDB</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">openDatabase</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">databaseURL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nx">sqlDB</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 必须先创建和升级 River 所需的数据库表。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">migrateRiver</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">sqlDB</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;River 数据库迁移失败: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 这里只迁移业务表。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// River 自己的表应通过 river migrate-up 创建。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">gormDB</span><span class="p">.</span><span class="nf">AutoMigrate</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">Order</span><span class="p">{});</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;迁移业务表失败: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">workers</span> <span class="o">:=</span> <span class="nx">river</span><span class="p">.</span><span class="nf">NewWorkers</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 注册任务 Worker。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">river</span><span class="p">.</span><span class="nf">AddWorker</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">workers</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">NewProcessOrderWorker</span><span class="p">(</span><span class="nx">gormDB</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// riverdatabasesql 允许 River 与 GORM 共用 sql.DB/sql.Tx。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">riverClient</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">river</span><span class="p">.</span><span class="nf">NewClient</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">riverdatabasesql</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">sqlDB</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&amp;</span><span class="nx">river</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Queues</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">river</span><span class="p">.</span><span class="nx">QueueConfig</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">OrderQueue</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">MaxWorkers</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Workers</span><span class="p">:</span>         <span class="nx">workers</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">SoftStopTimeout</span><span class="p">:</span> <span class="mi">15</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;创建 River Client 失败: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">appCtx</span><span class="p">,</span> <span class="nx">stop</span> <span class="o">:=</span> <span class="nx">signal</span><span class="p">.</span><span class="nf">NotifyContext</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ctx</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">syscall</span><span class="p">.</span><span class="nx">SIGINT</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">syscall</span><span class="p">.</span><span class="nx">SIGTERM</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">defer</span> <span class="nf">stop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 启动 River Worker。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">riverClient</span><span class="p">.</span><span class="nf">Start</span><span class="p">(</span><span class="nx">appCtx</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;启动 River Client 失败: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;River Worker 已启动&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 创建一条示例订单，并在同一事务中投递任务。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">order</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">CreateOrderAndEnqueue</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">appCtx</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">gormDB</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">riverClient</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="s">&#34;MacBook Pro&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatalf</span><span class="p">(</span><span class="s">&#34;创建示例订单失败: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="s">&#34;示例订单已创建: id=%d order_no=%s status=%s&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">order</span><span class="p">.</span><span class="nx">ID</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">order</span><span class="p">.</span><span class="nx">OrderNo</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">order</span><span class="p">.</span><span class="nx">Status</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 等待 SIGINT 或 SIGTERM。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="o">&lt;-</span><span class="nx">appCtx</span><span class="p">.</span><span class="nf">Done</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;正在停止 River Worker&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// Start 使用的 context 被取消后，River 会进入优雅停止流程。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="o">&lt;-</span><span class="nx">riverClient</span><span class="p">.</span><span class="nf">Stopped</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;River Worker 已停止&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/posts/2026-05-26-operator-sdk/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
