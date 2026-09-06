@@ -1,5 +1,4 @@
-
-
++++
 title = 'operator-sdk'
 date = 2026-05-26T21:50:01+08:00
 draft = false
@@ -7,6 +6,7 @@ draft = false
 tags = ["kube-operator","operator-sdk"]
 categories = ["Go"]
 
++++
 
 
 ## 一、Operator SDK 介绍
@@ -44,6 +44,14 @@ https://github.com/operator-framework/operator-sdk/releases
 operator-sdk version: "v1.42.2", commit: "6001c29067051e1a04e829ea033988b904d1845e", kubernetes version: "1.33.1", go version: "go1.25.7", GOOS: "darwin", GOARCH: "arm64"
 ```
 
+概念：
+
+* CRD (Custom Resource Definition)：定义自定义资源（如 `MyApp`），扩展 Kubernetes API。
+
+* Controller (控制器)：一个运行在集群内的循环进程，不断对比 期望状态 (Spec) 和 实际状态 (Status)，并执行操作使两者一致（Reconcile）。
+
+* Operator：CRD + Controller 的组合，用于自动化运维复杂应用。
+
 #### 2、初始化
 
 ```bash
@@ -56,6 +64,10 @@ operator-sdk init --domain example.com --repo github.com/example/caddy-operator
 
 ```bash
 operator-sdk create api --group web --version v1 --kind Caddy --resource --controller
+
+
+# 下载依赖
+go mod tidy
 ```
 
 该命令会自动生成自定义资源定义（CRD）、控制器逻辑及相关测试文件
@@ -78,27 +90,279 @@ operator-sdk create api --group web --version v1 --kind Caddy --resource --contr
 └── main.go             # 主入口文件
 ```
 
-构建和测试（基于Go开发具体可以参考kube-operator）
+自定义CRD
+
+```go
+// api/v1/crab_types.go
+type GuestbookSpec struct {
+	Replicas int32  `json:"replicas"` // 对应 YAML 的 `spec.replicas`
+	Image    string `json:"image"`    // 对应 YAML 的 `spec.image`
+	Port     int32  `json:"port"`     // 应用监听的端口
+	SvcPort  int32  `json:"svcPort"`  // Service 暴露的端口
+}
+
+type GuestbookStatus struct {
+    // +listType=map
+	// +listMapKey=type
+	// +optional
+	Conditions        []metav1.Condition `json:"conditions,omitempty"`
+	AvailableReplicas int32  
+}
+```
+
+实现业务逻辑
+
+```go
+import (
+	"context"
+
+	webappv1 "github.com/serialt/crab-operator/api/v1"
+	appsv1 "k8s.io/api/apps/v1"
+	corev1 "k8s.io/api/core/v1"
+	apierrors "k8s.io/apimachinery/pkg/api/errors"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime"
+	"k8s.io/apimachinery/pkg/util/intstr"
+	ctrl "sigs.k8s.io/controller-runtime"
+	"sigs.k8s.io/controller-runtime/pkg/client"
+	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
+	logf "sigs.k8s.io/controller-runtime/pkg/log"
+)
+
+// +kubebuilder:rbac:groups=webapp.web.imau.cc,resources=crabs,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=webapp.web.imau.cc,resources=crabs/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=webapp.web.imau.cc,resources=crabs/finalizers,verbs=update
+// +kubebuilder:rbac:groups=apps,resources=deployments,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups="",resources=pods,verbs=get;list;watch
+// +kubebuilder:rbac:groups="",resources=services,verbs=get;list;watch;create;update;patch;delete
+
+
+func (r *CrabReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+	logger := logf.FromContext(ctx)
+
+	crab := webappv1.Crab{}
+	if err := r.Get(ctx, req.NamespacedName, &crab); err != nil {
+		if apierrors.IsNotFound(err) {
+			// 资源已被物理删除，无需处理
+			return ctrl.Result{}, nil
+		}
+		return ctrl.Result{}, err
+	}
+
+	labels := map[string]string{
+		"app": crab.Name,
+	}
+
+	deploy := &appsv1.Deployment{
+		ObjectMeta: metav1.ObjectMeta{
+			Name:      crab.Name,
+			Namespace: crab.Namespace,
+			Labels:    labels,
+		}}
+	if err := controllerutil.SetControllerReference(&crab, deploy, r.Scheme); err != nil {
+		return ctrl.Result{}, err
+	}
+
+	result, err := controllerutil.CreateOrUpdate(ctx, r.Client, deploy, func() error {
+		deploy.Spec = appsv1.DeploymentSpec{
+			Replicas: &crab.Spec.Replicas,
+			Selector: &metav1.LabelSelector{
+				MatchLabels: labels,
+			},
+			Template: corev1.PodTemplateSpec{
+				ObjectMeta: metav1.ObjectMeta{
+					Labels: labels,
+				},
+				Spec: corev1.PodSpec{
+					Containers: []corev1.Container{
+						{
+							Name:  crab.Name,
+							Image: crab.Spec.Image,
+							Ports: []corev1.ContainerPort{
+								{
+									ContainerPort: crab.Spec.Port,
+								},
+							},
+						},
+					},
+				},
+			},
+		}
+
+		// 关键操作：设置 OwnerReference
+		// 确保删除 Guestbook CR 时，自动清理关联的 Deployment
+		if err := controllerutil.SetControllerReference(&crab, deploy, r.Scheme); err != nil {
+			return err
+		}
+		return nil
+	})
+	if err != nil {
+		logger.Error(err, "Failed to create or update Deployment")
+		crab.Status.AvailableReplicas = 0
+		return ctrl.Result{}, err
+	}
+	logger.Info("Deployment操作结果", "result", result)
+
+	// 构建svc
+	svc := &corev1.Service{
+		ObjectMeta: metav1.ObjectMeta{
+			Name:      crab.Name,
+			Namespace: crab.Namespace,
+		},
+	}
+	result, err = controllerutil.CreateOrUpdate(ctx, r.Client, svc, func() error {
+		svc.Spec = corev1.ServiceSpec{
+			Selector: labels,
+			Ports: []corev1.ServicePort{
+				{
+					Port:       crab.Spec.SvcPort,
+					TargetPort: intstr.FromInt(int(crab.Spec.Port)),
+				},
+			},
+		}
+		return controllerutil.SetControllerReference(&crab, svc, r.Scheme)
+	})
+	if err != nil {
+		logger.Error(err, "Failed to create or update Service")
+		return ctrl.Result{}, err
+	}
+	logger.Info("Service操作结果", "result", result)
+
+	return ctrl.Result{}, nil
+}
+
+
+
+func (r *CrabReconciler) SetupWithManager(mgr ctrl.Manager) error {
+	return ctrl.NewControllerManagedBy(mgr).
+		For(&webappv1.Crab{}).
+		Owns(&appsv1.Deployment{}).
+		Owns(&corev1.Service{}).
+		Complete(r)
+}
+```
+
+
+
+构建和测试
 
 ```bash
-# 生成代码 (kubebuilder 生成器)
-make generate
-
 # 生成 manifests (RBAC, CRD 等)
 make manifests
 
-# 运行单元测试
-make test
-
-# 构建多架构镜像
-make docker-buildx IMG=controller:latest
 
 # 本地运行 (开发环境)
+make install
 make run
 
 # 部署到集群
 make deploy IMG=controller:latest
 ```
+
+测试yaml
+
+```bash
+# config/samples/webapp_v1_crab.yaml
+apiVersion: webapp.web.imau.cc/v1
+kind: Crab
+metadata:
+  labels:
+    app.kubernetes.io/name: crab-op
+    app.kubernetes.io/managed-by: kustomize
+  name: crab-app
+  namespace: dev
+spec:
+  # TODO(user): Add fields here
+  replicas: 3
+  image: registry.cn-hangzhou.aliyuncs.com/serialt/nginx:1.28-alpine
+  port: 80
+  svcPort: 8080 
+
+  
+# 执行后可以看到3个pod
+[serialt@Krab web-op]🐳 kubectl apply -f config/samples/webapp_v1_crab.yaml 
+
+```
+
+
+
+#### 生产/集成测试
+
+将控制器打包成镜像部署到集群。
+
+```bash
+# 设置镜像仓库
+# export IMG=registry.cn-hangzhou.aliyuncs.com/serialt/crab-op:v0.0.1 
+
+# 当前系统与节点系统相同
+make docker-build docker-push IMG=registry.cn-hangzhou.aliyuncs.com/serialt/crab-op:v0.0.1 
+
+
+# 构建多架构镜像
+make docker-buildx PLATFORMS=linux/amd64 IMG=registry.cn-hangzhou.aliyuncs.com/serialt/crab-op:v0.0.1 
+
+#部署到集群
+make deploy IMG=registry.cn-hangzhou.aliyuncs.com/serialt/crab-op:v0.0.1 
+
+# 修改replicas
+kubectl replace -f config/samples/webapp_v1_crab.yaml 
+```
+
+#### chart 打包
+
+```bash
+# 使用helmify
+go install github.com/arttor/helmify/cmd/helmify@latest
+```
+
+makefile增加
+
+```makefile
+CHART_NAME ?= caddy-operator
+CHART_DIR ?= dist/caddy-operator
+CHART_VERSION ?= ${VERSION}
+APP_VERSION ?= latest
+HELM_REGISTRY ?= quay.io/serialt
+HELM_REPO ?= $(HELM_REGISTRY)/charts
+
+
+
+
+.PHONY: helmify
+helmify: $(HELMIFY)
+
+$(HELMIFY): $(LOCALBIN)
+	@test -s $(HELMIFY) || \
+	GOBIN=$(LOCALBIN) go install github.com/arttor/helmify/cmd/helmify@latest
+
+.PHONY: helm
+helm: manifests kustomize helmify
+	rm -rf $(CHART_DIR)
+	mkdir -p $(dir $(CHART_DIR))
+	$(KUSTOMIZE) build config/default | helmify $(CHART_DIR)
+
+.PHONY: helm-lint
+helm-lint: helm
+	helm lint $(CHART_DIR)
+
+.PHONY: helm-package
+helm-package: helm-lint
+	mkdir -p dist
+	helm package $(CHART_DIR) \
+		--destination dist \
+		--version $(CHART_VERSION) \
+		--app-version $(APP_VERSION)
+
+.PHONY: helm-push
+helm-push: helm-package
+	helm push \
+		dist/$(CHART_NAME)-$(CHART_VERSION).tgz \
+		oci://$(HELM_REPO)
+```
+
+
+
+
 
 
 
