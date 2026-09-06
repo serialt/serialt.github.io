@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>vue - Category - Blog</title>
+        <link>https://serialt.github.io/categories/vue/</link>
+        <description>vue - Category - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 25 Apr 2026 21:57:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/vue/" rel="self" type="application/rss+xml" /><item>
+    <title>Vue</title>
+    <link>https://serialt.github.io/posts/2026-04-25-vue3/</link>
+    <pubDate>Sat, 25 Apr 2026 21:57:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-04-25-vue3/</guid>
+    <description><![CDATA[Vue3 main.ts: 项目入口文件 index.hmtl,通过标签引入文件main.ts，开启整个工程。打开 index.hmtl、main.ts参看具体内容： &lt;!DOCTYPE]]></description>
+</item>
+</channel>
+</rss>

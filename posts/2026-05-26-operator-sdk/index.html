@@ -4,31 +4,31 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title> - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="" />
-<meta property="og:description" content="title = &lsquo;operator-sdk&rsquo; date = 2026-05-26T21:50:01&#43;08:00 draft = false tags = [&ldquo;kube-operator&rdquo;,&ldquo;operator-sdk&rdquo;] categories = [&ldquo;Go&rdquo;] 一、Operator SDK 介绍 Operator SDK 是由 Red Hat 开源的用于构建 Kubernetes Operator 的开发框架。它提供了工具、库和标准化模式，帮助开发者高" />
+        <title>operator-sdk - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="operator-sdk" />
+<meta property="og:description" content="一、Operator SDK 介绍 Operator SDK 是由 Red Hat 开源的用于构建 Kubernetes Operator 的开发框架。它提供了工具、库和标准化模式，帮助开发者高效、一致地创建、测试和打包能够" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://serialt.github.io/posts/2026-05-26-operator-sdk/" /><meta property="article:section" content="posts" />
-
-<meta property="og:site_name" content="Log" />
+<meta property="article:published_time" content="2026-05-26T21:50:01+08:00" />
+<meta property="article:modified_time" content="2026-05-26T21:50:01+08:00" /><meta property="og:site_name" content="Log" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content=""/>
-<meta name="twitter:description" content="title = &lsquo;operator-sdk&rsquo; date = 2026-05-26T21:50:01&#43;08:00 draft = false tags = [&ldquo;kube-operator&rdquo;,&ldquo;operator-sdk&rdquo;] categories = [&ldquo;Go&rdquo;] 一、Operator SDK 介绍 Operator SDK 是由 Red Hat 开源的用于构建 Kubernetes Operator 的开发框架。它提供了工具、库和标准化模式，帮助开发者高"/>
+<meta name="twitter:title" content="operator-sdk"/>
+<meta name="twitter:description" content="一、Operator SDK 介绍 Operator SDK 是由 Red Hat 开源的用于构建 Kubernetes Operator 的开发框架。它提供了工具、库和标准化模式，帮助开发者高效、一致地创建、测试和打包能够"/>
 <meta name="application-name" content="My cool site">
 <meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2026-05-26-operator-sdk/" /><link rel="prev" href="https://serialt.github.io/posts/2026-08-22-river/" /><link rel="next" href="https://serialt.github.io/posts/2026-04-05-kafka/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2026-05-26-operator-sdk/" /><link rel="prev" href="https://serialt.github.io/posts/2025-09-03-dev-terraform-provider/" /><link rel="next" href="https://serialt.github.io/posts/2026-08-22-river/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "",
+        "headline": "operator-sdk",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2026-05-26-operator-sdk\/"
-        },"genre": "posts","wordcount":  1090 ,
-        "url": "https:\/\/serialt.github.io\/posts\/2026-05-26-operator-sdk\/","publisher": {
+        },"genre": "posts","keywords": "kube-operator, operator-sdk","wordcount":  1877 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2026-05-26-operator-sdk\/","datePublished": "2026-05-26T21:50:01+08:00","dateModified": "2026-05-26T21:50:01+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -99,10 +99,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1090 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">operator-sdk</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-05-26">2026-05-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1877 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -120,12 +120,7 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p>title = &lsquo;operator-sdk&rsquo;
-date = 2026-05-26T21:50:01+08:00
-draft = false</p>
-<p>tags = [&ldquo;kube-operator&rdquo;,&ldquo;operator-sdk&rdquo;]
-categories = [&ldquo;Go&rdquo;]</p>
-<h2 id="一operator-sdk-介绍">一、Operator SDK 介绍</h2>
+            </div><div class="content" id="content"><h2 id="一operator-sdk-介绍">一、Operator SDK 介绍</h2>
 <p><a href="https://github.com/operator-framework/operator-sdk" target="_blank" rel="noopener noreffer ">Operator SDK</a> 是由 Red Hat 开源的用于构建 Kubernetes Operator 的开发框架。它提供了工具、库和标准化模式，帮助开发者高效、一致地创建、测试和打包能够自动化管理 Kubernetes 上复杂应用程序的 Operator。</p>
 <p>Operator SDK 基于 Kubernetes controller-runtime 库构建，并通过与 Operator Lifecycle Manager (OLM) 的无缝集成，为 Operator 特定的工具和抽象提供了扩展支持。</p>
 <h4 id="为什么需要-operator-sdk">为什么需要 Operator SDK</h4>
@@ -146,12 +141,28 @@ categories = [&ldquo;Go&rdquo;]</p>
 <h4 id="1安装">1、安装</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">🐳 operator-sdk version
 </span></span><span class="line"><span class="cl">operator-sdk version: <span class="s2">&#34;v1.42.2&#34;</span>, commit: <span class="s2">&#34;6001c29067051e1a04e829ea033988b904d1845e&#34;</span>, kubernetes version: <span class="s2">&#34;1.33.1&#34;</span>, go version: <span class="s2">&#34;go1.25.7&#34;</span>, GOOS: <span class="s2">&#34;darwin&#34;</span>, GOARCH: <span class="s2">&#34;arm64&#34;</span>
-</span></span></code></pre></div><h4 id="2初始化">2、初始化</h4>
+</span></span></code></pre></div><p>概念：</p>
+<ul>
+<li>
+<p>CRD (Custom Resource Definition)：定义自定义资源（如 <code>MyApp</code>），扩展 Kubernetes API。</p>
+</li>
+<li>
+<p>Controller (控制器)：一个运行在集群内的循环进程，不断对比 期望状态 (Spec) 和 实际状态 (Status)，并执行操作使两者一致（Reconcile）。</p>
+</li>
+<li>
+<p>Operator：CRD + Controller 的组合，用于自动化运维复杂应用。</p>
+</li>
+</ul>
+<h4 id="2初始化">2、初始化</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir caddy-operator <span class="o">&amp;&amp;</span> <span class="nb">cd</span> caddy-operator
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">operator-sdk init --domain example.com --repo github.com/example/caddy-operator
 </span></span></code></pre></div><h5 id="创建api">创建api</h5>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">operator-sdk create api --group web --version v1 --kind Caddy --resource --controller
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 下载依赖</span>
+</span></span><span class="line"><span class="cl">go mod tidy
 </span></span></code></pre></div><p>该命令会自动生成自定义资源定义（CRD）、控制器逻辑及相关测试文件</p>
 <p><strong>项目结构说明</strong></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">├── api/
@@ -167,24 +178,242 @@ categories = [&ldquo;Go&rdquo;]</p>
 </span></span><span class="line"><span class="cl">├── Makefile            <span class="c1"># 构建和部署命令</span>
 </span></span><span class="line"><span class="cl">├── PROJECT             <span class="c1"># 项目元数据</span>
 </span></span><span class="line"><span class="cl">└── main.go             <span class="c1"># 主入口文件</span>
-</span></span></code></pre></div><p>构建和测试（基于Go开发具体可以参考kube-operator）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 生成代码 (kubebuilder 生成器)</span>
-</span></span><span class="line"><span class="cl">make generate
+</span></span></code></pre></div><p>自定义CRD</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// api/v1/crab_types.go
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">GuestbookSpec</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Replicas</span> <span class="kt">int32</span>  <span class="s">`json:&#34;replicas&#34;`</span> <span class="c1">// 对应 YAML 的 `spec.replicas`
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">Image</span>    <span class="kt">string</span> <span class="s">`json:&#34;image&#34;`</span>    <span class="c1">// 对应 YAML 的 `spec.image`
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">Port</span>     <span class="kt">int32</span>  <span class="s">`json:&#34;port&#34;`</span>     <span class="c1">// 应用监听的端口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">SvcPort</span>  <span class="kt">int32</span>  <span class="s">`json:&#34;svcPort&#34;`</span>  <span class="c1">// Service 暴露的端口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 生成 manifests (RBAC, CRD 等)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">GuestbookStatus</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// +listType=map
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// +listMapKey=type
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// +optional
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">Conditions</span>        <span class="p">[]</span><span class="nx">metav1</span><span class="p">.</span><span class="nx">Condition</span> <span class="s">`json:&#34;conditions,omitempty&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">AvailableReplicas</span> <span class="kt">int32</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>实现业务逻辑</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">webappv1</span> <span class="s">&#34;github.com/serialt/crab-operator/api/v1&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">appsv1</span> <span class="s">&#34;k8s.io/api/apps/v1&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">corev1</span> <span class="s">&#34;k8s.io/api/core/v1&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">apierrors</span> <span class="s">&#34;k8s.io/apimachinery/pkg/api/errors&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">metav1</span> <span class="s">&#34;k8s.io/apimachinery/pkg/apis/meta/v1&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;k8s.io/apimachinery/pkg/runtime&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;k8s.io/apimachinery/pkg/util/intstr&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctrl</span> <span class="s">&#34;sigs.k8s.io/controller-runtime&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;sigs.k8s.io/controller-runtime/pkg/client&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;sigs.k8s.io/controller-runtime/pkg/controller/controllerutil&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">logf</span> <span class="s">&#34;sigs.k8s.io/controller-runtime/pkg/log&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// +kubebuilder:rbac:groups=webapp.web.imau.cc,resources=crabs,verbs=get;list;watch;create;update;patch;delete
+</span></span></span><span class="line"><span class="cl"><span class="c1">// +kubebuilder:rbac:groups=webapp.web.imau.cc,resources=crabs/status,verbs=get;update;patch
+</span></span></span><span class="line"><span class="cl"><span class="c1">// +kubebuilder:rbac:groups=webapp.web.imau.cc,resources=crabs/finalizers,verbs=update
+</span></span></span><span class="line"><span class="cl"><span class="c1">// +kubebuilder:rbac:groups=apps,resources=deployments,verbs=get;list;watch;create;update;patch;delete
+</span></span></span><span class="line"><span class="cl"><span class="c1">// +kubebuilder:rbac:groups=&#34;&#34;,resources=pods,verbs=get;list;watch
+</span></span></span><span class="line"><span class="cl"><span class="c1">// +kubebuilder:rbac:groups=&#34;&#34;,resources=services,verbs=get;list;watch;create;update;patch;delete
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">CrabReconciler</span><span class="p">)</span> <span class="nf">Reconcile</span><span class="p">(</span><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span> <span class="nx">req</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">(</span><span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">logger</span> <span class="o">:=</span> <span class="nx">logf</span><span class="p">.</span><span class="nf">FromContext</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">crab</span> <span class="o">:=</span> <span class="nx">webappv1</span><span class="p">.</span><span class="nx">Crab</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">NamespacedName</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">crab</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">apierrors</span><span class="p">.</span><span class="nf">IsNotFound</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">// 资源已被物理删除，无需处理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="k">return</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">{},</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">{},</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">labels</span> <span class="o">:=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="s">&#34;app&#34;</span><span class="p">:</span> <span class="nx">crab</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">deploy</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">appsv1</span><span class="p">.</span><span class="nx">Deployment</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ObjectMeta</span><span class="p">:</span> <span class="nx">metav1</span><span class="p">.</span><span class="nx">ObjectMeta</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Name</span><span class="p">:</span>      <span class="nx">crab</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Namespace</span><span class="p">:</span> <span class="nx">crab</span><span class="p">.</span><span class="nx">Namespace</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Labels</span><span class="p">:</span>    <span class="nx">labels</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">controllerutil</span><span class="p">.</span><span class="nf">SetControllerReference</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">crab</span><span class="p">,</span> <span class="nx">deploy</span><span class="p">,</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Scheme</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">{},</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">result</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">controllerutil</span><span class="p">.</span><span class="nf">CreateOrUpdate</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Client</span><span class="p">,</span> <span class="nx">deploy</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">deploy</span><span class="p">.</span><span class="nx">Spec</span> <span class="p">=</span> <span class="nx">appsv1</span><span class="p">.</span><span class="nx">DeploymentSpec</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Replicas</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">crab</span><span class="p">.</span><span class="nx">Spec</span><span class="p">.</span><span class="nx">Replicas</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Selector</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">metav1</span><span class="p">.</span><span class="nx">LabelSelector</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">MatchLabels</span><span class="p">:</span> <span class="nx">labels</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Template</span><span class="p">:</span> <span class="nx">corev1</span><span class="p">.</span><span class="nx">PodTemplateSpec</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">ObjectMeta</span><span class="p">:</span> <span class="nx">metav1</span><span class="p">.</span><span class="nx">ObjectMeta</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">Labels</span><span class="p">:</span> <span class="nx">labels</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="p">},</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Spec</span><span class="p">:</span> <span class="nx">corev1</span><span class="p">.</span><span class="nx">PodSpec</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">Containers</span><span class="p">:</span> <span class="p">[]</span><span class="nx">corev1</span><span class="p">.</span><span class="nx">Container</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">						<span class="p">{</span>
+</span></span><span class="line"><span class="cl">							<span class="nx">Name</span><span class="p">:</span>  <span class="nx">crab</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">							<span class="nx">Image</span><span class="p">:</span> <span class="nx">crab</span><span class="p">.</span><span class="nx">Spec</span><span class="p">.</span><span class="nx">Image</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">							<span class="nx">Ports</span><span class="p">:</span> <span class="p">[]</span><span class="nx">corev1</span><span class="p">.</span><span class="nx">ContainerPort</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">								<span class="p">{</span>
+</span></span><span class="line"><span class="cl">									<span class="nx">ContainerPort</span><span class="p">:</span> <span class="nx">crab</span><span class="p">.</span><span class="nx">Spec</span><span class="p">.</span><span class="nx">Port</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">								<span class="p">},</span>
+</span></span><span class="line"><span class="cl">							<span class="p">},</span>
+</span></span><span class="line"><span class="cl">						<span class="p">},</span>
+</span></span><span class="line"><span class="cl">					<span class="p">},</span>
+</span></span><span class="line"><span class="cl">				<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// 关键操作：设置 OwnerReference
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="c1">// 确保删除 Guestbook CR 时，自动清理关联的 Deployment
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">controllerutil</span><span class="p">.</span><span class="nf">SetControllerReference</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">crab</span><span class="p">,</span> <span class="nx">deploy</span><span class="p">,</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Scheme</span><span class="p">);</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">logger</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;Failed to create or update Deployment&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">crab</span><span class="p">.</span><span class="nx">Status</span><span class="p">.</span><span class="nx">AvailableReplicas</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">{},</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">logger</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;Deployment操作结果&#34;</span><span class="p">,</span> <span class="s">&#34;result&#34;</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 构建svc
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">svc</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">corev1</span><span class="p">.</span><span class="nx">Service</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ObjectMeta</span><span class="p">:</span> <span class="nx">metav1</span><span class="p">.</span><span class="nx">ObjectMeta</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Name</span><span class="p">:</span>      <span class="nx">crab</span><span class="p">.</span><span class="nx">Name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Namespace</span><span class="p">:</span> <span class="nx">crab</span><span class="p">.</span><span class="nx">Namespace</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">result</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">controllerutil</span><span class="p">.</span><span class="nf">CreateOrUpdate</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Client</span><span class="p">,</span> <span class="nx">svc</span><span class="p">,</span> <span class="kd">func</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">svc</span><span class="p">.</span><span class="nx">Spec</span> <span class="p">=</span> <span class="nx">corev1</span><span class="p">.</span><span class="nx">ServiceSpec</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Selector</span><span class="p">:</span> <span class="nx">labels</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">Ports</span><span class="p">:</span> <span class="p">[]</span><span class="nx">corev1</span><span class="p">.</span><span class="nx">ServicePort</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">Port</span><span class="p">:</span>       <span class="nx">crab</span><span class="p">.</span><span class="nx">Spec</span><span class="p">.</span><span class="nx">SvcPort</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">TargetPort</span><span class="p">:</span> <span class="nx">intstr</span><span class="p">.</span><span class="nf">FromInt</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nx">crab</span><span class="p">.</span><span class="nx">Spec</span><span class="p">.</span><span class="nx">Port</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">				<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">controllerutil</span><span class="p">.</span><span class="nf">SetControllerReference</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">crab</span><span class="p">,</span> <span class="nx">svc</span><span class="p">,</span> <span class="nx">r</span><span class="p">.</span><span class="nx">Scheme</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">logger</span><span class="p">.</span><span class="nf">Error</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="s">&#34;Failed to create or update Service&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">{},</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">logger</span><span class="p">.</span><span class="nf">Info</span><span class="p">(</span><span class="s">&#34;Service操作结果&#34;</span><span class="p">,</span> <span class="s">&#34;result&#34;</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Result</span><span class="p">{},</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">CrabReconciler</span><span class="p">)</span> <span class="nf">SetupWithManager</span><span class="p">(</span><span class="nx">mgr</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nx">Manager</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">ctrl</span><span class="p">.</span><span class="nf">NewControllerManagedBy</span><span class="p">(</span><span class="nx">mgr</span><span class="p">).</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">For</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">webappv1</span><span class="p">.</span><span class="nx">Crab</span><span class="p">{}).</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">Owns</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">appsv1</span><span class="p">.</span><span class="nx">Deployment</span><span class="p">{}).</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">Owns</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">corev1</span><span class="p">.</span><span class="nx">Service</span><span class="p">{}).</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">Complete</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>构建和测试</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 生成 manifests (RBAC, CRD 等)</span>
 </span></span><span class="line"><span class="cl">make manifests
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 运行单元测试</span>
-</span></span><span class="line"><span class="cl">make <span class="nb">test</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 构建多架构镜像</span>
-</span></span><span class="line"><span class="cl">make docker-buildx <span class="nv">IMG</span><span class="o">=</span>controller:latest
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 本地运行 (开发环境)</span>
+</span></span><span class="line"><span class="cl">make install
 </span></span><span class="line"><span class="cl">make run
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 部署到集群</span>
 </span></span><span class="line"><span class="cl">make deploy <span class="nv">IMG</span><span class="o">=</span>controller:latest
+</span></span></code></pre></div><p>测试yaml</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># config/samples/webapp_v1_crab.yaml</span>
+</span></span><span class="line"><span class="cl">apiVersion: webapp.web.imau.cc/v1
+</span></span><span class="line"><span class="cl">kind: Crab
+</span></span><span class="line"><span class="cl">metadata:
+</span></span><span class="line"><span class="cl">  labels:
+</span></span><span class="line"><span class="cl">    app.kubernetes.io/name: crab-op
+</span></span><span class="line"><span class="cl">    app.kubernetes.io/managed-by: kustomize
+</span></span><span class="line"><span class="cl">  name: crab-app
+</span></span><span class="line"><span class="cl">  namespace: dev
+</span></span><span class="line"><span class="cl">spec:
+</span></span><span class="line"><span class="cl">  <span class="c1"># TODO(user): Add fields here</span>
+</span></span><span class="line"><span class="cl">  replicas: <span class="m">3</span>
+</span></span><span class="line"><span class="cl">  image: registry.cn-hangzhou.aliyuncs.com/serialt/nginx:1.28-alpine
+</span></span><span class="line"><span class="cl">  port: <span class="m">80</span>
+</span></span><span class="line"><span class="cl">  svcPort: <span class="m">8080</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># 执行后可以看到3个pod</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>serialt@Krab web-op<span class="o">]</span>🐳 kubectl apply -f config/samples/webapp_v1_crab.yaml 
+</span></span></code></pre></div><h4 id="生产集成测试">生产/集成测试</h4>
+<p>将控制器打包成镜像部署到集群。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 设置镜像仓库</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># export IMG=registry.cn-hangzhou.aliyuncs.com/serialt/crab-op:v0.0.1 </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 当前系统与节点系统相同</span>
+</span></span><span class="line"><span class="cl">make docker-build docker-push <span class="nv">IMG</span><span class="o">=</span>registry.cn-hangzhou.aliyuncs.com/serialt/crab-op:v0.0.1 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 构建多架构镜像</span>
+</span></span><span class="line"><span class="cl">make docker-buildx <span class="nv">PLATFORMS</span><span class="o">=</span>linux/amd64 <span class="nv">IMG</span><span class="o">=</span>registry.cn-hangzhou.aliyuncs.com/serialt/crab-op:v0.0.1 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#部署到集群</span>
+</span></span><span class="line"><span class="cl">make deploy <span class="nv">IMG</span><span class="o">=</span>registry.cn-hangzhou.aliyuncs.com/serialt/crab-op:v0.0.1 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 修改replicas</span>
+</span></span><span class="line"><span class="cl">kubectl replace -f config/samples/webapp_v1_crab.yaml 
+</span></span></code></pre></div><h4 id="chart-打包">chart 打包</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 使用helmify</span>
+</span></span><span class="line"><span class="cl">go install github.com/arttor/helmify/cmd/helmify@latest
+</span></span></code></pre></div><p>makefile增加</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nv">CHART_NAME</span> <span class="o">?=</span> caddy-operator
+</span></span><span class="line"><span class="cl"><span class="nv">CHART_DIR</span> <span class="o">?=</span> dist/caddy-operator
+</span></span><span class="line"><span class="cl"><span class="nv">CHART_VERSION</span> <span class="o">?=</span> <span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span>
+</span></span><span class="line"><span class="cl"><span class="nv">APP_VERSION</span> <span class="o">?=</span> latest
+</span></span><span class="line"><span class="cl"><span class="nv">HELM_REGISTRY</span> <span class="o">?=</span> quay.io/serialt
+</span></span><span class="line"><span class="cl"><span class="nv">HELM_REPO</span> <span class="o">?=</span> <span class="k">$(</span>HELM_REGISTRY<span class="k">)</span>/charts
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">helmify</span>
+</span></span><span class="line"><span class="cl"><span class="nf">helmify</span><span class="o">:</span> <span class="k">$(</span><span class="nv">HELMIFY</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">$(HELMIFY)</span><span class="o">:</span> <span class="k">$(</span><span class="nv">LOCALBIN</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">	@test -s <span class="k">$(</span>HELMIFY<span class="k">)</span> <span class="o">||</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>	<span class="nv">GOBIN</span><span class="o">=</span><span class="k">$(</span>LOCALBIN<span class="k">)</span> go install github.com/arttor/helmify/cmd/helmify@latest
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">helm</span>
+</span></span><span class="line"><span class="cl"><span class="nf">helm</span><span class="o">:</span> <span class="n">manifests</span> <span class="n">kustomize</span> <span class="n">helmify</span>
+</span></span><span class="line"><span class="cl">	rm -rf <span class="k">$(</span>CHART_DIR<span class="k">)</span>
+</span></span><span class="line"><span class="cl">	mkdir -p <span class="k">$(</span>dir <span class="k">$(</span>CHART_DIR<span class="k">))</span>
+</span></span><span class="line"><span class="cl">	<span class="k">$(</span>KUSTOMIZE<span class="k">)</span> build config/default <span class="p">|</span> helmify <span class="k">$(</span>CHART_DIR<span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">helm</span>-<span class="n">lint</span>
+</span></span><span class="line"><span class="cl"><span class="nf">helm-lint</span><span class="o">:</span> <span class="n">helm</span>
+</span></span><span class="line"><span class="cl">	helm lint <span class="k">$(</span>CHART_DIR<span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">helm</span>-<span class="n">package</span>
+</span></span><span class="line"><span class="cl"><span class="nf">helm-package</span><span class="o">:</span> <span class="n">helm</span>-<span class="n">lint</span>
+</span></span><span class="line"><span class="cl">	mkdir -p dist
+</span></span><span class="line"><span class="cl">	helm package <span class="k">$(</span>CHART_DIR<span class="k">)</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>		--destination dist <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>		--version <span class="k">$(</span>CHART_VERSION<span class="k">)</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>		--app-version <span class="k">$(</span>APP_VERSION<span class="k">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">helm</span>-<span class="n">push</span>
+</span></span><span class="line"><span class="cl"><span class="nf">helm-push</span><span class="o">:</span> <span class="n">helm</span>-<span class="n">package</span>
+</span></span><span class="line"><span class="cl">	helm push <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>		dist/<span class="k">$(</span>CHART_NAME<span class="k">)</span>-<span class="k">$(</span>CHART_VERSION<span class="k">)</span>.tgz <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>		oci://<span class="k">$(</span>HELM_REPO<span class="k">)</span>
 </span></span></code></pre></div><h3 id="三基于-helm">三、基于 helm</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@dev ansible-op<span class="o">]</span><span class="c1"># operator-sdk init --plugins=helm --domain=example.com</span>
 </span></span><span class="line"><span class="cl">
@@ -299,7 +528,7 @@ categories = [&ldquo;Go&rdquo;]</p>
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 0001-01-01</span>
+                <span>Updated on 2026-05-26</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
@@ -310,14 +539,14 @@ categories = [&ldquo;Go&rdquo;]</p>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/kube-operator/">kube-operator</a>,&nbsp;<a href="/tags/operator-sdk/">operator-sdk</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/2026-08-22-river/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
-            <a href="/posts/2026-04-05-kafka/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/posts/2025-09-03-dev-terraform-provider/" class="prev" rel="prev" title="TF-dev"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>TF-dev</a>
+            <a href="/posts/2026-08-22-river/" class="next" rel="next" title="river">river<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

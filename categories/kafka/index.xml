@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Kafka - Category - Blog</title>
+        <link>https://serialt.github.io/categories/kafka/</link>
+        <description>Kafka - Category - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 05 Apr 2026 21:57:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/kafka/" rel="self" type="application/rss+xml" /><item>
+    <title>Kafka</title>
+    <link>https://serialt.github.io/posts/2026-04-05-kafka/</link>
+    <pubDate>Sun, 05 Apr 2026 21:57:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-04-05-kafka/</guid>
+    <description><![CDATA[Kafka 一、介绍 1、重要概念 Broker: Kafka 的基本单元，负责存储和传递消息。一个 Kafka 集群由多个 Broker 组成。 Topic: 消息的分类，每条消息都属于一个特定的 Topic。用户可以]]></description>
+</item>
+</channel>
+</rss>

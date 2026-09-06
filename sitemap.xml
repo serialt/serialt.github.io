@@ -2,17 +2,34 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://serialt.github.io/</loc><lastmod>2026-05-21T20:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/</loc><lastmod>2026-05-21T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/</loc><lastmod>2026-08-28T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/</loc><lastmod>2026-08-28T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/</loc><lastmod>2026-08-28T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/rust/</loc><lastmod>2026-08-28T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2026-08-28-rust/</loc><lastmod>2026-08-28T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/rust/</loc><lastmod>2026-08-28T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/</loc><lastmod>2026-08-28T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/go/</loc><lastmod>2026-08-22T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/river/</loc><lastmod>2026-08-22T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2026-08-22-river/</loc><lastmod>2026-08-22T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/kube-operator/</loc><lastmod>2026-05-26T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/operator-sdk/</loc><lastmod>2026-05-26T21:50:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2026-05-26-operator-sdk/</loc><lastmod>2026-05-26T21:50:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/categories/devops/</loc><lastmod>2026-05-21T20:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/posts/</loc><lastmod>2026-05-21T20:26:27&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/</loc><lastmod>2026-05-21T20:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/terraform-dev/</loc><lastmod>2026-05-21T20:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/tf-dev/</loc><lastmod>2026-05-21T20:26:27&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2025-09-03-dev-terraform-provider/</loc><lastmod>2026-05-21T20:26:27&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/vue/</loc><lastmod>2026-04-25T21:57:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/vue/</loc><lastmod>2026-04-25T21:57:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2026-04-25-vue3/</loc><lastmod>2026-04-25T21:57:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/kafka/</loc><lastmod>2026-04-05T21:57:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/kafka/</loc><lastmod>2026-04-05T21:57:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2026-04-05-kafka/</loc><lastmod>2026-04-05T21:57:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/tags/mq/</loc><lastmod>2026-03-28T21:57:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/categories/rabbitmq/</loc><lastmod>2026-03-28T21:57:01&#43;08:00</lastmod></url><url>
+            <loc>https://serialt.github.io/posts/2026-03-28-rabbitmq/</loc><lastmod>2026-03-28T21:57:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/auth/</loc><lastmod>2026-03-28T20:10:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/casbin/</loc><lastmod>2026-03-28T20:10:01&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/categories/go/</loc><lastmod>2026-03-28T20:10:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2026-03-28-mqtt/</loc><lastmod>2026-03-28T20:10:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2026-03-28-casbin/</loc><lastmod>2026-03-28T20:01:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/hpa/</loc><lastmod>2026-03-08T21:57:01&#43;08:00</lastmod></url><url>
@@ -25,7 +42,6 @@
             <loc>https://serialt.github.io/posts/2026-03-07-bufbuild/</loc><lastmod>2026-03-07T21:50:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2025-12-17-go-redis/</loc><lastmod>2025-12-17T21:50:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/redis/</loc><lastmod>2025-12-17T21:50:01&#43;08:00</lastmod></url><url>
-            <loc>https://serialt.github.io/tags/kube-operator/</loc><lastmod>2025-12-12T21:50:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/posts/2025-12-12-kube-op/</loc><lastmod>2025-12-12T21:50:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/kubebuilder/</loc><lastmod>2025-12-12T21:50:01&#43;08:00</lastmod></url><url>
             <loc>https://serialt.github.io/tags/kratos/</loc><lastmod>2025-11-22T21:50:01&#43;08:00</lastmod></url><url>
@@ -348,8 +364,4 @@
             <loc>https://serialt.github.io/posts/2023-11-11-npm/</loc></url><url>
             <loc>https://serialt.github.io/posts/2024-06-13-openvpn/</loc></url><url>
             <loc>https://serialt.github.io/posts/2024-06-14-taskfile/</loc></url><url>
-            <loc>https://serialt.github.io/posts/2025-01-05-android/</loc></url><url>
-            <loc>https://serialt.github.io/posts/2026-03-28-rabbitmq/</loc></url><url>
-            <loc>https://serialt.github.io/posts/2026-04-05-kafka/</loc></url><url>
-            <loc>https://serialt.github.io/posts/2026-05-26-operator-sdk/</loc></url><url>
-            <loc>https://serialt.github.io/posts/2026-08-22-river/</loc></url></urlset>
+            <loc>https://serialt.github.io/posts/2025-01-05-android/</loc></url></urlset>

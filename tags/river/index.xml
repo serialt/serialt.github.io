@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>river - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/river/</link>
+        <description>river - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 22 Aug 2026 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/river/" rel="self" type="application/rss+xml" /><item>
+    <title>river</title>
+    <link>https://serialt.github.io/posts/2026-08-22-river/</link>
+    <pubDate>Sat, 22 Aug 2026 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-08-22-river/</guid>
+    <description><![CDATA[River 简单来说，River 是一个专为 Go 设计的作业队列库，但它不是那种「又一个轮子」的存在。它最大的特点是什么？把队列和 PostgreSQL深度绑]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>operator-sdk - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/operator-sdk/</link>
+        <description>operator-sdk - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Tue, 26 May 2026 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/operator-sdk/" rel="self" type="application/rss+xml" /><item>
+    <title>operator-sdk</title>
+    <link>https://serialt.github.io/posts/2026-05-26-operator-sdk/</link>
+    <pubDate>Tue, 26 May 2026 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-05-26-operator-sdk/</guid>
+    <description><![CDATA[一、Operator SDK 介绍 Operator SDK 是由 Red Hat 开源的用于构建 Kubernetes Operator 的开发框架。它提供了工具、库和标准化模式，帮助开发者高效、一致地创建、测试和打包能够]]></description>
+</item>
+</channel>
+</rss>

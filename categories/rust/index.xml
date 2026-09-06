@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Rust - Category - Blog</title>
+        <link>https://serialt.github.io/categories/rust/</link>
+        <description>Rust - Category - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Fri, 28 Aug 2026 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/rust/" rel="self" type="application/rss+xml" /><item>
+    <title>rust</title>
+    <link>https://serialt.github.io/posts/2026-08-28-rust/</link>
+    <pubDate>Fri, 28 Aug 2026 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-08-28-rust/</guid>
+    <description><![CDATA[1、变量定义 // 不可变变量 let guess = String::new(); // 不可变变量可以用let 关键字来遮蔽变量 let x = 5; let x = x + 1; // 可变变量 let mut guess = String::new(); 2、数据类型 // 数值类型 8 位 i8]]></description>
+</item>
+</channel>
+</rss>
