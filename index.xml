@@ -4,9 +4,17 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Fri, 28 Aug 2026 21:50:01 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 06 Sep 2026 21:50:01 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>dev-tf</title>
+    <link>https://serialt.github.io/posts/2026-09-06-dev-tf/</link>
+    <pubDate>Sun, 06 Sep 2026 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-09-06-dev-tf/</guid>
+    <description><![CDATA[Terraform Provider 开发规范 1. 目的 本文定义基于 Terraform Plugin Framework（以下简称 TPF） 开发 Terraform Provider 的统一规范。 目标： 保证 Provider 行为符合 Terraform 生命周期语义。 保证 Resource / Data Source 代]]></description>
+</item>
+<item>
     <title>rust</title>
     <link>https://serialt.github.io/posts/2026-08-28-rust/</link>
     <pubDate>Fri, 28 Aug 2026 21:50:01 &#43;0800</pubDate>
@@ -77,14 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2026-03-28-casbin/</guid>
     <description><![CDATA[Casbin 一、介绍 Casbin是一个强大的、高效的开源访问控制框架，其权限管理机制支持多种访问控制模型，Casbin只负责访问控制。 其功能有： 支持自]]></description>
-</item>
-<item>
-    <title>k8s hpa</title>
-    <link>https://serialt.github.io/posts/2026-03-08-hpa/</link>
-    <pubDate>Sun, 08 Mar 2026 21:57:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2026-03-08-hpa/</guid>
-    <description><![CDATA[HPA pod数扩容和缩减可以使用kubectl scale进行操作，这个是完全手动操作的，k8s提供一个自动scale，Horizontal Pod Au]]></description>
 </item>
 </channel>
 </rss>

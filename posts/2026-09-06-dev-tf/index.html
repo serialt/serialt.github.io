@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>dev-tf - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="dev-tf" />
+<meta property="og:description" content="Terraform Provider 开发规范 1. 目的 本文定义基于 Terraform Plugin Framework（以下简称 TPF） 开发 Terraform Provider 的统一规范。 目标： 保证 Provider 行为符合 Terraform 生命周期语义。 保证 Resource / Data Source 代" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2026-09-06-dev-tf/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2026-09-06T21:50:01+08:00" />
+<meta property="article:modified_time" content="2026-09-06T21:50:01+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="dev-tf"/>
+<meta name="twitter:description" content="Terraform Provider 开发规范 1. 目的 本文定义基于 Terraform Plugin Framework（以下简称 TPF） 开发 Terraform Provider 的统一规范。 目标： 保证 Provider 行为符合 Terraform 生命周期语义。 保证 Resource / Data Source 代"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2026-09-06-dev-tf/" /><link rel="prev" href="https://serialt.github.io/posts/2026-08-28-rust/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "dev-tf",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2026-09-06-dev-tf\/"
+        },"genre": "posts","keywords": "dev-tf","wordcount":  6735 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2026-09-06-dev-tf\/","datePublished": "2026-09-06T21:50:01+08:00","dateModified": "2026-09-06T21:50:01+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">dev-tf</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tf/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>TF</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-09-06">2026-09-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6735 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#terraform-provider-开发规范">Terraform Provider 开发规范</a>
+      <ul>
+        <li><a href="#1-目的">1. 目的</a></li>
+        <li><a href="#2-技术栈">2. 技术栈</a></li>
+        <li><a href="#3-terraform-版本">3. Terraform 版本</a></li>
+        <li><a href="#4-项目目录规范">4. 项目目录规范</a></li>
+        <li><a href="#5-命名规范">5. 命名规范</a></li>
+        <li><a href="#6-provider-规范">6. Provider 规范</a></li>
+        <li><a href="#7-provider-配置模型">7. Provider 配置模型</a></li>
+        <li><a href="#8-provider-schema-规范">8. Provider Schema 规范</a></li>
+        <li><a href="#9-环境变量">9. 环境变量</a></li>
+        <li><a href="#10-configure-规范">10. Configure 规范</a></li>
+        <li><a href="#11-api-client-规范">11. API Client 规范</a></li>
+        <li><a href="#12-http-client-规范">12. HTTP Client 规范</a></li>
+        <li><a href="#13-resource-接口">13. Resource 接口</a></li>
+        <li><a href="#14-resource-生命周期">14. Resource 生命周期</a></li>
+        <li><a href="#15-resource-model">15. Resource Model</a></li>
+        <li><a href="#16-schema-属性规则">16. Schema 属性规则</a></li>
+        <li><a href="#17-id-规范">17. ID 规范</a></li>
+        <li><a href="#18-schema-validator">18. Schema Validator</a></li>
+        <li><a href="#19-plan-modifier">19. Plan Modifier</a></li>
+        <li><a href="#20-usestateforunknown">20. UseStateForUnknown</a></li>
+        <li><a href="#21-create-规范">21. Create 规范</a></li>
+        <li><a href="#22-read-规范">22. Read 规范</a></li>
+        <li><a href="#23-404-处理">23. 404 处理</a></li>
+        <li><a href="#24-update-规范">24. Update 规范</a></li>
+        <li><a href="#25-update-后重新读取">25. Update 后重新读取</a></li>
+        <li><a href="#26-delete-规范">26. Delete 规范</a></li>
+        <li><a href="#27-importstate">27. ImportState</a></li>
+        <li><a href="#28-import-id-格式">28. Import ID 格式</a></li>
+        <li><a href="#29-data-source-规范">29. Data Source 规范</a></li>
+        <li><a href="#30-data-source-查询条件">30. Data Source 查询条件</a></li>
+        <li><a href="#31-flatten--expand-规范">31. Flatten / Expand 规范</a></li>
+        <li><a href="#32-null--unknown">32. Null / Unknown</a></li>
+        <li><a href="#33-set-与-list">33. Set 与 List</a></li>
+        <li><a href="#34-map">34. Map</a></li>
+        <li><a href="#35-嵌套对象">35. 嵌套对象</a></li>
+        <li><a href="#36-diagnostics">36. Diagnostics</a></li>
+        <li><a href="#37-error-summary">37. Error Summary</a></li>
+        <li><a href="#38-api-error">38. API Error</a></li>
+        <li><a href="#39-日志">39. 日志</a></li>
+        <li><a href="#40-敏感信息日志">40. 敏感信息日志</a></li>
+        <li><a href="#41-context">41. Context</a></li>
+        <li><a href="#42-retry">42. Retry</a></li>
+        <li><a href="#43-eventually-consistent-api">43. Eventually Consistent API</a></li>
+        <li><a href="#44-terraform-state-原则">44. Terraform State 原则</a></li>
+        <li><a href="#45-permanent-diff">45. Permanent Diff</a></li>
+        <li><a href="#46-null-与空值">46. Null 与空值</a></li>
+        <li><a href="#47-时间格式">47. 时间格式</a></li>
+        <li><a href="#48-resource-state-upgrade">48. Resource State Upgrade</a></li>
+        <li><a href="#49-breaking-change">49. Breaking Change</a></li>
+        <li><a href="#50-api-version-与-provider-version">50. API Version 与 Provider Version</a></li>
+        <li><a href="#51-测试规范">51. 测试规范</a></li>
+        <li><a href="#52-unit-test">52. Unit Test</a></li>
+        <li><a href="#53-acceptance-test">53. Acceptance Test</a></li>
+        <li><a href="#54-acceptance-test-provider">54. Acceptance Test Provider</a></li>
+        <li><a href="#55-tf_acc">55. TF_ACC</a></li>
+        <li><a href="#56-测试资源命名">56. 测试资源命名</a></li>
+        <li><a href="#57-acceptance-test-清理">57. Acceptance Test 清理</a></li>
+        <li><a href="#58-examples">58. examples</a></li>
+        <li><a href="#59-文档">59. 文档</a></li>
+        <li><a href="#60-gofmt--lint">60. gofmt / lint</a></li>
+        <li><a href="#61-makefile">61. Makefile</a></li>
+        <li><a href="#62-maingo">62. main.go</a></li>
+        <li><a href="#63-provider-注册">63. Provider 注册</a></li>
+        <li><a href="#64-resource-文件模板">64. Resource 文件模板</a></li>
+        <li><a href="#65-resource-configure">65. Resource Configure</a></li>
+        <li><a href="#66-panic">66. Panic</a></li>
+        <li><a href="#67-并发">67. 并发</a></li>
+        <li><a href="#68-mutex">68. Mutex</a></li>
+        <li><a href="#69-api-client-timeout">69. API Client Timeout</a></li>
+        <li><a href="#70-rate-limit">70. Rate Limit</a></li>
+        <li><a href="#71-api-分页">71. API 分页</a></li>
+        <li><a href="#72-remote-resource-drift">72. Remote Resource Drift</a></li>
+        <li><a href="#73-external-delete">73. External Delete</a></li>
+        <li><a href="#74-api-默认值">74. API 默认值</a></li>
+        <li><a href="#75-inconsistent-result-after-apply">75. Inconsistent Result After Apply</a></li>
+        <li><a href="#76-description">76. Description</a></li>
+        <li><a href="#77-deprecated-字段">77. Deprecated 字段</a></li>
+        <li><a href="#78-commit-规范">78. Commit 规范</a></li>
+        <li><a href="#79-pull-request-检查">79. Pull Request 检查</a></li>
+        <li><a href="#80-resource-definition-of-done">80. Resource Definition of Done</a></li>
+        <li><a href="#81-核心设计原则">81. 核心设计原则</a></li>
+        <li><a href="#82-推荐开发流程">82. 推荐开发流程</a></li>
+        <li><a href="#83-推荐-resource-架构">83. 推荐 Resource 架构</a></li>
+        <li><a href="#84-最终强制规则摘要">84. 最终强制规则摘要</a></li>
+        <li><a href="#heading"></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="terraform-provider-开发规范">Terraform Provider 开发规范</h2>
+<h3 id="1-目的">1. 目的</h3>
+<p>本文定义基于 <strong>Terraform Plugin Framework（以下简称 TPF）</strong> 开发 Terraform Provider 的统一规范。</p>
+<p>目标：</p>
+<ul>
+<li>保证 Provider 行为符合 Terraform 生命周期语义。</li>
+<li>保证 Resource / Data Source 代码结构统一。</li>
+<li>降低状态漂移、永久 Diff、状态不一致等问题。</li>
+<li>提高 Provider 的可维护性、可测试性和扩展性。</li>
+<li>统一 API Client、Schema、Diagnostics、日志、测试及发布方式。</li>
+</ul>
+<p>本文适用于使用 Go 开发的 Terraform Provider。</p>
+<hr>
+<h3 id="2-技术栈">2. 技术栈</h3>
+<p>推荐技术栈：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Go
+</span></span><span class="line"><span class="cl">Terraform Plugin Framework
+</span></span><span class="line"><span class="cl">Terraform Plugin Testing
+</span></span><span class="line"><span class="cl">Terraform Plugin Log
+</span></span><span class="line"><span class="cl">Terraform Plugin Framework Validators
+</span></span><span class="line"><span class="cl">Terraform Plugin Framework Plan Modifiers
+</span></span></code></pre></div><p>核心依赖：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">hashicorp</span><span class="o">/</span><span class="nx">terraform</span><span class="o">-</span><span class="nx">plugin</span><span class="o">-</span><span class="nx">framework</span>
+</span></span><span class="line"><span class="cl"><span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">hashicorp</span><span class="o">/</span><span class="nx">terraform</span><span class="o">-</span><span class="nx">plugin</span><span class="o">-</span><span class="nx">framework</span><span class="o">-</span><span class="nx">validators</span>
+</span></span><span class="line"><span class="cl"><span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">hashicorp</span><span class="o">/</span><span class="nx">terraform</span><span class="o">-</span><span class="nx">plugin</span><span class="o">-</span><span class="nx">log</span>
+</span></span><span class="line"><span class="cl"><span class="nx">github</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">hashicorp</span><span class="o">/</span><span class="nx">terraform</span><span class="o">-</span><span class="nx">plugin</span><span class="o">-</span><span class="nx">testing</span>
+</span></span></code></pre></div><p>禁止新项目使用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">terraform-plugin-sdk/v2
+</span></span><span class="line"><span class="cl">schema.Resource
+</span></span><span class="line"><span class="cl">schema.ResourceData
+</span></span><span class="line"><span class="cl">d.Set(...)
+</span></span><span class="line"><span class="cl">d.Get(...)
+</span></span></code></pre></div><p>除非：</p>
+<ol>
+<li>正在迁移历史 SDKv2 Provider；</li>
+<li>必须通过 terraform-plugin-mux 保持兼容；</li>
+<li>存在 Plugin Framework 暂时无法满足的历史兼容需求。</li>
+</ol>
+<hr>
+<h3 id="3-terraform-版本">3. Terraform 版本</h3>
+<p>新 Provider SHOULD 使用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">providerserver</span><span class="p">.</span><span class="nf">Serve</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">ctx</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">provider</span><span class="p">.</span><span class="nx">New</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">providerserver</span><span class="p">.</span><span class="nx">ServeOpts</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">Address</span><span class="p">:</span> <span class="nx">providerAddress</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>推荐使用 Plugin Protocol v6。</p>
+<p>Provider Terraform 版本约束建议：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">terraform</span> {
+</span></span><span class="line"><span class="cl"><span class="n">  required_version</span> <span class="o">=</span><span class="n"> &#34;&gt;</span><span class="o">=</span> <span class="m">1</span><span class="p">.</span><span class="m">3</span><span class="p">.</span><span class="m">0</span><span class="err">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">required_providers</span> {
+</span></span><span class="line"><span class="cl"><span class="n">    example</span> <span class="o">=</span> {
+</span></span><span class="line"><span class="cl"><span class="n">      source</span>  <span class="o">=</span> <span class="s2">&#34;company/example&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">      version</span> <span class="o">=</span> <span class="s2">&#34;~&gt; 1.0&#34;</span>
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>除非业务确实需要，否则不要为了兼容非常老的 Terraform 版本而降低 Provider 架构质量。</p>
+<hr>
+<h3 id="4-项目目录规范">4. 项目目录规范</h3>
+<p>推荐目录：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">terraform-provider-example/
+</span></span><span class="line"><span class="cl">├── .github/
+</span></span><span class="line"><span class="cl">│   └── workflows/
+</span></span><span class="line"><span class="cl">├── docs/
+</span></span><span class="line"><span class="cl">├── examples/
+</span></span><span class="line"><span class="cl">│   ├── data-sources/
+</span></span><span class="line"><span class="cl">│   ├── provider/
+</span></span><span class="line"><span class="cl">│   └── resources/
+</span></span><span class="line"><span class="cl">├── internal/
+</span></span><span class="line"><span class="cl">│   ├── client/
+</span></span><span class="line"><span class="cl">│   │   ├── client.go
+</span></span><span class="line"><span class="cl">│   │   ├── request.go
+</span></span><span class="line"><span class="cl">│   │   ├── response.go
+</span></span><span class="line"><span class="cl">│   │   └── errors.go
+</span></span><span class="line"><span class="cl">│   │
+</span></span><span class="line"><span class="cl">│   └── provider/
+</span></span><span class="line"><span class="cl">│       ├── provider.go
+</span></span><span class="line"><span class="cl">│       ├── provider_model.go
+</span></span><span class="line"><span class="cl">│       │
+</span></span><span class="line"><span class="cl">│       ├── resource_instance.go
+</span></span><span class="line"><span class="cl">│       ├── resource_instance_model.go
+</span></span><span class="line"><span class="cl">│       ├── resource_instance_test.go
+</span></span><span class="line"><span class="cl">│       │
+</span></span><span class="line"><span class="cl">│       ├── data_source_instance.go
+</span></span><span class="line"><span class="cl">│       ├── data_source_instance_model.go
+</span></span><span class="line"><span class="cl">│       └── data_source_instance_test.go
+</span></span><span class="line"><span class="cl">│
+</span></span><span class="line"><span class="cl">├── main.go
+</span></span><span class="line"><span class="cl">├── go.mod
+</span></span><span class="line"><span class="cl">├── go.sum
+</span></span><span class="line"><span class="cl">├── Makefile
+</span></span><span class="line"><span class="cl">├── README.md
+</span></span><span class="line"><span class="cl">└── CHANGELOG.md
+</span></span></code></pre></div><p>大型 Provider MAY 进一步拆分：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">internal/provider/
+</span></span><span class="line"><span class="cl">├── provider.go
+</span></span><span class="line"><span class="cl">├── common/
+</span></span><span class="line"><span class="cl">├── resources/
+</span></span><span class="line"><span class="cl">│   ├── instance/
+</span></span><span class="line"><span class="cl">│   ├── network/
+</span></span><span class="line"><span class="cl">│   └── volume/
+</span></span><span class="line"><span class="cl">└── datasources/
+</span></span><span class="line"><span class="cl">    ├── instance/
+</span></span><span class="line"><span class="cl">    ├── network/
+</span></span><span class="line"><span class="cl">    └── volume/
+</span></span></code></pre></div><p>原则：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Terraform Layer
+</span></span><span class="line"><span class="cl">       │
+</span></span><span class="line"><span class="cl">       ▼
+</span></span><span class="line"><span class="cl">Provider / Resource / DataSource
+</span></span><span class="line"><span class="cl">       │
+</span></span><span class="line"><span class="cl">       ▼
+</span></span><span class="line"><span class="cl">API Client
+</span></span><span class="line"><span class="cl">       │
+</span></span><span class="line"><span class="cl">       ▼
+</span></span><span class="line"><span class="cl">Remote API
+</span></span></code></pre></div><p>Terraform Resource MUST NOT 直接实现复杂 HTTP 请求逻辑。</p>
+<hr>
+<h3 id="5-命名规范">5. 命名规范</h3>
+<h4 id="51-provider">5.1 Provider</h4>
+<p>Provider 名称：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">example
+</span></span></code></pre></div><p>Provider Address：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">registry.terraform.io/company/example
+</span></span></code></pre></div><hr>
+<h4 id="52-resource">5.2 Resource</h4>
+<p>格式：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">&lt;provider&gt;_&lt;resource&gt;
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">example_instance
+</span></span><span class="line"><span class="cl">example_network
+</span></span><span class="line"><span class="cl">example_volume
+</span></span><span class="line"><span class="cl">example_security_group
+</span></span></code></pre></div><p>禁止：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">example_create_instance
+</span></span><span class="line"><span class="cl">example_instance_resource
+</span></span><span class="line"><span class="cl">example_vm_create
+</span></span></code></pre></div><p>Resource 表示一个资源对象，而不是操作。</p>
+<hr>
+<h4 id="53-data-source">5.3 Data Source</h4>
+<p>格式同样采用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">&lt;provider&gt;_&lt;object&gt;
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">data &#34;example_instance&#34; &#34;example&#34; {}
+</span></span></code></pre></div><p>当 Resource 与 Data Source 同名时是正常的。</p>
+<hr>
+<h4 id="54-go-类型">5.4 Go 类型</h4>
+<p>推荐：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">instanceResource</span> <span class="kd">struct</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">instanceResourceModel</span> <span class="kd">struct</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">instanceDataSource</span> <span class="kd">struct</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">instanceDataSourceModel</span> <span class="kd">struct</span> <span class="p">{}</span>
+</span></span></code></pre></div><p>Constructor：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewInstanceResource</span><span class="p">()</span> <span class="nx">resource</span><span class="p">.</span><span class="nx">Resource</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">instanceResource</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<h3 id="6-provider-规范">6. Provider 规范</h3>
+<p>Provider MUST 实现：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">provider</span><span class="p">.</span><span class="nx">Provider</span>
+</span></span></code></pre></div><p>推荐同时进行编译期接口检查：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">_</span> <span class="nx">provider</span><span class="p">.</span><span class="nx">Provider</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">exampleProvider</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">_</span> <span class="nx">provider</span><span class="p">.</span><span class="nx">ProviderWithConfigure</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">exampleProvider</span><span class="p">{}</span>
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">exampleProvider</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">version</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Metadata：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">exampleProvider</span><span class="p">)</span> <span class="nf">Metadata</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">req</span> <span class="nx">provider</span><span class="p">.</span><span class="nx">MetadataRequest</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span> <span class="o">*</span><span class="nx">provider</span><span class="p">.</span><span class="nx">MetadataResponse</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">TypeName</span> <span class="p">=</span> <span class="s">&#34;example&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">Version</span> <span class="p">=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">version</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<h3 id="7-provider-配置模型">7. Provider 配置模型</h3>
+<p>Provider Model SHOULD 单独定义：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">providerModel</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Endpoint</span> <span class="nx">types</span><span class="p">.</span><span class="nx">String</span> <span class="s">`tfsdk:&#34;endpoint&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Token</span>    <span class="nx">types</span><span class="p">.</span><span class="nx">String</span> <span class="s">`tfsdk:&#34;token&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>禁止直接使用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span>
+</span></span></code></pre></div><p>承载 Terraform Schema 数据。</p>
+<p>应该使用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">types</span><span class="p">.</span><span class="nx">String</span>
+</span></span><span class="line"><span class="cl"><span class="nx">types</span><span class="p">.</span><span class="nx">Int64</span>
+</span></span><span class="line"><span class="cl"><span class="nx">types</span><span class="p">.</span><span class="nx">Bool</span>
+</span></span><span class="line"><span class="cl"><span class="nx">types</span><span class="p">.</span><span class="nx">Float64</span>
+</span></span><span class="line"><span class="cl"><span class="nx">types</span><span class="p">.</span><span class="nx">List</span>
+</span></span><span class="line"><span class="cl"><span class="nx">types</span><span class="p">.</span><span class="nx">Set</span>
+</span></span><span class="line"><span class="cl"><span class="nx">types</span><span class="p">.</span><span class="nx">Map</span>
+</span></span><span class="line"><span class="cl"><span class="nx">types</span><span class="p">.</span><span class="nx">Object</span>
+</span></span></code></pre></div><p>因为 Terraform 值除了具体值外，还可能存在：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Null
+</span></span><span class="line"><span class="cl">Unknown
+</span></span><span class="line"><span class="cl">Known
+</span></span></code></pre></div><p>普通 Go 类型无法正确表达 Terraform 的 Unknown / Null 语义。</p>
+<hr>
+<h3 id="8-provider-schema-规范">8. Provider Schema 规范</h3>
+<p>示例：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">exampleProvider</span><span class="p">)</span> <span class="nf">Schema</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">req</span> <span class="nx">provider</span><span class="p">.</span><span class="nx">SchemaRequest</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span> <span class="o">*</span><span class="nx">provider</span><span class="p">.</span><span class="nx">SchemaResponse</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">Schema</span> <span class="p">=</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">Schema</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Attributes</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">schema</span><span class="p">.</span><span class="nx">Attribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;endpoint&#34;</span><span class="p">:</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Optional</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Description</span><span class="p">:</span> <span class="s">&#34;API endpoint.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;token&#34;</span><span class="p">:</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Optional</span><span class="p">:</span>  <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Sensitive</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">Description</span><span class="p">:</span> <span class="s">&#34;API access token.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>所有 Schema 字段 SHOULD 添加：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">Description</span>
+</span></span></code></pre></div><p>敏感字段 MUST：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">Sensitive</span><span class="p">:</span> <span class="kc">true</span>
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">password
+</span></span><span class="line"><span class="cl">secret
+</span></span><span class="line"><span class="cl">token
+</span></span><span class="line"><span class="cl">access_key
+</span></span><span class="line"><span class="cl">private_key
+</span></span><span class="line"><span class="cl">client_secret
+</span></span></code></pre></div><hr>
+<h3 id="9-环境变量">9. 环境变量</h3>
+<p>认证配置 SHOULD 支持环境变量。</p>
+<p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">EXAMPLE_ENDPOINT
+</span></span><span class="line"><span class="cl">EXAMPLE_TOKEN
+</span></span></code></pre></div><p>优先级：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Terraform Provider Configuration
+</span></span><span class="line"><span class="cl">        &gt;
+</span></span><span class="line"><span class="cl">Environment Variable
+</span></span><span class="line"><span class="cl">        &gt;
+</span></span><span class="line"><span class="cl">Default Value
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">endpoint</span> <span class="o">:=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">Endpoint</span><span class="p">.</span><span class="nf">ValueString</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">endpoint</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">endpoint</span> <span class="p">=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Getenv</span><span class="p">(</span><span class="s">&#34;EXAMPLE_ENDPOINT&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>禁止要求用户将 Secret 强制写入 Terraform 文件：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">provider</span> <span class="s2">&#34;example&#34;</span> {
+</span></span><span class="line"><span class="cl"><span class="n">  token</span> <span class="o">=</span> <span class="s2">&#34;123456&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>应该同时允许：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">EXAMPLE_TOKEN</span><span class="o">=</span>xxxx
+</span></span></code></pre></div><hr>
+<h3 id="10-configure-规范">10. Configure 规范</h3>
+<p>Provider Configure SHOULD 只负责：</p>
+<ol>
+<li>读取 Provider 配置；</li>
+<li>参数校验；</li>
+<li>创建 API Client；</li>
+<li>将 Client 传递给 Resource / Data Source。</li>
+</ol>
+<p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">exampleProvider</span><span class="p">)</span> <span class="nf">Configure</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">req</span> <span class="nx">provider</span><span class="p">.</span><span class="nx">ConfigureRequest</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span> <span class="o">*</span><span class="nx">provider</span><span class="p">.</span><span class="nx">ConfigureResponse</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">data</span> <span class="nx">providerModel</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">Append</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">req</span><span class="p">.</span><span class="nx">Config</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">data</span><span class="p">)</span><span class="o">...</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">HasError</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">client</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">client</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Endpoint</span><span class="p">:</span> <span class="nx">data</span><span class="p">.</span><span class="nx">Endpoint</span><span class="p">.</span><span class="nf">ValueString</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Token</span><span class="p">:</span>    <span class="nx">data</span><span class="p">.</span><span class="nx">Token</span><span class="p">.</span><span class="nf">ValueString</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">AddError</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;Unable to Create API Client&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">		<span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">ResourceData</span> <span class="p">=</span> <span class="nx">client</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">DataSourceData</span> <span class="p">=</span> <span class="nx">client</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>禁止：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">在 Configure 中创建基础设施
+</span></span><span class="line"><span class="cl">在 Configure 中查询业务资源
+</span></span><span class="line"><span class="cl">在 Configure 中执行资源初始化
+</span></span></code></pre></div><hr>
+<h3 id="11-api-client-规范">11. API Client 规范</h3>
+<p>API Client MUST 与 Terraform Framework 解耦。</p>
+<p>正确：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">client</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Client</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">httpClient</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Client</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">endpoint</span>   <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">token</span>      <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Client</span><span class="p">)</span> <span class="nf">GetInstance</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">id</span> <span class="kt">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="nx">Instance</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>
+</span></span></code></pre></div><p>错误：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Client</span><span class="p">)</span> <span class="nf">GetInstance</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">id</span> <span class="nx">types</span><span class="p">.</span><span class="nx">String</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span> <span class="o">*</span><span class="nx">resource</span><span class="p">.</span><span class="nx">ReadResponse</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p><code>client</code> package MUST NOT 依赖：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">terraform-plugin-framework
+</span></span><span class="line"><span class="cl">terraform-plugin-log
+</span></span></code></pre></div><p>API Client SHOULD 可以单独作为普通 Go SDK 使用。</p>
+<hr>
+<h3 id="12-http-client-规范">12. HTTP Client 规范</h3>
+<p>所有 API 请求 MUST 接受：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">context</span><span class="p">.</span><span class="nx">Context</span>
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Client</span><span class="p">)</span> <span class="nf">do</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">method</span> <span class="kt">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">path</span> <span class="kt">string</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">body</span> <span class="nx">any</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">result</span> <span class="nx">any</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="kt">error</span>
+</span></span></code></pre></div><p>请求必须：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">http</span><span class="p">.</span><span class="nf">NewRequestWithContext</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</span></span></code></pre></div><p>禁止：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">http</span><span class="p">.</span><span class="nf">NewRequest</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</span></span></code></pre></div><p>忽略 Terraform Cancel。</p>
+<hr>
+<h3 id="13-resource-接口">13. Resource 接口</h3>
+<p>标准 Resource SHOULD 实现：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">resource</span><span class="p">.</span><span class="nx">Resource</span>
+</span></span><span class="line"><span class="cl"><span class="nx">resource</span><span class="p">.</span><span class="nx">ResourceWithConfigure</span>
+</span></span><span class="line"><span class="cl"><span class="nx">resource</span><span class="p">.</span><span class="nx">ResourceWithImportState</span>
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">_</span> <span class="nx">resource</span><span class="p">.</span><span class="nx">Resource</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">instanceResource</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">_</span> <span class="nx">resource</span><span class="p">.</span><span class="nx">ResourceWithConfigure</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">instanceResource</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">_</span> <span class="nx">resource</span><span class="p">.</span><span class="nx">ResourceWithImportState</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">instanceResource</span><span class="p">{}</span>
+</span></span></code></pre></div><p>根据需要 MAY 实现：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">resource</span><span class="p">.</span><span class="nx">ResourceWithModifyPlan</span>
+</span></span><span class="line"><span class="cl"><span class="nx">resource</span><span class="p">.</span><span class="nx">ResourceWithValidateConfig</span>
+</span></span><span class="line"><span class="cl"><span class="nx">resource</span><span class="p">.</span><span class="nx">ResourceWithUpgradeState</span>
+</span></span></code></pre></div><hr>
+<h3 id="14-resource-生命周期">14. Resource 生命周期</h3>
+<p>一个标准 Resource：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Metadata
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">Schema
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">Configure
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">Create
+</span></span><span class="line"><span class="cl">Read
+</span></span><span class="line"><span class="cl">Update
+</span></span><span class="line"><span class="cl">Delete
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">ImportState
+</span></span></code></pre></div><p>必须理解 Terraform 的核心语义：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Configuration
+</span></span><span class="line"><span class="cl">      ↓
+</span></span><span class="line"><span class="cl">Plan
+</span></span><span class="line"><span class="cl">      ↓
+</span></span><span class="line"><span class="cl">Apply
+</span></span><span class="line"><span class="cl">      ↓
+</span></span><span class="line"><span class="cl">Remote Resource
+</span></span><span class="line"><span class="cl">      ↓
+</span></span><span class="line"><span class="cl">State
+</span></span></code></pre></div><p>Provider 的职责不是简单地“调用 CRUD API”，而是：</p>
+<blockquote>
+<p>让 Configuration、Plan、Remote Object 和 Terraform State 最终保持一致。</p>
+</blockquote>
+<hr>
+<h3 id="15-resource-model">15. Resource Model</h3>
+<p>每个 Resource SHOULD 定义独立 Model。</p>
+<p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">instanceResourceModel</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ID</span>        <span class="nx">types</span><span class="p">.</span><span class="nx">String</span> <span class="s">`tfsdk:&#34;id&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Name</span>      <span class="nx">types</span><span class="p">.</span><span class="nx">String</span> <span class="s">`tfsdk:&#34;name&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Region</span>    <span class="nx">types</span><span class="p">.</span><span class="nx">String</span> <span class="s">`tfsdk:&#34;region&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">CPU</span>       <span class="nx">types</span><span class="p">.</span><span class="nx">Int64</span>  <span class="s">`tfsdk:&#34;cpu&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Status</span>    <span class="nx">types</span><span class="p">.</span><span class="nx">String</span> <span class="s">`tfsdk:&#34;status&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">CreatedAt</span> <span class="nx">types</span><span class="p">.</span><span class="nx">String</span> <span class="s">`tfsdk:&#34;created_at&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>字段排列建议：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">ID
+</span></span><span class="line"><span class="cl">用户配置字段
+</span></span><span class="line"><span class="cl">嵌套配置字段
+</span></span><span class="line"><span class="cl">Computed 字段
+</span></span><span class="line"><span class="cl">时间字段
+</span></span></code></pre></div><hr>
+<h3 id="16-schema-属性规则">16. Schema 属性规则</h3>
+<p>Schema 属性主要分成：</p>
+<h4 id="required">Required</h4>
+<p>用户必须配置：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Required</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">name
+</span></span><span class="line"><span class="cl">region
+</span></span><span class="line"><span class="cl">network_id
+</span></span></code></pre></div><hr>
+<h4 id="optional">Optional</h4>
+<p>用户可以配置：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Optional</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<h4 id="computed">Computed</h4>
+<p>由远程 API 返回：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Computed</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">id
+</span></span><span class="line"><span class="cl">status
+</span></span><span class="line"><span class="cl">created_at
+</span></span><span class="line"><span class="cl">public_ip
+</span></span></code></pre></div><hr>
+<h4 id="optional--computed">Optional + Computed</h4>
+<p>API 有默认值，同时用户允许覆盖：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Optional</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Computed</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>典型：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">hostname
+</span></span><span class="line"><span class="cl">description
+</span></span><span class="line"><span class="cl">disk_type
+</span></span></code></pre></div><p>这种属性必须特别关注 Plan / Read 行为，避免产生永久 Diff。</p>
+<hr>
+<h3 id="17-id-规范">17. ID 规范</h3>
+<p>Resource MUST 有稳定的唯一 ID。</p>
+<p>推荐：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="s">&#34;id&#34;</span><span class="p">:</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Computed</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>ID MUST：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">唯一
+</span></span><span class="line"><span class="cl">稳定
+</span></span><span class="line"><span class="cl">不可随名称变化
+</span></span><span class="line"><span class="cl">能够查询远程资源
+</span></span></code></pre></div><p>优先：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">UUID
+</span></span><span class="line"><span class="cl">云平台 Resource ID
+</span></span><span class="line"><span class="cl">API Object ID
+</span></span></code></pre></div><p>避免使用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">name
+</span></span><span class="line"><span class="cl">display_name
+</span></span><span class="line"><span class="cl">description
+</span></span></code></pre></div><p>作为唯一 State ID。</p>
+<hr>
+<h3 id="18-schema-validator">18. Schema Validator</h3>
+<p>字段存在约束时 MUST 优先使用 Validator。</p>
+<p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">Validators</span><span class="p">:</span> <span class="p">[]</span><span class="nx">validator</span><span class="p">.</span><span class="nx">String</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">stringvalidator</span><span class="p">.</span><span class="nf">OneOf</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="s">&#34;running&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="s">&#34;stopped&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>长度：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">stringvalidator</span><span class="p">.</span><span class="nf">LengthBetween</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+</span></span></code></pre></div><p>数值：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">int64validator</span><span class="p">.</span><span class="nf">Between</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+</span></span></code></pre></div><p>禁止将可以在 Terraform <code>validate/plan</code> 阶段发现的错误拖到 API 请求阶段。</p>
+<hr>
+<h3 id="19-plan-modifier">19. Plan Modifier</h3>
+<p>Plan Modifier 用于控制 Terraform Plan 行为。</p>
+<p>常用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">RequiresReplace
+</span></span><span class="line"><span class="cl">UseStateForUnknown
+</span></span></code></pre></div><hr>
+<h4 id="191-requiresreplace">19.1 RequiresReplace</h4>
+<p>远程 API 不支持修改的属性：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">PlanModifiers</span><span class="p">:</span> <span class="p">[]</span><span class="nx">planmodifier</span><span class="p">.</span><span class="nx">String</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">stringplanmodifier</span><span class="p">.</span><span class="nf">RequiresReplace</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">region
+</span></span><span class="line"><span class="cl">availability_zone
+</span></span><span class="line"><span class="cl">image_id
+</span></span><span class="line"><span class="cl">resource_type
+</span></span></code></pre></div><p>修改这些属性时：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">destroy old
+</span></span><span class="line"><span class="cl">create new
+</span></span></code></pre></div><p>而不是调用 Update。</p>
+<hr>
+<h3 id="20-usestateforunknown">20. UseStateForUnknown</h3>
+<p>稳定的 Computed 属性 MAY：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">PlanModifiers</span><span class="p">:</span> <span class="p">[]</span><span class="nx">planmodifier</span><span class="p">.</span><span class="nx">String</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">stringplanmodifier</span><span class="p">.</span><span class="nf">UseStateForUnknown</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">id
+</span></span><span class="line"><span class="cl">created_at
+</span></span></code></pre></div><p>但必须谨慎。</p>
+<p>禁止为了消除 Diff 对所有 Computed 字段添加：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nf">UseStateForUnknown</span><span class="p">()</span>
+</span></span></code></pre></div><p>例如以下字段通常不适合：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">status
+</span></span><span class="line"><span class="cl">ip_address
+</span></span><span class="line"><span class="cl">updated_at
+</span></span><span class="line"><span class="cl">runtime_state
+</span></span></code></pre></div><p>因为远程值可能真正发生变化。</p>
+<p>原则：</p>
+<blockquote>
+<p>Plan Modifier 用于表达资源语义，而不是隐藏 Provider Bug。</p>
+</blockquote>
+<hr>
+<h3 id="21-create-规范">21. Create 规范</h3>
+<p>Create 标准流程：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">读取 Plan
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">转换 API Request
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">Create API
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">查询实际资源
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">转换 Terraform Model
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">写 State
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">instanceResource</span><span class="p">)</span> <span class="nf">Create</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">req</span> <span class="nx">resource</span><span class="p">.</span><span class="nx">CreateRequest</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span> <span class="o">*</span><span class="nx">resource</span><span class="p">.</span><span class="nx">CreateResponse</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">plan</span> <span class="nx">instanceResourceModel</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">Append</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">req</span><span class="p">.</span><span class="nx">Plan</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">plan</span><span class="p">)</span><span class="o">...</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">HasError</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">instance</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">client</span><span class="p">.</span><span class="nf">CreateInstance</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ctx</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">buildCreateRequest</span><span class="p">(</span><span class="nx">plan</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">AddError</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;Unable to Create Instance&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">		<span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">state</span> <span class="o">:=</span> <span class="nf">flattenInstance</span><span class="p">(</span><span class="nx">instance</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">Append</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">resp</span><span class="p">.</span><span class="nx">State</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">state</span><span class="p">)</span><span class="o">...</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Create 后 SHOULD 使用 API 实际返回值写 State。</p>
+<p>不要单纯：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">resp</span><span class="p">.</span><span class="nx">State</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">plan</span><span class="p">)</span>
+</span></span></code></pre></div><p>因为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">API Default
+</span></span><span class="line"><span class="cl">服务端转换
+</span></span><span class="line"><span class="cl">Computed 字段
+</span></span><span class="line"><span class="cl">Normalized Value
+</span></span></code></pre></div><p>可能与 Plan 不一致。</p>
+<hr>
+<h3 id="22-read-规范">22. Read 规范</h3>
+<p>Read 是 Terraform Provider 最重要的方法。</p>
+<p>Read SHOULD：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">读取 State ID
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">请求 Remote API
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">资源存在？
+</span></span><span class="line"><span class="cl">  /     \
+</span></span><span class="line"><span class="cl">是      否
+</span></span><span class="line"><span class="cl">│       │
+</span></span><span class="line"><span class="cl">写State RemoveResource
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">instanceResource</span><span class="p">)</span> <span class="nf">Read</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">req</span> <span class="nx">resource</span><span class="p">.</span><span class="nx">ReadRequest</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span> <span class="o">*</span><span class="nx">resource</span><span class="p">.</span><span class="nx">ReadResponse</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">state</span> <span class="nx">instanceResourceModel</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">Append</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">req</span><span class="p">.</span><span class="nx">State</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">state</span><span class="p">)</span><span class="o">...</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">HasError</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">instance</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">r</span><span class="p">.</span><span class="nx">client</span><span class="p">.</span><span class="nf">GetInstance</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ctx</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">state</span><span class="p">.</span><span class="nx">ID</span><span class="p">.</span><span class="nf">ValueString</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">errors</span><span class="p">.</span><span class="nf">Is</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">client</span><span class="p">.</span><span class="nx">ErrNotFound</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">resp</span><span class="p">.</span><span class="nx">State</span><span class="p">.</span><span class="nf">RemoveResource</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">AddError</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;Unable to Read Instance&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">		<span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">state</span> <span class="p">=</span> <span class="nf">flattenInstance</span><span class="p">(</span><span class="nx">instance</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">Append</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">resp</span><span class="p">.</span><span class="nx">State</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">state</span><span class="p">)</span><span class="o">...</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<h3 id="23-404-处理">23. 404 处理</h3>
+<p>这是强制规范。</p>
+<p>当 Terraform State 中存在：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">example_instance.foo
+</span></span></code></pre></div><p>但 Remote API 返回：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">404 Not Found
+</span></span></code></pre></div><p>MUST：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">resp</span><span class="p">.</span><span class="nx">State</span><span class="p">.</span><span class="nf">RemoveResource</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
+</span></span></code></pre></div><p>禁止：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">AddError</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;Resource Not Found&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;...&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>否则用户永远无法通过：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">terraform apply
+</span></span></code></pre></div><p>重新创建资源。</p>
+<hr>
+<h3 id="24-update-规范">24. Update 规范</h3>
+<p>Update：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">读取 Plan
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">读取 State
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">比较需要修改的字段
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">Update API
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">重新 Read
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">写入最终 State
+</span></span></code></pre></div><p>推荐：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">plan</span> <span class="nx">instanceResourceModel</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">state</span> <span class="nx">instanceResourceModel</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nx">Plan</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">plan</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">req</span><span class="p">.</span><span class="nx">State</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">state</span><span class="p">)</span>
+</span></span></code></pre></div><p>只提交变化字段：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">!</span><span class="nx">plan</span><span class="p">.</span><span class="nx">Name</span><span class="p">.</span><span class="nf">Equal</span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">Name</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">request</span><span class="p">.</span><span class="nx">Name</span> <span class="p">=</span> <span class="nx">plan</span><span class="p">.</span><span class="nx">Name</span><span class="p">.</span><span class="nf">ValueString</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>避免每次 Update 将整个对象发送给 API。</p>
+<hr>
+<h3 id="25-update-后重新读取">25. Update 后重新读取</h3>
+<p>远程 API Update 后 SHOULD：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Update()
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">Get()
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">State.Set()
+</span></span></code></pre></div><p>而不是假设：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">API result == Terraform Plan
+</span></span></code></pre></div><p>因为 API 可能：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">格式标准化
+</span></span><span class="line"><span class="cl">生成默认字段
+</span></span><span class="line"><span class="cl">修改状态
+</span></span><span class="line"><span class="cl">异步处理
+</span></span><span class="line"><span class="cl">重写名称
+</span></span></code></pre></div><hr>
+<h3 id="26-delete-规范">26. Delete 规范</h3>
+<p>Delete：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">读取 State
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">调用 Delete API
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">等待删除完成（如果需要）
+</span></span></code></pre></div><p>如果 API 返回：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">404
+</span></span></code></pre></div><p>Delete SHOULD 视为成功。</p>
+<p>原因：</p>
+<p>Terraform 的目标是：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">resource does not exist
+</span></span></code></pre></div><p>远端已经不存在，目标已经实现。</p>
+<p>Delete MUST 具备幂等性。</p>
+<hr>
+<h3 id="27-importstate">27. ImportState</h3>
+<p>所有可被 API 查询的 Resource SHOULD 支持：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">terraform import
+</span></span></code></pre></div><p>实现：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">instanceResource</span><span class="p">)</span> <span class="nf">ImportState</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">req</span> <span class="nx">resource</span><span class="p">.</span><span class="nx">ImportStateRequest</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span> <span class="o">*</span><span class="nx">resource</span><span class="p">.</span><span class="nx">ImportStateResponse</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resource</span><span class="p">.</span><span class="nf">ImportStatePassthroughID</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ctx</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">path</span><span class="p">.</span><span class="nf">Root</span><span class="p">(</span><span class="s">&#34;id&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">req</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">resp</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>用户：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">terraform import example_instance.foo <span class="m">123456</span>
+</span></span></code></pre></div><p>Import 后：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">terraform plan
+</span></span></code></pre></div><p>SHOULD 尽可能产生：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">No changes
+</span></span></code></pre></div><hr>
+<h3 id="28-import-id-格式">28. Import ID 格式</h3>
+<p>复杂 Resource MAY 使用复合 ID：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">project_id/resource_id
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">terraform import example_network.foo project-001/network-001
+</span></span></code></pre></div><p>必须：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">明确文档化
+</span></span><span class="line"><span class="cl">可稳定解析
+</span></span><span class="line"><span class="cl">向后兼容
+</span></span></code></pre></div><p>一旦公开 Import ID 格式，不应随意修改。</p>
+<hr>
+<h3 id="29-data-source-规范">29. Data Source 规范</h3>
+<p>Data Source 原则：</p>
+<blockquote>
+<p>只读取，不修改 Remote Resource。</p>
+</blockquote>
+<p>通常实现：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">datasource</span><span class="p">.</span><span class="nx">DataSource</span>
+</span></span><span class="line"><span class="cl"><span class="nx">datasource</span><span class="p">.</span><span class="nx">DataSourceWithConfigure</span>
+</span></span></code></pre></div><p>Data Source 不允许：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Create
+</span></span><span class="line"><span class="cl">Update
+</span></span><span class="line"><span class="cl">Delete
+</span></span></code></pre></div><p>典型流程：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">读取 Config
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">调用 Query API
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">转换 Model
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">State.Set
+</span></span></code></pre></div><hr>
+<h3 id="30-data-source-查询条件">30. Data Source 查询条件</h3>
+<p>查询字段：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="s">&#34;name&#34;</span><span class="p">:</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Required</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>返回字段：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="s">&#34;id&#34;</span><span class="p">:</span> <span class="nx">schema</span><span class="p">.</span><span class="nx">StringAttribute</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Computed</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>如果允许：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">id
+</span></span><span class="line"><span class="cl">name
+</span></span></code></pre></div><p>任选其一查询，MUST 使用 Validator 保证：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">ExactlyOneOf
+</span></span><span class="line"><span class="cl">ConflictsWith
+</span></span></code></pre></div><p>或使用 Data Source 配置校验实现等价逻辑。</p>
+<hr>
+<h3 id="31-flatten--expand-规范">31. Flatten / Expand 规范</h3>
+<p>Terraform Model 和 API Model MUST 分离。</p>
+<p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Terraform Model
+</span></span><span class="line"><span class="cl">      ↕
+</span></span><span class="line"><span class="cl">Mapper
+</span></span><span class="line"><span class="cl">      ↕
+</span></span><span class="line"><span class="cl">API Model
+</span></span></code></pre></div><p>推荐：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">buildCreateRequest</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">model</span> <span class="nx">instanceResourceModel</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="nx">client</span><span class="p">.</span><span class="nx">CreateInstanceRequest</span>
+</span></span></code></pre></div><p>以及：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">flattenInstance</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">instance</span> <span class="o">*</span><span class="nx">client</span><span class="p">.</span><span class="nx">Instance</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="nx">instanceResourceModel</span>
+</span></span></code></pre></div><p>避免在 CRUD 方法中出现几十行：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">types</span><span class="p">.</span><span class="nf">StringValue</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">types</span><span class="p">.</span><span class="nf">Int64Value</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</span></span></code></pre></div><p>转换逻辑。</p>
+<hr>
+<h3 id="32-null--unknown">32. Null / Unknown</h3>
+<p>TPF 开发必须正确理解：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Null
+</span></span><span class="line"><span class="cl">Unknown
+</span></span><span class="line"><span class="cl">Known
+</span></span></code></pre></div><p>读取字段前：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">data</span><span class="p">.</span><span class="nx">Name</span><span class="p">.</span><span class="nf">IsNull</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">data</span><span class="p">.</span><span class="nx">Name</span><span class="p">.</span><span class="nf">IsUnknown</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>禁止无条件：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">data</span><span class="p">.</span><span class="nx">Name</span><span class="p">.</span><span class="nf">ValueString</span><span class="p">()</span>
+</span></span></code></pre></div><p>尤其是在：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">ValidateConfig
+</span></span><span class="line"><span class="cl">ModifyPlan
+</span></span><span class="line"><span class="cl">Optional 属性
+</span></span><span class="line"><span class="cl">Computed 属性
+</span></span></code></pre></div><p>中。</p>
+<hr>
+<h3 id="33-set-与-list">33. Set 与 List</h3>
+<p>集合无顺序语义时 SHOULD 使用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Set
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">security_group_ids
+</span></span><span class="line"><span class="cl">tags
+</span></span><span class="line"><span class="cl">allowed_ips
+</span></span></code></pre></div><p>有顺序语义时使用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">List
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">startup_steps
+</span></span><span class="line"><span class="cl">priority_rules
+</span></span><span class="line"><span class="cl">ordered_routes
+</span></span></code></pre></div><p>禁止因为 API 返回数组就机械使用 List。</p>
+<p>否则 API 顺序变化可能导致：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">permanent diff
+</span></span></code></pre></div><hr>
+<h3 id="34-map">34. Map</h3>
+<p>Key-Value 数据 SHOULD 使用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">schema</span><span class="p">.</span><span class="nx">MapAttribute</span>
+</span></span></code></pre></div><p>典型：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="n">tags</span> <span class="o">=</span> {
+</span></span><span class="line"><span class="cl"><span class="n">  env</span>  <span class="o">=</span> <span class="s2">&#34;prod&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">  team</span> <span class="o">=</span> <span class="s2">&#34;backend&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>而不是：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">tag</span> {
+</span></span><span class="line"><span class="cl"><span class="n">  key</span>   <span class="o">=</span> <span class="s2">&#34;env&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">  value</span> <span class="o">=</span> <span class="s2">&#34;prod&#34;</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>除非 API 本身需要复杂 Tag 对象。</p>
+<hr>
+<h3 id="35-嵌套对象">35. 嵌套对象</h3>
+<p>复杂结构推荐：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">SingleNestedAttribute
+</span></span><span class="line"><span class="cl">ListNestedAttribute
+</span></span><span class="line"><span class="cl">SetNestedAttribute
+</span></span></code></pre></div><p>应根据业务语义选择。</p>
+<p>不要为了“以后可能扩展”而过度设计深层嵌套 Schema。</p>
+<p>建议嵌套层级：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">&lt;= 3
+</span></span></code></pre></div><p>超过三层 SHOULD 评估是否应该拆分 Resource。</p>
+<hr>
+<h3 id="36-diagnostics">36. Diagnostics</h3>
+<p>Framework 方法禁止直接：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">return</span> <span class="nx">err</span>
+</span></span></code></pre></div><p>应该：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">AddError</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;Unable to Create Instance&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="s">&#34;Unable to create instance: %s&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">err</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>处理 Framework 调用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">Append</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">req</span><span class="p">.</span><span class="nx">Plan</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">data</span><span class="p">)</span><span class="o">...</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">HasError</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>这是强制模式。</p>
+<hr>
+<h3 id="37-error-summary">37. Error Summary</h3>
+<p>错误 Summary MUST：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">短
+</span></span><span class="line"><span class="cl">明确
+</span></span><span class="line"><span class="cl">可搜索
+</span></span><span class="line"><span class="cl">稳定
+</span></span></code></pre></div><p>推荐：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Unable to Create Instance
+</span></span><span class="line"><span class="cl">Unable to Read Network
+</span></span><span class="line"><span class="cl">Unable to Configure API Client
+</span></span><span class="line"><span class="cl">Invalid Provider Configuration
+</span></span></code></pre></div><p>不要：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Error
+</span></span><span class="line"><span class="cl">Failed
+</span></span><span class="line"><span class="cl">Something went wrong
+</span></span><span class="line"><span class="cl">API error
+</span></span></code></pre></div><hr>
+<h3 id="38-api-error">38. API Error</h3>
+<p>API Client SHOULD 定义结构化 Error：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">APIError</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">StatusCode</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Code</span>       <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Message</span>    <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>并提供：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">ErrNotFound</span> <span class="p">=</span> <span class="nx">errors</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="s">&#34;resource not found&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>或者：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">IsNotFound</span><span class="p">(</span><span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="kt">bool</span>
+</span></span></code></pre></div><p>Resource 不应该解析字符串：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nf">Error</span><span class="p">(),</span> <span class="s">&#34;404&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><hr>
+<h3 id="39-日志">39. 日志</h3>
+<p>Terraform Layer SHOULD 使用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">tflog</span><span class="p">.</span><span class="nf">Debug</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">tflog</span><span class="p">.</span><span class="nf">Info</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">tflog</span><span class="p">.</span><span class="nf">Warn</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">tflog</span><span class="p">.</span><span class="nf">Error</span><span class="p">()</span>
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">tflog</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;Creating instance&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">any</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="s">&#34;name&#34;</span><span class="p">:</span> <span class="nx">plan</span><span class="p">.</span><span class="nx">Name</span><span class="p">.</span><span class="nf">ValueString</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">	<span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>禁止：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">()</span>
+</span></span></code></pre></div><hr>
+<h3 id="40-敏感信息日志">40. 敏感信息日志</h3>
+<p>以下内容 MUST NOT 输出：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">password
+</span></span><span class="line"><span class="cl">token
+</span></span><span class="line"><span class="cl">secret
+</span></span><span class="line"><span class="cl">private_key
+</span></span><span class="line"><span class="cl">Authorization
+</span></span><span class="line"><span class="cl">Cookie
+</span></span><span class="line"><span class="cl">AccessKeySecret
+</span></span><span class="line"><span class="cl">完整 HTTP Header
+</span></span></code></pre></div><p>错误：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">tflog</span><span class="p">.</span><span class="nf">Debug</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;request&#34;</span><span class="p">,</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">any</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;token&#34;</span><span class="p">:</span> <span class="nx">token</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>任何 HTTP Debug 日志都必须执行 Secret 脱敏。</p>
+<hr>
+<h3 id="41-context">41. Context</h3>
+<p>所有可能阻塞的操作 MUST 使用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span>
+</span></span></code></pre></div><p>包括：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">HTTP
+</span></span><span class="line"><span class="cl">Retry
+</span></span><span class="line"><span class="cl">Polling
+</span></span><span class="line"><span class="cl">Wait
+</span></span><span class="line"><span class="cl">Database
+</span></span><span class="line"><span class="cl">RPC
+</span></span></code></pre></div><p>Retry：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">select</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">case</span> <span class="o">&lt;-</span><span class="nx">ctx</span><span class="p">.</span><span class="nf">Done</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">ctx</span><span class="p">.</span><span class="nf">Err</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">case</span> <span class="o">&lt;-</span><span class="nx">time</span><span class="p">.</span><span class="nf">After</span><span class="p">(</span><span class="nx">delay</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>禁止：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">time</span><span class="p">.</span><span class="nf">Sleep</span><span class="p">(</span><span class="mi">30</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+</span></span></code></pre></div><p>长时间无条件阻塞。</p>
+<hr>
+<h3 id="42-retry">42. Retry</h3>
+<p>以下错误 MAY Retry：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">429 Too Many Requests
+</span></span><span class="line"><span class="cl">502 Bad Gateway
+</span></span><span class="line"><span class="cl">503 Service Unavailable
+</span></span><span class="line"><span class="cl">504 Gateway Timeout
+</span></span><span class="line"><span class="cl">部分网络瞬时错误
+</span></span></code></pre></div><p>以下错误通常 MUST NOT Retry：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">400
+</span></span><span class="line"><span class="cl">401
+</span></span><span class="line"><span class="cl">403
+</span></span><span class="line"><span class="cl">404
+</span></span><span class="line"><span class="cl">业务校验错误
+</span></span></code></pre></div><p>推荐：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Exponential Backoff
+</span></span><span class="line"><span class="cl">+
+</span></span><span class="line"><span class="cl">Jitter
+</span></span></code></pre></div><p>Retry MUST：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">有最大次数/时间
+</span></span><span class="line"><span class="cl">支持 context cancel
+</span></span><span class="line"><span class="cl">记录必要日志
+</span></span></code></pre></div><hr>
+<h3 id="43-eventually-consistent-api">43. Eventually Consistent API</h3>
+<p>对于异步 API：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Create
+</span></span><span class="line"><span class="cl">  ↓
+</span></span><span class="line"><span class="cl">Pending
+</span></span><span class="line"><span class="cl">  ↓
+</span></span><span class="line"><span class="cl">Creating
+</span></span><span class="line"><span class="cl">  ↓
+</span></span><span class="line"><span class="cl">Running
+</span></span></code></pre></div><p>Provider SHOULD Poll：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="k">for</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">instance</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">GetInstance</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">switch</span> <span class="nx">instance</span><span class="p">.</span><span class="nx">Status</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="s">&#34;running&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">instance</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="s">&#34;failed&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span><span class="p">,</span> <span class="nx">errors</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// wait with ctx
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><p>等待逻辑 SHOULD 抽象：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nf">waitInstanceReady</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nf">waitInstanceDeleted</span><span class="p">()</span>
+</span></span></code></pre></div><p>禁止 CRUD 中复制 Polling 代码。</p>
+<hr>
+<h3 id="44-terraform-state-原则">44. Terraform State 原则</h3>
+<p>State MUST 表示：</p>
+<blockquote>
+<p>Remote Resource 当前实际状态。</p>
+</blockquote>
+<p>禁止：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">为了防止 Diff 保留旧值
+</span></span><span class="line"><span class="cl">为了通过测试伪造状态
+</span></span><span class="line"><span class="cl">为了隐藏 API 差异不刷新字段
+</span></span></code></pre></div><p>Read 必须尽可能刷新 Remote 状态。</p>
+<hr>
+<h3 id="45-permanent-diff">45. Permanent Diff</h3>
+<p>以下情况必须重点排查：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">terraform apply
+</span></span><span class="line"><span class="cl">terraform plan
+</span></span></code></pre></div><p>如果第二次 plan 仍然存在变化：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Provider 存在潜在问题
+</span></span></code></pre></div><p>常见原因：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">API 默认值没有写回
+</span></span><span class="line"><span class="cl">List 顺序不稳定
+</span></span><span class="line"><span class="cl">Optional/Computed 使用错误
+</span></span><span class="line"><span class="cl">大小写标准化
+</span></span><span class="line"><span class="cl">时间格式差异
+</span></span><span class="line"><span class="cl">Null 与空字符串混用
+</span></span><span class="line"><span class="cl">Null 与空 List 混用
+</span></span><span class="line"><span class="cl">Set Hash 不一致
+</span></span><span class="line"><span class="cl">API 返回字段和 Plan 不一致
+</span></span></code></pre></div><p>Resource SHOULD 满足：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Apply
+</span></span><span class="line"><span class="cl"> ↓
+</span></span><span class="line"><span class="cl">Plan
+</span></span><span class="line"><span class="cl"> ↓
+</span></span><span class="line"><span class="cl">No changes
+</span></span></code></pre></div><hr>
+<h3 id="46-null-与空值">46. Null 与空值</h3>
+<p>必须统一：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">null
+</span></span><span class="line"><span class="cl">&#34;&#34;
+</span></span><span class="line"><span class="cl">[]
+</span></span><span class="line"><span class="cl">{}
+</span></span></code></pre></div><p>的语义。</p>
+<p>禁止 API：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="kc">null</span>
+</span></span></code></pre></div><p>有时转换为：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">types</span><span class="p">.</span><span class="nf">StringNull</span><span class="p">()</span>
+</span></span></code></pre></div><p>有时转换成：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">types</span><span class="p">.</span><span class="nf">StringValue</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>同一个字段必须保持转换策略稳定。</p>
+<hr>
+<h3 id="47-时间格式">47. 时间格式</h3>
+<p>Terraform 中时间 SHOULD 使用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">RFC3339
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">2026-09-07T23:30:00+08:00
+</span></span></code></pre></div><p>避免：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">2026/09/07
+</span></span><span class="line"><span class="cl">09-07-2026
+</span></span><span class="line"><span class="cl">2026-09-07 23:30:00
+</span></span></code></pre></div><p>除非 Remote API 的业务格式必须原样暴露。</p>
+<hr>
+<h3 id="48-resource-state-upgrade">48. Resource State Upgrade</h3>
+<p>已经发布的 Resource Schema 不允许随意进行 Breaking Change。</p>
+<p>例如：</p>
+<p>V1：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">instance_name
+</span></span></code></pre></div><p>V2：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">name
+</span></span></code></pre></div><p>不能简单删除旧字段。</p>
+<p>涉及 State Schema 变化 SHOULD 使用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">resource</span><span class="p">.</span><span class="nx">ResourceWithUpgradeState</span>
+</span></span></code></pre></div><p>维护 State Migration。</p>
+<p>必须考虑：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">旧 terraform.tfstate
+</span></span><span class="line"><span class="cl">      ↓
+</span></span><span class="line"><span class="cl">升级 Provider
+</span></span><span class="line"><span class="cl">      ↓
+</span></span><span class="line"><span class="cl">新 Provider 是否还能读取
+</span></span></code></pre></div><hr>
+<h3 id="49-breaking-change">49. Breaking Change</h3>
+<p>以下操作属于潜在 Breaking Change：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">删除 Resource
+</span></span><span class="line"><span class="cl">删除 Attribute
+</span></span><span class="line"><span class="cl">Attribute Rename
+</span></span><span class="line"><span class="cl">改变 Attribute Type
+</span></span><span class="line"><span class="cl">Optional → Required
+</span></span><span class="line"><span class="cl">Computed → Required
+</span></span><span class="line"><span class="cl">修改 Import ID
+</span></span><span class="line"><span class="cl">修改 ID 生成逻辑
+</span></span><span class="line"><span class="cl">修改 List/Set 类型
+</span></span><span class="line"><span class="cl">修改默认行为
+</span></span></code></pre></div><p>必须通过 Major Version 或 State Upgrade 处理。</p>
+<hr>
+<h3 id="50-api-version-与-provider-version">50. API Version 与 Provider Version</h3>
+<p>不要把：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Provider Version
+</span></span></code></pre></div><p>和：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Remote API Version
+</span></span></code></pre></div><p>绑定。</p>
+<p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Provider v2.3.0
+</span></span></code></pre></div><p>不意味着：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">API v2
+</span></span></code></pre></div><p>Remote API Compatibility SHOULD 在 Client 层处理。</p>
+<hr>
+<h3 id="51-测试规范">51. 测试规范</h3>
+<p>测试分：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Unit Test
+</span></span><span class="line"><span class="cl">Acceptance Test
+</span></span></code></pre></div><p>推荐：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">                   Acceptance
+</span></span><span class="line"><span class="cl">                      ▲
+</span></span><span class="line"><span class="cl">                      │
+</span></span><span class="line"><span class="cl">             Mapper / Client Test
+</span></span><span class="line"><span class="cl">                      ▲
+</span></span><span class="line"><span class="cl">                      │
+</span></span><span class="line"><span class="cl">                   Unit
+</span></span></code></pre></div><hr>
+<h3 id="52-unit-test">52. Unit Test</h3>
+<p>Unit Test SHOULD 覆盖：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">flatten
+</span></span><span class="line"><span class="cl">expand
+</span></span><span class="line"><span class="cl">validator
+</span></span><span class="line"><span class="cl">ID parser
+</span></span><span class="line"><span class="cl">API error parser
+</span></span><span class="line"><span class="cl">response normalization
+</span></span><span class="line"><span class="cl">request building
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestFlattenInstance</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestParseImportID</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestBuildCreateInstanceRequest</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span>
+</span></span></code></pre></div><p>推荐 Table Driven Test：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestParseImportID</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">tests</span> <span class="o">:=</span> <span class="p">[]</span><span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">name</span>    <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">input</span>   <span class="kt">string</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">wantErr</span> <span class="kt">bool</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}{</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">name</span><span class="p">:</span>    <span class="s">&#34;valid&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">input</span><span class="p">:</span>   <span class="s">&#34;project-1/instance-1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">wantErr</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">tt</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">tests</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">t</span><span class="p">.</span><span class="nf">Run</span><span class="p">(</span><span class="nx">tt</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="p">})</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<h3 id="53-acceptance-test">53. Acceptance Test</h3>
+<p>Resource SHOULD 至少存在一个：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">TestAccXXXResource</span>
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">TestAccInstanceResource_basic</span><span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">testing</span><span class="p">.</span><span class="nx">T</span><span class="p">)</span>
+</span></span></code></pre></div><p>Acceptance Test 应覆盖：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Create
+</span></span><span class="line"><span class="cl">Read
+</span></span><span class="line"><span class="cl">Refresh
+</span></span><span class="line"><span class="cl">Update
+</span></span><span class="line"><span class="cl">Import
+</span></span><span class="line"><span class="cl">Destroy
+</span></span></code></pre></div><p>关键 Resource SHOULD 额外覆盖：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">RequiresReplace
+</span></span><span class="line"><span class="cl">External deletion
+</span></span><span class="line"><span class="cl">Invalid configuration
+</span></span><span class="line"><span class="cl">Optional fields
+</span></span><span class="line"><span class="cl">Default values
+</span></span></code></pre></div><p>Acceptance Test 使用真实 Terraform 生命周期，而不是只调用 Go 方法。</p>
+<hr>
+<h3 id="54-acceptance-test-provider">54. Acceptance Test Provider</h3>
+<p>使用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">ProtoV6ProviderFactories</span>
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">ProtoV6ProviderFactories</span><span class="p">:</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kd">func</span><span class="p">()</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">protfw</span><span class="p">.</span><span class="nx">ProviderServer</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">error</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">){</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;example&#34;</span><span class="p">:</span> <span class="nx">providerserver</span><span class="p">.</span><span class="nf">NewProtocol6WithError</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">New</span><span class="p">(</span><span class="s">&#34;test&#34;</span><span class="p">)(),</span>
+</span></span><span class="line"><span class="cl">	<span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span></code></pre></div><p>统一通过测试 Provider Factory 启动。</p>
+<hr>
+<h3 id="55-tf_acc">55. TF_ACC</h3>
+<p>Acceptance Test MUST 通过：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">TF_ACC</span><span class="o">=</span><span class="m">1</span> go <span class="nb">test</span> ./... -v
+</span></span></code></pre></div><p>普通：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">go <span class="nb">test</span> ./...
+</span></span></code></pre></div><p>不应该意外创建真实资源。</p>
+<p>CI 中 Acceptance Test 应明确配置：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">TF_ACC=1
+</span></span><span class="line"><span class="cl">Credentials
+</span></span><span class="line"><span class="cl">Test Region
+</span></span><span class="line"><span class="cl">Timeout
+</span></span></code></pre></div><hr>
+<h3 id="56-测试资源命名">56. 测试资源命名</h3>
+<p>Acceptance Test 创建的资源 MUST 能区分测试资源。</p>
+<p>推荐：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">tf-acc-xxxxx
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">tf-acc-instance-a8f7c
+</span></span></code></pre></div><p>不得：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">test
+</span></span><span class="line"><span class="cl">demo
+</span></span><span class="line"><span class="cl">instance1
+</span></span></code></pre></div><p>避免误删人工资源。</p>
+<hr>
+<h3 id="57-acceptance-test-清理">57. Acceptance Test 清理</h3>
+<p>Acceptance Test MUST 考虑异常退出后的资源清理。</p>
+<p>应：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">随机名称
+</span></span><span class="line"><span class="cl">独立项目/账号
+</span></span><span class="line"><span class="cl">测试标签
+</span></span><span class="line"><span class="cl">资源 TTL
+</span></span><span class="line"><span class="cl">CheckDestroy
+</span></span></code></pre></div><p>测试账号不得使用生产账号。</p>
+<hr>
+<h3 id="58-examples">58. examples</h3>
+<p>每个 Resource SHOULD 提供：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">examples/resources/&lt;resource&gt;/resource.tf
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">examples/resources/example_instance/resource.tf
+</span></span></code></pre></div><p>内容：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-hcl" data-lang="hcl"><span class="line"><span class="cl"><span class="k">resource</span> <span class="s2">&#34;example_instance&#34; &#34;example&#34;</span> {
+</span></span><span class="line"><span class="cl"><span class="n">  name</span>   <span class="o">=</span> <span class="s2">&#34;example&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">  region</span> <span class="o">=</span> <span class="s2">&#34;sg&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">  cpu</span>    <span class="o">=</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></div><p>每个 Data Source：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">examples/data-sources/&lt;data-source&gt;/data-source.tf
+</span></span></code></pre></div><hr>
+<h3 id="59-文档">59. 文档</h3>
+<p>每个 Resource 文档 MUST 描述：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">用途
+</span></span><span class="line"><span class="cl">Example
+</span></span><span class="line"><span class="cl">Arguments
+</span></span><span class="line"><span class="cl">Attributes
+</span></span><span class="line"><span class="cl">Import
+</span></span><span class="line"><span class="cl">注意事项
+</span></span></code></pre></div><p>尤其必须明确：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Force Replacement / RequiresReplace 字段
+</span></span><span class="line"><span class="cl">Default 值
+</span></span><span class="line"><span class="cl">Import ID
+</span></span><span class="line"><span class="cl">枚举值
+</span></span><span class="line"><span class="cl">敏感字段
+</span></span></code></pre></div><hr>
+<h3 id="60-gofmt--lint">60. gofmt / lint</h3>
+<p>提交代码前 MUST：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">go fmt ./...
+</span></span><span class="line"><span class="cl">go vet ./...
+</span></span><span class="line"><span class="cl">go <span class="nb">test</span> ./...
+</span></span></code></pre></div><p>推荐：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">golangci-lint run
+</span></span></code></pre></div><p>CI MUST 检查：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">fmt
+</span></span><span class="line"><span class="cl">vet
+</span></span><span class="line"><span class="cl">lint
+</span></span><span class="line"><span class="cl">unit test
+</span></span><span class="line"><span class="cl">build
+</span></span></code></pre></div><hr>
+<h3 id="61-makefile">61. Makefile</h3>
+<p>推荐：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">fmt</span>
+</span></span><span class="line"><span class="cl"><span class="nf">fmt</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	go fmt ./...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">vet</span>
+</span></span><span class="line"><span class="cl"><span class="nf">vet</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	go vet ./...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">test</span>
+</span></span><span class="line"><span class="cl"><span class="nf">test</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	go <span class="nb">test</span> ./...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">testacc</span>
+</span></span><span class="line"><span class="cl"><span class="nf">testacc</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">TF_ACC</span><span class="o">=</span><span class="m">1</span> go <span class="nb">test</span> ./... -v
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">lint</span>
+</span></span><span class="line"><span class="cl"><span class="nf">lint</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	golangci-lint run
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">.PHONY</span><span class="o">:</span> <span class="n">build</span>
+</span></span><span class="line"><span class="cl"><span class="nf">build</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">	go build ./...
+</span></span></code></pre></div><hr>
+<h3 id="62-maingo">62. main.go</h3>
+<p><code>main.go</code> MUST 保持简单：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;log&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/hashicorp/terraform-plugin-framework/providerserver&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;example.com/terraform-provider-example/internal/provider&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">version</span> <span class="p">=</span> <span class="s">&#34;dev&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="o">:=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">opts</span> <span class="o">:=</span> <span class="nx">providerserver</span><span class="p">.</span><span class="nx">ServeOpts</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Address</span><span class="p">:</span> <span class="s">&#34;registry.terraform.io/company/example&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Debug</span><span class="p">:</span>   <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">providerserver</span><span class="p">.</span><span class="nf">Serve</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">ctx</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">provider</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">version</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">opts</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>禁止把业务逻辑放入：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">main.go
+</span></span></code></pre></div><hr>
+<h3 id="63-provider-注册">63. Provider 注册</h3>
+<p>Provider SHOULD 集中注册 Resource：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">exampleProvider</span><span class="p">)</span> <span class="nf">Resources</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">[]</span><span class="kd">func</span><span class="p">()</span> <span class="nx">resource</span><span class="p">.</span><span class="nx">Resource</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="p">[]</span><span class="kd">func</span><span class="p">()</span> <span class="nx">resource</span><span class="p">.</span><span class="nx">Resource</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">NewInstanceResource</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">NewNetworkResource</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">NewVolumeResource</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Data Source：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">exampleProvider</span><span class="p">)</span> <span class="nf">DataSources</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">[]</span><span class="kd">func</span><span class="p">()</span> <span class="nx">datasource</span><span class="p">.</span><span class="nx">DataSource</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="p">[]</span><span class="kd">func</span><span class="p">()</span> <span class="nx">datasource</span><span class="p">.</span><span class="nx">DataSource</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">NewInstanceDataSource</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">NewNetworkDataSource</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>不要使用复杂的动态注册机制。</p>
+<hr>
+<h3 id="64-resource-文件模板">64. Resource 文件模板</h3>
+<p>一个标准 Resource 推荐结构：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">provider</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">instanceResource</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">client</span> <span class="o">*</span><span class="nx">client</span><span class="p">.</span><span class="nx">Client</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">instanceResourceModel</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ID</span>   <span class="nx">types</span><span class="p">.</span><span class="nx">String</span> <span class="s">`tfsdk:&#34;id&#34;`</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Name</span> <span class="nx">types</span><span class="p">.</span><span class="nx">String</span> <span class="s">`tfsdk:&#34;name&#34;`</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewInstanceResource</span><span class="p">()</span> <span class="nx">resource</span><span class="p">.</span><span class="nx">Resource</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">instanceResource</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">instanceResource</span><span class="p">)</span> <span class="nf">Metadata</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">instanceResource</span><span class="p">)</span> <span class="nf">Schema</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">instanceResource</span><span class="p">)</span> <span class="nf">Configure</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">instanceResource</span><span class="p">)</span> <span class="nf">Create</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">instanceResource</span><span class="p">)</span> <span class="nf">Read</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">instanceResource</span><span class="p">)</span> <span class="nf">Update</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">instanceResource</span><span class="p">)</span> <span class="nf">Delete</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">instanceResource</span><span class="p">)</span> <span class="nf">ImportState</span><span class="p">(</span><span class="o">...</span><span class="p">)</span> <span class="p">{}</span>
+</span></span></code></pre></div><p>统一函数排列顺序：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">New
+</span></span><span class="line"><span class="cl">Metadata
+</span></span><span class="line"><span class="cl">Schema
+</span></span><span class="line"><span class="cl">Configure
+</span></span><span class="line"><span class="cl">ValidateConfig
+</span></span><span class="line"><span class="cl">ModifyPlan
+</span></span><span class="line"><span class="cl">Create
+</span></span><span class="line"><span class="cl">Read
+</span></span><span class="line"><span class="cl">Update
+</span></span><span class="line"><span class="cl">Delete
+</span></span><span class="line"><span class="cl">ImportState
+</span></span><span class="line"><span class="cl">UpgradeState
+</span></span><span class="line"><span class="cl">Helper
+</span></span></code></pre></div><hr>
+<h3 id="65-resource-configure">65. Resource Configure</h3>
+<p>标准写法：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">r</span> <span class="o">*</span><span class="nx">instanceResource</span><span class="p">)</span> <span class="nf">Configure</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">req</span> <span class="nx">resource</span><span class="p">.</span><span class="nx">ConfigureRequest</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">resp</span> <span class="o">*</span><span class="nx">resource</span><span class="p">.</span><span class="nx">ConfigureResponse</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">req</span><span class="p">.</span><span class="nx">ProviderData</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">client</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">ProviderData</span><span class="p">.(</span><span class="o">*</span><span class="nx">client</span><span class="p">.</span><span class="nx">Client</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">!</span><span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">resp</span><span class="p">.</span><span class="nx">Diagnostics</span><span class="p">.</span><span class="nf">AddError</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">			<span class="s">&#34;Unexpected Resource Configure Type&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">				<span class="s">&#34;Expected *client.Client, got: %T&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">req</span><span class="p">.</span><span class="nx">ProviderData</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">r</span><span class="p">.</span><span class="nx">client</span> <span class="p">=</span> <span class="nx">client</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Resource MUST 检查类型断言。</p>
+<p>禁止：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">r</span><span class="p">.</span><span class="nx">client</span> <span class="p">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">ProviderData</span><span class="p">.(</span><span class="o">*</span><span class="nx">client</span><span class="p">.</span><span class="nx">Client</span><span class="p">)</span>
+</span></span></code></pre></div><p>避免 panic。</p>
+<hr>
+<h3 id="66-panic">66. Panic</h3>
+<p>Provider MUST NOT 因普通用户配置导致 Panic。</p>
+<p>禁止：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">value</span> <span class="o">:=</span> <span class="nx">ptr</span><span class="p">.</span><span class="nx">Value</span>
+</span></span><span class="line"><span class="cl"><span class="nx">client</span> <span class="o">:=</span> <span class="nx">data</span><span class="p">.(</span><span class="o">*</span><span class="nx">Client</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span></code></pre></div><p>没有边界或 nil 检查。</p>
+<p>Terraform Provider 是长期运行的外部 Plugin Process。</p>
+<p>一次 Panic 可能导致：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Plugin crashed
+</span></span><span class="line"><span class="cl">Request cancelled
+</span></span><span class="line"><span class="cl">Terraform apply failed
+</span></span></code></pre></div><hr>
+<h3 id="67-并发">67. 并发</h3>
+<p>不要假设 Resource 方法串行执行。</p>
+<p>Terraform 可以同时执行：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">resource A Create
+</span></span><span class="line"><span class="cl">resource B Create
+</span></span><span class="line"><span class="cl">data source C Read
+</span></span></code></pre></div><p>因此：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Client
+</span></span><span class="line"><span class="cl">Cache
+</span></span><span class="line"><span class="cl">Token
+</span></span><span class="line"><span class="cl">Global State
+</span></span></code></pre></div><p>必须线程安全。</p>
+<p>禁止：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">currentProjectID</span> <span class="kt">string</span>
+</span></span></code></pre></div><p>这种全局业务状态。</p>
+<hr>
+<h3 id="68-mutex">68. Mutex</h3>
+<p>只有 Remote API 本身要求串行操作时才 SHOULD 使用锁。</p>
+<p>并且优先：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">resource scoped lock
+</span></span></code></pre></div><p>而不是：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">global mutex
+</span></span></code></pre></div><p>禁止因为 API Client 非线程安全就把整个 Provider 串行化。</p>
+<p>应该修复 Client。</p>
+<hr>
+<h3 id="69-api-client-timeout">69. API Client Timeout</h3>
+<p>HTTP Client MUST 设置 Timeout：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Client</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Timeout</span><span class="p">:</span> <span class="mi">30</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>但对于：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Create VM
+</span></span><span class="line"><span class="cl">Delete VM
+</span></span><span class="line"><span class="cl">Long Poll
+</span></span></code></pre></div><p>应该区分：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">HTTP Request Timeout
+</span></span><span class="line"><span class="cl">Resource Operation Timeout
+</span></span></code></pre></div><p>不能简单把 HTTP Timeout 配置成：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">30 minutes
+</span></span></code></pre></div><hr>
+<h3 id="70-rate-limit">70. Rate Limit</h3>
+<p>如果 Remote API 存在限流：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">QPS
+</span></span><span class="line"><span class="cl">Burst
+</span></span><span class="line"><span class="cl">429
+</span></span></code></pre></div><p>SHOULD 在 Client 层统一处理：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">rate limiter
+</span></span><span class="line"><span class="cl">retry
+</span></span><span class="line"><span class="cl">backoff
+</span></span></code></pre></div><p>不要每个 Resource 自己实现一套限流。</p>
+<hr>
+<h3 id="71-api-分页">71. API 分页</h3>
+<p>Data Source/List API 必须正确处理分页。</p>
+<p>禁止只请求：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">page=1
+</span></span><span class="line"><span class="cl">size=100
+</span></span></code></pre></div><p>然后假设所有数据都返回。</p>
+<p>统一 Client：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">Client</span><span class="p">)</span> <span class="nf">ListAllInstances</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="nx">context</span><span class="p">.</span><span class="nx">Context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">([]</span><span class="nx">Instance</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span>
+</span></span></code></pre></div><p>或者明确暴露分页语义。</p>
+<hr>
+<h3 id="72-remote-resource-drift">72. Remote Resource Drift</h3>
+<p>必须支持用户在 Terraform 外部修改资源。</p>
+<p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Terraform State:
+</span></span><span class="line"><span class="cl">cpu = 2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Remote:
+</span></span><span class="line"><span class="cl">cpu = 4
+</span></span></code></pre></div><p>执行：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">terraform plan
+</span></span></code></pre></div><p>Read 后 Terraform SHOULD 能检测：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">4 -&gt; 2
+</span></span></code></pre></div><p>除非字段设计为仅 Computed。</p>
+<p>这就是 Terraform Drift Detection。</p>
+<hr>
+<h3 id="73-external-delete">73. External Delete</h3>
+<p>如果用户手动删除：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">example_instance.foo
+</span></span></code></pre></div><p>Terraform：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">terraform plan
+</span></span></code></pre></div><p>应该显示：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">+ create
+</span></span></code></pre></div><p>实现关键就是 Read 中：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">resp</span><span class="p">.</span><span class="nx">State</span><span class="p">.</span><span class="nf">RemoveResource</span><span class="p">(</span><span class="nx">ctx</span><span class="p">)</span>
+</span></span></code></pre></div><hr>
+<h3 id="74-api-默认值">74. API 默认值</h3>
+<p>API 默认值有两种处理方式。</p>
+<p>方案 A：</p>
+<p>Terraform Schema 明确默认逻辑。</p>
+<p>方案 B：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">Optional</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Computed</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span></code></pre></div><p>由 API 决定，然后 Read 写入。</p>
+<p>禁止 Terraform 一套默认值、API 又一套不同默认值。</p>
+<p>否则极易产生：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">inconsistent result after apply
+</span></span></code></pre></div><hr>
+<h3 id="75-inconsistent-result-after-apply">75. Inconsistent Result After Apply</h3>
+<p>遇到：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Provider produced inconsistent result after apply
+</span></span></code></pre></div><p>重点检查：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Create 写 State 是否与 Plan 一致
+</span></span><span class="line"><span class="cl">Optional/Computed 是否合理
+</span></span><span class="line"><span class="cl">API 是否修改输入
+</span></span><span class="line"><span class="cl">Null/Unknown 是否转换错误
+</span></span><span class="line"><span class="cl">List/Set 顺序
+</span></span><span class="line"><span class="cl">Plan Modifier
+</span></span><span class="line"><span class="cl">API 默认值
+</span></span></code></pre></div><p>禁止通过：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">UseStateForUnknown
+</span></span><span class="line"><span class="cl">忽略字段
+</span></span><span class="line"><span class="cl">强行写 Plan
+</span></span></code></pre></div><p>简单掩盖问题。</p>
+<hr>
+<h3 id="76-description">76. Description</h3>
+<p>每个字段必须提供有意义的 Description：</p>
+<p>正确：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">Description</span><span class="p">:</span> <span class="s">&#34;ID of the VPC where the instance is created.&#34;</span>
+</span></span></code></pre></div><p>错误：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">Description</span><span class="p">:</span> <span class="s">&#34;VPC ID.&#34;</span>
+</span></span></code></pre></div><p>尤其应说明：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">是否 Required
+</span></span><span class="line"><span class="cl">业务含义
+</span></span><span class="line"><span class="cl">取值范围
+</span></span><span class="line"><span class="cl">修改是否重建
+</span></span><span class="line"><span class="cl">默认行为
+</span></span></code></pre></div><p>但不要在 Description 中重复 Terraform 自动生成的信息。</p>
+<hr>
+<h3 id="77-deprecated-字段">77. Deprecated 字段</h3>
+<p>删除字段前 SHOULD 先 Deprecated。</p>
+<p>迁移过程：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">v1.4
+</span></span><span class="line"><span class="cl">field_a
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">v1.5
+</span></span><span class="line"><span class="cl">field_a Deprecated
+</span></span><span class="line"><span class="cl">field_b Added
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">v2.0
+</span></span><span class="line"><span class="cl">field_a Removed
+</span></span></code></pre></div><p>必须给予用户至少一个合理迁移周期。</p>
+<hr>
+<h3 id="78-commit-规范">78. Commit 规范</h3>
+<p>建议 Conventional Commits：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">feat:
+</span></span><span class="line"><span class="cl">fix:
+</span></span><span class="line"><span class="cl">docs:
+</span></span><span class="line"><span class="cl">test:
+</span></span><span class="line"><span class="cl">refactor:
+</span></span><span class="line"><span class="cl">chore:
+</span></span><span class="line"><span class="cl">ci:
+</span></span></code></pre></div><p>例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">feat(instance): support instance import
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">fix(network): remove state when remote network is missing
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docs(volume): document disk_type replacement behavior
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">test(instance): add update acceptance test
+</span></span></code></pre></div><hr>
+<h3 id="79-pull-request-检查">79. Pull Request 检查</h3>
+<p>Resource PR 必须确认：</p>
+<ul>
+<li>Metadata 正确</li>
+<li>Schema Description 完整</li>
+<li>Sensitive 字段正确标记</li>
+<li>Required / Optional / Computed 合理</li>
+<li>Validator 完整</li>
+<li>RequiresReplace 正确</li>
+<li>Null / Unknown 正确处理</li>
+<li>Create 使用真实 API 状态</li>
+<li>Read 正确刷新状态</li>
+<li>Read 404 RemoveResource</li>
+<li>Update 后重新读取状态</li>
+<li>Delete 404 视为成功</li>
+<li>ImportState 已实现</li>
+<li>API Client 支持 Context</li>
+<li>无 Secret 日志</li>
+<li>Unit Test 完整</li>
+<li>Acceptance Test 完整</li>
+<li>examples 已添加</li>
+<li>文档已更新</li>
+<li><code>terraform apply</code> 后再次 <code>plan</code> 无 Diff</li>
+</ul>
+<hr>
+<h3 id="80-resource-definition-of-done">80. Resource Definition of Done</h3>
+<p>一个 Resource 只有同时满足以下条件才算完成：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Create      ✓
+</span></span><span class="line"><span class="cl">Read        ✓
+</span></span><span class="line"><span class="cl">Update      ✓ / RequiresReplace
+</span></span><span class="line"><span class="cl">Delete      ✓
+</span></span><span class="line"><span class="cl">Import      ✓
+</span></span><span class="line"><span class="cl">Drift       ✓
+</span></span><span class="line"><span class="cl">404         ✓
+</span></span><span class="line"><span class="cl">Validation  ✓
+</span></span><span class="line"><span class="cl">Unit Test   ✓
+</span></span><span class="line"><span class="cl">Acc Test    ✓
+</span></span><span class="line"><span class="cl">Docs        ✓
+</span></span><span class="line"><span class="cl">Examples    ✓
+</span></span><span class="line"><span class="cl">No Diff     ✓
+</span></span></code></pre></div><p>其中最后一项尤其重要：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">terraform apply
+</span></span><span class="line"><span class="cl">terraform plan
+</span></span></code></pre></div><p>期望：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">No changes. Your infrastructure matches the configuration.
+</span></span></code></pre></div><hr>
+<h3 id="81-核心设计原则">81. 核心设计原则</h3>
+<p>Provider 开发必须遵循以下原则：</p>
+<h4 id="1-state-是事实不是缓存">1. State 是事实，不是缓存</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">State = Remote Resource 当前 Terraform 可表达的真实状态
+</span></span></code></pre></div><hr>
+<h4 id="2-read-是-resource-的核心">2. Read 是 Resource 的核心</h4>
+<p>Create / Update / Import 最终都应该能够通过 Read 得到一致状态。</p>
+<p>理想状态：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Create ─┐
+</span></span><span class="line"><span class="cl">Update ─┼─&gt; Read ─&gt; State
+</span></span><span class="line"><span class="cl">Import ─┘
+</span></span></code></pre></div><hr>
+<h4 id="3-api-model-与-terraform-model-分离">3. API Model 与 Terraform Model 分离</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Terraform Schema
+</span></span><span class="line"><span class="cl">      ↕
+</span></span><span class="line"><span class="cl">Terraform Model
+</span></span><span class="line"><span class="cl">      ↕
+</span></span><span class="line"><span class="cl">Mapper
+</span></span><span class="line"><span class="cl">      ↕
+</span></span><span class="line"><span class="cl">API Model
+</span></span></code></pre></div><p>禁止 Terraform 类型污染 API Client。</p>
+<hr>
+<h4 id="4-schema-表达资源语义">4. Schema 表达资源语义</h4>
+<p>不要把 Schema 当 DTO。</p>
+<p>Schema 需要表达：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Required
+</span></span><span class="line"><span class="cl">Optional
+</span></span><span class="line"><span class="cl">Computed
+</span></span><span class="line"><span class="cl">Sensitive
+</span></span><span class="line"><span class="cl">Validation
+</span></span><span class="line"><span class="cl">Replacement
+</span></span><span class="line"><span class="cl">Unknown
+</span></span><span class="line"><span class="cl">State
+</span></span></code></pre></div><hr>
+<h4 id="5-plan-modifier-不用于隐藏-bug">5. Plan Modifier 不用于隐藏 Bug</h4>
+<p>不要为了得到：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">No changes
+</span></span></code></pre></div><p>而滥用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">UseStateForUnknown
+</span></span><span class="line"><span class="cl">RequiresReplace
+</span></span><span class="line"><span class="cl">Computed
+</span></span></code></pre></div><p>必须解决真正的数据一致性问题。</p>
+<hr>
+<h4 id="6-provider-必须幂等">6. Provider 必须幂等</h4>
+<p>应该满足：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Apply #1
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">Resource Created
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Apply #2
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">No Changes
+</span></span></code></pre></div><p>而不是：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Apply #2
+</span></span><span class="line"><span class="cl">    ↓
+</span></span><span class="line"><span class="cl">Update Again
+</span></span></code></pre></div><hr>
+<h3 id="82-推荐开发流程">82. 推荐开发流程</h3>
+<p>新增 Resource：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">1. 分析 Remote API
+</span></span><span class="line"><span class="cl">       ↓
+</span></span><span class="line"><span class="cl">2. 确定 Terraform Resource 边界
+</span></span><span class="line"><span class="cl">       ↓
+</span></span><span class="line"><span class="cl">3. 设计 Schema
+</span></span><span class="line"><span class="cl">       ↓
+</span></span><span class="line"><span class="cl">4. 定义 Terraform Model
+</span></span><span class="line"><span class="cl">       ↓
+</span></span><span class="line"><span class="cl">5. 编写 API Client
+</span></span><span class="line"><span class="cl">       ↓
+</span></span><span class="line"><span class="cl">6. 编写 Mapper
+</span></span><span class="line"><span class="cl">       ↓
+</span></span><span class="line"><span class="cl">7. 实现 Create
+</span></span><span class="line"><span class="cl">       ↓
+</span></span><span class="line"><span class="cl">8. 实现 Read
+</span></span><span class="line"><span class="cl">       ↓
+</span></span><span class="line"><span class="cl">9. 实现 Update
+</span></span><span class="line"><span class="cl">       ↓
+</span></span><span class="line"><span class="cl">10. 实现 Delete
+</span></span><span class="line"><span class="cl">       ↓
+</span></span><span class="line"><span class="cl">11. 实现 Import
+</span></span><span class="line"><span class="cl">       ↓
+</span></span><span class="line"><span class="cl">12. Unit Test
+</span></span><span class="line"><span class="cl">       ↓
+</span></span><span class="line"><span class="cl">13. Acceptance Test
+</span></span><span class="line"><span class="cl">       ↓
+</span></span><span class="line"><span class="cl">14. terraform apply
+</span></span><span class="line"><span class="cl">       ↓
+</span></span><span class="line"><span class="cl">15. terraform plan
+</span></span><span class="line"><span class="cl">       ↓
+</span></span><span class="line"><span class="cl">16. Drift Test
+</span></span><span class="line"><span class="cl">       ↓
+</span></span><span class="line"><span class="cl">17. External Delete Test
+</span></span><span class="line"><span class="cl">       ↓
+</span></span><span class="line"><span class="cl">18. Documentation
+</span></span></code></pre></div><p>不建议：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">先写 CRUD
+</span></span><span class="line"><span class="cl">     ↓
+</span></span><span class="line"><span class="cl">再随便补 Schema
+</span></span><span class="line"><span class="cl">     ↓
+</span></span><span class="line"><span class="cl">最后处理 Terraform Diff
+</span></span></code></pre></div><p>Schema 应该在编码前完成基本设计。</p>
+<hr>
+<h3 id="83-推荐-resource-架构">83. 推荐 Resource 架构</h3>
+<p>最终推荐统一采用：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">                 Terraform Core
+</span></span><span class="line"><span class="cl">                       │
+</span></span><span class="line"><span class="cl">                       ▼
+</span></span><span class="line"><span class="cl">            Terraform Plugin Framework
+</span></span><span class="line"><span class="cl">                       │
+</span></span><span class="line"><span class="cl">              ┌────────┴────────┐
+</span></span><span class="line"><span class="cl">              │                 │
+</span></span><span class="line"><span class="cl">           Resource         DataSource
+</span></span><span class="line"><span class="cl">              │                 │
+</span></span><span class="line"><span class="cl">              └────────┬────────┘
+</span></span><span class="line"><span class="cl">                       │
+</span></span><span class="line"><span class="cl">                       ▼
+</span></span><span class="line"><span class="cl">                    Mapper
+</span></span><span class="line"><span class="cl">                       │
+</span></span><span class="line"><span class="cl">                       ▼
+</span></span><span class="line"><span class="cl">                  API Client
+</span></span><span class="line"><span class="cl">                       │
+</span></span><span class="line"><span class="cl">                       ▼
+</span></span><span class="line"><span class="cl">                Remote Service
+</span></span></code></pre></div><p>依赖方向必须保持：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">provider
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">client
+</span></span></code></pre></div><p>而不能：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">client
+</span></span><span class="line"><span class="cl">   ↓
+</span></span><span class="line"><span class="cl">provider
+</span></span></code></pre></div><hr>
+<h3 id="84-最终强制规则摘要">84. 最终强制规则摘要</h3>
+<p>以下规则定义为 MUST：</p>
+<ol>
+<li>新 Provider 使用 Terraform Plugin Framework。</li>
+<li>Terraform Model 使用 <code>types.*</code> 表达 Terraform 数据。</li>
+<li>API Client 与 Terraform Framework 解耦。</li>
+<li>所有远程请求接受 <code>context.Context</code>。</li>
+<li>Secret Schema 必须设置 <code>Sensitive: true</code>。</li>
+<li>Schema 必须正确区分 Required / Optional / Computed。</li>
+<li>不可变字段使用 <code>RequiresReplace</code>。</li>
+<li>不得滥用 <code>UseStateForUnknown</code>。</li>
+<li>Create / Update 后必须以 Remote API 实际状态为准。</li>
+<li>Read 遇到 Remote 404 必须 <code>RemoveResource</code>。</li>
+<li>Delete 遇到 Remote 404 必须视为成功。</li>
+<li>可查询 Resource 必须支持 Import。</li>
+<li>Provider 不得因用户输入 Panic。</li>
+<li>不得记录 Token / Password / Secret。</li>
+<li>Remote API 与 Terraform Model 必须通过 Mapper 隔离。</li>
+<li>List / Set 必须按照业务是否存在顺序语义选择。</li>
+<li>已发布 Schema 的 Breaking Change 必须考虑 State Upgrade。</li>
+<li>Resource 必须具备 Acceptance Test。</li>
+<li>Acceptance Test 必须验证 Import。</li>
+<li>Resource 必须通过 Apply 后再次 Plan 无永久 Diff 的测试。</li>
+</ol>
+<hr>
+<h3 id="heading"></h3>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2026-09-06</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev-tf/">dev-tf</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2026-08-28-rust/" class="prev" rel="prev" title="rust"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>rust</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

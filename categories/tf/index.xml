@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>TF - Category - Blog</title>
+        <link>https://serialt.github.io/categories/tf/</link>
+        <description>TF - Category - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 06 Sep 2026 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/tf/" rel="self" type="application/rss+xml" /><item>
+    <title>dev-tf</title>
+    <link>https://serialt.github.io/posts/2026-09-06-dev-tf/</link>
+    <pubDate>Sun, 06 Sep 2026 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-09-06-dev-tf/</guid>
+    <description><![CDATA[Terraform Provider 开发规范 1. 目的 本文定义基于 Terraform Plugin Framework（以下简称 TPF） 开发 Terraform Provider 的统一规范。 目标： 保证 Provider 行为符合 Terraform 生命周期语义。 保证 Resource / Data Source 代]]></description>
+</item>
+</channel>
+</rss>
