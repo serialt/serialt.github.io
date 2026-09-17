@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 06 Sep 2026 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 12 Sep 2026 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>vaults3</title>
+    <link>https://serialt.github.io/tags/vaults3/</link>
+    <pubDate>Sat, 12 Sep 2026 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/vaults3/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>dev-tf</title>
     <link>https://serialt.github.io/tags/dev-tf/</link>
     <pubDate>Sun, 06 Sep 2026 21:50:01 &#43;0800</pubDate>
@@ -74,14 +82,6 @@
     <pubDate>Sun, 05 Apr 2026 21:57:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/kafka/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>MQ</title>
-    <link>https://serialt.github.io/tags/mq/</link>
-    <pubDate>Sat, 28 Mar 2026 21:57:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/mq/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

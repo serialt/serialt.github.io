@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>s3 - Category - Blog</title>
+        <link>https://serialt.github.io/categories/s3/</link>
+        <description>s3 - Category - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 12 Sep 2026 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/s3/" rel="self" type="application/rss+xml" /><item>
+    <title>vaults3</title>
+    <link>https://serialt.github.io/posts/2026-09-12-light-s3/</link>
+    <pubDate>Sat, 12 Sep 2026 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-09-12-light-s3/</guid>
+    <description><![CDATA[VaultS3 轻量级S3存储 一、介绍 VaultS3 是一个轻量级、兼容 Amazon S3 API 的开源对象存储服务，使用 Go 开发，可以以单二进制或 Docker 容器方式运行，并内置 Web Dashboard]]></description>
+</item>
+</channel>
+</rss>
