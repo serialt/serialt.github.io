@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>mbot2 - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="mbot2" />
+<meta property="og:description" content="mbot2 https://github.com/krabt/mbot2 mbot2 是一个小型 MQTT 设备管理示例，由 MQTT Broker 和设备客户端两个独立的 Go 模块组成： mkrab：支持账号认证、角色 ACL、消息持久化和 Web 管理界面的 MQTT Br" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2026-09-12-mbot2/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2026-09-12T22:50:01+08:00" />
+<meta property="article:modified_time" content="2026-09-12T22:50:01+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="mbot2"/>
+<meta name="twitter:description" content="mbot2 https://github.com/krabt/mbot2 mbot2 是一个小型 MQTT 设备管理示例，由 MQTT Broker 和设备客户端两个独立的 Go 模块组成： mkrab：支持账号认证、角色 ACL、消息持久化和 Web 管理界面的 MQTT Br"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2026-09-12-mbot2/" /><link rel="prev" href="https://serialt.github.io/posts/2026-09-12-light-s3/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "mbot2",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2026-09-12-mbot2\/"
+        },"genre": "posts","keywords": "mbot2","wordcount":  2043 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2026-09-12-mbot2\/","datePublished": "2026-09-12T22:50:01+08:00","dateModified": "2026-09-12T22:50:01+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">mbot2</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/mqtt/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>mqtt</a>&nbsp;<a href="/categories/bot/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>bot</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-09-12">2026-09-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2043 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#功能概览">功能概览</a>
+      <ul>
+        <li><a href="#mkrab-broker">mkrab Broker</a></li>
+        <li><a href="#mbot-客户端">mbot 客户端</a></li>
+      </ul>
+    </li>
+    <li><a href="#项目结构">项目结构</a></li>
+    <li><a href="#环境要求">环境要求</a></li>
+    <li><a href="#快速开始">快速开始</a>
+      <ul>
+        <li><a href="#1-启动-mkrab">1. 启动 mkrab</a></li>
+        <li><a href="#2-配置-mbot">2. 配置 mbot</a></li>
+        <li><a href="#3-启动-mbot">3. 启动 mbot</a></li>
+      </ul>
+    </li>
+    <li><a href="#mkrab-配置">mkrab 配置</a>
+      <ul>
+        <li><a href="#数据和权限模型">数据和权限模型</a></li>
+      </ul>
+    </li>
+    <li><a href="#mqtt-消息协议">MQTT 消息协议</a>
+      <ul>
+        <li><a href="#温度上报">温度上报</a></li>
+        <li><a href="#命令下发与结果">命令下发与结果</a></li>
+        <li><a href="#使用-mosquitto-测试">使用 Mosquitto 测试</a></li>
+      </ul>
+    </li>
+    <li><a href="#主机信息采集">主机信息采集</a></li>
+    <li><a href="#开发与测试">开发与测试</a></li>
+    <li><a href="#安全建议">安全建议</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="mbot2">mbot2</h1>
+<ul>
+<li><a href="https://github.com/krabt/mbot2" target="_blank" rel="noopener noreffer ">https://github.com/krabt/mbot2</a></li>
+</ul>
+<p><code>mbot2</code> 是一个小型 MQTT 设备管理示例，由 MQTT Broker 和设备客户端两个独立的 Go 模块组成：</p>
+<ul>
+<li><strong>mkrab</strong>：支持账号认证、角色 ACL、消息持久化和 Web 管理界面的 MQTT Broker。</li>
+<li><strong>mbot</strong>：采集主机信息、上报模拟温度，并通过 MQTT 接收控制命令的设备客户端。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">控制端 ──发布命令──&gt; mkrab ──转发命令──&gt; mbot
+</span></span><span class="line"><span class="cl">控制端 &lt;─查看消息── mkrab &lt;─温度/结果── mbot
+</span></span><span class="line"><span class="cl">                         │
+</span></span><span class="line"><span class="cl">                         └── SQLite 审计与 Web 管理界面
+</span></span></code></pre></div><blockquote>
+<p>[!WARNING]
+<code>mbot</code> 当前允许 MQTT 消息触发任意 Shell 命令，<code>mkrab</code> 的 Web 管理接口当前也没有身份认证。项目适合本地开发和可信网络测试；用于生产环境前，请先完成命令白名单、Web 身份认证、TLS 和最小权限 ACL。</p>
+</blockquote>
+<h2 id="功能概览">功能概览</h2>
+<h3 id="mkrab-broker">mkrab Broker</h3>
+<ul>
+<li>MQTT over TCP、TLS、WebSocket 和 WSS，可分别启停</li>
+<li>SQLite 持久化，GORM 自动建表和软删除</li>
+<li>bcrypt 密码认证，以及基于角色的发布/订阅 ACL</li>
+<li>客户端连接、接收消息和主题数据记录</li>
+<li>内置 Web 管理界面和实时 WebSocket 订阅</li>
+<li>Cobra 命令行、Wire 依赖装配和 GORM Gen 查询代码</li>
+</ul>
+<h3 id="mbot-客户端">mbot 客户端</h3>
+<ul>
+<li>MQTT 自动连接、断线重连和主题订阅</li>
+<li>采集操作系统、CPU、内存、磁盘、网络、虚拟化及硬件信息</li>
+<li>根据硬件特征生成 SHA-256 主机 ID</li>
+<li>每 30 秒上报一次模拟温度</li>
+<li>接收命令、执行限时 Shell 任务并发布结果</li>
+</ul>
+<h2 id="项目结构">项目结构</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">mbot2/
+</span></span><span class="line"><span class="cl">├── README.md
+</span></span><span class="line"><span class="cl">├── mkrab/                    # MQTT Broker（独立 Go 模块）
+</span></span><span class="line"><span class="cl">│   ├── cmd/mkrab/            # 命令行入口
+</span></span><span class="line"><span class="cl">│   ├── internal/admin/       # Web 管理界面及 API
+</span></span><span class="line"><span class="cl">│   ├── internal/broker/      # MQTT 服务、认证和消息处理
+</span></span><span class="line"><span class="cl">│   ├── internal/data/        # SQLite、Repository 和生成的 Query
+</span></span><span class="line"><span class="cl">│   ├── config.example.yaml
+</span></span><span class="line"><span class="cl">│   └── go.mod
+</span></span><span class="line"><span class="cl">└── mbot/                     # 设备客户端（独立 Go 模块）
+</span></span><span class="line"><span class="cl">    ├── main.go               # MQTT 收发和命令执行
+</span></span><span class="line"><span class="cl">    ├── util/                 # 主机信息采集及 JSON 工具
+</span></span><span class="line"><span class="cl">    └── go.mod
+</span></span></code></pre></div><h2 id="环境要求">环境要求</h2>
+<ul>
+<li>Go 1.26.1 或兼容版本</li>
+<li>可选：Mosquitto CLI，用于手动发布和订阅测试消息</li>
+</ul>
+<p>仓库没有根级 <code>go.mod</code>，请在 <code>mkrab</code> 和 <code>mbot</code> 目录中分别执行 Go 命令。</p>
+<h2 id="快速开始">快速开始</h2>
+<h3 id="1-启动-mkrab">1. 启动 mkrab</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">cd</span> mkrab
+</span></span><span class="line"><span class="cl">cp config.example.yaml config.yaml
+</span></span><span class="line"><span class="cl">go run ./cmd/mkrab serve --config config.yaml
+</span></span></code></pre></div><p>默认开启以下服务：</p>
+<table>
+<thead>
+<tr>
+<th>服务</th>
+<th>地址</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MQTT TCP</td>
+<td><code>127.0.0.1:1883</code></td>
+<td>客户端连接入口</td>
+</tr>
+<tr>
+<td>Web 管理界面</td>
+<td><code>http://127.0.0.1:8080</code></td>
+<td>查看主题、消息、连接、用户及 ACL</td>
+</tr>
+<tr>
+<td>SQLite</td>
+<td><code>mkrab/mqtt.db</code></td>
+<td>账号、ACL、消息和连接记录</td>
+</tr>
+</tbody>
+</table>
+<p>首次启动且用户表为空时，Broker 会创建 <code>root</code> 用户、<code>admin</code> 角色和允许发布/订阅 <code>#</code> 的规则。随机初始密码只会在首次启动日志中显示一次，请立即保存。</p>
+<h3 id="2-配置-mbot">2. 配置 mbot</h3>
+<p>打开 <code>mbot/main.go</code>，修改 <code>cfg</code>。其中 <code>Password</code> 应替换为上一步日志中的初始密码：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">cfg</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">MqttConfig</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Broker</span><span class="p">:</span>   <span class="s">&#34;127.0.0.1:1883&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ClientID</span><span class="p">:</span> <span class="s">&#34;go-temperature-client&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Username</span><span class="p">:</span> <span class="s">&#34;root&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Password</span><span class="p">:</span> <span class="s">&#34;&lt;mkrab 首次启动生成的密码&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">SubTopic</span><span class="p">:</span> <span class="s">&#34;sugar/home/cmd&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">PubTopic</span><span class="p">:</span> <span class="s">&#34;sugar/home/sensor/temperature&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>多个客户端同时运行时，每个实例必须使用不同的 <code>ClientID</code>。生产环境不要把密码硬编码在源码中。</p>
+<h3 id="3-启动-mbot">3. 启动 mbot</h3>
+<p>另开一个终端：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">cd</span> mbot
+</span></span><span class="line"><span class="cl">go run .
+</span></span></code></pre></div><p>客户端将连接 Broker、订阅命令主题、打印一次主机信息 JSON，并每 30 秒发布一条模拟温度消息。此时可在 <code>http://127.0.0.1:8080</code> 查看连接和消息。</p>
+<h2 id="mkrab-配置">mkrab 配置</h2>
+<p>完整示例位于 <a href="mkrab/config.example.yaml" rel=""><code>mkrab/config.example.yaml</code></a>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;mqtt.db&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">listeners</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tcp</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;:1883&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">tls</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;:8883&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">cert_file</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;certs/server.crt&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">key_file</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;certs/server.key&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">websocket</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;:8083&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">wss</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;:8084&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">cert_file</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;certs/server.crt&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">key_file</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;certs/server.key&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">message_store</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">topic</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;#&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">web</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;127.0.0.1:8080&#34;</span><span class="w">
+</span></span></span></code></pre></div><p>至少需要启用一个 MQTT Listener。TLS 和 WSS 必须提供证书与私钥，最低支持 TLS 1.2。<code>message_store.topic</code> 决定 Broker 内置订阅要持久化的主题范围。</p>
+<h3 id="数据和权限模型">数据和权限模型</h3>
+<p>Broker 自动维护以下 SQLite 表：</p>
+<table>
+<thead>
+<tr>
+<th>表</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mqtt_user</code></td>
+<td>用户、bcrypt 密码哈希和启用状态</td>
+</tr>
+<tr>
+<td><code>mqtt_role</code></td>
+<td>角色</td>
+</tr>
+<tr>
+<td><code>mqtt_user_role</code></td>
+<td>用户与角色关系</td>
+</tr>
+<tr>
+<td><code>mqtt_acl_rule</code></td>
+<td>角色的发布/订阅 allow、deny 规则</td>
+</tr>
+<tr>
+<td><code>received_message</code></td>
+<td>Broker 内置订阅收到的消息</td>
+</tr>
+<tr>
+<td><code>mqtt_client_connection</code></td>
+<td>客户端连接、断开和协议元数据</td>
+</tr>
+</tbody>
+</table>
+<p>ACL 的 <code>operation</code> 为 <code>publish</code> 或 <code>subscribe</code>，<code>effect</code> 为 <code>allow</code> 或 <code>deny</code>。同一用户的多个角色合并时 deny 优先；没有匹配到 allow 时默认拒绝。认证和鉴权会实时读取数据库，修改数据后无需重启 Broker。</p>
+<h2 id="mqtt-消息协议">MQTT 消息协议</h2>
+<h3 id="温度上报">温度上报</h3>
+<p>默认主题：<code>sugar/home/sensor/temperature</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;device_id&#34;</span><span class="p">:</span> <span class="s2">&#34;sensor_001&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;temperature&#34;</span><span class="p">:</span> <span class="mf">22.5</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;ts&#34;</span><span class="p">:</span> <span class="mi">1750000000</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><code>temperature</code> 单位为摄氏度，<code>ts</code> 是秒级 Unix 时间戳。当前设备 ID 和温度均为示例数据。</p>
+<h3 id="命令下发与结果">命令下发与结果</h3>
+<p>默认命令主题：<code>sugar/home/cmd</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;msg&#34;</span><span class="p">:</span> <span class="s2">&#34;bash&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;cmd&#34;</span><span class="p">:</span> <span class="s2">&#34;uname -a&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>当 <code>msg</code> 为 <code>bash</code> 时，<code>mbot</code> 使用 <code>/bin/bash -c</code> 执行 <code>cmd</code>；超过 10 秒的任务会被终止。结果发布到 <code>sugar/home/sensor/temperature</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;result&#34;</span><span class="p">:</span> <span class="s2">&#34;Linux host 6.x ...&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>当前温度和命令结果共用一个发布主题，消费者需要根据 JSON 字段区分消息类型。如果命令同时产生标准输出和标准错误，当前实现返回标准错误。</p>
+<h3 id="使用-mosquitto-测试">使用 Mosquitto 测试</h3>
+<p>将 <code>&lt;password&gt;</code> 替换为 Broker 首次启动时生成的密码。</p>
+<p>监听上报和命令结果：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">mosquitto_sub <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -h 127.0.0.1 -p <span class="m">1883</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -u root -P <span class="s1">&#39;&lt;password&gt;&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -t sugar/home/sensor/temperature
+</span></span></code></pre></div><p>发送测试命令：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">mosquitto_pub <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -h 127.0.0.1 -p <span class="m">1883</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -u root -P <span class="s1">&#39;&lt;password&gt;&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -t sugar/home/cmd <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -m <span class="s1">&#39;{&#34;msg&#34;:&#34;bash&#34;,&#34;cmd&#34;:&#34;uname -a&#34;}&#39;</span>
+</span></span></code></pre></div><h2 id="主机信息采集">主机信息采集</h2>
+<p><code>mbot</code> 启动时输出操作系统、CPU、内存、磁盘、IPv4 网络、虚拟化和硬件信息。采集公网 IP 时会访问 <code>https://ipinfo.io</code>；请求失败时 <code>public_ip</code> 为空，不影响 MQTT 客户端继续运行。</p>
+<h2 id="开发与测试">开发与测试</h2>
+<p>分别测试两个模块：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="o">(</span><span class="nb">cd</span> mkrab <span class="o">&amp;&amp;</span> go <span class="nb">test</span> ./...<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span><span class="nb">cd</span> mbot <span class="o">&amp;&amp;</span> go <span class="nb">test</span> ./...<span class="o">)</span>
+</span></span></code></pre></div><p>修改 mkrab 数据模型后重新生成 GORM Query：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">cd</span> mkrab
+</span></span><span class="line"><span class="cl">go run ./cmd/mkrab gen
+</span></span></code></pre></div><p>修改 Wire provider 后重新生成依赖装配代码：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">cd</span> mkrab
+</span></span><span class="line"><span class="cl">go generate ./internal/app
+</span></span></code></pre></div><h2 id="安全建议">安全建议</h2>
+<ul>
+<li>使用独立的低权限系统用户运行 <code>mbot</code>，并将任意 Shell 执行改为命令白名单。</li>
+<li>为每台设备分配独立账号、客户端 ID 和主题权限。</li>
+<li>只允许受信控制端向设备命令主题发布消息。</li>
+<li>为 mkrab Web 管理界面增加身份认证，不要直接暴露到公网。</li>
+<li>生产环境启用 TLS/WSS，安全保存私钥和 MQTT 凭据。</li>
+<li>定期清理或归档 SQLite 中的消息及连接审计数据。</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2026-09-12</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/mbot2/">mbot2</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2026-09-12-light-s3/" class="prev" rel="prev" title="vaults3"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>vaults3</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

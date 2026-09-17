@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>mbot2 - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/mbot2/</link>
+        <description>mbot2 - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 12 Sep 2026 22:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/mbot2/" rel="self" type="application/rss+xml" /><item>
+    <title>mbot2</title>
+    <link>https://serialt.github.io/posts/2026-09-12-mbot2/</link>
+    <pubDate>Sat, 12 Sep 2026 22:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-09-12-mbot2/</guid>
+    <description><![CDATA[mbot2 https://github.com/krabt/mbot2 mbot2 是一个小型 MQTT 设备管理示例，由 MQTT Broker 和设备客户端两个独立的 Go 模块组成： mkrab：支持账号认证、角色 ACL、消息持久化和 Web 管理界面的 MQTT Br]]></description>
+</item>
+</channel>
+</rss>
