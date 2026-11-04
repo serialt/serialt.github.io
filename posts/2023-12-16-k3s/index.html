@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2023-12-16-k3s\/"
-        },"genre": "posts","keywords": "k3s, k8s","wordcount":  6855 ,
+        },"genre": "posts","keywords": "k3s, k8s","wordcount":  6893 ,
         "url": "https:\/\/serialt.github.io\/posts\/2023-12-16-k3s\/","datePublished": "2023-12-16T20:26:27+08:00","dateModified": "2023-12-16T20:26:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,7 +101,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">k3s</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-16">2023-12-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6855 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-16">2023-12-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6893 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -624,19 +624,25 @@
 </span></span></span><span class="line"><span class="cl"><span class="s">mirrors:
 </span></span></span><span class="line"><span class="cl"><span class="s">  docker.io:
 </span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
-</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://docker.mirrors.sjtug.sjtu.edu.cn&#34;
-</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://docker.nju.edu.cn&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://docker.m.daocloud.io&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">  registry.k8s.io:
+</span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://k8s.m.daocloud.io&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">  quay.io:
 </span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://quay.m.daocloud.io&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://quay.nju.edu.cn&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">  gcr.io:
 </span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://gcr.m.daocloud.io&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://gcr.nju.edu.cn&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">  ghcr.io:
 </span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://ghcr.m.daocloud.io&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://ghcr.nju.edu.cn&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">  nvcr.io:
 </span></span></span><span class="line"><span class="cl"><span class="s">    endpoint:
+</span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://nvcr.m.daocloud.io&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">      - &#34;https://ngc.nju.edu.cn&#34;
 </span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
 </span></span><span class="line"><span class="cl">
@@ -698,7 +704,21 @@ k3s certificate rotate
 
 # 启动 K3s
 systemctl start k3s
-</code></pre><h2 id="三多master高可用生产级别部署---在线版">三、多master高可用生产级别部署&mdash;在线版</h2>
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># k3s 改监听端口</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">vim /var/lib/rancher/k3s/server/manifests/traefik-config.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">helm.cattle.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">HelmChartConfig</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">traefik</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">kube-system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">valuesContent</span><span class="p">:</span><span class="w"> </span><span class="p">|-</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">    ports:
+</span></span></span><span class="line"><span class="cl"><span class="sd">      web:
+</span></span></span><span class="line"><span class="cl"><span class="sd">        exposedPort: 8000
+</span></span></span><span class="line"><span class="cl"><span class="sd">      websecure:
+</span></span></span><span class="line"><span class="cl"><span class="sd">        exposedPort: 8443</span><span class="w">    
+</span></span></span></code></pre></div><h2 id="三多master高可用生产级别部署---在线版">三、多master高可用生产级别部署&mdash;在线版</h2>
 <ul>
 <li>
 <p><a href="https://kube-vip.io/docs/usage/k3s/" target="_blank" rel="noopener noreffer ">https://kube-vip.io/docs/usage/k3s/</a></p>

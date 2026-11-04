@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2025-10-12-argocd\/"
-        },"genre": "posts","keywords": "argocd","wordcount":  3204 ,
+        },"genre": "posts","keywords": "argocd","wordcount":  3867 ,
         "url": "https:\/\/serialt.github.io\/posts\/2025-10-12-argocd\/","datePublished": "2025-10-12T21:26:27+08:00","dateModified": "2025-10-12T21:26:27+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,8 +101,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">ArgoCD</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/devops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>DevOps</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-10-12">2025-10-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3204 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2025-10-12">2025-10-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3867 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -117,6 +117,7 @@
         <li><a href="#三app">三、app</a></li>
         <li><a href="#四rollouts">四、rollouts</a></li>
         <li><a href="#五applicationset">五、ApplicationSet</a></li>
+        <li><a href="#六argo-其他服务">六、Argo 其他服务</a></li>
       </ul>
     </li>
   </ul>
@@ -157,7 +158,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">repository</span><span class="p">:</span><span class="w"> </span><span class="l">registry.cn-hangzhou.aliyuncs.com/serialt/argocd</span><span class="w">
 </span></span></span></code></pre></div><p>安装</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm upgrade --install argocd argo/argo-cd --namespace argocd --version<span class="o">=</span>9.4.11  -f value.yaml
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">helm upgrade --install argocd argo/argo-cd --namespace argocd --version<span class="o">=</span>10.11.6  -f value.yaml
 </span></span></code></pre></div><h4 id="2配置外部访问">2、配置外部访问</h4>
 <p><code>ingress(nginx)</code></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">cat &lt;&lt;EOF | kubectl apply -f -</span><span class="w">
@@ -230,7 +231,55 @@
 <pre tabindex="0"><code>127.0.0.1  argocd.local.com
 </code></pre><p>查看admin密码</p>
 <pre tabindex="0"><code>kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=&#34;{.data.password}&#34; | base64 -d
-</code></pre><h3 id="三app">三、app</h3>
+</code></pre><p>修改管理员密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">argocd account bcrypt --password <span class="s2">&#34;你的新密码&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 将下方 $2a$10$... 替换为你第一步生成的完整字符串</span>
+</span></span><span class="line"><span class="cl">kubectl -n argocd patch secret argocd-secret <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -p <span class="s1">&#39;{&#34;stringData&#34;: { &#34;admin.password&#34;: &#34;$2a$10$rRyBsGSHK6.uc8fntPwVIuLVHgsAhAX7TcdrqW/RADU0uh7CaChLa&#34;, &#34;admin.passwordMtime&#34;: &#34;&#39;</span><span class="k">$(</span>date +%FT%T%Z<span class="k">)</span><span class="s1">&#39;&#34; }}&#39;</span>
+</span></span></code></pre></div><p>配置git服务信任</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># ssh</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">ssh-keyscan -t ed25519,rsa git.internal.example.com</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">###</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ConfigMap</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">argocd-ssh-known-hosts-cm</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">argocd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="l">argocd-ssh-known-hosts-cm</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/part-of</span><span class="p">:</span><span class="w"> </span><span class="l">argocd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">data</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ssh_known_hosts</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">    # 保留原有的系统/官方指纹（如 github.com, gitlab.com），追加你的私有服务器指纹：
+</span></span></span><span class="line"><span class="cl"><span class="sd">    git.internal.example.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI...
+</span></span></span><span class="line"><span class="cl"><span class="sd">    git.internal.example.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQ...
+</span></span></span><span class="line"><span class="cl"><span class="sd">    </span><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">kubectl apply -f ssh-known-hosts-cm.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">kubectl rollout restart deployment argocd-repo-server -n argocd</span><span class="w">
+</span></span></span></code></pre></div><p>配置http信任</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 将 git.yourdomain.com 替换为你的 Git 服务器域名（如 gitlab.example.com）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 443 为默认 HTTPS 端口</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">openssl s_client -showcerts -connect git.yourdomain.com:443 &lt;/dev/null 2&gt;/dev/null | awk &#39;/BEGIN CERTIFICATE/,/END CERTIFICATE/{ print }&#39; &gt; git_ca_chain.crt</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">####</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ConfigMap</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">argocd-tls-certs-cm</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">argocd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/name</span><span class="p">:</span><span class="w"> </span><span class="l">argocd-tls-certs-cm</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app.kubernetes.io/part-of</span><span class="p">:</span><span class="w"> </span><span class="l">argocd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">data</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># Key 格式必须为目标 Git/Helm 服务器的域名或 IP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">git.internal.example.com</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span></span></span><span class="line"><span class="cl"><span class="sd">    -----BEGIN CERTIFICATE-----
+</span></span></span><span class="line"><span class="cl"><span class="sd">    MIIDXTCCAkWgAwIBAgIJAL9... 你的私有 CA 证书内容 ...
+</span></span></span><span class="line"><span class="cl"><span class="sd">    -----END CERTIFICATE-----</span><span class="w">    
+</span></span></span></code></pre></div><h3 id="三app">三、app</h3>
 <p>app的同步策略</p>
 <ul>
 <li>SYNC POLICY: 同步策略
@@ -389,7 +438,71 @@ argo-rollouts-577dd4d6bc-trp2k   1/1     Running   0          2m35s
 </span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">NodePort </span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="nt">selector</span><span class="p">:</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">nginx-web</span><span class="w">
-</span></span></span></code></pre></div><p>1、创建repo</p>
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># application 级联删除模版</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">argoproj.io/v1alpha1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Application</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">argocd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 关键配置：添加级联删除 Finalizer</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">finalizers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">resources-finalizer.argocd.argoproj.io</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">project</span><span class="p">:</span><span class="w"> </span><span class="l">default</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">source</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">repoURL</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;https://github.com/example/my-repo.git&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">targetRevision</span><span class="p">:</span><span class="w"> </span><span class="l">HEAD</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;manifests/dev&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">destination</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;https://kubernetes.default.svc&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">dev</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">syncPolicy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">automated</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">prune</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">        </span><span class="c"># 同步清理 Git 中已移除的资源</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">selfHeal</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">     </span><span class="c"># 自动纠偏</span><span class="w">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># ApplicationSet 级联删除模版</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">argoproj.io/v1alpha1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ApplicationSet</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">cluster-apps</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">argocd</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 策略 1：定义当 Git/Matrix 生成器不再匹配某集群或分支时，自动清理对应的子 App</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">syncPolicy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">preserveResourcesOnDeletion</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">  </span><span class="c"># false 表示允许清理子应用</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">generators</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">list</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">elements</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="l">engineering-dev</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">https://10.0.0.1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="nt">cluster</span><span class="p">:</span><span class="w"> </span><span class="l">engineering-prod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">https://10.0.0.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;{{cluster}}-app&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 策略 2：在生成的每个子 Application 中嵌入 Finalizer，确保 K8s 底层资源同步销毁</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">finalizers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="l">resources-finalizer.argocd.argoproj.io</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">project</span><span class="p">:</span><span class="w"> </span><span class="l">default</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">source</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">repoURL</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;https://github.com/example/my-repo.git&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">targetRevision</span><span class="p">:</span><span class="w"> </span><span class="l">HEAD</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;manifests/{{cluster}}&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">destination</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;{{url}}&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">default</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">syncPolicy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">automated</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">prune</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">selfHeal</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 快速应急处理命令</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 强行移除 Application 的 finalizers，使其立刻被删除</span>
+</span></span><span class="line"><span class="cl">kubectl patch app &lt;app-name&gt; -n argocd -p <span class="s1">&#39;{&#34;metadata&#34;:{&#34;finalizers&#34;:null}}&#39;</span> --type merge
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 强行移除 ApplicationSet 的 finalizers</span>
+</span></span><span class="line"><span class="cl">kubectl patch applicationset &lt;appset-name&gt; -n argocd -p <span class="s1">&#39;{&#34;metadata&#34;:{&#34;finalizers&#34;:null}}&#39;</span> --type merge
+</span></span></code></pre></div><p>1、创建repo</p>
 <p>repo: <a href="mailto:git@gitee.com" rel="">git@gitee.com</a>:serialt/myapp.git</p>
 <p>2、创建application</p>
 <p>根据repo创建application，自动sync需要时间，想要快速，可以使用手动sync</p>
@@ -559,7 +672,72 @@ argo-rollouts-577dd4d6bc-trp2k   1/1     Running   0          2m35s
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 2. 或者使用 Label 选择器（如果 ApplicationSet 模板中定义了特定 Label）</span>
 </span></span><span class="line"><span class="cl">argocd app list -l <span class="s1">&#39;app.kubernetes.io/instance=my-appset&#39;</span> -o name <span class="p">|</span> xargs -I <span class="o">{}</span> argocd app sync <span class="o">{}</span>
-</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+</span></span></code></pre></div><h3 id="六argo-其他服务">六、Argo 其他服务</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># workflow</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">crds</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">install</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">keep</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">controller</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">registry</span><span class="p">:</span><span class="w"> </span><span class="l">quay.m.daocloud.io</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">repository</span><span class="p">:</span><span class="w"> </span><span class="l">argoproj/workflow-controller</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l">v4.1.4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">pullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">IfNotPresent</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">workflowNamespaces</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">argo-workflows</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">server</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">image</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">registry</span><span class="p">:</span><span class="w"> </span><span class="l">quay.m.daocloud.io</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">repository</span><span class="p">:</span><span class="w"> </span><span class="l">argoproj/argocli</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tag</span><span class="p">:</span><span class="w"> </span><span class="l">v4.1.4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">pullPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">IfNotPresent</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">authModes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">server</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ingressClassName</span><span class="p">:</span><span class="w"> </span><span class="l">traefik</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">hosts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">argo-workflow.imau.cc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">paths</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l">Prefix</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">ingress.kubernetes.io/protocol</span><span class="p">:</span><span class="w"> </span><span class="l">https</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">workflow</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">serviceAccount</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">create</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">argo-workflow</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rbac</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">create</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></div><pre tabindex="0"><code>helm upgrade --install argo-workflows \
+  argo/argo-workflows \
+  --version 2.0.8 \
+  --namespace argo-workflows \
+  --create-namespace \
+  -f values.yaml
+</code></pre><p>rollouts</p>
+<pre tabindex="0"><code>controller:
+  image:
+    registry: quay.m.daocloud.io
+    repository: argoproj/argo-rollouts
+    tag: v1.10.0
+    pullPolicy: IfNotPresent
+</code></pre><pre tabindex="0"><code>helm upgrade --install argo-rollouts \
+  argo/argo-rollouts \
+  --version 2.43.2 \
+  --namespace argo-rollouts \
+  --create-namespace \
+  -f values.yaml
+</code></pre></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
