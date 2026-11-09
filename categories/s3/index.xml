@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/categories/s3/</link>
         <description>s3 - Category - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 12 Sep 2026 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/s3/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 04 Nov 2026 22:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/s3/" rel="self" type="application/rss+xml" /><item>
+    <title>Silo</title>
+    <link>https://serialt.github.io/posts/2026-11-04-silo/</link>
+    <pubDate>Wed, 04 Nov 2026 22:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-11-04-silo/</guid>
+    <description><![CDATA[Silo Silo 是 Pigsty 社区维护的 MinIO 分支，旨在为现有 MinIO 部署提供持续的发行与安全维护路径，同时保留 S3 API、MINIO_* 环境变量、磁盘格式等兼容契约。 安装和]]></description>
+</item>
+<item>
     <title>vaults3</title>
     <link>https://serialt.github.io/posts/2026-09-12-light-s3/</link>
     <pubDate>Sat, 12 Sep 2026 21:50:01 &#43;0800</pubDate>

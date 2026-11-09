@@ -4,7 +4,15 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 12 Sep 2026 22:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 04 Nov 2026 22:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>silo</title>
+    <link>https://serialt.github.io/tags/silo/</link>
+    <pubDate>Wed, 04 Nov 2026 22:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/silo/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>mbot2</title>
     <link>https://serialt.github.io/tags/mbot2/</link>
     <pubDate>Sat, 12 Sep 2026 22:50:01 &#43;0800</pubDate>
@@ -74,14 +82,6 @@
     <pubDate>Thu, 21 May 2026 20:26:27 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/tf-dev/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Vue</title>
-    <link>https://serialt.github.io/tags/vue/</link>
-    <pubDate>Sat, 25 Apr 2026 21:57:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/vue/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

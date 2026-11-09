@@ -4,9 +4,17 @@
         <link>https://serialt.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sat, 12 Sep 2026 22:50:01 &#43;0800</lastBuildDate>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 04 Nov 2026 22:50:01 &#43;0800</lastBuildDate>
             <atom:link href="https://serialt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Silo</title>
+    <link>https://serialt.github.io/posts/2026-11-04-silo/</link>
+    <pubDate>Wed, 04 Nov 2026 22:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-11-04-silo/</guid>
+    <description><![CDATA[Silo Silo 是 Pigsty 社区维护的 MinIO 分支，旨在为现有 MinIO 部署提供持续的发行与安全维护路径，同时保留 S3 API、MINIO_* 环境变量、磁盘格式等兼容契约。 安装和]]></description>
+</item>
+<item>
     <title>mbot2</title>
     <link>https://serialt.github.io/posts/2026-09-12-mbot2/</link>
     <pubDate>Sat, 12 Sep 2026 22:50:01 &#43;0800</pubDate>
@@ -77,14 +85,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2026-04-05-kafka/</guid>
     <description><![CDATA[Kafka 一、介绍 1、重要概念 Broker: Kafka 的基本单元，负责存储和传递消息。一个 Kafka 集群由多个 Broker 组成。 Topic: 消息的分类，每条消息都属于一个特定的 Topic。用户可以]]></description>
-</item>
-<item>
-    <title>RabbitMQ</title>
-    <link>https://serialt.github.io/posts/2026-03-28-rabbitmq/</link>
-    <pubDate>Sat, 28 Mar 2026 21:57:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2026-03-28-rabbitmq/</guid>
-    <description><![CDATA[RabbitMQ 一、rabbitmq 概念理解 1、概念 MQ（Message Queue，消息队列）是一种用于在分布式系统中实现消息传递和异步通信的技术。它充当]]></description>
 </item>
 </channel>
 </rss>
