@@ -4,7 +4,23 @@
         <link>https://serialt.github.io/tags/</link>
         <description>Tags - Tag - Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 04 Nov 2026 22:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 08 Nov 2026 22:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>grpc</title>
+    <link>https://serialt.github.io/tags/grpc/</link>
+    <pubDate>Sun, 08 Nov 2026 22:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/grpc/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>nats</title>
+    <link>https://serialt.github.io/tags/nats/</link>
+    <pubDate>Thu, 05 Nov 2026 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/tags/nats/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>silo</title>
     <link>https://serialt.github.io/tags/silo/</link>
     <pubDate>Wed, 04 Nov 2026 22:50:01 &#43;0800</pubDate>
@@ -66,22 +82,6 @@
     <pubDate>Tue, 26 May 2026 21:50:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/tags/operator-sdk/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>terraform-dev</title>
-    <link>https://serialt.github.io/tags/terraform-dev/</link>
-    <pubDate>Thu, 21 May 2026 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/terraform-dev/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>tf-dev</title>
-    <link>https://serialt.github.io/tags/tf-dev/</link>
-    <pubDate>Thu, 21 May 2026 20:26:27 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/tags/tf-dev/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

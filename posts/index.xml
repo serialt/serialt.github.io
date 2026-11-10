@@ -4,7 +4,23 @@
         <link>https://serialt.github.io/posts/</link>
         <description>All Posts | Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
-            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Wed, 04 Nov 2026 22:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 08 Nov 2026 22:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>gRPC</title>
+    <link>https://serialt.github.io/posts/2026-11-08-grpc-go/</link>
+    <pubDate>Sun, 08 Nov 2026 22:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-11-08-grpc-go/</guid>
+    <description><![CDATA[1、gRPC Go 简介 gRPC 是 Google 开源的高性能、跨语言的 RPC 框架，基于 HTTP/2 协议和 Protocol Buffers 序列化机制。gRPC Go（grpc-go）是 gRPC 官方提供的 Go 语言实现，广]]></description>
+</item>
+<item>
+    <title>nats</title>
+    <link>https://serialt.github.io/posts/2026-11-05-nats/</link>
+    <pubDate>Thu, 05 Nov 2026 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-11-05-nats/</guid>
+    <description><![CDATA[NATS https://robustmq.com/zh/Blogs/38 1、简介 NATS 是一个简单、安全、高性能的开源消息系统，专为云原生应用、IoT 消息和微服务架构设计。它提供轻量级的发布/订阅、请求/响应和队列]]></description>
+</item>
+<item>
     <title>Silo</title>
     <link>https://serialt.github.io/posts/2026-11-04-silo/</link>
     <pubDate>Wed, 04 Nov 2026 22:50:01 &#43;0800</pubDate>
@@ -67,22 +83,6 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2025-09-03-dev-terraform-provider/</guid>
     <description><![CDATA[Dev terraform provider 基于新框架tpf开发 开发示例： https://github.com/hashicorp/terraform-provider-scaffolding-framework https://github.com/serialt/terraform-provider-demo https://github.com/serialt/terraform-provider-dnshe 参考示例： https://github.com/hashicorp/terraform-provider-hashicups 一、调试 provider 1、debug terraform # Makefile default: fmt lint install generate build: go build -v ./... install: build go install -v ./... lint: golangci-lint run generate: cd tools; go generate ./... fmt: gofmt -s]]></description>
-</item>
-<item>
-    <title>Vue</title>
-    <link>https://serialt.github.io/posts/2026-04-25-vue3/</link>
-    <pubDate>Sat, 25 Apr 2026 21:57:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2026-04-25-vue3/</guid>
-    <description><![CDATA[Vue3 main.ts: 项目入口文件 index.hmtl,通过标签引入文件main.ts，开启整个工程。打开 index.hmtl、main.ts参看具体内容： &lt;!DOCTYPE]]></description>
-</item>
-<item>
-    <title>Kafka</title>
-    <link>https://serialt.github.io/posts/2026-04-05-kafka/</link>
-    <pubDate>Sun, 05 Apr 2026 21:57:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2026-04-05-kafka/</guid>
-    <description><![CDATA[Kafka 一、介绍 1、重要概念 Broker: Kafka 的基本单元，负责存储和传递消息。一个 Kafka 集群由多个 Broker 组成。 Topic: 消息的分类，每条消息都属于一个特定的 Topic。用户可以]]></description>
 </item>
 </channel>
 </rss>

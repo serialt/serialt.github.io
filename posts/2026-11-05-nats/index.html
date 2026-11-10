@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>nats - Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="nats" />
+<meta property="og:description" content="NATS https://robustmq.com/zh/Blogs/38 1、简介 NATS 是一个简单、安全、高性能的开源消息系统，专为云原生应用、IoT 消息和微服务架构设计。它提供轻量级的发布/订阅、请求/响应和队列" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://serialt.github.io/posts/2026-11-05-nats/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2026-11-05T21:50:01+08:00" />
+<meta property="article:modified_time" content="2026-11-05T21:50:01+08:00" /><meta property="og:site_name" content="Log" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="nats"/>
+<meta name="twitter:description" content="NATS https://robustmq.com/zh/Blogs/38 1、简介 NATS 是一个简单、安全、高性能的开源消息系统，专为云原生应用、IoT 消息和微服务架构设计。它提供轻量级的发布/订阅、请求/响应和队列"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://serialt.github.io/posts/2026-11-05-nats/" /><link rel="prev" href="https://serialt.github.io/posts/2026-11-04-silo/" /><link rel="next" href="https://serialt.github.io/posts/2026-11-08-grpc-go/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "nats",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/serialt.github.io\/posts\/2026-11-05-nats\/"
+        },"genre": "posts","keywords": "nats","wordcount":  3600 ,
+        "url": "https:\/\/serialt.github.io\/posts\/2026-11-05-nats\/","datePublished": "2026-11-05T21:50:01+08:00","dateModified": "2026-11-05T21:50:01+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "serialt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Blog">记录</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Blog">记录</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">nats</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/nats/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>nats</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-11-05">2026-11-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3600 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#nats">NATS</a>
+      <ul>
+        <li><a href="#1简介">1、简介</a></li>
+        <li><a href="#2核心架构组件与概念">2、核心架构组件与概念</a></li>
+        <li><a href="#3核心通信模式">3、核心通信模式</a></li>
+        <li><a href="#4关键特性和优势">4、关键特性和优势</a></li>
+        <li><a href="#5nats-20-与-jetstream解决持久化需求">5、NATS 2.0 与 JetStream：解决持久化需求</a></li>
+        <li><a href="#6与其他消息系统的比较">6、与其他消息系统的比较</a></li>
+        <li><a href="#2核心概念">2、核心概念</a></li>
+        <li><a href="#开发示例">开发示例</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="nats">NATS</h2>
+<ul>
+<li><a href="https://robustmq.com/zh/Blogs/38" target="_blank" rel="noopener noreffer ">https://robustmq.com/zh/Blogs/38</a></li>
+</ul>
+<h3 id="1简介">1、简介</h3>
+<p>NATS 是一个简单、安全、高性能的开源消息系统，专为云原生应用、IoT 消息和微服务架构设计。它提供轻量级的发布/订阅、请求/响应和队列组等核心消息模式，并通过 JetStream 提供持久化与流处理能力。</p>
+<p>NATS 是一个<strong>开源、高性能、轻量级的分布式消息系统</strong>。它的核心设计哲学围绕着几个关键原则：</p>
+<ol>
+<li><strong>极致的简单性：</strong> API 和协议设计都非常简洁明了，易于理解和使用。这使得开发、部署和维护的成本较低。</li>
+<li><strong>极致的高性能：</strong> 核心 NATS (通常称为 &ldquo;Core NATS&rdquo; 或 &ldquo;NATS Server&rdquo;) 被设计为极其快速和低延迟，尤其是在发布/订阅场景下。它通常能达到<strong>每秒处理数百万条消息的吞吐量。</strong></li>
+<li><strong>极致的轻量级：</strong> NATS Server 本身非常小巧（单个二进制文件，内存占用少），并且其客户端库也非常轻量，对资源消耗要求低。</li>
+<li><strong>云原生：</strong> NATS 天生就是为现代分布式系统和云环境设计的，支持弹性伸缩、高可用性，非常适合容器化和微服务架构。</li>
+<li><strong>基于主题的发布/订阅：</strong> 这是 NATS 最核心和最强大的通信模式。</li>
+<li><strong>&ldquo;At Most Once&rdquo; 交付 (核心模式)：</strong> 默认情况下，核心 NATS 提供<strong>尽力而为的交付保证</strong>。这意味着消息要么被成功传递一次，要么在失败时丢失（不重试）。这种设计是其实现高性能和低延迟的关键。</li>
+</ol>
+<h3 id="2核心架构组件与概念">2、核心架构组件与概念</h3>
+<p><strong>NATS Server：</strong> 消息传递的核心枢纽。负责接收、路由和分发消息。可以以单机模式运行，但更常见的是组成集群模式以实现高可用性和水平扩展。</p>
+<p><strong>NATS Client：</strong> 连接到 NATS Server 的应用程序。使用各种编程语言（如 Go, Java, JavaScript/Typescript, Python, Ruby, C#, C, Rust 等）的官方或社区维护的客户端库。</p>
+<p><strong>Subject：</strong> 消息传递的核心抽象。它是一个由点分隔的字符串，用于标识消息的目的地或主题。</p>
+<ul>
+<li>
+<p><strong>例子：</strong> <code>orders.new</code>, <code>sensors.temperature.room1</code>, <code>user.profile.updated</code></p>
+</li>
+<li>
+<p>通配符：</p>
+<p>NATS 提供了强大的主题通配符机制，使得订阅者可以灵活地订阅感兴趣的消息集合。</p>
+<ul>
+<li><code>*</code> (单级通配符)：匹配一个层级的任意部分。例如：<code>orders.*</code> 匹配 <code>orders.new</code> 和 <code>orders.cancel</code>，但不匹配 <code>orders.digital.new</code>。</li>
+<li><code>&gt;</code> (多级通配符)：匹配零个或多个层级的任意部分。例如：<code>sensors.&gt;</code> 匹配 <code>sensors.temperature</code>, <code>sensors.temperature.room1</code>, <code>sensors.humidity</code> 等，<strong>多级通配符只能在最后一级使用。</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>消息：</strong> 在 NATS 中传递的数据单元。包含：</p>
+<ul>
+<li><strong>Subject：</strong> 标识消息应被路由到哪里。</li>
+<li><strong>Payload (可选)：</strong> 要传输的实际数据（通常是字节数组，可以是 JSON, Protobuf, 文本等任何格式）。</li>
+<li><strong>Reply Subject (可选)：</strong> 用于请求/回复模式。</li>
+<li><strong>Headers (可选)：</strong> 键值对形式的元数据（较新的特性）。</li>
+</ul>
+<p><strong>发布者：</strong> 创建消息并将其发送到特定主题的客户端。它不需要知道谁（如果有的话）会接收这些消息。</p>
+<p><strong>订阅者：</strong> 对一个或多个主题（可以使用通配符）表达兴趣的客户端。它会接收发布到这些主题上的消息。一个主题可以有多个订阅者（广播），也可以没有订阅者（消息被丢弃）。</p>
+<p><strong>队列组：</strong> 一种负载均衡机制。</p>
+<ul>
+<li>多个订阅者使用<strong>相同的队列组名称</strong>订阅<strong>同一个主题</strong>。</li>
+<li>当消息发布到该主题时，NATS Server 会<strong>随机选择</strong>队列组中的一个订阅者来接收该消息。</li>
+<li>这允许你将工作负载分布到多个消费者实例上，实现水平扩展和处理能力提升。</li>
+</ul>
+<h3 id="3核心通信模式">3、核心通信模式</h3>
+<p>Nats为subject提供了两种通配符，订阅者可通过通配符订阅多个主题的消息(subject用法会在代码中展示)。</p>
+<pre tabindex="0"><code>time.us
+time.us.east
+time.us.east.newyork
+time.cn
+time.cn.beijing
+
+1）* 会匹配单个字符串
+a、可在同一个subject中多次出现
+b、如time.*.east可匹配time.us.east或time.eu.east但不可匹配time.us.east.newyork
+2) &gt; 会匹配多个字符串
+a、只能在同一个subject中出现一次
+b、如time.us.&gt;可匹配time.us.east和time.us.east.newyork等
+</code></pre><p>1、发布/订阅(publish-subscribe)：最基本和最核心的模式</p>
+<ul>
+<li>发布者将消息发送到一个主题。</li>
+<li>所有订阅了该主题（或匹配通配符模式）的订阅者都会收到该消息的副本。</li>
+<li>特点：一对多广播。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl">	<span class="nx">nc</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">nats</span><span class="p">.</span><span class="nf">Connect</span><span class="p">(</span><span class="nx">nats</span><span class="p">.</span><span class="nx">DefaultURL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 发布者 &#34;foo&#34;即为主题
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">nc</span><span class="p">.</span><span class="nf">Publish</span><span class="p">(</span><span class="s">&#34;foo&#34;</span><span class="p">,</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&#34;Hello World&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 异步订阅者
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">nc</span><span class="p">.</span><span class="nf">Subscribe</span><span class="p">(</span><span class="s">&#34;foo&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">m</span> <span class="o">*</span><span class="nx">nats</span><span class="p">.</span><span class="nx">Msg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Received a message: %s\n&#34;</span><span class="p">,</span> <span class="nb">string</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">Data</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><p>2、请求/回复(request-reply)：基于发布/订阅构建的常用模式</p>
+<ul>
+<li>
+<p>请求者发布一条消息到一个主题（通常是服务名称），并在消息中包含一个 <code>Reply-to</code> 主题（通常是临时生成的唯一主题）。</p>
+</li>
+<li>
+<p>响应者订阅请求主题。当收到请求消息时，处理请求，并将响应发布到请求消息中指定的 <code>Reply-to</code> 主题。</p>
+</li>
+<li>
+<p>请求者订阅它自己的 <code>Reply-to</code> 主题以接收响应。</p>
+</li>
+</ul>
+<pre tabindex="0"><code>// 请求 等待10毫秒
+msg, err := nc.Request(&#34;help&#34;, []byte(&#34;help me&#34;), 10*time.Millisecond)
+// 响应 收到消息后回复
+nc.Subscribe(&#34;help&#34;, func(m *nats.Msg) {
+    nc.Publish(m.Reply, []byte(&#34;I can help!&#34;))
+})
+</code></pre><p>3、队列订阅(Queue Groups)：此模式下nats服务器会随机的将消息分配至订阅者，而不是广播出去。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 将消息随机分配至 &#34;foo&#34;和&#34;job_workers&#34;中不在队列组中的订阅者依然会接收到所有消息。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">nc</span><span class="p">.</span><span class="nf">QueueSubscribe</span><span class="p">(</span><span class="s">&#34;foo&#34;</span><span class="p">,</span> <span class="s">&#34;job_workers&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">_</span> <span class="o">*</span><span class="nx">Msg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">received</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><h3 id="4关键特性和优势">4、关键特性和优势</h3>
+<ul>
+<li>
+<p><strong>卓越的性能：</strong> 极低的延迟和极高的吞吐量，尤其在核心发布/订阅模式下。</p>
+</li>
+<li>
+<p><strong>极简的协议：</strong> NATS 服务器和客户端之间的通信协议 (<code>nats://</code>) 是文本协议（可扩展为二进制 <code>nats://</code>），设计简洁高效，易于实现和调试。</p>
+</li>
+<li>
+<p><strong>无代理依赖：</strong> NATS Server 是自包含的，不需要依赖外部的数据库、ZooKeeper 或 etcd 来运行（集群协调是内置的）。</p>
+</li>
+<li>
+<p><strong>灵活的订阅模型：</strong> 强大的主题和通配符系统提供了极其灵活的消息路由能力。</p>
+</li>
+<li>
+<p><strong>内置负载均衡：</strong> 通过队列组轻松实现消费者负载均衡。</p>
+</li>
+<li>
+<p><strong>客户端自动重连和故障转移：</strong> 客户端库内置了强大的重连逻辑，在服务器故障或网络中断时能自动重连到集群中的其他可用节点。</p>
+</li>
+<li>
+<p><strong>安全性：</strong> 支持 TLS/SSL 加密通信、基于 Token 或用户名/密码的认证、NKey 认证以及更复杂的基于 JWT 和配置分发的认证授权系统。</p>
+</li>
+<li>
+<p><strong>多语言支持：</strong> 广泛的官方和社区支持的客户端库。</p>
+</li>
+<li>
+<p><strong>云原生友好：</strong> 轻量级、易于容器化、支持动态扩展，完美契合 Kubernetes 和微服务架构。</p>
+</li>
+</ul>
+<h3 id="5nats-20-与-jetstream解决持久化需求">5、NATS 2.0 与 JetStream：解决持久化需求</h3>
+<p>虽然核心 NATS 的高性能源于其 &ldquo;at most once&rdquo; 和无持久化设计，但许多应用场景需要更强的消息保证（至少一次、正好一次）和持久化能力。为此，NATS 2.0 引入了 <strong>JetStream</strong>。</p>
+<ul>
+<li>
+<p><strong>JetStream 是什么？</strong> 它是内置于 NATS Server 中的<strong>持久化引擎</strong>。它不是独立的服务器，而是与核心 NATS 协同工作。</p>
+</li>
+<li>
+<p>解决的问题：</p>
+<ul>
+<li>
+<p><strong>消息持久化：</strong> 将消息存储到磁盘（或内存），防止服务器重启导致消息丢失。</p>
+</li>
+<li>
+<p><strong>增强的交付语义：</strong> 支持 &ldquo;At Least Once&rdquo; 交付（通过确认机制确保消息被处理）和 &ldquo;Exactly Once&rdquo; 处理（通过消费者序列号去重）。</p>
+</li>
+<li>
+<p><strong>流处理：</strong> 将消息组织成持久的<strong>流</strong>。流定义了消息的存储策略（如保留策略：基于时间、消息数、大小等；存储后端：文件或内存）。</p>
+</li>
+<li>
+<p>消费者：</p>
+<p>从流中拉取或推送消息的实体。支持多种消费模式：</p>
+<ul>
+<li><strong>推模式：</strong> JetStream 主动将消息推送给消费者（类似核心订阅）。</li>
+<li><strong>拉模式：</strong> 消费者主动从流中请求一批消息（批处理友好）。</li>
+<li><strong>支持多种确认机制：</strong> Ack (成功), Nak (重试), Term (不再重试), AckNext (处理中并要求下一条) 等。</li>
+<li><strong>支持消费者配置：</strong> 如重试策略、起始位置、过滤等。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>核心 NATS 与 JetStream 的关系：</p>
+<ul>
+<li>核心 NATS 负责高性能、低延迟的即时消息传递（发布/订阅、请求/回复）。</li>
+<li>JetStream 负责需要持久化和更强保证的流式消息处理。</li>
+<li>它们共享相同的 NATS Server 基础设施、网络协议和客户端连接。客户端可以使用同一个连接同时进行核心 NATS 操作和 JetStream 操作。</li>
+<li>发布到配置了 JetStream 的主题的消息会被自动持久化到流中。</li>
+</ul>
+</li>
+</ul>
+<h3 id="6与其他消息系统的比较">6、与其他消息系统的比较</h3>
+<p><strong>vs RabbitMQ：</strong></p>
+<ul>
+<li>NATS 更轻量、性能更高（尤其在纯 pub/sub）。</li>
+<li>RabbitMQ 功能更丰富（多种交换类型、死信队列、更复杂的路由规则、插件体系），但相对更重。</li>
+<li>NATS 主题通配符比 RabbitMQ 的 Topic Exchange 更灵活。</li>
+<li>核心 NATS 的持久化/保证不如 RabbitMQ，但 JetStream 弥补了这一点。</li>
+</ul>
+<p><strong>vs Apache Kafka：</strong></p>
+<ul>
+<li>Kafka 是分布式流处理平台，核心是持久化、分区、有序的日志。吞吐量极高，适合大数据管道和流处理。</li>
+<li>NATS (Core) 更轻量、延迟更低，更适合实时消息传递和命令控制。</li>
+<li>NATS 的订阅模型比 Kafka 的 Consumer Group 更灵活（通配符订阅）。</li>
+<li>Kafka 的学习曲线和运维复杂度通常高于 NATS。</li>
+<li>JetStream 提供了类似 Kafka 的持久化流能力，但设计更简单，与核心 NATS 集成更紧密。</li>
+</ul>
+<p><strong>vs MQTT Brokers (如 Mosquitto, EMQX)：</strong></p>
+<ul>
+<li>MQTT 是标准协议，专注于 IoT，有 QoS 级别。</li>
+<li>NATS 原生协议 (<code>nats://</code>) 性能通常更高，功能更丰富（如请求/回复、队列组）。NATS 也支持 MQTT 协议网关。</li>
+<li>NATS 的集群和高可用设计通常更易于管理和扩展。</li>
+</ul>
+<p>docker compose</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nats</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nats:2.15-alpine3.22 </span><span class="w"> </span><span class="c"># 使用 alpine 版便于调试，latest 版是 scratch 基础镜像</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">nats</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">unless-stopped</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;4222:4222&#34;</span><span class="w">   </span><span class="c"># 客户端</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;8222:8222&#34;</span><span class="w">   </span><span class="c"># HTTP 监控</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;-js&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;-sd&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;/data&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;-m&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;8222&#34;</span><span class="p">]</span><span class="w">  </span><span class="c"># -js 开启 JetStream</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">nats_data:/data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nats_data</span><span class="p">:</span><span class="w">
+</span></span></span></code></pre></div><h3 id="2核心概念">2、核心概念</h3>
+<h4 id="subject-主题">subject 主题</h4>
+<p>Subject 是 NATS 中消息的路由标识，采用点分层级命名（如 <code>orders.created</code>、<code>users.login</code>）。发布者向 Subject 发送消息，订阅者订阅 Subject 接收消息。支持通配符：<code>*</code> 匹配单个 token，<code>&gt;</code> 匹配一个或多个 token。</p>
+<h4 id="消息模式">消息模式</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">模式</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">发布/订阅</td>
+<td style="text-align:left">一条消息分发给所有订阅者</td>
+<td style="text-align:left">事件广播、通知</td>
+</tr>
+<tr>
+<td style="text-align:left">队列组</td>
+<td style="text-align:left">同一队列组内的订阅者负载均衡消费</td>
+<td style="text-align:left">任务分发、工作队列</td>
+</tr>
+<tr>
+<td style="text-align:left">请求/响应</td>
+<td style="text-align:left">客户端发送请求并等待回复</td>
+<td style="text-align:left">RPC 调用、服务查询</td>
+</tr>
+</tbody>
+</table>
+<h4 id="jetstream">JetStream</h4>
+<p>JetStream 是 NATS 的持久化层，提供流（Stream）和消费者（Consumer）抽象，支持消息持久化、至少一次/恰好一次投递、消息重放等能力。</p>
+<h3 id="开发示例">开发示例</h3>
+<p><code>发布者</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;log&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;github.com/nats-io/nats.go&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">nc</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">nats</span><span class="p">.</span><span class="nf">Connect</span><span class="p">(</span><span class="nx">nats</span><span class="p">.</span><span class="nx">DefaultURL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">defer</span> <span class="nx">nc</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">err</span> <span class="p">=</span> <span class="nx">nc</span><span class="p">.</span><span class="nf">Publish</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">,</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&#34;Hello NATS!&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">nc</span><span class="p">.</span><span class="nf">Flush</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">log</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;Message published&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><code>订阅者</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;log&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;runtime&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;github.com/nats-io/nats.go&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">nc</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">nats</span><span class="p">.</span><span class="nf">Connect</span><span class="p">(</span><span class="nx">nats</span><span class="p">.</span><span class="nx">DefaultURL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">defer</span> <span class="nx">nc</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">nc</span><span class="p">.</span><span class="nf">Subscribe</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">msg</span> <span class="o">*</span><span class="nx">nats</span><span class="p">.</span><span class="nx">Msg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">log</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Received: %s&#34;</span><span class="p">,</span> <span class="nb">string</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">Data</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">runtime</span><span class="p">.</span><span class="nf">Goexit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2026-11-05</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/nats/">nats</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/2026-11-04-silo/" class="prev" rel="prev" title="Silo"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Silo</a>
+            <a href="/posts/2026-11-08-grpc-go/" class="next" rel="next" title="gRPC">gRPC<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">serialt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":80},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

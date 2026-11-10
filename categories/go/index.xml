@@ -45,14 +45,6 @@
     <description><![CDATA[HPA pod数扩容和缩减可以使用kubectl scale进行操作，这个是完全手动操作的，k8s提供一个自动scale，Horizontal Pod Au]]></description>
 </item>
 <item>
-    <title>gRPC</title>
-    <link>https://serialt.github.io/posts/2026-03-08-grpc/</link>
-    <pubDate>Sun, 08 Mar 2026 21:55:01 &#43;0800</pubDate>
-    <author>serialt</author>
-    <guid>https://serialt.github.io/posts/2026-03-08-grpc/</guid>
-    <description><![CDATA[gRPC gRPC是Google开发的一种高性能的远程 procedure call（RPC）框架，它使用HTTP/2作为传输协议，Protocol Buffers（pr]]></description>
-</item>
-<item>
     <title>go sync</title>
     <link>https://serialt.github.io/posts/2026-03-08-go-sync/</link>
     <pubDate>Sun, 08 Mar 2026 21:50:01 &#43;0800</pubDate>
@@ -83,6 +75,14 @@
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2025-12-12-kube-op/</guid>
     <description><![CDATA[kube-operator开发示例 使用 Kubebuilder 开发 Kubernetes Operator 是目前 Go 语言生态中最主流、最高效的方式。它是 Kubernetes 官方推荐的 SDK，基于 controller-runtime 和 controller-tools 构建，能自动生成 boilerplate]]></description>
+</item>
+<item>
+    <title>kratos</title>
+    <link>https://serialt.github.io/posts/2025-11-22-kratos/</link>
+    <pubDate>Sat, 22 Nov 2025 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2025-11-22-kratos/</guid>
+    <description><![CDATA[Go Kratos测试 1、测试repo层方法 glogger &#34;gorm.io/gorm/logger&#34; &#34;github.com/go-kratos/kratos/v2/log&#34; var ( msg = &#34;hello&#34; ctx = context.Context db *gorm.DB p = NewSugarRepo(log.DefaultLogger) bc conf.Bootstrap ) func init() { bcInit() var err error var dns = bc.Data.Database.Source db, err = gorm.Open(postgres.Open(dns), &amp;gorm.Config{ Logger: glogger.Default.LogMode(glogger.Info), }) if err != nil { panic(err) } md := metadata.New(map[string]string{ &#34;message&#34;: msg,]]></description>
 </item>
 </channel>
 </rss>

@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>nats - Tag - Blog</title>
+        <link>https://serialt.github.io/tags/nats/</link>
+        <description>nats - Tag - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Thu, 05 Nov 2026 21:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/tags/nats/" rel="self" type="application/rss+xml" /><item>
+    <title>nats</title>
+    <link>https://serialt.github.io/posts/2026-11-05-nats/</link>
+    <pubDate>Thu, 05 Nov 2026 21:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-11-05-nats/</guid>
+    <description><![CDATA[NATS https://robustmq.com/zh/Blogs/38 1、简介 NATS 是一个简单、安全、高性能的开源消息系统，专为云原生应用、IoT 消息和微服务架构设计。它提供轻量级的发布/订阅、请求/响应和队列]]></description>
+</item>
+</channel>
+</rss>

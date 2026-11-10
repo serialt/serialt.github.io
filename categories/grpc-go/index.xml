@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>grpc-go - Category - Blog</title>
+        <link>https://serialt.github.io/categories/grpc-go/</link>
+        <description>grpc-go - Category - Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>tserialt@gmail.com (serialt)</managingEditor>
+            <webMaster>tserialt@gmail.com (serialt)</webMaster><lastBuildDate>Sun, 08 Nov 2026 22:50:01 &#43;0800</lastBuildDate><atom:link href="https://serialt.github.io/categories/grpc-go/" rel="self" type="application/rss+xml" /><item>
+    <title>gRPC</title>
+    <link>https://serialt.github.io/posts/2026-11-08-grpc-go/</link>
+    <pubDate>Sun, 08 Nov 2026 22:50:01 &#43;0800</pubDate>
+    <author>serialt</author>
+    <guid>https://serialt.github.io/posts/2026-11-08-grpc-go/</guid>
+    <description><![CDATA[1、gRPC Go 简介 gRPC 是 Google 开源的高性能、跨语言的 RPC 框架，基于 HTTP/2 协议和 Protocol Buffers 序列化机制。gRPC Go（grpc-go）是 gRPC 官方提供的 Go 语言实现，广]]></description>
+</item>
+</channel>
+</rss>
