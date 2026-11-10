@@ -849,38 +849,38 @@
 </span></span></code></pre></div><h3 id="metadata">metadata</h3>
 <p>是一个键值对列表，key必须是ASCII 字符串，value可以是二进制数据（通常编码为 ASCII 字符串）或普通字符串，可以理解为类似http多header，Metadata 的 Key 是<strong>大小写不敏感</strong>的，传输过程中通常会被自动转换为小写</p>
 <p>限制：自定义的metdadata不能以<code>grpc-</code>开头</p>
-<pre tabindex="0"><code>package main
-
-import (
-	&#34;context&#34;
-	&#34;fmt&#34;
-
-	&#34;google.golang.org/grpc/metadata&#34;
-)
-
-func main() {
-	ctx := context.Background()
-	// metadata key
-	MDKey := &#34;name&#34;
-	// 设置metadata数据
-	metaData := map[string]string{
-		MDKey: &#34;jerry&#34;,
-	}
-	md := metadata.New(metaData)
-	ctx = metadata.NewOutgoingContext(ctx, md)
-
-	// 从ctx中获取metadata, get方法返回到是个slice,取第一个即可
-	data := &#34;&#34;
-	if md, ok := metadata.FromIncomingContext(ctx); ok {
-		names := md.Get(MDKey)
-		if len(names) &gt; 0 {
-			data = names[0]
-		}
-	}
-
-	fmt.Printf(&#34;name: %v&#34;, data)
-}
-</code></pre></div><div class="post-footer" id="post-footer">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;google.golang.org/grpc/metadata&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="o">:=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// metadata key
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">MDKey</span> <span class="o">:=</span> <span class="s">&#34;name&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 设置metadata数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">metaData</span> <span class="o">:=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">MDKey</span><span class="p">:</span> <span class="s">&#34;jerry&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">md</span> <span class="o">:=</span> <span class="nx">metadata</span><span class="p">.</span><span class="nf">New</span><span class="p">(</span><span class="nx">metaData</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ctx</span> <span class="p">=</span> <span class="nx">metadata</span><span class="p">.</span><span class="nf">NewOutgoingContext</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="nx">md</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 从ctx中获取metadata, get方法返回到是个slice,取第一个即可
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">data</span> <span class="o">:=</span> <span class="s">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">md</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">metadata</span><span class="p">.</span><span class="nf">FromIncomingContext</span><span class="p">(</span><span class="nx">ctx</span><span class="p">);</span> <span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">names</span> <span class="o">:=</span> <span class="nx">md</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">MDKey</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">names</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">data</span> <span class="p">=</span> <span class="nx">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;name: %v&#34;</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
