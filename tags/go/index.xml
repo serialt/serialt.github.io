@@ -10,7 +10,7 @@
     <pubDate>Sun, 17 Aug 2025 20:40:01 &#43;0800</pubDate>
     <author>serialt</author>
     <guid>https://serialt.github.io/posts/2025-08-17-go-plugin/</guid>
-    <description><![CDATA[go plugin [serialt@Krab plugin]🐳 tree . . ├── go.mod ├── kk │ ├── kk.go │ └── kk.so ├── ks └── main.go // kk.go package main import &#34;fmt&#34; func Greet(name string) { fmt.Println(&#34;Hello&#34;, name) } func main() {} // main.go package main import ( &#34;log&#34; &#34;plugin&#34; ) func main() { p, err]]></description>
+    <description><![CDATA[1、go plugin [serialt@Krab plugin]🐳 tree . . ├── go.mod ├── kk │ ├── kk.go │ └── kk.so ├── ks └── main.go // kk.go package main import &#34;fmt&#34; func Greet(name string) { fmt.Println(&#34;Hello&#34;, name) } func main() {} // main.go package main import ( &#34;log&#34; &#34;plugin&#34; ) func main()]]></description>
 </item>
 <item>
     <title>Simple-Gin</title>

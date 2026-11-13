@@ -27,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/serialt.github.io\/posts\/2026-05-26-operator-sdk\/"
-        },"genre": "posts","keywords": "kube-operator, operator-sdk","wordcount":  1877 ,
+        },"genre": "posts","keywords": "kube-operator, operator-sdk","wordcount":  2033 ,
         "url": "https:\/\/serialt.github.io\/posts\/2026-05-26-operator-sdk\/","datePublished": "2026-05-26T21:50:01+08:00","dateModified": "2026-05-26T21:50:01+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -101,8 +101,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">operator-sdk</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>serialt</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-05-26">2026-05-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1877 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2026-05-26">2026-05-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2033 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
@@ -417,9 +417,28 @@
 </span></span></code></pre></div><h3 id="三基于-helm">三、基于 helm</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>root@dev ansible-op<span class="o">]</span><span class="c1"># operator-sdk init --plugins=helm --domain=example.com</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 新chart</span>
 </span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ansible-op<span class="o">]</span><span class="c1">#  operator-sdk create api --group=web --version=v1 --kind=Caddy</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># 需要复制 kustomize 到 bin/kustomize</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 基于已经存在的chart</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 保证当前目录下有chart</span>
+</span></span><span class="line"><span class="cl">helm-charts/vscode
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>serialt@Sugar kube-op<span class="o">]</span>🐳 operator-sdk init --plugins helm --helm-chart helm-charts/vscode --group charts --version v1alpha1 --kind VSCode --domain<span class="o">=</span>imau.cc
+</span></span><span class="line"><span class="cl">INFO<span class="o">[</span>0000<span class="o">]</span> Writing kustomize manifests <span class="k">for</span> you to edit... 
+</span></span><span class="line"><span class="cl">INFO<span class="o">[</span>0000<span class="o">]</span> Creating the API:
+</span></span><span class="line"><span class="cl">$ operator-sdk create api --group charts --version v1alpha1 --kind VSCode --helm-chart helm-charts/vscode 
+</span></span><span class="line"><span class="cl">INFO<span class="o">[</span>0000<span class="o">]</span> Writing kustomize manifests <span class="k">for</span> you to edit... 
+</span></span><span class="line"><span class="cl">Created helm-charts/vscode
+</span></span><span class="line"><span class="cl">Generating RBAC rules
+</span></span><span class="line"><span class="cl">WARN<span class="o">[</span>0001<span class="o">]</span> The RBAC rules generated in config/rbac/role.yaml are based on the chart<span class="s1">&#39;s default manifest. Some rules may be missing for resources that are only enabled with custom values, and some existing rules may be overly broad. Double check the rules generated in config/rbac/role.yaml to ensure they meet the operator&#39;</span>s permission requirements. 
+</span></span><span class="line"><span class="cl"><span class="o">[</span>serialt@Sugar kube-op<span class="o">]</span>🐳 
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 安装crd</span>
 </span></span><span class="line"><span class="cl"><span class="o">[</span>root@dev ansible-op<span class="o">]</span><span class="c1">#  make install</span>
 </span></span><span class="line"><span class="cl">
