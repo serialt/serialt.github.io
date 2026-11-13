@@ -371,9 +371,29 @@ helm-push: helm-package
 ```bash
 [root@dev ansible-op]# operator-sdk init --plugins=helm --domain=example.com
 
+# 新chart
 [root@dev ansible-op]#  operator-sdk create api --group=web --version=v1 --kind=Caddy
 
 # 需要复制 kustomize 到 bin/kustomize
+
+
+
+
+
+# 基于已经存在的chart
+# 保证当前目录下有chart
+helm-charts/vscode
+
+[serialt@Sugar kube-op]🐳 operator-sdk init --plugins helm --helm-chart helm-charts/vscode --group charts --version v1alpha1 --kind VSCode --domain=imau.cc
+INFO[0000] Writing kustomize manifests for you to edit... 
+INFO[0000] Creating the API:
+$ operator-sdk create api --group charts --version v1alpha1 --kind VSCode --helm-chart helm-charts/vscode 
+INFO[0000] Writing kustomize manifests for you to edit... 
+Created helm-charts/vscode
+Generating RBAC rules
+WARN[0001] The RBAC rules generated in config/rbac/role.yaml are based on the chart's default manifest. Some rules may be missing for resources that are only enabled with custom values, and some existing rules may be overly broad. Double check the rules generated in config/rbac/role.yaml to ensure they meet the operator's permission requirements. 
+[serialt@Sugar kube-op]🐳 
+
 ```
 
 
